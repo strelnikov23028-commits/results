@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Стробоскопическая стимуляция — сравнение устройств</title>
+  <style>
+    :root {
+      --bg: #000;
+      --card: #111;
+      --border: rgba(255,255,255,0.08);
+      --text: #f5f5f7;
+      --muted: #86868b;
+      --accent: #2997ff;
+      --gold: #f5a623;
+      --green: #30d158;
+      --purple: #bf5af2;
+      --orange: #ff9f0a;
+      --red: #ff453a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 52px;
+    }
+    .nav-logo { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: #fff; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+    @media (max-width: 640px) { nav { padding: 0 20px; } .nav-links { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 140px 24px 100px;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% -10%, rgba(41,151,255,.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 100%, rgba(191,90,242,.12) 0%, transparent 60%);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 28px;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; flex: 1; width: 32px; height: 1px; background: currentColor; opacity: .4;
+    }
+    .hero h1 {
+      font-size: clamp(44px, 8vw, 88px); font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1.03;
+      background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,.4) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; max-width: 860px;
+    }
+    .hero p {
+      margin-top: 28px; font-size: clamp(17px, 2.2vw, 21px);
+      color: var(--muted); max-width: 560px; line-height: 1.65;
+    }
+    .hero-stats {
+      margin-top: 64px;
+      display: flex; gap: 56px; flex-wrap: wrap; justify-content: center;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 36px; font-weight: 700; letter-spacing: -0.03em; color: #fff; }
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .hero-scroll {
+      margin-top: 72px; color: var(--muted); font-size: 13px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .arrow { animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
+
+    /* ── SECTION BASE ── */
+    .section { padding: 120px 24px; max-width: 1140px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(30px, 5vw, 54px); font-weight: 700;
+      letter-spacing: -0.025em; line-height: 1.08; max-width: 700px;
+    }
+    .section-sub {
+      margin-top: 20px; font-size: 18px; color: var(--muted);
+      max-width: 560px; line-height: 1.65;
+    }
+    .divider { height: 1px; background: var(--border); max-width: 1140px; margin: 0 auto; }
+
+    /* ── DEVICE CARDS ── */
+    .devices { display: flex; flex-direction: column; gap: 2px; margin-top: 64px; border-radius: 20px; overflow: hidden; }
+
+    .device-card {
+      background: var(--card);
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 520px; overflow: hidden;
+      transition: background .2s;
+    }
+    .device-card:hover { background: #161616; }
+    .device-card.reverse { direction: rtl; }
+    .device-card.reverse > * { direction: ltr; }
+
+    .device-img {
+      position: relative; overflow: hidden; background: #0a0a0a;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .device-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: .9; transition: transform .5s ease, opacity .3s;
+    }
+    .device-card:hover .device-img img { transform: scale(1.03); opacity: 1; }
+    .device-img-placeholder {
+      width: 100%; height: 100%; min-height: 340px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px; opacity: .3;
+    }
+
+    .device-info { padding: 52px 48px; display: flex; flex-direction: column; justify-content: space-between; }
+
+    .device-badge {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px; margin-bottom: 24px; align-self: flex-start;
+    }
+    .b-blue   { background: rgba(41,151,255,.15); color: var(--accent); }
+    .b-gold   { background: rgba(245,166,35,.15); color: var(--gold); }
+    .b-purple { background: rgba(191,90,242,.15); color: var(--purple); }
+    .b-green  { background: rgba(48,209,88,.15); color: var(--green); }
+    .b-orange { background: rgba(255,159,10,.15); color: var(--orange); }
+
+    .device-name { font-size: 36px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 6px; }
+    .device-tagline { font-size: 15px; color: var(--muted); line-height: 1.55; margin-bottom: 32px; }
+
+    .device-price { font-size: 44px; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 4px; }
+    .device-price-note { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+
+    .specs { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 36px; }
+    .specs li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: rgba(255,255,255,.72); line-height: 1.45;
+    }
+    .spec-dot {
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+      margin-top: 6px; background: currentColor;
+    }
+
+    .buy-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      padding: 12px 24px; border-radius: 100px; transition: opacity .2s, transform .15s;
+      align-self: flex-start;
+    }
+    .buy-btn:hover { opacity: .85; transform: translateY(-1px); }
+    .btn-blue   { background: var(--accent); color: #fff; }
+    .btn-gold   { background: var(--gold); color: #000; }
+    .btn-purple { background: var(--purple); color: #fff; }
+    .btn-green  { background: var(--green); color: #000; }
+    .btn-orange { background: var(--orange); color: #000; }
+
+    @media (max-width: 768px) {
+      .device-card, .device-card.reverse { grid-template-columns: 1fr; direction: ltr; }
+      .device-img { min-height: 260px; }
+      .device-info { padding: 36px 28px; }
+    }
+
+    /* ── SCIENCE ── */
+    .science-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 64px; border-radius: 20px; overflow: hidden; }
+    @media (max-width: 768px) { .science-grid { grid-template-columns: 1fr; } }
+
+    .sci-card {
+      background: var(--card); padding: 44px 40px;
+      transition: background .2s;
+    }
+    .sci-card:hover { background: #161616; }
+    .sci-year { font-size: 48px; font-weight: 700; letter-spacing: -0.04em; color: var(--accent); margin-bottom: 12px; opacity: .6; }
+    .sci-title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 12px; }
+    .sci-text { font-size: 15px; color: rgba(255,255,255,.6); line-height: 1.7; }
+    .sci-tag {
+      display: inline-block; margin-top: 20px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--green); background: rgba(48,209,88,.1); padding: 4px 10px; border-radius: 6px;
+    }
+    .sci-tag.caution { color: var(--red); background: rgba(255,69,58,.1); }
+
+    /* ── GAMMA HERO ── */
+    .gamma-banner {
+      margin-top: 2px; background: var(--card);
+      border-radius: 0 0 20px 20px; overflow: hidden;
+      padding: 56px 48px;
+      background: linear-gradient(135deg, #111 0%, rgba(41,151,255,.08) 100%);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    @media (max-width: 768px) { .gamma-banner { grid-template-columns: 1fr; } }
+    .gamma-num { font-size: 120px; font-weight: 800; letter-spacing: -0.06em; line-height: 1; color: var(--accent); opacity: .15; }
+    .gamma-content h3 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .gamma-content p { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.7; }
+    .gamma-content .cite { margin-top: 16px; font-size: 13px; color: var(--accent); }
+
+    /* ── TABLE ── */
+    .table-wrap { overflow-x: auto; margin-top: 56px; border-radius: 16px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 780px; }
+    thead th {
+      padding: 18px 20px; text-align: left; font-weight: 600;
+      font-size: 12px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase;
+      border-bottom: 1px solid var(--border); background: rgba(255,255,255,.025);
+      white-space: nowrap;
+    }
+    tbody td { padding: 16px 20px; border-bottom: 1px solid var(--border); vertical-align: middle; color: rgba(255,255,255,.8); line-height: 1.4; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: rgba(255,255,255,.02); }
+    .td-name { font-weight: 600; color: #fff; white-space: nowrap; }
+    .td-price { font-weight: 600; white-space: nowrap; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+    .d-blue{background:var(--accent)} .d-gold{background:var(--gold)} .d-purple{background:var(--purple)} .d-green{background:var(--green)} .d-orange{background:var(--orange)}
+
+    /* ── PERSONAS ── */
+    .personas { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; margin-top: 56px; }
+    .persona {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 28px 24px; transition: border-color .2s;
+    }
+    .persona:hover { border-color: rgba(255,255,255,.18); }
+    .persona-icon { font-size: 32px; margin-bottom: 16px; }
+    .persona-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .persona-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    .persona-rec { margin-top: 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* ── VERDICT ── */
+    .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 56px; }
+    @media (max-width: 640px) { .verdict-grid { grid-template-columns: 1fr; } }
+    .verdict-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
+    .verdict-card h3 { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+    .verdict-card p { font-size: 18px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; }
+
+    /* ── SOURCES + FOOTER ── */
+    .sources { padding: 60px 24px; max-width: 1140px; margin: 0 auto; border-top: 1px solid var(--border); }
+    .sources h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .sources-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; }
+    .sources a { font-size: 13px; color: var(--accent); text-decoration: none; opacity: .8; }
+    .sources a:hover { opacity: 1; }
+    footer { padding: 40px 24px; text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Нейростимуляция</div>
+  <div class="nav-links">
+    <a href="#devices">Устройства</a>
+    <a href="#science">Наука</a>
+    <a href="#compare">Сравнение</a>
+    <a href="#verdict">Итог</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Нейротехнологии · 2025</div>
+  <h1>Стробоскопическая<br>стимуляция мозга</h1>
+  <p>От $70 до $23 000. Пять устройств, одна идея — мерцающий свет как инструмент изменения состояния сознания и нейропластичности.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">1934</div>
+      <div class="stat-label">Год открытия фотического вождения</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">40 Гц</div>
+      <div class="stat-label">Ключевая гамма-частота</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Устройств в сравнении</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Phase III</div>
+      <div class="stat-label">Клинические испытания MIT</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="arrow">↓</span>
+    прокрутить
+  </div>
+</div>
+
+<!-- ═══════════ DEVICES ═══════════ -->
+<section class="section" id="devices">
+  <div class="eyebrow">Устройства</div>
+  <h2 class="section-title">Пять подходов к одной идее</h2>
+  <p class="section-sub">Каждое устройство использует мерцающий свет по-своему — в форме, цене и глубине воздействия.</p>
+
+  <div class="devices">
+
+    <!-- NeuroVIZR -->
+    <div class="device-card">
+      <div class="device-img">
+        <img
+          src="https://neurovizr.com/cdn/shop/files/NR9_Brain_Wellness_Device_01.webp?v=1772175219&width=1500"
+          alt="NeuroVIZR device"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="device-img-placeholder" style="display:none;">🧠</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="device-badge b-blue">Носимый · Домашний</span>
+          <div class="device-name">NeuroVIZR</div>
+          <div class="device-tagline">Компактный LED-шлем. Свет + звук за одну сессию в 11 минут. Управление через приложение.</div>
+          <div class="device-price">$499</div>
+          <div class="device-price-note">от $499 до $599 в зависимости от комплекта</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--accent)"></span>9 белых LED, ~4000 K, угол 120°</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>Bluetooth LE 4.2 + iOS/Android приложение</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>100+ световых сессий без подписки</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>Вес 110 г, зарядка USB-C, аккумулятор LiFePO₄</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>Пилотное исследование 2023: 73% участников уснули за сессию</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>Фокус, релаксация, сон, медитация</li>
+          </ul>
+        </div>
+        <a href="https://neurovizr.com/products/neurovizr-light-sound-brain-wellness-device" target="_blank" class="buy-btn btn-blue">
+          Купить → neurovizr.com
+        </a>
+      </div>
+    </div>
+
+    <!-- Lucia N03 -->
+    <div class="device-card reverse">
+      <div class="device-img">
+        <img
+          src="https://lucialightexperience.com/cdn/shop/files/MG_2730_1000x.jpg"
+          alt="Lucia N03 light"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="device-img-placeholder" style="display:none;">💡</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="device-badge b-gold">Профессиональный · Клинический</span>
+          <div class="device-name">Lucia N°03</div>
+          <div class="device-tagline">Создана австрийским неврологом и клиническим психологом. Лучший аппарат для практиков и сессий глубоких состояний.</div>
+          <div class="device-price">$23 000+</div>
+          <div class="device-price-note">Practitioner System · домашняя Home Portal — €7 200</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--gold)"></span>9 источников: 8 LED + полноспектральный галоген</li>
+            <li><span class="spec-dot" style="color:var(--gold)"></span>Разработчики: Dr. Dirk Proeckl & Dr. Engelbert Winkler</li>
+            <li><span class="spec-dot" style="color:var(--gold)"></span>Ручное управление интенсивностью и паттерном</li>
+            <li><span class="spec-dot" style="color:var(--gold)"></span>Сессия 15–45 минут, возможен список ожидания</li>
+            <li><span class="spec-dot" style="color:var(--gold)"></span>Применяется в психотерапии, паллиативной помощи</li>
+            <li><span class="spec-dot" style="color:var(--gold)"></span>Производство Австрия, малыми партиями</li>
+          </ul>
+        </div>
+        <a href="https://lucialightexperience.com/products/lucia-n-03-practitioner-system" target="_blank" class="buy-btn btn-gold">
+          Купить → lucialightexperience.com
+        </a>
+      </div>
+    </div>
+
+    <!-- PandoraStar -->
+    <div class="device-card">
+      <div class="device-img">
+        <img
+          src="https://pandorastar.co.uk/wp-content/uploads/2019/11/PandoraStar-Deep-Trance-Meditation-Machine-1-scaled-e1574198506844.png"
+          alt="PandoraStar"
+          style="object-fit: contain; padding: 20px; background: #0d0d0d;"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="device-img-placeholder" style="display:none;">✦</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="device-badge b-purple">Профессиональный · Велнес</span>
+          <div class="device-name">PandoraStar</div>
+          <div class="device-tagline">12 LED в рисунке сакральной геометрии. Быстрый вход в гипнагогическое состояние. Создан в 2015 под вдохновением от Lucia N°03.</div>
+          <div class="device-price">По запросу</div>
+          <div class="device-price-note">ориентировочно $5 000–10 000 · уточнять у дилера</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--purple)"></span>12 стробоскопических LED</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>63 предустановленные программы (α, θ, δ-диапазоны)</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>Программный редактор для кастомных сессий</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>Гарантия возврата 21 день</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>Сессия 15–30 мин; применяется в float-центрах</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>Новая модель — PRISM (80+ программ)</li>
+          </ul>
+        </div>
+        <a href="https://pandorastar.co.uk/contact/" target="_blank" class="buy-btn btn-purple">
+          Запросить цену → pandorastar.co.uk
+        </a>
+      </div>
+    </div>
+
+    <!-- NeuroDreamer -->
+    <div class="device-card reverse">
+      <div class="device-img">
+        <div class="device-img-placeholder" style="display:flex; flex-direction:column; gap:8px; font-size:64px; opacity:.25;">🌙</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="device-badge b-green">Open Source · DIY</span>
+          <div class="device-name">NeuroDreamer</div>
+          <div class="device-tagline">Маска для сна с мультичастотным LED + аудио. Три версии: сон, осознанные сновидения, медитация. Открытый исходный код.</div>
+          <div class="device-price">$70</div>
+          <div class="device-price-note">три версии: Sleep / Lucid Dreaming / Meditation</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--green)"></span>До 4 частот одновременно, разные амплитуды</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Имитирует спектр частот естественного засыпания</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Аудио-брейнвейв-энтрейнмент в наушниках</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Пена с памятью формы, хлопковый чехол</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Открытый исходный код — можно модифицировать</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Нет приложения и Bluetooth</li>
+          </ul>
+        </div>
+        <a href="https://cornfieldelectronics.com/neurodreamer/buy.nd.php" target="_blank" class="buy-btn btn-green">
+          Купить → cornfieldelectronics.com
+        </a>
+      </div>
+    </div>
+
+    <!-- Senaptec Strobe -->
+    <div class="device-card">
+      <div class="device-img">
+        <img
+          src="https://ucarecdn.com/68b7431e-398f-4f10-af83-6227209c4388/-/format/auto/-/preview/3000x3000/-/quality/lighter/5f1f50e31ec23f833bfeaf8a_senaptec_strobe_4.jpeg"
+          alt="Senaptec Strobe Elite"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="device-img-placeholder" style="display:none;">🥽</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="device-badge b-orange">Спортивный · Реабилитация</span>
+          <div class="device-name">Senaptec Strobe</div>
+          <div class="device-tagline">Стробоскопические очки для тренировки реакции и координации. Используются в НФЛ, НБА, НХЛ и спортивной медицине.</div>
+          <div class="device-price">$299–599</div>
+          <div class="device-price-note">Strobe Elite до $599 · управление через Senaptec App</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--orange)"></span>ЖК-линзы (затемнение, не LED-строб)</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>8 уровней частоты стробирования</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>iOS/Android приложение с контролем сессий</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>Тренировка: реакция, глаза, координация, баланс</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>Применяется в спортивной медицине и нейрореабилитации</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>Не предназначен для изменения состояний сознания</li>
+          </ul>
+        </div>
+        <a href="https://senaptec.com/products/senaptec-strobe-elite" target="_blank" class="buy-btn btn-orange">
+          Купить → senaptec.com
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ SCIENCE ═══════════ -->
+<section class="section" id="science">
+  <div class="eyebrow">Наука</div>
+  <h2 class="section-title">90 лет исследований за одной идеей</h2>
+  <p class="section-sub">Стробоскопическая стимуляция — одна из наиболее изученных форм нейромодуляции. Вот что говорит наука.</p>
+
+  <div class="science-grid">
+
+    <div class="sci-card">
+      <div class="sci-year">1934</div>
+      <div class="sci-title">Открытие фотического вождения</div>
+      <div class="sci-text">Эдриан и Мэттьюс обнаружили, что ритмичный мерцающий свет вызывает синхронизированную ответную активность в ЭЭГ — явление получило название «photic driving». Мозг буквально следует за частотой светового стимула.</div>
+      <span class="sci-tag">Фундамент</span>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-year">1942</div>
+      <div class="sci-title">Грей Уолтер и стробоскоп</div>
+      <div class="sci-text">Нейробиолог Уильям Грей Уолтер систематически изучил стробоскопические частоты и их влияние на ЭЭГ. Он зафиксировал, что ответная ритмическая активность мозга распространяется из затылочных в центральные и лобные области — основа для будущего AVE.</div>
+      <span class="sci-tag">Пионер</span>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-year">AVE</div>
+      <div class="sci-title">Audio-Visual Entrainment — механизм</div>
+      <div class="sci-text">Мозг работает на частотах 0.5–40 Гц: дельта (сон), тета (медитация/гипноз), альфа (спокойное бодрствование), бета (концентрация), гамма (когниция). Ритмичный световой или звуковой стимул «затягивает» ЭЭГ-активность в соответствующий диапазон. Эффект доказан в десятках ЭЭГ-исследований.</div>
+      <span class="sci-tag">Механизм</span>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-year">2023</div>
+      <div class="sci-title">Систематический обзор AVE</div>
+      <div class="sci-text">Обзор 20 исследований (NCBI) показал эффективность AVE при: тревожности, депрессии, хронической боли, мигрени, ADD/ADHD, ПМС, сезонной депрессии и нарушениях сна. Эффекты — модераторные, но воспроизводимые.</div>
+      <span class="sci-tag">Доказано</span>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-year">2024</div>
+      <div class="sci-title">Глимфатическая система и амилоид</div>
+      <div class="sci-text">MIT (лаборатория Тsai) опубликовала в Nature: 40 Гц аудиовизуальная стимуляция активирует интернейроны, вызывая выброс пептида VIP. Это усиливает ток глимфатической жидкости и ускоряет вывод бета-амилоида из мозга у мышей. Китайские учёные независимо подтвердили этот эффект.</div>
+      <span class="sci-tag">Прорыв</span>
+    </div>
+
+    <div class="sci-card">
+      <div class="sci-year">⚠</div>
+      <div class="sci-title">Ограничения и безопасность</div>
+      <div class="sci-text">Главный риск — фотосенситивные эпилептические приступы. Устройства не рекомендованы людям с эпилепсией в анамнезе. RCT (рандомизированных контролируемых испытаний) на здоровых взрослых с коммерческими устройствами пока нет — большинство данных получено на животных или в открытых пилотах.</div>
+      <span class="sci-tag caution">Предостережение</span>
+    </div>
+
+  </div>
+
+  <!-- 40 HZ GAMMA BANNER -->
+  <div class="gamma-banner">
+    <div class="gamma-num">40<br>Гц</div>
+    <div class="gamma-content">
+      <h3>Гамма-стимуляция и болезнь Альцгеймера</h3>
+      <p>MIT и Cognito Therapeutics завершили Phase II и запустили Phase III. Результаты: ежедневная 1-час стимуляция 40 Гц светом и звуком значительно замедляла атрофию мозга и улучшала ряд когнитивных показателей у пациентов с мягкой стадией Альцгеймера по сравнению с контрольной группой. Пятилетнее расширенное исследование продолжается.</p>
+      <div class="cite">→ MIT News, март 2025 · Alzheimer's & Dementia, 2025</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ TABLE ═══════════ -->
+<section class="section" id="compare">
+  <div class="eyebrow">Сравнение</div>
+  <h2 class="section-title">Всё в одной таблице</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Устройство</th>
+          <th>Цена</th>
+          <th>Форм-фактор</th>
+          <th>Технология</th>
+          <th>Частоты</th>
+          <th>Сессия</th>
+          <th>Приложение</th>
+          <th>Назначение</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-name"><span class="dot d-blue"></span>NeuroVIZR</td>
+          <td class="td-price">$499–599</td>
+          <td>Шлем-гарнитура</td>
+          <td>9 LED + звук</td>
+          <td>0.5–40 Гц</td>
+          <td>5–11 мин</td>
+          <td>✓ iOS/Android</td>
+          <td>Дом, сон, релакс</td>
+        </tr>
+        <tr>
+          <td class="td-name"><span class="dot d-gold"></span>Lucia N°03</td>
+          <td class="td-price">$23 000+</td>
+          <td>Настольная лампа</td>
+          <td>Галоген + 8 LED</td>
+          <td>Ручной контроль</td>
+          <td>15–45 мин</td>
+          <td>✗</td>
+          <td>Клиника, практики</td>
+        </tr>
+        <tr>
+          <td class="td-name"><span class="dot d-purple"></span>PandoraStar</td>
+          <td class="td-price">По запросу</td>
+          <td>Напольная рама</td>
+          <td>12 LED геометрия</td>
+          <td>α, θ, δ программы</td>
+          <td>15–30 мин</td>
+          <td>Частично</td>
+          <td>Велнес-центры</td>
+        </tr>
+        <tr>
+          <td class="td-name"><span class="dot d-green"></span>NeuroDreamer</td>
+          <td class="td-price">$70</td>
+          <td>Маска для сна</td>
+          <td>LED + аудио</td>
+          <td>4 частоты mix</td>
+          <td>Вся ночь</td>
+          <td>✗</td>
+          <td>DIY, сон, ОС</td>
+        </tr>
+        <tr>
+          <td class="td-name"><span class="dot d-orange"></span>Senaptec Strobe</td>
+          <td class="td-price">$299–599</td>
+          <td>Очки</td>
+          <td>ЖК-линзы</td>
+          <td>8 уровней</td>
+          <td>10–20 мин</td>
+          <td>✓ iOS/Android</td>
+          <td>Спорт, реабилитация</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ PERSONAS ═══════════ -->
+<section class="section">
+  <div class="eyebrow">Для кого</div>
+  <h2 class="section-title">Кому что подойдёт</h2>
+
+  <div class="personas">
+    <div class="persona">
+      <div class="persona-icon">🧘</div>
+      <div class="persona-title">Медитирующий</div>
+      <div class="persona-desc">Хочет глубокие состояния без многолетней практики. Готов к необычным переживаниям.</div>
+      <div class="persona-rec" style="color:var(--purple)">→ PandoraStar или Lucia N°03</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">🏠</div>
+      <div class="persona-title">Домашний пользователь</div>
+      <div class="persona-desc">Хочет улучшить сон и снизить стресс. Без сложного оборудования, всё через приложение.</div>
+      <div class="persona-rec" style="color:var(--accent)">→ NeuroVIZR</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">⚡</div>
+      <div class="persona-title">Спортсмен</div>
+      <div class="persona-desc">Тренирует скорость реакции, координацию глаз-рука. Применяется в профессиональном спорте.</div>
+      <div class="persona-rec" style="color:var(--orange)">→ Senaptec Strobe</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">🔬</div>
+      <div class="persona-title">Исследователь / DIY</div>
+      <div class="persona-desc">Интересен открытый код, возможность настройки, минимальный бюджет на вход.</div>
+      <div class="persona-rec" style="color:var(--green)">→ NeuroDreamer</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">🏥</div>
+      <div class="persona-title">Практик / Клиника</div>
+      <div class="persona-desc">Предлагает сессии клиентам. Нужен аппарат с научным обоснованием и репутацией.</div>
+      <div class="persona-rec" style="color:var(--gold)">→ Lucia N°03</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ VERDICT ═══════════ -->
+<section class="section" id="verdict">
+  <div class="eyebrow">Итог</div>
+  <h2 class="section-title">Главные выводы</h2>
+
+  <div class="verdict-grid">
+    <div class="verdict-card">
+      <h3>Лучшее соотношение цена / возможности</h3>
+      <p style="color:var(--accent)">NeuroVIZR — $499, приложение, 100+ сессий, никаких подписок. Лучший старт.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Самый глубокий опыт</h3>
+      <p style="color:var(--gold)">Lucia N°03 — профессиональный инструмент с клинической историей и репутацией.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Минимальный вход</h3>
+      <p style="color:var(--green)">NeuroDreamer — $70, открытый код. Отличная точка входа для любопытных.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Наиболее изученная частота</h3>
+      <p style="color:var(--accent)">40 Гц гамма-стимуляция — единственный диапазон с Phase III клиническими испытаниями (MIT/Cognito).</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Нет масштабных RCT</h3>
+      <p style="color:var(--muted)">Ни одно из коммерческих устройств не прошло крупных рандомизированных испытаний. Область перспективна, но данные пока предварительные.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Ключевое предостережение</h3>
+      <p style="color:var(--red)">Фотосенситивная эпилепсия — абсолютное противопоказание для всех устройств со стробоскопическим эффектом.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>Источники</h4>
+  <div class="sources-grid">
+    <a href="https://news.mit.edu/2025/evidence-40hz-gamma-stimulation-promotes-brain-health-expanding-0314" target="_blank">MIT News — 40 Hz gamma stimulation, март 2025</a>
+    <a href="https://neurovizr.com/products/neurovizr-light-sound-brain-wellness-device" target="_blank">NeuroVIZR — официальная страница продукта</a>
+    <a href="https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.70792" target="_blank">Alzheimer's & Dementia — Gamma stimulation study, 2025</a>
+    <a href="https://lucialightexperience.com/products/lucia-n-03-practitioner-system" target="_blank">Lucia N°03 — Practitioner System</a>
+    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10842797/" target="_blank">PMC — Audiovisual gamma stimulation for neurodegeneration</a>
+    <a href="https://pandorastar.co.uk/" target="_blank">PandoraStar — официальный сайт</a>
+    <a href="https://www.ncbi.nlm.nih.gov/books/NBK75019/" target="_blank">NCBI — Brainwave entrainment comprehensive review</a>
+    <a href="https://cornfieldelectronics.com/neurodreamer/buy.nd.php" target="_blank">NeuroDreamer — покупка</a>
+    <a href="https://pubmed.ncbi.nlm.nih.gov/21256616/" target="_blank">PubMed — Direct effects of AVS on EEG</a>
+    <a href="https://senaptec.com/products/senaptec-strobe-elite" target="_blank">Senaptec Strobe Elite</a>
+    <a href="https://en.wikipedia.org/wiki/Audio-visual_entrainment" target="_blank">Wikipedia — Audio-visual entrainment</a>
+    <a href="https://www.psychonaut.tech/docs/guides/neurotech/stroboscopic/" target="_blank">Stroboscopic Light Machines — Psychonaut Tech</a>
+  </div>
+</div>
+
+<footer>
+  Собрано в апреле 2026 · Только для информационных целей · Не является медицинской рекомендацией
+</footer>
+
+</body>
+</html>
