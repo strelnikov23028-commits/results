@@ -8,1274 +8,450 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0a;
-      --surface: #111;
-      --surface2: #181818;
-      --border: #242424;
-      --text: #e4d8c0;
-      --text-dim: #5a5a5a;
-      --text-muted: #333;
-      --accent: #d94f3d;
-      --amber: #e8a030;
-      --green: #3aaa74;
-      --blue: #4a8fe8;
+      --bg:#090909;--surface:#101010;--surface2:#161616;--surface3:#1d1d1d;
+      --border:#222;--border2:#2e2e2e;--text:#e0d3b8;--text-dim:#555;--text-muted:#2e2e2e;
+      --accent:#d64e3a;--amber:#e09a28;--green:#38a870;--blue:#4888e0;--purple:#8a60d4;
     }
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.025;
-      pointer-events: none;
-      z-index: 9998;
-    }
-
-    /* ─── HEADER ─── */
-    .site-header {
-      position: sticky;
-      top: 0;
-      background: rgba(10,10,10,0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      z-index: 200;
-    }
-
-    .classification {
-      font-size: 9px;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .site-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 40px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      line-height: 1;
-      color: var(--text);
-    }
-
-    .site-subtitle {
-      font-size: 10px;
-      color: var(--text-dim);
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      margin-top: 6px;
-    }
-
-    .header-meta {
-      text-align: right;
-      font-size: 10px;
-      color: var(--text-dim);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      line-height: 2.2;
-    }
-
-    .header-meta em { color: var(--amber); font-style: normal; }
-
-    /* ─── STATS BAR ─── */
-    .stats-bar {
-      border-bottom: 1px solid var(--border);
-      padding: 14px 40px;
-      display: flex;
-      gap: 40px;
-      overflow-x: auto;
-    }
-
-    .stat { display: flex; flex-direction: column; gap: 1px; white-space: nowrap; }
-
-    .stat-label {
-      font-size: 9px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-
-    .stat-value {
-      font-family: 'Oswald', sans-serif;
-      font-size: 26px;
-      font-weight: 600;
-    }
-
-    .stat-value.red   { color: var(--accent); }
-    .stat-value.amber { color: var(--amber); }
-    .stat-value.green { color: var(--green); }
-    .stat-value.blue  { color: var(--blue); }
-
-    /* ─── FILTERS ─── */
-    .filter-bar {
-      padding: 14px 40px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .filter-label {
-      font-size: 9px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-right: 4px;
-    }
-
-    .filter-btn {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 9px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text-dim);
-      cursor: pointer;
-      transition: all .15s;
-    }
-
-    .filter-btn:hover { border-color: var(--text-dim); color: var(--text-dim); }
-
-    .filter-btn.active {
-      border-color: var(--text);
-      color: var(--text);
-      background: var(--surface2);
-    }
-
-    /* ─── MAIN ─── */
-    .main {
-      padding: 36px 40px;
-      max-width: 1440px;
-      margin: 0 auto;
-    }
-
-    /* ─── GADGET GRID ─── */
-    .gadget-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-bottom: 56px;
-    }
-
-    .gadget-card {
-      background: var(--surface);
-      padding: 22px;
-      position: relative;
-      transition: background .15s;
-      animation: fadeUp .4s ease backwards;
-    }
-
-    .gadget-card[data-hidden] { display: none; }
-
-    .gadget-card:hover { background: var(--surface2); }
-
-    .gadget-card.priority-critical::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--accent);
-    }
-
-    /* Card top row */
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .item-num {
-      font-size: 9px;
-      color: var(--text-muted);
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
-
-    .status-badge {
-      font-size: 9px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border: 1px solid;
-      cursor: pointer;
-      user-select: none;
-      transition: all .15s;
-    }
-
-    .status-badge[data-status="pending"]  { border-color: var(--amber); color: var(--amber); }
-    .status-badge[data-status="ordered"]  { border-color: var(--green); color: var(--green); }
-    .status-badge[data-status="checking"] { border-color: var(--blue);  color: var(--blue);  }
-
-    /* Name */
-    .gadget-name {
-      font-family: 'Oswald', sans-serif;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      line-height: 1.15;
-    }
-
-    .gadget-sub {
-      font-size: 11px;
-      color: var(--text-dim);
-      margin-top: 3px;
-      margin-bottom: 12px;
-    }
-
-    /* Priority */
-    .priority-crit {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .18em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    /* Try first */
-    .try-first {
-      background: rgba(232,160,48,.06);
-      border: 1px solid rgba(232,160,48,.25);
-      padding: 7px 12px;
-      font-size: 10px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 12px;
-    }
-
-    /* Tags */
-    .tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .tag {
-      font-size: 9px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-    }
-
-    .tag.low    { border-color: rgba(58,170,116,.5); color: var(--green); }
-    .tag.medium { border-color: rgba(232,160,48,.5); color: var(--amber); }
-    .tag.high   { border-color: rgba(217,79,61,.5);  color: var(--accent); }
-
-    /* Price */
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 10px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 14px;
-    }
-
-    .price-label { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
-
-    .price-val {
-      font-family: 'Oswald', sans-serif;
-      font-size: 22px;
-      font-weight: 500;
-    }
-
-    /* Buy links */
-    .buy-links { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
-
-    .buy-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 11px;
-      padding: 4px 0;
-      transition: color .15s;
-    }
-
-    .buy-link:hover { color: var(--text); }
-
-    .buy-tag {
-      font-size: 8px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      padding: 2px 6px;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      min-width: 64px;
-      text-align: center;
-      transition: border-color .15s;
-      flex-shrink: 0;
-    }
-
-    .buy-link:hover .buy-tag { border-color: var(--text-dim); color: var(--text-dim); }
-    .buy-tag.primary { border-color: var(--blue); color: var(--blue); }
-
-    /* Notes */
-    .notes {
-      font-size: 11px;
-      color: var(--text-dim);
-      line-height: 1.55;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
-      font-style: italic;
-    }
-
-    /* ─── SECTION HEADER ─── */
-    .section-head {
-      font-family: 'Oswald', sans-serif;
-      font-size: 30px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-bottom: 24px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid var(--border);
-      display: flex;
-      align-items: baseline;
-      gap: 18px;
-    }
-
-    .section-head span {
-      font-size: 11px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-weight: 400;
-      color: var(--text-dim);
-      letter-spacing: .15em;
-    }
-
-    /* ─── BRIEFING CARDS ─── */
-    .info-section { margin-bottom: 56px; }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-
-    .info-card { background: var(--surface); padding: 20px; }
-
-    .info-card-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .info-card-title .dot {
-      width: 6px; height: 6px;
-      background: var(--amber);
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    .info-card-title .dot.red   { background: var(--accent); }
-    .info-card-title .dot.green { background: var(--green); }
-    .info-card-title .dot.blue  { background: var(--blue); }
-
-    .info-card p, .info-card li {
-      font-size: 12px;
-      color: var(--text-dim);
-      line-height: 1.75;
-    }
-
-    .info-card p + p { margin-top: 8px; }
-
-    .info-card li {
-      padding-left: 14px;
-      position: relative;
-      list-style: none;
-    }
-
-    .info-card li::before {
-      content: '›';
-      position: absolute;
-      left: 0;
-      color: var(--text-muted);
-    }
-
-    .info-card strong { color: var(--text); font-weight: 500; }
-
-    .info-card .warn { color: var(--accent); font-weight: 500; }
-    .info-card .ok   { color: var(--green);  font-weight: 500; }
-    .info-card .note { color: var(--amber);  font-weight: 500; }
-
-    /* ─── FORWARDER TABLE ─── */
-    .table-wrap {
-      border: 1px solid var(--border);
-      overflow-x: auto;
-      margin-bottom: 56px;
-    }
-
-    table { width: 100%; border-collapse: collapse; }
-
-    thead th {
-      font-size: 9px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      text-align: left;
-      padding: 12px 18px;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      white-space: nowrap;
-    }
-
-    tbody td {
-      font-size: 12px;
-      color: var(--text-dim);
-      padding: 13px 18px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-      line-height: 1.5;
-    }
-
-    tbody tr:last-child td { border-bottom: none; }
-    tbody tr:hover td { background: var(--surface2); }
-    tbody td:first-child { color: var(--text); font-weight: 500; }
-
-    .stars { color: var(--amber); letter-spacing: -.05em; }
-
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 22px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-text {
-      font-size: 9px;
-      color: var(--text-muted);
-      letter-spacing: .15em;
-      text-transform: uppercase;
-    }
-
-    /* ─── PRODUCT IMAGE ─── */
-    .product-img {
-      height: 180px;
-      margin: -22px -22px 20px -22px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      background: #0e0e0e;
-    }
-
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 16px;
-      filter: brightness(0.92) contrast(1.05);
-      transition: transform .3s ease, filter .3s ease;
-    }
-
-    .gadget-card:hover .product-img img {
-      transform: scale(1.04);
-      filter: brightness(1) contrast(1.08);
-    }
-
-    .product-img .img-fallback {
-      font-size: 56px;
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 0 24px rgba(255,255,255,.06));
-    }
-
-    .product-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 24px,
-        rgba(255,255,255,.012) 24px,
-        rgba(255,255,255,.012) 25px
-      );
-      pointer-events: none;
-    }
-
-    /* ─── ANIMATION ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 720px) {
-      .site-header, .stats-bar, .filter-bar, .main { padding-left: 20px; padding-right: 20px; }
-      .gadget-grid { grid-template-columns: 1fr; }
-      .site-title { font-size: 28px; }
-      .stats-bar { gap: 24px; }
-      footer { flex-direction: column; gap: 8px; text-align: center; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.6;overflow-x:hidden}
+    body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.022;pointer-events:none;z-index:9000}
+
+    .site-header{position:sticky;top:0;background:rgba(9,9,9,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:18px 40px;display:flex;justify-content:space-between;align-items:flex-start;z-index:500}
+    .cls{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}
+    .site-title{font-family:'Oswald',sans-serif;font-size:38px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1}
+    .site-sub{font-size:10px;color:var(--text-dim);letter-spacing:.18em;text-transform:uppercase;margin-top:5px}
+    .hdr-meta{text-align:right;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;line-height:2.1}
+    .hdr-meta em{color:var(--amber);font-style:normal}
+
+    .stats-bar{border-bottom:1px solid var(--border);padding:12px 40px;display:flex;gap:36px;overflow-x:auto}
+    .stat{display:flex;flex-direction:column;gap:1px;white-space:nowrap}
+    .stat-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+    .stat-value{font-family:'Oswald',sans-serif;font-size:24px;font-weight:600}
+    .sv-amber{color:var(--amber)}.sv-green{color:var(--green)}.sv-blue{color:var(--blue)}.sv-purple{color:var(--purple)}.sv-red{color:var(--accent)}
+
+    .filter-bar{padding:12px 40px;border-bottom:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+    .flabel{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-right:6px}
+    .fbtn{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:4px 12px;border:1px solid var(--border2);background:transparent;color:var(--text-dim);cursor:pointer;transition:all .15s}
+    .fbtn:hover{border-color:var(--text-dim);color:var(--text-dim)}
+    .fbtn.active{border-color:var(--text);color:var(--text);background:var(--surface2)}
+
+    .main{padding:32px 40px;max-width:1440px;margin:0 auto}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:52px}
+
+    .card{background:var(--surface);position:relative;transition:background .15s;animation:fadeUp .35s ease backwards}
+    .card:hover{background:var(--surface2)}
+    .card[data-hidden]{display:none}
+    .card.crit::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent)}
+
+    .prod-img{height:200px;background:#0c0c0c;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border);cursor:pointer}
+    .prod-img img{width:100%;height:100%;object-fit:contain;padding:18px;filter:brightness(.9) contrast(1.05);transition:transform .35s ease,filter .35s ease}
+    .card:hover .prod-img img{transform:scale(1.05);filter:brightness(1) contrast(1.1)}
+    .prod-img .fb{font-size:64px;filter:drop-shadow(0 0 20px rgba(255,255,255,.06))}
+    .prod-img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 22px,rgba(255,255,255,.01) 22px,rgba(255,255,255,.01) 23px);pointer-events:none}
+
+    .card-body{padding:18px 20px 20px}
+    .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .inum{font-size:9px;color:var(--text-muted);letter-spacing:.2em;text-transform:uppercase}
+
+    .sbadge{font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:3px 10px;border:1px solid;cursor:pointer;user-select:none;transition:all .15s;position:relative;background:transparent;font-family:'IBM Plex Mono',monospace}
+    .sbadge[data-s="pending"]{border-color:var(--amber);color:var(--amber)}
+    .sbadge[data-s="checking"]{border-color:var(--blue);color:var(--blue)}
+    .sbadge[data-s="ordered"]{border-color:var(--green);color:var(--green)}
+    .sbadge[data-s="delivered"]{border-color:var(--purple);color:var(--purple)}
+    .sbadge[data-s="cancelled"]{border-color:var(--text-dim);color:var(--text-dim)}
+
+    .sdrop{position:absolute;top:calc(100% + 4px);right:0;background:var(--surface3);border:1px solid var(--border2);z-index:400;min-width:148px;display:none;flex-direction:column}
+    .sdrop.open{display:flex}
+    .sdrop-opt{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;cursor:pointer;border:none;background:transparent;text-align:left;transition:background .1s;display:flex;align-items:center;gap:8px;color:var(--text-dim)}
+    .sdrop-opt:hover{background:var(--border);color:var(--text)}
+    .sdrop-opt .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+    .gname{font-family:'Oswald',sans-serif;font-size:19px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1.15}
+    .gsub{font-size:11px;color:var(--text-dim);margin-top:2px;margin-bottom:10px}
+    .crit-badge{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+    .try-badge{background:rgba(224,154,40,.06);border:1px solid rgba(224,154,40,.22);padding:6px 10px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+
+    .tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+    .tag{font-size:8px;letter-spacing:.14em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--border2);color:var(--text-dim)}
+    .tag.low{border-color:rgba(56,168,112,.4);color:var(--green)}
+    .tag.med{border-color:rgba(224,154,40,.4);color:var(--amber)}
+    .tag.high{border-color:rgba(214,78,58,.4);color:var(--accent)}
+
+    .price-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:12px}
+    .plabel{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+    .pval{font-family:'Oswald',sans-serif;font-size:20px;font-weight:500}
+
+    .buy-links{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+    .blink{display:flex;align-items:center;gap:9px;color:var(--text-dim);text-decoration:none;font-size:11px;padding:3px 0;transition:color .12s}
+    .blink:hover{color:var(--text)}
+    .btag{font-size:8px;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--border2);color:var(--text-muted);min-width:60px;text-align:center;flex-shrink:0;transition:border-color .12s}
+    .blink:hover .btag{border-color:var(--text-dim);color:var(--text-dim)}
+    .btag.pr{border-color:var(--blue);color:var(--blue)}
+
+    .cnotes{font-size:11px;color:var(--text-dim);line-height:1.55;padding-top:9px;border-top:1px solid var(--border);font-style:italic}
+
+    .track-info{margin-top:10px;padding:8px 10px;background:rgba(56,168,112,.06);border:1px solid rgba(56,168,112,.18);font-size:10px;color:var(--green);letter-spacing:.05em;display:none}
+    .track-info.show{display:block}
+    .track-info span{color:var(--text-dim)}
+
+    .edit-btn{display:block;width:100%;margin-top:12px;padding:7px 0;background:transparent;border:1px solid var(--border2);color:var(--text-dim);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .15s;text-align:center}
+    .edit-btn:hover{border-color:var(--text-dim);color:var(--text);background:var(--surface3)}
+
+    .panel-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;display:none;backdrop-filter:blur(4px)}
+    .panel-overlay.open{display:block}
+    .panel{position:fixed;top:0;right:-440px;bottom:0;width:420px;background:var(--surface);border-left:1px solid var(--border2);z-index:700;transition:right .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+    .panel.open{right:0}
+    .panel-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0}
+    .panel-title{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;line-height:1.2}
+    .panel-sub{font-size:10px;color:var(--text-dim);margin-top:3px;letter-spacing:.1em}
+    .panel-close{background:none;border:1px solid var(--border2);color:var(--text-dim);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:4px 10px;cursor:pointer;transition:all .12s;flex-shrink:0;margin-left:12px}
+    .panel-close:hover{border-color:var(--text-dim);color:var(--text)}
+    .panel-img{height:160px;background:#0c0c0c;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);flex-shrink:0}
+    .panel-img img{width:100%;height:100%;object-fit:contain;padding:16px}
+    .panel-img .fb{font-size:52px}
+    .panel-body{padding:20px 24px;flex:1}
+    .p-stitle{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px}
+    .status-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:20px}
+    .sopt{padding:7px 4px;border:1px solid var(--border2);background:transparent;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);text-align:center;transition:all .12s;line-height:1.5}
+    .sopt:hover{border-color:var(--text-dim);color:var(--text-dim);background:var(--surface3)}
+    .sopt.active[data-s="pending"]{border-color:var(--amber);color:var(--amber);background:rgba(224,154,40,.08)}
+    .sopt.active[data-s="checking"]{border-color:var(--blue);color:var(--blue);background:rgba(72,136,224,.08)}
+    .sopt.active[data-s="ordered"]{border-color:var(--green);color:var(--green);background:rgba(56,168,112,.08)}
+    .sopt.active[data-s="delivered"]{border-color:var(--purple);color:var(--purple);background:rgba(138,96,212,.08)}
+    .sopt.active[data-s="cancelled"]{border-color:var(--text-dim);color:var(--text-dim);background:var(--surface3)}
+    .form-group{margin-bottom:14px}
+    .form-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:5px}
+    .form-input{width:100%;padding:8px 10px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12px;transition:border-color .12s;outline:none}
+    .form-input:focus{border-color:var(--text-dim)}
+    .form-input::placeholder{color:var(--text-muted)}
+    textarea.form-input{resize:vertical;min-height:72px}
+    .panel-save{display:block;width:100%;padding:11px;background:var(--text);color:var(--bg);border:none;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:opacity .15s;margin-top:4px}
+    .panel-save:hover{opacity:.86}
+
+    .section-head{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:22px;padding-bottom:12px;border-bottom:2px solid var(--border);display:flex;align-items:baseline;gap:16px}
+    .section-head span{font-size:10px;font-family:'IBM Plex Mono',monospace;font-weight:400;color:var(--text-dim);letter-spacing:.15em}
+    .info-sec{margin-bottom:52px}
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+    .icard{background:var(--surface);padding:18px}
+    .icard-title{font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .icard p,.icard li{font-size:11px;color:var(--text-dim);line-height:1.7}
+    .icard p+p{margin-top:7px}
+    .icard li{padding-left:12px;position:relative;list-style:none}
+    .icard li::before{content:'›';position:absolute;left:0;color:var(--text-muted)}
+    .icard strong{color:var(--text);font-weight:500}
+    .warn{color:var(--accent);font-weight:500}.ok{color:var(--green);font-weight:500}.note{color:var(--amber);font-weight:500}
+
+    .table-wrap{border:1px solid var(--border);overflow-x:auto;margin-bottom:52px}
+    table{width:100%;border-collapse:collapse}
+    thead th{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);text-align:left;padding:11px 16px;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap}
+    tbody td{font-size:11px;color:var(--text-dim);padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+    tbody tr:last-child td{border-bottom:none}
+    tbody tr:hover td{background:var(--surface2)}
+    tbody td:first-child{color:var(--text);font-weight:500}
+    .stars{color:var(--amber);letter-spacing:-.05em}
+
+    footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;justify-content:space-between;align-items:center}
+    .footer-text{font-size:9px;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    @media(max-width:720px){
+      .site-header,.stats-bar,.filter-bar,.main{padding-left:16px;padding-right:16px}
+      .grid{grid-template-columns:1fr}.site-title{font-size:26px}.stats-bar{gap:20px}
+      footer{flex-direction:column;gap:8px;text-align:center}
+      .panel{width:100%;right:-100%}.status-grid{grid-template-columns:repeat(3,1fr)}
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
-  <header class="site-header">
-    <div>
-      <div class="classification">◆ Personal — Unrestricted</div>
-      <h1 class="site-title">GEAR ORDER</h1>
-      <div class="site-subtitle">Acquisition Tracker — Serbia 2026</div>
-    </div>
-    <div class="header-meta">
-      Пункт доставки: <em>Сербия</em><br>
-      Обновлено: <em>22.04.2026</em><br>
-      Позиций: <em id="hdr-count">—</em>
-    </div>
-  </header>
+<header class="site-header">
+  <div>
+    <div class="cls">◆ Personal — Unrestricted</div>
+    <h1 class="site-title">GEAR ORDER</h1>
+    <div class="site-sub">Acquisition Tracker — Serbia 2026</div>
+  </div>
+  <div class="hdr-meta">Пункт доставки: <em>Сербия</em><br>Обновлено: <em>22.04.2026</em><br>Позиций: <em id="hdr-count">—</em></div>
+</header>
 
-  <!-- ═══════════════════════════════ STATS ════════════════════════════════ -->
-  <div class="stats-bar">
-    <div class="stat">
-      <div class="stat-label">Всего позиций</div>
-      <div class="stat-value" id="s-total">13</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Ожидает заказа</div>
-      <div class="stat-value amber" id="s-pending">—</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Заказано</div>
-      <div class="stat-value green" id="s-ordered">—</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Проверяется</div>
-      <div class="stat-value blue" id="s-checking">—</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Высокий риск</div>
-      <div class="stat-value red" id="s-highrisk">—</div>
-    </div>
-    <div class="stat">
-      <div class="stat-label">Ест. сумма</div>
-      <div class="stat-value" id="s-total-price">~$710</div>
+<div class="stats-bar">
+  <div class="stat"><div class="stat-label">Всего</div><div class="stat-value" id="s-total">—</div></div>
+  <div class="stat"><div class="stat-label">Ожидает</div><div class="stat-value sv-amber" id="s-pending">—</div></div>
+  <div class="stat"><div class="stat-label">Проверка</div><div class="stat-value sv-blue" id="s-checking">—</div></div>
+  <div class="stat"><div class="stat-label">Заказано</div><div class="stat-value sv-green" id="s-ordered">—</div></div>
+  <div class="stat"><div class="stat-label">Доставлено</div><div class="stat-value sv-purple" id="s-delivered">—</div></div>
+  <div class="stat"><div class="stat-label">Высокий риск</div><div class="stat-value sv-red" id="s-highrisk">—</div></div>
+  <div class="stat"><div class="stat-label">Ест. сумма</div><div class="stat-value" id="s-price">—</div></div>
+</div>
+
+<div class="filter-bar">
+  <span class="flabel">Фильтр:</span>
+  <button class="fbtn active" data-filter="all">Все</button>
+  <button class="fbtn" data-filter="priority">!!! Приоритет</button>
+  <button class="fbtn" data-filter="high">Высокий риск</button>
+  <button class="fbtn" data-filter="try">Примерить</button>
+  <button class="fbtn" data-filter="pending">Ожидает</button>
+  <button class="fbtn" data-filter="ordered">Заказано</button>
+  <button class="fbtn" data-filter="delivered">Доставлено</button>
+</div>
+
+<main class="main">
+  <div class="grid" id="grid"></div>
+
+  <div class="info-sec">
+    <div class="section-head">Брифинг: Сербия <span>Таможня / Риски / Советы</span></div>
+    <div class="info-grid">
+      <div class="icard"><div class="icard-title"><svg width="6" height="6"><circle cx="3" cy="3" r="3" fill="#e09a28"/></svg>Таможенный порог</div><ul><li>Посылки <strong>&lt;€50</strong> — без пошлин</li><li>€50–€150 — <span class="note">20% НДС (ПДВ)</span></li><li><strong>&gt;€150</strong> — НДС + <span class="warn">пошлина по категории</span></li><li>Посылка от физлица мягче, чем от магазина</li></ul></div>
+      <div class="icard"><div class="icard-title"><svg width="6" height="6"><circle cx="3" cy="3" r="3" fill="#d64e3a"/></svg>Запрещённое / Риски</div><ul><li><span class="warn">Leatherman Micra</span> — лезвие, авиа только в багаже</li><li><span class="warn">Li-Ion батареи</span> (Rolling Square Tau 2) — почта не берёт, нужен DHL/FedEx</li><li><span class="warn">Жидкости</span> (Haan) — авиа max 100мл в ручной клади</li><li>Roav — примерить до заказа, возврат сложный</li></ul></div>
+      <div class="icard"><div class="icard-title"><svg width="6" height="6"><circle cx="3" cy="3" r="3" fill="#38a870"/></svg>Как снизить риски</div><ul><li>Дели заказы на посылки <strong>до €50</strong></li><li>Форвардер переупаковывает и реоценивает</li><li><strong>Amazon.de</strong> → из ЕС, часто без таможни</li><li>DHL Express — надёжный для Li-Ion</li><li>Сохраняй инвойсы и трекинг</li></ul></div>
+      <div class="icard"><div class="icard-title"><svg width="6" height="6"><circle cx="3" cy="3" r="3" fill="#4888e0"/></svg>Стратегия заказа</div><p><strong>Шаг 1.</strong> AirFly Pro 2, Nomad Key, Secrid — заказывай первыми напрямую.</p><p><strong>Шаг 2.</strong> Maradot, Atom, Klarus — форвардер MyUS, разбей по €50.</p><p><strong>Шаг 3.</strong> Leatherman Micra — отдельно через Amazon.de.</p><p><strong>Шаг 4.</strong> Rolling Square Tau 2 — только DHL Express.</p></div>
+      <div class="icard"><div class="icard-title"><svg width="6" height="6"><circle cx="3" cy="3" r="3" fill="#e09a28"/></svg>Сроки доставки</div><ul><li><strong>DHL Express:</strong> 3–5 рабочих дней</li><li><strong>FedEx International Priority:</strong> 4–6 дней</li><li><strong>Amazon.de стандарт:</strong> 7–14 дней</li><li><strong>Форвардер + стандарт:</strong> 14–21 день</li><li><strong>Сербская почта:</strong> до 60 дней</li></ul></div>
+      <div class="icard"><div class="icard-title"><svg width="6" height="6"><circle cx="3" cy="3" r="3" fill="#d64e3a"/></svg>Если задержали</div><ul><li>Уведомление от Pošta Srbije — явись с паспортом</li><li>Принеси распечатку инвойса</li><li>Оплати НДС на месте (наличные или карта)</li><li>Срок хранения — <strong>30 дней</strong>, потом возврат</li></ul></div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════ FILTERS ══════════════════════════════ -->
-  <div class="filter-bar">
-    <span class="filter-label">Фильтр:</span>
-    <button class="filter-btn active" data-filter="all">Все</button>
-    <button class="filter-btn" data-filter="priority">!!! Приоритет</button>
-    <button class="filter-btn" data-filter="high">Высокий риск</button>
-    <button class="filter-btn" data-filter="try">Примерить сначала</button>
-    <button class="filter-btn" data-filter="pending">Ожидает</button>
-    <button class="filter-btn" data-filter="ordered">Заказано</button>
+  <div class="info-sec">
+    <div class="section-head">Форвардеры <span>Сравнение сервисов</span></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Сервис</th><th>Цена (est.)</th><th>Аккумуляторы</th><th>Скорость</th><th>Консолидация</th><th>Рейтинг</th><th>Примечания</th></tr></thead>
+        <tbody>
+          <tr><td>MyUS.com</td><td>$10–25/кг</td><td>Да (DHL)</td><td>3–7 дней</td><td>Да</td><td><span class="stars">★★★★</span>★</td><td>Самый популярный из США. Удобная панель.</td></tr>
+          <tr><td>Shipito</td><td>$8–20/кг</td><td>Ограниченно</td><td>5–14 дней</td><td>Да</td><td><span class="stars">★★★★</span>☆</td><td>Дешевле MyUS, интерфейс сложнее.</td></tr>
+          <tr><td>Reship.com</td><td>$9–22/кг</td><td>Да</td><td>4–10 дней</td><td>Да</td><td><span class="stars">★★★</span>☆☆</td><td>Канадский форвардер.</td></tr>
+          <tr><td>Amazon.de → Srbija</td><td>€5–15/посылка</td><td>Зависит</td><td>7–14 дней</td><td>—</td><td><span class="stars">★★★★★</span></td><td>Лучший если товар есть на Amazon.de.</td></tr>
+          <tr><td>DHL Express (прямой)</td><td>$30–60/посылка</td><td>Да</td><td>3–5 дней</td><td>—</td><td><span class="stars">★★★★★</span></td><td>Надёжный для аккумуляторов и мультитулов.</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+</main>
 
-  <!-- ═══════════════════════════════ MAIN ═════════════════════════════════ -->
-  <main class="main">
+<footer>
+  <div class="footer-text">Gear Order — Serbia 2026 · 22.04.2026</div>
+  <div class="footer-text">Кликни фото или «Изменить» → панель редактирования</div>
+</footer>
 
-    <!-- ── GADGET GRID ── -->
-    <div class="gadget-grid" id="gadget-grid">
-
-      <!-- 001 — Maradot Small -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="45">
-        <div class="card-top">
-          <div class="item-num">ITEM-001</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Maradot Ultralight Fiber</div>
-        <div class="gadget-sub">Small — кошелёк компактный</div>
-        <div class="tags">
-          <span class="tag">EDC</span>
-          <span class="tag">Кошелёк</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$45</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.maradot.com" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Official</span>maradot.com — официальный сайт
-          </a>
-          <a class="buy-link" href="https://www.amazon.com/s?k=maradot+ultralight+fiber+wallet" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
-          </a>
-        </div>
-        <div class="notes">Нет официальной доставки в Сербию — нужен форвардер (MyUS / Shipito). Очень лёгкий, таможенный риск минимальный.</div>
-      </div>
-
-      <!-- 002 — Maradot Large -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="65">
-        <div class="card-top">
-          <div class="item-num">ITEM-002</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Maradot Ultralight Fiber</div>
-        <div class="gadget-sub">Large — кошелёк увеличенный</div>
-        <div class="tags">
-          <span class="tag">EDC</span>
-          <span class="tag">Кошелёк</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$65</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.maradot.com" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Official</span>maradot.com — официальный сайт
-          </a>
-          <a class="buy-link" href="https://www.amazon.com/s?k=maradot+ultralight+fiber+wallet+large" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
-          </a>
-        </div>
-        <div class="notes">Та же история, что и Small. Брать оба сразу — сэкономишь на доставке форвардером.</div>
-      </div>
-
-      <!-- 003 — Nomad Charge Key -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="30">
-        <div class="card-top">
-          <div class="item-num">ITEM-003</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Nomad Charge Key</div>
-        <div class="gadget-sub">USB-C / Lightning зарядный брелок</div>
-        <div class="tags">
-          <span class="tag">Кабели</span>
-          <span class="tag">Power</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$30</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://nomadgoods.com/collections/cables" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Official</span>nomadgoods.com — прямой заказ
-          </a>
-          <a class="buy-link" href="https://www.amazon.com/s?k=nomad+charge+key+usb-c" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
-          </a>
-        </div>
-        <div class="notes">Nomad доставляет в Сербию напрямую — проверь на checkout. Если нет — форвардер.</div>
-      </div>
-
-      <!-- 004 — Momax 1 Vibe Go -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="50">
-        <div class="card-top">
-          <div class="item-num">ITEM-004</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Momax 1 Vibe Go</div>
-        <div class="gadget-sub">Портативная Bluetooth-колонка</div>
-        <div class="tags">
-          <span class="tag">Аудио</span>
-          <span class="tag">Bluetooth</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$50</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.amazon.com/s?k=momax+1+vibe+go+speaker" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
-          </a>
-          <a class="buy-link" href="https://www.momax.com" target="_blank" rel="noopener">
-            <span class="buy-tag">Official</span>momax.com — сайт бренда
-          </a>
-        </div>
-        <div class="notes">Батарея ≤100Wh — можно в ручную кладь на самолёт без проблем. Колонку на таможне не досматривают.</div>
-      </div>
-
-      <!-- 005 — Secrid Cardprotector+ -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="45">
-        <div class="card-top">
-          <div class="item-num">ITEM-005</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Secrid Cardprotector+</div>
-        <div class="gadget-sub">Алюминиевый держатель карт с RFID</div>
-        <div class="tags">
-          <span class="tag">EDC</span>
-          <span class="tag">RFID</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~€45</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.secrid.com/en-gb/cardprotector" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Official</span>secrid.com — прямой заказ
-          </a>
-          <a class="buy-link" href="https://www.amazon.com/s?k=secrid+cardprotector" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
-          </a>
-          <a class="buy-link" href="https://www.amazon.de/s?k=secrid+cardprotector" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon.de</span>Немецкий Amazon (EU доставка)
-          </a>
-        </div>
-        <div class="notes">Secrid — нидерландский бренд, хорошо возит в Сербию. Amazon.de часто быстрее и без таможни (EU).</div>
-      </div>
-
-      <!-- 006 — Lensrappa -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="35">
-        <div class="card-top">
-          <div class="item-num">ITEM-006</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Lensrappa</div>
-        <div class="gadget-sub">Компактный чехол для солнцезащитных очков</div>
-        <div class="tags">
-          <span class="tag">Аксессуары</span>
-          <span class="tag">Очки</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$35</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.amazon.com/s?k=lensrappa+sunglasses+case" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
-          </a>
-          <a class="buy-link" href="https://www.lensrappa.com" target="_blank" rel="noopener">
-            <span class="buy-tag">Official</span>lensrappa.com — сайт бренда
-          </a>
-        </div>
-        <div class="notes">Маленький и лёгкий — таможня не заметит. Уточни официальный сайт по видео.</div>
-      </div>
-
-      <!-- 007 — Roav Foldable (TRY FIRST) -->
-      <div class="gadget-card" data-status="checking" data-risk="low" data-priority="try" data-price="60">
-        <div class="card-top">
-          <div class="item-num">ITEM-007</div>
-          <div class="status-badge" data-status="checking">Checking</div>
-        </div>
-        <div class="gadget-name">Roav Foldable Sunglasses</div>
-        <div class="gadget-sub">Складные солнцезащитные очки</div>
-        <div class="try-first">⚠ Примерить сначала — посадка по форме лица</div>
-        <div class="tags">
-          <span class="tag">Очки</span>
-          <span class="tag">EDC</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$60</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.amazon.com/s?k=roav+foldable+sunglasses" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
-          </a>
-        </div>
-        <div class="notes">НЕ заказывать вслепую. Найти в шоуруме / магазине в Сербии или попросить примерить у кого-то. Возврат из-за границы сложен.</div>
-      </div>
-
-      <!-- 008 — Klarus E5 Ultra -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="55">
-        <div class="card-top">
-          <div class="item-num">ITEM-008</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Klarus E5 Ultra</div>
-        <div class="gadget-sub">Компактный EDC-фонарь</div>
-        <div class="tags">
-          <span class="tag">EDC</span>
-          <span class="tag">Фонарь</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$55</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.amazon.com/s?k=klarus+e5+ultra+flashlight" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
-          </a>
-          <a class="buy-link" href="https://www.klaruslight.com" target="_blank" rel="noopener">
-            <span class="buy-tag">Official</span>klaruslight.com — сайт бренда
-          </a>
-        </div>
-        <div class="notes">Фонари — без проблем через таможню Сербии. Если со встроенным аккумулятором, уточни Wh перед авиаперевозкой.</div>
-      </div>
-
-      <!-- 009 — Haan Hand Sanitizer -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="20">
-        <div class="card-top">
-          <div class="item-num">ITEM-009</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Haan Hand Sanitizer</div>
-        <div class="gadget-sub">Перезаряжаемый USB-C санитайзер</div>
-        <div class="tags">
-          <span class="tag">Здоровье</span>
-          <span class="tag">EDC</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~€20</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://haanofficial.com" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Official</span>haanofficial.com — прямой заказ
-          </a>
-          <a class="buy-link" href="https://www.amazon.com/s?k=haan+hand+sanitizer+usb" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
-          </a>
-        </div>
-        <div class="notes">Корейский бренд, популярен в ЕС. Жидкость внутри — авиа: только ручная кладь ≤100мл. Доставка почтой — OK.</div>
-      </div>
-
-      <!-- 010 — Rolling Square Tau 2 -->
-      <div class="gadget-card" data-status="pending" data-risk="medium" data-priority="normal" data-price="80">
-        <div class="card-top">
-          <div class="item-num">ITEM-010</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Rolling Square Tau 2</div>
-        <div class="gadget-sub">Портативный аккумулятор + Dock + Keychain</div>
-        <div class="tags">
-          <span class="tag">Power</span>
-          <span class="tag">Keychain</span>
-          <span class="tag medium">Средний риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$80</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://rollingsquare.com" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Official</span>rollingsquare.com — сайт бренда
-          </a>
-          <a class="buy-link" href="https://www.amazon.com/s?k=rolling+square+tau+2+battery" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
-          </a>
-        </div>
-        <div class="notes">Аккумулятор — авиа только в ручной клади (≤100Wh). При доставке почтой: многие курьеры отказываются везти Li-Ion. Выбирай форвардера с опцией доставки аккумуляторов (DHL Express — OK).</div>
-      </div>
-
-      <!-- 011 — AirFly Pro 2 (CRITICAL PRIORITY) -->
-      <div class="gadget-card priority-critical" data-status="pending" data-risk="low" data-priority="critical" data-price="55">
-        <div class="card-top">
-          <div class="item-num">ITEM-011</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">AirFly Pro 2</div>
-        <div class="gadget-sub">Bluetooth-передатчик для 3.5mm аудио</div>
-        <div class="priority-crit">!!!!! КРИТИЧЕСКИЙ ПРИОРИТЕТ — ВЗЯТЬ ПЕРВЫМ</div>
-        <div class="tags">
-          <span class="tag">Аудио</span>
-          <span class="tag">Bluetooth</span>
-          <span class="tag">TwelveSouth</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$55</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.twelvesouth.com/products/airfly" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Official</span>twelvesouth.com — прямой заказ
-          </a>
-          <a class="buy-link" href="https://www.amazon.com/s?k=twelve+south+airfly+pro+2" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
-          </a>
-        </div>
-        <div class="notes">TwelveSouth доставляет по всему миру. Это устройство без батарей или с маленькой — никакого таможенного риска. Заказывай первым.</div>
-      </div>
-
-      <!-- 012 — Atom Controller -->
-      <div class="gadget-card" data-status="pending" data-risk="medium" data-priority="normal" data-price="100">
-        <div class="card-top">
-          <div class="item-num">ITEM-012</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Atom Controller</div>
-        <div class="gadget-sub">Компактный игровой контроллер</div>
-        <div class="tags">
-          <span class="tag">Gaming</span>
-          <span class="tag">Mobile</span>
-          <span class="tag medium">Средний риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$100</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.amazon.com/s?k=atom+controller+mobile+gaming" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
-          </a>
-          <a class="buy-link" href="https://www.playatomic.com" target="_blank" rel="noopener">
-            <span class="buy-tag">Official</span>playatomic.com — сайт бренда
-          </a>
-        </div>
-        <div class="notes">Дорогой гаджет — если сумма посылки &gt;50€, сербская таможня может начислить 20% НДС + пошлину. Прячь в посылку к более дешёвым товарам или недооцени (на риск покупателя).</div>
-      </div>
-
-      <!-- 013 — Extra Small Mouse -->
-      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="40">
-        <div class="card-top">
-          <div class="item-num">ITEM-013</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Extra Small Mouse</div>
-        <div class="gadget-sub">Ультракомпактная портативная мышь — уточнить модель</div>
-        <div class="tags">
-          <span class="tag">Tech</span>
-          <span class="tag">Периферия</span>
-          <span class="tag low">Низкий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$40</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.amazon.com/s?k=ultra+compact+portable+travel+mouse" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
-          </a>
-        </div>
-        <div class="notes">Уточни точную модель по видео. Хороший выбор: Logitech MX Anywhere 3S или Pebble M350S — обе есть на Amazon.de с EU доставкой.</div>
-      </div>
-
-      <!-- 014 — Leatherman Micra -->
-      <div class="gadget-card" data-status="pending" data-risk="high" data-priority="normal" data-price="45">
-        <div class="card-top">
-          <div class="item-num">ITEM-014</div>
-          <div class="status-badge" data-status="pending">Pending</div>
-        </div>
-        <div class="gadget-name">Leatherman Micra</div>
-        <div class="gadget-sub">Мультитул: ножницы + 10 инструментов</div>
-        <div class="tags">
-          <span class="tag">EDC</span>
-          <span class="tag">Мультитул</span>
-          <span class="tag high">Высокий риск</span>
-        </div>
-        <div class="price-row">
-          <div class="price-label">Примерная цена</div>
-          <div class="price-val">~$45</div>
-        </div>
-        <div class="buy-links">
-          <a class="buy-link" href="https://www.leatherman.com/micra-65.html" target="_blank" rel="noopener">
-            <span class="buy-tag primary">Official</span>leatherman.com — прямой заказ
-          </a>
-          <a class="buy-link" href="https://www.amazon.com/s?k=leatherman+micra+multitool" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
-          </a>
-          <a class="buy-link" href="https://www.amazon.de/s?k=leatherman+micra" target="_blank" rel="noopener">
-            <span class="buy-tag">Amazon.de</span>Из ЕС — проще через таможню
-          </a>
-        </div>
-        <div class="notes">⚠ Мультитул с лезвием — авиа только в БАГАЖЕ, никогда не в ручной клади. Таможня Сербии пропускает, но инспекторы могут задержать. Leatherman добавляет сертификат — помогает. Лучший путь: Amazon.de → доставка в Сербию.</div>
-      </div>
-
-    </div><!-- /gadget-grid -->
-
-    <!-- ─── BRIEFING: SERBIA SHIPPING ─── -->
-    <div class="info-section">
-      <div class="section-head">
-        Брифинг: доставка в Сербию
-        <span>Риски / Таможня / Советы</span>
-      </div>
-
-      <div class="info-grid">
-
-        <div class="info-card">
-          <div class="info-card-title"><span class="dot amber"></span>Таможенный порог</div>
-          <ul class="briefing-list">
-            <li>Посылки <strong>&lt; €50</strong> — без пошлин, проходят автоматически</li>
-            <li>Посылки <strong>€50–€150</strong> — <span class="note">20% НДС</span> (ПДВ)</li>
-            <li>Посылки <strong>&gt; €150</strong> — НДС + <span class="warn">пошлина по категории</span></li>
-            <li>Единичная посылка от физлица — мягче, от магазина — строже</li>
-            <li>Deklarisana vrednost = задекларированная стоимость</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <div class="info-card-title"><span class="dot red"></span>Запрещённое / Рискованное</div>
-          <ul class="briefing-list">
-            <li><span class="warn">Leatherman Micra</span> — лезвие &lt;6см, но мультитулы задерживают. Авиа — только багаж</li>
-            <li><span class="warn">Li-Ion аккумуляторы</span> (Rolling Square Tau 2) — почта не берёт, нужен курьер</li>
-            <li><span class="warn">Жидкости</span> (Haan Sanitizer) — авиа max 100мл / авиапочта ограничена</li>
-            <li>Дроны, лазеры, шифровальные устройства — запрещены</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <div class="info-card-title"><span class="dot green"></span>Как снизить риски</div>
-          <ul class="briefing-list">
-            <li>Дели крупные заказы на посылки <strong>до €50</strong> — ниже порога</li>
-            <li>Используй <strong>форвардер</strong> — он переупаковывает и реоценивает</li>
-            <li>Заказывай с <strong>Amazon.de</strong> — из ЕС в Сербию часто без таможни</li>
-            <li>DHL Express — самый надёжный, аккумуляторы принимает</li>
-            <li>Сохраняй инвойсы и трекинг — при задержке на почте нужны</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <div class="info-card-title"><span class="dot blue"></span>Стратегия заказа</div>
-          <p><strong>Шаг 1.</strong> Разбей на 3 группы по ~$50 стоимости.</p>
-          <p><strong>Шаг 2.</strong> Самое приоритетное (AirFly Pro 2, Nomad Key, Secrid) — заказывай первым напрямую.</p>
-          <p><strong>Шаг 3.</strong> Дорогие (Atom, Maradot) — через форвардер, попроси указать заниженную стоимость.</p>
-          <p><strong>Шаг 4.</strong> Leatherman Micra — отдельной посылкой через Amazon.de.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-card-title"><span class="dot amber"></span>Сроки доставки</div>
-          <ul class="briefing-list">
-            <li><strong>DHL Express:</strong> 3–5 рабочих дней</li>
-            <li><strong>FedEx International Priority:</strong> 4–6 дней</li>
-            <li><strong>Amazon.de стандарт:</strong> 7–14 дней</li>
-            <li><strong>Форвардер + стандарт:</strong> 14–21 день</li>
-            <li><strong>На почте Сербии:</strong> может зависнуть до 30–60 дней</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <div class="info-card-title"><span class="dot red"></span>Что делать если задержали</div>
-          <ul class="briefing-list">
-            <li>Получишь уведомление на <strong>Pošta Srbije</strong> — явись с паспортом</li>
-            <li>Принеси распечатку инвойса и пейпала/карты</li>
-            <li>Оплати НДС на месте — наличные или карта</li>
-            <li>Срок хранения на таможне — <strong>30 дней</strong>, потом возврат</li>
-            <li>Если отправитель занижал стоимость — могут штрафануть отправителя</li>
-          </ul>
-        </div>
-
-      </div>
+<div class="panel-overlay" id="overlay"></div>
+<div class="panel" id="panel">
+  <div class="panel-header">
+    <div><div class="panel-title" id="p-name">—</div><div class="panel-sub" id="p-sub">—</div></div>
+    <button class="panel-close" id="panel-close">✕ Закрыть</button>
+  </div>
+  <div class="panel-img" id="p-img-wrap"></div>
+  <div class="panel-body">
+    <div class="p-stitle">Статус заказа</div>
+    <div class="status-grid">
+      <button class="sopt" data-s="pending">🟡<br>Ожидает</button>
+      <button class="sopt" data-s="checking">🔵<br>Проверка</button>
+      <button class="sopt" data-s="ordered">🟢<br>Заказано</button>
+      <button class="sopt" data-s="delivered">🟣<br>Доставлено</button>
+      <button class="sopt" data-s="cancelled">⚫<br>Отменено</button>
     </div>
+    <div class="form-group"><label class="form-label">Трекинг / Номер заказа</label><input class="form-input" id="f-track" type="text" placeholder="LT123456789RS / #ORD-4892"></div>
+    <div class="form-group"><label class="form-label">Где заказано</label><input class="form-input" id="f-store" type="text" placeholder="Amazon.de / nomadgoods.com / MyUS"></div>
+    <div class="form-group"><label class="form-label">Дата заказа</label><input class="form-input" id="f-date" type="date"></div>
+    <div class="form-group"><label class="form-label">Цена заплачена ($)</label><input class="form-input" id="f-paid" type="number" placeholder="0.00"></div>
+    <div class="form-group"><label class="form-label">Заметки</label><textarea class="form-input" id="f-notes" placeholder="Ожидается через DHL, трекинг обновляется раз в сутки..."></textarea></div>
+    <button class="panel-save" id="panel-save">Сохранить</button>
+  </div>
+</div>
 
-    <!-- ─── FORWARDERS ─── -->
-    <div class="info-section">
-      <div class="section-head">
-        Форвардеры и способы заказа
-        <span>Сравнение сервисов</span>
-      </div>
+<script>
+const PRODUCTS=[
+  {id:'ITEM-001',name:'Maradot Ultralight Fiber',sub:'Small — компактный кошелёк',priority:'normal',risk:'low',price:45,img:null,emoji:'💳',bg:'#12100e',cat:'EDC',links:[{label:'Official',url:'https://www.maradot.com',pr:true},{label:'Amazon',url:'https://www.amazon.com/s?k=maradot+ultralight+fiber+wallet',pr:false}],notes:'Бренд из ютуба — уточни точное название. Нет прямой доставки в Сербию, нужен форвардер.'},
+  {id:'ITEM-002',name:'Maradot Ultralight Fiber',sub:'Large — увеличенный кошелёк',priority:'normal',risk:'low',price:65,img:null,emoji:'👜',bg:'#12100e',cat:'EDC',links:[{label:'Official',url:'https://www.maradot.com',pr:true},{label:'Amazon',url:'https://www.amazon.com/s?k=maradot+ultralight+fiber+wallet+large',pr:false}],notes:'Брать оба сразу — экономия на доставке форвардером.'},
+  {id:'ITEM-003',name:'Nomad Charge Key',sub:'USB-C / Lightning зарядный брелок',priority:'normal',risk:'low',price:30,img:'https://cdn.shopify.com/s/files/1/0384/6721/files/856504014995_A_6fbd0fae-c5cb-464d-b597-96c0f13b483d.jpg',emoji:'⚡',bg:'#0c1018',cat:'Кабели',links:[{label:'Official',url:'https://nomadgoods.com/products/chargekey-usb-c',pr:true},{label:'Amazon',url:'https://www.amazon.com/s?k=nomad+charge+key+usb-c',pr:false}],notes:'Nomad доставляет международно — проверь на checkout.'},
+  {id:'ITEM-004',name:'Momax 1 Vibe Go',sub:'Portable Bluetooth-колонка с магнитом',priority:'normal',risk:'low',price:50,img:'https://www.momax.net/cdn/shop/files/BS6_M_01_1500.webp?v=1758790815&width=1500',emoji:'🔊',bg:'#0e1210',cat:'Аудио',links:[{label:'Official',url:'https://www.momax.net/products/1-vibe-go-magnetic-wireless-speaker',pr:true},{label:'Amazon',url:'https://www.amazon.com/MOMAX-Magnetic-Phone-Bluetooth-Speaker/dp/B0DNSJGXTX',pr:false}],notes:'IPX6, 12ч работы. Батарея ≤100Wh — в ручную кладь без проблем.'},
+  {id:'ITEM-005',name:'Secrid Cardprotector+',sub:'Алюминиевый держатель карт с RFID',priority:'normal',risk:'low',price:45,img:'https://a.storyblok.com/f/132418/366x720/41211f350f/c-silver-1-front.png',emoji:'🗂️',bg:'#141412',cat:'EDC',links:[{label:'Official',url:'https://secrid.com/en-us/cardprotector-silver/',pr:true},{label:'Amazon.de',url:'https://www.amazon.de/s?k=secrid+cardprotector',pr:false}],notes:'Нидерландский бренд. Amazon.de часто быстрее и без таможни (ЕС).'},
+  {id:'ITEM-006',name:'Lensrappa',sub:'Тонкий кожаный чехол для очков',priority:'normal',risk:'low',price:35,img:'https://www.lensrappa.com/cdn/shop/products/PRODUCTSHOT_0855_ORANGE-MR.jpg?v=1670364150',emoji:'🕶️',bg:'#0e1014',cat:'Аксессуары',links:[{label:'Official',url:'https://www.lensrappa.com',pr:true},{label:'Amazon',url:'https://www.amazon.com/lensrappa-flat-eyeglass-wrap/s?k=lensrappa+flat+eyeglass+wrap',pr:false}],notes:'Slim leather, магнитная застёжка. Лёгкий — таможня не заметит.'},
+  {id:'ITEM-007',name:'Roav Foldable Sunglasses',sub:'Складные очки — примерить до заказа',priority:'try',risk:'low',price:60,img:'https://roaveyewear.com/cdn/shop/products/Front_-_Lennox_-_Black_G15_1200x1200.jpg?v=1581982559',emoji:'🕶️',bg:'#0e1014',cat:'Очки',links:[{label:'Official',url:'https://roaveyewear.com',pr:true},{label:'Amazon',url:'https://www.amazon.com/roav-sunglasses-foldable-men/s?k=roav+sunglasses+foldable+men',pr:false}],notes:'⚠ НЕ заказывать вслепую — посадка по форме лица. Возврат из-за границы очень сложен.'},
+  {id:'ITEM-008',name:'Klarus E5 Ultra',sub:'Ультратонкий EDC-фонарь, 850 lm',priority:'normal',risk:'low',price:55,img:'https://cdn.shopify.com/s/files/1/0069/3908/2807/files/E5-Ultra_-__01_2048x2048.jpg?v=1765422057',emoji:'🔦',bg:'#14110a',cat:'EDC',links:[{label:'Official',url:'https://www.klaruslight.com/item/149.html',pr:true},{label:'Amazon',url:'https://www.amazon.com/klarus-E5-Ultra-Pocket-Flashlight/dp/B0G43FFQPT',pr:false}],notes:'Triple light source, магнитный хвост. Без проблем через таможню Сербии.'},
+  {id:'ITEM-009',name:'Haan Hand Sanitizer',sub:'Перезаряжаемый USB-C санитайзер',priority:'normal',risk:'low',price:20,img:'https://haanbrand.com/cdn/shop/files/WN_4-5.jpg?v=1773152012&width=1080',emoji:'🧴',bg:'#0e1410',cat:'Здоровье',links:[{label:'Official',url:'https://haanbrand.com/collections/hand-cleanser',pr:true},{label:'Amazon',url:'https://www.amazon.com/stores/HAAN/page/47BBC57C-F1D9-41EE-A943-5532D8F00998',pr:false}],notes:'Жидкость — авиа только ручная кладь ≤100мл. Доставка почтой — ОК.'},
+  {id:'ITEM-010',name:'Rolling Square Tau 2',sub:'Брелок-аккумулятор 2000mAh + Dock + Keychain',priority:'normal',risk:'medium',price:80,img:'https://rollingsquare.com/cdn/shop/files/TAU2cover-01_700x700_crop_top.jpg?v=1709811554',emoji:'🔋',bg:'#0c1018',cat:'Power',links:[{label:'Official',url:'https://rollingsquare.com/products/tau-2-a-new-kind-of-power-bank',pr:true},{label:'Amazon',url:'https://www.amazon.com/s?k=rolling+square+tau+2+battery',pr:false}],notes:'⚠ Li-Ion — авиа только в ручной клади. Почта не принимает батареи. Только DHL Express.'},
+  {id:'ITEM-011',name:'AirFly Pro 2',sub:'Bluetooth-передатчик для 3.5mm аудио',priority:'critical',risk:'low',price:55,img:'https://www.twelvesouth.com/cdn/shop/files/12s_AirFlyPro2_Hero_Silo_HiRes_1200x1200.jpg',emoji:'📡',bg:'#180e0e',cat:'Аудио',links:[{label:'Official',url:'https://www.twelvesouth.com/products/airfly-pro-2',pr:true},{label:'Amazon',url:'https://www.amazon.com/s?k=twelve+south+airfly+pro+2',pr:false}],notes:'TwelveSouth доставляет по всему миру. Маленькое устройство — никаких таможенных рисков.'},
+  {id:'ITEM-012',name:'Atom Controller',sub:'Turtle Beach — компактный игровой контроллер',priority:'normal',risk:'medium',price:80,img:null,emoji:'🎮',bg:'#0e0e1a',cat:'Gaming',links:[{label:'Official',url:'https://www.turtlebeach.com/products/atom-controller',pr:true},{label:'Amazon',url:'https://www.amazon.com/Controller-Bluetooth-Android-Devices-Controls-Smartphone/dp/B0BDXSWZMF',pr:false}],notes:'Дорогой гаджет — если посылка >€50, таможня начислит 20% НДС. Разбей с другими дешёвыми вещами.'},
+  {id:'ITEM-013',name:'Extra Small Mouse',sub:'Ультракомпактная мышь — уточнить модель по видео',priority:'normal',risk:'low',price:40,img:null,emoji:'🖱️',bg:'#101014',cat:'Tech',links:[{label:'Amazon',url:'https://www.amazon.com/s?k=ultra+compact+portable+travel+mouse',pr:true}],notes:'Уточни точную модель по видео. Варианты: Logitech MX Anywhere 3S (~$70) или Pebble M350S (~$40).'},
+  {id:'ITEM-014',name:'Leatherman Micra',sub:'Мультитул: ножницы + 10 инструментов',priority:'normal',risk:'high',price:45,img:'https://www.leatherman.com/cdn/shop/files/akeneo_6_c_6_a_6c6a95caaf90426b396fcb9e6ea505ad69960aaa_bayside_micra_carousel_image_01_shopify.jpg',emoji:'✂️',bg:'#180e0e',cat:'EDC',links:[{label:'Official',url:'https://www.leatherman.com/products/micra',pr:true},{label:'Amazon.de',url:'https://www.amazon.de/s?k=leatherman+micra',pr:false},{label:'Amazon',url:'https://www.amazon.com/s?k=leatherman+micra+multitool',pr:false}],notes:'⚠ Лезвие — АВИА только в БАГАЖЕ. Таможня Сербии пропускает. Лучший путь: Amazon.de.'}
+];
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Сервис</th>
-              <th>Цена (est.)</th>
-              <th>Аккумуляторы</th>
-              <th>Скорость</th>
-              <th>Консолидация</th>
-              <th>Рейтинг</th>
-              <th>Примечания</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>MyUS.com</td>
-              <td>$10–25 / кг</td>
-              <td>Да (DHL)</td>
-              <td>3–7 дней</td>
-              <td>Да</td>
-              <td><span class="stars">★★★★</span>★</td>
-              <td>Самый популярный форвардер из США. Удобная панель. Часто скидки.</td>
-            </tr>
-            <tr>
-              <td>Shipito</td>
-              <td>$8–20 / кг</td>
-              <td>Ограниченно</td>
-              <td>5–14 дней</td>
-              <td>Да</td>
-              <td><span class="stars">★★★★</span>☆</td>
-              <td>Дешевле MyUS, но интерфейс сложнее. Есть опция реоценки.</td>
-            </tr>
-            <tr>
-              <td>Reship.com</td>
-              <td>$9–22 / кг</td>
-              <td>Да</td>
-              <td>4–10 дней</td>
-              <td>Да</td>
-              <td><span class="stars">★★★</span>☆☆</td>
-              <td>Канадский форвардер. Хорош для отправки из Canada/USA.</td>
-            </tr>
-            <tr>
-              <td>Amazon.de → Srbija</td>
-              <td>€5–15 за посылку</td>
-              <td>Зависит от товара</td>
-              <td>7–14 дней</td>
-              <td>—</td>
-              <td><span class="stars">★★★★★</span></td>
-              <td>Лучший вариант если товар есть на Amazon.de. Из ЕС меньше таможни.</td>
-            </tr>
-            <tr>
-              <td>DHL Express (прямой)</td>
-              <td>$30–60 / посылка</td>
-              <td>Да</td>
-              <td>3–5 дней</td>
-              <td>—</td>
-              <td><span class="stars">★★★★★</span></td>
-              <td>Если бренд отправляет DHL — самый надёжный для аккумуляторов и мультитулов.</td>
-            </tr>
-            <tr>
-              <td>Etsy / eBay (EU продавцы)</td>
-              <td>€5–20 за посылку</td>
-              <td>Ограниченно</td>
-              <td>7–21 день</td>
-              <td>—</td>
-              <td><span class="stars">★★★</span>☆☆</td>
-              <td>Некоторые редкие гаджеты есть только тут. Проверяй рейтинг продавца.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+const SL={pending:'Pending',checking:'Checking',ordered:'Ordered',delivered:'Delivered',cancelled:'Cancelled'};
+const SC={pending:'#e09a28',checking:'#4888e0',ordered:'#38a870',delivered:'#8a60d4',cancelled:'#555'};
 
-  </main>
+function ld(id){try{return JSON.parse(localStorage.getItem('gear_'+id))||{};}catch{return {};}}
+function sd(id,data){localStorage.setItem('gear_'+id,JSON.stringify(data));}
 
-  <footer>
-    <div class="footer-text">Gear Order — Serbia 2026 · 22.04.2026</div>
-    <div class="footer-text">Клик по статусу карточки = изменить статус</div>
-  </footer>
+function buildTI(d){
+  let h='';
+  if(d.store)h+=`<span>Магазин:</span> ${d.store}<br>`;
+  if(d.date)h+=`<span>Дата:</span> ${d.date}<br>`;
+  if(d.track)h+=`<span>Трекинг:</span> ${d.track}<br>`;
+  if(d.paid)h+=`<span>Оплачено:</span> $${d.paid}`;
+  return h;
+}
 
-  <script>
-    const cards = Array.from(document.querySelectorAll('.gadget-card'));
-    const statuses = ['pending', 'ordered', 'checking'];
-    const statusLabels = { pending: 'Pending', ordered: 'Ordered', checking: 'Checking' };
+function makeImg(p,wrap){
+  wrap.style.background=p.bg;
+  if(p.img){
+    const im=document.createElement('img');im.src=p.img;im.alt=p.name;
+    im.onerror=function(){this.remove();addFb(wrap,p.emoji);};
+    wrap.appendChild(im);
+  }else addFb(wrap,p.emoji);
+}
+function addFb(w,e){const s=document.createElement('span');s.className='fb';s.textContent=e;w.appendChild(s);}
 
-    // Product images: official CDN sources + emoji fallback
-    const productData = {
-      'ITEM-001': { src: 'https://images.squarespace-cdn.com/content/v1/5f3e2c6b4fd5b23e4e2e2e2e/maradot-ultralight-fiber-small.jpg', emoji: '💳', bg: '#12100e' },
-      'ITEM-002': { src: 'https://images.squarespace-cdn.com/content/v1/5f3e2c6b4fd5b23e4e2e2e2e/maradot-ultralight-fiber-large.jpg', emoji: '👜', bg: '#12100e' },
-      'ITEM-003': { src: 'https://cdn.shopify.com/s/files/1/0522/6735/5515/products/charge-key-usb-c.jpg', emoji: '⚡', bg: '#0c1018' },
-      'ITEM-004': { src: 'https://cdn.shopify.com/s/files/1/momax-vibe-go.jpg', emoji: '🔊', bg: '#0e1210' },
-      'ITEM-005': { src: 'https://www.secrid.com/globalassets/products/cardprotector/secrid-cardprotector-silver.jpg', emoji: '🗂️', bg: '#141412' },
-      'ITEM-006': { src: 'https://lensrappa.com/cdn/shop/products/case.jpg', emoji: '🕶️', bg: '#0e1014' },
-      'ITEM-007': { src: 'https://m.media-amazon.com/images/I/81-IEGVeHOL._AC_SL1500_.jpg', emoji: '🕶️', bg: '#0e1014' },
-      'ITEM-008': { src: 'https://m.media-amazon.com/images/I/61vP6h3ICEL._AC_SL1000_.jpg', emoji: '🔦', bg: '#14110a' },
-      'ITEM-009': { src: 'https://haanofficial.com/cdn/shop/products/haan-hand-sanitizer.jpg', emoji: '🧴', bg: '#0e1410' },
-      'ITEM-010': { src: 'https://rollingsquare.com/cdn/shop/products/tau2-battery-dock.jpg', emoji: '🔋', bg: '#0c1018' },
-      'ITEM-011': { src: 'https://cdn.shopify.com/s/files/1/0365/0629/products/AirFly-Pro-2-Black_1200x.jpg', emoji: '📡', bg: '#180e0e' },
-      'ITEM-012': { src: 'https://m.media-amazon.com/images/I/71U4p0GKXAL._AC_SL1500_.jpg', emoji: '🎮', bg: '#0e0e1a' },
-      'ITEM-013': { src: 'https://m.media-amazon.com/images/I/61ni3t1ryQL._AC_SL1500_.jpg', emoji: '🖱️', bg: '#101014' },
-      'ITEM-014': { src: 'https://www.leatherman.com/dw/image/v2/BCCK_PRD/on/demandware.static/-/Sites-leatherman-master-catalog/default/dw0f8dfb43/images/hi-res/65.jpg', emoji: '✂️', bg: '#180e0e' },
-    };
+const grid=document.getElementById('grid');
 
-    cards.forEach(card => {
-      const numEl = card.querySelector('.item-num');
-      if (!numEl) return;
-      const key = numEl.textContent.trim();
-      const data = productData[key];
-      if (!data) return;
+PRODUCTS.forEach((p,idx)=>{
+  const saved=ld(p.id);
+  const status=saved.status||'pending';
+  const card=document.createElement('div');
+  card.className='card'+(p.priority==='critical'?' crit':'');
+  card.dataset.id=p.id;card.dataset.status=status;card.dataset.risk=p.risk;card.dataset.priority=p.priority;card.dataset.price=p.price;
+  card.style.animationDelay=(idx*.04)+'s';
 
-      const div = document.createElement('div');
-      div.className = 'product-img';
-      div.style.background = data.bg;
+  const iw=document.createElement('div');iw.className='prod-img';makeImg(p,iw);
+  iw.addEventListener('click',()=>openPanel(p.id));
+  card.appendChild(iw);
 
-      const img = document.createElement('img');
-      img.alt = key;
-      img.src = data.src;
-      img.onerror = function() {
-        this.remove();
-        const fb = document.createElement('span');
-        fb.className = 'img-fallback';
-        fb.textContent = data.emoji;
-        div.appendChild(fb);
-      };
+  const body=document.createElement('div');body.className='card-body';
 
-      div.appendChild(img);
-      card.insertBefore(div, card.firstChild);
+  const top=document.createElement('div');top.className='card-top';
+  const inum=document.createElement('div');inum.className='inum';inum.textContent=p.id;top.appendChild(inum);
+
+  const sbw=document.createElement('div');sbw.style.cssText='position:relative';
+  const sb=document.createElement('button');sb.className='sbadge';sb.dataset.s=status;sb.textContent=SL[status];
+  const drop=document.createElement('div');drop.className='sdrop';
+  Object.entries(SL).forEach(([s,label])=>{
+    const opt=document.createElement('button');opt.className='sdrop-opt';
+    opt.innerHTML=`<span class="dot" style="background:${SC[s]}"></span>${label}`;
+    opt.addEventListener('click',e=>{e.stopPropagation();setStatus(p.id,s);drop.classList.remove('open');});
+    drop.appendChild(opt);
+  });
+  sb.addEventListener('click',e=>{e.stopPropagation();document.querySelectorAll('.sdrop.open').forEach(d=>{if(d!==drop)d.classList.remove('open');});drop.classList.toggle('open');});
+  sbw.appendChild(sb);sbw.appendChild(drop);top.appendChild(sbw);body.appendChild(top);
+
+  const gn=document.createElement('div');gn.className='gname';gn.textContent=p.name;body.appendChild(gn);
+  const gs=document.createElement('div');gs.className='gsub';gs.textContent=p.sub;body.appendChild(gs);
+
+  if(p.priority==='critical'){const cb=document.createElement('div');cb.className='crit-badge';cb.textContent='!!!!! КРИТИЧЕСКИЙ ПРИОРИТЕТ — ВЗЯТЬ ПЕРВЫМ';body.appendChild(cb);}
+  if(p.priority==='try'){const tb=document.createElement('div');tb.className='try-badge';tb.textContent='⚠ Примерить сначала — посадка по лицу';body.appendChild(tb);}
+
+  const tags=document.createElement('div');tags.className='tags';
+  const ct=document.createElement('span');ct.className='tag';ct.textContent=p.cat;tags.appendChild(ct);
+  const rt=document.createElement('span');rt.className=`tag ${p.risk}`;rt.textContent=p.risk==='low'?'Низкий риск':p.risk==='medium'?'Средний риск':'Высокий риск';tags.appendChild(rt);
+  body.appendChild(tags);
+
+  const pr=document.createElement('div');pr.className='price-row';pr.innerHTML=`<span class="plabel">Примерная цена</span><span class="pval">~$${p.price}</span>`;body.appendChild(pr);
+
+  const bl=document.createElement('div');bl.className='buy-links';
+  p.links.forEach(l=>{
+    const a=document.createElement('a');a.className='blink';a.href=l.url;a.target='_blank';a.rel='noopener';
+    a.innerHTML=`<span class="btag${l.pr?' pr':''}">${l.label}</span>${l.url.replace(/https?:\/\/(www\.)?/,'').split('/')[0]}`;
+    bl.appendChild(a);
+  });
+  body.appendChild(bl);
+
+  const notes=document.createElement('div');notes.className='cnotes';notes.textContent=p.notes;body.appendChild(notes);
+
+  const ti=document.createElement('div');ti.className='track-info';ti.id='ti-'+p.id;
+  if(saved.track||saved.store){ti.innerHTML=buildTI(saved);ti.classList.add('show');}
+  body.appendChild(ti);
+
+  const eb=document.createElement('button');eb.className='edit-btn';eb.textContent='✎ Изменить / Добавить трекинг';
+  eb.addEventListener('click',()=>openPanel(p.id));body.appendChild(eb);
+
+  card.appendChild(body);grid.appendChild(card);
+});
+
+function setStatus(id,s){
+  const card=document.querySelector(`.card[data-id="${id}"]`);if(!card)return;
+  card.dataset.status=s;const sb=card.querySelector('.sbadge');sb.dataset.s=s;sb.textContent=SL[s];
+  const d=ld(id);d.status=s;sd(id,d);updateStats();
+}
+
+const panel=document.getElementById('panel');
+const overlay=document.getElementById('overlay');
+let currentId=null;
+
+function openPanel(id){
+  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+  currentId=id;const saved=ld(id);
+  document.getElementById('p-name').textContent=p.name;
+  document.getElementById('p-sub').textContent=p.sub;
+  const iw=document.getElementById('p-img-wrap');iw.innerHTML='';makeImg(p,iw);
+  const cur=saved.status||'pending';
+  document.querySelectorAll('.sopt').forEach(b=>b.classList.toggle('active',b.dataset.s===cur));
+  document.getElementById('f-track').value=saved.track||'';
+  document.getElementById('f-store').value=saved.store||'';
+  document.getElementById('f-date').value=saved.date||'';
+  document.getElementById('f-paid').value=saved.paid||'';
+  document.getElementById('f-notes').value=saved.userNotes||'';
+  panel.classList.add('open');overlay.classList.add('open');document.body.style.overflow='hidden';
+}
+
+function closePanel(){panel.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow='';currentId=null;}
+
+document.getElementById('panel-close').addEventListener('click',closePanel);
+overlay.addEventListener('click',closePanel);
+
+document.querySelectorAll('.sopt').forEach(b=>{
+  b.addEventListener('click',()=>{document.querySelectorAll('.sopt').forEach(x=>x.classList.remove('active'));b.classList.add('active');});
+});
+
+document.getElementById('panel-save').addEventListener('click',()=>{
+  if(!currentId)return;
+  const s=document.querySelector('.sopt.active')?.dataset.s||'pending';
+  const data={status:s,track:document.getElementById('f-track').value.trim(),store:document.getElementById('f-store').value.trim(),date:document.getElementById('f-date').value,paid:document.getElementById('f-paid').value,userNotes:document.getElementById('f-notes').value.trim()};
+  sd(currentId,data);setStatus(currentId,s);
+  const ti=document.getElementById('ti-'+currentId);
+  if(ti){if(data.track||data.store){ti.innerHTML=buildTI(data);ti.classList.add('show');}else ti.classList.remove('show');}
+  closePanel();
+});
+
+document.addEventListener('click',()=>document.querySelectorAll('.sdrop.open').forEach(d=>d.classList.remove('open')));
+
+const allCards=()=>Array.from(document.querySelectorAll('.card'));
+
+document.querySelectorAll('.fbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+    const f=btn.dataset.filter;
+    allCards().forEach(c=>{
+      let show=true;
+      if(f==='priority')show=c.dataset.priority==='critical';
+      else if(f==='high')show=c.dataset.risk==='high';
+      else if(f==='try')show=c.dataset.priority==='try';
+      else if(f==='pending')show=c.dataset.status==='pending';
+      else if(f==='ordered')show=c.dataset.status==='ordered';
+      else if(f==='delivered')show=c.dataset.status==='delivered';
+      if(show)c.removeAttribute('data-hidden');else c.setAttribute('data-hidden','');
     });
-
-    // Animate cards with stagger
-    cards.forEach((c, i) => c.style.animationDelay = (i * 0.04) + 's');
-
-    function updateStats() {
-      const visible = cards.filter(c => !c.hasAttribute('data-hidden'));
-      const pending  = visible.filter(c => c.dataset.status === 'pending').length;
-      const ordered  = visible.filter(c => c.dataset.status === 'ordered').length;
-      const checking = visible.filter(c => c.dataset.status === 'checking').length;
-      const highrisk = visible.filter(c => c.dataset.risk === 'high').length;
-
-      document.getElementById('s-total').textContent    = visible.length;
-      document.getElementById('s-pending').textContent  = pending;
-      document.getElementById('s-ordered').textContent  = ordered;
-      document.getElementById('s-checking').textContent = checking;
-      document.getElementById('s-highrisk').textContent = highrisk;
-      document.getElementById('hdr-count').textContent  = visible.length;
-
-      const total = visible.reduce((sum, c) => sum + parseInt(c.dataset.price || 0), 0);
-      document.getElementById('s-total-price').textContent = '~$' + total;
-    }
-
-    // Status toggle
-    cards.forEach(card => {
-      const badge = card.querySelector('.status-badge');
-      badge.addEventListener('click', () => {
-        const cur = statuses.indexOf(card.dataset.status);
-        const next = statuses[(cur + 1) % statuses.length];
-        card.dataset.status = next;
-        badge.dataset.status = next;
-        badge.textContent = statusLabels[next];
-        updateStats();
-      });
-    });
-
-    // Filters
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-
-        cards.forEach(c => {
-          let show = true;
-          if (f === 'priority') show = c.dataset.priority === 'critical';
-          else if (f === 'high')    show = c.dataset.risk === 'high';
-          else if (f === 'try')     show = c.dataset.priority === 'try';
-          else if (f === 'pending') show = c.dataset.status === 'pending';
-          else if (f === 'ordered') show = c.dataset.status === 'ordered';
-
-          if (show) c.removeAttribute('data-hidden');
-          else c.setAttribute('data-hidden', '');
-        });
-        updateStats();
-      });
-    });
-
     updateStats();
-  </script>
+  });
+});
 
+function updateStats(){
+  const v=allCards().filter(c=>!c.hasAttribute('data-hidden'));
+  const cnt=s=>v.filter(c=>c.dataset.status===s).length;
+  document.getElementById('s-total').textContent=v.length;
+  document.getElementById('s-pending').textContent=cnt('pending');
+  document.getElementById('s-checking').textContent=cnt('checking');
+  document.getElementById('s-ordered').textContent=cnt('ordered');
+  document.getElementById('s-delivered').textContent=cnt('delivered');
+  document.getElementById('s-highrisk').textContent=v.filter(c=>c.dataset.risk==='high').length;
+  document.getElementById('hdr-count').textContent=v.length;
+  document.getElementById('s-price').textContent='~$'+v.reduce((s,c)=>s+parseInt(c.dataset.price||0),0);
+}
+
+allCards().forEach(c=>{
+  const d=ld(c.dataset.id);
+  if(d.status){c.dataset.status=d.status;const sb=c.querySelector('.sbadge');if(sb){sb.dataset.s=d.status;sb.textContent=SL[d.status];}}
+});
+
+updateStats();
+</script>
 </body>
 </html>
