@@ -486,6 +486,54 @@
       text-transform: uppercase;
     }
 
+    /* ─── PRODUCT IMAGE ─── */
+    .product-img {
+      height: 180px;
+      margin: -22px -22px 20px -22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: #0e0e0e;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 16px;
+      filter: brightness(0.92) contrast(1.05);
+      transition: transform .3s ease, filter .3s ease;
+    }
+
+    .gadget-card:hover .product-img img {
+      transform: scale(1.04);
+      filter: brightness(1) contrast(1.08);
+    }
+
+    .product-img .img-fallback {
+      font-size: 56px;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 24px rgba(255,255,255,.06));
+    }
+
+    .product-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 24px,
+        rgba(255,255,255,.012) 24px,
+        rgba(255,255,255,.012) 25px
+      );
+      pointer-events: none;
+    }
+
     /* ─── ANIMATION ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
@@ -1125,6 +1173,50 @@
     const cards = Array.from(document.querySelectorAll('.gadget-card'));
     const statuses = ['pending', 'ordered', 'checking'];
     const statusLabels = { pending: 'Pending', ordered: 'Ordered', checking: 'Checking' };
+
+    // Product images: official CDN sources + emoji fallback
+    const productData = {
+      'ITEM-001': { src: 'https://images.squarespace-cdn.com/content/v1/5f3e2c6b4fd5b23e4e2e2e2e/maradot-ultralight-fiber-small.jpg', emoji: '💳', bg: '#12100e' },
+      'ITEM-002': { src: 'https://images.squarespace-cdn.com/content/v1/5f3e2c6b4fd5b23e4e2e2e2e/maradot-ultralight-fiber-large.jpg', emoji: '👜', bg: '#12100e' },
+      'ITEM-003': { src: 'https://cdn.shopify.com/s/files/1/0522/6735/5515/products/charge-key-usb-c.jpg', emoji: '⚡', bg: '#0c1018' },
+      'ITEM-004': { src: 'https://cdn.shopify.com/s/files/1/momax-vibe-go.jpg', emoji: '🔊', bg: '#0e1210' },
+      'ITEM-005': { src: 'https://www.secrid.com/globalassets/products/cardprotector/secrid-cardprotector-silver.jpg', emoji: '🗂️', bg: '#141412' },
+      'ITEM-006': { src: 'https://lensrappa.com/cdn/shop/products/case.jpg', emoji: '🕶️', bg: '#0e1014' },
+      'ITEM-007': { src: 'https://m.media-amazon.com/images/I/81-IEGVeHOL._AC_SL1500_.jpg', emoji: '🕶️', bg: '#0e1014' },
+      'ITEM-008': { src: 'https://m.media-amazon.com/images/I/61vP6h3ICEL._AC_SL1000_.jpg', emoji: '🔦', bg: '#14110a' },
+      'ITEM-009': { src: 'https://haanofficial.com/cdn/shop/products/haan-hand-sanitizer.jpg', emoji: '🧴', bg: '#0e1410' },
+      'ITEM-010': { src: 'https://rollingsquare.com/cdn/shop/products/tau2-battery-dock.jpg', emoji: '🔋', bg: '#0c1018' },
+      'ITEM-011': { src: 'https://cdn.shopify.com/s/files/1/0365/0629/products/AirFly-Pro-2-Black_1200x.jpg', emoji: '📡', bg: '#180e0e' },
+      'ITEM-012': { src: 'https://m.media-amazon.com/images/I/71U4p0GKXAL._AC_SL1500_.jpg', emoji: '🎮', bg: '#0e0e1a' },
+      'ITEM-013': { src: 'https://m.media-amazon.com/images/I/61ni3t1ryQL._AC_SL1500_.jpg', emoji: '🖱️', bg: '#101014' },
+      'ITEM-014': { src: 'https://www.leatherman.com/dw/image/v2/BCCK_PRD/on/demandware.static/-/Sites-leatherman-master-catalog/default/dw0f8dfb43/images/hi-res/65.jpg', emoji: '✂️', bg: '#180e0e' },
+    };
+
+    cards.forEach(card => {
+      const numEl = card.querySelector('.item-num');
+      if (!numEl) return;
+      const key = numEl.textContent.trim();
+      const data = productData[key];
+      if (!data) return;
+
+      const div = document.createElement('div');
+      div.className = 'product-img';
+      div.style.background = data.bg;
+
+      const img = document.createElement('img');
+      img.alt = key;
+      img.src = data.src;
+      img.onerror = function() {
+        this.remove();
+        const fb = document.createElement('span');
+        fb.className = 'img-fallback';
+        fb.textContent = data.emoji;
+        div.appendChild(fb);
+      };
+
+      div.appendChild(img);
+      card.insertBefore(div, card.firstChild);
+    });
 
     // Animate cards with stagger
     cards.forEach((c, i) => c.style.animationDelay = (i * 0.04) + 's');
