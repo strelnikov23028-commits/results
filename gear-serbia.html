@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEAR ORDER — Serbia 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --surface2: #181818;
+      --border: #242424;
+      --text: #e4d8c0;
+      --text-dim: #5a5a5a;
+      --text-muted: #333;
+      --accent: #d94f3d;
+      --amber: #e8a030;
+      --green: #3aaa74;
+      --blue: #4a8fe8;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ─── HEADER ─── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 200;
+    }
+
+    .classification {
+      font-size: 9px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .site-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .site-subtitle {
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      line-height: 2.2;
+    }
+
+    .header-meta em { color: var(--amber); font-style: normal; }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 40px;
+      display: flex;
+      gap: 40px;
+      overflow-x: auto;
+    }
+
+    .stat { display: flex; flex-direction: column; gap: 1px; white-space: nowrap; }
+
+    .stat-label {
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .stat-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .stat-value.red   { color: var(--accent); }
+    .stat-value.amber { color: var(--amber); }
+    .stat-value.green { color: var(--green); }
+    .stat-value.blue  { color: var(--blue); }
+
+    /* ─── FILTERS ─── */
+    .filter-bar {
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-right: 4px;
+    }
+
+    .filter-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .filter-btn:hover { border-color: var(--text-dim); color: var(--text-dim); }
+
+    .filter-btn.active {
+      border-color: var(--text);
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    /* ─── MAIN ─── */
+    .main {
+      padding: 36px 40px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* ─── GADGET GRID ─── */
+    .gadget-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+
+    .gadget-card {
+      background: var(--surface);
+      padding: 22px;
+      position: relative;
+      transition: background .15s;
+      animation: fadeUp .4s ease backwards;
+    }
+
+    .gadget-card[data-hidden] { display: none; }
+
+    .gadget-card:hover { background: var(--surface2); }
+
+    .gadget-card.priority-critical::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* Card top row */
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .item-num {
+      font-size: 9px;
+      color: var(--text-muted);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .status-badge {
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid;
+      cursor: pointer;
+      user-select: none;
+      transition: all .15s;
+    }
+
+    .status-badge[data-status="pending"]  { border-color: var(--amber); color: var(--amber); }
+    .status-badge[data-status="ordered"]  { border-color: var(--green); color: var(--green); }
+    .status-badge[data-status="checking"] { border-color: var(--blue);  color: var(--blue);  }
+
+    /* Name */
+    .gadget-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+
+    .gadget-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 3px;
+      margin-bottom: 12px;
+    }
+
+    /* Priority */
+    .priority-crit {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* Try first */
+    .try-first {
+      background: rgba(232,160,48,.06);
+      border: 1px solid rgba(232,160,48,.25);
+      padding: 7px 12px;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      font-size: 9px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+
+    .tag.low    { border-color: rgba(58,170,116,.5); color: var(--green); }
+    .tag.medium { border-color: rgba(232,160,48,.5); color: var(--amber); }
+    .tag.high   { border-color: rgba(217,79,61,.5);  color: var(--accent); }
+
+    /* Price */
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .price-label { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+
+    .price-val {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    /* Buy links */
+    .buy-links { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+
+    .buy-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 11px;
+      padding: 4px 0;
+      transition: color .15s;
+    }
+
+    .buy-link:hover { color: var(--text); }
+
+    .buy-tag {
+      font-size: 8px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      min-width: 64px;
+      text-align: center;
+      transition: border-color .15s;
+      flex-shrink: 0;
+    }
+
+    .buy-link:hover .buy-tag { border-color: var(--text-dim); color: var(--text-dim); }
+    .buy-tag.primary { border-color: var(--blue); color: var(--blue); }
+
+    /* Notes */
+    .notes {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.55;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-head {
+      font-family: 'Oswald', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+    }
+
+    .section-head span {
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 400;
+      color: var(--text-dim);
+      letter-spacing: .15em;
+    }
+
+    /* ─── BRIEFING CARDS ─── */
+    .info-section { margin-bottom: 56px; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .info-card { background: var(--surface); padding: 20px; }
+
+    .info-card-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card-title .dot {
+      width: 6px; height: 6px;
+      background: var(--amber);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .info-card-title .dot.red   { background: var(--accent); }
+    .info-card-title .dot.green { background: var(--green); }
+    .info-card-title .dot.blue  { background: var(--blue); }
+
+    .info-card p, .info-card li {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.75;
+    }
+
+    .info-card p + p { margin-top: 8px; }
+
+    .info-card li {
+      padding-left: 14px;
+      position: relative;
+      list-style: none;
+    }
+
+    .info-card li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    .info-card strong { color: var(--text); font-weight: 500; }
+
+    .info-card .warn { color: var(--accent); font-weight: 500; }
+    .info-card .ok   { color: var(--green);  font-weight: 500; }
+    .info-card .note { color: var(--amber);  font-weight: 500; }
+
+    /* ─── FORWARDER TABLE ─── */
+    .table-wrap {
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      margin-bottom: 56px;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    thead th {
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: left;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      font-size: 12px;
+      color: var(--text-dim);
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: var(--surface2); }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    .stars { color: var(--amber); letter-spacing: -.05em; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 22px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-size: 9px;
+      color: var(--text-muted);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    /* ─── ANIMATION ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 720px) {
+      .site-header, .stats-bar, .filter-bar, .main { padding-left: 20px; padding-right: 20px; }
+      .gadget-grid { grid-template-columns: 1fr; }
+      .site-title { font-size: 28px; }
+      .stats-bar { gap: 24px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header class="site-header">
+    <div>
+      <div class="classification">◆ Personal — Unrestricted</div>
+      <h1 class="site-title">GEAR ORDER</h1>
+      <div class="site-subtitle">Acquisition Tracker — Serbia 2026</div>
+    </div>
+    <div class="header-meta">
+      Пункт доставки: <em>Сербия</em><br>
+      Обновлено: <em>22.04.2026</em><br>
+      Позиций: <em id="hdr-count">—</em>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════ STATS ════════════════════════════════ -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-label">Всего позиций</div>
+      <div class="stat-value" id="s-total">13</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Ожидает заказа</div>
+      <div class="stat-value amber" id="s-pending">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Заказано</div>
+      <div class="stat-value green" id="s-ordered">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Проверяется</div>
+      <div class="stat-value blue" id="s-checking">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Высокий риск</div>
+      <div class="stat-value red" id="s-highrisk">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Ест. сумма</div>
+      <div class="stat-value" id="s-total-price">~$710</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ FILTERS ══════════════════════════════ -->
+  <div class="filter-bar">
+    <span class="filter-label">Фильтр:</span>
+    <button class="filter-btn active" data-filter="all">Все</button>
+    <button class="filter-btn" data-filter="priority">!!! Приоритет</button>
+    <button class="filter-btn" data-filter="high">Высокий риск</button>
+    <button class="filter-btn" data-filter="try">Примерить сначала</button>
+    <button class="filter-btn" data-filter="pending">Ожидает</button>
+    <button class="filter-btn" data-filter="ordered">Заказано</button>
+  </div>
+
+  <!-- ═══════════════════════════════ MAIN ═════════════════════════════════ -->
+  <main class="main">
+
+    <!-- ── GADGET GRID ── -->
+    <div class="gadget-grid" id="gadget-grid">
+
+      <!-- 001 — Maradot Small -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="45">
+        <div class="card-top">
+          <div class="item-num">ITEM-001</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Maradot Ultralight Fiber</div>
+        <div class="gadget-sub">Small — кошелёк компактный</div>
+        <div class="tags">
+          <span class="tag">EDC</span>
+          <span class="tag">Кошелёк</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$45</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.maradot.com" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Official</span>maradot.com — официальный сайт
+          </a>
+          <a class="buy-link" href="https://www.amazon.com/s?k=maradot+ultralight+fiber+wallet" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
+          </a>
+        </div>
+        <div class="notes">Нет официальной доставки в Сербию — нужен форвардер (MyUS / Shipito). Очень лёгкий, таможенный риск минимальный.</div>
+      </div>
+
+      <!-- 002 — Maradot Large -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="65">
+        <div class="card-top">
+          <div class="item-num">ITEM-002</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Maradot Ultralight Fiber</div>
+        <div class="gadget-sub">Large — кошелёк увеличенный</div>
+        <div class="tags">
+          <span class="tag">EDC</span>
+          <span class="tag">Кошелёк</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$65</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.maradot.com" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Official</span>maradot.com — официальный сайт
+          </a>
+          <a class="buy-link" href="https://www.amazon.com/s?k=maradot+ultralight+fiber+wallet+large" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
+          </a>
+        </div>
+        <div class="notes">Та же история, что и Small. Брать оба сразу — сэкономишь на доставке форвардером.</div>
+      </div>
+
+      <!-- 003 — Nomad Charge Key -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="30">
+        <div class="card-top">
+          <div class="item-num">ITEM-003</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Nomad Charge Key</div>
+        <div class="gadget-sub">USB-C / Lightning зарядный брелок</div>
+        <div class="tags">
+          <span class="tag">Кабели</span>
+          <span class="tag">Power</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$30</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://nomadgoods.com/collections/cables" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Official</span>nomadgoods.com — прямой заказ
+          </a>
+          <a class="buy-link" href="https://www.amazon.com/s?k=nomad+charge+key+usb-c" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
+          </a>
+        </div>
+        <div class="notes">Nomad доставляет в Сербию напрямую — проверь на checkout. Если нет — форвардер.</div>
+      </div>
+
+      <!-- 004 — Momax 1 Vibe Go -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="50">
+        <div class="card-top">
+          <div class="item-num">ITEM-004</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Momax 1 Vibe Go</div>
+        <div class="gadget-sub">Портативная Bluetooth-колонка</div>
+        <div class="tags">
+          <span class="tag">Аудио</span>
+          <span class="tag">Bluetooth</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$50</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.amazon.com/s?k=momax+1+vibe+go+speaker" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
+          </a>
+          <a class="buy-link" href="https://www.momax.com" target="_blank" rel="noopener">
+            <span class="buy-tag">Official</span>momax.com — сайт бренда
+          </a>
+        </div>
+        <div class="notes">Батарея ≤100Wh — можно в ручную кладь на самолёт без проблем. Колонку на таможне не досматривают.</div>
+      </div>
+
+      <!-- 005 — Secrid Cardprotector+ -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="45">
+        <div class="card-top">
+          <div class="item-num">ITEM-005</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Secrid Cardprotector+</div>
+        <div class="gadget-sub">Алюминиевый держатель карт с RFID</div>
+        <div class="tags">
+          <span class="tag">EDC</span>
+          <span class="tag">RFID</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~€45</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.secrid.com/en-gb/cardprotector" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Official</span>secrid.com — прямой заказ
+          </a>
+          <a class="buy-link" href="https://www.amazon.com/s?k=secrid+cardprotector" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
+          </a>
+          <a class="buy-link" href="https://www.amazon.de/s?k=secrid+cardprotector" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon.de</span>Немецкий Amazon (EU доставка)
+          </a>
+        </div>
+        <div class="notes">Secrid — нидерландский бренд, хорошо возит в Сербию. Amazon.de часто быстрее и без таможни (EU).</div>
+      </div>
+
+      <!-- 006 — Lensrappa -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="35">
+        <div class="card-top">
+          <div class="item-num">ITEM-006</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Lensrappa</div>
+        <div class="gadget-sub">Компактный чехол для солнцезащитных очков</div>
+        <div class="tags">
+          <span class="tag">Аксессуары</span>
+          <span class="tag">Очки</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$35</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.amazon.com/s?k=lensrappa+sunglasses+case" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
+          </a>
+          <a class="buy-link" href="https://www.lensrappa.com" target="_blank" rel="noopener">
+            <span class="buy-tag">Official</span>lensrappa.com — сайт бренда
+          </a>
+        </div>
+        <div class="notes">Маленький и лёгкий — таможня не заметит. Уточни официальный сайт по видео.</div>
+      </div>
+
+      <!-- 007 — Roav Foldable (TRY FIRST) -->
+      <div class="gadget-card" data-status="checking" data-risk="low" data-priority="try" data-price="60">
+        <div class="card-top">
+          <div class="item-num">ITEM-007</div>
+          <div class="status-badge" data-status="checking">Checking</div>
+        </div>
+        <div class="gadget-name">Roav Foldable Sunglasses</div>
+        <div class="gadget-sub">Складные солнцезащитные очки</div>
+        <div class="try-first">⚠ Примерить сначала — посадка по форме лица</div>
+        <div class="tags">
+          <span class="tag">Очки</span>
+          <span class="tag">EDC</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$60</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.amazon.com/s?k=roav+foldable+sunglasses" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
+          </a>
+        </div>
+        <div class="notes">НЕ заказывать вслепую. Найти в шоуруме / магазине в Сербии или попросить примерить у кого-то. Возврат из-за границы сложен.</div>
+      </div>
+
+      <!-- 008 — Klarus E5 Ultra -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="55">
+        <div class="card-top">
+          <div class="item-num">ITEM-008</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Klarus E5 Ultra</div>
+        <div class="gadget-sub">Компактный EDC-фонарь</div>
+        <div class="tags">
+          <span class="tag">EDC</span>
+          <span class="tag">Фонарь</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$55</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.amazon.com/s?k=klarus+e5+ultra+flashlight" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
+          </a>
+          <a class="buy-link" href="https://www.klaruslight.com" target="_blank" rel="noopener">
+            <span class="buy-tag">Official</span>klaruslight.com — сайт бренда
+          </a>
+        </div>
+        <div class="notes">Фонари — без проблем через таможню Сербии. Если со встроенным аккумулятором, уточни Wh перед авиаперевозкой.</div>
+      </div>
+
+      <!-- 009 — Haan Hand Sanitizer -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="20">
+        <div class="card-top">
+          <div class="item-num">ITEM-009</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Haan Hand Sanitizer</div>
+        <div class="gadget-sub">Перезаряжаемый USB-C санитайзер</div>
+        <div class="tags">
+          <span class="tag">Здоровье</span>
+          <span class="tag">EDC</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~€20</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://haanofficial.com" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Official</span>haanofficial.com — прямой заказ
+          </a>
+          <a class="buy-link" href="https://www.amazon.com/s?k=haan+hand+sanitizer+usb" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
+          </a>
+        </div>
+        <div class="notes">Корейский бренд, популярен в ЕС. Жидкость внутри — авиа: только ручная кладь ≤100мл. Доставка почтой — OK.</div>
+      </div>
+
+      <!-- 010 — Rolling Square Tau 2 -->
+      <div class="gadget-card" data-status="pending" data-risk="medium" data-priority="normal" data-price="80">
+        <div class="card-top">
+          <div class="item-num">ITEM-010</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Rolling Square Tau 2</div>
+        <div class="gadget-sub">Портативный аккумулятор + Dock + Keychain</div>
+        <div class="tags">
+          <span class="tag">Power</span>
+          <span class="tag">Keychain</span>
+          <span class="tag medium">Средний риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$80</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://rollingsquare.com" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Official</span>rollingsquare.com — сайт бренда
+          </a>
+          <a class="buy-link" href="https://www.amazon.com/s?k=rolling+square+tau+2+battery" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
+          </a>
+        </div>
+        <div class="notes">Аккумулятор — авиа только в ручной клади (≤100Wh). При доставке почтой: многие курьеры отказываются везти Li-Ion. Выбирай форвардера с опцией доставки аккумуляторов (DHL Express — OK).</div>
+      </div>
+
+      <!-- 011 — AirFly Pro 2 (CRITICAL PRIORITY) -->
+      <div class="gadget-card priority-critical" data-status="pending" data-risk="low" data-priority="critical" data-price="55">
+        <div class="card-top">
+          <div class="item-num">ITEM-011</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">AirFly Pro 2</div>
+        <div class="gadget-sub">Bluetooth-передатчик для 3.5mm аудио</div>
+        <div class="priority-crit">!!!!! КРИТИЧЕСКИЙ ПРИОРИТЕТ — ВЗЯТЬ ПЕРВЫМ</div>
+        <div class="tags">
+          <span class="tag">Аудио</span>
+          <span class="tag">Bluetooth</span>
+          <span class="tag">TwelveSouth</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$55</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.twelvesouth.com/products/airfly" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Official</span>twelvesouth.com — прямой заказ
+          </a>
+          <a class="buy-link" href="https://www.amazon.com/s?k=twelve+south+airfly+pro+2" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
+          </a>
+        </div>
+        <div class="notes">TwelveSouth доставляет по всему миру. Это устройство без батарей или с маленькой — никакого таможенного риска. Заказывай первым.</div>
+      </div>
+
+      <!-- 012 — Atom Controller -->
+      <div class="gadget-card" data-status="pending" data-risk="medium" data-priority="normal" data-price="100">
+        <div class="card-top">
+          <div class="item-num">ITEM-012</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Atom Controller</div>
+        <div class="gadget-sub">Компактный игровой контроллер</div>
+        <div class="tags">
+          <span class="tag">Gaming</span>
+          <span class="tag">Mobile</span>
+          <span class="tag medium">Средний риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$100</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.amazon.com/s?k=atom+controller+mobile+gaming" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
+          </a>
+          <a class="buy-link" href="https://www.playatomic.com" target="_blank" rel="noopener">
+            <span class="buy-tag">Official</span>playatomic.com — сайт бренда
+          </a>
+        </div>
+        <div class="notes">Дорогой гаджет — если сумма посылки &gt;50€, сербская таможня может начислить 20% НДС + пошлину. Прячь в посылку к более дешёвым товарам или недооцени (на риск покупателя).</div>
+      </div>
+
+      <!-- 013 — Extra Small Mouse -->
+      <div class="gadget-card" data-status="pending" data-risk="low" data-priority="normal" data-price="40">
+        <div class="card-top">
+          <div class="item-num">ITEM-013</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Extra Small Mouse</div>
+        <div class="gadget-sub">Ультракомпактная портативная мышь — уточнить модель</div>
+        <div class="tags">
+          <span class="tag">Tech</span>
+          <span class="tag">Периферия</span>
+          <span class="tag low">Низкий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$40</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.amazon.com/s?k=ultra+compact+portable+travel+mouse" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Amazon</span>Поиск на Amazon.com
+          </a>
+        </div>
+        <div class="notes">Уточни точную модель по видео. Хороший выбор: Logitech MX Anywhere 3S или Pebble M350S — обе есть на Amazon.de с EU доставкой.</div>
+      </div>
+
+      <!-- 014 — Leatherman Micra -->
+      <div class="gadget-card" data-status="pending" data-risk="high" data-priority="normal" data-price="45">
+        <div class="card-top">
+          <div class="item-num">ITEM-014</div>
+          <div class="status-badge" data-status="pending">Pending</div>
+        </div>
+        <div class="gadget-name">Leatherman Micra</div>
+        <div class="gadget-sub">Мультитул: ножницы + 10 инструментов</div>
+        <div class="tags">
+          <span class="tag">EDC</span>
+          <span class="tag">Мультитул</span>
+          <span class="tag high">Высокий риск</span>
+        </div>
+        <div class="price-row">
+          <div class="price-label">Примерная цена</div>
+          <div class="price-val">~$45</div>
+        </div>
+        <div class="buy-links">
+          <a class="buy-link" href="https://www.leatherman.com/micra-65.html" target="_blank" rel="noopener">
+            <span class="buy-tag primary">Official</span>leatherman.com — прямой заказ
+          </a>
+          <a class="buy-link" href="https://www.amazon.com/s?k=leatherman+micra+multitool" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon</span>Поиск на Amazon.com
+          </a>
+          <a class="buy-link" href="https://www.amazon.de/s?k=leatherman+micra" target="_blank" rel="noopener">
+            <span class="buy-tag">Amazon.de</span>Из ЕС — проще через таможню
+          </a>
+        </div>
+        <div class="notes">⚠ Мультитул с лезвием — авиа только в БАГАЖЕ, никогда не в ручной клади. Таможня Сербии пропускает, но инспекторы могут задержать. Leatherman добавляет сертификат — помогает. Лучший путь: Amazon.de → доставка в Сербию.</div>
+      </div>
+
+    </div><!-- /gadget-grid -->
+
+    <!-- ─── BRIEFING: SERBIA SHIPPING ─── -->
+    <div class="info-section">
+      <div class="section-head">
+        Брифинг: доставка в Сербию
+        <span>Риски / Таможня / Советы</span>
+      </div>
+
+      <div class="info-grid">
+
+        <div class="info-card">
+          <div class="info-card-title"><span class="dot amber"></span>Таможенный порог</div>
+          <ul class="briefing-list">
+            <li>Посылки <strong>&lt; €50</strong> — без пошлин, проходят автоматически</li>
+            <li>Посылки <strong>€50–€150</strong> — <span class="note">20% НДС</span> (ПДВ)</li>
+            <li>Посылки <strong>&gt; €150</strong> — НДС + <span class="warn">пошлина по категории</span></li>
+            <li>Единичная посылка от физлица — мягче, от магазина — строже</li>
+            <li>Deklarisana vrednost = задекларированная стоимость</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-title"><span class="dot red"></span>Запрещённое / Рискованное</div>
+          <ul class="briefing-list">
+            <li><span class="warn">Leatherman Micra</span> — лезвие &lt;6см, но мультитулы задерживают. Авиа — только багаж</li>
+            <li><span class="warn">Li-Ion аккумуляторы</span> (Rolling Square Tau 2) — почта не берёт, нужен курьер</li>
+            <li><span class="warn">Жидкости</span> (Haan Sanitizer) — авиа max 100мл / авиапочта ограничена</li>
+            <li>Дроны, лазеры, шифровальные устройства — запрещены</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-title"><span class="dot green"></span>Как снизить риски</div>
+          <ul class="briefing-list">
+            <li>Дели крупные заказы на посылки <strong>до €50</strong> — ниже порога</li>
+            <li>Используй <strong>форвардер</strong> — он переупаковывает и реоценивает</li>
+            <li>Заказывай с <strong>Amazon.de</strong> — из ЕС в Сербию часто без таможни</li>
+            <li>DHL Express — самый надёжный, аккумуляторы принимает</li>
+            <li>Сохраняй инвойсы и трекинг — при задержке на почте нужны</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-title"><span class="dot blue"></span>Стратегия заказа</div>
+          <p><strong>Шаг 1.</strong> Разбей на 3 группы по ~$50 стоимости.</p>
+          <p><strong>Шаг 2.</strong> Самое приоритетное (AirFly Pro 2, Nomad Key, Secrid) — заказывай первым напрямую.</p>
+          <p><strong>Шаг 3.</strong> Дорогие (Atom, Maradot) — через форвардер, попроси указать заниженную стоимость.</p>
+          <p><strong>Шаг 4.</strong> Leatherman Micra — отдельной посылкой через Amazon.de.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-title"><span class="dot amber"></span>Сроки доставки</div>
+          <ul class="briefing-list">
+            <li><strong>DHL Express:</strong> 3–5 рабочих дней</li>
+            <li><strong>FedEx International Priority:</strong> 4–6 дней</li>
+            <li><strong>Amazon.de стандарт:</strong> 7–14 дней</li>
+            <li><strong>Форвардер + стандарт:</strong> 14–21 день</li>
+            <li><strong>На почте Сербии:</strong> может зависнуть до 30–60 дней</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-title"><span class="dot red"></span>Что делать если задержали</div>
+          <ul class="briefing-list">
+            <li>Получишь уведомление на <strong>Pošta Srbije</strong> — явись с паспортом</li>
+            <li>Принеси распечатку инвойса и пейпала/карты</li>
+            <li>Оплати НДС на месте — наличные или карта</li>
+            <li>Срок хранения на таможне — <strong>30 дней</strong>, потом возврат</li>
+            <li>Если отправитель занижал стоимость — могут штрафануть отправителя</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── FORWARDERS ─── -->
+    <div class="info-section">
+      <div class="section-head">
+        Форвардеры и способы заказа
+        <span>Сравнение сервисов</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Сервис</th>
+              <th>Цена (est.)</th>
+              <th>Аккумуляторы</th>
+              <th>Скорость</th>
+              <th>Консолидация</th>
+              <th>Рейтинг</th>
+              <th>Примечания</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MyUS.com</td>
+              <td>$10–25 / кг</td>
+              <td>Да (DHL)</td>
+              <td>3–7 дней</td>
+              <td>Да</td>
+              <td><span class="stars">★★★★</span>★</td>
+              <td>Самый популярный форвардер из США. Удобная панель. Часто скидки.</td>
+            </tr>
+            <tr>
+              <td>Shipito</td>
+              <td>$8–20 / кг</td>
+              <td>Ограниченно</td>
+              <td>5–14 дней</td>
+              <td>Да</td>
+              <td><span class="stars">★★★★</span>☆</td>
+              <td>Дешевле MyUS, но интерфейс сложнее. Есть опция реоценки.</td>
+            </tr>
+            <tr>
+              <td>Reship.com</td>
+              <td>$9–22 / кг</td>
+              <td>Да</td>
+              <td>4–10 дней</td>
+              <td>Да</td>
+              <td><span class="stars">★★★</span>☆☆</td>
+              <td>Канадский форвардер. Хорош для отправки из Canada/USA.</td>
+            </tr>
+            <tr>
+              <td>Amazon.de → Srbija</td>
+              <td>€5–15 за посылку</td>
+              <td>Зависит от товара</td>
+              <td>7–14 дней</td>
+              <td>—</td>
+              <td><span class="stars">★★★★★</span></td>
+              <td>Лучший вариант если товар есть на Amazon.de. Из ЕС меньше таможни.</td>
+            </tr>
+            <tr>
+              <td>DHL Express (прямой)</td>
+              <td>$30–60 / посылка</td>
+              <td>Да</td>
+              <td>3–5 дней</td>
+              <td>—</td>
+              <td><span class="stars">★★★★★</span></td>
+              <td>Если бренд отправляет DHL — самый надёжный для аккумуляторов и мультитулов.</td>
+            </tr>
+            <tr>
+              <td>Etsy / eBay (EU продавцы)</td>
+              <td>€5–20 за посылку</td>
+              <td>Ограниченно</td>
+              <td>7–21 день</td>
+              <td>—</td>
+              <td><span class="stars">★★★</span>☆☆</td>
+              <td>Некоторые редкие гаджеты есть только тут. Проверяй рейтинг продавца.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-text">Gear Order — Serbia 2026 · 22.04.2026</div>
+    <div class="footer-text">Клик по статусу карточки = изменить статус</div>
+  </footer>
+
+  <script>
+    const cards = Array.from(document.querySelectorAll('.gadget-card'));
+    const statuses = ['pending', 'ordered', 'checking'];
+    const statusLabels = { pending: 'Pending', ordered: 'Ordered', checking: 'Checking' };
+
+    // Animate cards with stagger
+    cards.forEach((c, i) => c.style.animationDelay = (i * 0.04) + 's');
+
+    function updateStats() {
+      const visible = cards.filter(c => !c.hasAttribute('data-hidden'));
+      const pending  = visible.filter(c => c.dataset.status === 'pending').length;
+      const ordered  = visible.filter(c => c.dataset.status === 'ordered').length;
+      const checking = visible.filter(c => c.dataset.status === 'checking').length;
+      const highrisk = visible.filter(c => c.dataset.risk === 'high').length;
+
+      document.getElementById('s-total').textContent    = visible.length;
+      document.getElementById('s-pending').textContent  = pending;
+      document.getElementById('s-ordered').textContent  = ordered;
+      document.getElementById('s-checking').textContent = checking;
+      document.getElementById('s-highrisk').textContent = highrisk;
+      document.getElementById('hdr-count').textContent  = visible.length;
+
+      const total = visible.reduce((sum, c) => sum + parseInt(c.dataset.price || 0), 0);
+      document.getElementById('s-total-price').textContent = '~$' + total;
+    }
+
+    // Status toggle
+    cards.forEach(card => {
+      const badge = card.querySelector('.status-badge');
+      badge.addEventListener('click', () => {
+        const cur = statuses.indexOf(card.dataset.status);
+        const next = statuses[(cur + 1) % statuses.length];
+        card.dataset.status = next;
+        badge.dataset.status = next;
+        badge.textContent = statusLabels[next];
+        updateStats();
+      });
+    });
+
+    // Filters
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+
+        cards.forEach(c => {
+          let show = true;
+          if (f === 'priority') show = c.dataset.priority === 'critical';
+          else if (f === 'high')    show = c.dataset.risk === 'high';
+          else if (f === 'try')     show = c.dataset.priority === 'try';
+          else if (f === 'pending') show = c.dataset.status === 'pending';
+          else if (f === 'ordered') show = c.dataset.status === 'ordered';
+
+          if (show) c.removeAttribute('data-hidden');
+          else c.setAttribute('data-hidden', '');
+        });
+        updateStats();
+      });
+    });
+
+    updateStats();
+  </script>
+
+</body>
+</html>
