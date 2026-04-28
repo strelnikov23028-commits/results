@@ -139,6 +139,13 @@
     .panel-save{display:block;width:100%;padding:11px;background:var(--text);color:var(--bg);border:none;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:opacity .15s;margin-top:4px}
     .panel-save:hover{opacity:.86}
     .panel-save:disabled{opacity:.4;cursor:not-allowed}
+    .prio-toggle{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--border2);background:transparent;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);width:100%;transition:all .15s;margin-bottom:12px}
+    .prio-toggle:hover{border-color:var(--amber);color:var(--amber)}
+    .prio-toggle.on{border-color:var(--amber);color:var(--amber);background:rgba(224,154,40,.09)}
+    .prio-toggle .pt-dot{width:8px;height:8px;border-radius:50%;border:1px solid currentColor;flex-shrink:0;transition:background .15s}
+    .prio-toggle.on .pt-dot{background:var(--amber)}
+    .uprio-badge{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--amber);text-transform:uppercase;margin-bottom:8px;display:none}
+    .uprio-badge.show{display:block}
 
     /* setup panel */
     .setup-panel{position:fixed;top:0;right:-480px;bottom:0;width:460px;background:var(--surface);border-left:1px solid var(--border2);z-index:800;transition:right .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
@@ -293,6 +300,7 @@
     <div class="form-group"><label class="form-label">Дата заказа</label><input class="form-input" id="f-date" type="date"></div>
     <div class="form-group"><label class="form-label">Цена заплачена ($)</label><input class="form-input" id="f-paid" type="number" placeholder="0.00"></div>
     <div class="form-group"><label class="form-label">Заметки</label><textarea class="form-input" id="f-notes" placeholder="Ожидается через DHL, трекинг обновляется раз в сутки..."></textarea></div>
+    <button type="button" class="prio-toggle" id="f-prio-btn" onclick="togglePriority()"><span class="pt-dot"></span><span id="f-prio-label">Отметить как приоритет</span></button>
     <button class="panel-save" id="panel-save">Сохранить</button>
   </div>
 </div>
@@ -498,6 +506,19 @@ function makeImg(p,wrap){
 }
 function addFb(w,e){const s=document.createElement('span');s.className='fb';s.textContent=e;w.appendChild(s);}
 
+// Apply priority flag to card DOM
+function applyPriority(id, on){
+  const card=document.querySelector(`.card[data-id="${id}"]`);
+  if(!card) return;
+  const p=PRODUCTS.find(x=>x.id===id);
+  const hardCrit = p?.priority==='critical';
+  const isPrio = on || hardCrit;
+  card.classList.toggle('crit', isPrio);
+  card.dataset.priority = isPrio ? 'critical' : (p?.priority||'normal');
+  const ub=document.getElementById('upb-'+id);
+  if(ub) ub.classList.toggle('show', on && !hardCrit);
+}
+
 // Apply remote data update to an existing card
 function applyCardData(id, data){
   const card=document.querySelector(`.card[data-id="${id}"]`);
@@ -514,6 +535,7 @@ function applyCardData(id, data){
       ti.classList.remove('show');
     }
   }
+  if(data.userPriority!==undefined) applyPriority(id, !!data.userPriority);
   updateStats();
 }
 
@@ -559,6 +581,8 @@ PRODUCTS.forEach((p,idx)=>{
 
   if(p.priority==='critical'){const cb=document.createElement('div');cb.className='crit-badge';cb.textContent='!!!!! КРИТИЧЕСКИЙ ПРИОРИТЕТ — ВЗЯТЬ ПЕРВЫМ';body.appendChild(cb);}
   if(p.priority==='try'){const tb=document.createElement('div');tb.className='try-badge';tb.textContent='⚠ Примерить сначала — посадка по лицу';body.appendChild(tb);}
+  // User-set priority badge
+  const upb=document.createElement('div');upb.className='uprio-badge';upb.id='upb-'+p.id;upb.textContent='⭐ МОЙ ПРИОРИТЕТ';body.appendChild(upb);
 
   const tags=document.createElement('div');tags.className='tags';
   const ct=document.createElement('span');ct.className='tag';ct.textContent=p.cat;tags.appendChild(ct);
@@ -604,6 +628,14 @@ function setStatus(id, s){
 const panel=document.getElementById('panel');
 const overlay=document.getElementById('overlay');
 let currentId=null;
+let _priorityOn=false;
+
+function togglePriority(){
+  _priorityOn=!_priorityOn;
+  const btn=document.getElementById('f-prio-btn');
+  btn.classList.toggle('on',_priorityOn);
+  document.getElementById('f-prio-label').textContent=_priorityOn?'⭐ Приоритет установлен':'Отметить как приоритет';
+}
 
 function openPanel(id){
   const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
@@ -619,7 +651,12 @@ function openPanel(id){
   document.getElementById('f-date').value=saved.date||'';
   document.getElementById('f-paid').value=saved.paid||'';
   document.getElementById('f-notes').value=saved.userNotes||'';
-  const btn=document.getElementById('panel-save');btn.textContent='Сохранить';btn.disabled=false;
+  // Priority — inherit from product hardcode OR saved user flag
+  _priorityOn = !!saved.userPriority || (p.priority==='critical' && saved.userPriority!==false);
+  const btn=document.getElementById('f-prio-btn');
+  btn.classList.toggle('on',_priorityOn);
+  document.getElementById('f-prio-label').textContent=_priorityOn?'⭐ Приоритет установлен':'Отметить как приоритет';
+  const psave=document.getElementById('panel-save');psave.textContent='Сохранить';psave.disabled=false;
   panel.classList.add('open');overlay.classList.add('open');document.body.style.overflow='hidden';
 }
 
@@ -647,11 +684,13 @@ document.getElementById('panel-save').addEventListener('click',()=>{
     store:document.getElementById('f-store').value.trim(),
     date:document.getElementById('f-date').value,
     paid:document.getElementById('f-paid').value,
-    userNotes:document.getElementById('f-notes').value.trim()
+    userNotes:document.getElementById('f-notes').value.trim(),
+    userPriority:_priorityOn
   };
   const btn=document.getElementById('panel-save');
   btn.textContent='Сохранение…';btn.disabled=true;
   sd(currentId,data);
+  applyPriority(currentId, _priorityOn);
   setStatus(currentId,s);
   const ti=document.getElementById('ti-'+currentId);
   if(ti){
@@ -778,6 +817,7 @@ allCards().forEach(c=>{
     const sb=c.querySelector('.sbadge');
     if(sb){sb.dataset.s=d.status;sb.textContent=SL[d.status];}
   }
+  if(d.userPriority!==undefined) applyPriority(c.dataset.id, !!d.userPriority);
 });
 
 updateStats();
