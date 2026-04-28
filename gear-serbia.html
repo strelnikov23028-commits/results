@@ -331,7 +331,14 @@
         <div class="form-label">Firebase Project ID</div>
         <div id="connected-project" style="font-size:11px;color:var(--amber);padding:6px 0;letter-spacing:.05em"></div>
       </div>
-      <button class="panel-save" style="background:transparent;color:var(--accent);border:1px solid rgba(214,78,58,.3);margin-top:8px" onclick="disconnectFirebase()">
+      <div style="margin-bottom:6px;font-size:10px;color:var(--text-dim);letter-spacing:.08em">
+        Чтобы синхронизация работала на другом ПК — скопируй ссылку и открой её там. Firebase подключится автоматически.
+      </div>
+      <button class="panel-save" style="background:var(--surface3);color:var(--amber);border:1px solid rgba(224,154,40,.35);margin-bottom:10px" onclick="copyShareLink()">
+        📋 Скопировать ссылку для другого устройства
+      </button>
+      <div id="share-copied" style="display:none;font-size:10px;color:var(--green);letter-spacing:.1em;margin-bottom:10px">✓ Ссылка скопирована — открой на другом устройстве</div>
+      <button class="panel-save" style="background:transparent;color:var(--accent);border:1px solid rgba(214,78,58,.3)" onclick="disconnectFirebase()">
         Отключить и сбросить
       </button>
     </div>
@@ -430,8 +437,12 @@ function sd(id, data){
 
 function initFirebase(config){
   try{
-    // Delete existing app if any
-    if(firebase.apps.length){ firebase.app().delete(); }
+    // Tear down existing app synchronously before re-init
+    if(firebase.apps.length){
+      const old = firebase.app();
+      try{ old.database().goOffline(); }catch(e){}
+      old.delete();
+    }
     firebase.initializeApp(config);
     db = firebase.database();
 
@@ -463,8 +474,57 @@ function initFirebase(config){
   }
 }
 
-// Try to restore saved config on load
+// Generate share link with Firebase config embedded in URL params
+function generateShareLink(){
+  try{
+    const cfg = JSON.parse(localStorage.getItem('fb_config')||'{}');
+    if(!cfg.apiKey || !cfg.databaseURL) return null;
+    const url = new URL(window.location.href);
+    url.search = '';
+    url.searchParams.set('_fbk', cfg.apiKey);
+    url.searchParams.set('_fbu', cfg.databaseURL);
+    url.searchParams.set('_fbp', cfg.projectId||'');
+    if(cfg.appId)    url.searchParams.set('_fba', cfg.appId);
+    if(cfg.authDomain) url.searchParams.set('_fbd', cfg.authDomain);
+    if(cfg.messagingSenderId) url.searchParams.set('_fbm', cfg.messagingSenderId);
+    return url.toString();
+  }catch(e){ return null; }
+}
+
+function copyShareLink(){
+  const link = generateShareLink();
+  if(!link){ showErr('Firebase не подключён — сначала настрой синхронизацию'); return; }
+  navigator.clipboard.writeText(link).then(()=>{
+    const el = document.getElementById('share-copied');
+    if(el){ el.style.display=''; setTimeout(()=>{ el.style.display='none'; }, 4000); }
+  }).catch(()=>{
+    prompt('Скопируй ссылку вручную:', link);
+  });
+}
+
+// Try to restore config: first from URL params, then from localStorage
 (function(){
+  try{
+    const url = new URL(window.location.href);
+    const fbk = url.searchParams.get('_fbk');
+    const fbu = url.searchParams.get('_fbu');
+    const fbp = url.searchParams.get('_fbp');
+    if(fbk && fbu){
+      const cfg = {
+        apiKey:            fbk,
+        databaseURL:       fbu,
+        projectId:         fbp||'',
+        appId:             url.searchParams.get('_fba')||'1:0:web:0',
+        authDomain:        url.searchParams.get('_fbd')||'',
+        messagingSenderId: url.searchParams.get('_fbm')||''
+      };
+      if(initFirebase(cfg)){
+        // Clean URL so it doesn't linger in browser history
+        history.replaceState(null, '', window.location.pathname);
+        return;
+      }
+    }
+  }catch(e){}
   const saved = localStorage.getItem('fb_config');
   if(saved){
     try{ initFirebase(JSON.parse(saved)); }catch(e){}
@@ -691,7 +751,14 @@ document.getElementById('panel-save').addEventListener('click',()=>{
   btn.textContent='Сохранение…';btn.disabled=true;
   sd(currentId,data);
   applyPriority(currentId, _priorityOn);
-  setStatus(currentId,s);
+  // Update card status UI without re-saving (sd already wrote full data)
+  const _card=document.querySelector(`.card[data-id="${currentId}"]`);
+  if(_card){
+    _card.dataset.status=s;
+    const _sb=_card.querySelector('.sbadge');
+    if(_sb){_sb.dataset.s=s;_sb.textContent=SL[s];}
+  }
+  updateStats();
   const ti=document.getElementById('ti-'+currentId);
   if(ti){
     if(data.track||data.store||data.userNotes){ti.innerHTML=buildTI(data);ti.classList.add('show');}
