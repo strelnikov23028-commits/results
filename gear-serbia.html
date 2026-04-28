@@ -30,9 +30,6 @@
     #conn-dot.live{background:var(--green);box-shadow:0 0 6px rgba(56,168,112,.5)}
     #conn-dot.offline{background:var(--accent)}
     #conn-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim)}
-    #sync-btn{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--border2);background:transparent;color:var(--text-dim);cursor:pointer;transition:all .12s}
-    #sync-btn:hover{border-color:var(--text-dim);color:var(--text)}
-    #sync-btn.connected{border-color:rgba(56,168,112,.4);color:var(--green)}
 
     .stats-bar{border-bottom:1px solid var(--border);padding:12px 40px;display:flex;gap:36px;overflow-x:auto}
     .stat{display:flex;flex-direction:column;gap:1px;white-space:nowrap}
@@ -147,20 +144,6 @@
     .uprio-badge{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--amber);text-transform:uppercase;margin-bottom:8px;display:none}
     .uprio-badge.show{display:block}
 
-    /* setup panel */
-    .setup-panel{position:fixed;top:0;right:-480px;bottom:0;width:460px;background:var(--surface);border-left:1px solid var(--border2);z-index:800;transition:right .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
-    .setup-panel.open{right:0}
-    .setup-step{display:flex;gap:12px;margin-bottom:14px;font-size:12px;color:var(--text-dim);line-height:1.6}
-    .setup-num{font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;color:var(--amber);flex-shrink:0;line-height:1.2}
-    .setup-step strong{color:var(--text)}
-    .setup-step code{font-family:'IBM Plex Mono',monospace;font-size:10px;background:var(--surface3);padding:1px 5px;color:var(--amber)}
-    .setup-link{color:var(--blue);text-decoration:none;font-size:11px}
-    .setup-link:hover{text-decoration:underline}
-    .setup-sep{height:1px;background:var(--border);margin:18px 0}
-    .sync-notice{padding:8px 10px;background:rgba(56,168,112,.08);border:1px solid rgba(56,168,112,.2);font-size:10px;color:var(--green);margin-bottom:14px;display:none}
-    .sync-notice.show{display:block}
-    .sync-err{padding:8px 10px;background:rgba(214,78,58,.08);border:1px solid rgba(214,78,58,.2);font-size:10px;color:var(--accent);margin-bottom:14px;display:none}
-    .sync-err.show{display:block}
 
     .section-head{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:22px;padding-bottom:12px;border-bottom:2px solid var(--border);display:flex;align-items:baseline;gap:16px}
     .section-head span{font-size:10px;font-family:'IBM Plex Mono',monospace;font-weight:400;color:var(--text-dim);letter-spacing:.15em}
@@ -193,7 +176,7 @@
       .site-header,.stats-bar,.filter-bar,.main{padding-left:16px;padding-right:16px}
       .grid{grid-template-columns:1fr}.site-title{font-size:26px}.stats-bar{gap:20px}
       footer{flex-direction:column;gap:8px;text-align:center}
-      .panel{width:100%;right:-100%}.setup-panel{width:100%;right:-100%}
+      .panel{width:100%;right:-100%}
       .status-grid{grid-template-columns:repeat(3,1fr)}
     }
   </style>
@@ -212,8 +195,7 @@
     Позиций: <em id="hdr-count">—</em>
     <div class="sync-row">
       <span id="conn-dot"></span>
-      <span id="conn-label">Offline</span>
-      <button id="sync-btn" onclick="openSetup()">⚙ Sync</button>
+      <span id="conn-label">Sync</span>
     </div>
   </div>
 </header>
@@ -305,91 +287,8 @@
   </div>
 </div>
 
-<!-- Setup panel overlay -->
-<div class="panel-overlay" id="setup-overlay" onclick="closeSetup()"></div>
-
-<!-- Setup panel -->
-<div class="setup-panel" id="setup-panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title">⚡ Синхронизация</div>
-      <div class="panel-sub">Real-time · все видят изменения мгновенно</div>
-    </div>
-    <button class="panel-close" onclick="closeSetup()">✕</button>
-  </div>
-  <div class="panel-body">
-
-    <div class="sync-notice" id="sync-notice"></div>
-    <div class="sync-err" id="sync-err"></div>
-
-    <div id="setup-connected-view" style="display:none">
-      <div style="font-size:11px;color:var(--text-dim);line-height:1.7;margin-bottom:16px">
-        <span style="color:var(--green);font-weight:600">● Firebase подключён.</span><br>
-        Все изменения синхронизируются в реальном времени между всеми пользователями.
-      </div>
-      <div class="form-group">
-        <div class="form-label">Firebase Project ID</div>
-        <div id="connected-project" style="font-size:11px;color:var(--amber);padding:6px 0;letter-spacing:.05em"></div>
-      </div>
-      <div style="margin-bottom:6px;font-size:10px;color:var(--text-dim);letter-spacing:.08em">
-        Чтобы синхронизация работала на другом ПК — скопируй ссылку и открой её там. Firebase подключится автоматически.
-      </div>
-      <button class="panel-save" style="background:var(--surface3);color:var(--amber);border:1px solid rgba(224,154,40,.35);margin-bottom:10px" onclick="copyShareLink()">
-        📋 Скопировать ссылку для другого устройства
-      </button>
-      <div id="share-copied" style="display:none;font-size:10px;color:var(--green);letter-spacing:.1em;margin-bottom:10px">✓ Ссылка скопирована — открой на другом устройстве</div>
-      <button class="panel-save" style="background:transparent;color:var(--accent);border:1px solid rgba(214,78,58,.3)" onclick="disconnectFirebase()">
-        Отключить и сбросить
-      </button>
-    </div>
-
-    <div id="setup-form-view">
-      <div style="font-size:11px;color:var(--text-dim);line-height:1.75;margin-bottom:18px">
-        Для синхронизации нужен <strong style="color:var(--text)">Firebase Realtime Database</strong> — бесплатно, настройка 3 минуты.
-      </div>
-
-      <div class="setup-step">
-        <div class="setup-num">1</div>
-        <div>Открой <a class="setup-link" href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a> → <strong>Add project</strong> → придумай название → отключи Google Analytics → <strong>Create project</strong></div>
-      </div>
-      <div class="setup-step">
-        <div class="setup-num">2</div>
-        <div>В меню слева: <strong>Build → Realtime Database → Create database</strong> → выбери регион → <strong>Start in test mode</strong> → Enable</div>
-      </div>
-      <div class="setup-step">
-        <div class="setup-num">3</div>
-        <div>Вернись на главную проекта → <strong>&lt;/&gt; Add app</strong> → введи любое название → <strong>Register app</strong></div>
-      </div>
-      <div class="setup-step">
-        <div class="setup-num">4</div>
-        <div>Скопируй объект <code>firebaseConfig</code> и вставь ниже</div>
-      </div>
-
-      <div class="setup-sep"></div>
-
-      <div class="form-group">
-        <label class="form-label">Вставь firebaseConfig (JSON или весь блок кода)</label>
-        <textarea class="form-input" id="setup-input" style="min-height:120px;font-size:11px" placeholder='Вставь сюда содержимое firebaseConfig:
-
-{
-  "apiKey": "AIza...",
-  "authDomain": "my-project.firebaseapp.com",
-  "databaseURL": "https://my-project-default-rtdb.firebaseio.com",
-  "projectId": "my-project",
-  "storageBucket": "my-project.appspot.com",
-  "messagingSenderId": "123456789",
-  "appId": "1:123..."
-}'></textarea>
-      </div>
-      <button class="panel-save" id="setup-save-btn" onclick="saveFirebaseConfig()">Подключить и включить синхронизацию</button>
-    </div>
-
-  </div>
-</div>
-
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<!-- Gun.js P2P sync — zero config -->
+<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -416,10 +315,13 @@ const SL={pending:'Pending',checking:'Checking',ordered:'Ordered',delivered:'Del
 const SC={pending:'#e09a28',checking:'#4888e0',ordered:'#38a870',delivered:'#8a60d4',cancelled:'#555'};
 
 // ═══════════════════════════════════════════════════════════════
-//  STORAGE & FIREBASE
+//  STORAGE & GUN.JS SYNC (zero config, P2P real-time)
 // ═══════════════════════════════════════════════════════════════
-let db = null;
-let _suppressSync = false; // prevents echo when we write
+const GUN_PEERS = ['https://relay.peer.ooo/gun', 'https://gun.eco/gun'];
+const GUN_NS    = 'gear-serbia-2026-v3k9x'; // unique namespace = shared "room"
+
+let gearNode  = null;
+let _gunWrite = {}; // id → true while suppressing echo
 
 function ld(id){
   try{return JSON.parse(localStorage.getItem('gear_'+id))||{};}catch{return {};}
@@ -427,121 +329,50 @@ function ld(id){
 
 function sd(id, data){
   localStorage.setItem('gear_'+id, JSON.stringify(data));
-  if(db){
-    _suppressSync = true;
-    db.ref('gear/'+id).set({...data, _ts: firebase.database.ServerValue.TIMESTAMP})
-      .then(()=>{ setTimeout(()=>{ _suppressSync=false; }, 500); })
-      .catch(e=>{ _suppressSync=false; console.warn('Firebase write error:',e); });
+  if(gearNode){
+    _gunWrite[id] = true;
+    gearNode.get(id).put(data);
+    setTimeout(()=>{ delete _gunWrite[id]; }, 900);
+    setConnStatus(true);
   }
 }
 
-function initFirebase(config){
-  try{
-    // Tear down existing app synchronously before re-init
-    if(firebase.apps.length){
-      const old = firebase.app();
-      try{ old.database().goOffline(); }catch(e){}
-      old.delete();
-    }
-    firebase.initializeApp(config);
-    db = firebase.database();
+// ── Connection indicator ──────────────────────────────────────
+function setConnStatus(on){
+  const dot = document.getElementById('conn-dot');
+  const lbl = document.getElementById('conn-label');
+  if(dot) dot.className = on ? 'live' : 'offline';
+  if(lbl) lbl.textContent = on ? 'Live' : '…';
+}
 
-    // Real-time listeners
+// ── Init Gun.js ───────────────────────────────────────────────
+(function(){
+  try{
+    const gun = GUN({peers: GUN_PEERS, localStorage: false, radisk: false});
+    gearNode = gun.get(GUN_NS);
+
     PRODUCTS.forEach(p=>{
-      db.ref('gear/'+p.id).on('value', snap=>{
-        if(_suppressSync) return;
-        const remote = snap.val();
-        if(!remote) return;
-        const {_ts, ...data} = remote;
+      gearNode.get(p.id).on(raw=>{
+        if(_gunWrite[p.id] || !raw || typeof raw !== 'object') return;
+        // strip Gun internal metadata key "_"
+        const data = {};
+        Object.keys(raw).forEach(k=>{ if(k!=='_') data[k]=raw[k]; });
+        if(!Object.keys(data).length) return;
         const local = ld(p.id);
         if(JSON.stringify(data) !== JSON.stringify(local)){
           localStorage.setItem('gear_'+p.id, JSON.stringify(data));
           applyCardData(p.id, data);
         }
+        setConnStatus(true);
       });
     });
 
-    // Connection status
-    db.ref('.info/connected').on('value', snap=>{
-      setConnStatus(snap.val()===true);
-    });
-
-    localStorage.setItem('fb_config', JSON.stringify(config));
-    return true;
+    // Light connectivity probe — if relay responds, mark live
+    gun.get(GUN_NS+'~ping').once(()=>{ setConnStatus(true); });
   }catch(e){
-    console.error('Firebase init error:', e);
-    return false;
-  }
-}
-
-// Generate share link with Firebase config embedded in URL params
-function generateShareLink(){
-  try{
-    const cfg = JSON.parse(localStorage.getItem('fb_config')||'{}');
-    if(!cfg.apiKey || !cfg.databaseURL) return null;
-    const url = new URL(window.location.href);
-    url.search = '';
-    url.searchParams.set('_fbk', cfg.apiKey);
-    url.searchParams.set('_fbu', cfg.databaseURL);
-    url.searchParams.set('_fbp', cfg.projectId||'');
-    if(cfg.appId)    url.searchParams.set('_fba', cfg.appId);
-    if(cfg.authDomain) url.searchParams.set('_fbd', cfg.authDomain);
-    if(cfg.messagingSenderId) url.searchParams.set('_fbm', cfg.messagingSenderId);
-    return url.toString();
-  }catch(e){ return null; }
-}
-
-function copyShareLink(){
-  const link = generateShareLink();
-  if(!link){ showErr('Firebase не подключён — сначала настрой синхронизацию'); return; }
-  navigator.clipboard.writeText(link).then(()=>{
-    const el = document.getElementById('share-copied');
-    if(el){ el.style.display=''; setTimeout(()=>{ el.style.display='none'; }, 4000); }
-  }).catch(()=>{
-    prompt('Скопируй ссылку вручную:', link);
-  });
-}
-
-// Try to restore config: first from URL params, then from localStorage
-(function(){
-  try{
-    const url = new URL(window.location.href);
-    const fbk = url.searchParams.get('_fbk');
-    const fbu = url.searchParams.get('_fbu');
-    const fbp = url.searchParams.get('_fbp');
-    if(fbk && fbu){
-      const cfg = {
-        apiKey:            fbk,
-        databaseURL:       fbu,
-        projectId:         fbp||'',
-        appId:             url.searchParams.get('_fba')||'1:0:web:0',
-        authDomain:        url.searchParams.get('_fbd')||'',
-        messagingSenderId: url.searchParams.get('_fbm')||''
-      };
-      if(initFirebase(cfg)){
-        // Clean URL so it doesn't linger in browser history
-        history.replaceState(null, '', window.location.pathname);
-        return;
-      }
-    }
-  }catch(e){}
-  const saved = localStorage.getItem('fb_config');
-  if(saved){
-    try{ initFirebase(JSON.parse(saved)); }catch(e){}
+    console.warn('Gun init error:', e);
   }
 })();
-
-// ── Connection indicator ───────────────────────────────────────
-function setConnStatus(connected){
-  const dot   = document.getElementById('conn-dot');
-  const label = document.getElementById('conn-label');
-  const btn   = document.getElementById('sync-btn');
-  if(dot){
-    dot.className = connected ? 'live' : 'offline';
-  }
-  if(label) label.textContent = connected ? 'Live' : 'Offline';
-  if(btn)   btn.className     = connected ? 'connected' : '';
-}
 
 // ═══════════════════════════════════════════════════════════════
 //  UI HELPERS
@@ -770,75 +601,6 @@ document.getElementById('panel-save').addEventListener('click',()=>{
 
 document.addEventListener('click',()=>document.querySelectorAll('.sdrop.open').forEach(d=>d.classList.remove('open')));
 
-// ═══════════════════════════════════════════════════════════════
-//  SETUP PANEL
-// ═══════════════════════════════════════════════════════════════
-function openSetup(){
-  refreshSetupView();
-  document.getElementById('setup-panel').classList.add('open');
-  document.getElementById('setup-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeSetup(){
-  document.getElementById('setup-panel').classList.remove('open');
-  document.getElementById('setup-overlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-function refreshSetupView(){
-  const connected = !!db;
-  document.getElementById('setup-connected-view').style.display = connected ? '' : 'none';
-  document.getElementById('setup-form-view').style.display       = connected ? 'none' : '';
-  if(connected){
-    try{
-      const cfg = JSON.parse(localStorage.getItem('fb_config')||'{}');
-      document.getElementById('connected-project').textContent = cfg.projectId || '—';
-    }catch(e){}
-  }
-  showNotice('');showErr('');
-}
-
-function showNotice(msg){ const el=document.getElementById('sync-notice'); el.textContent=msg; el.className='sync-notice'+(msg?' show':''); }
-function showErr(msg){    const el=document.getElementById('sync-err');    el.textContent=msg; el.className='sync-err'+(msg?' show':''); }
-
-function saveFirebaseConfig(){
-  const raw=document.getElementById('setup-input').value.trim();
-  showNotice('');showErr('');
-  try{
-    // Accept: raw JSON object, or JS const firebaseConfig = {...}
-    let cleaned=raw;
-    // Strip JS assignment wrapper if present
-    cleaned=cleaned.replace(/^[\s\S]*?=\s*(\{)/, '$1').replace(/\s*;\s*$/, '');
-    // Strip trailing JS comments
-    cleaned=cleaned.replace(/\/\/.*/g,'');
-    const config=JSON.parse(cleaned);
-    if(!config.apiKey)       throw new Error('Нет поля apiKey');
-    if(!config.databaseURL)  throw new Error('Нет поля databaseURL — включи Realtime Database в Firebase');
-    if(!config.projectId)    throw new Error('Нет поля projectId');
-    const btn=document.getElementById('setup-save-btn');
-    btn.textContent='Подключение…';btn.disabled=true;
-    const ok=initFirebase(config);
-    btn.textContent='Подключить и включить синхронизацию';btn.disabled=false;
-    if(ok){
-      showNotice('✓ Firebase подключён! Синхронизация активна.');
-      setTimeout(()=>{ refreshSetupView(); }, 1200);
-    }else{
-      showErr('Не удалось подключиться. Проверьте конфиг и правила Realtime Database.');
-    }
-  }catch(e){
-    showErr('Ошибка: '+e.message);
-  }
-}
-
-function disconnectFirebase(){
-  if(!confirm('Отключить Firebase? Локальные данные сохранятся.')) return;
-  localStorage.removeItem('fb_config');
-  if(db){ try{ firebase.app().delete(); }catch(e){} }
-  db=null;
-  setConnStatus(false);
-  refreshSetupView();
-  showNotice('Firebase отключён. Страница работает в локальном режиме.');
-}
 
 // ═══════════════════════════════════════════════════════════════
 //  FILTERS + STATS
