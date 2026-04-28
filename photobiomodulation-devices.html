@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Фотобиомодуляция — сравнение устройств</title>
+  <style>
+    :root {
+      --bg:#000; --card:#111; --border:rgba(255,255,255,.08);
+      --text:#f5f5f7; --muted:#86868b;
+      --accent:#2997ff; --red:#ff453a; --green:#30d158;
+      --orange:#ff9f0a; --purple:#bf5af2; --teal:#5ac8fa;
+      --gold:#f5a623;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:52px;}
+    .nav-logo{font-size:14px;font-weight:600;letter-spacing:-.01em;}
+    .nav-links{display:flex;gap:32px;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:#fff;}
+    @media(max-width:640px){nav{padding:0 20px;}.nav-links{display:none;}}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;background:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(255,149,0,.18) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 80% 100%,rgba(41,151,255,.12) 0%,transparent 60%);}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:28px;}
+    .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:32px;height:1px;background:currentColor;opacity:.4;}
+    .hero h1{font-size:clamp(44px,8vw,88px);font-weight:700;letter-spacing:-.04em;line-height:1.03;background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.4) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;max-width:860px;}
+    .hero p{margin-top:28px;font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:580px;line-height:1.65;}
+    .hero-stats{margin-top:64px;display:flex;gap:56px;flex-wrap:wrap;justify-content:center;}
+    .stat{text-align:center;}
+    .stat-num{font-size:36px;font-weight:700;letter-spacing:-.03em;color:#fff;}
+    .stat-label{font-size:13px;color:var(--muted);margin-top:4px;}
+    .hero-scroll{margin-top:72px;color:var(--muted);font-size:13px;display:flex;flex-direction:column;align-items:center;gap:6px;}
+    .arrow{animation:bounce 2s ease-in-out infinite;display:block;}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+    /* WINNER BANNER */
+    .winner{max-width:1140px;margin:0 auto;padding:0 24px 0;}
+    .winner-card{background:linear-gradient(135deg,rgba(41,151,255,.12) 0%,rgba(41,151,255,.04) 100%);border:1px solid rgba(41,151,255,.3);border-radius:20px;padding:48px 52px;display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;}
+    @media(max-width:768px){.winner-card{grid-template-columns:1fr;text-align:center;padding:32px;}}
+    .winner-trophy{font-size:56px;}
+    .winner-title{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+    .winner-name{font-size:32px;font-weight:700;letter-spacing:-.025em;margin-bottom:8px;}
+    .winner-desc{font-size:16px;color:rgba(255,255,255,.65);line-height:1.6;}
+    .winner-price{text-align:right;}
+    .winner-price .price{font-size:40px;font-weight:700;letter-spacing:-.03em;color:var(--accent);}
+    .winner-price .note{font-size:13px;color:var(--muted);margin-top:4px;}
+    @media(max-width:768px){.winner-price{text-align:center;}}
+
+    /* SECTION */
+    .section{padding:120px 24px;max-width:1140px;margin:0 auto;}
+    .eyebrow{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;}
+    .section-title{font-size:clamp(30px,5vw,54px);font-weight:700;letter-spacing:-.025em;line-height:1.08;max-width:700px;}
+    .section-sub{margin-top:20px;font-size:18px;color:var(--muted);max-width:560px;line-height:1.65;}
+    .divider{height:1px;background:var(--border);max-width:1140px;margin:0 auto;}
+
+    /* DEVICE CARDS */
+    .devices{display:flex;flex-direction:column;gap:2px;margin-top:64px;border-radius:20px;overflow:hidden;}
+    .device-card{background:var(--card);display:grid;grid-template-columns:1fr 1fr;min-height:520px;overflow:hidden;transition:background .2s;}
+    .device-card:hover{background:#161616;}
+    .device-card.reverse{direction:rtl;}
+    .device-card.reverse>*{direction:ltr;}
+    .device-img{position:relative;overflow:hidden;background:#0a0a0a;display:flex;align-items:center;justify-content:center;}
+    .device-img img{width:100%;height:100%;object-fit:cover;opacity:.9;transition:transform .5s ease,opacity .3s;}
+    .device-card:hover .device-img img{transform:scale(1.03);opacity:1;}
+    .placeholder{width:100%;min-height:340px;display:flex;align-items:center;justify-content:center;font-size:80px;opacity:.2;}
+    .device-info{padding:52px 48px;display:flex;flex-direction:column;justify-content:space-between;}
+    @media(max-width:768px){
+      .device-card,.device-card.reverse{grid-template-columns:1fr;direction:ltr;}
+      .device-img{min-height:260px;}
+      .device-info{padding:36px 28px;}
+    }
+
+    .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:100px;margin-bottom:24px;align-self:flex-start;}
+    .b-blue{background:rgba(41,151,255,.15);color:var(--accent);}
+    .b-orange{background:rgba(255,149,0,.15);color:var(--orange);}
+    .b-green{background:rgba(48,209,88,.15);color:var(--green);}
+    .b-teal{background:rgba(90,200,250,.15);color:var(--teal);}
+    .b-purple{background:rgba(191,90,242,.15);color:var(--purple);}
+    .b-gold{background:rgba(245,166,35,.15);color:var(--gold);}
+
+    .device-name{font-size:34px;font-weight:700;letter-spacing:-.025em;margin-bottom:6px;}
+    .device-tagline{font-size:15px;color:var(--muted);line-height:1.55;margin-bottom:28px;}
+    .device-price{font-size:44px;font-weight:700;letter-spacing:-.04em;margin-bottom:4px;}
+    .device-price-note{font-size:13px;color:var(--muted);margin-bottom:28px;}
+    .specs{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:32px;}
+    .specs li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.72);line-height:1.45;}
+    .spec-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;background:currentColor;}
+    .buy-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:100px;transition:opacity .2s,transform .15s;align-self:flex-start;}
+    .buy-btn:hover{opacity:.85;transform:translateY(-1px);}
+    .btn-blue{background:var(--accent);color:#fff;}
+    .btn-orange{background:var(--orange);color:#000;}
+    .btn-green{background:var(--green);color:#000;}
+    .btn-teal{background:var(--teal);color:#000;}
+    .btn-purple{background:var(--purple);color:#fff;}
+
+    /* WAVELENGTH VIZ */
+    .wave-section{padding:80px 24px;max-width:1140px;margin:0 auto;}
+    .wave-bars{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-top:48px;}
+    .wave-bar{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 20px;text-align:center;}
+    .wave-nm{font-size:32px;font-weight:700;letter-spacing:-.03em;margin-bottom:6px;}
+    .wave-name{font-size:13px;font-weight:600;margin-bottom:8px;}
+    .wave-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+    .wave-depth{margin-top:12px;height:4px;border-radius:2px;opacity:.6;}
+
+    /* SCIENCE */
+    .science-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:64px;border-radius:20px;overflow:hidden;}
+    @media(max-width:768px){.science-grid{grid-template-columns:1fr;}}
+    .sci-card{background:var(--card);padding:44px 40px;transition:background .2s;}
+    .sci-card:hover{background:#161616;}
+    .sci-year{font-size:44px;font-weight:700;letter-spacing:-.04em;color:var(--orange);opacity:.6;margin-bottom:12px;}
+    .sci-title{font-size:20px;font-weight:600;letter-spacing:-.01em;margin-bottom:12px;}
+    .sci-text{font-size:15px;color:rgba(255,255,255,.6);line-height:1.7;}
+    .sci-tag{display:inline-block;margin-top:20px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:6px;}
+    .tag-green{color:var(--green);background:rgba(48,209,88,.1);}
+    .tag-orange{color:var(--orange);background:rgba(255,149,0,.1);}
+    .tag-red{color:var(--red);background:rgba(255,69,58,.1);}
+    .tag-blue{color:var(--accent);background:rgba(41,151,255,.1);}
+
+    /* TABLE */
+    .table-wrap{overflow-x:auto;margin-top:56px;border-radius:16px;border:1px solid var(--border);}
+    table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;}
+    thead th{padding:18px 20px;text-align:left;font-weight:600;font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--border);background:rgba(255,255,255,.025);white-space:nowrap;}
+    tbody td{padding:16px 20px;border-bottom:1px solid var(--border);vertical-align:middle;color:rgba(255,255,255,.8);line-height:1.4;}
+    tbody tr:last-child td{border-bottom:none;}
+    tbody tr:hover td{background:rgba(255,255,255,.02);}
+    .td-name{font-weight:600;color:#fff;white-space:nowrap;}
+    .td-price{font-weight:600;white-space:nowrap;}
+    .winner-row td{background:rgba(41,151,255,.06);}
+    .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;}
+    .d-blue{background:var(--accent)} .d-orange{background:var(--orange)} .d-green{background:var(--green)} .d-teal{background:var(--teal)} .d-purple{background:var(--purple)}
+
+    /* PERSONAS */
+    .personas{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-top:56px;}
+    .persona{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;transition:border-color .2s;}
+    .persona:hover{border-color:rgba(255,255,255,.18);}
+    .persona-icon{font-size:32px;margin-bottom:16px;}
+    .persona-title{font-size:16px;font-weight:600;margin-bottom:8px;}
+    .persona-desc{font-size:13px;color:var(--muted);line-height:1.55;}
+    .persona-rec{margin-top:14px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;}
+
+    /* VERDICT */
+    .verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px;}
+    @media(max-width:640px){.verdict-grid{grid-template-columns:1fr;}}
+    .verdict-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;}
+    .verdict-card h3{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
+    .verdict-card p{font-size:18px;font-weight:600;line-height:1.45;letter-spacing:-.01em;}
+
+    /* SOURCES */
+    .sources{padding:60px 24px;max-width:1140px;margin:0 auto;border-top:1px solid var(--border);}
+    .sources h4{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+    .sources-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 32px;}
+    .sources a{font-size:13px;color:var(--accent);text-decoration:none;opacity:.8;}
+    .sources a:hover{opacity:1;}
+    footer{padding:40px 24px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border);}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Фотобиомодуляция</div>
+  <div class="nav-links">
+    <a href="#winner">Лучший выбор</a>
+    <a href="#devices">Устройства</a>
+    <a href="#science">Наука</a>
+    <a href="#compare">Сравнение</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Нейротехнологии · 2025</div>
+  <h1>Фотобиомодуляция<br>мозга</h1>
+  <p>Ближний инфракрасный свет проникает сквозь кость в мозг, активирует митохондрии и запускает нейропластичность. Пять лучших устройств — от $699 до $2 399.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">150+</div>
+      <div class="stat-label">PubMed-исследований</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">46</div>
+      <div class="stat-label">Клинических испытаний</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">810–1070</div>
+      <div class="stat-label">нм — рабочий диапазон</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">20 мин</div>
+      <div class="stat-label">Типичная сессия</div>
+    </div>
+  </div>
+  <div class="hero-scroll"><span class="arrow">↓</span>прокрутить</div>
+</div>
+
+<!-- WINNER -->
+<div class="winner" id="winner">
+  <div class="winner-card">
+    <div class="winner-trophy">🏆</div>
+    <div>
+      <div class="winner-title">Лучший выбор редакции</div>
+      <div class="winner-name">Vielight Neuro Duo 4</div>
+      <div class="winner-desc">Единственное устройство с двойным маршрутом — транскраниальный + интраназальный. Достигает глубоких структур мозга. Два режима: Alpha 10 Гц (релакс) и Gamma 40 Гц (когниция). Больше всего клинических данных. ISO 13485 сертифицировано.</div>
+    </div>
+    <div class="winner-price">
+      <div class="price">$2 399</div>
+      <div class="note">HSA/FSA eligible · гарантия 24 мес</div>
+    </div>
+  </div>
+</div>
+
+<!-- WAVELENGTHS -->
+<div class="wave-section">
+  <div class="eyebrow">Длины волн</div>
+  <h2 class="section-title" style="font-size:clamp(28px,4vw,44px);">Как свет проникает в мозг</h2>
+  <div class="wave-bars">
+    <div class="wave-bar">
+      <div class="wave-nm" style="color:#e05252;">630 нм</div>
+      <div class="wave-name">Красный</div>
+      <div class="wave-desc">Поверхность кожи и кость. Эффективен для скальпа и поверхностных тканей.</div>
+      <div class="wave-depth" style="background:linear-gradient(90deg,#e05252,#c03434);width:30%;"></div>
+    </div>
+    <div class="wave-bar">
+      <div class="wave-nm" style="color:#c8614e;">660 нм</div>
+      <div class="wave-name">Красный NIR</div>
+      <div class="wave-desc">Проникает глубже, используется в светодиодных панелях для тела.</div>
+      <div class="wave-depth" style="background:linear-gradient(90deg,#c8614e,#a04040);width:40%;"></div>
+    </div>
+    <div class="wave-bar">
+      <div class="wave-nm" style="color:var(--orange);">810 нм</div>
+      <div class="wave-name">Ближний ИК</div>
+      <div class="wave-desc">Золотой стандарт для мозга. Наибольшая доказательная база. Достигает коры.</div>
+      <div class="wave-depth" style="background:linear-gradient(90deg,var(--orange),#c07800);width:70%;"></div>
+    </div>
+    <div class="wave-bar">
+      <div class="wave-nm" style="color:var(--teal);">1070 нм</div>
+      <div class="wave-name">Глубокий ИК</div>
+      <div class="wave-desc">Максимальное проникновение. Достигает таламуса и белого вещества.</div>
+      <div class="wave-depth" style="background:linear-gradient(90deg,var(--teal),#3a9aba);width:90%;"></div>
+    </div>
+    <div class="wave-bar">
+      <div class="wave-nm" style="color:var(--purple);">Интраназал</div>
+      <div class="wave-name">Vielight путь</div>
+      <div class="wave-desc">Через нос → решётчатая кость → базальные ганглии. Уникально для Vielight.</div>
+      <div class="wave-depth" style="background:linear-gradient(90deg,var(--purple),#8a3ad2);width:95%;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DEVICES -->
+<section class="section" id="devices">
+  <div class="eyebrow">Устройства</div>
+  <h2 class="section-title">Пять лучших устройств</h2>
+  <p class="section-sub">От бюджетного входа до топового шлема с двойным маршрутом стимуляции.</p>
+
+  <div class="devices">
+
+    <!-- Vielight Neuro Duo 4 -->
+    <div class="device-card">
+      <div class="device-img">
+        <img src="img/pbm/vielight-duo.jpg" alt="Vielight Neuro Duo 4"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+        <div class="placeholder" style="display:none;">🧠</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="badge b-blue">★ Лучший выбор · Двойной маршрут</span>
+          <div class="device-name">Vielight Neuro Duo 4</div>
+          <div class="device-tagline">Транскраниальный + интраназальный. Alpha 10 Гц и Gamma 40 Гц в одном устройстве. Больше всего клинических данных среди всех PBM-шлемов.</div>
+          <div class="device-price">$2 399</div>
+          <div class="device-price-note">HSA/FSA eligible · ISO 13485 · гарантия 24 мес · 80% возврат в течение 6 мес</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--accent)"></span>5 мощных Vie-LED модулей, покрытие ~400 см²</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>Alpha 10 Гц (релакс, обучение) + Gamma 40 Гц (когниция, память)</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>Интраназальный аппликатор — уникальный путь через решётчатую кость</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>810 нм, облучённость 200–250 мВт/см², сессия 20 мин</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>Сертификат ISO 13485, TÜV Rheinland, MDSAP</li>
+            <li><span class="spec-dot" style="color:var(--accent)"></span>6 мес бесплатного доступа к Vielight AI</li>
+          </ul>
+        </div>
+        <a href="https://www.vielight.com/devices/vielight-neuro-duo-brain/" target="_blank" class="buy-btn btn-blue">Купить → vielight.com</a>
+      </div>
+    </div>
+
+    <!-- Vielight Neuro Gamma 4 -->
+    <div class="device-card reverse">
+      <div class="device-img">
+        <img src="img/pbm/vielight-gamma.webp" alt="Vielight Neuro Gamma 4"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+        <div class="placeholder" style="display:none;">⚡</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="badge b-orange">Гамма 40 Гц · Фокус</span>
+          <div class="device-name">Vielight Neuro Gamma 4</div>
+          <div class="device-tagline">Оптимизирован под 40 Гц гамма-частоту — наиболее изученную для когнитивных функций и нейропротекции. Более доступный вариант от Vielight.</div>
+          <div class="device-price">$1 799</div>
+          <div class="device-price-note">HSA/FSA eligible · лучший выбор для когниции и концентрации</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--orange)"></span>Gamma 40 Гц — связан с когницией и болезнью Альцгеймера</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>810 нм транскраниальный + интраназальный</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>5 LED модулей, покрытие ~400 см²</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>Сессия 20 минут, 6 дней в неделю</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>ISO 13485, TÜV Rheinland, MDSAP</li>
+            <li><span class="spec-dot" style="color:var(--orange)"></span>На $600 дешевле Duo при сопоставимой базе исследований</li>
+          </ul>
+        </div>
+        <a href="https://www.vielight.com/devices/vielight-neuro-gamma/" target="_blank" class="buy-btn btn-orange">Купить → vielight.com</a>
+      </div>
+    </div>
+
+    <!-- MitoMIND -->
+    <div class="device-card">
+      <div class="device-img">
+        <img src="img/pbm/mitomind.jpg" alt="MitoMIND Helmet"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+        <div class="placeholder" style="display:none;">🪖</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="badge b-green">256 LED · Максимальное покрытие</span>
+          <div class="device-name">MitoMIND</div>
+          <div class="device-tagline">256 светодиодов на 810 нм — рекордное количество среди потребительских PBM-шлемов. Полное покрытие черепа. 6 пресетов. Лучшая цена на LED-количество.</div>
+          <div class="device-price">$2 195</div>
+          <div class="device-price-note">Mito Red Light · опция: добавить интраназальный 1070 нм модуль</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--green)"></span>256 LED при 810 нм — наибольшая плотность в классе</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>6 предустановленных программ, регулировка мощности</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Облучённость 7–10 мВт/см² (измеренная)</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Опция: интраназальный модуль 1070 нм</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Эргономичная регулируемая конструкция</li>
+            <li><span class="spec-dot" style="color:var(--green)"></span>Лучшее соотношение LED/цена в сегменте</li>
+          </ul>
+        </div>
+        <a href="https://mitoredlight.com/products/mitomind-helmet" target="_blank" class="buy-btn btn-green">Купить → mitoredlight.com</a>
+      </div>
+    </div>
+
+    <!-- Neuronic LIGHT -->
+    <div class="device-card reverse">
+      <div class="device-img">
+        <img src="img/pbm/neuronic.jpg" alt="Neuronic LIGHT"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+        <div class="placeholder" style="display:none;">💡</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="badge b-teal">1070 нм · Глубокое проникновение</span>
+          <div class="device-name">Neuronic LIGHT</div>
+          <div class="device-tagline">300 LED на 1070 нм — самая длинная волна в классе. Максимальная глубина проникновения. Беспроводной, с аккумулятором и приложением. Покрытие 670 см².</div>
+          <div class="device-price">$1 795</div>
+          <div class="device-price-note">иногда со скидкой до $1 599 · 100% возврат первые 90 дней (США/Канада)</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--teal)"></span>300 LED при 1070 нм — максимальная глубина проникновения</li>
+            <li><span class="spec-dot" style="color:var(--teal)"></span>Покрытие 670 см², мощность ~1725 мВт</li>
+            <li><span class="spec-dot" style="color:var(--teal)"></span>Беспроводной, встроенный аккумулятор</li>
+            <li><span class="spec-dot" style="color:var(--teal)"></span>iOS/Android приложение с контролем сессий</li>
+            <li><span class="spec-dot" style="color:var(--teal)"></span>Достигает таламуса и глубокого белого вещества</li>
+            <li><span class="spec-dot" style="color:var(--teal)"></span>100% возврат (США/Канада) в течение первых 90 дней</li>
+          </ul>
+        </div>
+        <a href="https://www.neuronic.online/products/neuronic-light-1070nm-photobiomodulation-helmet-with-app-connectivity" target="_blank" class="buy-btn btn-teal">Купить → neuronic.online</a>
+      </div>
+    </div>
+
+    <!-- Vielight Vagus -->
+    <div class="device-card">
+      <div class="device-img">
+        <img src="img/pbm/vielight-vagus.webp" alt="Vielight Vagus"
+          style="object-fit:contain;padding:20px;background:#0d0d0d;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+        <div class="placeholder" style="display:none;">🔋</div>
+      </div>
+      <div class="device-info">
+        <div>
+          <span class="badge b-purple">Блуждающий нерв · Бюджет</span>
+          <div class="device-name">Vielight Vagus</div>
+          <div class="device-tagline">Единственное в мире устройство PBM для стимуляции блуждающего нерва. Соединяет мозг и тело. Оптимально для стресса, иммунитета и нейровоспаления.</div>
+          <div class="device-price">$699</div>
+          <div class="device-price-note">HSA/FSA eligible · самый доступный вход в экосистему Vielight</div>
+          <ul class="specs">
+            <li><span class="spec-dot" style="color:var(--purple)"></span>Патент: единственный PBM-VNS (vagus nerve stimulation) в мире</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>2 шейных модуля + интраназальный аппликатор</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>810 нм, 100 Гц, 50 мВт/см² на шее</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>Сессия 20 мин, 6 дней в неделю</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>Эффект: стресс, иммунитет, ментальная ясность</li>
+            <li><span class="spec-dot" style="color:var(--purple)"></span>Питание 110/220V, универсальный</li>
+          </ul>
+        </div>
+        <a href="https://www.vielight.com/devices/vagus/" target="_blank" class="buy-btn" style="background:var(--purple);color:#fff;">Купить → vielight.com</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCIENCE -->
+<section class="section" id="science">
+  <div class="eyebrow">Наука</div>
+  <h2 class="section-title">Как это работает</h2>
+  <p class="section-sub">Фотобиомодуляция — одна из наиболее быстро растущих областей нейронауки. Вот что знает наука к 2025 году.</p>
+
+  <div class="science-grid">
+    <div class="sci-card">
+      <div class="sci-year">ATP</div>
+      <div class="sci-title">Механизм: митохондрии</div>
+      <div class="sci-text">Инфракрасный свет поглощается цитохром c оксидазой — ключевым ферментом дыхательной цепи митохондрий. Это запускает выработку ATP (клеточной энергии), снижает оксидативный стресс, модулирует NO-сигнализацию и активирует антиапоптозные гены. Нейроны буквально получают дополнительное питание.</div>
+      <span class="sci-tag tag-blue">Механизм</span>
+    </div>
+    <div class="sci-card">
+      <div class="sci-year">2024</div>
+      <div class="sci-title">Когниция и память</div>
+      <div class="sci-text">Рандомизированное исследование 2024 (Neda et al.): оценка по шкале MoCA выросла на 3.20 балла в группе PBM против 1.97 балла в группе плацебо за 60 дней. Отдельное исследование (Johnson et al., 2024) показало значимое улучшение показателей креативности при большом размере эффекта.</div>
+      <span class="sci-tag tag-green">Доказано</span>
+    </div>
+    <div class="sci-card">
+      <div class="sci-year">2025</div>
+      <div class="sci-title">Болезнь Паркинсона</div>
+      <div class="sci-text">Исследование Liebert et al. (2025) зафиксировало значительное улучшение двигательных симптомов и изменение микробиома кишечника у пациентов с болезнью Паркинсона после PBM-терапии на протяжении 5 лет. MDPI Journal of Clinical Medicine, 2024: рандомизированное испытание подтвердило эффективность при моторных и немоторных симптомах.</div>
+      <span class="sci-tag tag-green">5-летнее исследование</span>
+    </div>
+    <div class="sci-card">
+      <div class="sci-year">2025</div>
+      <div class="sci-title">Постковидный мозговой туман</div>
+      <div class="sci-text">Пилотное рандомизированное сham-контролируемое исследование (medRxiv, 2025): PBM показала значимые улучшения внимания и интегральных когнитивных показателей у молодых взрослых с постковидным когнитивным нарушением. Первые контролируемые данные эффективности PBM при Long COVID.</div>
+      <span class="sci-tag tag-orange">Новое, 2025</span>
+    </div>
+    <div class="sci-card">
+      <div class="sci-year">810 нм</div>
+      <div class="sci-title">Оптимальная волна для мозга</div>
+      <div class="sci-text">Исследование 2024 (рандомизированное, контролируемое): 810 нм транскраниальная PBM снизила тягу к опиоидам через усиление ингибиторного контроля. Длина волны 810 нм — наибольшее поглощение цитохром c оксидазой и наибольшая доказательная база среди всех NIR-длин волн для применения в мозге.</div>
+      <span class="sci-tag tag-blue">Стандарт</span>
+    </div>
+    <div class="sci-card">
+      <div class="sci-year">⚠</div>
+      <div class="sci-title">Ограничения и противопоказания</div>
+      <div class="sci-text">Нет одобрения FDA для большинства состояний. Противопоказания: активные опухоли головного мозга, фоточувствительная эпилепсия, беременность, имплантированные нейростимуляторы. Большинство исследований — малые выборки. Долгосрочная безопасность при ежедневном применении не установлена. Доза-эффект нелинейная: слишком много = хуже.</div>
+      <span class="sci-tag tag-red">Предостережение</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TABLE -->
+<section class="section" id="compare">
+  <div class="eyebrow">Сравнение</div>
+  <h2 class="section-title">Всё в одной таблице</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Устройство</th>
+          <th>Цена</th>
+          <th>Длина волны</th>
+          <th>LED</th>
+          <th>Мощность</th>
+          <th>Режимы</th>
+          <th>Приложение</th>
+          <th>Возврат</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="winner-row">
+          <td class="td-name"><span class="dot d-blue"></span>Vielight Neuro Duo 4 ★</td>
+          <td class="td-price">$2 399</td>
+          <td>810 нм</td>
+          <td>5 модулей + нос</td>
+          <td>200–250 мВт/см²</td>
+          <td>Alpha + Gamma</td>
+          <td>Vielight AI</td>
+          <td>80% / 6 мес</td>
+        </tr>
+        <tr>
+          <td class="td-name"><span class="dot d-orange"></span>Vielight Neuro Gamma 4</td>
+          <td class="td-price">$1 799</td>
+          <td>810 нм</td>
+          <td>5 модулей + нос</td>
+          <td>200–250 мВт/см²</td>
+          <td>Gamma 40 Гц</td>
+          <td>Vielight AI</td>
+          <td>80% / 6 мес</td>
+        </tr>
+        <tr>
+          <td class="td-name"><span class="dot d-green"></span>MitoMIND</td>
+          <td class="td-price">$2 195</td>
+          <td>810 нм</td>
+          <td>256 LED</td>
+          <td>7–10 мВт/см²</td>
+          <td>6 пресетов</td>
+          <td>✗</td>
+          <td>н/д</td>
+        </tr>
+        <tr>
+          <td class="td-name"><span class="dot d-teal"></span>Neuronic LIGHT</td>
+          <td class="td-price">$1 795</td>
+          <td>1070 нм</td>
+          <td>300 LED</td>
+          <td>~2.6 мВт/см²</td>
+          <td>App-контроль</td>
+          <td>✓ iOS/Android</td>
+          <td>100% / 90 дн</td>
+        </tr>
+        <tr>
+          <td class="td-name"><span class="dot d-purple"></span>Vielight Vagus</td>
+          <td class="td-price">$699</td>
+          <td>810 нм</td>
+          <td>2 шейных + нос</td>
+          <td>50 мВт/см²</td>
+          <td>100 Гц</td>
+          <td>✗</td>
+          <td>80% / 6 мес</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PERSONAS -->
+<section class="section">
+  <div class="eyebrow">Для кого</div>
+  <h2 class="section-title">Кому что подойдёт</h2>
+
+  <div class="personas">
+    <div class="persona">
+      <div class="persona-icon">🧠</div>
+      <div class="persona-title">Максимальная эффективность</div>
+      <div class="persona-desc">Хочет лучшее устройство с наибольшей доказательной базой и двумя режимами.</div>
+      <div class="persona-rec" style="color:var(--accent)">→ Neuro Duo 4 ($2 399)</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">⚡</div>
+      <div class="persona-title">Фокус и когниция</div>
+      <div class="persona-desc">Нужна гамма-частота для концентрации и нейропротекции. Без переплаты за Alpha-режим.</div>
+      <div class="persona-rec" style="color:var(--orange)">→ Neuro Gamma 4 ($1 799)</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">🪖</div>
+      <div class="persona-title">Максимум LED</div>
+      <div class="persona-desc">Хочет полное покрытие черепа, 256 диодов, без лишних функций. Лучший per-LED бюджет.</div>
+      <div class="persona-rec" style="color:var(--green)">→ MitoMIND ($2 195)</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">🌊</div>
+      <div class="persona-title">Глубокое проникновение</div>
+      <div class="persona-desc">Важно достичь таламуса и глубоких структур. Беспроводной формат + приложение.</div>
+      <div class="persona-rec" style="color:var(--teal)">→ Neuronic LIGHT ($1 795)</div>
+    </div>
+    <div class="persona">
+      <div class="persona-icon">💆</div>
+      <div class="persona-title">Стресс и иммунитет</div>
+      <div class="persona-desc">Первое знакомство с PBM. Хочет воздействовать на блуждающий нерв, снизить тревогу.</div>
+      <div class="persona-rec" style="color:var(--purple)">→ Vielight Vagus ($699)</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VERDICT -->
+<section class="section" id="verdict">
+  <div class="eyebrow">Итог</div>
+  <h2 class="section-title">Главные выводы</h2>
+
+  <div class="verdict-grid">
+    <div class="verdict-card">
+      <h3>Лучший выбор</h3>
+      <p style="color:var(--accent)">Vielight Neuro Duo 4 — двойной маршрут, два режима, наибольшая доказательная база.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Лучшая цена за вход</h3>
+      <p style="color:var(--purple)">Vielight Vagus — $699, патентованная VNS-технология, те же 810 нм от Vielight.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Самое глубокое проникновение</h3>
+      <p style="color:var(--teal)">Neuronic LIGHT — 1070 нм достигает таламуса. Беспроводной, 100% возврат.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Наибольшее число LED</h3>
+      <p style="color:var(--green)">MitoMIND — 256 диодов при 810 нм. Лучший вариант для тех, кому важна плотность покрытия.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Ключевая длина волны</h3>
+      <p style="color:var(--orange)">810 нм — максимальная доказательная база. 1070 нм — максимальная глубина. Оба эффективны.</p>
+    </div>
+    <div class="verdict-card">
+      <h3>Важно знать</h3>
+      <p style="color:var(--muted)">FDA не одобрило PBM-шлемы как лечебные устройства. Доза-эффект нелинейная. Консультируйтесь с врачом при нейродегенеративных заболеваниях.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>Источники</h4>
+  <div class="sources-grid">
+    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11007916/" target="_blank">PMC — Devices for photobiomodulation of the brain (2024)</a>
+    <a href="https://www.vielight.com/devices/vielight-neuro-duo-brain/" target="_blank">Vielight Neuro Duo 4 — официальная страница</a>
+    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11171912/" target="_blank">PMC — PBM on Brain: Cognitive Dynamics (2024)</a>
+    <a href="https://mitoredlight.com/products/mitomind-helmet" target="_blank">MitoMIND Helmet — Mito Red Light</a>
+    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10840571/" target="_blank">PMC — Transcranial PBM for brain diseases (2024)</a>
+    <a href="https://www.neuronic.online/products/neuronic-light-1070nm-photobiomodulation-helmet-with-app-connectivity" target="_blank">Neuronic LIGHT — официальная страница</a>
+    <a href="https://www.mdpi.com/2077-0383/14/21/7463" target="_blank">MDPI — PBM for Parkinson's RCT (2024)</a>
+    <a href="https://www.vielight.com/devices/vagus/" target="_blank">Vielight Vagus — официальная страница</a>
+    <a href="https://www.medrxiv.org/content/10.1101/2025.07.24.25331961v1.full" target="_blank">medRxiv — PBM for Post-COVID Brain Fog (2025)</a>
+    <a href="https://www.vielight.com/research/" target="_blank">Vielight Research — клинические исследования</a>
+  </div>
+</div>
+
+<footer>
+  Собрано в апреле 2026 · Только для информационных целей · Не является медицинской рекомендацией
+</footer>
+
+</body>
+</html>
