@@ -24,6 +24,16 @@
     .hdr-meta{text-align:right;font-size:10px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;line-height:2.1}
     .hdr-meta em{color:var(--amber);font-style:normal}
 
+    /* sync indicator */
+    .sync-row{display:flex;align-items:center;gap:8px;margin-top:8px;justify-content:flex-end}
+    #conn-dot{width:7px;height:7px;border-radius:50%;background:var(--text-muted);flex-shrink:0;transition:background .4s}
+    #conn-dot.live{background:var(--green);box-shadow:0 0 6px rgba(56,168,112,.5)}
+    #conn-dot.offline{background:var(--accent)}
+    #conn-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim)}
+    #sync-btn{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--border2);background:transparent;color:var(--text-dim);cursor:pointer;transition:all .12s}
+    #sync-btn:hover{border-color:var(--text-dim);color:var(--text)}
+    #sync-btn.connected{border-color:rgba(56,168,112,.4);color:var(--green)}
+
     .stats-bar{border-bottom:1px solid var(--border);padding:12px 40px;display:flex;gap:36px;overflow-x:auto}
     .stat{display:flex;flex-direction:column;gap:1px;white-space:nowrap}
     .stat-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
@@ -37,9 +47,7 @@
     .fbtn.active{border-color:var(--text);color:var(--text);background:var(--surface2)}
 
     .main{padding:32px 40px;max-width:1440px;margin:0 auto}
-
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:52px}
-
     .card{background:var(--surface);position:relative;transition:background .15s;animation:fadeUp .35s ease backwards}
     .card:hover{background:var(--surface2)}
     .card[data-hidden]{display:none}
@@ -99,6 +107,7 @@
     .edit-btn{display:block;width:100%;margin-top:12px;padding:7px 0;background:transparent;border:1px solid var(--border2);color:var(--text-dim);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .15s;text-align:center}
     .edit-btn:hover{border-color:var(--text-dim);color:var(--text);background:var(--surface3)}
 
+    /* panels */
     .panel-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;display:none;backdrop-filter:blur(4px)}
     .panel-overlay.open{display:block}
     .panel{position:fixed;top:0;right:-440px;bottom:0;width:420px;background:var(--surface);border-left:1px solid var(--border2);z-index:700;transition:right .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
@@ -129,6 +138,22 @@
     textarea.form-input{resize:vertical;min-height:72px}
     .panel-save{display:block;width:100%;padding:11px;background:var(--text);color:var(--bg);border:none;font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:opacity .15s;margin-top:4px}
     .panel-save:hover{opacity:.86}
+    .panel-save:disabled{opacity:.4;cursor:not-allowed}
+
+    /* setup panel */
+    .setup-panel{position:fixed;top:0;right:-480px;bottom:0;width:460px;background:var(--surface);border-left:1px solid var(--border2);z-index:800;transition:right .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+    .setup-panel.open{right:0}
+    .setup-step{display:flex;gap:12px;margin-bottom:14px;font-size:12px;color:var(--text-dim);line-height:1.6}
+    .setup-num{font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;color:var(--amber);flex-shrink:0;line-height:1.2}
+    .setup-step strong{color:var(--text)}
+    .setup-step code{font-family:'IBM Plex Mono',monospace;font-size:10px;background:var(--surface3);padding:1px 5px;color:var(--amber)}
+    .setup-link{color:var(--blue);text-decoration:none;font-size:11px}
+    .setup-link:hover{text-decoration:underline}
+    .setup-sep{height:1px;background:var(--border);margin:18px 0}
+    .sync-notice{padding:8px 10px;background:rgba(56,168,112,.08);border:1px solid rgba(56,168,112,.2);font-size:10px;color:var(--green);margin-bottom:14px;display:none}
+    .sync-notice.show{display:block}
+    .sync-err{padding:8px 10px;background:rgba(214,78,58,.08);border:1px solid rgba(214,78,58,.2);font-size:10px;color:var(--accent);margin-bottom:14px;display:none}
+    .sync-err.show{display:block}
 
     .section-head{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:22px;padding-bottom:12px;border-bottom:2px solid var(--border);display:flex;align-items:baseline;gap:16px}
     .section-head span{font-size:10px;font-family:'IBM Plex Mono',monospace;font-weight:400;color:var(--text-dim);letter-spacing:.15em}
@@ -161,7 +186,8 @@
       .site-header,.stats-bar,.filter-bar,.main{padding-left:16px;padding-right:16px}
       .grid{grid-template-columns:1fr}.site-title{font-size:26px}.stats-bar{gap:20px}
       footer{flex-direction:column;gap:8px;text-align:center}
-      .panel{width:100%;right:-100%}.status-grid{grid-template-columns:repeat(3,1fr)}
+      .panel{width:100%;right:-100%}.setup-panel{width:100%;right:-100%}
+      .status-grid{grid-template-columns:repeat(3,1fr)}
     }
   </style>
 </head>
@@ -173,7 +199,16 @@
     <h1 class="site-title">GEAR ORDER</h1>
     <div class="site-sub">Acquisition Tracker — Serbia 2026</div>
   </div>
-  <div class="hdr-meta">Пункт доставки: <em>Сербия</em><br>Обновлено: <em>22.04.2026</em><br>Позиций: <em id="hdr-count">—</em></div>
+  <div class="hdr-meta">
+    Пункт доставки: <em>Сербия</em><br>
+    Обновлено: <em>22.04.2026</em><br>
+    Позиций: <em id="hdr-count">—</em>
+    <div class="sync-row">
+      <span id="conn-dot"></span>
+      <span id="conn-label">Offline</span>
+      <button id="sync-btn" onclick="openSetup()">⚙ Sync</button>
+    </div>
+  </div>
 </header>
 
 <div class="stats-bar">
@@ -234,7 +269,10 @@
   <div class="footer-text">Кликни фото или «Изменить» → панель редактирования</div>
 </footer>
 
+<!-- Edit panel overlay -->
 <div class="panel-overlay" id="overlay"></div>
+
+<!-- Edit panel -->
 <div class="panel" id="panel">
   <div class="panel-header">
     <div><div class="panel-title" id="p-name">—</div><div class="panel-sub" id="p-sub">—</div></div>
@@ -259,7 +297,89 @@
   </div>
 </div>
 
+<!-- Setup panel overlay -->
+<div class="panel-overlay" id="setup-overlay" onclick="closeSetup()"></div>
+
+<!-- Setup panel -->
+<div class="setup-panel" id="setup-panel">
+  <div class="panel-header">
+    <div>
+      <div class="panel-title">⚡ Синхронизация</div>
+      <div class="panel-sub">Real-time · все видят изменения мгновенно</div>
+    </div>
+    <button class="panel-close" onclick="closeSetup()">✕</button>
+  </div>
+  <div class="panel-body">
+
+    <div class="sync-notice" id="sync-notice"></div>
+    <div class="sync-err" id="sync-err"></div>
+
+    <div id="setup-connected-view" style="display:none">
+      <div style="font-size:11px;color:var(--text-dim);line-height:1.7;margin-bottom:16px">
+        <span style="color:var(--green);font-weight:600">● Firebase подключён.</span><br>
+        Все изменения синхронизируются в реальном времени между всеми пользователями.
+      </div>
+      <div class="form-group">
+        <div class="form-label">Firebase Project ID</div>
+        <div id="connected-project" style="font-size:11px;color:var(--amber);padding:6px 0;letter-spacing:.05em"></div>
+      </div>
+      <button class="panel-save" style="background:transparent;color:var(--accent);border:1px solid rgba(214,78,58,.3);margin-top:8px" onclick="disconnectFirebase()">
+        Отключить и сбросить
+      </button>
+    </div>
+
+    <div id="setup-form-view">
+      <div style="font-size:11px;color:var(--text-dim);line-height:1.75;margin-bottom:18px">
+        Для синхронизации нужен <strong style="color:var(--text)">Firebase Realtime Database</strong> — бесплатно, настройка 3 минуты.
+      </div>
+
+      <div class="setup-step">
+        <div class="setup-num">1</div>
+        <div>Открой <a class="setup-link" href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a> → <strong>Add project</strong> → придумай название → отключи Google Analytics → <strong>Create project</strong></div>
+      </div>
+      <div class="setup-step">
+        <div class="setup-num">2</div>
+        <div>В меню слева: <strong>Build → Realtime Database → Create database</strong> → выбери регион → <strong>Start in test mode</strong> → Enable</div>
+      </div>
+      <div class="setup-step">
+        <div class="setup-num">3</div>
+        <div>Вернись на главную проекта → <strong>&lt;/&gt; Add app</strong> → введи любое название → <strong>Register app</strong></div>
+      </div>
+      <div class="setup-step">
+        <div class="setup-num">4</div>
+        <div>Скопируй объект <code>firebaseConfig</code> и вставь ниже</div>
+      </div>
+
+      <div class="setup-sep"></div>
+
+      <div class="form-group">
+        <label class="form-label">Вставь firebaseConfig (JSON или весь блок кода)</label>
+        <textarea class="form-input" id="setup-input" style="min-height:120px;font-size:11px" placeholder='Вставь сюда содержимое firebaseConfig:
+
+{
+  "apiKey": "AIza...",
+  "authDomain": "my-project.firebaseapp.com",
+  "databaseURL": "https://my-project-default-rtdb.firebaseio.com",
+  "projectId": "my-project",
+  "storageBucket": "my-project.appspot.com",
+  "messagingSenderId": "123456789",
+  "appId": "1:123..."
+}'></textarea>
+      </div>
+      <button class="panel-save" id="setup-save-btn" onclick="saveFirebaseConfig()">Подключить и включить синхронизацию</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 <script>
+// ═══════════════════════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════════════════════
 const PRODUCTS=[
   {id:'ITEM-001',name:'Matador Ultralight Travel Towel',sub:'Small — $20 — компактное полотенце',priority:'normal',risk:'low',price:20,img:'https://www.matadorequipment.com/cdn/shop/files/MATULTS001CH_Matador_ULtowelSmall_1_cropped.jpg?crop=center&height=1299&v=1759532609&width=1000',emoji:'🏖️',bg:'#0e1210',cat:'Путешествия',links:[{label:'Official',url:'https://www.matadorequipment.com/products/ultralight-travel-towel-small',pr:true},{label:'Amazon',url:'https://www.amazon.com/s?k=matador+ultralight+travel+towel+small',pr:false}],notes:'Nanofiber, впитывает 2.3x своего веса. Поставляется с чехлом. Matador доставляет международно — проверь на checkout.'},
   {id:'ITEM-002',name:'Matador Ultralight Travel Towel',sub:'Large — $39 — большое полотенце',priority:'normal',risk:'low',price:39,img:'https://www.matadorequipment.com/cdn/shop/files/MATULTL001CH_Matador_ULtowelLarge_1_cropped.jpg?crop=center&height=1299&v=1759532679&width=1000',emoji:'🏖️',bg:'#0e1210',cat:'Путешествия',links:[{label:'Official',url:'https://www.matadorequipment.com/products/ultralight-travel-towel-large',pr:true},{label:'Amazon',url:'https://www.amazon.com/s?k=matador+ultralight+travel+towel+large',pr:false}],notes:'Брать оба сразу — экономия на доставке. Small для рук/лица, Large — полноценное.'},
@@ -280,15 +400,91 @@ const PRODUCTS=[
 const SL={pending:'Pending',checking:'Checking',ordered:'Ordered',delivered:'Delivered',cancelled:'Cancelled'};
 const SC={pending:'#e09a28',checking:'#4888e0',ordered:'#38a870',delivered:'#8a60d4',cancelled:'#555'};
 
-function ld(id){try{return JSON.parse(localStorage.getItem('gear_'+id))||{};}catch{return {};}}
-function sd(id,data){localStorage.setItem('gear_'+id,JSON.stringify(data));}
+// ═══════════════════════════════════════════════════════════════
+//  STORAGE & FIREBASE
+// ═══════════════════════════════════════════════════════════════
+let db = null;
+let _suppressSync = false; // prevents echo when we write
 
+function ld(id){
+  try{return JSON.parse(localStorage.getItem('gear_'+id))||{};}catch{return {};}
+}
+
+function sd(id, data){
+  localStorage.setItem('gear_'+id, JSON.stringify(data));
+  if(db){
+    _suppressSync = true;
+    db.ref('gear/'+id).set({...data, _ts: firebase.database.ServerValue.TIMESTAMP})
+      .then(()=>{ setTimeout(()=>{ _suppressSync=false; }, 500); })
+      .catch(e=>{ _suppressSync=false; console.warn('Firebase write error:',e); });
+  }
+}
+
+function initFirebase(config){
+  try{
+    // Delete existing app if any
+    if(firebase.apps.length){ firebase.app().delete(); }
+    firebase.initializeApp(config);
+    db = firebase.database();
+
+    // Real-time listeners
+    PRODUCTS.forEach(p=>{
+      db.ref('gear/'+p.id).on('value', snap=>{
+        if(_suppressSync) return;
+        const remote = snap.val();
+        if(!remote) return;
+        const {_ts, ...data} = remote;
+        const local = ld(p.id);
+        if(JSON.stringify(data) !== JSON.stringify(local)){
+          localStorage.setItem('gear_'+p.id, JSON.stringify(data));
+          applyCardData(p.id, data);
+        }
+      });
+    });
+
+    // Connection status
+    db.ref('.info/connected').on('value', snap=>{
+      setConnStatus(snap.val()===true);
+    });
+
+    localStorage.setItem('fb_config', JSON.stringify(config));
+    return true;
+  }catch(e){
+    console.error('Firebase init error:', e);
+    return false;
+  }
+}
+
+// Try to restore saved config on load
+(function(){
+  const saved = localStorage.getItem('fb_config');
+  if(saved){
+    try{ initFirebase(JSON.parse(saved)); }catch(e){}
+  }
+})();
+
+// ── Connection indicator ───────────────────────────────────────
+function setConnStatus(connected){
+  const dot   = document.getElementById('conn-dot');
+  const label = document.getElementById('conn-label');
+  const btn   = document.getElementById('sync-btn');
+  if(dot){
+    dot.className = connected ? 'live' : 'offline';
+  }
+  if(label) label.textContent = connected ? 'Live' : 'Offline';
+  if(btn)   btn.className     = connected ? 'connected' : '';
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  UI HELPERS
+// ═══════════════════════════════════════════════════════════════
 function buildTI(d){
   let h='';
-  if(d.store)h+=`<span>Магазин:</span> ${d.store}<br>`;
-  if(d.date)h+=`<span>Дата:</span> ${d.date}<br>`;
-  if(d.track)h+=`<span>Трекинг:</span> ${d.track}<br>`;
-  if(d.paid)h+=`<span>Оплачено:</span> $${d.paid}`;
+  if(d.store) h+=`<span>Магазин:</span> ${d.store}<br>`;
+  if(d.date)  h+=`<span>Дата:</span> ${d.date}<br>`;
+  if(d.track) h+=`<span>Трекинг:</span> ${d.track}<br>`;
+  if(d.paid)  h+=`<span>Оплачено:</span> $${d.paid}`;
+  if(d.userNotes) h+=`${d.track||d.store||d.date||d.paid?'<br>':''}  <span>Заметки:</span> ${d.userNotes}`;
   return h;
 }
 
@@ -302,6 +498,28 @@ function makeImg(p,wrap){
 }
 function addFb(w,e){const s=document.createElement('span');s.className='fb';s.textContent=e;w.appendChild(s);}
 
+// Apply remote data update to an existing card
+function applyCardData(id, data){
+  const card=document.querySelector(`.card[data-id="${id}"]`);
+  if(!card) return;
+  const s=data.status||'pending';
+  card.dataset.status=s;
+  const sb=card.querySelector('.sbadge');
+  if(sb){sb.dataset.s=s;sb.textContent=SL[s];}
+  const ti=document.getElementById('ti-'+id);
+  if(ti){
+    if(data.track||data.store||data.userNotes){
+      ti.innerHTML=buildTI(data);ti.classList.add('show');
+    }else{
+      ti.classList.remove('show');
+    }
+  }
+  updateStats();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  CARD BUILDER
+// ═══════════════════════════════════════════════════════════════
 const grid=document.getElementById('grid');
 
 PRODUCTS.forEach((p,idx)=>{
@@ -317,7 +535,6 @@ PRODUCTS.forEach((p,idx)=>{
   card.appendChild(iw);
 
   const body=document.createElement('div');body.className='card-body';
-
   const top=document.createElement('div');top.className='card-top';
   const inum=document.createElement('div');inum.className='inum';inum.textContent=p.id;top.appendChild(inum);
 
@@ -330,7 +547,11 @@ PRODUCTS.forEach((p,idx)=>{
     opt.addEventListener('click',e=>{e.stopPropagation();setStatus(p.id,s);drop.classList.remove('open');});
     drop.appendChild(opt);
   });
-  sb.addEventListener('click',e=>{e.stopPropagation();document.querySelectorAll('.sdrop.open').forEach(d=>{if(d!==drop)d.classList.remove('open');});drop.classList.toggle('open');});
+  sb.addEventListener('click',e=>{
+    e.stopPropagation();
+    document.querySelectorAll('.sdrop.open').forEach(d=>{if(d!==drop)d.classList.remove('open');});
+    drop.classList.toggle('open');
+  });
   sbw.appendChild(sb);sbw.appendChild(drop);top.appendChild(sbw);body.appendChild(top);
 
   const gn=document.createElement('div');gn.className='gname';gn.textContent=p.name;body.appendChild(gn);
@@ -357,7 +578,7 @@ PRODUCTS.forEach((p,idx)=>{
   const notes=document.createElement('div');notes.className='cnotes';notes.textContent=p.notes;body.appendChild(notes);
 
   const ti=document.createElement('div');ti.className='track-info';ti.id='ti-'+p.id;
-  if(saved.track||saved.store){ti.innerHTML=buildTI(saved);ti.classList.add('show');}
+  if(saved.track||saved.store||saved.userNotes){ti.innerHTML=buildTI(saved);ti.classList.add('show');}
   body.appendChild(ti);
 
   const eb=document.createElement('button');eb.className='edit-btn';eb.textContent='✎ Изменить / Добавить трекинг';
@@ -366,19 +587,28 @@ PRODUCTS.forEach((p,idx)=>{
   card.appendChild(body);grid.appendChild(card);
 });
 
-function setStatus(id,s){
+// ═══════════════════════════════════════════════════════════════
+//  STATUS
+// ═══════════════════════════════════════════════════════════════
+function setStatus(id, s){
   const card=document.querySelector(`.card[data-id="${id}"]`);if(!card)return;
-  card.dataset.status=s;const sb=card.querySelector('.sbadge');sb.dataset.s=s;sb.textContent=SL[s];
-  const d=ld(id);d.status=s;sd(id,d);updateStats();
+  card.dataset.status=s;
+  const sb=card.querySelector('.sbadge');sb.dataset.s=s;sb.textContent=SL[s];
+  const d=ld(id);d.status=s;sd(id,d);
+  updateStats();
 }
 
+// ═══════════════════════════════════════════════════════════════
+//  EDIT PANEL
+// ═══════════════════════════════════════════════════════════════
 const panel=document.getElementById('panel');
 const overlay=document.getElementById('overlay');
 let currentId=null;
 
 function openPanel(id){
   const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
-  currentId=id;const saved=ld(id);
+  currentId=id;
+  const saved=ld(id);
   document.getElementById('p-name').textContent=p.name;
   document.getElementById('p-sub').textContent=p.sub;
   const iw=document.getElementById('p-img-wrap');iw.innerHTML='';makeImg(p,iw);
@@ -389,30 +619,124 @@ function openPanel(id){
   document.getElementById('f-date').value=saved.date||'';
   document.getElementById('f-paid').value=saved.paid||'';
   document.getElementById('f-notes').value=saved.userNotes||'';
+  const btn=document.getElementById('panel-save');btn.textContent='Сохранить';btn.disabled=false;
   panel.classList.add('open');overlay.classList.add('open');document.body.style.overflow='hidden';
 }
 
-function closePanel(){panel.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow='';currentId=null;}
+function closePanel(){
+  panel.classList.remove('open');overlay.classList.remove('open');
+  document.body.style.overflow='';currentId=null;
+}
 
 document.getElementById('panel-close').addEventListener('click',closePanel);
 overlay.addEventListener('click',closePanel);
 
 document.querySelectorAll('.sopt').forEach(b=>{
-  b.addEventListener('click',()=>{document.querySelectorAll('.sopt').forEach(x=>x.classList.remove('active'));b.classList.add('active');});
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.sopt').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+  });
 });
 
 document.getElementById('panel-save').addEventListener('click',()=>{
   if(!currentId)return;
   const s=document.querySelector('.sopt.active')?.dataset.s||'pending';
-  const data={status:s,track:document.getElementById('f-track').value.trim(),store:document.getElementById('f-store').value.trim(),date:document.getElementById('f-date').value,paid:document.getElementById('f-paid').value,userNotes:document.getElementById('f-notes').value.trim()};
-  sd(currentId,data);setStatus(currentId,s);
+  const data={
+    status:s,
+    track:document.getElementById('f-track').value.trim(),
+    store:document.getElementById('f-store').value.trim(),
+    date:document.getElementById('f-date').value,
+    paid:document.getElementById('f-paid').value,
+    userNotes:document.getElementById('f-notes').value.trim()
+  };
+  const btn=document.getElementById('panel-save');
+  btn.textContent='Сохранение…';btn.disabled=true;
+  sd(currentId,data);
+  setStatus(currentId,s);
   const ti=document.getElementById('ti-'+currentId);
-  if(ti){if(data.track||data.store){ti.innerHTML=buildTI(data);ti.classList.add('show');}else ti.classList.remove('show');}
-  closePanel();
+  if(ti){
+    if(data.track||data.store||data.userNotes){ti.innerHTML=buildTI(data);ti.classList.add('show');}
+    else ti.classList.remove('show');
+  }
+  btn.textContent=db?'Сохранено ✓ (sync)':'Сохранено ✓ (local)';
+  setTimeout(()=>{btn.textContent='Сохранить';btn.disabled=false;closePanel();},900);
 });
 
 document.addEventListener('click',()=>document.querySelectorAll('.sdrop.open').forEach(d=>d.classList.remove('open')));
 
+// ═══════════════════════════════════════════════════════════════
+//  SETUP PANEL
+// ═══════════════════════════════════════════════════════════════
+function openSetup(){
+  refreshSetupView();
+  document.getElementById('setup-panel').classList.add('open');
+  document.getElementById('setup-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSetup(){
+  document.getElementById('setup-panel').classList.remove('open');
+  document.getElementById('setup-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function refreshSetupView(){
+  const connected = !!db;
+  document.getElementById('setup-connected-view').style.display = connected ? '' : 'none';
+  document.getElementById('setup-form-view').style.display       = connected ? 'none' : '';
+  if(connected){
+    try{
+      const cfg = JSON.parse(localStorage.getItem('fb_config')||'{}');
+      document.getElementById('connected-project').textContent = cfg.projectId || '—';
+    }catch(e){}
+  }
+  showNotice('');showErr('');
+}
+
+function showNotice(msg){ const el=document.getElementById('sync-notice'); el.textContent=msg; el.className='sync-notice'+(msg?' show':''); }
+function showErr(msg){    const el=document.getElementById('sync-err');    el.textContent=msg; el.className='sync-err'+(msg?' show':''); }
+
+function saveFirebaseConfig(){
+  const raw=document.getElementById('setup-input').value.trim();
+  showNotice('');showErr('');
+  try{
+    // Accept: raw JSON object, or JS const firebaseConfig = {...}
+    let cleaned=raw;
+    // Strip JS assignment wrapper if present
+    cleaned=cleaned.replace(/^[\s\S]*?=\s*(\{)/, '$1').replace(/\s*;\s*$/, '');
+    // Strip trailing JS comments
+    cleaned=cleaned.replace(/\/\/.*/g,'');
+    const config=JSON.parse(cleaned);
+    if(!config.apiKey)       throw new Error('Нет поля apiKey');
+    if(!config.databaseURL)  throw new Error('Нет поля databaseURL — включи Realtime Database в Firebase');
+    if(!config.projectId)    throw new Error('Нет поля projectId');
+    const btn=document.getElementById('setup-save-btn');
+    btn.textContent='Подключение…';btn.disabled=true;
+    const ok=initFirebase(config);
+    btn.textContent='Подключить и включить синхронизацию';btn.disabled=false;
+    if(ok){
+      showNotice('✓ Firebase подключён! Синхронизация активна.');
+      setTimeout(()=>{ refreshSetupView(); }, 1200);
+    }else{
+      showErr('Не удалось подключиться. Проверьте конфиг и правила Realtime Database.');
+    }
+  }catch(e){
+    showErr('Ошибка: '+e.message);
+  }
+}
+
+function disconnectFirebase(){
+  if(!confirm('Отключить Firebase? Локальные данные сохранятся.')) return;
+  localStorage.removeItem('fb_config');
+  if(db){ try{ firebase.app().delete(); }catch(e){} }
+  db=null;
+  setConnStatus(false);
+  refreshSetupView();
+  showNotice('Firebase отключён. Страница работает в локальном режиме.');
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  FILTERS + STATS
+// ═══════════════════════════════════════════════════════════════
 const allCards=()=>Array.from(document.querySelectorAll('.card'));
 
 document.querySelectorAll('.fbtn').forEach(btn=>{
@@ -421,12 +745,12 @@ document.querySelectorAll('.fbtn').forEach(btn=>{
     const f=btn.dataset.filter;
     allCards().forEach(c=>{
       let show=true;
-      if(f==='priority')show=c.dataset.priority==='critical';
-      else if(f==='high')show=c.dataset.risk==='high';
-      else if(f==='try')show=c.dataset.priority==='try';
-      else if(f==='pending')show=c.dataset.status==='pending';
-      else if(f==='ordered')show=c.dataset.status==='ordered';
-      else if(f==='delivered')show=c.dataset.status==='delivered';
+      if(f==='priority') show=c.dataset.priority==='critical';
+      else if(f==='high') show=c.dataset.risk==='high';
+      else if(f==='try')  show=c.dataset.priority==='try';
+      else if(f==='pending')   show=c.dataset.status==='pending';
+      else if(f==='ordered')   show=c.dataset.status==='ordered';
+      else if(f==='delivered') show=c.dataset.status==='delivered';
       if(show)c.removeAttribute('data-hidden');else c.setAttribute('data-hidden','');
     });
     updateStats();
@@ -446,9 +770,14 @@ function updateStats(){
   document.getElementById('s-price').textContent='~$'+v.reduce((s,c)=>s+parseInt(c.dataset.price||0),0);
 }
 
+// Apply saved local data on init
 allCards().forEach(c=>{
   const d=ld(c.dataset.id);
-  if(d.status){c.dataset.status=d.status;const sb=c.querySelector('.sbadge');if(sb){sb.dataset.s=d.status;sb.textContent=SL[d.status];}}
+  if(d.status){
+    c.dataset.status=d.status;
+    const sb=c.querySelector('.sbadge');
+    if(sb){sb.dataset.s=d.status;sb.textContent=SL[d.status];}
+  }
 });
 
 updateStats();
