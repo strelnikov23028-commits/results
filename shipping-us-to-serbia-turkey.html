@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Доставка из США: Белград vs Даламан — расчёт пошлин</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #3B82F6;
+    --primary-light: #EFF6FF;
+    --primary-dark: #1D4ED8;
+    --serbia: #DC2626;
+    --serbia-light: #FEF2F2;
+    --turkey: #B91C1C;
+    --turkey-light: #FFF1F2;
+    --success: #16A34A;
+    --success-light: #F0FDF4;
+    --warning: #D97706;
+    --warning-light: #FFFBEB;
+    --danger: #DC2626;
+    --danger-light: #FEF2F2;
+    --surface: #FFFFFF;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-300: #D1D5DB;
+    --gray-400: #9CA3AF;
+    --gray-500: #6B7280;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+    --text: #111827;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--gray-50);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── HERO ─────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #1E40AF 100%);
+    color: #fff;
+    padding: 64px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,.35) 0%, transparent 70%);
+  }
+  .hero-inner { position: relative; max-width: 880px; margin: 0 auto; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: rgba(255,255,255,.85); margin-bottom: 24px;
+  }
+  .hero-eyebrow span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #60A5FA; }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800; letter-spacing: -.02em; line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero p {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(255,255,255,.78);
+    max-width: 640px; margin: 0 auto;
+  }
+
+  /* ─── LAYOUT ────────────────────────────────────── */
+  main { max-width: 1100px; margin: -40px auto 80px; padding: 0 24px; position: relative; z-index: 2; }
+  section { margin-bottom: 48px; }
+
+  h2 {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 800; letter-spacing: -.01em;
+    margin-bottom: 8px;
+  }
+  h2 .num {
+    display: inline-block;
+    background: var(--primary); color: #fff;
+    border-radius: 8px;
+    font-size: 14px; font-weight: 700;
+    padding: 2px 10px; margin-right: 10px; vertical-align: middle;
+  }
+  .section-sub { color: var(--gray-500); margin-bottom: 24px; font-size: 15px; }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 28px;
+    border: 1px solid var(--gray-200);
+  }
+
+  /* ─── PRODUCTS ──────────────────────────────────── */
+  .products {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) { .products { grid-template-columns: 1fr; } }
+  .product {
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .product-name { font-weight: 700; font-size: 18px; margin-bottom: 4px; }
+  .product-link { color: var(--gray-500); font-size: 13px; word-break: break-all; }
+  .product-link a { color: var(--primary); text-decoration: none; }
+  .product-link a:hover { text-decoration: underline; }
+  .product-price { font-size: 28px; font-weight: 800; color: var(--gray-900); margin-top: 12px; }
+  .product-meta { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
+  .product-tag {
+    display: inline-block; margin-top: 12px;
+    background: var(--warning-light); color: var(--warning);
+    font-size: 12px; font-weight: 600;
+    padding: 4px 10px; border-radius: 100px;
+  }
+
+  .total-bar {
+    margin-top: 16px;
+    background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+    color: #fff;
+    padding: 20px 24px;
+    border-radius: var(--radius-lg);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .total-bar .label { font-size: 13px; opacity: .85; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+  .total-bar .value { font-size: 28px; font-weight: 800; }
+  .total-bar .extra { font-size: 13px; opacity: .85; }
+
+  /* ─── COUNTRY COMPARE ───────────────────────────── */
+  .countries {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 880px) { .countries { grid-template-columns: 1fr; } }
+
+  .country {
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .country-head {
+    padding: 24px;
+    color: #fff;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .country.serbia .country-head {
+    background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  }
+  .country.turkey .country-head {
+    background: linear-gradient(135deg, #B91C1C 0%, #7F1D1D 100%);
+  }
+  .flag {
+    font-size: 36px; line-height: 1;
+    background: rgba(255,255,255,.18);
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .country-head h3 { font-size: 22px; font-weight: 800; margin-bottom: 2px; }
+  .country-head .sub { font-size: 13px; opacity: .85; }
+
+  .country-body { padding: 24px; }
+  .calc-row {
+    display: flex; justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--gray-200);
+    font-size: 15px;
+  }
+  .calc-row:last-of-type { border-bottom: none; }
+  .calc-row .label { color: var(--gray-600); }
+  .calc-row .value { font-weight: 600; color: var(--gray-900); font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+  .calc-row.subtotal { font-weight: 700; }
+  .calc-row.total {
+    margin-top: 12px;
+    background: var(--gray-100);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    border: none;
+  }
+  .calc-row.total .value { font-size: 20px; color: var(--danger); }
+
+  .verdict {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .verdict.good { background: var(--success-light); color: var(--success); border: 1px solid #BBF7D0; }
+  .verdict.bad { background: var(--danger-light); color: var(--danger); border: 1px solid #FECACA; }
+  .verdict.warn { background: var(--warning-light); color: var(--warning); border: 1px solid #FED7AA; }
+
+  .notes-list {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    color: var(--gray-700);
+  }
+  .notes-list li { margin-left: 18px; margin-bottom: 6px; }
+  .notes-list li:last-child { margin-bottom: 0; }
+  .notes-list .label { font-weight: 700; display: block; margin-bottom: 8px; color: var(--gray-900); font-size: 13px; }
+
+  /* ─── COURIERS TABLE ────────────────────────────── */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); background: #fff; box-shadow: var(--shadow-sm); }
+  table { width: 100%; border-collapse: collapse; min-width: 600px; }
+  th, td { text-align: left; padding: 14px 18px; font-size: 14px; }
+  thead { background: var(--gray-100); }
+  th { font-weight: 700; color: var(--gray-700); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+  tbody tr { border-top: 1px solid var(--gray-200); }
+  tbody tr:hover { background: var(--gray-50); }
+  td.num { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+  .badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 100px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .badge.fast { background: var(--success-light); color: var(--success); }
+  .badge.mid { background: var(--warning-light); color: var(--warning); }
+  .badge.slow { background: var(--gray-200); color: var(--gray-700); }
+
+  /* ─── RECOMMENDATIONS ───────────────────────────── */
+  .reco-list { display: grid; gap: 12px; }
+  .reco {
+    background: var(--surface);
+    border: 1px solid var(--gray-200);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    display: flex; gap: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .reco.best { border-left-color: var(--success); }
+  .reco.alt { border-left-color: var(--primary); }
+  .reco.avoid { border-left-color: var(--danger); }
+  .reco-num {
+    font-size: 28px; font-weight: 800;
+    color: var(--gray-300); line-height: 1;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .reco-title { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .reco-text { font-size: 14px; color: var(--gray-600); }
+
+  /* ─── DECLARATION ───────────────────────────────── */
+  .declaration {
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 32px;
+  }
+  .declaration h3 { font-size: 20px; margin-bottom: 8px; font-weight: 700; }
+  .declaration p { color: rgba(255,255,255,.7); margin-bottom: 20px; font-size: 14px; }
+  .decl-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .decl-item {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+  }
+  .decl-key { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.55); font-weight: 600; margin-bottom: 6px; }
+  .decl-val { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #fff; }
+
+  /* ─── FOOTER ─────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--gray-500);
+    font-size: 13px;
+    border-top: 1px solid var(--gray-200);
+    background: var(--surface);
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span></span>Логистика и таможня · 2026</div>
+    <h1>Доставка из США: Белград или Даламан?</h1>
+    <p>Расчёт расходов, пошлин и сроков для двух гаджетов — Muse S Athena и AYO+ Light Therapy Glasses. Сравнение Сербии и Турции с конкретными цифрами и легальными способами снизить налог.</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- ─────── 1. ТОВАРЫ ─────── -->
+  <section>
+    <h2><span class="num">01</span>Что отправляем</h2>
+    <p class="section-sub">Два устройства от физического лица физическому лицу.</p>
+
+    <div class="products">
+      <div class="product">
+        <div class="product-name">Muse S Athena</div>
+        <div class="product-link"><a href="https://choosemuse.com/products/muse-s-athena?variant=51836734538095" target="_blank" rel="noopener">choosemuse.com</a></div>
+        <div class="product-price">$474.99</div>
+        <div class="product-meta">EEG-повязка для сна и медитации · Bluetooth</div>
+        <span class="product-tag">⚠ есть Bluetooth — важно для Турции</span>
+      </div>
+
+      <div class="product">
+        <div class="product-name">AYO+ Light Therapy Glasses</div>
+        <div class="product-link"><a href="https://goayo.com/products/ayo-light-therapy-glasses" target="_blank" rel="noopener">goayo.com</a></div>
+        <div class="product-price">$299.00</div>
+        <div class="product-meta">Очки светотерапии · Bluetooth · USB-C</div>
+        <span class="product-tag">⚠ есть Bluetooth — важно для Турции</span>
+      </div>
+    </div>
+
+    <div class="total-bar">
+      <div>
+        <div class="label">Стоимость товаров</div>
+        <div class="value">$773.99 <span style="font-size:18px; opacity:.7;">≈ €715</span></div>
+      </div>
+      <div class="extra">+ доставка курьером ≈ $80–120<br>+ страховка (по желанию) ≈ $15</div>
+    </div>
+  </section>
+
+  <!-- ─────── 2. СРАВНЕНИЕ СТРАН ─────── -->
+  <section>
+    <h2><span class="num">02</span>Сербия vs Турция: расчёт пошлин</h2>
+    <p class="section-sub">Курсы: $1 ≈ €0.92, €1 ≈ ₺36. Стоимость одной отправки $774 + $90 доставка = $864.</p>
+
+    <div class="countries">
+
+      <!-- ── СЕРБИЯ ── -->
+      <div class="country serbia">
+        <div class="country-head">
+          <div class="flag">🇷🇸</div>
+          <div>
+            <h3>Сербия — Белград</h3>
+            <div class="sub">Беспошлинный лимит для подарков физ→физ: 70 €</div>
+          </div>
+        </div>
+        <div class="country-body">
+          <div class="calc-row"><span class="label">Стоимость товаров</span><span class="value">$774</span></div>
+          <div class="calc-row"><span class="label">Доставка DHL</span><span class="value">$90</span></div>
+          <div class="calc-row subtotal"><span class="label">Таможенная база</span><span class="value">≈ €795</span></div>
+          <div class="calc-row"><span class="label">Пошлина (electronics, 5%)</span><span class="value">€40</span></div>
+          <div class="calc-row"><span class="label">НДС 20% от (база + пошлина)</span><span class="value">€167</span></div>
+          <div class="calc-row"><span class="label">Сбор курьера за растаможку</span><span class="value">≈ €15</span></div>
+          <div class="calc-row total"><span class="label">Доплата на таможне</span><span class="value">≈ €222 (~$240)</span></div>
+
+          <div class="verdict warn">⚠ Превышен лимит 70 € — пошлина начисляется на всю стоимость.</div>
+
+          <div class="notes-list">
+            <span class="label">Особенности Сербии:</span>
+            <ul>
+              <li>Бытовая электроника — пошлина 0–5%, НДС стандартный 20%</li>
+              <li>Если разбить на 2 посылки — каждая всё равно выше 70 €</li>
+              <li>DHL/FedEx сами оформляют, получатель платит счёт при доставке</li>
+              <li>Через USPS дольше (1–2 недели на таможне) и ездить в Carinarnicu Beograd самому</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ТУРЦИЯ ── -->
+      <div class="country turkey">
+        <div class="country-head">
+          <div class="flag">🇹🇷</div>
+          <div>
+            <h3>Турция — Даламан</h3>
+            <div class="sub">Беспошлинный лимит личных посылок: 30 €</div>
+          </div>
+        </div>
+        <div class="country-body">
+          <div class="calc-row"><span class="label">Стоимость товаров</span><span class="value">$774</span></div>
+          <div class="calc-row"><span class="label">Доставка DHL</span><span class="value">$100</span></div>
+          <div class="calc-row subtotal"><span class="label">Таможенная база</span><span class="value">≈ $874</span></div>
+          <div class="calc-row"><span class="label">Единая пошлина 30% (товары не из ЕС)</span><span class="value">$262</span></div>
+          <div class="calc-row"><span class="label">KDV (НДС) 20% от (база + пошлина)</span><span class="value">$227</span></div>
+          <div class="calc-row"><span class="label">Сбор курьера + брокер</span><span class="value">≈ $25</span></div>
+          <div class="calc-row total"><span class="label">Доплата на таможне</span><span class="value">≈ $514</span></div>
+
+          <div class="verdict bad">✕ Дороже Сербии примерно в 2 раза. Плюс риск с Bluetooth-устройствами.</div>
+
+          <div class="notes-list">
+            <span class="label">Дополнительные риски Турции:</span>
+            <ul>
+              <li><b>Bluetooth-устройства</b> могут потребовать регистрации в e-Devlet (для phones это TRT bandrol ≈ 45 000 ₺ ≈ $1 200, для гаджетов без SIM обычно проходит, но возможны вопросы)</li>
+              <li>С 2019 беспошлинный порог для интернет-покупок отменён, для подарков физлицам — 30 € и не чаще 5 раз в год</li>
+              <li>Электроника часто попадает на дополнительный досмотр в Стамбул, до Даламана идёт +3–5 дней</li>
+              <li>В Даламане нет крупного таможенного хаба — растаможка через İzmir или İstanbul</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────── 3. КУРЬЕРЫ И СРОКИ ─────── -->
+  <section>
+    <h2><span class="num">03</span>Способы доставки и сроки</h2>
+    <p class="section-sub">Сроки указаны для рабочих дней с момента приёма посылки.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Курьер</th>
+            <th>США → Белград</th>
+            <th>США → Даламан</th>
+            <th>Цена за 2 кг</th>
+            <th>Скорость</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>DHL Express Worldwide</b></td>
+            <td>3–4 дня</td>
+            <td>4–6 дней</td>
+            <td class="num">$80–120</td>
+            <td><span class="badge fast">Быстро</span></td>
+          </tr>
+          <tr>
+            <td><b>FedEx Int'l Priority</b></td>
+            <td>3–5 дней</td>
+            <td>4–6 дней</td>
+            <td class="num">$85–130</td>
+            <td><span class="badge fast">Быстро</span></td>
+          </tr>
+          <tr>
+            <td><b>UPS Worldwide Express</b></td>
+            <td>3–5 дней</td>
+            <td>5–7 дней</td>
+            <td class="num">$90–140</td>
+            <td><span class="badge fast">Быстро</span></td>
+          </tr>
+          <tr>
+            <td><b>USPS Priority Mail Express Int'l</b></td>
+            <td>5–10 дней</td>
+            <td>7–14 дней</td>
+            <td class="num">$55–80</td>
+            <td><span class="badge mid">Средне</span></td>
+          </tr>
+          <tr>
+            <td><b>USPS Priority Mail Int'l</b></td>
+            <td>10–18 дней</td>
+            <td>14–25 дней</td>
+            <td class="num">$40–60</td>
+            <td><span class="badge slow">Медленно</span></td>
+          </tr>
+          <tr>
+            <td><b>Попутчик / личный багаж</b></td>
+            <td colspan="2" style="text-align:center">Зависит от рейса</td>
+            <td class="num">$0</td>
+            <td><span class="badge fast">Без таможни</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─────── 4. РЕКОМЕНДАЦИИ ─────── -->
+  <section>
+    <h2><span class="num">04</span>Рекомендации</h2>
+    <p class="section-sub">От лучшего варианта к худшему.</p>
+
+    <div class="reco-list">
+      <div class="reco best">
+        <div class="reco-num">1</div>
+        <div>
+          <div class="reco-title">Лучший вариант: попутчик в личном багаже</div>
+          <div class="reco-text">Если кто-то летит из США в Белград или Даламан — отдать с собой. Личные вещи в багаже не таможатся, ноль пошлины. Muse и AYO легко помещаются в ручную кладь. Экономия $240–514.</div>
+        </div>
+      </div>
+
+      <div class="reco alt">
+        <div class="reco-num">2</div>
+        <div>
+          <div class="reco-title">Если курьером — однозначно в Сербию (Белград)</div>
+          <div class="reco-text">DHL Express, 3–4 дня. Доплата на таможне ≈ €222. Из Белграда в Турцию потом дешевле довезти автобусом / самолётом, чем растамаживать в Турции.</div>
+        </div>
+      </div>
+
+      <div class="reco alt">
+        <div class="reco-num">3</div>
+        <div>
+          <div class="reco-title">Дробить на 2 посылки — не поможет</div>
+          <div class="reco-text">Каждый из товаров дороже €70 поодиночке. Лимит подарка в Сербии не сработает. В Турции лимит вообще €30 — не вариант.</div>
+        </div>
+      </div>
+
+      <div class="reco avoid">
+        <div class="reco-num">4</div>
+        <div>
+          <div class="reco-title">Не отправляйте курьером сразу в Турцию</div>
+          <div class="reco-text">≈ $514 пошлины + риск задержки 2+ недели на досмотре + потенциальные вопросы по Bluetooth-устройствам. Если конечная цель — Даламан, сделайте маршрут через Сербию.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── 5. КАК ЗАПОЛНЯТЬ ДЕКЛАРАЦИЮ ─────── -->
+  <section>
+    <h2><span class="num">05</span>Как заполнять декларацию (CN22 / CN23)</h2>
+    <p class="section-sub">Образец для отправки физлицо → физлицо в Сербию.</p>
+
+    <div class="declaration">
+      <h3>Что писать в полях</h3>
+      <p>От правильного оформления зависит, попадёте ли вы под досмотр и какую ставку применят.</p>
+
+      <div class="decl-grid">
+        <div class="decl-item">
+          <div class="decl-key">Sender / Receiver</div>
+          <div class="decl-val">Имена физлиц, не компании</div>
+        </div>
+        <div class="decl-item">
+          <div class="decl-key">Reason for export</div>
+          <div class="decl-val">Gift</div>
+        </div>
+        <div class="decl-item">
+          <div class="decl-key">Contents (описание)</div>
+          <div class="decl-val">Used personal sleep tracker, used light therapy glasses</div>
+        </div>
+        <div class="decl-item">
+          <div class="decl-key">Declared value</div>
+          <div class="decl-val">Реальная или заниженная аккуратно</div>
+        </div>
+        <div class="decl-item">
+          <div class="decl-key">HS code (Muse)</div>
+          <div class="decl-val">9018.19 — медицинский мониторинг</div>
+        </div>
+        <div class="decl-item">
+          <div class="decl-key">HS code (AYO)</div>
+          <div class="decl-val">9405.42 — LED-светотерапия</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes-list" style="margin-top:20px;">
+      <span class="label">Что НЕ делать:</span>
+      <ul>
+        <li>Не писать «new», «electronics», «sample», «commercial» — автоматический коммерческий статус</li>
+        <li>Не отправлять с обратным адресом LLC / Inc — теряется статус физлица</li>
+        <li>Не занижать стоимость в 10 раз — таможня сверится с каталогом, доначислит + штраф</li>
+        <li>Не указывать «high value», не страховать на $1000+ — это сигнал для досмотра</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────── 6. ИТОГ ─────── -->
+  <section>
+    <h2><span class="num">06</span>Итог в одном предложении</h2>
+    <div class="card">
+      <p style="font-size:17px; line-height:1.7;">
+        Если есть попутчик — <b>везти лично в багаже</b>, ноль пошлины.<br>
+        Если нет — <b>DHL Express в Белград как Gift, ~3–4 дня, доплата ≈ €222</b>. Турция как точка назначения курьером невыгодна (вдвое дороже + риски с Bluetooth-устройствами).
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Расчёт от 1 мая 2026 · Курсы и тарифы могут измениться · Проверяйте актуальные ставки на сайтах <a href="https://www.carina.rs" target="_blank" rel="noopener">carina.rs</a> и <a href="https://ticaret.gov.tr" target="_blank" rel="noopener">ticaret.gov.tr</a>
+</footer>
+
+</body>
+</html>
