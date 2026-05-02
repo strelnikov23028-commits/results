@@ -362,6 +362,157 @@
       letter-spacing: -1px;
     }
 
+    /* Device hero image */
+    .device-image {
+      width: calc(100% + 56px);
+      margin: -28px -28px 20px;
+      height: 200px;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background-position: center;
+      background-size: cover;
+    }
+    .device-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(255,255,255,.15));
+      pointer-events: none;
+    }
+    .device-image img {
+      max-width: 75%;
+      max-height: 80%;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,.18));
+      position: relative;
+      z-index: 1;
+    }
+    .device-image-emoji {
+      font-size: 88px;
+      line-height: 1;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.15));
+      position: relative;
+      z-index: 1;
+    }
+    .device-image-label {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      background: rgba(255,255,255,.9);
+      color: var(--text);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      backdrop-filter: blur(6px);
+      z-index: 2;
+    }
+    .img-bg-perytong { background: linear-gradient(135deg, #FECACA, #FBCFE8, #DDD6FE); }
+    .img-bg-lcdolida { background: linear-gradient(135deg, #E0E7FF, #C7D2FE, #A5B4FC); }
+    .img-bg-musicozy { background: linear-gradient(135deg, #FDE68A, #FBCFE8, #FECACA); }
+    .img-bg-a20      { background: linear-gradient(135deg, #D1FAE5, #BBF7D0, #A7F3D0); }
+    .img-bg-ozlo     { background: linear-gradient(135deg, #DBEAFE, #BFDBFE, #C7D2FE); }
+    .img-bg-a30s     { background: linear-gradient(135deg, #DDD6FE, #C7D2FE, #BFDBFE); }
+
+    /* Stores grid (Belgrade, Istanbul, Almaty) */
+    .stores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .store-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .store-flag {
+      padding: 24px 28px;
+      background: var(--bg-dark);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .store-flag-emoji {
+      font-size: 36px;
+      line-height: 1;
+    }
+    .store-flag-city {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+    }
+    .store-flag-country {
+      font-size: 12px;
+      color: #94A3B8;
+      margin-top: 2px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .store-body {
+      padding: 24px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .store-item {
+      border-left: 3px solid var(--primary);
+      padding-left: 14px;
+    }
+    .store-item-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .store-item-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-bottom: 6px;
+    }
+    .tag-official { background: #DCFCE7; color: #15803D; }
+    .tag-retailer { background: #DBEAFE; color: #1D4ED8; }
+    .tag-online   { background: #F3E8FF; color: #6B21A8; }
+    .store-item-addr {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    .store-item-addr a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .store-item-meta {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+    }
+    .store-tip {
+      background: #FFFBEB;
+      border-top: 1px solid #FDE68A;
+      padding: 16px 28px;
+      font-size: 12.5px;
+      color: #78350F;
+      line-height: 1.55;
+    }
+    .store-tip strong { color: #451A03; }
+
     /* Notice block */
     .notice {
       background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
@@ -791,6 +942,10 @@
         <!-- 1. Perytong Headband (BEST RATING 4.4) -->
         <div class="device-card winner">
           <div class="winner-badge">★ Лучший рейтинг + цена</div>
+          <div class="device-image img-bg-perytong">
+            <div class="device-image-emoji">🎧</div>
+            <div class="device-image-label">Headband · ткань</div>
+          </div>
           <div class="card-header">
             <div style="display:flex; gap:14px; align-items:flex-start;">
               <div class="device-icon icon-rose">🎧</div>
@@ -848,6 +1003,10 @@
 
         <!-- 2. LC-dolida 3D Mask (4.4) -->
         <div class="device-card">
+          <div class="device-image img-bg-lcdolida">
+            <div class="device-image-emoji">💤</div>
+            <div class="device-image-label">3D Маска · Bluetooth</div>
+          </div>
           <div class="card-header">
             <div style="display:flex; gap:14px; align-items:flex-start;">
               <div class="device-icon icon-slate">💤</div>
@@ -905,6 +1064,10 @@
 
         <!-- 3. MUSICOZY 3D Mask (4.2) -->
         <div class="device-card">
+          <div class="device-image img-bg-musicozy">
+            <div class="device-image-emoji">😴</div>
+            <div class="device-image-label">3D Маска · Premium</div>
+          </div>
           <div class="card-header">
             <div style="display:flex; gap:14px; align-items:flex-start;">
               <div class="device-icon icon-pink">😴</div>
@@ -961,6 +1124,10 @@
 
         <!-- 4. Soundcore Sleep A20 (4.1) -->
         <div class="device-card">
+          <div class="device-image img-bg-a20">
+            <div class="device-image-emoji">🎵</div>
+            <div class="device-image-label">Earbuds TWS · 80 ч</div>
+          </div>
           <div class="card-header">
             <div style="display:flex; gap:14px; align-items:flex-start;">
               <div class="device-icon icon-green">💰</div>
@@ -1018,6 +1185,11 @@
 
         <!-- 5. Ozlo Sleepbuds (~4.0) -->
         <div class="device-card">
+          <div class="device-image img-bg-ozlo">
+            <img src="https://ozlosleep.com/cdn/shop/files/OZLO_2e32a38e-bcc8-4adb-9890-3d185485d413.png?v=1776362845&width=800" alt="Ozlo Sleepbuds" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <div class="device-image-emoji" style="display:none;">💎</div>
+            <div class="device-image-label">Earbuds · ex-Bose</div>
+          </div>
           <div class="card-header">
             <div style="display:flex; gap:14px; align-items:flex-start;">
               <div class="device-icon icon-purple">💎</div>
@@ -1075,6 +1247,10 @@
 
         <!-- 6. Soundcore Sleep A30 Special (новинка, рейтинг ещё формируется) -->
         <div class="device-card">
+          <div class="device-image img-bg-a30s">
+            <div class="device-image-emoji">🎯</div>
+            <div class="device-image-label">Earbuds + ANC · 2026</div>
+          </div>
           <div class="card-header">
             <div style="display:flex; gap:14px; align-items:flex-start;">
               <div class="device-icon icon-blue">🎯</div>
@@ -1364,6 +1540,140 @@
       <div class="section-label">Итог</div>
       <h2 class="section-title">Финальный вердикт</h2>
       <p class="section-sub">Если ориентир — рейтинг Amazon (а не «фишки за любую цену»), однозначный выбор — <strong>Perytong Headband ($19.99, 4.4★, 50 000+ отзывов)</strong> или <strong>LC-dolida 3D Mask ($12.99, 4.4★)</strong>. Это бестселлеры с самыми надёжными реальными оценками во всей категории. Если хочется именно earbuds — Soundcore Sleep A20 (4.1★) проверенная рабочая лошадка. Если важен ANC против храпа — Sleep A30 Special, но это новинка с пока неустоявшимся рейтингом. Ozlo Sleepbuds — комфортно, но рейтинг ~4.0 из-за жалоб на коннект.</p>
+    </div>
+  </section>
+
+  <!-- WHERE TO TEST IRL -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-label">Перед покупкой</div>
+      <h2 class="section-title">Где потестить вживую</h2>
+      <p class="section-sub">Ехать в США за earbuds для сна — необязательно. В Белграде, Стамбуле и Алматы есть Anker-магазины и крупные ритейлеры, где можно потрогать похожие модели Soundcore (TWS, sleep-серию A10) и оценить эргономику до заказа на Amazon.</p>
+
+      <div class="stores-grid">
+
+        <!-- BELGRADE -->
+        <div class="store-card">
+          <div class="store-flag">
+            <div class="store-flag-emoji">🇷🇸</div>
+            <div>
+              <div class="store-flag-city">Белград</div>
+              <div class="store-flag-country">Сербия</div>
+            </div>
+          </div>
+          <div class="store-body">
+            <div class="store-item">
+              <span class="store-item-tag tag-official">Официальный магазин</span>
+              <div class="store-item-name">Anker Experience Store</div>
+              <div class="store-item-addr">TC Galerija Beograd, 2-й этаж<br/><a href="https://maps.google.com/?q=Galerija+Beograd+Bulevar+Vudroa+Vilsona+14" target="_blank" rel="noopener">Bulevar Vudroa Vilsona 14, 11000 Beograd</a></div>
+              <div class="store-item-meta">⏰ 10:00–22:00 · 📞 +381 60 629 31 13<br/>Первый Anker store в Восточной Европе. Тут точно есть Soundcore Liberty + Sleep-линейка.</div>
+            </div>
+            <div class="store-item" style="border-color: var(--accent);">
+              <span class="store-item-tag tag-retailer">Ритейлер</span>
+              <div class="store-item-name">Tehnomanija</div>
+              <div class="store-item-addr">Несколько локаций: Tošin bunar 179g · Milutina Milankovića 1-D · Požeška 85 · Vukasovićeva 50A</div>
+              <div class="store-item-meta">📞 011/3-713-713 (call-центр)</div>
+            </div>
+            <div class="store-item" style="border-color: var(--secondary);">
+              <span class="store-item-tag tag-retailer">Ритейлер</span>
+              <div class="store-item-name">Gigatron</div>
+              <div class="store-item-addr"><a href="https://gigatron.rs/tv-audio-video/slusalice?Brend=Anker" target="_blank" rel="noopener">gigatron.rs/tv-audio-video/slusalice?Brend=Anker</a></div>
+              <div class="store-item-meta">Большой выбор Soundcore: AeroFit, Liberty, P40i</div>
+            </div>
+          </div>
+          <div class="store-tip">
+            <strong>💡 Что брать в Belgrade:</strong> в Anker store пощупай Soundcore Liberty 4 (силикон амбушюр такой же как у Sleep A20/A30) — поймёшь, как «сядет» на твоё ухо. Сами Sleep A20/A30 в офлайне Сербии пока редкость, но через ankersrbija.rs можно заказать с 2-3-дневной доставкой.
+          </div>
+        </div>
+
+        <!-- ISTANBUL -->
+        <div class="store-card">
+          <div class="store-flag">
+            <div class="store-flag-emoji">🇹🇷</div>
+            <div>
+              <div class="store-flag-city">Стамбул</div>
+              <div class="store-flag-country">Турция</div>
+            </div>
+          </div>
+          <div class="store-body">
+            <div class="store-item">
+              <span class="store-item-tag tag-official">Официальный дистрибьютор</span>
+              <div class="store-item-name">Anker Türkiye (online)</div>
+              <div class="store-item-addr"><a href="https://anker-tr.com/" target="_blank" rel="noopener">anker-tr.com</a> · <a href="https://www.instagram.com/anker.tr/" target="_blank" rel="noopener">@anker.tr</a></div>
+              <div class="store-item-meta">Все Soundcore модели с гарантией ТР</div>
+            </div>
+            <div class="store-item" style="border-color: var(--accent);">
+              <span class="store-item-tag tag-retailer">Ритейлер · офлайн</span>
+              <div class="store-item-name">MediaMarkt</div>
+              <div class="store-item-addr">Maltepe Piazza AVM, Akasya AVM, Marmara Forum, Maslak Vadi и др.<br/><a href="https://www.mediamarkt.com.tr/tr/store/magazalarimiz" target="_blank" rel="noopener">Все локации MediaMarkt</a></div>
+              <div class="store-item-meta">Anker-секция: Liberty 4 NC, Life серия, Q-серия</div>
+            </div>
+            <div class="store-item" style="border-color: var(--secondary);">
+              <span class="store-item-tag tag-retailer">Ритейлер · офлайн</span>
+              <div class="store-item-name">Vatan Bilgisayar / Teknosa</div>
+              <div class="store-item-addr">Десятки магазинов по Стамбулу. Vatan: <a href="https://www.vatanbilgisayar.com/anker/bluetooth-kulaklik-mikrofon/" target="_blank" rel="noopener">vatanbilgisayar.com/anker</a><br/>Teknosa: <a href="https://www.teknosa.com/anker-b-226" target="_blank" rel="noopener">teknosa.com/anker</a></div>
+              <div class="store-item-meta">📞 Vatan call-center: 0850 222 56 56</div>
+            </div>
+            <div class="store-item" style="border-color: var(--warning);">
+              <span class="store-item-tag tag-online">Маркетплейс</span>
+              <div class="store-item-name">Hepsiburada / Amazon.com.tr</div>
+              <div class="store-item-addr"><a href="https://www.hepsiburada.com/anker-soundcore-x-s62156" target="_blank" rel="noopener">hepsiburada.com/anker-soundcore</a></div>
+              <div class="store-item-meta">Доставка в Стамбул 1-2 дня · скидки до -27%</div>
+            </div>
+          </div>
+          <div class="store-tip">
+            <strong>💡 Что брать в Istanbul:</strong> в MediaMarkt в Akasya AVM или Kanyon AVM есть демо-стенды Soundcore — попроси примерить силиконовые амбушюры (eartip-fit-test). В Турции цены на Soundcore часто ниже европейских из-за прямого дистрибьютора.
+          </div>
+        </div>
+
+        <!-- ALMATY -->
+        <div class="store-card">
+          <div class="store-flag">
+            <div class="store-flag-emoji">🇰🇿</div>
+            <div>
+              <div class="store-flag-city">Алматы</div>
+              <div class="store-flag-country">Казахстан</div>
+            </div>
+          </div>
+          <div class="store-body">
+            <div class="store-item">
+              <span class="store-item-tag tag-official">Официальный дистрибьютор Soundcore в РК</span>
+              <div class="store-item-name">TFN-KZ</div>
+              <div class="store-item-addr"><a href="https://maps.google.com/?q=Каldаyakov+21+Almaty" target="_blank" rel="noopener">ул. Калдаякова 21, офис 409, Алматы</a></div>
+              <div class="store-item-meta">⏰ Пн–Пт 09:00–18:00 · 📞 +7 (727) 357-35-00<br/>Прямой импорт, гарантия от дистрибьютора</div>
+            </div>
+            <div class="store-item" style="border-color: var(--accent);">
+              <span class="store-item-tag tag-retailer">Ритейлер · офлайн+онлайн</span>
+              <div class="store-item-name">Sulpak</div>
+              <div class="store-item-addr"><a href="https://www.sulpak.kz/f/naushniki/almaty/1140_5055" target="_blank" rel="noopener">sulpak.kz/f/naushniki/almaty</a></div>
+              <div class="store-item-meta">⭐ <a href="https://www.sulpak.kz/g/naushniki_soundcore_sleep_a10" target="_blank" rel="noopener">Soundcore Sleep A10</a> в продаже — единственная sleep-модель в офлайне Алматы! Можно потестить эргономику.</div>
+            </div>
+            <div class="store-item" style="border-color: var(--secondary);">
+              <span class="store-item-tag tag-retailer">Ритейлер · офлайн+онлайн</span>
+              <div class="store-item-name">Mechta.kz / Technodom</div>
+              <div class="store-item-addr"><a href="https://www.mechta.kz/section/naushniki/" target="_blank" rel="noopener">mechta.kz/section/naushniki</a></div>
+              <div class="store-item-meta">SOUNDCORE Q30, Liberty 4 PRO, Sport X20 в офлайне</div>
+            </div>
+            <div class="store-item" style="border-color: var(--warning);">
+              <span class="store-item-tag tag-online">Маркетплейс</span>
+              <div class="store-item-name">Kaspi.kz / OZON.kz</div>
+              <div class="store-item-addr"><a href="https://kaspi.kz/shop/c/anker_soundcore/" target="_blank" rel="noopener">kaspi.kz</a> · <a href="https://ozon.kz/category/naushniki-anker-soundcore/" target="_blank" rel="noopener">ozon.kz/category/naushniki-anker-soundcore</a></div>
+              <div class="store-item-meta">Кредит 0–0–12 на Kaspi · доставка по Алматы день в день</div>
+            </div>
+          </div>
+          <div class="store-tip">
+            <strong>💡 Что брать в Алматы:</strong> прямой плюс — в Sulpak в продаже именно <strong>Soundcore Sleep A10</strong> (предыдущее поколение sleep-серии). Это идеальная возможность примерить sleep-форм-фактор Anker до заказа A20/A30 с Amazon. По эргономике A10 ≈ A20.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="notice" style="margin-top: 32px;">
+        <div class="notice-icon">📦</div>
+        <div class="notice-text">
+          <strong>Важно про headband и маски:</strong> Perytong, MUSICOZY и LC-dolida — это китайские бренды без официальных представительств в перечисленных городах. В офлайне их обычно нет. Берите через Amazon (доставка в Сербию/Турцию/Казахстан занимает 1–3 недели), либо ищите аналоги на Hepsiburada (Стамбул), Kaspi (Алматы) — там часто есть похожие headband-наушники по ключевику <em>«bluetooth uyku bandı»</em> (Турция) или <em>«повязка для сна с наушниками»</em> (Казахстан).
+        </div>
+      </div>
     </div>
   </section>
 
