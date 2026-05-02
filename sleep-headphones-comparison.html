@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Наушники для сна — Подборка и сравнение 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #6366F1;
+      --secondary: #A855F7;
+      --accent: #06B6D4;
+      --success: #16A34A;
+      --warning: #D97706;
+      --danger: #DC2626;
+      --surface: #FFFFFF;
+      --text: #0F172A;
+      --text-secondary: #64748B;
+      --text-tertiary: #94A3B8;
+      --border: #E2E8F0;
+      --border-light: #F1F5F9;
+      --bg: #F8FAFC;
+      --bg-dark: #0B1120;
+      --radius-sm: 8px;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--bg-dark);
+      padding: 88px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 1100px 600px at 50% -100px,
+        rgba(99,102,241,.4) 0%,
+        rgba(168,85,247,.22) 45%,
+        transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: -100px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(6,182,212,.15), transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99,102,241,.15);
+      border: 1px solid rgba(99,102,241,.35);
+      border-radius: 100px;
+      padding: 5px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #A5B4FC;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 60px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #818CF8, #C084FC, #22D3EE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      color: #CBD5E1;
+      font-size: 17px;
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 100px;
+      padding: 7px 18px;
+      font-size: 12px;
+      color: #E2E8F0;
+      font-weight: 500;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* SECTION TITLES */
+    .section { padding: 64px 0; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -.02em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .section-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    /* TOP PICKS BANNER */
+    .top-picks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .pick-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pick-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+    .pick-card.gold::before { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
+    .pick-card.silver::before { background: linear-gradient(90deg, #94A3B8, #CBD5E1); }
+    .pick-card.bronze::before { background: linear-gradient(90deg, #B45309, #F59E0B); }
+    .pick-trophy {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 10px;
+    }
+    .pick-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+      letter-spacing: -.01em;
+    }
+    .pick-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .pick-price {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* DEVICE CARDS */
+    .device-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 22px;
+    }
+
+    .device-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      position: relative;
+      transition: box-shadow .25s ease, transform .25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .device-card:hover {
+      box-shadow: 0 12px 36px rgba(15,23,42,.08);
+      transform: translateY(-3px);
+    }
+    .device-card.winner {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px var(--primary), 0 8px 32px rgba(99,102,241,.15);
+    }
+    .winner-badge {
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      box-shadow: 0 4px 12px rgba(99,102,241,.35);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .device-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .icon-blue { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+    .icon-purple { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+    .icon-green { background: linear-gradient(135deg, #DCFCE7, #BBF7D0); }
+    .icon-amber { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
+    .icon-pink { background: linear-gradient(135deg, #FCE7F3, #FBCFE8); }
+    .icon-cyan { background: linear-gradient(135deg, #CFFAFE, #A5F3FC); }
+    .icon-rose { background: linear-gradient(135deg, #FFE4E6, #FECACA); }
+    .icon-slate { background: linear-gradient(135deg, #F1F5F9, #E2E8F0); }
+
+    .device-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -.01em;
+      line-height: 1.3;
+    }
+    .device-maker {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .device-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -.02em;
+      white-space: nowrap;
+    }
+    .device-price-old {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-decoration: line-through;
+      text-align: right;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .device-price-note {
+      font-size: 10px;
+      color: var(--success);
+      font-weight: 600;
+      text-align: right;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .device-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+    .badge-earbuds   { background: #EEF2FF; color: #4338CA; }
+    .badge-headband  { background: #F5F3FF; color: #6D28D9; }
+    .badge-mask      { background: #FCE7F3; color: #BE185D; }
+    .badge-plugs     { background: #ECFEFF; color: #0E7490; }
+
+    /* Amazon rating badge */
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFF7ED;
+      border: 1px solid #FDBA74;
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #C2410C;
+      margin-bottom: 12px;
+      margin-left: 6px;
+    }
+    .rating-badge.high {
+      background: #DCFCE7;
+      border-color: #86EFAC;
+      color: #15803D;
+    }
+    .rating-badge.low {
+      background: #FEF2F2;
+      border-color: #FCA5A5;
+      color: #B91C1C;
+    }
+    .rating-badge .stars {
+      color: #F59E0B;
+      letter-spacing: -1px;
+    }
+
+    /* Notice block */
+    .notice {
+      background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+      border: 1px solid #FCD34D;
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .notice-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .notice-text {
+      font-size: 14px;
+      color: #78350F;
+      line-height: 1.65;
+    }
+    .notice-text strong { color: #451A03; }
+
+    .device-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 20px;
+      padding: 14px;
+      background: var(--bg);
+      border-radius: var(--radius);
+    }
+    .spec-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .spec-key {
+      color: var(--text-tertiary);
+      font-weight: 500;
+      min-width: 110px;
+      flex-shrink: 0;
+    }
+    .spec-val {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Pros / Cons */
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .pro-con-box {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .pro-con-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+    .pros .pro-con-title { color: var(--success); }
+    .cons .pro-con-title { color: var(--danger); }
+    .pro-con-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pro-con-list li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.5;
+    }
+    .pros .pro-con-list li::before { content: '\2713'; color: var(--success); font-weight: 700; flex-shrink: 0; }
+    .cons .pro-con-list li::before { content: '\00D7'; color: var(--danger); font-weight: 700; flex-shrink: 0; }
+
+    /* Score */
+    .score-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .score-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+    }
+    .score-label {
+      color: var(--text-secondary);
+      min-width: 130px;
+      font-weight: 500;
+    }
+    .score-bar {
+      flex: 1;
+      height: 5px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .score-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+    .score-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      min-width: 28px;
+      text-align: right;
+    }
+
+    /* CTA Buy button */
+    .buy-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: linear-gradient(135deg, #FF9900, #FF6B00);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 20px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      transition: transform .15s ease, box-shadow .15s ease;
+      margin-top: auto;
+    }
+    .buy-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(255,153,0,.35);
+    }
+    .buy-btn.alt {
+      background: var(--text);
+    }
+    .buy-btn.alt:hover {
+      box-shadow: 0 8px 22px rgba(15,23,42,.25);
+    }
+    .prime-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #232F3E;
+      color: #00A8E1;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: .04em;
+    }
+
+    /* COMPARISON TABLE */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 900px;
+    }
+    thead tr { background: var(--bg-dark); }
+    thead th {
+      padding: 16px 18px;
+      text-align: left;
+      font-weight: 600;
+      color: #94A3B8;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    thead th:first-child { color: #fff; }
+    tbody tr {
+      border-top: 1px solid var(--border-light);
+      transition: background .15s;
+    }
+    tbody tr:hover { background: var(--bg); }
+    tbody td {
+      padding: 16px 18px;
+      vertical-align: middle;
+    }
+    .td-name {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .td-name small {
+      display: block;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .td-price {
+      font-weight: 800;
+      color: var(--text);
+      font-size: 14px;
+    }
+    .check { color: var(--success); font-weight: 700; }
+    .nope  { color: var(--danger); font-weight: 700; }
+    .partial { color: var(--warning); font-weight: 700; }
+
+    /* GUIDE BLOCKS */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .guide-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    .guide-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .guide-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .guide-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* USE CASE BLOCKS */
+    .use-case {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+    .use-case-emoji {
+      font-size: 40px;
+      width: 80px;
+      height: 80px;
+      background: var(--bg);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .use-case-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .use-case-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .use-case-pick {
+      background: linear-gradient(135deg, #EEF2FF, #F5F3FF);
+      border: 1px solid #C7D2FE;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      text-align: center;
+      min-width: 200px;
+    }
+    .use-case-pick-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .use-case-pick-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    @media (max-width: 720px) {
+      .use-case {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .use-case-emoji { margin: 0 auto; }
+      .use-case-pick { min-width: 0; }
+    }
+
+    /* TIPS */
+    .tip-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px 32px;
+    }
+    .tip-list h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .tip-list ol {
+      padding-left: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tip-list ol li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .tip-list ol li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-dark);
+      color: #94A3B8;
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 13px;
+    }
+    footer a { color: #818CF8; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Подборка · Май 2026</div>
+    <h1>Наушники для сна:<br/><span>лучший выбор 2026</span></h1>
+    <p>Подборка с реальными рейтингами Amazon. Только модели в наличии — отфильтровано по рейтингу 4.0+ и с приоритетом самых высокооценённых.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">★ 6 моделей в наличии</span>
+      <span class="hero-badge">⭐ Реальные оценки Amazon</span>
+      <span class="hero-badge">🛒 Amazon Prime</span>
+      <span class="hero-badge">💰 От $13 до $299</span>
+    </div>
+  </section>
+
+  <!-- TOP PICKS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Если читать некогда</div>
+      <h2 class="section-title">Топ выбора по категориям</h2>
+      <p class="section-sub">Эти три модели — оптимум по соотношению рейтинга Amazon, цены и функций. Ниже — полный разбор всех моделей.</p>
+
+      <div class="notice">
+        <div class="notice-icon">⚠️</div>
+        <div class="notice-text">
+          <strong>Честно про рейтинги:</strong> sleep-наушники — структурно сложная категория для Amazon-рейтингов. Модели страдают от индивидуальной несовместимости с формой уха, проблем посадки на боку, разной чувствительности к шуму. Поэтому в категории <strong>почти ни у одной модели нет рейтинга 4.5+</strong>. Большинство — между 4.0 и 4.4. В подборке ниже все модели имеют ≥4.0★, реальные цифры указаны в каждой карточке. Самые высокие — Perytong (4.4★) и LC-dolida (4.4★). Самый низкий допуск — 4.0.
+        </div>
+      </div>
+
+      <div class="top-picks">
+        <div class="pick-card gold">
+          <div class="pick-trophy">🥇 Самый высокий рейтинг + цена</div>
+          <div class="pick-title">Perytong Sleep Headband</div>
+          <div class="pick-sub">⭐ 4.4★ · 50 000+ отзывов на Amazon. Бестселлер категории.</div>
+          <div class="pick-price">$19.99</div>
+        </div>
+        <div class="pick-card silver">
+          <div class="pick-trophy">🥈 Лучшая маска + аудио</div>
+          <div class="pick-title">LC-dolida 3D Sleep Mask</div>
+          <div class="pick-sub">⭐ 4.4★ на Amazon. Blackout-маска со встроенными наушниками за смешные деньги.</div>
+          <div class="pick-price">$12.99</div>
+        </div>
+        <div class="pick-card bronze">
+          <div class="pick-trophy">🥉 Лучший премиум-выбор (но рейтинг ниже)</div>
+          <div class="pick-title">Soundcore Sleep A20</div>
+          <div class="pick-sub">⭐ 4.1★. Если важны фишки (свой Bluetooth, 80 ч кейса) — придётся пожертвовать рейтингом.</div>
+          <div class="pick-price">$119.99 (-33%)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILED CARDS -->
+  <section class="section" style="padding-top: 16px;">
+    <div class="container">
+      <div class="section-label">Детальный разбор</div>
+      <h2 class="section-title">Все 6 моделей — карточки</h2>
+      <p class="section-sub">Карточки отсортированы по рейтингу Amazon (от высокого к низкому). В каждой — реальная оценка с количеством отзывов, спеки, плюсы/минусы и прямая ссылка. Исключены: оригинальный Sleep A30 (3.7★, снят с продажи), Amazfit Zenbuds (2.5★, discontinued), QuietOn 3.1 (нет на Amazon вообще).</p>
+
+      <div class="device-grid">
+
+        <!-- 1. Perytong Headband (BEST RATING 4.4) -->
+        <div class="device-card winner">
+          <div class="winner-badge">★ Лучший рейтинг + цена</div>
+          <div class="card-header">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div class="device-icon icon-rose">🎧</div>
+              <div>
+                <div class="device-name">Perytong Sleep Headband</div>
+                <div class="device-maker">Perytong · Bluetooth 5.4</div>
+              </div>
+            </div>
+            <div>
+              <div class="device-price">$19.99</div>
+              <div class="device-price-note">Prime</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-headband">Headband · ткань</span>
+          <span class="rating-badge high"><span class="stars">★★★★☆</span> 4.4 на Amazon · 50 000+ отзывов</span>
+          <p class="device-desc">Самый надёжный выбор по соотношению рейтинг/цена. Бестселлер категории на Amazon — десятки тысяч отзывов и стабильно высокая оценка. Тонкие динамики, мягкая ткань, не давит на ухо при сне на боку. Ткань стирается, динамики вынимаются.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">Тканевая повязка</span></li>
+            <li><span class="spec-key">Динамики</span><span class="spec-val">Ультра-тонкие, съёмные</span></li>
+            <li><span class="spec-key">Батарея</span><span class="spec-val">10–12 ч</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.4</span></li>
+            <li><span class="spec-key">Шумоподавление</span><span class="spec-val">Нет</span></li>
+            <li><span class="spec-key">Можно стирать</span><span class="spec-val">Да (без модуля)</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Самый высокий рейтинг в подборке</li>
+                <li>Очень дешёво при отличном качестве</li>
+                <li>Не давит на ухо — лучшее для бокового сна</li>
+                <li>Подходит для йоги и бега</li>
+                <li>Стирается</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Звук средний — не для меломанов</li>
+                <li>Не глушит окружающие звуки</li>
+                <li>Может перегреваться летом</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Шумоподавление</span><div class="score-bar"><div class="score-fill" style="width:35%"></div></div><span class="score-num">3.5</span></div>
+            <div class="score-item"><span class="score-label">Комфорт сна на боку</span><div class="score-bar"><div class="score-fill" style="width:96%"></div></div><span class="score-num">9.6</span></div>
+            <div class="score-item"><span class="score-label">Звук / контент</span><div class="score-bar"><div class="score-fill" style="width:60%"></div></div><span class="score-num">6.0</span></div>
+            <div class="score-item"><span class="score-label">Батарея</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
+          </div>
+          <a class="buy-btn" href="https://www.amazon.com/Sleep-Headphones-Perytong-Ultra-Thin-Meditation/dp/B07SHBQY7Z" target="_blank" rel="noopener">
+            🛒 Купить на Amazon <span class="prime-badge">prime</span>
+          </a>
+        </div>
+
+        <!-- 2. LC-dolida 3D Mask (4.4) -->
+        <div class="device-card">
+          <div class="card-header">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div class="device-icon icon-slate">💤</div>
+              <div>
+                <div class="device-name">LC-dolida Sleep Mask</div>
+                <div class="device-maker">LC-dolida · Bluetooth 5.4</div>
+              </div>
+            </div>
+            <div>
+              <div class="device-price">$12.99</div>
+              <div class="device-price-old">$25.99</div>
+              <div class="device-price-note">Prime · бюджет</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-mask">3D-маска + наушники</span>
+          <span class="rating-badge high"><span class="stars">★★★★☆</span> 4.4 на Amazon · бестселлер</span>
+          <p class="device-desc">Самый бюджетный вариант с реально высоким рейтингом. 3D blackout-маска с встроенными ультра-тонкими динамиками, memory foam. Tom's Guide и AsInsight называют LC-dolida №1 в категории best-selling sleep headphones.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">3D blackout-маска</span></li>
+            <li><span class="spec-key">Динамики</span><span class="spec-val">Ультра-тонкие, 0.25"</span></li>
+            <li><span class="spec-key">Батарея</span><span class="spec-val">~15 ч</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.4</span></li>
+            <li><span class="spec-key">Материал</span><span class="spec-val">Memory foam</span></li>
+            <li><span class="spec-key">Свет</span><span class="spec-val">100% blackout</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Стоит как «два кофе»</li>
+                <li>Реально 100% темнота</li>
+                <li>Удобен в поездках</li>
+                <li>15+ ч батареи на одной зарядке</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Звук бюджетный</li>
+                <li>Не глушит шум</li>
+                <li>QC у разных партий разный</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Шумоподавление</span><div class="score-bar"><div class="score-fill" style="width:25%"></div></div><span class="score-num">2.5</span></div>
+            <div class="score-item"><span class="score-label">Комфорт сна на боку</span><div class="score-bar"><div class="score-fill" style="width:84%"></div></div><span class="score-num">8.4</span></div>
+            <div class="score-item"><span class="score-label">Звук / контент</span><div class="score-bar"><div class="score-fill" style="width:50%"></div></div><span class="score-num">5.0</span></div>
+            <div class="score-item"><span class="score-label">Батарея</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
+          </div>
+          <a class="buy-btn" href="https://www.amazon.com/Headphones-Bluetooth-LC-dolida-Ultra-Thin-Meditation/dp/B07T6FNLQV" target="_blank" rel="noopener">
+            🛒 Купить на Amazon <span class="prime-badge">prime</span>
+          </a>
+        </div>
+
+        <!-- 3. MUSICOZY 3D Mask (4.2) -->
+        <div class="device-card">
+          <div class="card-header">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div class="device-icon icon-pink">😴</div>
+              <div>
+                <div class="device-name">MUSICOZY 3D Sleep Mask</div>
+                <div class="device-maker">MUSICOZY · Bluetooth 5.4</div>
+              </div>
+            </div>
+            <div>
+              <div class="device-price">$32.99</div>
+              <div class="device-price-note">Prime</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-mask">3D-маска + наушники</span>
+          <span class="rating-badge"><span class="stars">★★★★☆</span> 4.2 на Amazon · тысячи отзывов</span>
+          <p class="device-desc">Гибрид blackout-маски и Bluetooth-наушников рангом выше LC-dolida. 3D-чашечки не давят на глаза — можно моргать. Динамики в боковых ремешках. По обзору Tom's Guide — эффективная защита от света при среднем звуке.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">3D blackout-маска</span></li>
+            <li><span class="spec-key">Динамики</span><span class="spec-val">В ремешках, HD-стерео</span></li>
+            <li><span class="spec-key">Батарея</span><span class="spec-val">~14 ч</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.4</span></li>
+            <li><span class="spec-key">Свет</span><span class="spec-val">100% blackout</span></li>
+            <li><span class="spec-key">Микрофон</span><span class="spec-val">Есть</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>2 в 1: маска для глаз + аудио</li>
+                <li>Глубокие 3D-чашки — глазам комфортно</li>
+                <li>Идеален для путешествий</li>
+                <li>Микрофон для звонков</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Звук средненький</li>
+                <li>Жалобы на батарею со временем</li>
+                <li>Динамики смещаются на боку</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Шумоподавление</span><div class="score-bar"><div class="score-fill" style="width:30%"></div></div><span class="score-num">3.0</span></div>
+            <div class="score-item"><span class="score-label">Комфорт сна на боку</span><div class="score-bar"><div class="score-fill" style="width:84%"></div></div><span class="score-num">8.4</span></div>
+            <div class="score-item"><span class="score-label">Звук / контент</span><div class="score-bar"><div class="score-fill" style="width:55%"></div></div><span class="score-num">5.5</span></div>
+            <div class="score-item"><span class="score-label">Батарея</span><div class="score-bar"><div class="score-fill" style="width:80%"></div></div><span class="score-num">8.0</span></div>
+          </div>
+          <a class="buy-btn" href="https://www.amazon.com/MUSICOZY-Headphones-Bluetooth-Meditation-Microphones/dp/B08R8N383L" target="_blank" rel="noopener">
+            🛒 Купить на Amazon <span class="prime-badge">prime</span>
+          </a>
+        </div>
+
+        <!-- 4. Soundcore Sleep A20 (4.1) -->
+        <div class="device-card">
+          <div class="card-header">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div class="device-icon icon-green">💰</div>
+              <div>
+                <div class="device-name">Soundcore Sleep A20</div>
+                <div class="device-maker">Anker · 2024</div>
+              </div>
+            </div>
+            <div>
+              <div class="device-price">$119.99</div>
+              <div class="device-price-old">$179.99</div>
+              <div class="device-price-note">−33% Prime</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-earbuds">In-ear · Passive</span>
+          <span class="rating-badge"><span class="stars">★★★★☆</span> 4.1 на Amazon</span>
+          <p class="device-desc">Лучший premium earbuds-вариант в подборке: 80 ч от кейса — рекорд категории, sleep-monitoring + персональный будильник через приложение. Рейтинг чуть ниже 4.5 — типично для earbuds (проблемы посадки уникальны для каждого уха).</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">Earbuds (TWS)</span></li>
+            <li><span class="spec-key">Шумоподавление</span><span class="spec-val">Пассивное −30 dB</span></li>
+            <li><span class="spec-key">Батарея</span><span class="spec-val">14 ч / 80 ч с кейсом</span></li>
+            <li><span class="spec-key">Вес</span><span class="spec-val">3 г / наушник</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.3</span></li>
+            <li><span class="spec-key">Свой звук</span><span class="spec-val">Да</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Невероятная батарея (80 ч с кейсом)</li>
+                <li>Эргономика для бокового сна</li>
+                <li>Sleep tracker встроен</li>
+                <li>Свой Bluetooth-стрим (любой контент)</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Нет активного ANC</li>
+                <li>Низкие частоты гасит хуже флагмана</li>
+                <li>Рейтинг 4.1 — части пользователей не подходит посадка</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Шумоподавление</span><div class="score-bar"><div class="score-fill" style="width:75%"></div></div><span class="score-num">7.5</span></div>
+            <div class="score-item"><span class="score-label">Комфорт сна на боку</span><div class="score-bar"><div class="score-fill" style="width:92%"></div></div><span class="score-num">9.2</span></div>
+            <div class="score-item"><span class="score-label">Звук / контент</span><div class="score-bar"><div class="score-fill" style="width:75%"></div></div><span class="score-num">7.5</span></div>
+            <div class="score-item"><span class="score-label">Батарея</span><div class="score-bar"><div class="score-fill" style="width:96%"></div></div><span class="score-num">9.6</span></div>
+          </div>
+          <a class="buy-btn" href="https://www.amazon.com/Soundcore-Blocking-Headphones-Sleepers-Bluetooth/dp/B0CRGR2TS5" target="_blank" rel="noopener">
+            🛒 Купить на Amazon <span class="prime-badge">prime</span>
+          </a>
+        </div>
+
+        <!-- 5. Ozlo Sleepbuds (~4.0) -->
+        <div class="device-card">
+          <div class="card-header">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div class="device-icon icon-purple">💎</div>
+              <div>
+                <div class="device-name">Ozlo Sleepbuds</div>
+                <div class="device-maker">Ozlo (ex-Bose) · 2024</div>
+              </div>
+            </div>
+            <div>
+              <div class="device-price">$275</div>
+              <div class="device-price-old">$299</div>
+              <div class="device-price-note">Prime</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-earbuds">In-ear · Bluetooth LE</span>
+          <span class="rating-badge"><span class="stars">★★★★☆</span> ~4.0 на Amazon</span>
+          <p class="device-desc">Прямой наследник Bose Sleepbuds — основан тремя экс-инженерами Bose. Самые маленькие и мягкие из всех earbuds. Block-and-replace вместо ANC. Рейтинг плавающий из-за жалоб на коннект и зарядку кейса — кому подошли, ставят 5★, остальным — 1–2★.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">Earbuds (TWS)</span></li>
+            <li><span class="spec-key">Шумоподавление</span><span class="spec-val">Пассивное + маскинг</span></li>
+            <li><span class="spec-key">Батарея</span><span class="spec-val">10 ч / 32 ч с кейсом</span></li>
+            <li><span class="spec-key">Вес</span><span class="spec-val">~1.4 г / наушник</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">BLE через Smart Case</span></li>
+            <li><span class="spec-key">Биометрия</span><span class="spec-val">Темп. + позиция тела</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Самая комфортная посадка на рынке</li>
+                <li>Свой Bluetooth-стриминг (в отличие от Bose)</li>
+                <li>Авто-маскинг при засыпании</li>
+                <li>Тихий персональный будильник</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Самые дорогие в подборке</li>
+                <li>Жалобы на стабильность коннекта</li>
+                <li>Зарядка кейса проблемная у части пользователей</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Шумоподавление</span><div class="score-bar"><div class="score-fill" style="width:82%"></div></div><span class="score-num">8.2</span></div>
+            <div class="score-item"><span class="score-label">Комфорт сна на боку</span><div class="score-bar"><div class="score-fill" style="width:98%"></div></div><span class="score-num">9.8</span></div>
+            <div class="score-item"><span class="score-label">Звук / контент</span><div class="score-bar"><div class="score-fill" style="width:72%"></div></div><span class="score-num">7.2</span></div>
+            <div class="score-item"><span class="score-label">Батарея</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
+          </div>
+          <a class="buy-btn" href="https://www.amazon.com/Ozlo-Sleepbuds%C2%AE-Comfortable-Headphones-Science-Backed/dp/B0DJB1ZL8V" target="_blank" rel="noopener">
+            🛒 Купить на Amazon <span class="prime-badge">prime</span>
+          </a>
+        </div>
+
+        <!-- 6. Soundcore Sleep A30 Special (новинка, рейтинг ещё формируется) -->
+        <div class="device-card">
+          <div class="card-header">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div class="device-icon icon-blue">🎯</div>
+              <div>
+                <div class="device-name">Soundcore Sleep A30 Special</div>
+                <div class="device-maker">Anker · CES 2026 · NEW</div>
+              </div>
+            </div>
+            <div>
+              <div class="device-price">$179.99</div>
+              <div class="device-price-old">$199.99</div>
+              <div class="device-price-note">−10% Prime</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-earbuds">In-ear · ANC · 2026</span>
+          <span class="rating-badge low"><span class="stars">⏳</span> Новинка января 2026 · мало отзывов</span>
+          <p class="device-desc">Единственная модель в подборке с активным ANC + анти-храп. Заменила оригинальный A30 (3.7★, снят с продажи). Рейтинг ещё формируется — модель свежая, отзывов мало. Берите осознанно: фишки топовые, но риски новой модели присутствуют.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">Earbuds (TWS)</span></li>
+            <li><span class="spec-key">ANC</span><span class="spec-val">Активное (20–200 Hz)</span></li>
+            <li><span class="spec-key">Батарея</span><span class="spec-val">8–10 ч / 50 ч с кейсом</span></li>
+            <li><span class="spec-key">Вес</span><span class="spec-val">3 г / наушник</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.3 + LE Audio</span></li>
+            <li><span class="spec-key">Свой звук</span><span class="spec-val">Да, через приложение</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Единственный реальный ANC в подборке</li>
+                <li>Anti-snore — детект и маскирование храпа</li>
+                <li>5 силикон + 3 поролон + 4 крылышка</li>
+                <li>Лучше батарея, чем у оригинала A30</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Рейтинг ещё формируется — мало отзывов</li>
+                <li>Оригинальный A30 был 3.7 — есть риск</li>
+                <li>Цена кусается</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Шумоподавление</span><div class="score-bar"><div class="score-fill" style="width:90%"></div></div><span class="score-num">9.0</span></div>
+            <div class="score-item"><span class="score-label">Комфорт сна на боку</span><div class="score-bar"><div class="score-fill" style="width:92%"></div></div><span class="score-num">9.2</span></div>
+            <div class="score-item"><span class="score-label">Звук / контент</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
+            <div class="score-item"><span class="score-label">Батарея</span><div class="score-bar"><div class="score-fill" style="width:82%"></div></div><span class="score-num">8.2</span></div>
+          </div>
+          <a class="buy-btn" href="https://www.amazon.com/Soundcore-Isolation-Headphones-Extensive-Sleepers/dp/B0FYFV2HLM" target="_blank" rel="noopener">
+            🛒 Купить на Amazon <span class="prime-badge">prime</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="section" style="padding-top: 16px;">
+    <div class="container">
+      <div class="section-label">Бок о бок</div>
+      <h2 class="section-title">Сводная таблица</h2>
+      <p class="section-sub">Отсортировано по рейтингу Amazon (от высокого к низкому). Самый высокий — Perytong и LC-dolida (4.4★), затем MUSICOZY (4.2), Sleep A20 (4.1), Ozlo (~4.0), Sleep A30 Special (рейтинг ещё формируется — новинка).</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Модель</th>
+              <th>Рейтинг ★</th>
+              <th>Тип</th>
+              <th>Цена</th>
+              <th>ANC</th>
+              <th>Батарея</th>
+              <th>Свой звук</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">Perytong Headband<small>Bluetooth 5.4</small></td>
+              <td><strong style="color:#15803D;">4.4 ★</strong><small style="display:block; color:var(--text-tertiary); font-size:11px;">50 000+ отзывов</small></td>
+              <td>Headband</td>
+              <td class="td-price">$19.99</td>
+              <td><span class="nope">—</span></td>
+              <td>10–12 ч</td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">LC-dolida 3D Mask<small>Bluetooth 5.4</small></td>
+              <td><strong style="color:#15803D;">4.4 ★</strong><small style="display:block; color:var(--text-tertiary); font-size:11px;">бестселлер</small></td>
+              <td>Маска + аудио</td>
+              <td class="td-price">$12.99</td>
+              <td><span class="nope">—</span></td>
+              <td>~15 ч</td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">MUSICOZY 3D Mask<small>Bluetooth 5.4</small></td>
+              <td><strong style="color:#C2410C;">4.2 ★</strong></td>
+              <td>Маска + аудио</td>
+              <td class="td-price">$32.99</td>
+              <td><span class="nope">—</span></td>
+              <td>~14 ч</td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Soundcore Sleep A20<small>Anker</small></td>
+              <td><strong style="color:#C2410C;">4.1 ★</strong></td>
+              <td>Earbuds</td>
+              <td class="td-price">$119.99</td>
+              <td><span class="partial">Пассив −30 dB</span></td>
+              <td>14 / 80 ч</td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Ozlo Sleepbuds<small>ex-Bose</small></td>
+              <td><strong style="color:#C2410C;">~4.0 ★</strong></td>
+              <td>Earbuds</td>
+              <td class="td-price">$275</td>
+              <td><span class="partial">Пассив + маскинг</span></td>
+              <td>10 / 32 ч</td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Soundcore Sleep A30 Special<small>Anker, 2026 NEW</small></td>
+              <td><strong style="color:#94A3B8;">⏳ нет данных</strong><small style="display:block; color:var(--text-tertiary); font-size:11px;">мало отзывов</small></td>
+              <td>Earbuds</td>
+              <td class="td-price">$179.99</td>
+              <td><span class="check">Активное</span></td>
+              <td>8–10 / 50 ч</td>
+              <td><span class="check">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="section" style="padding-top: 16px;">
+    <div class="container">
+      <div class="section-label">Кому что брать</div>
+      <h2 class="section-title">Подбор под задачу</h2>
+      <p class="section-sub">Выбор сильно зависит от того, что мешает спать: храп партнёра, шум улицы, свет, или просто хочется засыпать под подкаст.</p>
+
+      <div class="use-case">
+        <div class="use-case-emoji">😤</div>
+        <div>
+          <div class="use-case-title">Партнёр храпит</div>
+          <div class="use-case-desc">Нужен активный ANC. Единственный вариант на Amazon — Sleep A30 Special с Triple Noise Reduction (ANC + пассив + маскинг). Это новинка января 2026 — рейтинг ещё формируется. Альтернатива с гарантированным рейтингом — Sleep A20 (4.1★) с пассивным шумоподавлением и встроенными звуками-маскерами.</div>
+        </div>
+        <div class="use-case-pick">
+          <div class="use-case-pick-label">Топ-выбор</div>
+          <div class="use-case-pick-name">Sleep A30 Special или Sleep A20 (4.1★)</div>
+        </div>
+      </div>
+
+      <div class="use-case">
+        <div class="use-case-emoji">🛏️</div>
+        <div>
+          <div class="use-case-title">Сплю исключительно на боку</div>
+          <div class="use-case-desc">Главное — нулевое давление на ухо от подушки. Perytong Headband (4.4★) — самый проверенный выбор: мягкая ткань, ультра-тонкие динамики, лучше всех при сне на боку. Ozlo дают ещё меньше профиль, но рейтинг на Amazon плавающий из-за жалоб на коннект.</div>
+        </div>
+        <div class="use-case-pick">
+          <div class="use-case-pick-label">Топ-выбор</div>
+          <div class="use-case-pick-name">Perytong Headband (4.4★)</div>
+        </div>
+      </div>
+
+      <div class="use-case">
+        <div class="use-case-emoji">🎧</div>
+        <div>
+          <div class="use-case-title">Засыпаю под подкаст / медитации</div>
+          <div class="use-case-desc">Нужен Bluetooth-стрим со своего телефона + автостоп после засыпания. Soundcore A20 даёт оба, плюс 80 ч батареи кейса — рекорд категории. Через приложение Soundcore настраивается таймер выключения и кастомный плейлист.</div>
+        </div>
+        <div class="use-case-pick">
+          <div class="use-case-pick-label">Топ-выбор</div>
+          <div class="use-case-pick-name">Soundcore Sleep A20</div>
+        </div>
+      </div>
+
+      <div class="use-case">
+        <div class="use-case-emoji">✈️</div>
+        <div>
+          <div class="use-case-title">Часто в самолётах / отелях</div>
+          <div class="use-case-desc">Хочется маску от света + аудио в одном изделии. Не критичен звук, нужна компактность. MUSICOZY и LC-dolida — лёгкая, складывается, blackout. На длинных перелётах добавь беруши — свет и аудио закрыты, шум на сосед слева — нет.</div>
+        </div>
+        <div class="use-case-pick">
+          <div class="use-case-pick-label">Топ-выбор</div>
+          <div class="use-case-pick-name">MUSICOZY 3D Mask</div>
+        </div>
+      </div>
+
+      <div class="use-case">
+        <div class="use-case-emoji">📊</div>
+        <div>
+          <div class="use-case-title">Хочу мониторинг сна</div>
+          <div class="use-case-desc">Soundcore A20 и A30 Special отслеживают сон через движение и время в наушниках — графики и инсайты приходят в приложение Soundcore. Полноценный пульсометр в формате sleep-earbuds в 2026 на Amazon реально не купить (Amazfit Zenbuds сняты с продажи) — для пульса берите фитнес-браслет отдельно.</div>
+        </div>
+        <div class="use-case-pick">
+          <div class="use-case-pick-label">Топ-выбор</div>
+          <div class="use-case-pick-name">Soundcore A20 + браслет отдельно</div>
+        </div>
+      </div>
+
+      <div class="use-case">
+        <div class="use-case-emoji">💰</div>
+        <div>
+          <div class="use-case-title">Бюджет до $30</div>
+          <div class="use-case-desc">Идеально совпадает с самыми высокорейтинговыми моделями подборки. Perytong Headband за $19.99 — 4.4★ и 50 000+ отзывов. LC-dolida 3D Mask за $12.99 — также 4.4★ и №1 по продажам в категории. Это лучший выбор по соотношению цены, рейтинга и реальной пользы.</div>
+        </div>
+        <div class="use-case-pick">
+          <div class="use-case-pick-label">Топ-выбор</div>
+          <div class="use-case-pick-name">Perytong $19.99 / LC-dolida $12.99</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUYING GUIDE -->
+  <section class="section" style="padding-top: 16px;">
+    <div class="container">
+      <div class="section-label">Что важно знать</div>
+      <h2 class="section-title">Гайд покупателя</h2>
+      <p class="section-sub">5 факторов, на которые стоит смотреть в первую очередь — независимо от бренда и цены.</p>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-icon icon-blue">📐</div>
+          <div class="guide-title">Толщина / профиль</div>
+          <div class="guide-text">Для бокового сна корпус наушника не должен выступать наружу более ~5 мм. Soundcore A30/A20 и Ozlo — флаг. Обычные AirPods и Bose QC категорически нет.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon icon-purple">🔇</div>
+          <div class="guide-title">ANC vs пассив vs маскинг</div>
+          <div class="guide-text">ANC — лучше всего против низких частот (трафик, кондиционер). Пассив — против высоких (разговоры). Маскинг = поверх шума играет белый шум. Лучшие модели комбинируют все три.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon icon-green">🔋</div>
+          <div class="guide-title">Батарея на 1 ночь</div>
+          <div class="guide-text">8+ ч на одной зарядке — минимум. С ANC время падает на 20–30 %. Реальная цифра у A30 с включённым ANC — около 8 ч, без — 10 ч.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon icon-amber">⏰</div>
+          <div class="guide-title">Будильник внутри уха</div>
+          <div class="guide-text">Все earbuds в подборке (кроме QuietOn) умеют будить лично тебя, не партнёра. Это огромный плюс если у вас разный график.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon icon-pink">📶</div>
+          <div class="guide-title">Свой Bluetooth-аудио или нет</div>
+          <div class="guide-text">Bose Sleepbuds II не давали стримить свою музыку — только встроенные звуки. Это была главная претензия. Все наушники в этой подборке (кроме QuietOn) поддерживают свой стрим.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon icon-cyan">💧</div>
+          <div class="guide-title">Гигиена и стирка</div>
+          <div class="guide-text">Тканевые повязки (Perytong, MUSICOZY, LC-dolida) — стираются после извлечения модуля. Earbuds надо протирать каждые 1–2 недели, чтобы не размножались бактерии.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="section" style="padding-top: 16px;">
+    <div class="container">
+      <div class="section-label">Финальные советы</div>
+      <h2 class="section-title">Как сделать ночь максимально комфортной</h2>
+
+      <div class="tip-list">
+        <h3>Чек-лист на ночь</h3>
+        <ol>
+          <li><strong>Подбирай размер амбушюр.</strong> 80 % проблем «давит ухо» решаются сменой силикон/поролон-вкладыша. У Soundcore A30 в комплекте 8 размеров — попробуй все за пару ночей.</li>
+          <li><strong>Громкость — 40–50 %.</strong> ВОЗ рекомендует не превышать 60 % от макс. для длительного прослушивания. Для маскировки шума хватает уровня «чуть громче кондиционера».</li>
+          <li><strong>Разделяй музыку и сон.</strong> Включай таймер сна на 20–30 мин — после засыпания мозг не должен обрабатывать сложный звук, иначе глубокий сон страдает.</li>
+          <li><strong>Не клади кейс на тумбочку с проводом.</strong> Если будильник в наушнике — кейс должен быть подальше, иначе наушник спросонья улетит на пол вместе с кейсом.</li>
+          <li><strong>Чисти амбушюры раз в неделю.</strong> Тёплая вода + пара капель мыла, дать высохнуть. Иначе будут отиты — гарантировано.</li>
+          <li><strong>Запасной комплект амбушюр на алиэкспрессе ~$5.</strong> Силикон деформируется примерно за 6 месяцев, после этого комфорт падает резко.</li>
+          <li><strong>Если храп очень сильный — комбо.</strong> Беруши Mack's за $5 + Perytong сверху для аудио = громче чем большинство earbuds, и в разы дешевле.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERDICT -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-label">Итог</div>
+      <h2 class="section-title">Финальный вердикт</h2>
+      <p class="section-sub">Если ориентир — рейтинг Amazon (а не «фишки за любую цену»), однозначный выбор — <strong>Perytong Headband ($19.99, 4.4★, 50 000+ отзывов)</strong> или <strong>LC-dolida 3D Mask ($12.99, 4.4★)</strong>. Это бестселлеры с самыми надёжными реальными оценками во всей категории. Если хочется именно earbuds — Soundcore Sleep A20 (4.1★) проверенная рабочая лошадка. Если важен ANC против храпа — Sleep A30 Special, но это новинка с пока неустоявшимся рейтингом. Ozlo Sleepbuds — комфортно, но рейтинг ~4.0 из-за жалоб на коннект.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Подборка собрана 2 мая 2026. Все 6 моделей проверены — в наличии на Amazon с Prime-доставкой.</p>
+    <p style="margin-top: 8px; opacity: .85;"><strong>Исключены за низкий рейтинг или отсутствие в наличии:</strong> оригинальный Sleep A30 (3.7★, снят с продажи), Amazfit Zenbuds (2.5★, discontinued), QuietOn 3.1 (только сайт бренда, не Amazon).</p>
+    <p style="margin-top: 8px; opacity: .75;">Sleep-наушники структурно — сложная категория для рейтингов: совместимость посадки уникальна для каждого человека. Поэтому в категории редко встречаются модели 4.5+. Самые высокие — 4.4★ (Perytong, LC-dolida).</p>
+    <p style="margin-top: 8px; opacity: .65;">Цены могут меняться — на Amazon Prime Day и Black Friday модели падают на 15–30%. Партнёрских меток нет.</p>
+  </footer>
+
+</body>
+</html>
