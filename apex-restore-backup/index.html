@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Восстановление мира из бэкапа — Apex Minecraft Hosting</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #161a21;
+    --line: #232934;
+    --text: #e7ecf3;
+    --muted: #9aa4b2;
+    --accent: #c8ff00;
+    --accent-soft: rgba(200, 255, 0, 0.12);
+    --warn: #ffb547;
+    --warn-soft: rgba(255, 181, 71, 0.12);
+    --danger: #ff6b6b;
+    --danger-soft: rgba(255, 107, 107, 0.12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 96px; }
+  header { margin-bottom: 40px; }
+  .badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 36px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+  .subtitle { color: var(--muted); font-size: 17px; margin: 0; }
+  h2 {
+    font-size: 22px;
+    margin: 40px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  p { margin: 0 0 12px; }
+  ul, ol { padding-left: 22px; margin: 12px 0; }
+  li { margin-bottom: 8px; }
+  code {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin: 16px 0;
+  }
+  .note {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .note strong { color: var(--warn); }
+  .danger {
+    background: var(--danger-soft);
+    border-left: 3px solid var(--danger);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .danger strong { color: var(--danger); }
+  figure {
+    margin: 20px 0 28px;
+    padding: 0;
+  }
+  figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    display: block;
+  }
+  figcaption {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+  }
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 32px;
+  }
+  .toc h3 { margin: 0 0 12px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+  .toc ol { margin: 0; padding-left: 20px; }
+  .toc a { color: var(--text); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+  footer { margin-top: 60px; color: var(--muted); font-size: 13px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="badge">Apex Minecraft Hosting</div>
+  <h1>Как восстановить мир из бэкапа</h1>
+  <p class="subtitle">Пошаговая инструкция по откату сервера из автоматического бэкапа через FTP File Access.</p>
+</header>
+
+<div class="toc">
+  <h3>Содержание</h3>
+  <ol>
+    <li><a href="#stop">Остановить сервер</a></li>
+    <li><a href="#ftp">Открыть FTP File Access</a></li>
+    <li><a href="#find">Найти нужный бэкап в папке backups</a></li>
+    <li><a href="#extract">Распаковать архив</a></li>
+    <li><a href="#replace">Заменить папку world</a></li>
+    <li><a href="#start">Запустить сервер и проверить</a></li>
+  </ol>
+</div>
+
+<div class="danger">
+  <strong>Важно перед началом:</strong> восстановление перезапишет текущий мир. Если на сервере есть свежий прогресс, который ещё не в бэкапе, сначала сохрани его (сделай ручной бэкап в разделе <code>Backups</code>).
+</div>
+
+<h2 id="stop"><span class="step-num">1</span> Остановить сервер</h2>
+<p>Зайди в панель Apex и в разделе <strong>Server Management → Console</strong> нажми <code>Stop</code>. Дождись, пока сервер полностью выключится — статус должен стать «Offline». Восстанавливать файлы на работающем сервере нельзя: Minecraft перезапишет их при следующем сохранении.</p>
+
+<h2 id="ftp"><span class="step-num">2</span> Открыть FTP File Access</h2>
+<p>В левой колонке панели разверни блок <strong>File Management</strong> и нажми <strong>FTP File Access</strong>.</p>
+
+<figure>
+  <img src="img/01-sidebar-ftp.png" alt="Боковое меню панели Apex Hosting с пунктом FTP File Access">
+  <figcaption>Сайдбар панели → File Management → FTP File Access</figcaption>
+</figure>
+
+<h2 id="find"><span class="step-num">3</span> Найти нужный бэкап</h2>
+<p>В дереве файлов слева открой папку <code>backups</code>. Бэкапы названы по дате и времени в формате <code>ГГГГ-ММ-ДД-ЧЧ-ММ-СС.zip</code>. Выбирай самый свежий <em>до</em> момента, когда всё пошло не так.</p>
+
+<figure>
+  <img src="img/02-ftp-backups.png" alt="FTP Client со списком бэкапов и папкой world">
+  <figcaption>Список бэкапов в папке <code>backups/</code> и папка <code>world/</code> внизу дерева</figcaption>
+</figure>
+
+<div class="note">
+  <strong>Подсказка:</strong> в названии файла время указано в UTC (см. <em>Current panel time</em> в правом верхнем углу). Учитывай разницу с Москвой — обычно −3 часа.
+</div>
+
+<h2 id="extract"><span class="step-num">4</span> Распаковать архив бэкапа</h2>
+<ol>
+  <li>Кликни <strong>правой кнопкой мыши</strong> по нужному zip-файлу.</li>
+  <li>В меню выбери <strong>Unarchive</strong> (или <strong>Extract</strong>).</li>
+  <li>Дождись, пока появится новая папка с тем же именем, что и архив (например <code>2026-05-07-05-50-17/</code>). На крупных мирах это занимает 1–3 минуты.</li>
+  <li>Зайди внутрь распакованной папки — там должна быть папка <code>world</code> (а также <code>world_nether</code>, <code>world_the_end</code>, если используешь Vanilla/Paper).</li>
+</ol>
+
+<h2 id="replace"><span class="step-num">5</span> Заменить папку world в корне</h2>
+<ol>
+  <li>Вернись в корень <code>default/</code> (самый верх дерева).</li>
+  <li><strong>Переименуй</strong> текущую папку <code>world</code> в <code>world_old</code> — это страховка на случай, если бэкап окажется не тем.</li>
+  <li>Перетащи папку <code>world</code> из распакованного бэкапа в корень <code>default/</code>. Если есть папки <code>world_nether</code> и <code>world_the_end</code> — перенеси их тоже (точно так же, переименовав старые в <code>_old</code>).</li>
+</ol>
+
+<div class="note">
+  <strong>Альтернатива:</strong> если в Apex меню есть пункт <strong>Move to root</strong> при правом клике по папке внутри бэкапа — пользуйся им, это надёжнее, чем drag &amp; drop.
+</div>
+
+<h2 id="start"><span class="step-num">6</span> Запустить сервер и проверить</h2>
+<ol>
+  <li>Возвращайся в <strong>Console</strong> и жми <code>Start</code>.</li>
+  <li>В логе следи за строкой <code>Done (Xs)! For help, type "help"</code> — значит мир загрузился без ошибок.</li>
+  <li>Зайди на сервер и проверь: постройки, игроков, инвентари. Если всё ок — удали папки <code>world_old</code> (и пары к ним) через FTP.</li>
+  <li>Распакованную папку с архивом тоже можно удалить, чтобы не занимала место.</li>
+</ol>
+
+<hr>
+
+<h2>Если что-то пошло не так</h2>
+<ul>
+  <li><strong>Сервер не стартует, в логе ошибка про мир</strong> — останови сервер, удали новый <code>world</code>, переименуй <code>world_old</code> обратно в <code>world</code>, попробуй другой бэкап.</li>
+  <li><strong>Распаковка зависла</strong> — обнови страницу FTP, проверь, не появилась ли уже папка. Apex иногда не показывает прогресс, но процесс идёт.</li>
+  <li><strong>Архив слишком большой и Unarchive не работает</strong> — скачай zip на компьютер через правый клик → <strong>Download</strong>, распакуй локально, загрузи папку <code>world</code> обратно через <strong>Upload</strong> или SFTP-клиент (FileZilla).</li>
+  <li><strong>Хочешь восстановить только один регион / постройку</strong> — распакуй бэкап, открой <code>world/region/</code>, скопируй нужный <code>.mca</code>-файл поверх текущего (имя файла привязано к координатам чанков).</li>
+</ul>
+
+<footer>
+  Инструкция для сервера <code>hotroundstar@gmail.com</code> на Apex Minecraft Hosting.<br>
+  Обновлено: 2026-05-07
+</footer>
+
+</div>
+</body>
+</html>
