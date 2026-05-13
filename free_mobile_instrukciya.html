@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как оформить французскую SIM-карту Free Mobile — Пошаговая инструкция</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary:      #CD1E25;
+    --primary-dim:  #FEF2F2;
+    --primary-dark: #A8181E;
+    --secondary:    #1F2937;
+    --secondary-dim:#F3F4F6;
+    --success:      #16A34A;
+    --success-dim:  #F0FDF4;
+    --warning:      #D97706;
+    --warning-dim:  #FFFBEB;
+    --danger:       #DC2626;
+    --danger-dim:   #FEF2F2;
+    --surface:      #FFFFFF;
+    --text:         #111827;
+    --text-2:       #374151;
+    --text-3:       #6B7280;
+    --border:       #E5E7EB;
+    --bg:           #F9FAFB;
+    --radius:       10px;
+    --radius-lg:    16px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  @media print {
+    body { background: #fff; font-size: 12px; }
+    .page { padding: 0; max-width: 100%; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .card { break-inside: avoid; }
+    .section { break-inside: avoid; }
+  }
+
+  /* ── Print button ── */
+  .print-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin-bottom: 40px;
+    box-shadow: 0 1px 3px rgba(205,30,37,.3);
+    transition: background .15s, box-shadow .15s;
+  }
+  .print-btn:hover { background: var(--primary-dark); box-shadow: 0 4px 12px rgba(205,30,37,.35); }
+
+  /* ── Header ── */
+  .doc-header {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .doc-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .doc-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -.025em;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .doc-subtitle {
+    font-size: 14px;
+    color: var(--text-3);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .meta-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-3);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+  }
+
+  /* ── Callouts ── */
+  .callout {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .callout-icon { flex-shrink: 0; margin-top: 1px; }
+  .callout-body p { margin-top: 4px; }
+  .callout-body strong { font-weight: 600; }
+  .callout--warning { background: var(--warning-dim); border-color: #FDE68A; color: var(--text-2); }
+  .callout--warning .callout-icon { color: var(--warning); }
+  .callout--info    { background: #EFF6FF; border-color: #BFDBFE; color: var(--text-2); }
+  .callout--info    .callout-icon { color: #2563EB; }
+  .callout--success { background: var(--success-dim); border-color: #BBF7D0; color: var(--text-2); }
+  .callout--success .callout-icon { color: var(--success); }
+  .callout--danger  { background: var(--danger-dim);  border-color: #FECACA; color: var(--text-2); }
+  .callout--danger  .callout-icon { color: var(--danger); }
+
+  /* ── Section ── */
+  .section { margin-bottom: 36px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(205,30,37,.25);
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -.015em;
+    color: var(--text);
+  }
+
+  /* ── Cards / Steps ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+  .card-body {
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+  .card-body ul, .card-body ol { padding-left: 20px; }
+  .card-body li { margin-bottom: 5px; }
+  .card-body p + p { margin-top: 10px; }
+  .card-body .sub-callout { margin-top: 12px; margin-bottom: 0; }
+
+  /* ── Badge ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge--red     { background: var(--primary-dim);    color: var(--primary); }
+  .badge--success { background: var(--success-dim);    color: var(--success); }
+  .badge--warning { background: var(--warning-dim);    color: var(--warning); }
+  .badge--neutral { background: #F3F4F6;               color: var(--text-3); }
+
+  /* ── Sub-section h3 ── */
+  h3 {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin: 24px 0 10px;
+  }
+
+  /* ── Info-tiles ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 580px) { .info-grid { grid-template-columns: 1fr; } }
+
+  .info-tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+  }
+  .info-tile-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--text-3);
+    margin-bottom: 6px;
+  }
+  .info-tile-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: -.01em;
+  }
+  .info-tile-value--red { color: var(--primary); }
+  .info-tile-desc {
+    font-size: 12px;
+    color: var(--text-3);
+    line-height: 1.5;
+  }
+
+  /* ── Link ── */
+  a.ext-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dashed rgba(205,30,37,.4);
+    transition: border-color .15s, color .15s;
+  }
+  a.ext-link:hover { color: var(--primary-dark); border-bottom-color: var(--primary); }
+
+  /* ── Checklist ── */
+  .checklist { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+  .check-icon { color: var(--success); flex-shrink: 0; margin-top: 1px; }
+
+  /* ── Field-table for form values ── */
+  .field-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin: 12px 0;
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    border-bottom: 1px solid var(--border);
+  }
+  .field-row:last-child { border-bottom: none; }
+  .field-key {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-3);
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+  }
+  .field-val {
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .field-val code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--primary-dim);
+    color: var(--primary-dark);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+  @media (max-width: 580px) {
+    .field-row { grid-template-columns: 1fr; }
+    .field-key { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  /* ── Divider ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* ── Code ── */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: #F3F4F6;
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: var(--text);
+  }
+
+  /* ── Hero icon ── */
+  .hero-emoji {
+    font-size: 36px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  /* ── Step pill ── */
+  .step-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    background: var(--primary-dim);
+    color: var(--primary);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-3);
+    text-align: center;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <button class="print-btn no-print" onclick="window.print()">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Сохранить как PDF
+  </button>
+
+  <!-- ── ШАПКА ── -->
+  <header class="doc-header">
+    <div class="hero-emoji">🇫🇷 📱</div>
+    <p class="doc-eyebrow">Free Mobile · Франция · eSIM</p>
+    <h1 class="doc-title">Как оформить французскую<br>SIM-карту Free Mobile</h1>
+    <p class="doc-subtitle">Пошаговая инструкция: от выбора тарифа до подключения eSIM. Без обязательств, безлимитный интернет во Франции и +135 направлений за <strong>29,99 €/мес</strong>.</p>
+    <div class="doc-meta">
+      <span class="meta-chip">
+        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        7 шагов · ~15 минут
+      </span>
+      <span class="meta-chip">
+        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V8"/></svg>
+        eSIM — активация сразу
+      </span>
+      <span class="meta-chip">
+        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+        Sans engagement
+      </span>
+    </div>
+  </header>
+
+  <!-- Быстрые факты -->
+  <div class="info-grid">
+    <div class="info-tile">
+      <div class="info-tile-label">Тариф</div>
+      <div class="info-tile-value">Forfait Free Max</div>
+      <div class="info-tile-desc">Безлимит во Франции + 135 стран · 5G/5G+</div>
+    </div>
+    <div class="info-tile">
+      <div class="info-tile-label">Цена</div>
+      <div class="info-tile-value info-tile-value--red">29,99 €<span style="font-size:12px;color:var(--text-3);font-weight:500">/мес</span></div>
+      <div class="info-tile-desc">Без обязательств — отменить можно в любой момент</div>
+    </div>
+    <div class="info-tile">
+      <div class="info-tile-label">Первый платёж</div>
+      <div class="info-tile-value">39,99 €</div>
+      <div class="info-tile-desc">29,99 € абонплата + 10 € стоимость eSIM</div>
+    </div>
+  </div>
+
+  <!-- Информационная заметка -->
+  <div class="callout callout--info">
+    <svg class="callout-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <div class="callout-body">
+      <strong>Что понадобится перед началом.</strong>
+      <p>Рабочий e-mail (туда придут логин и пароль от личного кабинета), банковская карта Visa/Mastercard (карты Visa Electron, eCarte и Mastercard Maestro не принимаются) и телефон с поддержкой eSIM. Проверить совместимость можно <a class="ext-link" href="https://mobile.free.fr/" target="_blank">на сайте Free</a> по ссылке «Quelle SIM est compatible avec mon téléphone ?».</p>
+    </div>
+  </div>
+
+  <!-- ── ШАГ 1 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">1</div>
+      <h2>Заходим на сайт и выбираем тариф</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="step-pill">Forfait Free Max</span>
+        <span class="card-title">29,99 €/мес · самый правый блок</span>
+      </div>
+      <div class="card-body">
+        <p>Открываем <a class="ext-link" href="https://mobile.free.fr/" target="_blank">mobile.free.fr</a>. На главной странице будет блок «Des offres mobiles simples, à prix Free et sans engagement» с тремя тарифами.</p>
+        <p>Нам нужен <strong>самый правый</strong> — <strong>Forfait Free Max</strong> за 29,99 €/мес. Это безлимит во Франции и +135 направлений (включая Россию для входящих звонков и часть Европы для интернета).</p>
+        <p>Нажимаем красную кнопку <code>S'abonner</code> под этим тарифом.</p>
+        <div class="callout callout--warning sub-callout">
+          <svg class="callout-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div class="callout-body">
+            Не путать с тарифом <strong>Forfait 2€</strong> в переключателе сверху — это другая, более дешёвая категория с очень ограниченным объёмом. Нам нужны <strong>Forfaits 5G/5G+</strong>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ШАГ 2 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">2</div>
+      <h2>Выбираем только тариф — без телефона</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="step-pill">Forfait Seul</span>
+        <span class="card-title">Правый блок с иконкой SIM-карты</span>
+      </div>
+      <div class="card-body">
+        <p>Появится окно с двумя вариантами:</p>
+        <ul>
+          <li><strong>Mobile + Forfait</strong> — телефон в рассрочку + тариф. <span class="badge badge--neutral">не нужно</span></li>
+          <li><strong>Forfait Seul</strong> — только SIM-карта/тариф. <span class="badge badge--red">наш вариант</span></li>
+        </ul>
+        <p>Нажимаем кнопку <code>Continuer</code> под <strong>Forfait Seul</strong> (правый блок с иконкой SIM-карты).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ШАГ 3 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">3</div>
+      <h2>Настройка линии и выбор eSIM</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="step-pill">Конфигурация</span>
+        <span class="card-title">Заполняем 4 блока — внимательно</span>
+      </div>
+      <div class="card-body">
+        <p>На этой странице 4 секции — выставляем всё так:</p>
+
+        <div class="field-list">
+          <div class="field-row">
+            <div class="field-key">Êtes-vous abonné Freebox ?</div>
+            <div class="field-val"><code>Non, je ne suis pas abonné Freebox</code></div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Configuration de ma ligne</div>
+            <div class="field-val"><code>Je choisis un nouveau numéro</code> — затем выбрать любой номер из выпадающего списка</div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Choix de ma SIM</div>
+            <div class="field-val"><code>eSIM</code> · 10 € · активируется сразу после оформления</div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">McAfee (антивирус)</div>
+            <div class="field-val"><code>Sans solution McAfee</code> — нам не нужно</div>
+          </div>
+        </div>
+
+        <div class="callout callout--success sub-callout">
+          <svg class="callout-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <div class="callout-body">
+            <strong>Почему eSIM, а не физическая карта.</strong>
+            <p>eSIM активируется сразу после оплаты прямо в личном кабинете — её не нужно ждать по почте 5 дней. Идеально, если оформляете из-за границы или нужно срочно.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ШАГ 4 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">4</div>
+      <h2>Заполняем личные данные</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="step-pill">Informations personnelles</span>
+        <span class="card-title">Любые данные — кроме e-mail</span>
+      </div>
+      <div class="card-body">
+        <p>Все поля можно заполнить произвольными данными — система не верифицирует имя, дату рождения и адрес. <strong>Единственное критическое поле — e-mail</strong>: на него придут логин и пароль для входа в личный кабинет.</p>
+
+        <h3>Что заполняем</h3>
+        <div class="field-list">
+          <div class="field-row">
+            <div class="field-key">Вежливость</div>
+            <div class="field-val"><code>Madame</code> или <code>Monsieur</code> (Сэр)</div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Имя / Фамилия</div>
+            <div class="field-val">Например: <code>Jean</code> / <code>Morgan</code></div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Дата рождения</div>
+            <div class="field-val">Любая, формат <code>дд/мм/гггг</code></div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Родильное отделение / город</div>
+            <div class="field-val">Любой департамент и город (например <code>21 - Côte d'Or</code>)</div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Контактный номер</div>
+            <div class="field-val">Любой французский мобильный, формат <code>06 ХХ ХХ ХХ ХХ</code></div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">E-mail</div>
+            <div class="field-val"><span class="badge badge--red">критично</span> Реальный, к которому есть доступ — придут логин и пароль</div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Почтовый адрес</div>
+            <div class="field-val">Любой действующий французский адрес</div>
+          </div>
+        </div>
+
+        <div class="callout callout--danger sub-callout">
+          <svg class="callout-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="callout-body">
+            <strong>E-mail вводится дважды — оба раза одинаково.</strong>
+            <p>Если ошибётесь в e-mail, доступ к личному кабинету придётся восстанавливать через поддержку Free. Проверьте e-mail перед нажатием «Продолжить».</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ШАГ 5 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">5</div>
+      <h2>Оплата картой</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="step-pill">Carte bancaire</span>
+        <span class="card-title">Сумма к оплате — 39,99 €</span>
+      </div>
+      <div class="card-body">
+        <p>Вводим данные банковской карты:</p>
+
+        <div class="field-list">
+          <div class="field-row">
+            <div class="field-key">Имя на карте</div>
+            <div class="field-val">Как указано на карте (латиницей)</div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Номер карты</div>
+            <div class="field-val">16 цифр</div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Срок годности</div>
+            <div class="field-val"><code>ММ/ГГ</code></div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">CVV</div>
+            <div class="field-val">3 цифры на обороте карты</div>
+          </div>
+        </div>
+
+        <div class="callout callout--warning sub-callout">
+          <svg class="callout-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div class="callout-body">
+            <strong>Какие карты НЕ принимаются:</strong>
+            <p>карты <strong>Visa Electron</strong>, <strong>eCarte Blue</strong>, <strong>Mastercard Maestro</strong>. Принимаются обычные Visa, Mastercard, CB.</p>
+          </div>
+        </div>
+
+        <p>Подтверждаем оплату — обычно банк попросит 3D Secure / SMS-код. После оплаты на e-mail придёт письмо с <strong>логином (8 цифр)</strong> и <strong>паролем</strong> от личного кабинета.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ШАГ 6 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">6</div>
+      <h2>Заходим в личный кабинет</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="step-pill">Espace Abonné</span>
+        <span class="card-title">Логин и пароль из письма</span>
+      </div>
+      <div class="card-body">
+        <p>Открываем ссылку входа: <a class="ext-link" href="https://mobile.free.fr/account/v2/login" target="_blank">mobile.free.fr/account/v2/login</a></p>
+
+        <div class="field-list">
+          <div class="field-row">
+            <div class="field-key">Identifiant (8 chiffres)</div>
+            <div class="field-val">8-значный логин из письма</div>
+          </div>
+          <div class="field-row">
+            <div class="field-key">Mot de passe</div>
+            <div class="field-val">Пароль из письма</div>
+          </div>
+        </div>
+
+        <p>Нажимаем красную кнопку <code>Se connecter</code>. Если письмо не пришло — проверьте папку «Спам».</p>
+
+        <div class="callout callout--info sub-callout">
+          <svg class="callout-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div class="callout-body">
+            <strong>Совет.</strong>
+            <p>Сразу после первого входа смените пароль на свой — тот, что прислали по почте, временный и достаточно простой.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ШАГ 7 ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">7</div>
+      <h2>Активируем eSIM на телефоне</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="step-pill">Ma SIM → Ma eSIM</span>
+        <span class="card-title">Получаем QR-код и сканируем</span>
+      </div>
+      <div class="card-body">
+        <p>В личном кабинете переходим в раздел <strong>Ma SIM</strong> → подраздел <strong>Ma eSIM</strong>. Система покажет QR-код для активации eSIM.</p>
+
+        <h3>Как добавить eSIM на iPhone</h3>
+        <ol>
+          <li>Открыть <strong>Настройки</strong> → <strong>Сотовая связь</strong> (или «Мобильные данные»)</li>
+          <li>Нажать <strong>Добавить eSIM</strong> → <strong>Использовать QR-код</strong></li>
+          <li>Навести камеру на QR-код с экрана компьютера</li>
+          <li>Подтвердить добавление, дать ярлык (например «Free FR»)</li>
+        </ol>
+
+        <h3>Как добавить eSIM на Android</h3>
+        <ol>
+          <li><strong>Настройки</strong> → <strong>Подключения</strong> / <strong>Сеть и интернет</strong> → <strong>SIM-карты</strong></li>
+          <li>Нажать <strong>+ Добавить eSIM</strong> или <strong>Загрузить SIM с помощью QR-кода</strong></li>
+          <li>Отсканировать QR-код, подтвердить</li>
+        </ol>
+
+        <div class="callout callout--success sub-callout">
+          <svg class="callout-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <div class="callout-body">
+            <strong>Готово.</strong>
+            <p>Через 1–2 минуты eSIM активируется, телефон поймает французскую сеть, появится номер +33. Безлимитный интернет и звонки во Францию и +135 направлений работают сразу.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── Чек-лист итог ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">✓</div>
+      <h2>Финальный чек-лист</h2>
+    </div>
+
+    <div class="checklist">
+      <div class="check-item">
+        <svg class="check-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>На сайте <a class="ext-link" href="https://mobile.free.fr/" target="_blank">mobile.free.fr</a> выбран тариф <strong>Forfait Free Max</strong> за 29,99 €/мес.</div>
+      </div>
+      <div class="check-item">
+        <svg class="check-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>Выбран вариант <strong>Forfait Seul</strong> (без покупки телефона).</div>
+      </div>
+      <div class="check-item">
+        <svg class="check-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>Указано: не абонент Freebox, новый номер, <strong>eSIM</strong>, без McAfee.</div>
+      </div>
+      <div class="check-item">
+        <svg class="check-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>Личные данные заполнены, <strong>e-mail проверен</strong> и введён дважды без опечаток.</div>
+      </div>
+      <div class="check-item">
+        <svg class="check-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>Оплачено <strong>39,99 €</strong> подходящей картой (Visa / Mastercard / CB).</div>
+      </div>
+      <div class="check-item">
+        <svg class="check-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>Получено письмо с логином и паролем, выполнен вход в личный кабинет.</div>
+      </div>
+      <div class="check-item">
+        <svg class="check-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <div>В разделе <strong>Ma SIM → Ma eSIM</strong> отсканирован QR-код, eSIM подключена к телефону.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Полезные ссылки ── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-badge">🔗</div>
+      <h2>Полезные ссылки</h2>
+    </div>
+
+    <div class="field-list">
+      <div class="field-row">
+        <div class="field-key">Главная Free Mobile</div>
+        <div class="field-val"><a class="ext-link" href="https://mobile.free.fr/" target="_blank">mobile.free.fr</a></div>
+      </div>
+      <div class="field-row">
+        <div class="field-key">Вход в личный кабинет</div>
+        <div class="field-val"><a class="ext-link" href="https://mobile.free.fr/account/v2/login" target="_blank">mobile.free.fr/account/v2/login</a></div>
+      </div>
+      <div class="field-row">
+        <div class="field-key">Совместимость с eSIM</div>
+        <div class="field-val">Раздел «Quelle SIM est compatible avec mon téléphone ?» на странице оформления</div>
+      </div>
+      <div class="field-row">
+        <div class="field-key">Поддержка</div>
+        <div class="field-val"><a class="ext-link" href="https://mobile.free.fr/assistance/" target="_blank">mobile.free.fr/assistance</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ФУТЕР ── -->
+  <footer class="doc-footer">
+    Документ носит информационный характер. Условия тарифов, цены и порядок оформления могут меняться — финальная информация на официальном сайте Free Mobile.<br>
+    Подготовлено в 2026 году.
+  </footer>
+
+</div>
+</body>
+</html>
