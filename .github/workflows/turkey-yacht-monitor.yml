@@ -38,6 +38,9 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # При ручном запуске шлём heartbeat-сводку (для проверки/успокоения).
+          # При cron-запуске молчим, кроме случаев с реальной находкой.
+          ALWAYS_PING: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
         run: python notify.py
 
       - name: Upload run artifact
