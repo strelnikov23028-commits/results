@@ -1,0 +1,158 @@
+# Источники для мониторинга появления Aquila (Aquila 50 Sail и др.)
+# в чартерных компаниях Турции.
+#
+# kind=aggregator — мета-площадки, собирающие флот многих компаний
+# kind=company    — отдельные турецкие чартерные операторы
+#
+# Если сайт SPA (рендер на JS) и requests не видит флот — пометить spa=true
+# и его пока пропускаем (TODO: Playwright).
+
+sources:
+  # ---- Агрегаторы (видят флот сразу десятков компаний) ----
+  # Универсальный URL турецких катамаранов на SamBoat
+  - name: SamBoat Turkey catamarans (bareboat)
+    url: https://www.samboat.com/catamaran-rental/turkey/bareboat
+    kind: aggregator
+
+  - name: SamBoat Turkey luxury yachts
+    url: https://www.samboat.com/luxury-yacht-rental/turkey
+    kind: aggregator
+
+  # Узкий фильтр: только катамараны бренда Aquila в Турции.
+  # Сейчас выдача пустая (вне фильтра-селекта совпадений нет).
+  # Появится карточка — сразу триггер.
+  - name: SamBoat Turkey filter=Aquila (catamarans)
+    url: https://www.samboat.com/catamaran-rental/turkey/bareboat?builders%5B%5D=23334
+    kind: aggregator
+
+  - name: SamBoat Turkey filter=Aquila (motor & all)
+    url: https://www.samboat.com/boat-rental/turkey?builders%5B%5D=23334
+    kind: aggregator
+
+  - name: 12knots Turkey catamarans
+    url: https://12knots.com/en/yacht-charter/destinations/mediterranean-sea/turkey/catamaran-charter/
+    kind: aggregator
+
+  - name: 12knots Turkey all yachts
+    url: https://12knots.com/en/yacht-charter/destinations/mediterranean-sea/turkey/
+    kind: aggregator
+
+  - name: Sailo Turkey catamarans
+    url: https://www.sailo.com/boat-rentals/T%C3%BCrkiye?boat_type%5B%5D=catamaran
+    kind: aggregator
+    timeout: 60
+
+  - name: Viravira Turkey bareboat
+    url: https://www.viravira.co/yacht-charter/turkey/bareboat
+    kind: aggregator
+
+  - name: Plainsailing Turkey
+    url: https://plainsailing.com/destinations/turkey
+    kind: aggregator
+
+  - name: Boatbookings Turkey
+    url: https://www.boatbookings.com/yachting_content/turkey_yacht_charter.php
+    kind: aggregator
+
+  - name: Charterworld Turkey
+    url: https://www.charterworld.com/index.html?sub=turkey-yacht-charter
+    kind: aggregator
+
+  - name: Yasido Turkey charter companies
+    url: https://yasido.com/charter-companies?country=turkey
+    kind: aggregator
+
+  - name: Boatingturkey bareboat search
+    url: https://www.boatingturkey.net/Find_a_Bareboat_Search.html
+    kind: aggregator
+
+  # ---- Турецкие чартерные компании ----
+  - name: Saysail (catamarans)
+    url: https://saysail.com/en/yacht-rental?country=100181&boat_type=51&regions=559906&marinas=1317289
+    kind: company
+
+  - name: Saysail (full fleet)
+    url: https://saysail.com/en/yacht-rental
+    kind: company
+
+  - name: Ediba Sailing (via Yasido)
+    url: https://yasido.com/charter-companies/ediba-sailing
+    kind: company
+
+  - name: Sailfleet (our fleet)
+    url: https://www.sailfleet.net/en/our-fleet
+    kind: company
+
+  - name: Sailfleet (catamarans filter)
+    url: https://www.sailfleet.net/en/our-fleet?filter%5B3%5D%5B%5D=1
+    kind: company
+
+  - name: Navigare Yachting Turkey
+    url: https://navigare-yachting.com/en/yacht-charter/turkey-base-marmaris-joya-del-mar-marina
+    kind: company
+
+  - name: Irmak Yachting (home)
+    url: https://www.irmakyachting.com/
+    kind: company
+
+  - name: Irmak Yachting (fleet)
+    url: https://www.irmakyachting.com/fleet
+    kind: company
+
+  - name: Marmaris Sailing Marmaris fleet
+    url: https://marmaris-sailing.com/bareboat/bareboat-marmaris.php
+    kind: company
+
+  - name: Marmaris Sailing Gocek fleet
+    url: https://marmaris-sailing.com/bareboat/bareboat-gocek.php
+    kind: company
+
+  - name: Rotaneta Gocek catamaran
+    url: https://rotaneta.com/en/gocek-bareboat-weekly-catamaran-charter
+    kind: company
+
+  - name: Rotaneta home
+    url: https://rotaneta.com/en
+    kind: company
+
+  # Dream Yacht Charter блокирует прямой GET (403). Используем альтернативный
+  # маркетинговый URL — он отвечает и содержит список флота Турции.
+  - name: Dream Yacht Charter Turkey
+    url: https://www.dreamyachtworldwide.com/destination/turkey/
+    kind: company
+
+  - name: BBS Yachting (via Yasido)
+    url: https://yasido.com/charter-companies/bbs-yachting-turkey
+    kind: company
+
+  - name: Bodrumtour (via Yasido)
+    url: https://yasido.com/charter-companies/bodrumtour-travel-and-yachting
+    kind: company
+
+  - name: Farout Yachting (via Yasido)
+    url: https://yasido.com/charter-companies/farout-yachting-turkey
+    kind: company
+
+  - name: Contact Yachts Turkey
+    url: https://www.contactyachts.com/destinations/turkey/
+    kind: company
+
+  - name: Boating Turkey (home)
+    url: https://www.boatingturkey.net/
+    kind: company
+
+  - name: Marmaris Sailing (home)
+    url: https://marmaris-sailing.com/
+    kind: company
+
+  - name: IYC Turkey megayachts
+    url: https://iyc.com/turkey/
+    kind: company
+
+  - name: Northrop & Johnson Turkey
+    url: https://www.northropandjohnson.com/yacht-charter/mediterranean/turkey
+    kind: company
+
+  - name: Moran Yachts Turkey
+    url: https://www.moranyachts.com/luxury-yacht-charter/turkey/
+    kind: company

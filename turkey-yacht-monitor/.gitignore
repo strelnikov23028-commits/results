@@ -1,0 +1,4 @@
+.env
+__pycache__/
+*.pyc
+state/last_run.json
