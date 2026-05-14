@@ -38,6 +38,21 @@ def send(token: str, chat_id: str, text: str) -> None:
     if r.status_code >= 400:
         print(f"[notify] telegram error {r.status_code}: {r.text[:300]}",
               file=sys.stderr)
+        if "chat not found" in r.text.lower():
+            # First-time onboarding: tell the operator which bot to /start
+            try:
+                me = requests.get(
+                    f"https://api.telegram.org/bot{token}/getMe", timeout=10
+                ).json()
+                username = me.get("result", {}).get("username", "?")
+                print(
+                    f"[notify] HINT: чат {chat_id} ещё не открыт у бота. "
+                    f"Открой https://t.me/{username} и нажми /start, "
+                    f"потом запусти workflow заново.",
+                    file=sys.stderr,
+                )
+            except requests.RequestException as inner:
+                print(f"[notify] getMe failed: {inner}", file=sys.stderr)
     r.raise_for_status()
 
 
