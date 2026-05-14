@@ -70,10 +70,12 @@ sources:
   - name: Saysail (catamarans)
     url: https://saysail.com/en/yacht-rental?country=100181&boat_type=51&regions=559906&marinas=1317289
     kind: company
+    timeout: 60
 
   - name: Saysail (full fleet)
     url: https://saysail.com/en/yacht-rental
     kind: company
+    timeout: 60
 
   - name: Ediba Sailing (via Yasido)
     url: https://yasido.com/charter-companies/ediba-sailing
@@ -156,3 +158,100 @@ sources:
   - name: Moran Yachts Turkey
     url: https://www.moranyachts.com/luxury-yacht-charter/turkey/
     kind: company
+
+  # ============================================================
+  # Доп.источники (вторая партия — крупные маркетплейсы и гулет-операторы)
+  # ============================================================
+
+  # ---- Маркетплейсы / агрегаторы ----
+  - name: Yachtico Turkey catamarans
+    url: https://www.yachtico.com/yacht-charters-rentals-catamaran-turkey
+    kind: aggregator
+
+  - name: Yachtico Turkey all sailing
+    url: https://www.yachtico.com/yacht-charters-rentals-sailing_boat-turkey
+    kind: aggregator
+
+  - name: Yachtico Turkey full catalog
+    url: https://www.yachtico.com/yacht-charters-rentals-turkey
+    kind: aggregator
+
+  - name: Boataround Turkey
+    url: https://www.boataround.com/us/search?destinations=turkey
+    kind: aggregator
+    timeout: 45
+
+  - name: Yacht-Rent Turkey
+    url: https://www.yacht-rent.com/turkey
+    kind: aggregator
+
+  - name: Borrow A Boat Turkey
+    url: https://www.borrowaboat.com/en-us/c/turkey/
+    kind: aggregator
+
+  - name: YachtCharterFleet Turkey
+    url: https://www.yachtcharterfleet.com/turkey-yacht-charters-409.htm
+    kind: aggregator
+
+  - name: YachtCharterFleet gulet fleet
+    url: https://www.yachtcharterfleet.com/gulet-yacht-charter-fleet.htm
+    kind: aggregator
+
+  - name: GetMyBoat Turkey
+    url: https://www.getmyboat.com/boat-rental/Turkey/
+    kind: aggregator
+
+  # ---- Гулет-специализированные (главный продукт Турции) ----
+  - name: Goolets Turkey
+    url: https://goolets.net/destination/turkey/
+    kind: company
+
+  - name: Gulet Bookers (home, Bodrum-based)
+    url: https://www.guletbookers.com/
+    kind: company
+
+  - name: GuletCharter.org fleet
+    url: https://guletcharter.org/gulet-fleet/
+    kind: company
+
+  - name: Gulet Escapes (UK)
+    url: https://www.guletescapes.com/
+    kind: company
+
+  - name: GuletYacht.net
+    url: https://www.guletyacht.net/
+    kind: company
+
+  - name: Turkey Luxury Gulet (fleet)
+    url: https://www.turkeyluxurygulet.com/turkish-gulet-fleet/
+    kind: company
+
+  - name: Wondergulets
+    url: https://www.wondergulets.com/en
+    kind: company
+
+  # ---- Турецкие чартерные компании (B2C) ----
+  - name: Lumar Yachts (charter Turkey)
+    url: https://www.lumar-yachts.com/yacht-charter-turkey
+    kind: company
+
+  - name: Lumar Yachts luxury sailing yachts
+    url: https://www.lumar-yachts.com/yacht-charter-turkey/luxury-sailing-yachts
+    kind: company
+
+  - name: Platin Yachting
+    url: https://www.platinyachting.com/
+    kind: company
+
+  - name: Yachts & Gulets
+    url: https://yachtsngulets.com/
+    kind: company
+
+  - name: Mirya Yachting (own fleet)
+    url: https://miryaguletcharter.com/own-fleet/
+    kind: company
+
+  - name: Mirya Yachting (home)
+    url: https://miryaguletcharter.com/
+    kind: company
+

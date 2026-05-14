@@ -1,4 +1,10 @@
 {
-  "ts": "2026-05-14T06:47:20.089888+00:00",
-  "findings": {}
+  "ts": "2026-05-14T07:16:13.362331+00:00",
+  "findings": {},
+  "errors": {
+    "Sailo Turkey catamarans": "http_503",
+    "Saysail (catamarans)": "request_error: ReadTimeout: HTTPSConnectionPool(host='saysail.com', port=443): Read timed out. (read timeout=30)",
+    "Dream Yacht Charter Turkey": "http_403",
+    "GuletYacht.net": "http_403"
+  }
 }

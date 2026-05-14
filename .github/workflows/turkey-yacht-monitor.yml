@@ -2,9 +2,9 @@ name: Turkey yacht — Aquila watch
 
 on:
   schedule:
-    # ежедневно ~06:17 UTC = ~09:17 МСК
-    - cron: "17 6 * * *"
-  workflow_dispatch:  # ручной запуск из UI
+    # ежедневно 06:02 UTC = 09:02 МСК (≈ "9 утра")
+    - cron: "2 6 * * *"
+  workflow_dispatch:  # ручной запуск из UI или из inline-кнопки в TG
 
 permissions:
   contents: write   # чтобы коммитить обновлённый state/last_status.json
@@ -38,9 +38,10 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          # При ручном запуске шлём heartbeat-сводку (для проверки/успокоения).
-          # При cron-запуске молчим, кроме случаев с реальной находкой.
-          ALWAYS_PING: ${{ github.event_name == 'workflow_dispatch' && '1' || '' }}
+          # Каждый запуск (cron и manual) шлёт полный отчёт со списком сайтов.
+          ALWAYS_PING: "1"
+          # Ссылка на форму ручного запуска для inline-кнопки.
+          DISPATCH_URL: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/turkey-yacht-monitor.yml
         run: python notify.py
 
       - name: Upload run artifact
@@ -64,3 +65,33 @@ jobs:
           else
             echo "state unchanged"
           fi
+
+      # Любая фатальная ошибка (Python падает, monitor.py крашится, push не идёт) —
+      # тоже летит в Telegram, чтобы не пропустить молчаливое умирание мониторинга.
+      - name: Notify Telegram about workflow failure
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import os, requests
+          token = os.environ.get("TELEGRAM_BOT_TOKEN")
+          chat = os.environ.get("TELEGRAM_CHAT_ID")
+          run_url = os.environ.get("RUN_URL", "?")
+          if not token or not chat:
+              print("no telegram creds — skip"); raise SystemExit(0)
+          text = (
+              "\U0001f6e5️ <b>AQUILA-WATCH</b> — workflow упал\n"
+              f"Run: {run_url}\n"
+              "Смотри логи в Actions. Мониторинг сегодня не отработал."
+          )
+          r = requests.post(
+              f"https://api.telegram.org/bot{token}/sendMessage",
+              json={"chat_id": chat, "text": text, "parse_mode": "HTML",
+                    "disable_web_page_preview": True},
+              timeout=20,
+          )
+          print(r.status_code, r.text[:200])
+          PY
