@@ -109,7 +109,7 @@ def load_state() -> dict:
             return json.loads(STATE_FILE.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             pass
-    return {"findings": {}}
+    return {"findings": {}, "errors": {}}
 
 
 def save_state(state: dict) -> None:
@@ -130,9 +130,10 @@ def main() -> int:
     sources = yaml.safe_load(SOURCES_PATH.read_text(encoding="utf-8"))["sources"]
     old_state = load_state()
     old_findings = old_state.get("findings", {})
+    old_errors = old_state.get("errors", {})  # name -> last_error_code
 
     new_findings: dict[str, dict] = {}
-    errors: list[dict] = []
+    errors_map: dict[str, dict] = {}  # name -> {url, error}
     checked = 0
 
     for s in sources:
@@ -142,7 +143,7 @@ def main() -> int:
         checked += 1
         html, err = fetch(url, timeout=timeout)
         if err:
-            errors.append({"name": name, "url": url, "error": err})
+            errors_map[name] = {"url": url, "error": err}
             # Polite delay
             time.sleep(1.0)
             continue
@@ -175,26 +176,43 @@ def main() -> int:
                 ][:5],
             }
 
+    # New errors = sources that error'd now AND either didn't error before
+    # or had a different error code. (We don't spam if a flaky source keeps
+    # returning the same 503 every day.)
+    new_errors: dict[str, dict] = {}
+    for name, info in errors_map.items():
+        prev = old_errors.get(name)
+        if prev != info["error"]:
+            new_errors[name] = info
+
     ts = datetime.now(timezone.utc).isoformat()
+    errors_list = [{"name": n, **info} for n, info in errors_map.items()]
     report = {
         "ts": ts,
         "checked": checked,
-        "errors": errors,
+        "errors": errors_list,
+        "new_errors": [{"name": n, **info} for n, info in new_errors.items()],
         "all_findings": new_findings,
         "fresh_hits": fresh_hits,
     }
 
-    save_state({"ts": ts, "findings": new_findings})
+    save_state({
+        "ts": ts,
+        "findings": new_findings,
+        "errors": {n: info["error"] for n, info in errors_map.items()},
+    })
     write_run_report(report)
 
     # Stdout summary (for CI logs)
     print(f"[{ts}] checked={checked} sources_with_aquila={len(new_findings)} "
-          f"fresh_hits={len(fresh_hits)} errors={len(errors)}")
+          f"fresh_hits={len(fresh_hits)} errors={len(errors_list)} "
+          f"new_errors={len(new_errors)}")
     for name, info in new_findings.items():
         flag = "NEW" if name in fresh_hits else "seen"
         print(f"  [{flag}] {name} ({info['match_count']} match) -> {info['url']}")
-    for err in errors:
-        print(f"  [err] {err['name']}: {err['error']}")
+    for name, info in errors_map.items():
+        flag = "NEW" if name in new_errors else "stale"
+        print(f"  [err-{flag}] {name}: {info['error']}")
 
     # Exit code 0 always — GH Actions step checks fresh_hits separately
     return 0
