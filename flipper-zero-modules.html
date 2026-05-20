@@ -198,6 +198,113 @@
   .buy:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(249,115,22,0.3)}
   .buy svg{width:14px;height:14px}
 
+  .use-cases{
+    margin:0 0 18px;
+    padding:12px 14px;
+    background:rgba(249,115,22,0.06);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+  }
+  .uc-title{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    font-weight:700;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .use-cases ul{
+    list-style:none;
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .use-cases li{
+    padding:3px 0 3px 14px;
+    position:relative;
+    line-height:1.45;
+  }
+  .use-cases li::before{
+    content:"▸";
+    color:var(--accent);
+    position:absolute;
+    left:0;
+    font-size:11px;
+    top:5px;
+  }
+
+  .legal-section{
+    background:
+      radial-gradient(ellipse at top right,rgba(248,113,113,0.06) 0%,transparent 60%),
+      var(--bg);
+    border-top:1px solid var(--border);
+  }
+  .legal-warning{
+    margin:0 0 32px;
+    padding:20px 24px;
+    background:rgba(248,113,113,0.08);
+    border:1px solid rgba(248,113,113,0.3);
+    border-radius:14px;
+    display:flex;gap:16px;align-items:flex-start;
+  }
+  .legal-warning .icon{font-size:28px;line-height:1}
+  .legal-warning strong{color:#fca5a5}
+  .legal-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+    gap:16px;
+  }
+  .country-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px 24px;
+    transition:border-color .2s;
+  }
+  .country-card:hover{border-color:rgba(248,113,113,0.4)}
+  .country-card .flag{
+    font-size:32px;
+    margin-bottom:6px;
+    line-height:1;
+  }
+  .country-card h4{
+    font-size:18px;
+    margin-bottom:6px;
+    font-weight:700;
+  }
+  .country-card .status{
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:6px;
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:12px;
+  }
+  .status-banned{background:rgba(248,113,113,0.18);color:#fca5a5;border:1px solid rgba(248,113,113,0.4)}
+  .status-risky{background:rgba(251,146,60,0.18);color:var(--accent-2);border:1px solid rgba(251,146,60,0.4)}
+  .status-grey{background:rgba(251,191,36,0.18);color:var(--gold);border:1px solid rgba(251,191,36,0.4)}
+  .status-ok{background:rgba(52,211,153,0.18);color:var(--green);border:1px solid rgba(52,211,153,0.4)}
+  .country-card p{font-size:13.5px;color:var(--text-dim)}
+  .country-card .penalty{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--border);
+    font-size:12.5px;
+    color:var(--text-faint);
+  }
+  .country-card .penalty strong{color:#fca5a5}
+  .legal-note{
+    margin-top:28px;
+    padding:18px 22px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    font-size:13.5px;
+    color:var(--text-dim);
+  }
+  .legal-note strong{color:var(--text)}
+
   .official-banner{
     margin:32px 0 0;
     padding:24px 28px;
@@ -303,6 +410,7 @@
       <li><a href="#case">Корпуса и защита</a></li>
       <li><a href="#compare">Сравнительная таблица</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a href="#legal">Правовой статус и запреты</a></li>
     </ul>
   </nav>
 </div>
@@ -332,6 +440,16 @@
             <li>USB-C, кнопки BOOT/RST</li>
             <li>Совместима с Marauder и Black Magic</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Wardriving: сбор и картирование Wi-Fi-сетей вокруг здания, в офисе, в районе</li>
+              <li>Evil Portal: фишинг-страница для аудита корпоративного Wi-Fi по согласованию с заказчиком</li>
+              <li>Deauth-атаки на свои тестовые стенды (отбраковка дешёвых IoT-камер)</li>
+              <li>Bluetooth-spam на закрытых демо-площадках для проверки реакции iOS/Android</li>
+              <li>Учебные задачи на CTF-соревнованиях и в кружках по кибербезу</li>
+            </ul>
+          </div>
           <a class="buy" href="https://flipper.net/products/wifi-devboard" target="_blank" rel="noopener">На flipper.net →</a>
         </div>
       </article>
@@ -350,6 +468,16 @@
             <li>Внешний SMA-разъём для антенны</li>
             <li>Совместимо со штатной CLI и Unleashed</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Считывание брелоков ворот, шлагбаумов, гаражей с расстояния 30–50 м (своих)</li>
+              <li>Аудит датчиков сигнализации и метеостанций на 433/868 МГц</li>
+              <li>Реверс-инжиниринг пультов LPD-радиостанций и удалённых выключателей</li>
+              <li>Поиск «зашумлённых» каналов перед запуском собственного оборудования</li>
+              <li>Расширенный радиус для записи и replay-атак на тестовом стенде</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/flux-capacitor" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -368,6 +496,16 @@
             <li>Встроенный GPS и батарея</li>
             <li>Touch-дисплей и собственный UI</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Профессиональный wardriving с автономным дисплеем без подключения к Flipper</li>
+              <li>Параллельная работа двух Wi-Fi-радио: одно слушает, второе атакует</li>
+              <li>Картирование точек доступа на территории кампуса/предприятия с GPS-трекингом</li>
+              <li>Полевая работа red-team на длинном выезде без ноутбука</li>
+              <li>Сбор беспроводной телеметрии на массовых мероприятиях для bug-bounty</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/awok-dual-touch-v3" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -401,6 +539,16 @@
             <li>Подключение через GPIO</li>
             <li>Поддержка Mifare Classic / DESFire / NTAG</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Чтение карт доступа сквозь одежду/сумку при ассессменте физической безопасности</li>
+              <li>Эмуляция пропуска на считыватель, к которому Flipper не получается поднести вплотную</li>
+              <li>Длинный «щуп» для удалённого тестирования замков и считывателей у дверей</li>
+              <li>Аудит NFC-меток на витринах и в банкоматах без разборки оборудования</li>
+              <li>Тестирование защищённости электронных пропусков на проходных</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/nfc-range-extender-for-flipper-zero" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -419,6 +567,16 @@
             <li>Не требует пайки и питания</li>
             <li>Совместима с любым чехлом</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Чтение Mifare-меток сквозь силиконовый чехол без снятия</li>
+              <li>+30–50% дальности для считывания меток на стенах и под потолком</li>
+              <li>Бюджетная альтернатива активному удлинителю — для бытовых задач</li>
+              <li>Усиление сигнала при копировании школьных/студенческих NFC-пропусков</li>
+              <li>Стабильное чтение «капризных» NFC-наклеек и трекеров</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/nfc-booster-antenna-for-flipper-zero" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -452,6 +610,16 @@
             <li>Wide-angle диаграмма</li>
             <li>Питание от GPIO Flipper</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Управление всеми ТВ-приёмниками в большом баре/спортбаре одним нажатием</li>
+              <li>Аудит ИК-замков, кондиционеров и проекторов в опен-спейсе</li>
+              <li>«TV-B-Gone» для конференц-залов и переговорок</li>
+              <li>Дистанционный запуск проекторов в школах/университетах без штатного пульта</li>
+              <li>Тестирование диапазона работы любых ИК-устройств</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/slim-shady-ir-blaster" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -470,6 +638,16 @@
             <li>Узкий направленный луч</li>
             <li>Совместима с базовой прошивкой</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Прицельное управление телевизором на витрине магазина с улицы</li>
+              <li>ИК-сигнал на 20+ метров — через стекло витрины, длинный коридор, склад</li>
+              <li>Передача обучающих ИК-кодов через большой лекционный зал</li>
+              <li>Тестирование ИК-систем умного дома на дальних дистанциях</li>
+              <li>Полевая работа техника: один пульт на все типы оборудования</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/masta-blasta-ir-blaster" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -503,6 +681,16 @@
             <li>VGA до 640×480</li>
             <li>9-осевой IMU + microSD</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Вывод экрана Flipper на монитор/проектор для презентаций и стримов</li>
+              <li>Запуск DOOM, NES-эмуляторов и портов ретро-игр на больших экранах</li>
+              <li>Разработка прошивок для RP2040 без отдельной отладочной платы</li>
+              <li>Использование 9-осевого IMU как контроллера движения для своих игр</li>
+              <li>Хранение прошивок, дампов, медиа на дополнительной microSD-карте</li>
+            </ul>
+          </div>
           <a class="buy" href="https://flipper.net/products/video-game-module-for-flipper-zero" target="_blank" rel="noopener">На flipper.net →</a>
         </div>
       </article>
@@ -521,6 +709,16 @@
             <li>Поддержка кастомных приложений</li>
             <li>Идеально для школ и курсов</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Уроки электроники в школе/кружке без макетных плат и пайки</li>
+              <li>Изучение GPIO, ШИМ, I²C, UART на готовых наглядных сценариях</li>
+              <li>Прототипирование простых устройств управления (лампы, моторы, сенсоры)</li>
+              <li>Демонстрации на лекциях по embedded и автоматизации</li>
+              <li>Самообучение основам микроконтроллеров для начинающих</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/digilab-for-flipperzero" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -554,6 +752,16 @@
             <li>Размер под штатный «грибок»</li>
             <li>Идеально для одноразовых прототипов</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Сборка собственного модуля под уникальную пентест-задачу</li>
+              <li>Одноразовый щуп для конкретного объекта (UART/SPI на нестандартных пинах)</li>
+              <li>Эксперименты с собственными сенсорами (термопары, датчики Холла, гироскопы)</li>
+              <li>Учебные проекты по разработке плат расширения</li>
+              <li>Создание адаптеров под нестандартные интерфейсы и разъёмы</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/flipper-zero-prototyping-boards" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -587,6 +795,16 @@
             <li>Поддержка стандарта CAN 2.0B</li>
             <li>Прошивки: CanFlipper, OBD-II</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Чтение OBD-II: ошибки двигателя, температура, обороты, расход — всё в реальном времени</li>
+              <li>Реверс-инжиниринг команд ECU и климат-контроля на своём авто</li>
+              <li>Аудит беспилотного оборудования и автоматики (CAN в станках/тракторах)</li>
+              <li>Учебные проекты по car-hacking и CTF на автомобильную тематику</li>
+              <li>Анализ CAN-шины электротранспорта и зарядных станций</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/ec-canbus" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -605,6 +823,16 @@
             <li>JTAG/SWD-отладка</li>
             <li>UART/I²C-снифер</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Дамп SPI Flash прошивки IoT-роутера через SOIC-клипсу без выпаивания</li>
+              <li>JTAG/SWD-отладка дешёвых IP-камер для bug bounty</li>
+              <li>UART-снифинг логов умной техники: видеть, что внутри устройства</li>
+              <li>Аудит smart-замков, лампочек, термостатов на CVE</li>
+              <li>Дамп прошивок для последующего анализа через Ghidra/IDA</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/feberis-pro" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -638,6 +866,16 @@
             <li>Доступ ко всем кнопкам</li>
             <li>Несколько расцветок</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Базовая защита от падений в кармане, рюкзаке, на столе</li>
+              <li>Дополнительная фрикция в руке для активного использования в полевых условиях</li>
+              <li>Цветовое отличие нескольких Flipper-ов в команде/семье</li>
+              <li>Снижение износа углов корпуса при ежедневной носке</li>
+              <li>Защита от мелких царапин на дисплее и кнопках</li>
+            </ul>
+          </div>
           <a class="buy" href="https://flipper.net/products/flipper-silicone-case" target="_blank" rel="noopener">На flipper.net →</a>
         </div>
       </article>
@@ -656,6 +894,16 @@
             <li>Отделения под модули расширения</li>
             <li>Карабин и петля на пояс</li>
           </ul>
+          <div class="use-cases">
+            <div class="uc-title">Кейсы применения</div>
+            <ul>
+              <li>Транспортировка Flipper + 2–3 модулей на выездной пентест в одном кейсе</li>
+              <li>Защита от ударов, пыли и дождя в полевых условиях</li>
+              <li>Удобное хранение всего набора: Flipper, microSD, кабели, переходники</li>
+              <li>Перевозка устройства в самолёте без риска повреждения</li>
+              <li>Брутальный внешний вид для тех, кто использует Flipper профессионально</li>
+            </ul>
+          </div>
           <a class="buy" href="https://lab401.com/products/lab401-hardshell-for-flipper-zero" target="_blank" rel="noopener">На lab401.com →</a>
         </div>
       </article>
@@ -743,10 +991,153 @@
   </div>
 </section>
 
+<!-- LEGAL STATUS -->
+<section id="legal" class="legal-section">
+  <div class="container">
+    <h2>Правовой статус: где Flipper Zero нельзя возить</h2>
+    <p class="section-sub">Перед поездкой стоит проверить юрисдикцию: в одних странах Flipper Zero и модули расширения официально запрещены к ввозу, в других — попадают в «серую» зону по статьям о незаконных радиоустройствах или средствах негласного получения информации. Ниже — карта рисков на май 2026.</p>
+
+    <div class="legal-warning">
+      <div class="icon">⚠️</div>
+      <div>
+        <strong>Важно:</strong> сам Flipper Zero почти нигде не объявлен «оружием хакера» — претензии обычно к модулям расширения, антеннам и прошивкам типа Marauder/Xtreme. На таможне досматривают именно <strong>железо вместе с прошивкой</strong> и сторонними платами (NRF24, CC1101, Wi-Fi). Прошивка из коробки даёт меньше поводов для конфискации.
+      </div>
+    </div>
+
+    <div class="legal-grid">
+
+      <div class="country-card">
+        <div class="flag">🇧🇷</div>
+        <h4>Бразилия</h4>
+        <span class="status status-banned">Полный запрет</span>
+        <p>С апреля 2023 года телеком-регулятор <strong>ANATEL</strong> объявил Flipper Zero нелицензированным радиоустройством. Все посылки конфискуются на таможне, продажа в стране запрещена. Это самая жёсткая позиция в мире.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> конфискация устройства, штраф продавцу до <strong>R$ 10 000</strong> за единицу товара. Покупатель теряет посылку без компенсации.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇨🇦</div>
+        <h4>Канада</h4>
+        <span class="status status-risky">Был анонсирован запрет</span>
+        <p>В феврале 2024 министерство <strong>Innovation, Science and Economic Development</strong> анонсировало запрет на ввоз и продажу из-за роста угонов авто. В итоге запрет смягчили: <strong>устройство легально</strong>, преследуется только незаконное использование.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> при незаконном использовании (relay-атака на чужое авто) — до <strong>10 лет тюрьмы</strong> по Criminal Code §342.1.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇷🇺</div>
+        <h4>Россия</h4>
+        <span class="status status-risky">«Серая» зона</span>
+        <p>Сам Flipper Zero не запрещён, но <strong>ст. 138.1 УК РФ</strong> («незаконный оборот специальных технических средств для негласного получения информации») активно применяется к модулям типа NRF24/CC1101, NFC-удлинителям, скрытым диктофонам. Известны случаи конфискации на таможне.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> штраф до <strong>200 000 ₽</strong> или лишение свободы на срок до <strong>4 лет</strong>.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇧🇾</div>
+        <h4>Беларусь</h4>
+        <span class="status status-risky">«Серая» зона</span>
+        <p>Аналогичная российской рамка: формального запрета нет, но устройство и расширения могут быть квалифицированы как СТС негласного получения информации. На таможне досматривают тщательно, особенно посылки из ЕС.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> ст. 376 УК РБ — штраф или ограничение свободы до <strong>2 лет</strong>; конфискация устройства.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇦🇪</div>
+        <h4>ОАЭ</h4>
+        <span class="status status-banned">Фактический запрет</span>
+        <p>Закон <strong>Cybercrime Law 2021 (Federal Decree-Law 34)</strong> прямо запрещает ввоз и использование «hacking tools». Flipper Zero и WiFi Devboard попадают под определение однозначно. На таможне в Дубае и Абу-Даби посылки разворачивают.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> штраф от <strong>50 000 до 2 000 000 AED</strong> (≈ $13k–540k), тюремное заключение от 6 месяцев до нескольких лет.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇦🇺</div>
+        <h4>Австралия</h4>
+        <span class="status status-grey">Риск конфискации</span>
+        <p>Прямого запрета нет, но <strong>ACMA</strong> (телеком-регулятор) активно конфискует устройства, нарушающие условия эфирной лицензии. Кейсы изъятия на границе документированы. Использование сторонних радиомодулей повышает риск кратно.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> штраф до <strong>AU$ 222 000</strong> для физлиц по Radiocommunications Act 1992 за работу нелицензированного передатчика.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇺🇸</div>
+        <h4>США</h4>
+        <span class="status status-ok">Легален</span>
+        <p>Запрета нет, устройство сертифицировано FCC. В 2022 году CBP однократно конфисковала контейнер на 15 000 штук, но владельцам всё вернули. Amazon и eBay сняли товар, но <strong>flipper.net</strong> и проверенные ритейлеры работают.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> только при незаконном использовании — Computer Fraud and Abuse Act, до <strong>10 лет тюрьмы</strong> за неавторизованный доступ.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇪🇺</div>
+        <h4>Евросоюз</h4>
+        <span class="status status-ok">Легален</span>
+        <p>Flipper Zero и официальные модули имеют <strong>CE</strong>-сертификацию. Свободно продаются через Lab401 (Франция), Hak5 EU и другие точки. Главное ограничение — направленные радиоатаки в открытом эфире.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> по GDPR и Computer Misuse Act (UK) — штрафы до <strong>€20 млн</strong> или 4% оборота за неправомерный сбор данных, тюрьма по местным УК.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇮🇷</div>
+        <h4>Иран, КНДР, Сирия</h4>
+        <span class="status status-banned">Недоступен</span>
+        <p>Flipper Devices — резидент США, поэтому устройство и расширения попадают под <strong>экспортные ограничения OFAC/BIS</strong>. Поставки в санкционные юрисдикции официально не производятся, ввоз через третьи страны рискован.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> для продавца — нарушение OFAC, штраф до <strong>$1 млн</strong>. На таможне получателя — местные нормы (Иран: до 5 лет за «незаконные средства связи»).
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇨🇳</div>
+        <h4>Китай</h4>
+        <span class="status status-risky">Высокий риск</span>
+        <p>Прямого запрета на Flipper нет, но любое радиооборудование без сертификации <strong>SRRC</strong> может быть изъято. На внутреннем рынке устройство официально не продаётся; ввоз через Гонконг иногда проходит, через материковую таможню — лотерея.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> штраф 3–5× от стоимости устройства, конфискация. При использовании в коммерческих целях — административное взыскание.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇬🇧</div>
+        <h4>Великобритания</h4>
+        <span class="status status-ok">Легален</span>
+        <p>Продажа и ввоз не запрещены, регуляторных проблем нет. Главное — не нарушать <strong>Computer Misuse Act 1990</strong> при пользовании. Все Wi-Fi/RFID-атаки на чужое оборудование без письменного разрешения — уголовное преступление.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> CMA 1990 — до <strong>10 лет тюрьмы</strong> за неавторизованный доступ к компьютерной системе с целью совершения дальнейших преступлений.
+        </div>
+      </div>
+
+      <div class="country-card">
+        <div class="flag">🇹🇷</div>
+        <h4>Турция</h4>
+        <span class="status status-grey">Серая зона</span>
+        <p>Прямого запрета нет, но <strong>BTK</strong> (телеком-регулятор) требует сертификации для любого радиооборудования. На таможне посылки иногда задерживают для проверки. Внутри страны Flipper можно найти на местных площадках, но без гарантии.</p>
+        <div class="penalty">
+          <strong>Санкции:</strong> административный штраф до <strong>50 000 TL</strong> за нелицензированное радиооборудование; конфискация устройства.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="legal-note">
+      <strong>Практические советы для путешественников:</strong> в зону «серого» риска — Россия, Беларусь, Турция, Австралия, Китай — берите Flipper <em>без сторонних модулей расширения</em> и с заводской прошивкой. Wi-Fi Devboard, CC1101-плата, NRF24 и Marauder-прошивка — главные «красные флаги» на таможне. В Бразилию и ОАЭ устройство <em>не везите вообще</em>: конфискация почти гарантирована. Перед поездкой сверяйтесь с актуальной страницей <a href="https://flipper.net/pages/compliance" target="_blank" rel="noopener" style="color:var(--accent)">flipper.net/pages/compliance</a> — там Flipper Devices сами публикуют список стран и юридический статус.
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="container">
-    <p>Каталог собран в мае 2026. Цены и наличие могут меняться — проверяйте на сайтах производителей.</p>
-    <p style="margin-top:8px">Источники: <a href="https://flipper.net" target="_blank" rel="noopener">flipper.net</a> · <a href="https://lab401.com" target="_blank" rel="noopener">lab401.com</a></p>
+    <p>Каталог собран в мае 2026. Цены, наличие и правовой статус могут меняться — проверяйте на сайтах производителей и в новостях регуляторов.</p>
+    <p style="margin-top:8px">Источники: <a href="https://flipper.net" target="_blank" rel="noopener">flipper.net</a> · <a href="https://lab401.com" target="_blank" rel="noopener">lab401.com</a> · <a href="https://flipper.net/pages/compliance" target="_blank" rel="noopener">compliance</a> · <a href="https://xda-developers.com" target="_blank" rel="noopener">XDA Developers</a></p>
   </div>
 </footer>
 
