@@ -1,9 +1,8 @@
 {
-  "ts": "2026-05-24T08:33:19.908938+00:00",
+  "ts": "2026-05-25T10:12:51.879542+00:00",
   "findings": {},
   "errors": {
     "Yacht-Rent Turkey": "http_403",
-    "Gulet Bookers (home, Bodrum-based)": "request_error: SSLError: HTTPSConnectionPool(host='www.guletbookers.com', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))",
     "GuletYacht.net": "http_403"
   }
 }
