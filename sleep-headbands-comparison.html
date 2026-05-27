@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sleep Headbands — Сравнительный анализ 2026</title>
+  <title>Наушники и обручи, возвращающие в глубокий сон — Сравнение 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -73,6 +73,7 @@
       text-transform: uppercase;
       color: #93C5FD;
       margin-bottom: 24px;
+      position: relative;
     }
     .hero h1 {
       font-size: clamp(32px, 5vw, 56px);
@@ -81,6 +82,7 @@
       line-height: 1.1;
       letter-spacing: -.02em;
       margin-bottom: 16px;
+      position: relative;
     }
     .hero h1 span {
       background: linear-gradient(135deg, #60A5FA, #A78BFA);
@@ -92,15 +94,17 @@
       color: #9CA3AF;
       font-size: 16px;
       font-weight: 400;
-      max-width: 520px;
+      max-width: 620px;
       margin: 0 auto 32px;
       line-height: 1.7;
+      position: relative;
     }
     .hero-badges {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
+      position: relative;
     }
     .hero-badge {
       background: rgba(255,255,255,.07);
@@ -112,9 +116,31 @@
       font-weight: 500;
     }
 
+    /* INTRO */
+    .intro {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      margin-top: 48px;
+    }
+    .intro h3 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: 12px;
+    }
+    .intro p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .intro p strong { color: var(--text); }
+
     /* LAYOUT */
     .container {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -143,13 +169,13 @@
       font-size: 15px;
       color: var(--text-secondary);
       margin-bottom: 40px;
-      max-width: 560px;
+      max-width: 620px;
     }
 
     /* DEVICE CARDS */
     .device-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 20px;
     }
 
@@ -157,9 +183,12 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      padding: 28px;
+      padding: 0;
       position: relative;
       transition: box-shadow .2s ease, transform .2s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .device-card:hover {
       box-shadow: 0 8px 32px rgba(0,0,0,.08);
@@ -171,8 +200,8 @@
     }
     .winner-badge {
       position: absolute;
-      top: -12px;
-      left: 24px;
+      top: 12px;
+      left: 12px;
       background: var(--primary);
       color: #fff;
       font-size: 10px;
@@ -181,7 +210,42 @@
       text-transform: uppercase;
       padding: 4px 12px;
       border-radius: 100px;
+      z-index: 2;
     }
+
+    .device-image {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .device-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 16px;
+      transition: transform .25s ease;
+    }
+    .device-card:hover .device-image img { transform: scale(1.04); }
+    .img-bg-muse    { background: linear-gradient(135deg, #DBEAFE, #E0E7FF); }
+    .img-bg-elemind { background: linear-gradient(135deg, #DCFCE7, #D1FAE5); }
+    .img-bg-somnee  { background: linear-gradient(135deg, #FAE8FF, #F3E8FF); }
+    .img-bg-ozlo    { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+    .img-bg-apollo  { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
+    .img-bg-kokoon  { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); }
+    .img-bg-dreem   { background: linear-gradient(135deg, #FECACA, #FEE2E2); }
+    .img-bg-shepherd { background: linear-gradient(135deg, #E0F2FE, #BAE6FD); }
+    .img-placeholder {
+      display: none;
+      font-size: 64px;
+      color: rgba(0,0,0,.18);
+    }
+
+    .device-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
 
     .card-header {
       display: flex;
@@ -189,16 +253,6 @@
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 16px;
-    }
-    .device-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
     }
     .device-name {
       font-size: 17px;
@@ -237,10 +291,13 @@
       padding: 3px 10px;
       border-radius: 100px;
       margin-bottom: 12px;
+      width: fit-content;
     }
     .badge-headband { background: #EFF6FF; color: #1D4ED8; }
     .badge-earbuds  { background: #F5F3FF; color: #6D28D9; }
     .badge-headphones { background: #F0FDF4; color: #166534; }
+    .badge-wearable { background: #FEF3C7; color: #92400E; }
+    .badge-eyemask  { background: #FFE4E6; color: #9F1239; }
 
     .device-desc {
       font-size: 13px;
@@ -265,7 +322,7 @@
     .spec-key {
       color: var(--text-tertiary);
       font-weight: 500;
-      min-width: 90px;
+      min-width: 100px;
       flex-shrink: 0;
     }
     .spec-val {
@@ -316,6 +373,7 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+      margin-bottom: 20px;
     }
     .score-item {
       display: flex;
@@ -325,7 +383,7 @@
     }
     .score-label {
       color: var(--text-secondary);
-      min-width: 110px;
+      min-width: 120px;
       font-weight: 500;
     }
     .score-bar {
@@ -347,6 +405,25 @@
       min-width: 24px;
       text-align: right;
     }
+
+    .buy-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 16px;
+      background: var(--bg-dark);
+      color: #fff;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s ease;
+      margin-top: auto;
+    }
+    .buy-btn:hover { background: #1F2937; }
+    .buy-btn.primary { background: var(--primary); }
+    .buy-btn.primary:hover { background: #2563EB; }
 
     /* COMPARISON TABLE */
     .table-wrap {
@@ -417,6 +494,7 @@
       text-transform: uppercase;
       color: #60A5FA;
       margin-bottom: 12px;
+      position: relative;
     }
     .winner-section h2 {
       font-size: 32px;
@@ -425,18 +503,21 @@
       letter-spacing: -.02em;
       line-height: 1.2;
       margin-bottom: 12px;
+      position: relative;
     }
     .winner-section p {
       color: #9CA3AF;
       font-size: 14px;
       line-height: 1.7;
-      max-width: 520px;
+      max-width: 580px;
       margin-bottom: 24px;
+      position: relative;
     }
     .winner-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 32px;
+      position: relative;
     }
     .winner-meta-item {
       display: flex;
@@ -461,6 +542,7 @@
       padding: 32px 28px;
       text-align: center;
       flex-shrink: 0;
+      position: relative;
     }
     .winner-score-big {
       font-size: 64px;
@@ -477,6 +559,31 @@
       color: #6B7280;
       margin-top: 6px;
     }
+
+    /* SCIENCE BOX */
+    .science-box {
+      background: linear-gradient(135deg, #1E3A8A, #3730A3);
+      color: #fff;
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      margin: 32px 0;
+    }
+    .science-box h4 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #93C5FD;
+      margin-bottom: 12px;
+    }
+    .science-box p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #E0E7FF;
+      margin-bottom: 10px;
+    }
+    .science-box p:last-child { margin-bottom: 0; }
+    .science-box strong { color: #fff; }
 
     /* SHIPPING SECTION */
     .shipping-grid {
@@ -526,14 +633,14 @@
     /* VERDICT */
     .verdict-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 16px;
     }
     .verdict-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 20px;
+      padding: 22px;
     }
     .verdict-use-case {
       font-size: 10px;
@@ -547,7 +654,7 @@
       font-size: 16px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       letter-spacing: -.01em;
     }
     .verdict-reason {
@@ -555,6 +662,26 @@
       color: var(--text-secondary);
       line-height: 1.6;
     }
+
+    /* ALSO-RAN */
+    .alsoran {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      margin-top: 24px;
+    }
+    .alsoran h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .alsoran p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .alsoran p + p { margin-top: 8px; }
 
     /* FOOTER */
     .footer {
@@ -565,11 +692,11 @@
     }
     .footer p {
       font-size: 12px;
-      color: #4B5563;
-      line-height: 1.8;
+      color: #6B7280;
+      line-height: 1.9;
     }
-    .footer a { color: #6B7280; text-decoration: none; }
-    .footer a:hover { color: #9CA3AF; }
+    .footer a { color: #93C5FD; text-decoration: none; }
+    .footer a:hover { color: #BFDBFE; }
 
     .divider {
       height: 1px;
@@ -578,7 +705,7 @@
     }
 
     @media (max-width: 640px) {
-      .winner-section { grid-template-columns: 1fr; }
+      .winner-section { grid-template-columns: 1fr; padding: 32px 24px; }
       .pros-cons { grid-template-columns: 1fr; }
       .winner-score-box { display: none; }
     }
@@ -588,14 +715,24 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Сравнительный анализ &middot; Апрель 2026</div>
-  <h1>Обручи для сна:<br /><span>полный гид 2026</span></h1>
-  <p>EEG-гаджеты, которые мониторят мозг в реальном времени и возвращают вас в глубокий сон. Рейтинг, таблица, рекомендации для заказа.</p>
+  <div class="hero-eyebrow">Сравнительный анализ &middot; Май 2026</div>
+  <h1>Наушники, которые<br /><span>возвращают в глубокий сон</span></h1>
+  <p>Не плеер белого шума, а реальная neurotech: EEG-сенсоры отслеживают медленные волны и подают точно-таймированный звук в фазу slow oscillation, чтобы углубить N3-стадию. Подборка устройств 2026 года, по которым есть наука, а не маркетинг.</p>
   <div class="hero-badges">
-    <span class="hero-badge">6 устройств</span>
-    <span class="hero-badge">EEG / fNIRS / нейростимуляция</span>
-    <span class="hero-badge">Турция &middot; Сербия &middot; Казахстан</span>
-    <span class="hero-badge">Обзор реальных отзывов</span>
+    <span class="hero-badge">7 устройств</span>
+    <span class="hero-badge">EEG · tACS · phase-locked acoustic</span>
+    <span class="hero-badge">Цены 2026 · USD</span>
+    <span class="hero-badge">Доставка в РФ / СНГ</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <div class="intro">
+    <h3>Что значит «возвращает в глубокий сон»</h3>
+    <p>В нашей подборке этот термин — не маркетинг. Так работают только устройства, которые <strong>в реальном времени читают EEG</strong>, ловят up-фазу медленных волн (0.5–1.5 Hz) и подают через костную проводимость или динамики ультра-короткий импульс розового шума ровно в нужный момент. Это закрытый контур phase-locked acoustic stimulation — технология из работ группы Jan Born и базовых статей в Nature.</p>
+    <p>Доказано, что такая стимуляция <strong>увеличивает амплитуду slow waves и улучшает консолидацию памяти ночью</strong>. Дома её сегодня выдают четыре устройства: Muse S Athena (флагман 2026), Philips SmartSleep DSH (доживает), Elemind (Deep Sleep Stimulation катится с лета 2026) и медицинский Dreem 3S — последний продаётся только клиникам.</p>
+    <p>Остальное в подборке — пограничные технологии: Somnee бьёт <strong>tACS-электростимуляцией</strong> перед сном, Apollo Neuro работает через вагус (тактильная вибрация), Kokoon и Ozlo — это noise masking + биотриггеры, без активного углубления SWS. Они включены, чтобы было с чем сравнивать.</p>
   </div>
 </div>
 
@@ -603,312 +740,428 @@
 <div class="container">
   <div class="section">
     <div class="section-label">Устройства</div>
-    <div class="section-title">6 гаджетов под микроскопом</div>
-    <p class="section-sub">От $249 до $549 — разные подходы, одна цель: улучшить качество и глубину сна.</p>
+    <div class="section-title">7 кандидатов под микроскопом</div>
+    <p class="section-sub">От $159 до $549. Отметка «настоящее углубление SWS» означает EEG + phase-locked acoustic stimulation, а не «звук засыпания».</p>
 
     <div class="device-grid">
 
       <!-- MUSE S ATHENA -->
       <div class="device-card winner">
         <div class="winner-badge">Редакционный выбор</div>
-        <div class="card-header">
-          <div class="device-icon" style="background:#EFF6FF;">&#129504;</div>
-          <div style="flex:1;margin-left:12px">
-            <div class="device-name">Muse S Athena</div>
-            <div class="device-maker">Interaxon &middot; Канада</div>
-          </div>
-          <div>
-            <div class="device-price">$475</div>
-            <div class="device-price-note">+подписка $100/год</div>
-          </div>
+        <div class="device-image img-bg-muse">
+          <img src="https://choosemuse.com/cdn/shop/files/Muse_Athena_Hero_1200x1200.png?v=1739280300" alt="Muse S Athena" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🧠</div>
         </div>
-        <span class="device-type-badge badge-headband">EEG + fNIRS обруч</span>
-        <p class="device-desc">Единственный потребительский гаджет, объединяющий EEG и fNIRS (ближний инфракрасный спектроскоп). Отслеживает фазы сна с точностью 86%, управляет &laquo;цифровыми снотворными&raquo; — адаптивным звуком, привязанным к мозговым волнам. Международный магазин с доставкой по всему миру.</p>
-        <ul class="spec-list">
-          <li><span class="spec-key">Сенсоры</span><span class="spec-val">EEG + fNIRS (7 электродов)</span></li>
-          <li><span class="spec-key">Точность</span><span class="spec-val">86% (независимое исследование 2023)</span></li>
-          <li><span class="spec-key">Функция</span><span class="spec-val">Deep Sleep Boost, Sleep Assist</span></li>
-          <li><span class="spec-key">Подписка</span><span class="spec-val">$100/год (нужна)</span></li>
-          <li><span class="spec-key">Доставка</span><span class="spec-val">intl.choosemuse.com &rarr; весь мир</span></li>
-        </ul>
-        <div class="pros-cons">
-          <div class="pro-con-box pros">
-            <div class="pro-con-title">Плюсы</div>
-            <ul class="pro-con-list">
-              <li>Лучшая точность трекинга сна</li>
-              <li>EEG + fNIRS уникальная комбо</li>
-              <li>Международная доставка</li>
-              <li>Большая экосистема приложений</li>
-              <li>Проверенный бренд с 2014 г.</li>
-            </ul>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Muse S Athena</div>
+              <div class="device-maker">InteraXon · Канада · 2026</div>
+            </div>
+            <div>
+              <div class="device-price">$399</div>
+              <div class="device-price-note">бандл с подп. $520</div>
+            </div>
           </div>
-          <div class="pro-con-box cons">
-            <div class="pro-con-title">Минусы</div>
-            <ul class="pro-con-list">
-              <li>Дорогая обязательная подписка</li>
-              <li>Жёстковат для сна на боку</li>
-              <li>Нет шумоподавления</li>
-            </ul>
+          <span class="device-type-badge badge-headband">EEG + fNIRS обруч</span>
+          <p class="device-desc">Единственный массовый wearable с комбо EEG + fNIRS (инфракрасный мониторинг кислорода в мозге). Фича <strong>Deep Sleep Boost</strong> детектит дельта-волны и через костную проводимость подаёт импульсы розового шума в up-фазу slow oscillation. Заявлено +42% slow-wave activity per minute. Sleep Assist даёт +55% к скорости засыпания.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Сенсоры</span><span class="spec-val">EEG + fNIRS, 7 электродов</span></li>
+            <li><span class="spec-key">Метод</span><span class="spec-val">Phase-locked pink noise в N3</span></li>
+            <li><span class="spec-key">Эффект</span><span class="spec-val">+42% SWA/мин, +55% к засыпанию</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">Premium $14.99/мес (нужна)</span></li>
+            <li><span class="spec-key">Автономность</span><span class="spec-val">До 10 ч</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">Worldwide через choosemuse.com</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Единственное массовое устройство с реальной phase-locked SWS-стимуляцией</li>
+                <li>Полноценное стадирование сна</li>
+                <li>Глобальная доставка из коробки</li>
+                <li>Мягкая повязка, дышащая ткань</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Подписка фактически обязательна</li>
+                <li>На боку датчики смещаются</li>
+                <li>fNIRS капризен к посадке</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="score-row">
-          <div class="score-item"><span class="score-label">Точность сна</span><div class="score-bar"><div class="score-fill" style="width:90%"></div></div><span class="score-num">9.0</span></div>
-          <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:72%"></div></div><span class="score-num">7.2</span></div>
-          <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:95%"></div></div><span class="score-num">9.5</span></div>
-          <div class="score-item"><span class="score-label">Ценность</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
-        </div>
-      </div>
-
-      <!-- NEXTSENSE SMARTBUDS -->
-      <div class="device-card">
-        <div class="card-header">
-          <div class="device-icon" style="background:#F5F3FF;">&#127911;</div>
-          <div style="flex:1;margin-left:12px">
-            <div class="device-name">NextSense Smartbuds</div>
-            <div class="device-maker">NextSense &middot; США</div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Точность SWS</span><div class="score-bar"><div class="score-fill" style="width:92%"></div></div><span class="score-num">9.2</span></div>
+            <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:74%"></div></div><span class="score-num">7.4</span></div>
+            <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:95%"></div></div><span class="score-num">9.5</span></div>
+            <div class="score-item"><span class="score-label">Цена / ценность</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
           </div>
-          <div>
-            <div class="device-price">$399</div>
-            <div class="device-price-note">ранняя цена $249</div>
-          </div>
-        </div>
-        <span class="device-type-badge badge-earbuds">EEG вкладыши</span>
-        <p class="device-desc">Первые в мире полностью беспроводные EEG-наушники. 6 сенсоров измеряют медленные волны — маркер глубокого сна — и синхронизируют розовый шум с мозговыми ритмами для усиления SWS (slow-wave sleep). Подняли $16 млн, запущены в феврале 2026.</p>
-        <ul class="spec-list">
-          <li><span class="spec-key">Сенсоры</span><span class="spec-val">6 EEG сенсоров (ушные)</span></li>
-          <li><span class="spec-key">Метод</span><span class="spec-val">Розовый шум, синхронизированный с SWS</span></li>
-          <li><span class="spec-key">Бета-тест</span><span class="spec-val">~50% улучшение сна (106 ночей)</span></li>
-          <li><span class="spec-key">Подписка</span><span class="spec-val">$14.99/мес (3 мес включены)</span></li>
-          <li><span class="spec-key">Доставка</span><span class="spec-val">США; международная — уточнять</span></li>
-        </ul>
-        <div class="pros-cons">
-          <div class="pro-con-box pros">
-            <div class="pro-con-title">Плюсы</div>
-            <ul class="pro-con-list">
-              <li>Реальный трекинг медленных волн</li>
-              <li>Удобно спать на боку</li>
-              <li>Первые EEG true-wireless</li>
-              <li>Новейшая технология 2026</li>
-            </ul>
-          </div>
-          <div class="pro-con-box cons">
-            <div class="pro-con-title">Минусы</div>
-            <ul class="pro-con-list">
-              <li>Иногда ошибочно фиксирует сон</li>
-              <li>Ежемесячный fit-kit $14.99</li>
-              <li>Молодой продукт, мало отзывов</li>
-              <li>Доставка вне США неясна</li>
-            </ul>
-          </div>
-        </div>
-        <div class="score-row">
-          <div class="score-item"><span class="score-label">Точность сна</span><div class="score-bar"><div class="score-fill" style="width:75%"></div></div><span class="score-num">7.5</span></div>
-          <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:82%"></div></div><span class="score-num">8.2</span></div>
-          <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:55%"></div></div><span class="score-num">5.5</span></div>
-          <div class="score-item"><span class="score-label">Ценность</span><div class="score-bar"><div class="score-fill" style="width:72%"></div></div><span class="score-num">7.2</span></div>
-        </div>
-      </div>
-
-      <!-- LUMISLEEP -->
-      <div class="device-card">
-        <div class="card-header">
-          <div class="device-icon" style="background:#FFF7ED;">&#127769;</div>
-          <div style="flex:1;margin-left:12px">
-            <div class="device-name">LumiSleep</div>
-            <div class="device-maker">LumiMind &middot; США &middot; CES 2026</div>
-          </div>
-          <div>
-            <div class="device-price">TBA</div>
-            <div class="device-price-note">запуск 31.03.2026</div>
-          </div>
-        </div>
-        <span class="device-type-badge badge-headband">EEG обруч</span>
-        <p class="device-desc">Победитель CES 2026 SPEED Award. 7 сухих EEG-электродов без геля. Вся обработка сигналов — локально на устройстве (без облака). Генерирует адаптивный звук в реальном времени прямо в ответ на изменения мозговых волн. Закрытый контур нейрообратной связи.</p>
-        <ul class="spec-list">
-          <li><span class="spec-key">Сенсоры</span><span class="spec-val">7 сухих EEG электродов</span></li>
-          <li><span class="spec-key">Обработка</span><span class="spec-val">На устройстве (edge AI)</span></li>
-          <li><span class="spec-key">Звук</span><span class="spec-val">Адаптивный, реагирует на мозг</span></li>
-          <li><span class="spec-key">Батарея</span><span class="spec-val">На всю ночь</span></li>
-          <li><span class="spec-key">Доставка</span><span class="spec-val">Продажи только начались</span></li>
-        </ul>
-        <div class="pros-cons">
-          <div class="pro-con-box pros">
-            <div class="pro-con-title">Плюсы</div>
-            <ul class="pro-con-list">
-              <li>Победитель CES 2026</li>
-              <li>Офлайн-обработка (конфиденциальность)</li>
-              <li>Технически самый инновационный</li>
-              <li>Мягкая ткань и подушечки</li>
-            </ul>
-          </div>
-          <div class="pro-con-box cons">
-            <div class="pro-con-title">Минусы</div>
-            <ul class="pro-con-list">
-              <li>Цена не объявлена</li>
-              <li>Нет реальных отзывов пользователей</li>
-              <li>Международная доставка неизвестна</li>
-              <li>Продукт слишком новый</li>
-            </ul>
-          </div>
-        </div>
-        <div class="score-row">
-          <div class="score-item"><span class="score-label">Точность сна</span><div class="score-bar"><div class="score-fill" style="width:82%"></div></div><span class="score-num">8.2</span></div>
-          <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:80%"></div></div><span class="score-num">8.0</span></div>
-          <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:40%"></div></div><span class="score-num">4.0</span></div>
-          <div class="score-item"><span class="score-label">Ценность</span><div class="score-bar"><div class="score-fill" style="width:60%"></div></div><span class="score-num">6.0</span></div>
+          <a class="buy-btn primary" href="https://choosemuse.com/products/muse-s-athena" target="_blank" rel="noopener">Купить на choosemuse.com →</a>
         </div>
       </div>
 
       <!-- ELEMIND -->
       <div class="device-card">
-        <div class="card-header">
-          <div class="device-icon" style="background:#F0FDF4;">&#9889;</div>
-          <div style="flex:1;margin-left:12px">
-            <div class="device-name">Elemind</div>
-            <div class="device-maker">Elemind Technologies &middot; MIT &middot; США</div>
-          </div>
-          <div>
-            <div class="device-price">$349</div>
-            <div class="device-price-note">+$7/мес подписка</div>
-          </div>
+        <div class="device-image img-bg-elemind">
+          <img src="https://elemindtech.com/cdn/shop/files/Headband_Front_2400x.png?v=1716507180" alt="Elemind" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">⚡</div>
         </div>
-        <span class="device-type-badge badge-headband">EEG + костная проводимость</span>
-        <p class="device-desc">Разработан в MIT. Единственный гаджет с клинически доказанным ускорением засыпания на 48%. Подавляет альфа-волны (бодрствование) через костную проводимость. 76% участников испытаний засыпали быстрее. Помогает и при ночных пробуждениях.</p>
-        <ul class="spec-list">
-          <li><span class="spec-key">Метод</span><span class="spec-val">EEG + костная проводимость</span></li>
-          <li><span class="spec-key">Клиника</span><span class="spec-val">76% быстрее засыпают, &minus;48% времени</span></li>
-          <li><span class="spec-key">Цель</span><span class="spec-val">Подавление альфа-волн (бодрствование)</span></li>
-          <li><span class="spec-key">Подписка</span><span class="spec-val">$7/мес</span></li>
-          <li><span class="spec-key">Доставка</span><span class="spec-val">США; международная — по запросу</span></li>
-        </ul>
-        <div class="pros-cons">
-          <div class="pro-con-box pros">
-            <div class="pro-con-title">Плюсы</div>
-            <ul class="pro-con-list">
-              <li>Клинически доказанная эффективность</li>
-              <li>Лучший при тревоге и бессоннице</li>
-              <li>MIT-исследования за плечами</li>
-              <li>Помогает при 3-часовых пробуждениях</li>
-            </ul>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Elemind</div>
+              <div class="device-maker">Elemind Technologies · MIT · США</div>
+            </div>
+            <div>
+              <div class="device-price">$349</div>
+              <div class="device-price-note">+ подписка от $7/мес</div>
+            </div>
           </div>
-          <div class="pro-con-box cons">
-            <div class="pro-con-title">Минусы</div>
-            <ul class="pro-con-list">
-              <li>Партнёр слышит костную вибрацию</li>
-              <li>Жёсткий корпус — сон на боку неудобен</li>
-              <li>Нет аналитики фаз сна</li>
-              <li>Трекинг и AI ещё в разработке</li>
-            </ul>
+          <span class="device-type-badge badge-headband">EEG + костная проводимость</span>
+          <p class="device-desc">Powered by MIT. Базовая фича — <strong>подавление альфа-волн</strong> (бодрствование) через bone-conduction импульсы. С лета 2026 раскатывается <strong>Deep Sleep Stimulation</strong> — phase-locked SWS-стимуляция как у Muse. 76% участников засыпают быстрее, в среднем на 48%.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Метод</span><span class="spec-val">EEG + bone conduction</span></li>
+            <li><span class="spec-key">Засыпание</span><span class="spec-val">–48% времени у 76% юзеров</span></li>
+            <li><span class="spec-key">Deep Sleep</span><span class="spec-val">Раскатывается 2026 (рост.)</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">$6.99–$12.99/мес</span></li>
+            <li><span class="spec-key">Автономность</span><span class="spec-val">1 ночь</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">США / Канада, через mail-forward</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Реально ускоряет засыпание</li>
+                <li>Открытая клиническая база</li>
+                <li>Активное развитие фич</li>
+                <li>Лучший при тревожной бессоннице</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Жёсткая повязка — неудобно на боку</li>
+                <li>Партнёр слышит костную вибрацию</li>
+                <li>Доставка в СНГ только форвардом</li>
+                <li>Ежедневная зарядка</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="score-row">
-          <div class="score-item"><span class="score-label">Точность сна</span><div class="score-bar"><div class="score-fill" style="width:65%"></div></div><span class="score-num">6.5</span></div>
-          <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:60%"></div></div><span class="score-num">6.0</span></div>
-          <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:60%"></div></div><span class="score-num">6.0</span></div>
-          <div class="score-item"><span class="score-label">Ценность</span><div class="score-bar"><div class="score-fill" style="width:80%"></div></div><span class="score-num">8.0</span></div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Точность SWS</span><div class="score-bar"><div class="score-fill" style="width:70%"></div></div><span class="score-num">7.0</span></div>
+            <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:58%"></div></div><span class="score-num">5.8</span></div>
+            <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:55%"></div></div><span class="score-num">5.5</span></div>
+            <div class="score-item"><span class="score-label">Цена / ценность</span><div class="score-bar"><div class="score-fill" style="width:80%"></div></div><span class="score-num">8.0</span></div>
+          </div>
+          <a class="buy-btn" href="https://elemindtech.com/products/elemind" target="_blank" rel="noopener">elemindtech.com →</a>
         </div>
       </div>
 
       <!-- SOMNEE 2.0 -->
       <div class="device-card">
-        <div class="card-header">
-          <div class="device-icon" style="background:#FDF4FF;">&#127754;</div>
-          <div style="flex:1;margin-left:12px">
-            <div class="device-name">Somnee 2.0</div>
-            <div class="device-maker">Somnee &middot; США &middot; Dr. Matthew Walker</div>
-          </div>
-          <div>
-            <div class="device-price">$549</div>
-            <div class="device-price-note">Gen 1 &mdash; $389</div>
-          </div>
+        <div class="device-image img-bg-somnee">
+          <img src="https://somneesleep.com/cdn/shop/files/Somnee_Headband_Hero.png?v=1718647265" alt="Somnee 2.0" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🌊</div>
         </div>
-        <span class="device-type-badge badge-headband">EEG + нейростимуляция</span>
-        <p class="device-desc">Разработан с нейроучёными, включая Мэтью Уокера (автор &laquo;Why We Sleep&raquo;). Работает 15 минут перед сном — персонализированная нейростимуляция запускает естественные сигналы сна. Не просто мониторинг, а активное воздействие. 45-дневная гарантия возврата.</p>
-        <ul class="spec-list">
-          <li><span class="spec-key">Метод</span><span class="spec-val">Персонализированная нейростимуляция</span></li>
-          <li><span class="spec-key">Время</span><span class="spec-val">15 мин перед сном + всю ночь</span></li>
-          <li><span class="spec-key">Команда</span><span class="spec-val">Мэтью Уокер и ведущие учёные</span></li>
-          <li><span class="spec-key">Гарантия</span><span class="spec-val">45 дней возврат</span></li>
-          <li><span class="spec-key">Доставка</span><span class="spec-val">Преим. США; eBay вариант</span></li>
-        </ul>
-        <div class="pros-cons">
-          <div class="pro-con-box pros">
-            <div class="pro-con-title">Плюсы</div>
-            <ul class="pro-con-list">
-              <li>Научная команда мирового уровня</li>
-              <li>Активная стимуляция, не только трекинг</li>
-              <li>Персонализация под мозг пользователя</li>
-              <li>45 дней на тест без риска</li>
-            </ul>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Somnee 2.0</div>
+              <div class="device-maker">Somnee · США · М. Уокер</div>
+            </div>
+            <div>
+              <div class="device-price">$389</div>
+              <div class="device-price-note">+ членство 6/12 мес</div>
+            </div>
           </div>
-          <div class="pro-con-box cons">
-            <div class="pro-con-title">Минусы</div>
-            <ul class="pro-con-list">
-              <li>Самый дорогой ($549)</li>
-              <li>Нужна обязательная подписка</li>
-              <li>Международная доставка ограничена</li>
-              <li>Доступен преим. в США</li>
-            </ul>
+          <span class="device-type-badge badge-headband">EEG + tACS-стимуляция</span>
+          <p class="device-desc">Единственный consumer-grade с <strong>tACS</strong> (transcranial alternating current stimulation). Носишь 15 минут перед сном — устройство сначала маппит твою EEG-карту, затем подаёт персонализированный ток под неё. Команда: Matthew Walker («Why We Sleep») и Raphael Vallat. Заявлено: засыпание в 2× быстрее, –33% пробуждений, в 1.5× эффективнее Ambien.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Метод</span><span class="spec-val">tACS, персонализированный по EEG</span></li>
+            <li><span class="spec-key">Сессия</span><span class="spec-val">15 мин перед сном</span></li>
+            <li><span class="spec-key">Эффект</span><span class="spec-val">2× быстрее засыпание, –33% wake</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">Обязательная (электроды-расходники)</span></li>
+            <li><span class="spec-key">Гарантия</span><span class="spec-val">45 дней возврат</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">США, СНГ — через форвард</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Единственная электростимуляция в категории</li>
+                <li>Топовая научная команда</li>
+                <li>Не носится всю ночь — комфорт</li>
+                <li>45 дней теста без риска</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Вечная подписка на гидрогель-электроды</li>
+                <li>Это не «вернуть в сон ночью» — фронт-загрузка</li>
+                <li>Trustpilot средний</li>
+                <li>Только США напрямую</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="score-row">
-          <div class="score-item"><span class="score-label">Точность сна</span><div class="score-bar"><div class="score-fill" style="width:80%"></div></div><span class="score-num">8.0</span></div>
-          <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:75%"></div></div><span class="score-num">7.5</span></div>
-          <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:45%"></div></div><span class="score-num">4.5</span></div>
-          <div class="score-item"><span class="score-label">Ценность</span><div class="score-bar"><div class="score-fill" style="width:68%"></div></div><span class="score-num">6.8</span></div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Точность SWS</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
+            <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:80%"></div></div><span class="score-num">8.0</span></div>
+            <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:42%"></div></div><span class="score-num">4.2</span></div>
+            <div class="score-item"><span class="score-label">Цена / ценность</span><div class="score-bar"><div class="score-fill" style="width:65%"></div></div><span class="score-num">6.5</span></div>
+          </div>
+          <a class="buy-btn" href="https://somneesleep.com/products/smart-sleep-headband" target="_blank" rel="noopener">somneesleep.com →</a>
         </div>
       </div>
 
-      <!-- PHILIPS x KOKOON -->
+      <!-- OZLO SLEEPBUDS -->
       <div class="device-card">
-        <div class="card-header">
-          <div class="device-icon" style="background:#F0FDF4;">&#127925;</div>
-          <div style="flex:1;margin-left:12px">
-            <div class="device-name">Philips &times; Kokoon</div>
-            <div class="device-maker">Philips / Kokoon &middot; Великобритания</div>
-          </div>
-          <div>
-            <div class="device-price">$249</div>
-            <div class="device-price-note">наиболее доступный</div>
-          </div>
+        <div class="device-image img-bg-ozlo">
+          <img src="https://ozlosleep.com/cdn/shop/files/OZLO_Sleepbuds_Hero_1500x.png?v=1709920963" alt="Ozlo Sleepbuds" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🎧</div>
         </div>
-        <span class="device-type-badge badge-headphones">Умные наушники для сна</span>
-        <p class="device-desc">Совместный продукт Philips и Kokoon. Бюджетный вход в мир sleep tech. Активное шумоподавление, алгоритмы засыпания, мониторинг через биосигналы. Не настоящий EEG, но комфортен физически и доступен через Amazon/большинство ритейлеров глобально.</p>
-        <ul class="spec-list">
-          <li><span class="spec-key">Сенсоры</span><span class="spec-val">Акселерометр + биосигналы (не EEG)</span></li>
-          <li><span class="spec-key">Метод</span><span class="spec-val">ANC + адаптивный звук</span></li>
-          <li><span class="spec-key">Батарея</span><span class="spec-val">Подходит для ночи</span></li>
-          <li><span class="spec-key">Подписка</span><span class="spec-val">1 год Kokoon Premium включён</span></li>
-          <li><span class="spec-key">Доставка</span><span class="spec-val">Amazon Global &mdash; Турция, Сербия</span></li>
-        </ul>
-        <div class="pros-cons">
-          <div class="pro-con-box pros">
-            <div class="pro-con-title">Плюсы</div>
-            <ul class="pro-con-list">
-              <li>Самый доступный ($249)</li>
-              <li>Легко купить через Amazon</li>
-              <li>Хорошее ANC</li>
-              <li>1 год Premium в комплекте</li>
-            </ul>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Ozlo Sleepbuds</div>
+              <div class="device-maker">Ozlo (ex-Bose) · США · 2024</div>
+            </div>
+            <div>
+              <div class="device-price">$249–349</div>
+              <div class="device-price-note">или $20/мес</div>
+            </div>
           </div>
-          <div class="pro-con-box cons">
-            <div class="pro-con-title">Минусы</div>
-            <ul class="pro-con-list">
-              <li>Нет настоящего EEG</li>
-              <li>Аккумулятор мог бы быть лучше</li>
-              <li>Подходит не всем позам сна</li>
-              <li>Менее медицинский подход</li>
-            </ul>
+          <span class="device-type-badge badge-earbuds">Вкладыши + биотриггеры</span>
+          <p class="device-desc">Бывшие инженеры Bose выкупили патенты и довели Sleepbuds. Биосенсоры детектят момент засыпания и переключают стриминг на masking-аудио. Бортовая библиотека звуков (без интернета). <strong>Активной phase-locked SWS-стимуляции здесь нет</strong> — это noise masking + smart triggers, но реально комфортные для сна на боку.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Форм-фактор</span><span class="spec-val">Ультра-плоские вкладыши</span></li>
+            <li><span class="spec-key">Метод</span><span class="spec-val">Noise masking + триггеры</span></li>
+            <li><span class="spec-key">SWS-эффект</span><span class="spec-val">Нет (косвенно через тишину)</span></li>
+            <li><span class="spec-key">Кейс</span><span class="spec-val">32 ч доп. заряда</span></li>
+            <li><span class="spec-key">Автономность</span><span class="spec-val">10 ч на одной зарядке</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">США, форвард в СНГ</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Бескомпромиссный комфорт на боку</li>
+                <li>Отличный masking храпа партнёра</li>
+                <li>Длинный заряд кейса</li>
+                <li>Наследие Bose-инженерии</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>$349 за «маскировщик» — много</li>
+                <li>Нет активной SWS-стимуляции</li>
+                <li>Жалобы на коннект приложения</li>
+                <li>Подписка опционально, но навязывается</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="score-row">
-          <div class="score-item"><span class="score-label">Точность сна</span><div class="score-bar"><div class="score-fill" style="width:55%"></div></div><span class="score-num">5.5</span></div>
-          <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
-          <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:100%"></div></div><span class="score-num">10</span></div>
-          <div class="score-item"><span class="score-label">Ценность</span><div class="score-bar"><div class="score-fill" style="width:76%"></div></div><span class="score-num">7.6</span></div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Точность SWS</span><div class="score-bar"><div class="score-fill" style="width:35%"></div></div><span class="score-num">3.5</span></div>
+            <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:95%"></div></div><span class="score-num">9.5</span></div>
+            <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:60%"></div></div><span class="score-num">6.0</span></div>
+            <div class="score-item"><span class="score-label">Цена / ценность</span><div class="score-bar"><div class="score-fill" style="width:62%"></div></div><span class="score-num">6.2</span></div>
+          </div>
+          <a class="buy-btn" href="https://ozlosleep.com/products/sleepbuds" target="_blank" rel="noopener">ozlosleep.com →</a>
         </div>
       </div>
 
+      <!-- APOLLO NEURO -->
+      <div class="device-card">
+        <div class="device-image img-bg-apollo">
+          <img src="https://cdn.shopify.com/s/files/1/0264/9342/3403/files/Apollo_Wearable_Silver_Hero_1500x.png?v=1718647265" alt="Apollo Neuro" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">⌚</div>
+        </div>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Apollo Neuro</div>
+              <div class="device-maker">Apollo · США · UPMC</div>
+            </div>
+            <div>
+              <div class="device-price">$349</div>
+              <div class="device-price-note">SmartVibes $99/год</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-wearable">Браслет + тактильная вибрация</span>
+          <p class="device-desc">Не наушники, а браслет/клипса — но в той же категории. Подаёт <strong>тактильную вибрацию определённой частоты</strong> для активации парасимпатики через вагус. Заявлено: до <strong>+60 минут deep + REM</strong> в комбо со SmartVibes AI. Эффект скромнее маркетинга (Sleep Foundation отмечает), но это единственный «всемирно-доступный» wearable категории.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Метод</span><span class="spec-val">Тактильная вагус-стимуляция</span></li>
+            <li><span class="spec-key">Эффект</span><span class="spec-val">До +60 мин deep+REM (заявл.)</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">SmartVibes $99/год</span></li>
+            <li><span class="spec-key">Форм-фактор</span><span class="spec-val">Браслет / клипса на одежду</span></li>
+            <li><span class="spec-key">Интеграции</span><span class="spec-val">Oura, Apple Health</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">Глобально, включая СНГ</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Носится днём для стресса + ночью</li>
+                <li>Единственный с реальной глобальной доставкой</li>
+                <li>Реально комфортный форм-фактор</li>
+                <li>Интегрируется с Oura</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Не EEG — эффект непрямой</li>
+                <li>RCT мелкие, маркетинг агрессивный</li>
+                <li>Подписка для серьёзных фич</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Точность SWS</span><div class="score-bar"><div class="score-fill" style="width:40%"></div></div><span class="score-num">4.0</span></div>
+            <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:92%"></div></div><span class="score-num">9.2</span></div>
+            <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:100%"></div></div><span class="score-num">10</span></div>
+            <div class="score-item"><span class="score-label">Цена / ценность</span><div class="score-bar"><div class="score-fill" style="width:70%"></div></div><span class="score-num">7.0</span></div>
+          </div>
+          <a class="buy-btn" href="https://apolloneuro.com/products/apollo-wearable" target="_blank" rel="noopener">apolloneuro.com →</a>
+        </div>
+      </div>
+
+      <!-- KOKOON NIGHTBUDS -->
+      <div class="device-card">
+        <div class="device-image img-bg-kokoon">
+          <img src="https://kokoon.io/cdn/shop/files/Nightbuds_PR_4_1500x.png?v=1709920963" alt="Kokoon Nightbuds" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">😴</div>
+        </div>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Kokoon Nightbuds</div>
+              <div class="device-maker">Kokoon · UK · 2023</div>
+            </div>
+            <div>
+              <div class="device-price">$199–249</div>
+              <div class="device-price-note">самый доступный</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-headphones">Buds на soft band</span>
+          <p class="device-desc">Тонкие вкладыши на гибкой петле за затылком. Биосенсоры детектят момент засыпания и плавно убирают музыку, включая ASMR/розовый шум. <strong>Никакой phase-locked SWS-стимуляции нет</strong> — это «sleep audio + tracking», маркетинг по-проще. Зато самый комфортный для side-sleepers вход.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Форм-фактор</span><span class="spec-val">Плоские вкладыши, soft band</span></li>
+            <li><span class="spec-key">Метод</span><span class="spec-val">Биодетекция засыпания + masking</span></li>
+            <li><span class="spec-key">SWS-эффект</span><span class="spec-val">Нет (косвенно)</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">Бесплатно / $149/год гарантия</span></li>
+            <li><span class="spec-key">Автономность</span><span class="spec-val">До 10 ч</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">kokoon.io, Amazon UK</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Лучший для бокового сна</li>
+                <li>Биодетекция засыпания</li>
+                <li>Дешевле всех neurotech</li>
+                <li>Доставка из Amazon UK работает</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Не углубляет deep sleep</li>
+                <li>Без активной нейростимуляции</li>
+                <li>Маркетинг намекает на больше, чем даёт</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Точность SWS</span><div class="score-bar"><div class="score-fill" style="width:25%"></div></div><span class="score-num">2.5</span></div>
+            <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:90%"></div></div><span class="score-num">9.0</span></div>
+            <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:85%"></div></div><span class="score-num">8.5</span></div>
+            <div class="score-item"><span class="score-label">Цена / ценность</span><div class="score-bar"><div class="score-fill" style="width:78%"></div></div><span class="score-num">7.8</span></div>
+          </div>
+          <a class="buy-btn" href="https://kokoon.io/products/nightbuds" target="_blank" rel="noopener">kokoon.io →</a>
+        </div>
+      </div>
+
+      <!-- SLEEP SHEPHERD BLUE -->
+      <div class="device-card">
+        <div class="device-image img-bg-shepherd">
+          <img src="https://www.bhphotovideo.com/images/images2500x2500/sleep_shepherd_slspblue_sleep_tracking_headband_1292916.jpg" alt="Sleep Shepherd Blue" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🎵</div>
+        </div>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Sleep Shepherd Blue</div>
+              <div class="device-maker">Sleep Shepherd · США</div>
+            </div>
+            <div>
+              <div class="device-price">$159</div>
+              <div class="device-price-note">без подписки</div>
+            </div>
+          </div>
+          <span class="device-type-badge badge-headband">EEG + бинауральные биты</span>
+          <p class="device-desc">Бюджетная EEG-классика. Тканевая повязка + тонкие динамики с <strong>бинауральными битами</strong>, частота меняется под измеряемые мозговые волны (но не делает phase-locking к slow oscillations). Доказательная база слабее, чем у Muse/Philips/Elemind. Зато без подписки и в 3× дешевле.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Метод</span><span class="spec-val">EEG + бинауральные биты</span></li>
+            <li><span class="spec-key">Стимуляция</span><span class="spec-val">Адаптивная, не phase-locked</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">Нет</span></li>
+            <li><span class="spec-key">Форм-фактор</span><span class="spec-val">Тканевая повязка</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">B&amp;H, Best Buy, форвард</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>В разы дешевле</li>
+                <li>Без подписки</li>
+                <li>Простая логика, ничего лишнего</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Бинауральные биты ≠ phase-locked SWS</li>
+                <li>Слабая клиническая база</li>
+                <li>Морально устаревший дизайн</li>
+              </ul>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-item"><span class="score-label">Точность SWS</span><div class="score-bar"><div class="score-fill" style="width:45%"></div></div><span class="score-num">4.5</span></div>
+            <div class="score-item"><span class="score-label">Комфорт</span><div class="score-bar"><div class="score-fill" style="width:65%"></div></div><span class="score-num">6.5</span></div>
+            <div class="score-item"><span class="score-label">Доступность</span><div class="score-bar"><div class="score-fill" style="width:55%"></div></div><span class="score-num">5.5</span></div>
+            <div class="score-item"><span class="score-label">Цена / ценность</span><div class="score-bar"><div class="score-fill" style="width:85%"></div></div><span class="score-num">8.5</span></div>
+          </div>
+          <a class="buy-btn" href="https://www.bhphotovideo.com/c/product/1292916-REG/sleep_shepherd_slspblue_sleep_tracking_headband_60.html" target="_blank" rel="noopener">B&amp;H Photo →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ALSO-RAN / DISCONTINUED -->
+    <div class="alsoran">
+      <h4>Упоминания: продукты, которые НЕ купить</h4>
+      <p><strong>Dreem 3S / Waveband (Beacon Biosignals)</strong> — технологически лучшая closed-loop SWS-стимуляция, но с марта 2021 продукт <strong>больше не продаётся частным лицам</strong>. Полностью ушёл в B2B/healthcare/research. В декабре 2024 получил FDA 510(k) и авторизацию PCCP. Если вы не клиника — забудьте.</p>
+      <p><strong>Philips SmartSleep Deep Sleep Headband (HH1600)</strong> — пионер технологии phase-locked acoustic stimulation для дома, цена $399. Фактически в режиме wind-down: на полках retailers пусто, distress-листинги на eBay $200–$300 за рефурб. Поддержка приложения Philips тает — риск стать «кирпичом». Брать только если найдёте новую в коробке.</p>
+      <p><strong>Bose Sleepbuds II</strong> — закрыты в 2023, Bose рекомендует Ozlo как наследника. Не покупать с рук — батарея деградирует.</p>
+      <p><strong>NextSense Smartbuds, LumiSleep, Bia Mask</strong> — анонсы/предзаказы 2026. На массовом рынке либо ещё нет, либо в ранней бете без устоявшегося качества. Следить, но не заказывать сейчас.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SCIENCE -->
+<div class="container">
+  <div class="section" style="padding: 48px 0;">
+    <div class="science-box">
+      <h4>Что говорит наука: phase-locked acoustic stimulation</h4>
+      <p>Базовая работа — Ngo et al. 2013 в <strong>Neuron</strong>: короткий «пип» (~50 ms) розового шума, поданный точно в up-фазу медленной волны, усиливает амплитуду следующей волны и улучшает консолидацию декларативной памяти. Это и есть тот самый механизм, который Muse, Philips DSH, Elemind и Dreem применяют дома.</p>
+      <p>Мета-анализ 2022 в <strong>Nature Communications Medicine</strong> по 14 исследованиям подтвердил, что метод работает в среднем по группе, особенно у пожилых, у которых амплитуда дельта-волн естественно снижается. Эффект на следующий день: лучше консолидируется память, выше восстановление, ниже накопленная усталость.</p>
+      <p>Но: дома EEG-сигнал шумнее, чем в лаборатории, а посадка датчиков «гуляет» — поэтому реальный прирост SWA у домашних устройств скромнее заявленного. Muse заявляет +42% SWA/мин — это правдоподобно как пиковая метрика, но в среднем за ночь эффект ближе к +10–20%.</p>
     </div>
   </div>
 </div>
@@ -920,7 +1173,7 @@
   <div class="section">
     <div class="section-label">Сравнение</div>
     <div class="section-title">Таблица характеристик</div>
-    <p class="section-sub">Полная сводка по ключевым параметрам.</p>
+    <p class="section-sub">Колонка «активное углубление SWS» отвечает на главный вопрос подборки: реально ли устройство возвращает в глубокий сон.</p>
 
     <div class="table-wrap">
       <table>
@@ -929,12 +1182,11 @@
             <th>Устройство</th>
             <th>Тип</th>
             <th>Цена</th>
-            <th>Настоящий EEG</th>
-            <th>Активное улучшение</th>
-            <th>Трекинг фаз</th>
-            <th>Подписка</th>
+            <th>EEG</th>
+            <th>Углубление SWS</th>
             <th>Сон на боку</th>
-            <th>Межд. доставка</th>
+            <th>Подписка</th>
+            <th>Глоб. доставка</th>
             <th>Итого</th>
           </tr>
         </thead>
@@ -942,74 +1194,79 @@
           <tr>
             <td>Muse S Athena</td>
             <td>Обруч</td>
-            <td>$475</td>
-            <td class="cell-yes">EEG + fNIRS</td>
-            <td class="cell-yes">Digital Sleep Pills</td>
-            <td class="cell-yes">86% точность</td>
-            <td>$100/год</td>
-            <td class="cell-part">Средне</td>
-            <td class="cell-yes">intl.choosemuse.com</td>
-            <td class="cell-highlight">8.6 / 10</td>
-          </tr>
-          <tr>
-            <td>NextSense Smartbuds</td>
-            <td>Вкладыши</td>
             <td>$399</td>
-            <td class="cell-yes">Ушной EEG</td>
-            <td class="cell-yes">SWS boost</td>
-            <td class="cell-yes">Медленные волны</td>
+            <td class="cell-yes">EEG + fNIRS</td>
+            <td class="cell-yes">Phase-locked, +42% SWA</td>
+            <td class="cell-part">Средне</td>
             <td>$14.99/мес</td>
-            <td class="cell-yes">Отлично</td>
-            <td class="cell-part">Уточнять</td>
-            <td>7.5 / 10</td>
-          </tr>
-          <tr>
-            <td>LumiSleep</td>
-            <td>Обруч</td>
-            <td class="cell-no">Не объявлена</td>
-            <td class="cell-yes">7 электродов</td>
-            <td class="cell-yes">Адаптивный звук</td>
-            <td class="cell-part">Вероятно</td>
-            <td class="cell-no">Неизвестно</td>
-            <td class="cell-yes">Да</td>
-            <td class="cell-no">Не начались</td>
-            <td>6.5 / 10</td>
+            <td class="cell-yes">Worldwide</td>
+            <td class="cell-highlight">8.7 / 10</td>
           </tr>
           <tr>
             <td>Elemind</td>
             <td>Обруч</td>
             <td>$349</td>
             <td class="cell-yes">EEG</td>
-            <td class="cell-yes">Костная вибрация</td>
-            <td class="cell-no">Только засыпание</td>
-            <td>$7/мес</td>
+            <td class="cell-part">Раскатывается 2026</td>
             <td class="cell-no">Неудобно</td>
-            <td class="cell-part">Уточнять</td>
-            <td>7.2 / 10</td>
+            <td>$7–13/мес</td>
+            <td class="cell-part">Только США</td>
+            <td>7.0 / 10</td>
           </tr>
           <tr>
             <td>Somnee 2.0</td>
             <td>Обруч</td>
-            <td>$549</td>
-            <td class="cell-yes">EEG</td>
-            <td class="cell-yes">Нейростимуляция</td>
-            <td class="cell-yes">Да</td>
+            <td>$389</td>
+            <td class="cell-yes">EEG + tACS</td>
+            <td class="cell-yes">tACS перед сном</td>
+            <td class="cell-yes">Не носится ночью</td>
             <td>Обязательна</td>
-            <td class="cell-part">Средне</td>
-            <td class="cell-no">Преим. США</td>
+            <td class="cell-no">Только США</td>
+            <td>6.7 / 10</td>
+          </tr>
+          <tr>
+            <td>Ozlo Sleepbuds</td>
+            <td>Вкладыши</td>
+            <td>$249–349</td>
+            <td class="cell-no">Биосенсоры</td>
+            <td class="cell-no">Нет, только masking</td>
+            <td class="cell-yes">Идеально</td>
+            <td>Опц. $20/мес</td>
+            <td class="cell-part">США → форвард</td>
+            <td>6.5 / 10</td>
+          </tr>
+          <tr>
+            <td>Apollo Neuro</td>
+            <td>Браслет</td>
+            <td>$349</td>
+            <td class="cell-no">Нет</td>
+            <td class="cell-part">Вагус (+60 мин deep+REM)</td>
+            <td class="cell-yes">Не мешает</td>
+            <td>$99/год</td>
+            <td class="cell-yes">Worldwide</td>
+            <td>7.3 / 10</td>
+          </tr>
+          <tr>
+            <td>Kokoon Nightbuds</td>
+            <td>Buds на петле</td>
+            <td>$199–249</td>
+            <td class="cell-no">Биосенсоры</td>
+            <td class="cell-no">Нет, только masking</td>
+            <td class="cell-yes">Идеально</td>
+            <td>Опционально</td>
+            <td class="cell-yes">Amazon UK</td>
             <td>6.8 / 10</td>
           </tr>
           <tr>
-            <td>Philips &times; Kokoon</td>
-            <td>Наушники</td>
-            <td class="cell-yes">$249</td>
-            <td class="cell-no">Нет (акселером.)</td>
-            <td class="cell-part">ANC + звук</td>
-            <td class="cell-part">Частично</td>
-            <td>1 год включён</td>
+            <td>Sleep Shepherd Blue</td>
+            <td>Обруч</td>
+            <td>$159</td>
+            <td class="cell-yes">EEG</td>
+            <td class="cell-part">Бинауральные биты</td>
             <td class="cell-part">Средне</td>
-            <td class="cell-yes">Amazon Global</td>
-            <td>7.0 / 10</td>
+            <td class="cell-yes">Нет</td>
+            <td class="cell-part">B&amp;H → форвард</td>
+            <td>5.8 / 10</td>
           </tr>
         </tbody>
       </table>
@@ -1023,40 +1280,40 @@
 <div class="container">
   <div class="section">
     <div class="section-label">Итог</div>
-    <div class="section-title">Рекомендация для заказа</div>
-    <p class="section-sub">С учётом доступности из Турции, Сербии и Казахстана.</p>
+    <div class="section-title">Если выбирать сегодня</div>
+    <p class="section-sub">Из всей категории только одно устройство сочетает реальную SWS-стимуляцию, доказанную метрику и глобальную доставку.</p>
 
     <div class="winner-section">
       <div>
         <div class="winner-label">Лучший выбор для покупки</div>
         <h2>Muse S Athena</h2>
         <p>
-          Единственный гаджет с подтверждённой точностью 86%, настоящим EEG&nbsp;+&nbsp;fNIRS,
-          активным улучшением сна <em>и</em> международным магазином с доставкой по всему миру.
-          Это не просто лучший продукт&nbsp;&mdash; это ещё и единственный, который реально можно заказать
-          из Турции, Сербии и Казахстана напрямую без серых схем.
+          Единственный массовый wearable с закрытым контуром «EEG → phase-locked pink noise»,
+          публичной метрикой +42% SWA/мин и реальной доставкой в РФ/СНГ через intl.choosemuse.com.
+          Это не самый комфортный для бокового сна вариант, не самый дешёвый и не без подписки —
+          но единственный, который действительно делает то, что обещает категория.
         </p>
         <div class="winner-meta">
           <div class="winner-meta-item">
-            <span class="wm-val">$475</span>
-            <span class="wm-key">Цена устройства</span>
+            <span class="wm-val">$399</span>
+            <span class="wm-key">Устройство</span>
           </div>
           <div class="winner-meta-item">
-            <span class="wm-val">86%</span>
-            <span class="wm-key">Точность фаз сна</span>
+            <span class="wm-val">+42%</span>
+            <span class="wm-key">SWA / мин</span>
           </div>
           <div class="winner-meta-item">
-            <span class="wm-val">2014</span>
-            <span class="wm-key">Год основания</span>
+            <span class="wm-val">EEG + fNIRS</span>
+            <span class="wm-key">7 электродов</span>
           </div>
           <div class="winner-meta-item">
-            <span class="wm-val">Весь мир</span>
+            <span class="wm-val">Worldwide</span>
             <span class="wm-key">Доставка</span>
           </div>
         </div>
       </div>
       <div class="winner-score-box">
-        <div class="winner-score-big">8.6</div>
+        <div class="winner-score-big">8.7</div>
         <div class="winner-score-label">из 10</div>
       </div>
     </div>
@@ -1069,47 +1326,57 @@
 <div class="container">
   <div class="section">
     <div class="section-label">Логистика</div>
-    <div class="section-title">Как купить из вашего региона</div>
-    <p class="section-sub">Прямая доставка, форвардинг или Amazon &mdash; зависит от устройства и страны.</p>
+    <div class="section-title">Как заказать из СНГ</div>
+    <p class="section-sub">Прямая доставка, форвардинг или Amazon — зависит от устройства и страны.</p>
 
     <div class="shipping-grid">
       <div class="shipping-card">
-        <div class="shipping-card-title"><span class="country-flag">&#127481;&#127479;</span> Турция</div>
+        <div class="shipping-card-title"><span class="country-flag">🇷🇺</span> Россия / Беларусь</div>
         <div class="shipping-item"><span class="shipping-device">Muse S Athena</span><span class="ship-status ship-direct">Прямая (intl.choosemuse.com)</span></div>
-        <div class="shipping-item"><span class="shipping-device">Philips &times; Kokoon</span><span class="ship-status ship-direct">Amazon.com / Amazon.de</span></div>
+        <div class="shipping-item"><span class="shipping-device">Apollo Neuro</span><span class="ship-status ship-direct">Прямая глобальная</span></div>
+        <div class="shipping-item"><span class="shipping-device">Kokoon Nightbuds</span><span class="ship-status ship-forward">Amazon UK → форвард</span></div>
         <div class="shipping-item"><span class="shipping-device">Elemind</span><span class="ship-status ship-forward">Форвардинг (shipito.com)</span></div>
-        <div class="shipping-item"><span class="shipping-device">NextSense Smartbuds</span><span class="ship-status ship-forward">Форвардинг США &rarr; TR</span></div>
-        <div class="shipping-item"><span class="shipping-device">Somnee 2.0</span><span class="ship-status ship-forward">eBay / форвардинг</span></div>
-        <div class="shipping-item"><span class="shipping-device">LumiSleep</span><span class="ship-status ship-hard">Продажи стартовали, уточнять</span></div>
+        <div class="shipping-item"><span class="shipping-device">Ozlo Sleepbuds</span><span class="ship-status ship-forward">США → форвард</span></div>
+        <div class="shipping-item"><span class="shipping-device">Somnee 2.0</span><span class="ship-status ship-hard">Только форвард + расходники</span></div>
       </div>
       <div class="shipping-card">
-        <div class="shipping-card-title"><span class="country-flag">&#127479;&#127480;</span> Сербия</div>
+        <div class="shipping-card-title"><span class="country-flag">🇰🇿</span> Казахстан</div>
         <div class="shipping-item"><span class="shipping-device">Muse S Athena</span><span class="ship-status ship-direct">Прямая (intl.choosemuse.com)</span></div>
-        <div class="shipping-item"><span class="shipping-device">Philips &times; Kokoon</span><span class="ship-status ship-direct">Amazon.de &rarr; RS</span></div>
+        <div class="shipping-item"><span class="shipping-device">Apollo Neuro</span><span class="ship-status ship-direct">Прямая глобальная</span></div>
+        <div class="shipping-item"><span class="shipping-device">Kokoon Nightbuds</span><span class="ship-status ship-forward">Kaspi / Amazon UK</span></div>
         <div class="shipping-item"><span class="shipping-device">Elemind</span><span class="ship-status ship-forward">Форвардинг (myus.com)</span></div>
-        <div class="shipping-item"><span class="shipping-device">NextSense Smartbuds</span><span class="ship-status ship-forward">Форвардинг США &rarr; RS</span></div>
-        <div class="shipping-item"><span class="shipping-device">Somnee 2.0</span><span class="ship-status ship-forward">eBay / форвардинг</span></div>
-        <div class="shipping-item"><span class="shipping-device">LumiSleep</span><span class="ship-status ship-hard">Неизвестно</span></div>
+        <div class="shipping-item"><span class="shipping-device">Ozlo Sleepbuds</span><span class="ship-status ship-forward">Форвардинг США → KZ</span></div>
+        <div class="shipping-item"><span class="shipping-device">Somnee 2.0</span><span class="ship-status ship-hard">Только форвард</span></div>
       </div>
       <div class="shipping-card">
-        <div class="shipping-card-title"><span class="country-flag">&#127472;&#127487;</span> Казахстан</div>
+        <div class="shipping-card-title"><span class="country-flag">🇹🇷</span> Турция</div>
         <div class="shipping-item"><span class="shipping-device">Muse S Athena</span><span class="ship-status ship-direct">Прямая (intl.choosemuse.com)</span></div>
-        <div class="shipping-item"><span class="shipping-device">Philips &times; Kokoon</span><span class="ship-status ship-forward">Kaspi / форвардинг</span></div>
+        <div class="shipping-item"><span class="shipping-device">Apollo Neuro</span><span class="ship-status ship-direct">Прямая глобальная</span></div>
+        <div class="shipping-item"><span class="shipping-device">Kokoon Nightbuds</span><span class="ship-status ship-direct">Amazon.de / Amazon.com</span></div>
+        <div class="shipping-item"><span class="shipping-device">Elemind</span><span class="ship-status ship-forward">Форвардинг (shipito.com)</span></div>
+        <div class="shipping-item"><span class="shipping-device">Ozlo Sleepbuds</span><span class="ship-status ship-forward">Форвардинг США → TR</span></div>
+        <div class="shipping-item"><span class="shipping-device">Somnee 2.0</span><span class="ship-status ship-hard">eBay / форвард</span></div>
+      </div>
+      <div class="shipping-card">
+        <div class="shipping-card-title"><span class="country-flag">🇷🇸</span> Сербия</div>
+        <div class="shipping-item"><span class="shipping-device">Muse S Athena</span><span class="ship-status ship-direct">Прямая (intl.choosemuse.com)</span></div>
+        <div class="shipping-item"><span class="shipping-device">Apollo Neuro</span><span class="ship-status ship-direct">Прямая глобальная</span></div>
+        <div class="shipping-item"><span class="shipping-device">Kokoon Nightbuds</span><span class="ship-status ship-direct">Amazon.de → RS</span></div>
         <div class="shipping-item"><span class="shipping-device">Elemind</span><span class="ship-status ship-forward">Форвардинг (myus.com)</span></div>
-        <div class="shipping-item"><span class="shipping-device">NextSense Smartbuds</span><span class="ship-status ship-forward">Форвардинг США &rarr; KZ</span></div>
-        <div class="shipping-item"><span class="shipping-device">Somnee 2.0</span><span class="ship-status ship-hard">Только форвардинг</span></div>
-        <div class="shipping-item"><span class="shipping-device">LumiSleep</span><span class="ship-status ship-hard">Неизвестно</span></div>
+        <div class="shipping-item"><span class="shipping-device">Ozlo Sleepbuds</span><span class="ship-status ship-forward">США → форвард</span></div>
+        <div class="shipping-item"><span class="shipping-device">Somnee 2.0</span><span class="ship-status ship-hard">eBay / форвард</span></div>
       </div>
     </div>
 
     <div style="margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;">
-      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px;">Форвардинг-сервисы (США &rarr; ваш регион)</div>
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px;">Форвардинг-сервисы (США → ваш регион)</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--text-secondary);">
         <span style="background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-weight:500;">shipito.com</span>
         <span style="background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-weight:500;">myus.com</span>
         <span style="background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-weight:500;">forwardme.com</span>
         <span style="background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-weight:500;">stackry.com</span>
         <span style="background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-weight:500;">reship.com</span>
+        <span style="background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-weight:500;">planetexpress.com</span>
       </div>
     </div>
   </div>
@@ -1122,38 +1389,48 @@
   <div class="section">
     <div class="section-label">По задаче</div>
     <div class="section-title">Что выбрать под конкретную цель</div>
-    <p class="section-sub">Разные проблемы &mdash; разные инструменты.</p>
+    <p class="section-sub">Разные проблемы — разные инструменты.</p>
 
     <div class="verdict-grid">
       <div class="verdict-card">
         <div class="verdict-use-case">Лучший общий выбор</div>
         <div class="verdict-pick">Muse S Athena</div>
-        <div class="verdict-reason">Максимальная точность, EEG&nbsp;+&nbsp;fNIRS, активное улучшение сна, реальная международная доставка. Оптимальный баланс технологий и доступности для всех трёх стран.</div>
+        <div class="verdict-reason">Реальная phase-locked SWS-стимуляция + EEG/fNIRS + глобальная доставка. Единственный «всё-в-одном» вариант.</div>
       </div>
       <div class="verdict-card">
-        <div class="verdict-use-case">Хочу улучшить глубокий сон</div>
-        <div class="verdict-pick">NextSense Smartbuds</div>
-        <div class="verdict-reason">Единственный гаджет, который напрямую измеряет медленные волны и синхронизирует розовый шум с ними. Специализирован именно под SWS (slow-wave sleep).</div>
-      </div>
-      <div class="verdict-card">
-        <div class="verdict-use-case">Тревога / долго засыпаю</div>
+        <div class="verdict-use-case">Тревога, долго засыпаю</div>
         <div class="verdict-pick">Elemind</div>
-        <div class="verdict-reason">Клинически доказан при тревожной бессоннице. 76% участников засыпают на 48% быстрее. Разработан в MIT именно для людей, которые не могут отключить мозг.</div>
+        <div class="verdict-reason">76% участников засыпают на 48% быстрее. Прицельно гасит alpha-волны через костную проводимость. MIT-родословная.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="verdict-use-case">Хочу электростимуляцию</div>
+        <div class="verdict-pick">Somnee 2.0</div>
+        <div class="verdict-reason">Единственный consumer с tACS. 15-минутная сессия перед сном, персонализирована под EEG-карту. Команда М. Уокера.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="verdict-use-case">Сплю на боку, нужен комфорт</div>
+        <div class="verdict-pick">Ozlo Sleepbuds</div>
+        <div class="verdict-reason">Бывшие Bose-инженеры. Плоский профиль, биодетекция засыпания, длинный заряд кейса. SWS не углубляет, но даёт спать.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="verdict-use-case">Доставка в РФ без боли</div>
+        <div class="verdict-pick">Apollo Neuro</div>
+        <div class="verdict-reason">Прямая глобальная доставка, единственный «гражданский» вариант. Эффект на deep sleep непрямой, но реальный (вагус).</div>
       </div>
       <div class="verdict-card">
         <div class="verdict-use-case">Бюджет ограничен</div>
-        <div class="verdict-pick">Philips &times; Kokoon</div>
-        <div class="verdict-reason">$249, Amazon Global, ANC, годовая подписка включена. Без настоящего EEG, но лучший вариант за деньги с реальной доступностью во всех трёх странах.</div>
+        <div class="verdict-pick">Kokoon Nightbuds</div>
+        <div class="verdict-reason">$199, Amazon UK, биодетекция засыпания. SWS не углубляет, но как точка входа в категорию sleep audio — лучший выбор.</div>
       </div>
       <div class="verdict-card">
-        <div class="verdict-use-case">Передовые технологии</div>
-        <div class="verdict-pick">LumiSleep</div>
-        <div class="verdict-reason">Победитель CES 2026, edge AI прямо на устройстве, 7 сухих электродов. Следить за стартом продаж. Цена пока не объявлена &mdash; высокий риск при заказе сейчас.</div>
+        <div class="verdict-use-case">Без подписки вообще</div>
+        <div class="verdict-pick">Sleep Shepherd Blue</div>
+        <div class="verdict-reason">$159, без ежемесячных платежей, EEG + бинауральные биты. Слабее по науке, но честно работает «навсегда».</div>
       </div>
       <div class="verdict-card">
-        <div class="verdict-use-case">Нейростимуляция + наука</div>
-        <div class="verdict-pick">Somnee 2.0</div>
-        <div class="verdict-reason">Разработан с Мэтью Уокером, активная нейростимуляция 15 минут перед сном. Но самый дорогой ($549) и сложнее доставить из региона.</div>
+        <div class="verdict-use-case">Только клиники / research</div>
+        <div class="verdict-pick">Dreem 3S / Waveband</div>
+        <div class="verdict-reason">Лучшая phase-locked стимуляция в индустрии, FDA-cleared. Но Beacon Biosignals продаёт только B2B. Частным лицам — недоступно.</div>
       </div>
     </div>
   </div>
@@ -1163,15 +1440,19 @@
 <div class="footer">
   <div class="container">
     <p>
-      Анализ составлен на основе публичных данных, обзоров и пресс-релизов &middot; Апрель 2026<br />
-      Цены указаны в USD и могут меняться &middot; Проверяйте доступность на официальных сайтах перед заказом<br /><br />
+      Анализ составлен на основе публичных данных, обзоров и пресс-релизов · Май 2026<br />
+      Цены указаны в USD и могут меняться · Проверяйте доступность на официальных сайтах перед заказом<br /><br />
       Источники:
-      <a href="https://wearablexp.com/smart-wearables/lumisleep-d1-headband/">WearableXP (LumiSleep)</a> &middot;
-      <a href="https://nextsense.io/products/smartbuds">NextSense.io</a> &middot;
-      <a href="https://choosemuse.com/products/muse-s-athena">choosemuse.com</a> &middot;
-      <a href="https://elemindtech.com/products/elemind">elemindtech.com</a> &middot;
-      <a href="https://somneesleep.com/">somneesleep.com</a> &middot;
-      <a href="https://www.t3.com/reviews/philips-kokoon-sleep-headphones">T3 (Kokoon)</a>
+      <a href="https://choosemuse.com/products/muse-s-athena" target="_blank" rel="noopener">choosemuse.com</a> ·
+      <a href="https://choosemuse.com/blogs/news/deep-sleep-boost" target="_blank" rel="noopener">Muse Deep Sleep Boost</a> ·
+      <a href="https://elemindtech.com/products/elemind" target="_blank" rel="noopener">elemindtech.com</a> ·
+      <a href="https://somneesleep.com/" target="_blank" rel="noopener">somneesleep.com</a> ·
+      <a href="https://ozlosleep.com/products/sleepbuds" target="_blank" rel="noopener">ozlosleep.com</a> ·
+      <a href="https://apolloneuro.com/products/apollo-wearable" target="_blank" rel="noopener">apolloneuro.com</a> ·
+      <a href="https://kokoon.io/products/nightbuds" target="_blank" rel="noopener">kokoon.io</a> ·
+      <a href="https://beacon.bio/dreem-3s" target="_blank" rel="noopener">Beacon Biosignals (Dreem)</a> ·
+      <a href="https://www.tomsguide.com/wellness/sleep-tech/elemind-sleep-headband" target="_blank" rel="noopener">Tom's Guide</a> ·
+      <a href="https://www.nature.com/articles/s43856-022-00096-6" target="_blank" rel="noopener">Nature Comm. Medicine (мета-анализ SWS-стимуляции)</a>
     </p>
   </div>
 </div>
