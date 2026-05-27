@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Наушники для глубокого сна 2026 — true wireless подборка</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #3B82F6;
+      --secondary: #8B5CF6;
+      --success: #16A34A;
+      --warning: #D97706;
+      --danger: #DC2626;
+      --surface: #FFFFFF;
+      --text: #111827;
+      --text-secondary: #6B7280;
+      --text-tertiary: #9CA3AF;
+      --border: #E5E7EB;
+      --border-light: #F3F4F6;
+      --bg: #F9FAFB;
+      --bg-dark: #111827;
+      --radius-sm: 8px;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 14px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--bg-dark);
+      padding: 80px 24px 72px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 900px 500px at 50% -100px,
+        rgba(59,130,246,.35) 0%, rgba(139,92,246,.18) 45%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(59,130,246,.15);
+      border: 1px solid rgba(59,130,246,.3);
+      border-radius: 100px; padding: 4px 14px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: #93C5FD; margin-bottom: 24px; position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px); font-weight: 800;
+      color: #fff; line-height: 1.1; letter-spacing: -.02em;
+      margin-bottom: 16px; position: relative;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #60A5FA, #A78BFA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      color: #9CA3AF; font-size: 16px; font-weight: 400;
+      max-width: 640px; margin: 0 auto 32px;
+      line-height: 1.7; position: relative;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; position: relative;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 12px; color: #D1D5DB; font-weight: 500;
+    }
+
+    /* LAYOUT */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 64px 0; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(22px, 3vw, 32px); font-weight: 800;
+      color: var(--text); letter-spacing: -.02em;
+      line-height: 1.2; margin-bottom: 8px;
+    }
+    .section-sub {
+      font-size: 15px; color: var(--text-secondary);
+      margin-bottom: 40px; max-width: 640px;
+    }
+
+    /* INTRO */
+    .intro {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 32px;
+      margin-top: 48px;
+    }
+    .intro h3 { font-size: 18px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 12px; }
+    .intro p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 10px; }
+    .intro p:last-child { margin-bottom: 0; }
+    .intro strong { color: var(--text); }
+
+    /* DEVICE CARDS */
+    .device-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .device-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); position: relative;
+      transition: box-shadow .2s ease, transform .2s ease;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .device-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); transform: translateY(-2px); }
+    .device-card.winner {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px var(--primary), 0 8px 32px rgba(59,130,246,.12);
+    }
+    .winner-badge {
+      position: absolute; top: 12px; left: 12px; z-index: 2;
+      background: var(--primary); color: #fff;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .device-image {
+      width: 100%; height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .device-image img {
+      width: 100%; height: 100%;
+      object-fit: contain; padding: 24px;
+      transition: transform .25s ease;
+    }
+    .device-card:hover .device-image img { transform: scale(1.04); }
+    .img-bg-ozlo     { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+    .img-bg-a30      { background: linear-gradient(135deg, #E0E7FF, #C7D2FE); }
+    .img-bg-a20      { background: linear-gradient(135deg, #F0FDF4, #BBF7D0); }
+    .img-bg-a10      { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
+    .img-bg-nextsense{ background: linear-gradient(135deg, #FAE8FF, #F3E8FF); }
+    .img-bg-bose     { background: linear-gradient(135deg, #F1F5F9, #E2E8F0); }
+    .img-placeholder {
+      display: none; font-size: 72px; color: rgba(0,0,0,.18);
+    }
+
+    .device-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+
+    .card-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px; margin-bottom: 14px;
+    }
+    .device-name {
+      font-size: 17px; font-weight: 700; color: var(--text);
+      letter-spacing: -.01em; line-height: 1.3;
+    }
+    .device-maker { font-size: 12px; color: var(--text-tertiary); font-weight: 400; margin-top: 2px; }
+    .device-price { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -.02em; white-space: nowrap; }
+    .device-price-note { font-size: 10px; color: var(--text-tertiary); font-weight: 400; text-align: right; margin-top: 2px; }
+
+    .rating-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 14px;
+    }
+    .stars { color: #F59E0B; font-size: 14px; letter-spacing: 1px; }
+    .rating-num { font-size: 12px; font-weight: 600; color: var(--text); }
+    .rating-count { font-size: 12px; color: var(--text-tertiary); }
+
+    .device-type-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 12px; width: fit-content;
+    }
+    .badge-anc { background: #EFF6FF; color: #1D4ED8; }
+    .badge-passive { background: #F0FDF4; color: #166534; }
+    .badge-eeg { background: #FAE8FF; color: #86198F; }
+    .badge-discontinued { background: #FEE2E2; color: #991B1B; }
+    .badge-budget { background: #FEF3C7; color: #92400E; }
+    .badge-neckloop { background: #ECFEFF; color: #155E75; }
+
+    /* AUTO-FADE highlight */
+    .autofade {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #DCFCE7; color: #15803D;
+      border: 1px solid #86EFAC;
+      font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 100px;
+      margin-bottom: 12px;
+      position: absolute; top: 12px; right: 12px;
+      z-index: 2;
+    }
+    .autofade::before {
+      content: '●'; color: #16A34A; animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+
+    .device-desc {
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 1.65; margin-bottom: 18px;
+    }
+
+    .spec-list {
+      list-style: none; display: flex; flex-direction: column;
+      gap: 8px; margin-bottom: 18px;
+    }
+    .spec-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+    .spec-key { color: var(--text-tertiary); font-weight: 500; min-width: 110px; flex-shrink: 0; }
+    .spec-val { color: var(--text); font-weight: 500; }
+
+    .pros-cons {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 18px;
+    }
+    .pro-con-box { background: var(--bg); border-radius: var(--radius); padding: 12px; }
+    .pro-con-title {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .pros .pro-con-title { color: var(--success); }
+    .cons .pro-con-title { color: var(--danger); }
+    .pro-con-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .pro-con-list li {
+      font-size: 12px; color: var(--text-secondary);
+      display: flex; align-items: flex-start; gap: 6px; line-height: 1.5;
+    }
+    .pros .pro-con-list li::before { content: '\2713'; color: var(--success); font-weight: 700; flex-shrink: 0; }
+    .cons .pro-con-list li::before { content: '\00D7'; color: var(--danger); font-weight: 700; flex-shrink: 0; }
+
+    .buy-row {
+      display: flex; gap: 8px; margin-top: auto;
+    }
+    .buy-btn {
+      flex: 1; display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 14px;
+      background: var(--bg-dark); color: #fff;
+      border-radius: var(--radius);
+      font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: background .2s ease;
+    }
+    .buy-btn:hover { background: #1F2937; }
+    .buy-btn.primary { background: var(--primary); }
+    .buy-btn.primary:hover { background: #2563EB; }
+    .buy-btn.amazon { background: #FF9900; color: #111827; }
+    .buy-btn.amazon:hover { background: #E08800; }
+
+    /* COMPARISON TABLE */
+    .table-wrap {
+      overflow-x: auto; border: 1px solid var(--border);
+      border-radius: var(--radius-xl); background: var(--surface);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--bg-dark); }
+    thead th {
+      padding: 16px 20px; text-align: left;
+      font-weight: 600; color: #9CA3AF;
+      font-size: 11px; letter-spacing: .06em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    thead th:first-child { color: #fff; }
+    tbody tr { border-top: 1px solid var(--border-light); transition: background .15s; }
+    tbody tr:hover { background: #F9FAFB; }
+    tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
+    tbody td:first-child { font-weight: 600; }
+    .cell-yes  { color: var(--success); font-weight: 600; }
+    .cell-no   { color: var(--text-tertiary); }
+    .cell-part { color: var(--warning); font-weight: 500; }
+    .cell-highlight { color: var(--primary); font-weight: 700; }
+
+    /* WINNER */
+    .winner-section {
+      background: var(--bg-dark);
+      border-radius: var(--radius-xl);
+      padding: 48px 40px;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 40px; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .winner-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 700px 400px at 100% 50%, rgba(59,130,246,.2), transparent 60%);
+      pointer-events: none;
+    }
+    .winner-section .winner-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: #60A5FA;
+      margin-bottom: 12px; position: relative;
+    }
+    .winner-section h2 {
+      font-size: 32px; font-weight: 800; color: #fff;
+      letter-spacing: -.02em; line-height: 1.2;
+      margin-bottom: 12px; position: relative;
+    }
+    .winner-section p {
+      color: #9CA3AF; font-size: 14px;
+      line-height: 1.7; max-width: 580px;
+      margin-bottom: 24px; position: relative;
+    }
+    .winner-meta { display: flex; flex-wrap: wrap; gap: 32px; position: relative; }
+    .winner-meta-item { display: flex; flex-direction: column; gap: 2px; }
+    .winner-meta-item .wm-val { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+    .winner-meta-item .wm-key { font-size: 11px; color: #6B7280; font-weight: 500; }
+    .winner-score-box {
+      background: rgba(59,130,246,.15);
+      border: 1px solid rgba(59,130,246,.3);
+      border-radius: var(--radius-xl);
+      padding: 32px 28px; text-align: center;
+      flex-shrink: 0; position: relative;
+    }
+    .winner-score-big { font-size: 64px; font-weight: 900; color: #60A5FA; line-height: 1; letter-spacing: -.04em; }
+    .winner-score-label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #6B7280; margin-top: 6px; }
+
+    /* VERDICT */
+    .verdict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .verdict-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 22px;
+    }
+    .verdict-use-case {
+      font-size: 10px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px;
+    }
+    .verdict-pick { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -.01em; }
+    .verdict-reason { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ALSO-RAN */
+    .alsoran {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px; margin-top: 24px;
+    }
+    .alsoran h4 { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+    .alsoran p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-top: 6px; }
+    .alsoran strong { color: var(--text); }
+
+    /* FOOTER */
+    .footer { background: var(--bg-dark); padding: 40px 24px; text-align: center; border-top: 1px solid #1F2937; }
+    .footer p { font-size: 12px; color: #6B7280; line-height: 1.9; }
+    .footer a { color: #93C5FD; text-decoration: none; }
+    .footer a:hover { color: #BFDBFE; }
+
+    .divider { height: 1px; background: var(--border); margin: 0; }
+
+    @media (max-width: 640px) {
+      .winner-section { grid-template-columns: 1fr; padding: 32px 24px; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .winner-score-box { display: none; }
+      .buy-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Подборка · Май 2026</div>
+  <h1>Наушники для сна,<br /><span>которые сами знают, когда ты заснул</span></h1>
+  <p>Главное в этой подборке — функция авто-фейда: наушник по биосигналам понимает момент засыпания и плавно убирает музыку, чтобы не выдернуть тебя обратно из глубокого сна. Пять моделей 2026 года — true-wireless и с петлёй за шеей — с актуальной ценой и прямой ссылкой на покупку.</p>
+  <div class="hero-badges">
+    <span class="hero-badge">5 моделей</span>
+    <span class="hero-badge">Авто-фейд при засыпании</span>
+    <span class="hero-badge">$80 — $399</span>
+    <span class="hero-badge">Доставка в РФ / СНГ</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <div class="intro">
+    <h3>Главная фишка — «понимает, что ты засыпаешь»</h3>
+    <p>Три модели в подборке умеют <strong>авто-фейд при засыпании</strong>: биосенсоры детектят момент перехода в сон и плавно гасят музыку, чтобы мозг не выдернуло обратно. Это <strong>Kokoon Nightbuds</strong> (биодетекция + плавный фейд), <strong>Ozlo Sleepbuds</strong> (биосенсоры позы и движения, переключение со стриминга на masking) и <strong>NextSense Smartbuds</strong> (EEG в ушных каналах, адаптивный звук в реальном времени).</p>
+    <p>Остальные две — <strong>Soundcore A30 и A20</strong> — без биодетекции, но используют sleep timer в приложении (через 30–60 мин звук гаснет сам). У A30 есть бонус: ANC + AI-маскирование храпа партнёра. Это другая стратегия не выпасть из глубокого сна.</p>
+    <p>Чего тут нет: повязок Muse / Elemind / Somnee (они в <a href="sleep-headbands-comparison.html" style="color:var(--primary);text-decoration:none;font-weight:600;">отдельной подборке</a>) и QuietOn (только ANC, без аудио — нечему «гаснуть»).</p>
+  </div>
+</div>
+
+<!-- DEVICE CARDS -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Подборка</div>
+    <div class="section-title">5 моделей наушников для сна</div>
+    <p class="section-sub">Отсортировано от премиум к бюджету. Зелёный значок «Авто-фейд» — у моделей, которые сами знают, когда ты заснул.</p>
+
+    <div class="device-grid">
+
+      <!-- OZLO SLEEPBUDS -->
+      <div class="device-card winner">
+        <div class="winner-badge">Редакционный выбор</div>
+        <div class="autofade">Авто-фейд</div>
+        <div class="device-image img-bg-ozlo">
+          <img src="https://ozlosleep.com/cdn/shop/files/preview_images/83b5e03192514eba8953efc168e12182.thumbnail.0000000000_1100x.jpg?v=1709920963" alt="Ozlo Sleepbuds" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🎧</div>
+        </div>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Ozlo Sleepbuds</div>
+              <div class="device-maker">Ozlo (ex-Bose команда) · США</div>
+            </div>
+            <div>
+              <div class="device-price">$249</div>
+              <div class="device-price-note">MSRP $349 · –$100</div>
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-num">4.0</span>
+            <span class="rating-count">· Amazon, биосенсоры</span>
+          </div>
+          <span class="device-type-badge badge-passive">Биосенсоры + masking</span>
+          <p class="device-desc">Прямой наследник Bose Sleepbuds — те же инженеры выкупили патенты. <strong>Биосенсоры детектят позу, движение и момент засыпания</strong>: после засыпания плавно переключают стриминг на masking-аудио из бортовой библиотеки (без интернета). Кейс заряжает 32 часа. Лучший форм-фактор для бокового сна в категории.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">True wireless, плоские</span></li>
+            <li><span class="spec-key">Метод</span><span class="spec-val">Биодетекция + noise masking</span></li>
+            <li><span class="spec-key">Автономность</span><span class="spec-val">10 ч + 32 ч кейс</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.3</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">Опц. Renew $20/мес</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">США + форвард в СНГ</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Лучшая посадка для side-sleepers</li>
+                <li>Биодатчики позы и движения</li>
+                <li>Бортовая аудио-библиотека (без интернета)</li>
+                <li>Наследие Bose-инженерии</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>$349 за «маскировщик» — дорого</li>
+                <li>Жалобы на коннект приложения</li>
+                <li>Прямой доставки в СНГ нет</li>
+              </ul>
+            </div>
+          </div>
+          <div class="buy-row">
+            <a class="buy-btn primary" href="https://ozlosleep.com/products/sleepbuds" target="_blank" rel="noopener">ozlosleep.com</a>
+            <a class="buy-btn amazon" href="https://www.amazon.com/Ozlo-Sleepbuds%C2%AE-Comfortable-Headphones-Science-Backed/dp/B0DJB1ZL8V" target="_blank" rel="noopener">Amazon</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOKOON NIGHTBUDS -->
+      <div class="device-card">
+        <div class="autofade">Авто-фейд</div>
+        <div class="device-image" style="background: linear-gradient(135deg, #F0FDF4, #DCFCE7);">
+          <img src="https://m.media-amazon.com/images/I/61V0qY8hPAL._AC_SL1500_.jpg" alt="Kokoon Nightbuds" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🎧</div>
+        </div>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Kokoon Nightbuds</div>
+              <div class="device-maker">Kokoon · UK · 2023</div>
+            </div>
+            <div>
+              <div class="device-price">$136</div>
+              <div class="device-price-note">офсайт · MSRP $250</div>
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-num">4.1</span>
+            <span class="rating-count">· Amazon, 1k+ отзывов</span>
+          </div>
+          <span class="device-type-badge badge-neckloop">Buds + петля за шеей</span>
+          <p class="device-desc"><strong>Самый идеологически чистый «авто-фейд»</strong>: биосенсоры в наушнике детектят момент засыпания и плавно убирают музыку — алгоритм Kokoon именно на этом и построен. Плоские капли висят на тонком кабеле-петле за шеей (не true-wireless, но удобно для side-sleepers — корпус не давит). EEG-подобный анализ сна и обширная библиотека ASMR/розового шума.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">Buds на soft band</span></li>
+            <li><span class="spec-key">Метод</span><span class="spec-val">Биодетекция + плавный фейд</span></li>
+            <li><span class="spec-key">Автономность</span><span class="spec-val">До 10 ч</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.0</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">Бесплатно / $149/год гарантия</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">kokoon.io, Amazon, Best Buy</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Самая отточенная авто-фейд функция</li>
+                <li>Дешевле всех в подборке с биодетекцией</li>
+                <li>Идеально для бокового сна</li>
+                <li>Бесплатная базовая подписка</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Петля за шеей мешает крутиться</li>
+                <li>Не true-wireless</li>
+                <li>Только серый цвет</li>
+              </ul>
+            </div>
+          </div>
+          <div class="buy-row">
+            <a class="buy-btn primary" href="https://get.kokoon.io/nightbuds/" target="_blank" rel="noopener">kokoon.io</a>
+            <a class="buy-btn amazon" href="https://www.amazon.com/Earbuds-Sleep-Nightbuds-Ear-Headphones/dp/B09GYS9DFW" target="_blank" rel="noopener">Amazon</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEXTSENSE SMARTBUDS -->
+      <div class="device-card">
+        <div class="autofade">Авто-фейд</div>
+        <div class="device-image img-bg-nextsense">
+          <img src="https://nextsense.io/cdn/shop/files/NS_Product_1_3.png?v=1770934594&width=1400" alt="NextSense Smartbuds" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🧠</div>
+        </div>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">NextSense Smartbuds</div>
+              <div class="device-maker">NextSense (ex-Google X) · США · 2026</div>
+            </div>
+            <div>
+              <div class="device-price">$249</div>
+              <div class="device-price-note">Early Bird · MSRP $399</div>
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-num">новинка</span>
+            <span class="rating-count">· февраль 2026</span>
+          </div>
+          <span class="device-type-badge badge-eeg">EEG в ушах</span>
+          <p class="device-desc">Первые в мире <strong>true-wireless вкладыши с EEG-сенсорами в ушных каналах</strong> (6 электродов). Реально измеряют медленные волны и подают розовый шум, синхронизированный с фазами SWS. Бета-тест: ~50% улучшение качества сна за 106 ночей. Только iPhone 12+ и iOS 17+. Подняли $16 млн, релиз — февраль 2026.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">True wireless EEG</span></li>
+            <li><span class="spec-key">Метод</span><span class="spec-val">Phase-locked розовый шум</span></li>
+            <li><span class="spec-key">Сенсоры</span><span class="spec-val">6 EEG в ушном канале</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">$14.99/мес (3 мес free)</span></li>
+            <li><span class="spec-key">Требует</span><span class="spec-val">iPhone 12+, iOS 17+</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">США + форвард</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Единственные EEG-buds на рынке</li>
+                <li>Реальный трекинг медленных волн</li>
+                <li>Удобный side-sleeper форм-фактор</li>
+                <li>Новейшая neurotech 2026</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Молодой продукт, мало отзывов</li>
+                <li>Подписка обязательна</li>
+                <li>Только iOS</li>
+                <li>Доставка только в США</li>
+              </ul>
+            </div>
+          </div>
+          <div class="buy-row">
+            <a class="buy-btn primary" href="https://nextsense.io/products/smartbuds" target="_blank" rel="noopener">nextsense.io</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOUNDCORE SLEEP A30 -->
+      <div class="device-card">
+        <div class="device-image img-bg-a30">
+          <img src="https://m.media-amazon.com/images/I/51wKpiMqmML._AC_SL1500_.jpg" alt="Soundcore Sleep A30" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🎧</div>
+        </div>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Soundcore Sleep A30</div>
+              <div class="device-maker">Anker · 2026 · Special</div>
+            </div>
+            <div>
+              <div class="device-price">$199</div>
+              <div class="device-price-note">A30 Special · –$30</div>
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-num">4.2</span>
+            <span class="rating-count">· Amazon, TÜV-cert</span>
+          </div>
+          <span class="device-type-badge badge-anc">ANC + храпоподавление</span>
+          <p class="device-desc">Единственные sleep buds с <strong>активным шумоподавлением + AI-маскированием храпа</strong> (TÜV-сертифицировано). Микрофон ловит храп партнёра — алгоритм подаёт точно противоположную звуковую волну прямо в ваше ухо. A30 Special — релиз 6 января 2026, на $30 дешевле оригинала, с улучшенной батареей. Самый «технологичный» вариант под $200.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">True wireless с ANC</span></li>
+            <li><span class="spec-key">Метод</span><span class="spec-val">ANC + храп-cancellation</span></li>
+            <li><span class="spec-key">Автономность</span><span class="spec-val">10 ч + кейс 45 ч</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.3</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">Нет</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">Amazon Global, Soundcore.com</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Уникальное храп-подавление</li>
+                <li>Реальный ANC под сон</li>
+                <li>Без подписки</li>
+                <li>Доступны на Amazon глобально</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Корпус крупнее A20</li>
+                <li>ANC съедает заряд быстрее</li>
+                <li>Цена в 2× выше A20</li>
+              </ul>
+            </div>
+          </div>
+          <div class="buy-row">
+            <a class="buy-btn primary" href="https://www.soundcore.com/products/d1301-sleep-a30-smart-anc-earbuds-for-sleeping" target="_blank" rel="noopener">soundcore.com</a>
+            <a class="buy-btn amazon" href="https://www.amazon.com/Soundcore-Isolation-Headphones-Extensive-Sleepers/dp/B0FYFRW3BX" target="_blank" rel="noopener">Amazon</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOUNDCORE SLEEP A20 -->
+      <div class="device-card">
+        <div class="device-image img-bg-a20">
+          <img src="https://m.media-amazon.com/images/I/410c51tHtvL._AC_SL1500_.jpg" alt="Soundcore Sleep A20" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="img-placeholder">🎧</div>
+        </div>
+        <div class="device-body">
+          <div class="card-header">
+            <div>
+              <div class="device-name">Soundcore Sleep A20</div>
+              <div class="device-maker">Anker · 2024 · бестселлер</div>
+            </div>
+            <div>
+              <div class="device-price">$149</div>
+              <div class="device-price-note">проверенная цена</div>
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-num">4.1</span>
+            <span class="rating-count">· Amazon, 10k+ отзывов</span>
+          </div>
+          <span class="device-type-badge badge-passive">Пассивное шумоподавление</span>
+          <p class="device-desc">Самый проверенный sleep buds в категории среднего уровня. <strong>Рекордные 80 часов работы</strong> (14 ч в ушах + кейс), пассивное звукоизолирование 30 dB на высоких. Без ANC и без подписки — простая рабочая лошадка. Лучшее соотношение цена/качество, если ANC не критичен.</p>
+          <ul class="spec-list">
+            <li><span class="spec-key">Тип</span><span class="spec-val">True wireless</span></li>
+            <li><span class="spec-key">Метод</span><span class="spec-val">Пассивная изоляция 30 dB</span></li>
+            <li><span class="spec-key">Автономность</span><span class="spec-val">14 ч + кейс = 80 ч</span></li>
+            <li><span class="spec-key">Bluetooth</span><span class="spec-val">5.3</span></li>
+            <li><span class="spec-key">Подписка</span><span class="spec-val">Нет</span></li>
+            <li><span class="spec-key">Доставка</span><span class="spec-val">Amazon Global, Soundcore.com</span></li>
+          </ul>
+          <div class="pros-cons">
+            <div class="pro-con-box pros">
+              <div class="pro-con-title">Плюсы</div>
+              <ul class="pro-con-list">
+                <li>Рекордные 80 ч с кейсом</li>
+                <li>Проверенная модель, много отзывов</li>
+                <li>Лучшая цена/качество в подборке</li>
+                <li>Глобальная доступность</li>
+              </ul>
+            </div>
+            <div class="pro-con-box cons">
+              <div class="pro-con-title">Минусы</div>
+              <ul class="pro-con-list">
+                <li>Без ANC — храп прорывается</li>
+                <li>Нет биосенсоров</li>
+                <li>Аудио-библиотека скромнее Ozlo</li>
+              </ul>
+            </div>
+          </div>
+          <div class="buy-row">
+            <a class="buy-btn primary" href="https://www.soundcore.com/sleep-a20-sleeping-earbuds" target="_blank" rel="noopener">soundcore.com</a>
+            <a class="buy-btn amazon" href="https://www.amazon.com/Soundcore-Blocking-Headphones-Sleepers-Bluetooth/dp/B0CRGR2TS5" target="_blank" rel="noopener">Amazon</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ALSO-RAN -->
+    <div class="alsoran">
+      <h4>Что НЕ в подборке и почему</h4>
+      <p><strong>Bose Sleepbuds II</strong> — легенда категории, но снята с производства в марте 2023, только б/у на eBay / Back Market. Приложение деградирует — есть риск, что устройство станет «кирпичом». Bose сам рекомендует Ozlo как наследника.</p>
+      <p><strong>Soundcore Sleep A10</strong> — entry-level Anker, на Amazon снят с продажи, замены нет.</p>
+      <p><strong>QuietOn 3.1 / QuietOn 4</strong> (€269 / €499) — pure ANC, без Bluetooth и без музыки. Лучший выбор, если задача только «отрезать храп / шум», но нечему «гаснуть» — поэтому фишку авто-фейда не реализует.</p>
+      <p><strong>Loop Quiet / Loop Dream</strong> ($25–35) — пассивные беруши, не электронные. Бесшумная альтернатива, если не нужна музыка вообще.</p>
+      <p><strong>MUSICOZY / Perytong / LC-dolida headbands</strong> ($15–30) — повязки/маски с динамиками. Дешёвые и комфортные для бокового сна, но это не наушники.</p>
+      <p><strong>Muse S Athena, Elemind, Somnee, Apollo Neuro</strong> — повязки и браслеты с EEG/нейростимуляцией. Эта подборка только про наушники → они в <a href="sleep-headbands-comparison.html" style="color:var(--primary);font-weight:600;text-decoration:none;">отдельной</a>.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- COMPARISON TABLE -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Сравнение</div>
+    <div class="section-title">Таблица характеристик</div>
+    <p class="section-sub">Главное под рукой.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Модель</th>
+            <th>Цена</th>
+            <th>Авто-фейд</th>
+            <th>Метод</th>
+            <th>Автономность</th>
+            <th>ANC</th>
+            <th>Подписка</th>
+            <th>Доставка в СНГ</th>
+            <th>Рейтинг</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ozlo Sleepbuds</td>
+            <td>$249</td>
+            <td class="cell-yes">Да (биосенсоры)</td>
+            <td>Биодетекция + masking</td>
+            <td>10 ч + 32 ч кейс</td>
+            <td class="cell-no">Нет</td>
+            <td>Опц.</td>
+            <td class="cell-part">Через форвард</td>
+            <td class="cell-highlight">8.5 / 10</td>
+          </tr>
+          <tr>
+            <td>Kokoon Nightbuds</td>
+            <td>$136</td>
+            <td class="cell-yes">Да (биодетекция)</td>
+            <td>Плавный фейд по сигналам</td>
+            <td>До 10 ч</td>
+            <td class="cell-no">Нет</td>
+            <td>Бесплатно</td>
+            <td class="cell-part">Amazon UK / форвард</td>
+            <td>8.1 / 10</td>
+          </tr>
+          <tr>
+            <td>NextSense Smartbuds</td>
+            <td>$249</td>
+            <td class="cell-yes">Да (EEG)</td>
+            <td>Phase-locked pink noise</td>
+            <td>~8 ч</td>
+            <td class="cell-no">Нет</td>
+            <td>$14.99/мес</td>
+            <td class="cell-part">Через форвард</td>
+            <td>8.0 / 10</td>
+          </tr>
+          <tr>
+            <td>Soundcore Sleep A30</td>
+            <td>$199</td>
+            <td class="cell-part">Только sleep timer</td>
+            <td>ANC + храп-cancellation</td>
+            <td>10 ч + 45 ч кейс</td>
+            <td class="cell-yes">Да + AI</td>
+            <td>Нет</td>
+            <td class="cell-yes">Amazon Global</td>
+            <td>8.2 / 10</td>
+          </tr>
+          <tr>
+            <td>Soundcore Sleep A20</td>
+            <td>$149</td>
+            <td class="cell-part">Только sleep timer</td>
+            <td>Пассивная изоляция</td>
+            <td>14 ч + 66 ч кейс</td>
+            <td class="cell-no">Нет</td>
+            <td>Нет</td>
+            <td class="cell-yes">Amazon Global</td>
+            <td>8.0 / 10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WINNER -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Итог</div>
+    <div class="section-title">Если выбирать одно</div>
+    <p class="section-sub">При выборе между «настоящей наукой» и «комфортом + работающей экосистемой».</p>
+
+    <div class="winner-section">
+      <div>
+        <div class="winner-label">Лучший выбор 2026</div>
+        <h2>Ozlo Sleepbuds</h2>
+        <p>
+          Прямое наследие Bose с теми же инженерами, но с биосенсорами, обновлённой
+          посадкой и сегодняшней поддержкой. <strong>Лучший форм-фактор для бокового
+          сна</strong>, бортовая аудио-библиотека (не нужен интернет в спальне) и
+          реально длинный заряд кейса. NextSense Smartbuds технологичнее, но они
+          ещё совсем молодые. Soundcore A30 дешевле и с ANC — берите его, если
+          храпит партнёр и бюджет важнее премиум-эргономики.
+        </p>
+        <div class="winner-meta">
+          <div class="winner-meta-item">
+            <span class="wm-val">$249</span>
+            <span class="wm-key">Скидка с $349</span>
+          </div>
+          <div class="winner-meta-item">
+            <span class="wm-val">10+32 ч</span>
+            <span class="wm-key">Buds + кейс</span>
+          </div>
+          <div class="winner-meta-item">
+            <span class="wm-val">Биосенсоры</span>
+            <span class="wm-key">Поза, движение</span>
+          </div>
+          <div class="winner-meta-item">
+            <span class="wm-val">Bose DNA</span>
+            <span class="wm-key">Та же команда</span>
+          </div>
+        </div>
+      </div>
+      <div class="winner-score-box">
+        <div class="winner-score-big">8.5</div>
+        <div class="winner-score-label">из 10</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VERDICTS BY USE CASE -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">По задаче</div>
+    <div class="section-title">Что выбрать под конкретную ситуацию</div>
+    <p class="section-sub">Шесть моделей закрывают шесть разных задач.</p>
+
+    <div class="verdict-grid">
+      <div class="verdict-card">
+        <div class="verdict-use-case">Лучший общий выбор</div>
+        <div class="verdict-pick">Ozlo Sleepbuds</div>
+        <div class="verdict-reason">Премиум-эргономика, биосенсоры + авто-фейд, бортовая аудио-библиотека, наследие Bose. $249 со скидкой.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="verdict-use-case">Авто-фейд за минимум денег</div>
+        <div class="verdict-pick">Kokoon Nightbuds</div>
+        <div class="verdict-reason">Самая отточенная функция авто-фейда в категории. Петля за шеей вместо true-wireless — но дёшево и комфортно на боку. $136.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="verdict-use-case">Храпит партнёр</div>
+        <div class="verdict-pick">Soundcore Sleep A30</div>
+        <div class="verdict-reason">Единственные с активным шумоподавлением и AI-маскированием храпа (TÜV-cert). $199.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="verdict-use-case">Хочу реальный neurotech</div>
+        <div class="verdict-pick">NextSense Smartbuds</div>
+        <div class="verdict-reason">EEG в ушах + phase-locked розовый шум. Первые true-wireless с реальным углублением SWS. $249 Early Bird.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="verdict-use-case">Лучшая цена/качество</div>
+        <div class="verdict-pick">Soundcore Sleep A20</div>
+        <div class="verdict-reason">Проверенная классика, 80 ч с кейсом, 10k+ отзывов на Amazon, без подписки. $149.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="verdict-use-case">Не подходит ни один из 5</div>
+        <div class="verdict-pick">Bose Sleepbuds II (б/у)</div>
+        <div class="verdict-reason">Легенда категории, снят с производства в 2023. Refurb на Back Market / eBay — но риск что приложение перестанет работать.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="container">
+    <p>
+      Анализ составлен на основе публичных данных, обзоров и пресс-релизов · Май 2026<br />
+      Цены в USD, могут меняться · Проверяйте доступность на официальных сайтах перед заказом<br /><br />
+      Источники:
+      <a href="https://ozlosleep.com/products/sleepbuds" target="_blank" rel="noopener">ozlosleep.com</a> ·
+      <a href="https://nextsense.io/products/smartbuds" target="_blank" rel="noopener">nextsense.io</a> ·
+      <a href="https://www.soundcore.com/products/d1301-sleep-a30-smart-anc-earbuds-for-sleeping" target="_blank" rel="noopener">soundcore.com (A30)</a> ·
+      <a href="https://www.soundcore.com/sleep-a20-sleeping-earbuds" target="_blank" rel="noopener">soundcore.com (A20)</a> ·
+      <a href="https://www.soundguys.com/best-headphones-for-sleeping-85068/" target="_blank" rel="noopener">SoundGuys</a> ·
+      <a href="https://www.cnn.com/cnn-underscored/reviews/best-headphones-for-sleeping" target="_blank" rel="noopener">CNN Underscored</a> ·
+      <a href="https://liveworksleep.com/bose-sleepbuds-alternatives/" target="_blank" rel="noopener">LiveWorkSleep</a>
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
