@@ -250,35 +250,30 @@
     .ribbon.b { background: var(--tier-b); }
     .ribbon.x { background: var(--tier-x); }
 
-    .device-header-img {
+    .device-photo {
       width: 100%;
-      height: 150px;
+      height: 200px;
+      background: #F3F4F6;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 56px;
-      font-weight: 800;
-      letter-spacing: -.04em;
-      color: rgba(255,255,255,.92);
+      overflow: hidden;
       position: relative;
+      border-bottom: 1px solid var(--border);
     }
-    .header-gammacore { background: linear-gradient(135deg, #1E40AF, #2563EB); }
-    .header-nemos     { background: linear-gradient(135deg, #065F46, #10B981); }
-    .header-parasym   { background: linear-gradient(135deg, #6D28D9, #A78BFA); }
-    .header-truvaga   { background: linear-gradient(135deg, #92400E, #F59E0B); }
-    .header-pulsetto  { background: linear-gradient(135deg, #B45309, #FBBF24); }
-    .header-xen       { background: linear-gradient(135deg, #92400E, #D97706); }
-    .header-vagustim  { background: linear-gradient(135deg, #9A3412, #FB923C); }
-    .header-hoolest   { background: linear-gradient(135deg, #854D0E, #EAB308); }
-    .header-apollo    { background: linear-gradient(135deg, #7F1D1D, #DC2626); }
-    .header-sensate   { background: linear-gradient(135deg, #7F1D1D, #EF4444); }
-    .device-header-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), transparent 60%);
-      pointer-events: none;
+    .device-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 14px;
+      transition: transform .25s ease;
+      background: #fff;
     }
+    .device-card:hover .device-photo img { transform: scale(1.05); }
+    .photo-bg-cervical  { background: linear-gradient(135deg, #DBEAFE, #E0E7FF); }
+    .photo-bg-auricular { background: linear-gradient(135deg, #EDE9FE, #F3E8FF); }
+    .photo-bg-wellness  { background: linear-gradient(135deg, #FEF3C7, #FED7AA); }
+    .photo-bg-notvns    { background: linear-gradient(135deg, #FECACA, #FEE2E2); }
 
     .device-body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; }
     .card-head {
@@ -730,7 +725,10 @@
       <!-- gammaCore -->
       <article class="device-card medical">
         <div class="ribbon">Лидер evidence</div>
-        <div class="device-header-img header-gammacore">gC</div>
+        <div class="device-photo photo-bg-cervical">
+          <img src="https://www.gammacore.com/wp-content/uploads/2022/02/gammacore-devices.jpg"
+               alt="gammaCore Sapphire — ручной шейный nVNS-стимулятор" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -783,7 +781,10 @@
 
       <!-- Nemos / tVNS-E -->
       <article class="device-card medical">
-        <div class="device-header-img header-nemos">tV</div>
+        <div class="device-photo photo-bg-auricular">
+          <img src="https://static.wixstatic.com/media/1e4b83_186ef66a968a4d24a9af74c4f923a593~mv2.png"
+               alt="Nemos / tVNS-E — ушной аурикулярный стимулятор cymba conchae" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -835,7 +836,10 @@
 
       <!-- Parasym / Nurosym -->
       <article class="device-card medical">
-        <div class="device-header-img header-parasym">Nu</div>
+        <div class="device-photo photo-bg-auricular">
+          <img src="https://nurosym.com/cdn/shop/files/Nurosym_71cf4e3b-d410-4168-86ab-b1743b45c6da.png"
+               alt="Nurosym / Parasym — ушной зажим на трагус с контроллером" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -900,7 +904,10 @@
       <!-- Truvaga -->
       <article class="device-card wellness">
         <div class="ribbon b">Wellness</div>
-        <div class="device-header-img header-truvaga">Tr</div>
+        <div class="device-photo photo-bg-wellness">
+          <img src="https://www.truvaga.com/wp-content/uploads/2024/02/truvaga-plus.png"
+               alt="Truvaga Plus — портативный шейный стимулятор" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -928,7 +935,10 @@
       <!-- Pulsetto -->
       <article class="device-card wellness">
         <div class="ribbon b">Wellness</div>
-        <div class="device-header-img header-pulsetto">Pl</div>
+        <div class="device-photo photo-bg-wellness">
+          <img src="https://pulsetto.tech/cdn/shop/files/1A1A8308-Edit1_Large_5f7f7d3a-f801-4783-9a02-6d7d572c3a5f.png"
+               alt="Pulsetto — шейный wellness-стимулятор" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -956,7 +966,10 @@
       <!-- Xen by Neuvana -->
       <article class="device-card wellness">
         <div class="ribbon b">Wellness</div>
-        <div class="device-header-img header-xen">Xe</div>
+        <div class="device-photo photo-bg-wellness">
+          <img src="https://neuvanalife.com/cdn/shop/files/xen-device-hero.png"
+               alt="Xen by Neuvana — вагусные наушники-стимуляторы" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -984,7 +997,10 @@
       <!-- Vagustim -->
       <article class="device-card wellness">
         <div class="ribbon b">Wellness</div>
-        <div class="device-header-img header-vagustim">Vg</div>
+        <div class="device-photo photo-bg-wellness">
+          <img src="https://vagustim.io/cdn/shop/files/vagus-nerve-stimulator-usage.jpg"
+               alt="Vagustim V2 — билатеральная ушная стимуляция" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -1012,7 +1028,10 @@
       <!-- Hoolest -->
       <article class="device-card wellness">
         <div class="ribbon b">Wellness</div>
-        <div class="device-header-img header-hoolest">Hl</div>
+        <div class="device-photo photo-bg-wellness">
+          <img src="https://hoolest.com/cdn/shop/files/VeRelief_Prime_device_front_view.webp"
+               alt="Hoolest VeRelief Prime — портативный стимулятор" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -1051,7 +1070,10 @@
       <!-- Apollo Neuro -->
       <article class="device-card notvns">
         <div class="ribbon x">Не VNS</div>
-        <div class="device-header-img header-apollo">Ap</div>
+        <div class="device-photo photo-bg-notvns">
+          <img src="https://apolloneuro.com/cdn/shop/files/switch-rose.png"
+               alt="Apollo Neuro — вибротактильный носимый браслет" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
@@ -1075,7 +1097,10 @@
       <!-- Sensate -->
       <article class="device-card notvns">
         <div class="ribbon x">Не VNS</div>
-        <div class="device-header-img header-sensate">Sn</div>
+        <div class="device-photo photo-bg-notvns">
+          <img src="https://cdn.shopify.com/s/files/1/1715/1973/files/sensate-buy-options-img-01_bf2a6ed3-4ac2-45fb-9fd6-d39ad5dbdfd8.png"
+               alt="Sensate 2 — инфразвуковой релакс-камень на грудину" loading="lazy">
+        </div>
         <div class="device-body">
           <div class="card-head">
             <div>
