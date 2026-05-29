@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Theramask — насколько рабочая? Полный разбор</title>
+<meta name="description" content="Theramask = Therabody TheraFace Mask: FDA-cleared LED-маска 415/633/830 нм. Спектр, мощность, клинические исследования, сравнение с Omnilux и CurrentBody, риски для глаз."/>
+<style>
+:root{
+  --bg:#000; --card:#0d0d10; --card2:#15151a; --border:rgba(255,255,255,.08);
+  --text:#f5f5f7; --muted:#8e8e93;
+  --blue:#3a8dff; --red:#ff453a; --green:#30d158; --orange:#ff9f0a;
+  --violet:#bf5af2; --teal:#5ac8fa; --gold:#f5a623; --pink:#ff2d92;
+  --ir:#a64dff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5;}
+a{color:inherit;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.7);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:54px;}
+.nav-logo{font-size:14px;font-weight:700;letter-spacing:-.01em;}
+.nav-links{display:flex;gap:30px;}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .15s;}
+.nav-links a:hover{color:#fff;}
+@media(max-width:760px){nav{padding:0 18px;}.nav-links{display:none;}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 90px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 50% at 20% 10%, rgba(58,141,255,.18) 0%, transparent 60%),
+  radial-gradient(ellipse 50% 40% at 80% 30%, rgba(255,69,58,.16) 0%, transparent 60%),
+  radial-gradient(ellipse 50% 50% at 50% 100%, rgba(166,77,255,.18) 0%, transparent 65%);
+  pointer-events:none;z-index:0;}
+.hero>*{position:relative;z-index:1;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:26px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:28px;height:1px;background:currentColor;opacity:.4;}
+.hero h1{font-size:clamp(40px,8.2vw,92px);font-weight:700;letter-spacing:-.04em;line-height:1.02;background:linear-gradient(180deg,#fff 25%,rgba(255,255,255,.45) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;max-width:920px;}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--blue),var(--violet) 50%,var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{margin-top:28px;font-size:clamp(16px,2.1vw,21px);color:var(--muted);max-width:620px;line-height:1.6;}
+.hero-stats{margin-top:56px;display:flex;gap:48px;flex-wrap:wrap;justify-content:center;}
+.stat{text-align:center;}
+.stat-num{font-size:34px;font-weight:700;letter-spacing:-.03em;color:#fff;}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:.04em;}
+.tldr{margin-top:60px;max-width:760px;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;padding:26px 30px;font-size:15px;color:rgba(255,255,255,.78);line-height:1.65;}
+.tldr b{color:#fff;}
+.tldr-label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:block;}
+
+/* SECTION */
+.section{padding:110px 24px;max-width:1180px;margin:0 auto;}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;}
+.section-title{font-size:clamp(28px,4.8vw,52px);font-weight:700;letter-spacing:-.025em;line-height:1.08;max-width:760px;}
+.section-sub{margin-top:18px;font-size:17px;color:var(--muted);max-width:620px;line-height:1.65;}
+.divider{height:1px;background:var(--border);max-width:1180px;margin:0 auto;}
+
+/* VERDICT BANNER */
+.verdict{max-width:1180px;margin:0 auto;padding:0 24px;}
+.verdict-card{background:linear-gradient(135deg,rgba(48,209,88,.10) 0%,rgba(58,141,255,.06) 100%);border:1px solid rgba(48,209,88,.28);border-radius:22px;padding:44px 50px;display:grid;grid-template-columns:auto 1fr auto;gap:34px;align-items:center;}
+@media(max-width:820px){.verdict-card{grid-template-columns:1fr;text-align:center;padding:30px;gap:18px;}}
+.verdict-grade{font-size:64px;font-weight:800;letter-spacing:-.04em;color:var(--green);line-height:1;}
+.verdict-grade small{display:block;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.15em;margin-top:6px;}
+.verdict-label{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+.verdict-name{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;}
+.verdict-desc{font-size:15px;color:rgba(255,255,255,.7);line-height:1.6;}
+.verdict-price{text-align:right;}
+.verdict-price .price{font-size:36px;font-weight:700;letter-spacing:-.03em;color:#fff;}
+.verdict-price .note{font-size:12px;color:var(--muted);margin-top:4px;}
+@media(max-width:820px){.verdict-price{text-align:center;}}
+
+/* SPEC GRID */
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:50px;}
+.spec-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;}
+.spec-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.spec-val{font-size:30px;font-weight:700;letter-spacing:-.025em;color:#fff;line-height:1.1;}
+.spec-val small{font-size:14px;color:var(--muted);font-weight:500;margin-left:4px;}
+.spec-foot{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.45;}
+
+/* WAVELENGTHS */
+.waves{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px;}
+@media(max-width:760px){.waves{grid-template-columns:1fr;}}
+.wave{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px 28px;position:relative;overflow:hidden;}
+.wave::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;}
+.wave-blue::before{background:linear-gradient(90deg,#3a8dff,#5ac8fa);}
+.wave-red::before{background:linear-gradient(90deg,#ff453a,#ff2d92);}
+.wave-ir::before{background:linear-gradient(90deg,#a64dff,#bf5af2);}
+.wave-nm{font-size:48px;font-weight:800;letter-spacing:-.04em;line-height:1;}
+.wave-blue .wave-nm{color:var(--blue);}
+.wave-red .wave-nm{color:var(--red);}
+.wave-ir .wave-nm{color:var(--ir);}
+.wave-nm small{font-size:18px;font-weight:500;margin-left:4px;color:var(--muted);letter-spacing:0;}
+.wave-name{margin-top:10px;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#fff;}
+.wave-depth{margin-top:18px;font-size:13px;color:var(--muted);}
+.wave-depth-bar{height:4px;border-radius:2px;margin-top:6px;background:rgba(255,255,255,.08);position:relative;}
+.wave-depth-bar span{position:absolute;top:0;left:0;bottom:0;border-radius:2px;}
+.wave-blue .wave-depth-bar span{width:20%;background:var(--blue);}
+.wave-red .wave-depth-bar span{width:55%;background:var(--red);}
+.wave-ir .wave-depth-bar span{width:90%;background:var(--ir);}
+.wave-for{margin-top:24px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;}
+.wave-for b{color:#fff;}
+.wave-power{margin-top:18px;padding-top:18px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);}
+.wave-power b{color:#fff;font-size:14px;font-weight:600;}
+
+/* STUDIES */
+.studies{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:54px;border-radius:22px;overflow:hidden;}
+@media(max-width:820px){.studies{grid-template-columns:1fr;}}
+.study{background:var(--card);padding:40px 36px;display:flex;flex-direction:column;}
+.study-tag{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:6px;margin-bottom:16px;}
+.tag-peer{background:rgba(48,209,88,.12);color:var(--green);}
+.tag-brand{background:rgba(255,159,10,.12);color:var(--orange);}
+.tag-case{background:rgba(255,69,58,.12);color:var(--red);}
+.tag-meta{background:rgba(58,141,255,.12);color:var(--blue);}
+.study-year{font-size:13px;color:var(--muted);margin-bottom:6px;}
+.study-title{font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:14px;line-height:1.35;}
+.study-design{font-size:13px;color:var(--muted);margin-bottom:14px;letter-spacing:.02em;}
+.study-result{font-size:14px;color:rgba(255,255,255,.78);line-height:1.62;margin-bottom:18px;}
+.study-result b{color:#fff;}
+.study-link{margin-top:auto;font-size:12px;color:var(--blue);text-decoration:none;border-bottom:1px solid transparent;align-self:flex-start;}
+.study-link:hover{border-color:currentColor;}
+
+/* COMPARE TABLE */
+.compare{margin-top:54px;background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;overflow-x:auto;}
+.compare table{width:100%;border-collapse:collapse;min-width:780px;}
+.compare th,.compare td{padding:18px 20px;text-align:left;font-size:14px;border-bottom:1px solid var(--border);vertical-align:top;}
+.compare th{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.02);}
+.compare tr:last-child td{border-bottom:none;}
+.compare .name{font-weight:600;color:#fff;}
+.compare .price{color:var(--green);font-weight:600;}
+.compare .wave-mini{font-family:"SF Mono",ui-monospace,monospace;font-size:13px;color:rgba(255,255,255,.8);}
+.compare tr.highlight{background:rgba(58,141,255,.06);}
+.tick{color:var(--green);}
+.cross{color:var(--muted);}
+
+/* SAFETY */
+.warn{margin-top:54px;background:linear-gradient(135deg,rgba(255,69,58,.08),rgba(255,159,10,.04));border:1px solid rgba(255,69,58,.25);border-radius:20px;padding:36px 38px;}
+.warn-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.warn-icon{width:42px;height:42px;border-radius:50%;background:rgba(255,69,58,.18);display:flex;align-items:center;justify-content:center;font-size:22px;}
+.warn-title{font-size:22px;font-weight:700;letter-spacing:-.015em;}
+.warn-body{font-size:15px;color:rgba(255,255,255,.78);line-height:1.65;}
+.warn-body b{color:#fff;}
+.warn-list{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:760px){.warn-list{grid-template-columns:1fr;}}
+.warn-item{background:rgba(0,0,0,.3);border-radius:12px;padding:16px 18px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.55;}
+.warn-item b{display:block;color:#fff;margin-bottom:4px;font-size:13px;}
+
+/* PROS CONS */
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:54px;}
+@media(max-width:760px){.pc{grid-template-columns:1fr;}}
+.pc-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 30px;}
+.pc-card.pros{border-color:rgba(48,209,88,.25);}
+.pc-card.cons{border-color:rgba(255,159,10,.25);}
+.pc-head{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;}
+.pros .pc-head{color:var(--green);}
+.cons .pc-head{color:var(--orange);}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.pc-list li{display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,.78);line-height:1.55;}
+.pc-list li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:7px;}
+.pros .pc-list li::before{background:var(--green);}
+.cons .pc-list li::before{background:var(--orange);}
+
+/* WHO */
+.who{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:54px;border-radius:20px;overflow:hidden;}
+@media(max-width:760px){.who{grid-template-columns:1fr;}}
+.who-card{background:var(--card);padding:32px 30px;}
+.who-card.bad{background:var(--card2);}
+.who-icon{font-size:28px;margin-bottom:14px;display:block;}
+.who-title{font-size:18px;font-weight:600;margin-bottom:14px;}
+.who-card.good .who-title{color:var(--green);}
+.who-card.bad .who-title{color:var(--orange);}
+.who-list{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;color:rgba(255,255,255,.7);line-height:1.55;}
+.who-list li{padding-left:18px;position:relative;}
+.who-list li::before{content:'•';position:absolute;left:0;}
+
+/* BUY */
+.buy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:46px;}
+.buy-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-decoration:none;color:inherit;transition:border-color .2s,transform .15s;display:block;}
+.buy-card:hover{border-color:rgba(58,141,255,.4);transform:translateY(-2px);}
+.buy-shop{font-size:13px;color:var(--muted);margin-bottom:10px;}
+.buy-price{font-size:24px;font-weight:700;letter-spacing:-.02em;color:#fff;}
+.buy-note{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;}
+.buy-arrow{display:inline-block;margin-left:6px;color:var(--blue);}
+
+/* SOURCES */
+.sources{margin-top:50px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:760px){.sources{grid-template-columns:1fr;}}
+.src{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:13px;color:rgba(255,255,255,.65);text-decoration:none;line-height:1.45;display:flex;flex-direction:column;gap:4px;transition:border-color .2s;}
+.src:hover{border-color:rgba(58,141,255,.4);color:#fff;}
+.src-tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);}
+.src-tag.peer{color:var(--green);}
+.src-tag.brand{color:var(--orange);}
+.src-tag.fda{color:var(--violet);}
+.src-tag.review{color:var(--teal);}
+.src-url{font-family:"SF Mono",ui-monospace,monospace;font-size:11px;color:var(--muted);word-break:break-all;}
+
+/* FOOTER */
+footer{text-align:center;padding:60px 24px 40px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);}
+footer p{margin-bottom:6px;}
+.disclaimer{max-width:680px;margin:14px auto 0;font-size:12px;color:rgba(255,255,255,.4);line-height:1.6;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Theramask · разбор</div>
+  <div class="nav-links">
+    <a href="#what">Что это</a>
+    <a href="#spec">Спецификация</a>
+    <a href="#studies">Исследования</a>
+    <a href="#compare">Конкуренты</a>
+    <a href="#safety">Безопасность</a>
+    <a href="#verdict">Вывод</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Глубокий разбор · 24 источника</div>
+  <h1>Theramask — это <em>TheraFace&nbsp;Mask</em><br/>от Therabody</h1>
+  <p>FDA-cleared LED-маска на трёх длинах волн — 415, 633 и 830 нм.<br/>Разбираемся, насколько маска реально работает, есть ли доказательства и стоит&nbsp;ли своих денег.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">длины волн</div></div>
+    <div class="stat"><div class="stat-num">648</div><div class="stat-label">LED-источников</div></div>
+    <div class="stat"><div class="stat-num">9–12</div><div class="stat-label">мин/сеанс</div></div>
+    <div class="stat"><div class="stat-num">K230293</div><div class="stat-label">FDA clearance</div></div>
+  </div>
+
+  <div class="tldr">
+    <span class="tldr-label">TL;DR</span>
+    Если вы ищете «Theramask» — речь почти наверняка о <b>Therabody TheraFace Mask</b> (или новой <b>TheraFace Mask Glo</b>). Это <b>настоящая FDA-cleared LED-маска</b> с правильно подобранным спектром: 415&nbsp;нм против акне, 633&nbsp;нм против морщин, 830&nbsp;нм для коллагена. <b>Длины волн и принцип работают — это доказано в peer-review.</b> Но прямого peer-reviewed RCT именно на TheraFace Mask нет: бренд опирается на внутреннее 12-недельное исследование (subjective 87%, объективный VISIA-замер — всего ~1,3% улучшения). Конкуренты <b>Omnilux Contour Face</b> и <b>CurrentBody Skin Mask</b> на тех же волнах — равноценная альтернатива.
+  </div>
+</section>
+
+<div class="verdict">
+  <div class="verdict-card">
+    <div class="verdict-grade">B+<small>работает, но без чудес</small></div>
+    <div>
+      <div class="verdict-label">Итоговая оценка</div>
+      <div class="verdict-name">Therabody TheraFace Mask</div>
+      <div class="verdict-desc">Хардвер на уровне топ-сегмента, FDA-cleared, правильный спектр. Но субъективный 87% «улучшения» против объективных 1,3% по VISIA — типичная история всех домашних LED-масок. Эффект есть, но скромный, кумулятивный и сильно зависит от регулярности.</div>
+    </div>
+    <div class="verdict-price">
+      <div class="price">$599</div>
+      <div class="note">Glo — $649<br/>Dermstore / Ulta / Amazon</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT IS IT -->
+<section class="section" id="what">
+  <div class="eyebrow">01 — Что это</div>
+  <h2 class="section-title">«Theramask» — это маркетинговое название Therabody&nbsp;TheraFace&nbsp;Mask</h2>
+  <p class="section-sub">Других LED-масок под брендом «Thera» в продаже на 2026 нет. Производитель — Therabody (тот же, что делает Theragun-перкуссоры). Две актуальные модели — оригинал 2023 года и обновлённая Glo 2024–2025.</p>
+
+  <div class="spec-grid">
+    <div class="spec-card">
+      <div class="spec-label">Производитель</div>
+      <div class="spec-val">Therabody</div>
+      <div class="spec-foot">США, основан 2008 (изначально Theragun). LED-категория с 2023.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label">Модель 1</div>
+      <div class="spec-val">TheraFace Mask</div>
+      <div class="spec-foot">Запуск июнь 2023. 648 LED, цикл 9 мин. FDA 510(k) K230293.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label">Модель 2</div>
+      <div class="spec-val">Mask Glo</div>
+      <div class="spec-foot">Запуск 2024. 504 LED медицинского класса, цикл 12 мин, дополнительная программа Red+IR.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label">Класс</div>
+      <div class="spec-val">II <small>OTC</small></div>
+      <div class="spec-foot">FDA Class II, product code OHS, 21 CFR 878.4810 — Light Based OTC Wrinkle Reduction.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WAVELENGTHS -->
+<section class="section" id="spec">
+  <div class="eyebrow">02 — Спектр и мощность</div>
+  <h2 class="section-title">Три длины волны — каждая бьёт в свою глубину кожи</h2>
+  <p class="section-sub">Это правильный набор. Те же 415 / 633 / 830 нм используют Omnilux и CurrentBody. Tolerance ±5–10 нм по официальной спецификации Therabody.</p>
+
+  <div class="waves">
+    <div class="wave wave-blue">
+      <div class="wave-nm">415<small>нм</small></div>
+      <div class="wave-name">Blue · Синий</div>
+      <div class="wave-depth">Глубина проникновения: эпидермис</div>
+      <div class="wave-depth-bar"><span></span></div>
+      <div class="wave-for"><b>Против акне.</b> Убивает <i>P.&nbsp;acnes</i> через возбуждение порфиринов в бактериях, снижает воспаление.</div>
+      <div class="wave-power"><b>61–64 мВт/см²</b><br/>плотность мощности на коже</div>
+    </div>
+    <div class="wave wave-red">
+      <div class="wave-nm">633<small>нм</small></div>
+      <div class="wave-name">Red · Красный</div>
+      <div class="wave-depth">Глубина: верхняя дерма (~2–5 мм)</div>
+      <div class="wave-depth-bar"><span></span></div>
+      <div class="wave-for"><b>Против морщин и пигментации.</b> Стимулирует фибробласты, увеличивает выработку коллагена и эластина, улучшает тон кожи.</div>
+      <div class="wave-power"><b>70–73 мВт/см²</b><br/>самая интенсивная зона</div>
+    </div>
+    <div class="wave wave-ir">
+      <div class="wave-nm">830<small>нм</small></div>
+      <div class="wave-name">NIR · Ближний ИК</div>
+      <div class="wave-depth">Глубина: глубокая дерма (~5–10 мм)</div>
+      <div class="wave-depth-bar"><span></span></div>
+      <div class="wave-for"><b>Глубокий коллаген + заживление.</b> Активирует митохондриальный цитохром&nbsp;C-оксидазу, ускоряет восстановление тканей.</div>
+      <div class="wave-power"><b>53–55 мВт/см²</b><br/>невидим глазом, но работает глубже всех</div>
+    </div>
+  </div>
+
+  <div class="spec-grid" style="margin-top:30px;">
+    <div class="spec-card">
+      <div class="spec-label">LED-источники (оригинал)</div>
+      <div class="spec-val">648 <small>tri-wick</small></div>
+      <div class="spec-foot">216 multi-chip пакетов × 3 эмиттера в каждом. Дают равномерное покрытие лица.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label">LED-источники (Glo)</div>
+      <div class="spec-val">504 <small>medical-grade</small></div>
+      <div class="spec-foot">Меньше количеством, но выше класс. Плотность на коже выше.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label">Длительность сеанса</div>
+      <div class="spec-val">9–12 <small>мин</small></div>
+      <div class="spec-foot">3 мин на длину волны (оригинал) или 4 мин (Glo). Полный цикл — все три режима подряд.</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-label">Общая доза за сеанс</div>
+      <div class="spec-val">618 <small>Дж ±10%</small></div>
+      <div class="spec-foot">Соответствует терапевтическому окну PBM. Источник — официальный спец-блог Therabody.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STUDIES -->
+<section class="section" id="studies">
+  <div class="eyebrow">03 — Доказательная база</div>
+  <h2 class="section-title">Что говорит наука — честно</h2>
+  <p class="section-sub">Здесь два слоя. <b>Слой 1:</b> исследования самой Therabody (бренд-спонсируемые). <b>Слой 2:</b> peer-reviewed RCT на тех же длинах волн, но на других устройствах. Это валидирует механизм, но не самy маску.</p>
+
+  <div class="studies">
+
+    <div class="study">
+      <span class="study-tag tag-brand">Бренд-спонсируемое</span>
+      <div class="study-year">2024 · Therabody (ClinicalTrials.gov NCT07054710)</div>
+      <div class="study-title">Внутреннее 12-недельное исследование TheraFace Mask Glo</div>
+      <div class="study-design">n = 115 enrolled / 104 завершили · 12 мин/день, 6 дней/нед · perception survey + VISIA</div>
+      <div class="study-result"><b>87% участников</b> оценили кожу как «более гладкую» по самооценке. Но <b>объективный VISIA-замер</b> шероховатости показал <b>всего ~1,3%</b> улучшения за 8 недель. Зарегистрировано на ClinicalTrials.gov, но публикации в peer-review журнале нет.</div>
+      <a class="study-link" href="https://clinicaltrials.gov/study/NCT07054710" target="_blank" rel="noopener">ClinicalTrials.gov NCT07054710 →</a>
+    </div>
+
+    <div class="study">
+      <span class="study-tag tag-peer">Peer-reviewed RCT · ★★★★</span>
+      <div class="study-year">2025 · Medicine (Lippincott) · PMC11835066</div>
+      <div class="study-title">Морщины «гусиных лапок» — устройство 630/850&nbsp;нм</div>
+      <div class="study-design">RCT, двойное слепое, sham-controlled · мультицентровое · n=60, 59 завершили · 9 мин 5×/нед, 12 недель</div>
+      <div class="study-result">Улучшение «гусиных лапок» у <b>86,2%</b> в группе лечения <b>против 16,7%</b> в sham-контроле. Тестировалась корейская Easy Claire — <b>не Therabody</b>, но длины волн и принцип идентичны. Сильное доказательство механизма.</div>
+      <a class="study-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11835066/" target="_blank" rel="noopener">PMC11835066 →</a>
+    </div>
+
+    <div class="study">
+      <span class="study-tag tag-peer">Peer-reviewed RCT · ★★★★</span>
+      <div class="study-year">2025 · Lasers in Medical Science · PMID 40167796</div>
+      <div class="study-title">Красная LED-маска 660&nbsp;нм против глабеллярных морщин</div>
+      <div class="study-design">RCT, двойное слепое, sham-controlled · n=95 женщин 45–60 лет · 21 мин, 6,4 мВт/см², 8,05 Дж/см²</div>
+      <div class="study-result">Статистически значимое сокращение длины глабеллярных и периорбитальных морщин по ImageJ, <b>p&lt;0,001</b>. FACE-Q satisfaction 79,6% (3 сеанса/нед) vs 73,4% (2 сеанса/нед). <b>Двух сеансов в неделю достаточно</b> — третий не даёт дополнительного эффекта.</div>
+      <a class="study-link" href="https://pubmed.ncbi.nlm.nih.gov/40167796/" target="_blank" rel="noopener">PubMed 40167796 →</a>
+    </div>
+
+    <div class="study">
+      <span class="study-tag tag-peer">Peer-reviewed · акне</span>
+      <div class="study-year">2025 · JCAD 18(10):25–32 · Omnilux Clear</div>
+      <div class="study-title">Маска 415/633&nbsp;нм против акне — те же длины, что у Therabody</div>
+      <div class="study-design">Open-label, 7 недель · n=29 завершивших · конкурент Omnilux Clear (тот же спектр)</div>
+      <div class="study-result"><b>≥1-grade IGA reduction у 86% пациентов</b> (превышение порога успеха 50% на 36 п.п.). Снижение воспалительных элементов <b>−13,07</b> и невоспалительных <b>−14,73</b>, <b>p&lt;0,0001</b>. Подтверждает работу пары 415/633 нм против акне — она есть в TheraFace Mask.</div>
+      <a class="study-link" href="https://jcadonline.com/evaluating-the-efficacy-and-safety-of-phototherapy/" target="_blank" rel="noopener">JCAD 2025 →</a>
+    </div>
+
+    <div class="study">
+      <span class="study-tag tag-meta">Систематический обзор</span>
+      <div class="study-year">2023 · J Clin Med · PMC10309024</div>
+      <div class="study-title">PBM для омоложения кожи — обзор клинических исследований</div>
+      <div class="study-design">Обзор RCT и клинических испытаний 2010–2023 · длины волн 611–1064 нм</div>
+      <div class="study-result">Клинически подтверждённые длины волн для омоложения: <b>красный 625–700 нм</b> (чаще 630–660) и <b>NIR 700–1100 нм</b> (чаще 780–830). Те же, что в TheraFace, Omnilux Contour, CurrentBody. PBM улучшает топографию кожи, стимулирует коллаген и эластин. Но: <b>для домашних устройств доказательная база слабее</b>, чем для in-office.</div>
+      <a class="study-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10309024/" target="_blank" rel="noopener">PMC10309024 →</a>
+    </div>
+
+    <div class="study">
+      <span class="study-tag tag-case">Case report · риск</span>
+      <div class="study-year">2020 · Medicine · PMC7302677</div>
+      <div class="study-title">Фотохимическая ретинопатия после синей LED-маски</div>
+      <div class="study-design">N=1 case report · женщина 37 лет · маска Cellreturn 460–470 нм · 20 мин через день, 1 мес</div>
+      <div class="study-result">Хориоретинальное повреждение в парафовеальной зоне, разрушение пигментного эпителия. Лечение — интравитреальная инъекция бевацизумаба. Причина — <b>конструкция с открытой зоной глаз</b>. Это был не Therabody, но риск общий для всего «синего» диапазона. <b>Защищать глаза обязательно.</b></div>
+      <a class="study-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7302677/" target="_blank" rel="noopener">PMC7302677 →</a>
+    </div>
+
+  </div>
+
+  <div class="warn" style="margin-top:36px;">
+    <div class="warn-head">
+      <div class="warn-icon" style="background:rgba(255,159,10,.2);color:var(--orange);">⚠</div>
+      <div class="warn-title" style="color:var(--orange);">Главный нюанс честности</div>
+    </div>
+    <div class="warn-body">
+      Прямого peer-reviewed RCT на самой Therabody TheraFace Mask <b>не существует</b>. Бренд опирается на собственное perception-исследование и регистрацию на ClinicalTrials.gov без публикации. Все «жирные» цифры эффективности (87%, 84% и т.д.) — <b>самооценка участников</b>, а не объективные замеры. Объективный VISIA дал ~1,3% улучшения за 8 недель. Это <b>не значит, что маска не работает</b> — длины волн и механизм валидированы внешними RCT. Но ждать «минус 10 лет за 12 недель» бессмысленно.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARE -->
+<section class="section" id="compare">
+  <div class="eyebrow">04 — Конкуренты</div>
+  <h2 class="section-title">Theramask vs Omnilux vs CurrentBody vs Dr.&nbsp;Dennis&nbsp;Gross</h2>
+  <p class="section-sub">У всех топов 2026 — практически одинаковый спектр 633 + 830 нм. Разница — в форме, мощности, цене и FDA-статусе.</p>
+
+  <div class="compare">
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th>
+          <th>Длины волн</th>
+          <th>LED</th>
+          <th>Время</th>
+          <th>FDA</th>
+          <th>Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td class="name">Therabody TheraFace Mask</td>
+          <td class="wave-mini">415 / 633 / 830</td>
+          <td>648 (tri-wick)</td>
+          <td>9 мин</td>
+          <td class="tick">✓ K230293</td>
+          <td class="price">$599</td>
+        </tr>
+        <tr class="highlight">
+          <td class="name">Therabody TheraFace Mask Glo</td>
+          <td class="wave-mini">415 / 633 / 830</td>
+          <td>504 medical-grade</td>
+          <td>12 мин</td>
+          <td class="tick">✓ K230293</td>
+          <td class="price">$649</td>
+        </tr>
+        <tr>
+          <td class="name">Omnilux Contour Face</td>
+          <td class="wave-mini">633 / 830</td>
+          <td>132</td>
+          <td>10 мин</td>
+          <td class="tick">✓</td>
+          <td class="price">$395</td>
+        </tr>
+        <tr>
+          <td class="name">Omnilux Clear (только акне)</td>
+          <td class="wave-mini">415 / 633</td>
+          <td>~66</td>
+          <td>10 мин</td>
+          <td class="tick">✓</td>
+          <td class="price">$395</td>
+        </tr>
+        <tr>
+          <td class="name">CurrentBody Skin LED Mask</td>
+          <td class="wave-mini">633 / 830</td>
+          <td>132</td>
+          <td>10 мин</td>
+          <td class="tick">✓</td>
+          <td class="price">$469</td>
+        </tr>
+        <tr>
+          <td class="name">Dr. Dennis Gross SpectraLite</td>
+          <td class="wave-mini">605 / 633 / 850</td>
+          <td>100</td>
+          <td>3 мин</td>
+          <td class="tick">✓</td>
+          <td class="price">$455</td>
+        </tr>
+        <tr>
+          <td class="name">LightStim for Wrinkles</td>
+          <td class="wave-mini">605 / 630 / 660 / 855</td>
+          <td>72 (ручная)</td>
+          <td>3 мин/зона</td>
+          <td class="tick">✓</td>
+          <td class="price">$249</td>
+        </tr>
+        <tr>
+          <td class="name">Solawave Wand</td>
+          <td class="wave-mini">630 (без NIR)</td>
+          <td>—</td>
+          <td>5–10 мин/зона</td>
+          <td class="cross">не маска</td>
+          <td class="price">$169</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pc">
+    <div class="pc-card pros">
+      <div class="pc-head">Когда Theramask лучше конкурентов</div>
+      <ul class="pc-list">
+        <li>Нужен спектр «3-в-1» с синим против акне — у Omnilux Contour и CurrentBody синего нет</li>
+        <li>Гибкая силиконовая форма лучше прилегает к лицу, чем жёсткие модели</li>
+        <li>Самое большое количество LED-источников (648) среди топов</li>
+        <li>Tri-wick multi-chip даёт более равномерное излучение, чем дискретные диоды</li>
+        <li>Beam-форма излучения с защитной зоной для глаз</li>
+      </ul>
+    </div>
+    <div class="pc-card cons">
+      <div class="pc-head">Когда лучше взять конкурента</div>
+      <ul class="pc-list">
+        <li>Если важна цена — Omnilux Contour Face даёт почти то же за $395 (минус $200)</li>
+        <li>Если синий не нужен — Omnilux/CurrentBody те же 633/830 нм без переплаты</li>
+        <li>Если хочется FDA-cleared чисто против акне — Omnilux Clear с peer-reviewed данными</li>
+        <li>Если нужен супер-короткий сеанс — Dr. Dennis Gross делает 3 мин</li>
+        <li>Если в РФ/СНГ нет официальной доставки Therabody — Omnilux чаще встречается</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SAFETY -->
+<section class="section" id="safety">
+  <div class="eyebrow">05 — Безопасность</div>
+  <h2 class="section-title">Маска безопасна, но к глазам нужно отнестись серьёзно</h2>
+  <p class="section-sub">FDA-clearance K230293 формально подтверждает безопасность. Но реальный задокументированный случай повреждения сетчатки от LED-маски в литературе есть.</p>
+
+  <div class="warn">
+    <div class="warn-head">
+      <div class="warn-icon">⚠</div>
+      <div class="warn-title">Главный задокументированный риск — глаза</div>
+    </div>
+    <div class="warn-body">
+      В 2020 году в журнале Medicine (PMC7302677) описан случай <b>фотохимической ретинопатии у 37-летней женщины</b>, использовавшей синюю LED-маску Cellreturn (Корея, 460–470 нм). 20 минут через день в течение месяца — итог: повреждение парафовеальной зоны, разрушение пигментного эпителия, лечение интравитреальной инъекцией бевацизумаба. <b>Конструкция маски с открытой зоной глаз</b> — прямая причина. У Therabody TheraFace зона глаз закрыта непрозрачной силиконовой вставкой, но при синем режиме всё равно лучше держать глаза закрытыми и не использовать дольше указанного цикла.
+    </div>
+    <div class="warn-list">
+      <div class="warn-item"><b>Закрывайте глаза</b>На любом синем режиме (415 нм). Даже если маска формально безопасна.</div>
+      <div class="warn-item"><b>Не превышайте цикл</b>9–12 минут — это максимум на сеанс. Больше ≠ лучше.</div>
+      <div class="warn-item"><b>Не используйте при мигрени с аурой</b>Триггер эпилептоидной активности у светочувствительных людей.</div>
+      <div class="warn-item"><b>Не сочетайте с фотосенситайзерами</b>Изотретиноин, гиперицин, некоторые антибиотики — повышают риск реакции кожи.</div>
+      <div class="warn-item"><b>Беременность</b>Производитель не рекомендует — нет данных РКИ.</div>
+      <div class="warn-item"><b>Меланома/активная онкология</b>Противопоказание по умолчанию для PBM.</div>
+    </div>
+  </div>
+
+  <div class="who">
+    <div class="who-card good">
+      <span class="who-icon">✓</span>
+      <div class="who-title">Кому подойдёт</div>
+      <ul class="who-list">
+        <li>Возраст 30–55, лёгкие/средние возрастные изменения</li>
+        <li>Комбинированная кожа с эпизодами акне</li>
+        <li>Готовность использовать 6 дней в неделю по 9–12 мин</li>
+        <li>Понимание, что эффект кумулятивный (8–12 недель минимум)</li>
+        <li>Бюджет $400–650 на гаджет без жалости</li>
+      </ul>
+    </div>
+    <div class="who-card bad">
+      <span class="who-icon">✗</span>
+      <div class="who-title">Кому не нужно</div>
+      <ul class="who-list">
+        <li>Глубокие морщины, выраженный птоз — нужны филлеры/процедуры</li>
+        <li>Активная мигрень с аурой, эпилепсия</li>
+        <li>Беременность, лактация</li>
+        <li>Розацеа в обострении (синий может усилить покраснение)</li>
+        <li>Ожидание «вау» эффекта за 2 недели</li>
+        <li>Нерегулярное использование — без 5–6 раз в неделю эффект ≈ 0</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUY -->
+<section class="section">
+  <div class="eyebrow">06 — Где купить</div>
+  <h2 class="section-title">Цены и каналы — 2026</h2>
+  <p class="section-sub">Официальная розница примерно одинаковая. Распродажи бывают на Dermstore и Ulta (–10..20%). В РФ/СНГ официальной дистрибуции нет — только параллельный импорт.</p>
+
+  <div class="buy-grid">
+    <a class="buy-card" href="https://www.therabody.com/products/theraface-mask" target="_blank" rel="noopener">
+      <div class="buy-shop">Therabody.com</div>
+      <div class="buy-price">$599 <span class="buy-arrow">→</span></div>
+      <div class="buy-note">Прямо от производителя, гарантия 1 год.</div>
+    </a>
+    <a class="buy-card" href="https://www.dermstore.com/" target="_blank" rel="noopener">
+      <div class="buy-shop">Dermstore</div>
+      <div class="buy-price">$599 <span class="buy-arrow">→</span></div>
+      <div class="buy-note">Сезонные распродажи −15..20%, рассрочка.</div>
+    </a>
+    <a class="buy-card" href="https://www.ulta.com/" target="_blank" rel="noopener">
+      <div class="buy-shop">Ulta Beauty</div>
+      <div class="buy-price">$599 <span class="buy-arrow">→</span></div>
+      <div class="buy-note">Кэшбэк по Ultamate Rewards, частые промокоды.</div>
+    </a>
+    <a class="buy-card" href="https://www.amazon.com/" target="_blank" rel="noopener">
+      <div class="buy-shop">Amazon</div>
+      <div class="buy-price">$599 <span class="buy-arrow">→</span></div>
+      <div class="buy-note">Prime-доставка, лёгкий возврат. Проверяйте, что продавец = Therabody.</div>
+    </a>
+    <a class="buy-card" href="https://www.bestbuy.com/" target="_blank" rel="noopener">
+      <div class="buy-shop">Best Buy</div>
+      <div class="buy-price">$599 <span class="buy-arrow">→</span></div>
+      <div class="buy-note">Расширенная гарантия Geek Squad опционально.</div>
+    </a>
+    <a class="buy-card" href="https://store.mayoclinic.com/" target="_blank" rel="noopener">
+      <div class="buy-shop">Mayo Clinic Store</div>
+      <div class="buy-price">$599 <span class="buy-arrow">→</span></div>
+      <div class="buy-note">Подтверждает «медицинское» позиционирование.</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL VERDICT -->
+<section class="section" id="verdict">
+  <div class="eyebrow">07 — Итог</div>
+  <h2 class="section-title">Theramask — рабочая. Но не «волшебная».</h2>
+  <p class="section-sub" style="max-width:760px;">Краткий честный вывод по 24 источникам и 22 верифицированным фактам.</p>
+
+  <div class="tldr" style="margin-top:40px;font-size:16px;">
+    <span class="tldr-label" style="color:var(--green);">Финальный вердикт</span>
+    <p style="margin-bottom:14px;"><b>1. Длины волн правильные.</b> 415 / 633 / 830 нм — это стандартная клинически валидированная тройка. PBM на этих волнах действительно стимулирует фибробласты, коллаген, эластин и борется с <i>P. acnes</i>. Это доказано в peer-review.</p>
+    <p style="margin-bottom:14px;"><b>2. FDA-clearance настоящий.</b> 510(k) K230293, класс II, OTC wrinkle reduction. Это формальное подтверждение безопасности — но не эффективности конкретно для морщин.</p>
+    <p style="margin-bottom:14px;"><b>3. Прямого peer-reviewed RCT на TheraFace Mask нет.</b> Все «жирные цифры» — perception survey, бренд-спонсируемые. Объективный VISIA дал ~1,3% улучшения за 8 недель.</p>
+    <p style="margin-bottom:14px;"><b>4. Реальный ожидаемый эффект:</b> через 8–12 недель регулярного использования (5–6 раз в неделю) — кожа выглядит более ровной и сияющей, мелкие морщины менее заметны, акне реже. Глубокие морщины маска <b>не уберёт</b>. Птоз <b>не подтянет</b>. Пигментные пятна осветлит чуть-чуть.</p>
+    <p style="margin-bottom:14px;"><b>5. Конкуренты не хуже.</b> Omnilux Contour Face за $395 даёт практически то же самое. CurrentBody Skin Mask — тоже. Переплата за Therabody — в основном за бренд, синий режим и 648 LED.</p>
+    <p><b>6. Стоит ли своих денег?</b> Если есть лишние $600, регулярность и адекватные ожидания — да. Если бюджет тесный — Omnilux Contour или CurrentBody. Если эпизодически — лучше не покупать вообще.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOURCES -->
+<section class="section">
+  <div class="eyebrow">Источники</div>
+  <h2 class="section-title">24 источника · 22 верифицированных факта</h2>
+  <p class="section-sub">Все ссылки проверены, 3 утверждения отвергнуты на adversarial-проверке и в отчёт не вошли.</p>
+
+  <div class="sources">
+
+    <a class="src" href="https://www.therabody.com/products/theraface-mask" target="_blank" rel="noopener">
+      <span class="src-tag brand">Производитель</span>
+      <span>Therabody TheraFace Mask — официальная страница</span>
+      <span class="src-url">therabody.com/products/theraface-mask</span>
+    </a>
+    <a class="src" href="https://www.therabody.com/products/theraface-mask-glo-led-light-mask" target="_blank" rel="noopener">
+      <span class="src-tag brand">Производитель</span>
+      <span>TheraFace Mask Glo — страница продукта</span>
+      <span class="src-url">therabody.com/products/theraface-mask-glo-led-light-mask</span>
+    </a>
+    <a class="src" href="https://www.therabody.com/blogs/news/theraface-mask-your-most-common-questions-answered" target="_blank" rel="noopener">
+      <span class="src-tag brand">Производитель</span>
+      <span>Технические FAQ TheraFace Mask</span>
+      <span class="src-url">therabody.com/blogs/news/theraface-mask-your-most-common-questions-answered</span>
+    </a>
+    <a class="src" href="https://www.therabody.com/blogs/news/the-clinical-findings-behind-theraface-mask-glo-the-largest-study-of-led-masks-on-the-market" target="_blank" rel="noopener">
+      <span class="src-tag brand">Производитель</span>
+      <span>Внутреннее исследование Glo — 104 участника</span>
+      <span class="src-url">therabody.com/blogs/news/the-clinical-findings-behind-theraface-mask-glo...</span>
+    </a>
+    <a class="src" href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K230293" target="_blank" rel="noopener">
+      <span class="src-tag fda">FDA</span>
+      <span>FDA 510(k) Clearance K230293 — официальная база</span>
+      <span class="src-url">accessdata.fda.gov/.../K230293</span>
+    </a>
+    <a class="src" href="https://clinicaltrials.gov/study/NCT07054710" target="_blank" rel="noopener">
+      <span class="src-tag brand">Регистрация</span>
+      <span>ClinicalTrials.gov NCT07054710 — Glo исследование</span>
+      <span class="src-url">clinicaltrials.gov/study/NCT07054710</span>
+    </a>
+
+    <a class="src" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11835066/" target="_blank" rel="noopener">
+      <span class="src-tag peer">Peer-review</span>
+      <span>Medicine 2025 — RCT 630/850 нм против «гусиных лапок»</span>
+      <span class="src-url">ncbi.nlm.nih.gov/pmc/articles/PMC11835066</span>
+    </a>
+    <a class="src" href="https://link.springer.com/article/10.1007/s10103-025-04383-1" target="_blank" rel="noopener">
+      <span class="src-tag peer">Peer-review</span>
+      <span>Lasers in Medical Science 2025 — RCT 660 нм, n=95</span>
+      <span class="src-url">link.springer.com/article/10.1007/s10103-025-04383-1</span>
+    </a>
+    <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/40167796/" target="_blank" rel="noopener">
+      <span class="src-tag peer">Peer-review</span>
+      <span>PubMed 40167796 — Civinski et al.</span>
+      <span class="src-url">pubmed.ncbi.nlm.nih.gov/40167796</span>
+    </a>
+    <a class="src" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10309024/" target="_blank" rel="noopener">
+      <span class="src-tag peer">Peer-review</span>
+      <span>J Clin Med 2023 — систематический обзор PBM</span>
+      <span class="src-url">pmc.ncbi.nlm.nih.gov/articles/PMC10309024</span>
+    </a>
+    <a class="src" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11049838/" target="_blank" rel="noopener">
+      <span class="src-tag peer">Peer-review</span>
+      <span>PBM — обзор механизма и параметров</span>
+      <span class="src-url">pmc.ncbi.nlm.nih.gov/articles/PMC11049838</span>
+    </a>
+    <a class="src" href="https://jcadonline.com/evaluating-the-efficacy-and-safety-of-phototherapy/" target="_blank" rel="noopener">
+      <span class="src-tag peer">Peer-review</span>
+      <span>JCAD 2025 — Omnilux Clear 415/633 нм против акне</span>
+      <span class="src-url">jcadonline.com/evaluating-the-efficacy-and-safety-of-phototherapy</span>
+    </a>
+    <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/41416031/" target="_blank" rel="noopener">
+      <span class="src-tag peer">Peer-review</span>
+      <span>PubMed 41416031 — Ablon G., JCAD 2025</span>
+      <span class="src-url">pubmed.ncbi.nlm.nih.gov/41416031</span>
+    </a>
+    <a class="src" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7302677/" target="_blank" rel="noopener">
+      <span class="src-tag peer">Case report</span>
+      <span>Medicine 2020 — ретинопатия от LED-маски Cellreturn</span>
+      <span class="src-url">ncbi.nlm.nih.gov/pmc/articles/PMC7302677</span>
+    </a>
+
+    <a class="src" href="https://omniluxled.com/products/omnilux-contour-face" target="_blank" rel="noopener">
+      <span class="src-tag">Конкурент</span>
+      <span>Omnilux Contour Face — спецификация</span>
+      <span class="src-url">omniluxled.com/products/omnilux-contour-face</span>
+    </a>
+    <a class="src" href="https://omniluxled.com/products/omnilux-clear" target="_blank" rel="noopener">
+      <span class="src-tag">Конкурент</span>
+      <span>Omnilux Clear — анти-акне модель 415/633 нм</span>
+      <span class="src-url">omniluxled.com/products/omnilux-clear</span>
+    </a>
+    <a class="src" href="https://us.currentbody.com/products/currentbody-skin-led-light-therapy-mask" target="_blank" rel="noopener">
+      <span class="src-tag">Конкурент</span>
+      <span>CurrentBody Skin LED Mask Series 1</span>
+      <span class="src-url">us.currentbody.com/products/currentbody-skin-led-light-therapy-mask</span>
+    </a>
+    <a class="src" href="https://us.currentbody.com/blogs/editorial/currentbody-vs-omnilux" target="_blank" rel="noopener">
+      <span class="src-tag review">Сравнение</span>
+      <span>CurrentBody vs Omnilux — официальный блог</span>
+      <span class="src-url">us.currentbody.com/blogs/editorial/currentbody-vs-omnilux</span>
+    </a>
+    <a class="src" href="https://comparemaniac.com/theraface-vs-omnilux/" target="_blank" rel="noopener">
+      <span class="src-tag review">Сравнение</span>
+      <span>TheraFace vs Omnilux — независимое сравнение</span>
+      <span class="src-url">comparemaniac.com/theraface-vs-omnilux</span>
+    </a>
+    <a class="src" href="https://www.lighttherapyinsiders.com/theraface-red-light-review-therabody-mask-tested/" target="_blank" rel="noopener">
+      <span class="src-tag review">Независимый тест</span>
+      <span>Light Therapy Insiders — лабораторный обзор TheraFace</span>
+      <span class="src-url">lighttherapyinsiders.com/theraface-red-light-review-therabody-mask-tested</span>
+    </a>
+    <a class="src" href="https://www.mindbodygreen.com/articles/theraface-mask-review" target="_blank" rel="noopener">
+      <span class="src-tag review">Обзор</span>
+      <span>MindBodyGreen — обзор TheraFace Mask</span>
+      <span class="src-url">mindbodygreen.com/articles/theraface-mask-review</span>
+    </a>
+    <a class="src" href="https://wwd.com/shop/shop-beauty/therabody-theraface-mask-glo-led-face-mask-review-2026-1238682177/" target="_blank" rel="noopener">
+      <span class="src-tag review">Обзор</span>
+      <span>WWD 2026 — обзор TheraFace Mask Glo</span>
+      <span class="src-url">wwd.com/.../therabody-theraface-mask-glo-led-face-mask-review-2026</span>
+    </a>
+    <a class="src" href="https://www.hollywoodreporter.com/lifestyle/shopping/best-led-light-therapy-face-masks-1235600938/" target="_blank" rel="noopener">
+      <span class="src-tag review">Обзор</span>
+      <span>The Hollywood Reporter — best LED-masks 2026</span>
+      <span class="src-url">hollywoodreporter.com/.../best-led-light-therapy-face-masks</span>
+    </a>
+    <a class="src" href="https://us.currentbody.com/blogs/editorial/is-red-led-light-therapy-bad-for-your-eyes" target="_blank" rel="noopener">
+      <span class="src-tag">Безопасность</span>
+      <span>CurrentBody — обзор по безопасности для глаз</span>
+      <span class="src-url">us.currentbody.com/blogs/editorial/is-red-led-light-therapy-bad-for-your-eyes</span>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <p>Deep-research разбор · 24 источника · 22/25 верифицированных утверждений · 2026-05</p>
+  <p class="disclaimer">Материал носит информационный характер. Не является медицинской рекомендацией. При наличии хронических заболеваний кожи или глаз — консультация с дерматологом перед использованием LED-масок обязательна. FDA-clearance подтверждает безопасность, а не клиническую эффективность для всех заявленных показаний. Цены могут меняться, перепроверяйте перед покупкой.</p>
+</footer>
+
+</body>
+</html>
