@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Онкогенные штаммы ВПЧ в Белграде — Где сдать, цены, сроки 2026</title>
+<style>
+  :root {
+    --bg: #0d1018;
+    --card: #141720;
+    --card2: #181b28;
+    --border: #252a3a;
+    --accent: #e05c7a;
+    --accent2: #b848d0;
+    --blue: #5b8af0;
+    --green: #3fcb8a;
+    --yellow: #f5c842;
+    --orange: #f0884e;
+    --text: #e4e8f5;
+    --muted: #7a849f;
+    --tag-bg: #1e2233;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0d1018 0%, #160f1e 50%, #1a0f20 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 52px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 300px;
+    background: radial-gradient(ellipse, rgba(224,92,122,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(224,92,122,0.12);
+    border: 1px solid rgba(224,92,122,0.35);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(22px, 4vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg, #f0d0d8 0%, #c87090 50%, #b848d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto 24px;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .dot-live { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; margin-right: 5px; }
+
+  /* Container */
+  .container { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 44px 0 28px; }
+  .sec-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2.2px;
+    color: var(--accent);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Strain cards — top section */
+  .strain-intro {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media(max-width:640px){ .strain-intro { grid-template-columns: 1fr; } }
+  .strain-col h3 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .strain-list { list-style: none; }
+  .strain-list li {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .strain-list li:last-child { border-bottom: none; }
+  .s-num {
+    font-weight: 800;
+    font-size: 13px;
+    min-width: 44px;
+    color: var(--accent);
+  }
+  .s-num.low { color: var(--yellow); }
+  .s-risk {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-weight: 700;
+    margin-left: auto;
+  }
+  .risk-hi { background: rgba(224,92,122,0.15); color: var(--accent); }
+  .risk-mid { background: rgba(245,200,66,0.12); color: var(--yellow); }
+
+  /* Test types */
+  .test-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .test-type-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .test-type-card .tt-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .test-type-card .tt-name {
+    font-size: 14.5px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .test-type-card .tt-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .tt-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 6px;
+  }
+  .tt-base { background: rgba(91,138,240,0.12); color: var(--blue); }
+  .tt-plus { background: rgba(63,203,138,0.12); color: var(--green); }
+  .tt-full { background: rgba(224,92,122,0.12); color: var(--accent); }
+  .tt-extra { background: rgba(240,136,78,0.12); color: var(--orange); }
+
+  /* Clinic cards */
+  .clinics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+  }
+  .clinic-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .clinic-card:hover { border-color: rgba(224,92,122,0.35); transform: translateY(-2px); }
+  .clinic-card.featured { border-color: rgba(63,203,138,0.3); }
+  .clinic-top {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .clinic-ico {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    background: rgba(224,92,122,0.1);
+  }
+  .clinic-name { font-size: 15.5px; font-weight: 700; margin-bottom: 3px; }
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  .badge-cheap { background: rgba(63,203,138,0.12); color: var(--green); }
+  .badge-fast { background: rgba(91,138,240,0.12); color: var(--blue); }
+  .badge-full { background: rgba(224,92,122,0.12); color: var(--accent); }
+  .badge-state { background: rgba(245,200,66,0.1); color: var(--yellow); }
+  .clinic-body { padding: 14px 20px 16px; }
+  .row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    align-items: baseline;
+  }
+  .row-lbl { color: var(--muted); font-size: 12px; min-width: 64px; flex-shrink: 0; }
+  .row-val { color: var(--text); }
+  .row-val.g { color: var(--green); font-weight: 600; }
+  .row-val.y { color: var(--yellow); font-weight: 600; }
+  .row-val.a { color: var(--accent); font-weight: 600; }
+  .tests-avail { margin-top: 12px; }
+  .tests-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 7px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 5px;
+    color: var(--text);
+  }
+  .tag.hi { border-color: rgba(224,92,122,0.3); color: var(--accent); background: rgba(224,92,122,0.07); }
+  .clinic-foot {
+    padding: 11px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.015);
+  }
+  .phone { font-size: 12.5px; color: var(--muted); }
+  .site-link {
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid rgba(224,92,122,0.3);
+    padding: 4px 12px;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .site-link:hover { background: rgba(224,92,122,0.1); }
+
+  /* Price comparison table */
+  .table-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .table-head {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    padding: 9px 16px;
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+  tbody tr { border-bottom: 1px solid rgba(37,42,58,0.7); }
+  tbody tr:last-child { border: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  td { padding: 10px 16px; font-size: 13px; }
+  .td-name { font-weight: 700; }
+  .td-method { color: var(--muted); font-size: 12px; }
+  .td-types { font-size: 12px; color: var(--muted); }
+  .td-price { color: var(--yellow); font-weight: 700; white-space: nowrap; }
+  .td-eur { color: var(--muted); font-size: 11.5px; }
+  .td-time { color: var(--green); font-weight: 600; font-size: 12.5px; }
+  .td-best { font-size: 11.5px; }
+  .check { color: var(--green); }
+  .best-row { background: rgba(63,203,138,0.04); }
+
+  /* Tips */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+  .tip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .ti { font-size: 18px; flex-shrink: 0; }
+  .tip-text { color: var(--muted); }
+  .tip-text strong { display: block; color: var(--text); margin-bottom: 3px; }
+
+  /* Warning */
+  .warn {
+    background: rgba(240,136,78,0.07);
+    border: 1px solid rgba(240,136,78,0.22);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: #f0c0a0;
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 26px 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 40px;
+  }
+
+  @media(max-width:640px){
+    .clinics-grid { grid-template-columns: 1fr; }
+    .test-types { grid-template-columns: 1fr 1fr; }
+    td, th { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">ВПЧ · Онкогенные штаммы · Белград 2026</div>
+  <h1>Анализ на раковые штаммы<br>папилломавируса (ВПЧ)</h1>
+  <p class="hero-sub">Где в Белграде сдать PCR-тест на онкогенные типы HPV, сколько стоит и за какой срок готов результат</p>
+  <div class="hero-meta">
+    <span><span class="dot-live"></span>Обновлено: июнь 2026</span>
+    <span>🔬 PCR-метод</span>
+    <span>6 лабораторий в обзоре</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Strains -->
+  <div class="section">
+    <div class="sec-title">Онкогенные штаммы ВПЧ</div>
+    <div class="strain-intro">
+      <div class="strain-col">
+        <h3>Высокоонкогенные (высокий риск)</h3>
+        <ul class="strain-list">
+          <li><span class="s-num">16, 18</span> Вызывают 70 % рака шейки матки <span class="s-risk risk-hi">Группа 1</span></li>
+          <li><span class="s-num">31, 33, 45</span> Другие частые онкогенные типы <span class="s-risk risk-hi">Группа 1</span></li>
+          <li><span class="s-num">35, 39, 51</span> Высокий риск онкотрансформации <span class="s-risk risk-hi">Группа 1</span></li>
+          <li><span class="s-num">52, 56, 58</span> Высокий риск онкотрансформации <span class="s-risk risk-hi">Группа 1</span></li>
+          <li><span class="s-num">59, 66, 68</span> Высокий риск онкотрансформации <span class="s-risk risk-hi">Группа 1</span></li>
+          <li><span class="s-num">26, 53, 73, 82</span> Вероятно онкогенные <span class="s-risk risk-mid">Группа 2</span></li>
+        </ul>
+      </div>
+      <div class="strain-col">
+        <h3>Что определяет полный тест</h3>
+        <ul class="strain-list" style="margin-bottom:16px;">
+          <li>Тип 16 &amp; 18 — ответственны за <strong style="color:var(--accent)">70 % рака шейки матки</strong></li>
+          <li>Тип 16 — 95 % орофарингеального рака</li>
+          <li>Тип 16 — 92 % анального рака</li>
+          <li>Типы 16/18 — 80 % рака вульвы и влагалища</li>
+          <li>Типы 16/18 — 63 % рака пениса</li>
+        </ul>
+        <div style="background:rgba(224,92,122,0.07);border:1px solid rgba(224,92,122,0.2);border-radius:10px;padding:12px 14px;font-size:13px;color:#f0b8c8;">
+          <strong style="display:block;margin-bottom:4px;">Материал для анализа:</strong>
+          Женщины — мазок из шейки матки / влагалища<br>
+          Мужчины — мазок из уретры<br>
+          <span style="color:var(--muted);font-size:12px;">Взятие мазка (у гинеколога/уролога) — обычно отдельно</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test types -->
+  <div class="section" style="padding-top:0;">
+    <div class="sec-title">Виды тестов — что выбрать</div>
+    <div class="test-types">
+      <div class="test-type-card">
+        <div class="tt-label">Базовый</div>
+        <div class="tt-name">Только детекция</div>
+        <div class="tt-desc">Ответ: есть ли высокорисковый ВПЧ (да / нет). Тип не определяется.</div>
+        <span class="tt-badge tt-base">Скрининг</span>
+      </div>
+      <div class="test-type-card">
+        <div class="tt-label">Стандартный</div>
+        <div class="tt-name">Детекция + генотипирование</div>
+        <div class="tt-desc">Показывает конкретные типы (16, 18, 31 и т.д.). Рекомендован.</div>
+        <span class="tt-badge tt-plus">Оптимальный</span>
+      </div>
+      <div class="test-type-card">
+        <div class="tt-label">Расширенный</div>
+        <div class="tt-name">Генотипирование + вирусная нагрузка</div>
+        <div class="tt-desc">Определяет количество вируса — важно для оценки динамики лечения.</div>
+        <span class="tt-badge tt-full">Полный</span>
+      </div>
+      <div class="test-type-card">
+        <div class="tt-label">Отдельно</div>
+        <div class="tt-name">Только тип 16 или только тип 18</div>
+        <div class="tt-desc">Если ранее был найден ВПЧ и нужно уточнить именно эти агрессивные типы.</div>
+        <span class="tt-badge tt-extra">Уточняющий</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clinics -->
+  <div class="section">
+    <div class="sec-title">Лаборатории Белграда</div>
+    <div class="clinics-grid">
+
+      <!-- Aqualab -->
+      <div class="clinic-card featured">
+        <div class="clinic-top">
+          <div class="clinic-ico">🧬</div>
+          <div>
+            <div class="clinic-name">Aqualab</div>
+            <span class="badge badge-cheap">Дешевле всех</span>
+          </div>
+        </div>
+        <div class="clinic-body">
+          <div class="row"><span class="row-lbl">Адрес</span><span class="row-val">Bulevar Mihajla Pupina 115a, Novi Beograd</span></div>
+          <div class="row"><span class="row-lbl">Цена</span><span class="row-val a">7 900 RSD (~67 €)</span></div>
+          <div class="row"><span class="row-lbl">Сроки</span><span class="row-val g">2–3 рабочих дня</span></div>
+          <div class="row"><span class="row-lbl">Метод</span><span class="row-val">Real-Time PCR, современное оборудование</span></div>
+          <div class="tests-avail">
+            <div class="tests-lbl">Определяет типы</div>
+            <div class="tags">
+              <span class="tag hi">16, 18</span>
+              <span class="tag hi">31, 33, 35, 39, 45</span>
+              <span class="tag hi">51, 52, 53, 56, 58, 59</span>
+              <span class="tag hi">66, 68, 26, 73, 82</span>
+              <span class="tag">+ 6, 11, 81 (низкий риск)</span>
+            </div>
+          </div>
+        </div>
+        <div class="clinic-foot">
+          <span class="phone">011 2441 551</span>
+          <a href="https://aqualab.rs/analize/genetika/humani-papilloma-virus-detekcija-dnk-i-genotipizacija/" class="site-link" target="_blank">Сайт →</a>
+        </div>
+      </div>
+
+      <!-- Beo-lab -->
+      <div class="clinic-card">
+        <div class="clinic-top">
+          <div class="clinic-ico">💉</div>
+          <div>
+            <div class="clinic-name">Beo-lab</div>
+            <span class="badge badge-full">Онлайн-заказ</span>
+          </div>
+        </div>
+        <div class="clinic-body">
+          <div class="row"><span class="row-lbl">Адрес</span><span class="row-val">Borska 41m / Ratka Mitrovića 148 (несколько точек)</span></div>
+          <div class="row"><span class="row-lbl">Часы</span><span class="row-val">Пн–Пт 07:00–20:00, Сб 08:00–15:00</span></div>
+          <div class="row"><span class="row-lbl">Цена</span><span class="row-val a">8 750 RSD (~74 €) — только высокоонкогенные<br><span style="color:var(--muted);font-size:12px;">+ вар. с низкоонкогенными и с вирусной нагрузкой</span></span></div>
+          <div class="row"><span class="row-lbl">Сроки</span><span class="row-val g">До 10 дней</span></div>
+          <div class="row"><span class="row-lbl">Онлайн</span><span class="row-val g">E-лаборатория — заказ и результат онлайн</span></div>
+          <div class="tests-avail">
+            <div class="tests-lbl">Пакеты</div>
+            <div class="tags">
+              <span class="tag hi">Только высокорисковые (PCR)</span>
+              <span class="tag">Низко + высокорисковые</span>
+              <span class="tag">С вирусной нагрузкой</span>
+              <span class="tag">HPV + STD панели</span>
+            </div>
+          </div>
+        </div>
+        <div class="clinic-foot">
+          <span class="phone">011/060</span>
+          <a href="https://www.beo-lab.rs/analiza/hpv-tipizacija-visokorizicni-tipovi-pcr/" class="site-link" target="_blank">Заказать →</a>
+        </div>
+      </div>
+
+      <!-- Genomlab -->
+      <div class="clinic-card">
+        <div class="clinic-top">
+          <div class="clinic-ico">🔬</div>
+          <div>
+            <div class="clinic-name">Genomlab</div>
+            <span class="badge badge-fast">Самый быстрый</span>
+          </div>
+        </div>
+        <div class="clinic-body">
+          <div class="row"><span class="row-lbl">Адрес</span><span class="row-val">Beograd (уточнить на сайте)</span></div>
+          <div class="row"><span class="row-lbl">Цена</span><span class="row-val y">Уточнить на сайте</span></div>
+          <div class="row"><span class="row-lbl">Сроки</span><span class="row-val g">1 рабочий день</span></div>
+          <div class="tests-avail">
+            <div class="tests-lbl">4 варианта теста</div>
+            <div class="tags">
+              <span class="tag">HPV 1 — детекция 14 высокорисковых типов</span>
+              <span class="tag hi">HPV 2 — детекция + типирование</span>
+              <span class="tag hi">HPV 3 — детекция + типирование + нагрузка</span>
+              <span class="tag">HPV 16 отдельно</span>
+              <span class="tag">HPV 18 отдельно</span>
+            </div>
+          </div>
+        </div>
+        <div class="clinic-foot">
+          <span class="phone">genomlab.rs</span>
+          <a href="https://genomlab.rs/humani-papiloma-virus-hpv/" class="site-link" target="_blank">Сайт →</a>
+        </div>
+      </div>
+
+      <!-- IntroLab -->
+      <div class="clinic-card">
+        <div class="clinic-top">
+          <div class="clinic-ico">🧫</div>
+          <div>
+            <div class="clinic-name">IntroLab</div>
+            <span class="badge badge-full">Англ. интерфейс</span>
+          </div>
+        </div>
+        <div class="clinic-body">
+          <div class="row"><span class="row-lbl">Адрес</span><span class="row-val">Beograd (несколько точек)</span></div>
+          <div class="row"><span class="row-lbl">Цена</span><span class="row-val y">Уточнить на сайте</span></div>
+          <div class="row"><span class="row-lbl">Сроки</span><span class="row-val g">24–48 часов</span></div>
+          <div class="row"><span class="row-lbl">Язык</span><span class="row-val g">Английский интерфейс, удобно иностранцам</span></div>
+          <div class="tests-avail">
+            <div class="tests-lbl">Доступные тесты</div>
+            <div class="tags">
+              <span class="tag hi">HPV генотип 16 (отдельно)</span>
+              <span class="tag hi">HPV генотип 18 (отдельно)</span>
+              <span class="tag">Полная типизация (PCR)</span>
+            </div>
+          </div>
+        </div>
+        <div class="clinic-foot">
+          <span class="phone">introlab.net</span>
+          <a href="https://introlab.net/en/human-papillomavirus-hpv-genotyping-genotype-16-urethral-vaginal-cervical-swab/" class="site-link" target="_blank">HPV-16 →</a>
+        </div>
+      </div>
+
+      <!-- DNK Centar -->
+      <div class="clinic-card">
+        <div class="clinic-top">
+          <div class="clinic-ico">🧪</div>
+          <div>
+            <div class="clinic-name">DNK Centar za genetiku</div>
+            <span class="badge badge-full">Генетическая лаборатория</span>
+          </div>
+        </div>
+        <div class="clinic-body">
+          <div class="row"><span class="row-lbl">Адрес</span><span class="row-val">Marka Oreškovića 1, Beograd</span></div>
+          <div class="row"><span class="row-lbl">Цена</span><span class="row-val y">Уточнить на сайте / по телефону</span></div>
+          <div class="row"><span class="row-lbl">Метод</span><span class="row-val">PCR, специализированная ДНК-лаборатория с 2008 г.</span></div>
+          <div class="tests-avail">
+            <div class="tests-lbl">Доступные тесты</div>
+            <div class="tags">
+              <span class="tag hi">ВПЧ высокорисковые типы (PCR)</span>
+              <span class="tag">Все 14 онкогенных типов</span>
+            </div>
+          </div>
+        </div>
+        <div class="clinic-foot">
+          <span class="phone">+381 11 218 2111</span>
+          <a href="https://dnk.rs/Humani-papiloma-virus" class="site-link" target="_blank">Сайт →</a>
+        </div>
+      </div>
+
+      <!-- Millenium Medic -->
+      <div class="clinic-card">
+        <div class="clinic-top">
+          <div class="clinic-ico">🏥</div>
+          <div>
+            <div class="clinic-name">Millenium Medic</div>
+            <span class="badge badge-full">Клиника + лаборатория</span>
+          </div>
+        </div>
+        <div class="clinic-body">
+          <div class="row"><span class="row-lbl">Адрес</span><span class="row-val">Slavija / Vračar, Beograd</span></div>
+          <div class="row"><span class="row-lbl">Цена</span><span class="row-val y">Уточнить на сайте</span></div>
+          <div class="row"><span class="row-lbl">Плюс</span><span class="row-val">Мазок возьмут прямо в клинике (гинеколог на месте)</span></div>
+          <div class="tests-avail">
+            <div class="tests-lbl">Доступные тесты</div>
+            <div class="tags">
+              <span class="tag hi">HPV типирование (PCR)</span>
+              <span class="tag">Мазок + типизация в одном визите</span>
+            </div>
+          </div>
+        </div>
+        <div class="clinic-foot">
+          <span class="phone">milleniummedic.rs</span>
+          <a href="https://milleniummedic.rs/hpv-virus/" class="site-link" target="_blank">Сайт →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Price table -->
+  <div class="section">
+    <div class="sec-title">Сравнение цен и сроков</div>
+    <div class="table-wrap">
+      <div class="table-head">Тест на онкогенные штаммы ВПЧ — PCR, Белград</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Лаборатория</th>
+            <th>Тест</th>
+            <th>Цена</th>
+            <th>≈ EUR</th>
+            <th>Срок</th>
+            <th>Онлайн</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best-row">
+            <td class="td-name">Aqualab</td>
+            <td class="td-types">Детекция ДНК + генотипирование<br><span style="color:var(--muted);font-size:11.5px;">18 высокорисковых + 3 низкорисковых типа</span></td>
+            <td class="td-price">7 900 RSD</td>
+            <td class="td-eur">~67 €</td>
+            <td class="td-time">2–3 дня</td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="td-name">Beo-lab</td>
+            <td class="td-types">Типизация — только высокорисковые, PCR</td>
+            <td class="td-price">8 750 RSD</td>
+            <td class="td-eur">~74 €</td>
+            <td class="td-time">до 10 дней</td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="td-name">Beo-lab</td>
+            <td class="td-types">Типизация — низко + высокорисковые, PCR</td>
+            <td class="td-price">~11 000 RSD</td>
+            <td class="td-eur">~93 €</td>
+            <td class="td-time">до 10 дней</td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="td-name">Genomlab</td>
+            <td class="td-types">HPV 2 (детекция + типирование)</td>
+            <td class="td-price">уточнить</td>
+            <td class="td-eur">—</td>
+            <td class="td-time"><span style="color:var(--accent);font-weight:700;">1 рабочий день</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="td-name">IntroLab</td>
+            <td class="td-types">HPV-16 или HPV-18 (по отдельности)</td>
+            <td class="td-price">уточнить</td>
+            <td class="td-eur">—</td>
+            <td class="td-time">24–48 ч</td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="td-name">DNK Centar</td>
+            <td class="td-types">HPV высокорисковые типы (PCR)</td>
+            <td class="td-price">уточнить</td>
+            <td class="td-eur">—</td>
+            <td class="td-time">уточнить</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11.5px;color:var(--muted);margin-top:8px;">* Курс 1 EUR ≈ 118 RSD (июнь 2026). Цены ориентировочные — уточняйте напрямую в лаборатории.</p>
+  </div>
+
+  <!-- Tips -->
+  <div class="section">
+    <div class="sec-title">Что важно знать перед сдачей</div>
+    <div class="tips-grid">
+      <div class="tip">
+        <span class="ti">🚫</span>
+        <div class="tip-text">
+          <strong>Без секса за 2 дня</strong>
+          За 48 часов до взятия мазка исключить половые контакты — иначе результат будет недостоверным.
+        </div>
+      </div>
+      <div class="tip">
+        <span class="ti">🛁</span>
+        <div class="tip-text">
+          <strong>Без спринцевания</strong>
+          За 1–2 дня нельзя спринцеваться, использовать вагинальные таблетки и свечи.
+        </div>
+      </div>
+      <div class="tip">
+        <span class="ti">🩺</span>
+        <div class="tip-text">
+          <strong>Взятие мазка — отдельно</strong>
+          Большинство лабораторий берут мазок сами. Но уточните заранее — иногда нужно прийти с уже взятым мазком от гинеколога.
+        </div>
+      </div>
+      <div class="tip">
+        <span class="ti">📅</span>
+        <div class="tip-text">
+          <strong>Цикл (для женщин)</strong>
+          Оптимально — на 10–18 день цикла. Нельзя сдавать во время менструации.
+        </div>
+      </div>
+      <div class="tip">
+        <span class="ti">🔁</span>
+        <div class="tip-text">
+          <strong>Повтор через 6–12 месяцев</strong>
+          Отрицательный результат не означает иммунитет — вирус может появиться позже. Повторный тест нужен при смене партнёра.
+        </div>
+      </div>
+      <div class="tip">
+        <span class="ti">🌐</span>
+        <div class="tip-text">
+          <strong>Без языка</strong>
+          Aqualab и IntroLab работают на английском. Beo-lab и Genomlab — в основном по-сербски.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">
+    <span style="font-size:20px;flex-shrink:0;">⚠️</span>
+    <div>
+      <strong>Важно:</strong> Положительный тест на ВПЧ высокого риска — не диагноз «рак». Это сигнал для обследования у онколога или гинеколога. В большинстве случаев иммунная система сама подавляет вирус в течение 1–2 лет. Интерпретацию результата обязательно делает врач.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    Данные собраны из открытых источников (сайты лабораторий, июнь 2026) · Не является медицинской рекомендацией<br>
+    <span style="opacity:0.45;">aqualab.rs · beo-lab.rs · genomlab.rs · introlab.net · dnk.rs · milleniummedic.rs</span>
+  </div>
+</footer>
+
+</body>
+</html>
