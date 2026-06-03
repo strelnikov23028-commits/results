@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InBody в Белграде — где сделать, цены 2026</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f0f4f8; color: #1a202c; }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, #0a1628 0%, #1b3a5c 55%, #2563a8 100%);
+            color: white;
+            padding: 64px 20px 56px;
+            text-align: center;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            font-weight: 600;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.75;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ── LAYOUT ── */
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+        .section { padding: 50px 0 20px; }
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 26px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, #e2e8f0, transparent);
+        }
+
+        /* ── MODELS GRID ── */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 24px;
+        }
+        .model-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.13);
+        }
+        .model-card.featured { border: 2px solid #2563a8; }
+        .featured-badge {
+            position: absolute;
+            top: 14px; right: 14px;
+            background: #2563a8;
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .model-img-wrap {
+            background: linear-gradient(160deg, #f5f8ff, #edf2ff);
+            padding: 32px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 230px;
+        }
+        .model-img-wrap img {
+            max-height: 175px;
+            max-width: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 6px 18px rgba(0,0,50,0.15));
+        }
+        .model-body { padding: 22px 22px 24px; }
+        .model-name { font-size: 1.35rem; font-weight: 800; color: #0a1628; margin-bottom: 4px; }
+        .model-tier { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 16px; font-weight: 600; }
+        .spec-list { display: flex; flex-direction: column; gap: 0; }
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            padding: 7px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .spec-row:last-child { border-bottom: none; }
+        .sl { color: #94a3b8; }
+        .sv { font-weight: 700; color: #334155; }
+        .highlight { color: #2563a8; }
+
+        /* ── TIP BOX ── */
+        .tip-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 14px;
+            padding: 18px 22px;
+            font-size: 14px;
+            color: #1e40af;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+        .tip-box strong { font-weight: 700; }
+
+        /* ── LOCATIONS ── */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .loc-card {
+            background: white;
+            border-radius: 16px;
+            padding: 26px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border-left: 4px solid #e2e8f0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .loc-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+        }
+        .loc-card.v770 { border-left-color: #2563a8; }
+        .loc-card.v720 { border-left-color: #f59e0b; }
+        .loc-card.vunk { border-left-color: #94a3b8; }
+
+        .loc-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .loc-name { font-size: 1.1rem; font-weight: 800; color: #0a1628; line-height: 1.3; }
+        .loc-type { font-size: 12px; color: #94a3b8; margin-top: 3px; font-weight: 500; }
+
+        .mbadge {
+            font-size: 11px; font-weight: 800;
+            padding: 5px 11px;
+            border-radius: 10px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+        .mb770 { background: #dbeafe; color: #1d4ed8; }
+        .mb720 { background: #fef3c7; color: #92400e; }
+        .mbunk { background: #f1f5f9; color: #64748b; }
+
+        .price-block {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .price-main { font-size: 1.4rem; font-weight: 900; color: #0a1628; }
+        .price-eur { font-size: 13px; color: #94a3b8; font-weight: 600; margin-top: 2px; }
+        .price-note { font-size: 11px; color: #94a3b8; text-align: right; line-height: 1.4; }
+        .price-na { font-size: 0.95rem; font-weight: 600; color: #94a3b8; }
+
+        .loc-details { display: flex; flex-direction: column; gap: 7px; margin-top: 4px; }
+        .drow {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.4;
+        }
+        .drow svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 1px; opacity: 0.5; }
+
+        .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+        .t-green { background: #d1fae5; color: #065f46; }
+        .t-orange { background: #fef3c7; color: #92400e; }
+        .t-purple { background: #ede9fe; color: #5b21b6; }
+        .t-warn { background: #fee2e2; color: #991b1b; }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 32px 20px;
+            color: #94a3b8;
+            font-size: 13px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 800px) {
+            .models-grid { grid-template-columns: 1fr; }
+            .locations-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="badge">Белград · июнь 2026</div>
+    <h1>InBody в Белграде</h1>
+    <p>Где сделать точный анализ состава тела на профессиональных аппаратах InBody 580 / 770 / 970 — адреса, модели, цены</p>
+</div>
+
+<div class="container">
+
+    <!-- ── МОДЕЛИ ── -->
+    <div class="section">
+        <div class="section-title">Топ-модели InBody</div>
+        <div class="models-grid">
+
+            <!-- 580 -->
+            <div class="model-card">
+                <div class="model-img-wrap">
+                    <img src="https://inbody.com/res/inbody/images/products/InBody580/device/device_01.png"
+                         onerror="this.onerror=null;this.src='https://shop.inbodyusa.com/cdn/shop/files/InBody580.png';"
+                         alt="InBody 580">
+                </div>
+                <div class="model-body">
+                    <div class="model-name">InBody 580</div>
+                    <div class="model-tier">Clinical · Advanced</div>
+                    <div class="spec-list">
+                        <div class="spec-row"><span class="sl">Частоты</span><span class="sv">6 частот (1–1000 кГц)</span></div>
+                        <div class="spec-row"><span class="sl">Сегменты</span><span class="sv">5 сегментов тела</span></div>
+                        <div class="spec-row"><span class="sl">Время замера</span><span class="sv">60 сек</span></div>
+                        <div class="spec-row"><span class="sl">Макс. вес</span><span class="sv">250 кг</span></div>
+                        <div class="spec-row"><span class="sl">Память</span><span class="sv">100 000 записей</span></div>
+                        <div class="spec-row"><span class="sl">Фазовый угол</span><span class="sv">✓</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 770 -->
+            <div class="model-card featured">
+                <div class="featured-badge">В Белграде есть</div>
+                <div class="model-img-wrap">
+                    <img src="https://inbody.com/res/inbody/images/products/InBody770/device/device_01.png"
+                         onerror="this.onerror=null;this.src='https://shop.inbodyusa.com/cdn/shop/files/InBody770.png';"
+                         alt="InBody 770">
+                </div>
+                <div class="model-body">
+                    <div class="model-name">InBody 770</div>
+                    <div class="model-tier">Research-grade · Clinical</div>
+                    <div class="spec-list">
+                        <div class="spec-row"><span class="sl">Частоты</span><span class="sv highlight">6 частот (1–1000 кГц)</span></div>
+                        <div class="spec-row"><span class="sl">Сегменты</span><span class="sv">5 сегментов тела</span></div>
+                        <div class="spec-row"><span class="sl">Время замера</span><span class="sv">60 сек</span></div>
+                        <div class="spec-row"><span class="sl">ECW/TBW</span><span class="sv highlight">✓ Распределение воды</span></div>
+                        <div class="spec-row"><span class="sl">Фазовый угол</span><span class="sv highlight">✓</span></div>
+                        <div class="spec-row"><span class="sl">Облако</span><span class="sv">✓ LookinBody Web</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 970 -->
+            <div class="model-card featured">
+                <div class="featured-badge">Лучший</div>
+                <div class="model-img-wrap">
+                    <img src="https://inbody.com/res/inbody/images/products/InBody970/device/device_01.png"
+                         onerror="this.onerror=null;this.src='https://inbody.rs/wp-content/uploads/2022/06/InBody970.png';"
+                         alt="InBody 970">
+                </div>
+                <div class="model-body">
+                    <div class="model-name">InBody 970</div>
+                    <div class="model-tier">Top-tier · Research</div>
+                    <div class="spec-list">
+                        <div class="spec-row"><span class="sl">Частоты</span><span class="sv highlight">8 частот + 3 МГц (новый стандарт)</span></div>
+                        <div class="spec-row"><span class="sl">Сегменты</span><span class="sv">5 сегментов тела</span></div>
+                        <div class="spec-row"><span class="sl">Время замера</span><span class="sv">90 сек</span></div>
+                        <div class="spec-row"><span class="sl">Макс. вес</span><span class="sv highlight">300 кг</span></div>
+                        <div class="spec-row"><span class="sl">Отчёты</span><span class="sv highlight">7 типов</span></div>
+                        <div class="spec-row"><span class="sl">Память</span><span class="sv">100 000 записей</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tip-box">
+            <strong>InBody 770 — самый распространённый топ-аппарат в Белграде.</strong>
+            Он подтверждён в нескольких медицинских и спортивных центрах города. InBody 970 продаётся через официального дистрибьютора BORF d.o.o. (Белград), но точек для публичного измерения на нём пока не найдено. InBody 580 — также в продаже, но в клиниках встречается реже. Рекомендую начать с мест, где стоит InBody 770.
+        </div>
+    </div>
+
+    <!-- ── МЕСТА ── -->
+    <div class="section" style="padding-top:0;">
+        <div class="section-title">Места в Белграде</div>
+        <div class="locations-grid">
+
+            <!-- Fizikus -->
+            <div class="loc-card vunk">
+                <div class="loc-top">
+                    <div>
+                        <div class="loc-name">Поликлиника Fizikus</div>
+                        <div class="loc-type">Медицинский центр</div>
+                    </div>
+                    <span class="mbadge mbunk">InBody (модель н/д)</span>
+                </div>
+                <div class="price-block">
+                    <div>
+                        <div class="price-main">2 500 RSD</div>
+                        <div class="price-eur">≈ 21 €</div>
+                    </div>
+                    <div class="price-note">Контрольное<br>измерение (3 мес):<br>1 000 RSD</div>
+                </div>
+                <div class="loc-details">
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Deligradska 27 (Stari DIF), Beograd
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 2.18 2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.09-1.09a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        011 264-3242 &nbsp;/&nbsp; 063 349-278
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        info@fizikus.rs
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Пн–Пт: 10:00–20:00
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag t-green">✓ Цена подтверждена</span>
+                    <span class="tag t-purple">Самый дешёвый вариант</span>
+                </div>
+            </div>
+
+            <!-- Fit House KOSA -->
+            <div class="loc-card v770">
+                <div class="loc-top">
+                    <div>
+                        <div class="loc-name">Fit House KOSA</div>
+                        <div class="loc-type">Фитнес-клуб · Novi Beograd</div>
+                    </div>
+                    <span class="mbadge mb770">InBody 770</span>
+                </div>
+                <div class="price-block">
+                    <div class="price-na">Цена не опубликована</div>
+                </div>
+                <div class="loc-details">
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Partizanske avijacije 4, Novi Beograd
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 2.18 2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.09-1.09a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        065 228-4573
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        office@fithousekosa.rs
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag t-orange">📞 Уточнить цену</span>
+                </div>
+            </div>
+
+            <!-- PROFEX -->
+            <div class="loc-card v770">
+                <div class="loc-top">
+                    <div>
+                        <div class="loc-name">PROFEX (проф. Душко Илич)</div>
+                        <div class="loc-type">Спортивный центр · Novi Beograd</div>
+                    </div>
+                    <span class="mbadge mb770">InBody 770</span>
+                </div>
+                <div class="price-block">
+                    <div class="price-na">Цена не опубликована</div>
+                </div>
+                <div class="loc-details">
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Novi Beograd
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        navidiku.rs/firme/fitnes-klubovi-beograd/mrsavljenje-profex
+                    </div>
+                    <div class="drow" style="color:#94a3b8;font-size:12px;">
+                        Центр проф. Илича с каф. биомеханики FSFV университета Белграда. Более 70 кг потерь веса у пациентов.
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag t-orange">📞 Уточнить цену и адрес</span>
+                </div>
+            </div>
+
+            <!-- Dr Čubrilo -->
+            <div class="loc-card v770">
+                <div class="loc-top">
+                    <div>
+                        <div class="loc-name">Centar Dr. Čubrilo</div>
+                        <div class="loc-type">Центр метаболизма</div>
+                    </div>
+                    <span class="mbadge mb770">InBody 770</span>
+                </div>
+                <div class="price-block">
+                    <div>
+                        <div class="price-main">~12 000 RSD</div>
+                        <div class="price-eur">≈ 103 € — первый визит</div>
+                    </div>
+                    <div class="price-note">Включает<br>консультацию<br>врача (45 мин)</div>
+                </div>
+                <div class="loc-details">
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        drcubrilo.com
+                    </div>
+                    <div class="drow" style="color:#94a3b8;font-size:12px;">
+                        ⚠ Популярный центр — запись может быть занята на месяцы вперёд.
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag t-purple">Комплексный подход</span>
+                    <span class="tag t-warn">Очередь!</span>
+                </div>
+            </div>
+
+            <!-- Dr Gifing -->
+            <div class="loc-card v720">
+                <div class="loc-top">
+                    <div>
+                        <div class="loc-name">Centar Dr. Gifing</div>
+                        <div class="loc-type">Медицинский центр (хроно-питание)</div>
+                    </div>
+                    <span class="mbadge" style="background:#fef3c7;color:#92400e;">InBody 720</span>
+                </div>
+                <div class="price-block">
+                    <div class="price-na">Цена не опубликована</div>
+                    <div class="price-note" style="color:#f59e0b;font-weight:700;">⚠ Модель 720<br>(не 580/770/970)</div>
+                </div>
+                <div class="loc-details">
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Svetogorska 25, I спрат, ст. 5, Beograd
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 2.18 2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.09-1.09a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        066 635-0-636
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        office@drgifing.com
+                    </div>
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Пн–Пт: 10:00–19:00 &nbsp;/&nbsp; Сб: 09:00–15:00
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag t-orange">📞 Уточнить цену</span>
+                </div>
+            </div>
+
+            <!-- Sky Experience -->
+            <div class="loc-card vunk">
+                <div class="loc-top">
+                    <div>
+                        <div class="loc-name">Sky Experience</div>
+                        <div class="loc-type">Премиальный фитнес-клуб</div>
+                    </div>
+                    <span class="mbadge mbunk">InBody (модель н/д)</span>
+                </div>
+                <div class="price-block">
+                    <div>
+                        <div class="price-main">от 30 510 RSD</div>
+                        <div class="price-eur">≈ 261 € / 3 месяца</div>
+                    </div>
+                    <div class="price-note">InBody входит<br>в стоимость<br>членства</div>
+                </div>
+                <div class="loc-details">
+                    <div class="drow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        skyexperience.rs
+                    </div>
+                    <div class="drow" style="color:#94a3b8;font-size:12px;">
+                        InBody-диагностика — стартовая процедура для новых членов. Отдельной продажи замера нет.
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag t-orange">Только с абонементом</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── ВЫВОД ── -->
+    <div style="margin: 30px 0 50px;">
+        <div class="tip-box" style="background:#f0fdf4;border-color:#bbf7d0;color:#14532d;">
+            <strong>Рекомендация:</strong> Самый дешёвый подтверждённый вариант — <strong>Поликлиника Fizikus</strong> (2 500 RSD ≈ 21 €).
+            Если нужна именно модель 770 — звонить в <strong>Fit House KOSA</strong> или <strong>PROFEX</strong> и уточнять цену напрямую.
+            Для комплексной консультации с врачом — <strong>Centar Dr. Čubrilo</strong>, но запись может быть через месяц.
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    Данные актуальны на июнь 2026 &nbsp;·&nbsp; Источники: fizikus.rs, inbody.rs, drgifing.com, skyexperience.rs, drcubrilo.com &nbsp;·&nbsp; 1 EUR ≈ 117 RSD
+</footer>
+
+</body>
+</html>
