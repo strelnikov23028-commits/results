@@ -1,8 +1,9 @@
 {
-  "ts": "2026-06-08T11:01:41.171085+00:00",
+  "ts": "2026-06-09T09:51:19.845561+00:00",
   "findings": {},
   "errors": {
     "Yacht-Rent Turkey": "http_403",
-    "GuletYacht.net": "http_403"
+    "GuletYacht.net": "http_403",
+    "Mirya Yachting (home)": "request_error: ReadTimeout: HTTPSConnectionPool(host='miryaguletcharter.com', port=443): Read timed out. (read timeout=30)"
   }
 }
