@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tria — открытие счёта с филиппинскими документами</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0b0f;
+      --surface: #12141a;
+      --surface2: #1a1d26;
+      --border: #252836;
+      --accent: #7c5cfc;
+      --accent2: #4f9eff;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --text: #e8eaf0;
+      --muted: #8b8fa8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0d0e1a 0%, #1a1040 50%, #0d1a2e 100%);
+      padding: 60px 24px 48px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,92,252,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(124,92,252,0.15);
+      border: 1px solid rgba(124,92,252,0.4);
+      color: #a78bfa;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .hero h1 span {
+      background: linear-gradient(90deg, #7c5cfc, #4f9eff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 600px;
+      margin: 0 auto 28px;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #4ade80;
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .status-pill::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* Layout */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Sections */
+    section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child { border-bottom: none; }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .icon-purple { background: rgba(124,92,252,0.2); }
+    .icon-blue   { background: rgba(79,158,255,0.2); }
+    .icon-green  { background: rgba(34,197,94,0.2); }
+    .icon-yellow { background: rgba(245,158,11,0.2); }
+    .icon-red    { background: rgba(239,68,68,0.2); }
+
+    /* Info block */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+    .info-card .label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .info-card .value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .info-card .value.accent { color: #a78bfa; }
+    .info-card .value.green  { color: #4ade80; }
+    .info-card .value.blue   { color: #60a5fa; }
+
+    /* Alert */
+    .alert {
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-body strong { display: block; margin-bottom: 4px; font-size: 14px; }
+    .alert-body p { font-size: 14px; color: var(--muted); }
+    .alert.warn  { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); }
+    .alert.warn .alert-body strong { color: #fbbf24; }
+    .alert.danger{ background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); }
+    .alert.danger .alert-body strong { color: #f87171; }
+    .alert.info  { background: rgba(79,158,255,0.08); border: 1px solid rgba(79,158,255,0.25); }
+    .alert.info .alert-body strong { color: #60a5fa; }
+    .alert.success { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); }
+    .alert.success .alert-body strong { color: #4ade80; }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c5cfc, #4f9eff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-content p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Tiers */
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .tier-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .tier-card.popular {
+      border-color: rgba(124,92,252,0.5);
+      background: linear-gradient(135deg, #12141a, #1a1040);
+    }
+    .tier-card.popular::before {
+      content: 'Популярный';
+      position: absolute;
+      top: -11px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(90deg, #7c5cfc, #4f9eff);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 14px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+    .tier-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .tier-price {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .tier-price span { font-size: 16px; font-weight: 500; color: var(--muted); }
+    .tier-cashback {
+      display: inline-block;
+      background: rgba(34,197,94,0.15);
+      color: #4ade80;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .tier-features { list-style: none; }
+    .tier-features li {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tier-features li:last-child { border-bottom: none; }
+    .tier-features li::before {
+      content: '✓';
+      color: #4ade80;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    /* Docs list */
+    .doc-list { list-style: none; }
+    .doc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-item:last-child { border-bottom: none; }
+    .doc-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .doc-info strong { font-size: 14px; display: block; margin-bottom: 2px; }
+    .doc-info p { font-size: 13px; color: var(--muted); }
+
+    /* Banned countries */
+    .countries-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .country-tag {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.2);
+      color: #f87171;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* Summary table */
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .summary-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .summary-table td:first-child {
+      color: var(--muted);
+      font-weight: 500;
+      width: 40%;
+    }
+    .summary-table td:last-child { font-weight: 600; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer a {
+      color: #a78bfa;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 40px 20px 32px; }
+      section { padding: 28px 0; }
+      .tiers { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">Гайд 2026</div>
+  <h1>Tria — открытие счёта<br><span>с филиппинскими документами</span></h1>
+  <p>Полный разбор: юрисдикция карты, KYC-требования, тарифы и подводные камни</p>
+  <div class="status-pill">Филиппины — разрешены ✅</div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- ЧТО ТАКОЕ TRIA -->
+  <section>
+    <div class="section-title">
+      <div class="icon icon-purple">🏦</div>
+      Что такое Tria
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Тип</div>
+        <div class="value accent">Self-custodial крипто-необанк</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Карта</div>
+        <div class="value blue">Visa Debit, 150+ стран</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Доходность</div>
+        <div class="value green">До 15% APY на крипту</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Транзакции</div>
+        <div class="value">$100M+ за 4 месяца</div>
+      </div>
+    </div>
+    <p style="color: var(--muted); font-size: 14px;">Tria — криптовый необанк, где средства остаются в вашем самокастодиальном кошельке вплоть до момента транзакции. Поддерживает 1000+ криптоактивов, имеет встроенный AI-роутер BestPath для оптимальных обменов и выпускает Visa-дебетовую карту для повседневных расходов.</p>
+  </section>
+
+  <!-- ЮРИСДИКЦИЯ КАРТЫ -->
+  <section>
+    <div class="section-title">
+      <div class="icon icon-blue">🗺️</div>
+      Юрисдикция карты
+    </div>
+    <table class="summary-table">
+      <tr>
+        <td>Эмитент карты</td>
+        <td>Nimbus, LLC / Threely Dimensions Inc (Delaware, США)</td>
+      </tr>
+      <tr>
+        <td>Применимое право</td>
+        <td>Законодательство Пуэрто-Рико (для международных держателей)</td>
+      </tr>
+      <tr>
+        <td>Арбитраж споров</td>
+        <td>Нью-Йорк, США (или удалённо по выбору)</td>
+      </tr>
+      <tr>
+        <td>Платёжная система</td>
+        <td>Visa (приём по всему миру)</td>
+      </tr>
+      <tr>
+        <td>Tria — банк?</td>
+        <td>Нет. Tria не является банком, не выдаёт кредиты, не устанавливает ставки</td>
+      </tr>
+      <tr>
+        <td>Нигерия (исключение)</td>
+        <td>Карту там маркетирует BANEX MICROFINANCE BANK (лицензия Центробанка Нигерии)</td>
+      </tr>
+    </table>
+    <div class="alert info" style="margin-top: 16px;">
+      <span class="alert-icon">ℹ️</span>
+      <div class="alert-body">
+        <strong>Важно для OFW (Overseas Filipino Workers)</strong>
+        <p>Карта выпущена американской компанией (Nimbus LLC, Delaware), регулируется правом Пуэрто-Рико. Это не filipino-based банк — это глобальный крипто-инструмент. BSP-регулирование к ней не применяется напрямую.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- СТАТУС ФИЛИППИН -->
+  <section>
+    <div class="section-title">
+      <div class="icon icon-green">🇵🇭</div>
+      Статус Филиппин
+    </div>
+    <div class="alert success">
+      <span class="alert-icon">✅</span>
+      <div class="alert-body">
+        <strong>Филиппины — в списке разрешённых стран</strong>
+        <p>Филиппины явно не фигурируют в списке заблокированных юрисдикций Tria. Сервис доступен для резидентов страны.</p>
+      </div>
+    </div>
+    <div class="alert warn">
+      <span class="alert-icon">⚠️</span>
+      <div class="alert-body">
+        <strong>Критическое условие: документ + резидентство + телефон — одна страна</strong>
+        <p>Tria проверяет соответствие: страна выпуска документа, страна вашего фактического проживания (по proof of address) и код страны в номере телефона должны совпадать. OFW с паспортом PH, но проживающий в другой стране, должен открываться по документам страны фактического пребывания.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KYC И ДОКУМЕНТЫ -->
+  <section>
+    <div class="section-title">
+      <div class="icon icon-purple">📄</div>
+      KYC — какие документы нужны
+    </div>
+    <p style="color: var(--muted); font-size: 14px; margin-bottom: 20px;">Верификация проходит через <strong style="color: var(--text);">Sumsub</strong> — стандартный KYC-провайдер. Процесс занимает в среднем 2–5 минут.</p>
+
+    <ul class="doc-list">
+      <li class="doc-item">
+        <div class="doc-icon">🛂</div>
+        <div class="doc-info">
+          <strong>Паспорт Филиппин (Philippine Passport)</strong>
+          <p>Основной документ. Должен быть действующим. Фото разворота + selfie рядом с документом.</p>
+        </div>
+      </li>
+      <li class="doc-item">
+        <div class="doc-icon">🪪</div>
+        <div class="doc-info">
+          <strong>Национальный ID / Driver's License</strong>
+          <p>Принимаются как альтернатива паспорту. PhilSys ID, UMID, SSS, GSIS, PRC — подходят.</p>
+        </div>
+      </li>
+      <li class="doc-item">
+        <div class="doc-icon">🤳</div>
+        <div class="doc-info">
+          <strong>Selfie / Liveness check (обязательно)</strong>
+          <p>Живая фотосессия через камеру телефона прямо в приложении. Нейросеть Sumsub проверяет «живость».</p>
+        </div>
+      </li>
+      <li class="doc-item">
+        <div class="doc-icon">🏠</div>
+        <div class="doc-info">
+          <strong>Proof of Address (для Signature и Metal)</strong>
+          <p>Счёт за коммунальные услуги, банковская выписка или договор аренды на ваше имя. Требуется для старших тиров.</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="alert warn" style="margin-top: 16px;">
+      <span class="alert-icon">💸</span>
+      <div class="alert-body">
+        <strong>Оплата ДО верификации — возврата нет</strong>
+        <p>Tria берёт плату за карту перед KYC. Если идентификация провалится — деньги не вернут. Наиболее рискованно для тира Metal ($250). Начните с Virtual ($25).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ТАРИФЫ -->
+  <section>
+    <div class="section-title">
+      <div class="icon icon-yellow">💳</div>
+      Тарифы и тиры карт
+    </div>
+    <div class="tiers">
+      <!-- Virtual -->
+      <div class="tier-card">
+        <div class="tier-name">Virtual</div>
+        <div class="tier-price">$25<span> разово</span></div>
+        <div class="tier-cashback">1.5% кэшбэк в TRIA</div>
+        <ul class="tier-features">
+          <li>Только цифровая карта</li>
+          <li>Без ежемесячных платежей</li>
+          <li>Рекомендуется для старта</li>
+          <li>Риск потери минимален</li>
+        </ul>
+      </div>
+      <!-- Signature -->
+      <div class="tier-card popular">
+        <div class="tier-name">Signature</div>
+        <div class="tier-price">$109<span> разово</span></div>
+        <div class="tier-cashback">4.5% кэшбэк в TRIA</div>
+        <ul class="tier-features">
+          <li>Цифровая + пластиковая карта</li>
+          <li>Доставка по всему миру</li>
+          <li>Требует Proof of Address</li>
+          <li>Хорошее соотношение цены</li>
+        </ul>
+      </div>
+      <!-- Metal -->
+      <div class="tier-card">
+        <div class="tier-name">Metal</div>
+        <div class="tier-price">$250<span> разово</span></div>
+        <div class="tier-cashback">6% кэшбэк в TRIA</div>
+        <ul class="tier-features">
+          <li>Премиум металлическая карта</li>
+          <li>Цифровая + физическая</li>
+          <li>Требует Proof of Address</li>
+          <li>Высокий риск до KYC</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-top: 20px;">
+      <div style="font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;">Дополнительные комиссии</div>
+      <table class="summary-table">
+        <tr>
+          <td>Конвертация валют (FX)</td>
+          <td>До 3%</td>
+        </tr>
+        <tr>
+          <td>Снятие в банкомате</td>
+          <td>До $2 + 3%</td>
+        </tr>
+        <tr>
+          <td>Международные транзакции</td>
+          <td>До 1%</td>
+        </tr>
+        <tr>
+          <td>Ежемесячная плата</td>
+          <td style="color: #4ade80;">Нет</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ПОШАГОВАЯ ИНСТРУКЦИЯ -->
+  <section>
+    <div class="section-title">
+      <div class="icon icon-green">🚀</div>
+      Как открыть — пошагово
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Скачайте приложение Tria</h4>
+          <p>App Store или Google Play. Поищите «Tria: Crypto Neobank» или «UseTria».</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Зарегистрируйтесь с филиппинским номером телефона (+63)</h4>
+          <p>Номер должен совпадать со страной ваших документов. Это ключевое условие.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Выберите тир Virtual ($25) для первого опыта</h4>
+          <p>Минимальный финансовый риск до прохождения KYC. Деньги не возвращаются при отказе.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Пройдите KYC через Sumsub</h4>
+          <p>Загрузите паспорт PH (или другой gov-ID), сделайте liveness selfie. Обычно одобряют за 2–5 минут.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>Пополните криптовый кошелёк</h4>
+          <p>USDC, USDT, BTC, ETH и 1000+ других активов. Средства остаются в вашем кошельке (self-custody).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <h4>Используйте карту для покупок</h4>
+          <p>Принимается везде, где есть Visa. Работает в 150+ странах. Кэшбэк начисляется в токенах TRIA.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЗАБЛОКИРОВАННЫЕ СТРАНЫ -->
+  <section>
+    <div class="section-title">
+      <div class="icon icon-red">🚫</div>
+      Заблокированные юрисдикции
+    </div>
+    <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Филиппины в этом списке <strong style="color: #4ade80;">отсутствуют</strong>. Заблокированы:</p>
+    <div class="countries-grid">
+      <span class="country-tag">🇺🇸 США</span>
+      <span class="country-tag">🇷🇺 Россия</span>
+      <span class="country-tag">🇧🇾 Беларусь</span>
+      <span class="country-tag">🇨🇳 Китай</span>
+      <span class="country-tag">🇮🇳 Индия</span>
+      <span class="country-tag">🇹🇷 Турция</span>
+      <span class="country-tag">🇻🇳 Вьетнам</span>
+      <span class="country-tag">🇮🇱 Израиль</span>
+      <span class="country-tag">🇺🇦 Украина</span>
+      <span class="country-tag">🇳🇵 Непал</span>
+      <span class="country-tag">🇮🇶 Ирак</span>
+      <span class="country-tag">🇮🇷 Иран</span>
+      <span class="country-tag">🇰🇵 Сев. Корея</span>
+      <span class="country-tag">🇨🇺 Куба</span>
+      <span class="country-tag">🇸🇾 Сирия</span>
+      <span class="country-tag">🇻🇪 Венесуэла</span>
+    </div>
+  </section>
+
+  <!-- ИТОГ -->
+  <section>
+    <div class="section-title">
+      <div class="icon icon-blue">📊</div>
+      Итоговый вердикт
+    </div>
+    <div class="info-grid">
+      <div class="info-card" style="border-color: rgba(34,197,94,0.3);">
+        <div class="label">Открыть с филиппинскими доками</div>
+        <div class="value green">Да, возможно ✅</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Юрисдикция карты</div>
+        <div class="value blue">Пуэрто-Рико / США</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Эмитент</div>
+        <div class="value accent">Nimbus LLC (Delaware)</div>
+      </div>
+      <div class="info-card" style="border-color: rgba(245,158,11,0.3);">
+        <div class="label">Главный риск</div>
+        <div class="value" style="color: #fbbf24;">Оплата до KYC — без возврата</div>
+      </div>
+    </div>
+    <div class="alert info" style="margin-top: 8px;">
+      <span class="alert-icon">💡</span>
+      <div class="alert-body">
+        <strong>Рекомендация</strong>
+        <p>Начните с тира <strong>Virtual ($25)</strong> — минимальные потери если KYC не пройдёт. Убедитесь, что паспорт/ID, proof of address и номер телефона — все на PH (+63). Если живёте за рубежом как OFW — открывайте по документам страны проживания, не по PH-паспорту.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  <p>Данные актуальны на июнь 2026 · Источники: <a href="https://docs.tria.so/card-terms-international" target="_blank">Tria Docs</a>, <a href="https://kkinvesting.io/en/posts/tria-card-review/" target="_blank">KKInvesting</a>, <a href="https://cryptocardcompare.io/cards/tria/" target="_blank">CryptoCardCompare</a></p>
+</div>
+
+</body>
+</html>
