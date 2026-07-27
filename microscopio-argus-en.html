@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARGUS MVP — Bill of Materials (build on IO Rodeo Full Kit)</title>
+<meta name="description" content="ARGUS MVP — OpenFlexure fluorescence microscope bill of materials on the IO Rodeo Full Kit: components, specs, priorities. No vendor links.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --ink2:#424245; --muted:#6E6E73;
+    --line:#E5E5EA; --line2:#EDEDF0; --blue:#0071E3; --blue-ink:#0058b8;
+    --green:#1a7f37; --green-bg:#e7f6ec; --amber:#8a5a00; --amber-bg:#fbf1dc;
+    --red:#b3261e; --red-bg:#fbe9e7; --purple:#6a3ea1; --purple-bg:#f0e9fa;
+    --radius:20px; --radius-sm:13px; --shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 30px rgba(0,0,0,.05);
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    font-feature-settings:"cv02","cv03","cv04","cv11";
+  }
+  a{color:var(--blue-ink); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 22px}
+  code, .mono{font-family:var(--mono); font-size:.86em}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:1; transform:none}
+  html.js-anim .reveal{opacity:0; transform:translateY(22px)}
+  html.js-anim .reveal.in{opacity:1; transform:none;
+    transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1)}
+  @media (prefers-reduced-motion: reduce){
+    html.js-anim .reveal{opacity:1; transform:none; transition:none}
+  }
+
+  /* ---------- hero ---------- */
+  header.hero{padding:76px 0 40px}
+  .eyebrow{font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--muted); text-transform:uppercase; margin-bottom:18px}
+  .eyebrow .dot{color:var(--blue)}
+  h1{font-size:clamp(34px,6vw,60px); line-height:1.05; letter-spacing:-.028em; font-weight:800; margin:0 0 20px}
+  .lede{font-size:clamp(17px,2.2vw,20px); color:var(--ink2); max-width:780px; margin:0 0 26px}
+  .lede b{color:var(--ink); font-weight:600}
+  .meta-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px}
+  .mchip{background:var(--card); border:1px solid var(--line); border-radius:100px; padding:9px 16px; font-size:14px; font-weight:600; box-shadow:var(--shadow)}
+  .mchip span{color:var(--muted); font-weight:500}
+
+  /* ---------- stages ---------- */
+  .stages{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:34px 0 8px}
+  .stage{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow)}
+  .stage .tag{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.04em; padding:5px 11px; border-radius:8px; margin-bottom:12px}
+  .stage.s1 .tag{background:var(--green-bg); color:var(--green)}
+  .stage.s2 .tag{background:var(--purple-bg); color:var(--purple)}
+  .stage h3{margin:0 0 8px; font-size:19px; letter-spacing:-.01em}
+  .stage p{margin:0; color:var(--ink2); font-size:15px}
+
+  /* ---------- rules ---------- */
+  .rules{background:linear-gradient(180deg,#fff, #fbfbfd); border:1px solid var(--line); border-radius:var(--radius); padding:26px 28px; margin:28px 0; box-shadow:var(--shadow)}
+  .rules h4{margin:0 0 16px; font-size:15px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted)}
+  .rules ul{list-style:none; margin:0; padding:0; display:grid; gap:14px}
+  .rules li{display:flex; gap:14px; align-items:flex-start; font-size:15.5px; color:var(--ink2)}
+  .rules li b{color:var(--ink)}
+  .rn{flex:0 0 auto; width:26px; height:26px; border-radius:8px; background:var(--red-bg); color:var(--red); display:grid; place-items:center; font-weight:700; font-size:14px; margin-top:1px}
+
+  /* ---------- section head ---------- */
+  section{padding:30px 0}
+  .sec-head{display:flex; align-items:center; gap:16px; margin-bottom:8px}
+  .sec-ico{flex:0 0 auto; width:46px; height:46px; border-radius:13px; background:var(--card); border:1px solid var(--line); display:grid; place-items:center; box-shadow:var(--shadow)}
+  .sec-ico svg{width:24px; height:24px; stroke:var(--ink); fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round}
+  .sec-num{font-family:var(--mono); font-size:13px; color:var(--blue); font-weight:600; letter-spacing:.02em}
+  .sec-head h2{margin:2px 0 0; font-size:clamp(23px,3vw,30px); letter-spacing:-.02em; font-weight:700}
+  .sec-sub{color:var(--ink2); font-size:15.5px; max-width:820px; margin:2px 0 22px}
+
+  /* ---------- badges ---------- */
+  .badge{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:4px 10px; border-radius:100px; letter-spacing:.01em; white-space:nowrap}
+  .b-local{background:var(--green-bg); color:var(--green)}
+  .b-import{background:var(--amber-bg); color:var(--amber)}
+  .b-first{background:#e6f0fd; color:var(--blue-ink)}
+  .b-frozen{background:#eef0f2; color:var(--muted)}
+  .badge .bd{width:6px; height:6px; border-radius:50%; background:currentColor}
+
+  /* ---------- kit-included block ---------- */
+  .kit{background:linear-gradient(180deg,#f0faf3,#ffffff); border:1px solid #cdeed7; border-radius:var(--radius); padding:26px 28px; box-shadow:var(--shadow)}
+  .kit-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 14px; margin-bottom:6px}
+  .kit-top h3{margin:0; font-size:21px; letter-spacing:-.01em}
+  .kit-top .pill{background:var(--green-bg); color:var(--green); font-size:12px; font-weight:700; padding:5px 12px; border-radius:100px}
+  .kit-top .pr{margin-left:auto; font-family:var(--mono); font-weight:600; font-size:18px}
+  .kit p.sub{margin:2px 0 18px; color:var(--ink2); font-size:15px}
+  .kit-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px 22px}
+  .kit-grid .k{display:flex; gap:11px; align-items:flex-start; font-size:14.5px; color:var(--ink2)}
+  .kit-grid .k svg{width:19px; height:19px; flex:0 0 auto; margin-top:2px; stroke:var(--green); fill:none; stroke-width:2.2}
+  .kit-grid .k b{color:var(--ink)}
+  .kit-grid .k.no svg{stroke:var(--muted)}
+  .kit-grid .k.no{color:var(--muted)}
+  .kit-cta{margin-top:20px; display:flex; flex-wrap:wrap; gap:10px}
+
+  /* ---------- item card ---------- */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .item{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .18s ease, box-shadow .18s ease}
+  .item:hover{transform:translateY(-2px); box-shadow:0 2px 6px rgba(0,0,0,.05), 0 18px 44px rgba(0,0,0,.08)}
+  .item.span2{grid-column:1 / -1}
+  .item-top{display:flex; gap:14px; align-items:flex-start; margin-bottom:12px}
+  .inum{flex:0 0 auto; width:34px; height:34px; border-radius:10px; background:#111; color:#fff; font-family:var(--mono); font-weight:600; font-size:15px; display:grid; place-items:center}
+  .item h3{margin:0; font-size:17.5px; letter-spacing:-.01em; line-height:1.3}
+  .item-head-r{margin-left:auto; display:flex; flex-direction:column; align-items:flex-end; gap:6px}
+  .thumb{width:74px; height:74px; border-radius:12px; border:1px solid var(--line); background:#fafafa; object-fit:contain; padding:6px; flex:0 0 auto}
+  .chips{display:flex; flex-wrap:wrap; gap:7px; margin:2px 0 12px}
+  .chip{background:#f2f2f4; border:1px solid var(--line2); border-radius:8px; padding:4px 9px; font-size:12.5px; font-weight:500; color:var(--ink2)}
+  .chip.warn{background:var(--red-bg); color:var(--red); border-color:#f3cfcb}
+  .chip.mono{font-family:var(--mono); font-size:11.5px}
+  .desc{font-size:14.5px; color:var(--ink2); margin:0 0 14px}
+  .desc b{color:var(--ink)}
+  .buy-label{font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; margin:2px 0 8px}
+  .buys{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px}
+  .buy{display:inline-flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-size:13.5px; font-weight:600; color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.03); transition:border-color .15s, background .15s, transform .15s}
+  .buy:hover{border-color:var(--blue); background:#f5faff; text-decoration:none; transform:translateY(-1px)}
+  .buy .arr{width:13px; height:13px; stroke:var(--muted); fill:none; stroke-width:2}
+  .buy .price{font-family:var(--mono); font-weight:600; color:var(--muted); font-size:12.5px}
+  .foot{margin-top:auto; padding-top:14px; border-top:1px dashed var(--line); display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--muted)}
+  .foot svg{width:15px; height:15px; stroke:var(--green); fill:none; stroke-width:2; flex:0 0 auto; margin-top:2px}
+  .price-tag{font-family:var(--mono); font-weight:600; font-size:14px; color:var(--ink); background:#f2f2f4; border-radius:8px; padding:3px 9px; white-space:nowrap}
+
+  /* ---------- callout ---------- */
+  .note{border-radius:14px; padding:14px 16px; font-size:14px; margin:14px 0; display:flex; gap:11px; align-items:flex-start; line-height:1.5}
+  .note svg{width:18px; height:18px; flex:0 0 auto; margin-top:1px; fill:none; stroke-width:2}
+  .note.warn{background:var(--amber-bg); color:#6b4a04} .note.warn svg{stroke:var(--amber)}
+  .note.danger{background:var(--red-bg); color:#7a1a15} .note.danger svg{stroke:var(--red)}
+  .note.info{background:#eef4ff; color:#1a3b73} .note.info svg{stroke:var(--blue-ink)}
+  .note b{font-weight:700}
+
+  /* ---------- tables ---------- */
+  .tbl{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:var(--radius-sm); overflow:hidden; box-shadow:var(--shadow); font-size:14px}
+  .tbl th,.tbl td{padding:12px 15px; text-align:left; border-bottom:1px solid var(--line2); vertical-align:top}
+  .tbl th{background:#fafafb; font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); font-weight:600}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td .price{font-family:var(--mono); font-weight:600}
+  .scroll-x{overflow-x:auto; -webkit-overflow-scrolling:touch}
+
+  /* ---------- cheat sheet ---------- */
+  .cheat-toolbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:0 0 14px}
+  .cheat-toolbar .hint{font-size:13px; color:var(--muted); margin-right:auto; display:flex; align-items:center; gap:8px}
+  .cheat-toolbar .hint b{color:var(--ink); font-family:var(--mono)}
+  .btn{display:inline-flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 14px; font-size:13.5px; font-weight:600; color:var(--ink); cursor:pointer; box-shadow:var(--shadow); transition:border-color .15s, background .15s}
+  .btn:hover{border-color:var(--blue); background:#f5faff}
+  .btn svg{width:15px; height:15px; stroke:var(--ink2); fill:none; stroke-width:2}
+  .check-wrap{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+  .check-tbl{width:100%; border-collapse:collapse; font-size:13.5px; min-width:920px}
+  .check-tbl th{position:sticky; top:0; background:#f4f4f6; z-index:2; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); font-weight:600; padding:12px 12px; text-align:left; border-bottom:1px solid var(--line)}
+  .check-tbl td{padding:11px 12px; border-bottom:1px solid var(--line2); vertical-align:top}
+  .check-tbl tbody tr:last-child td{border-bottom:none}
+  .check-tbl tbody tr:hover{background:#fafbfd}
+  .check-tbl tr.done{background:#f3faf5}
+  .check-tbl tr.base{background:#f0faf3}
+  .check-tbl tr.done td.c-name, .check-tbl tr.done td.c-who{opacity:.5; text-decoration:line-through}
+  .check-tbl td.c-chk{text-align:center; width:38px}
+  .chk{width:19px; height:19px; accent-color:var(--blue); cursor:pointer; vertical-align:middle}
+  .cnum{font-family:var(--mono); color:var(--muted); font-weight:600; width:34px}
+  .check-tbl .c-name b{font-weight:600}
+  .check-tbl .c-qty{white-space:nowrap; color:var(--ink2)}
+  .check-tbl .price{font-family:var(--mono); font-weight:600; white-space:nowrap}
+  .dtag{display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:100px; white-space:nowrap}
+  .dtag.l{background:var(--green-bg); color:var(--green)}
+  .dtag.b{background:#eaf1ff; color:#1a3b73}
+  .dtag.i{background:var(--amber-bg); color:var(--amber)}
+  .dtag.n{background:#eef0f2; color:var(--muted)}
+  .prio{display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:7px; white-space:nowrap}
+  .prio.p1{background:#e6f0fd; color:var(--blue-ink)}
+  .prio.now{background:var(--green-bg); color:var(--green)}
+  .prio.hold{background:#fbf1dc; color:var(--amber)}
+  .prio.stop{background:var(--red-bg); color:var(--red)}
+  .prio.base{background:#d9f0e1; color:var(--green)}
+  .legend{display:flex; flex-wrap:wrap; gap:14px; margin:14px 2px 0; font-size:12.5px; color:var(--muted)}
+  .legend span{display:inline-flex; align-items:center; gap:6px}
+
+  /* ---------- budget ---------- */
+  .budget{background:#111; color:#fff; border-radius:var(--radius); padding:30px; box-shadow:var(--shadow)}
+  .budget h2{color:#fff; margin:0 0 18px; font-size:24px; letter-spacing:-.01em}
+  .brow{display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.12); font-size:15px}
+  .brow span:first-child{color:#c7c7cc}
+  .brow .price{font-family:var(--mono); font-weight:600; color:#fff}
+  .btotal{display:flex; justify-content:space-between; gap:16px; margin-top:18px; padding-top:18px; border-top:2px solid rgba(255,255,255,.25); align-items:baseline}
+  .btotal .lab{font-size:15px; color:#c7c7cc; max-width:60%}
+  .btotal .sum{font-family:var(--mono); font-weight:600; font-size:26px}
+
+  footer{padding:50px 0 70px; color:var(--muted); font-size:13.5px; text-align:center; border-top:1px solid var(--line); margin-top:40px}
+  footer a{color:var(--muted); text-decoration:underline}
+
+  @media (max-width:820px){
+    .stages,.grid,.kit-grid{grid-template-columns:1fr}
+    .item-head-r{flex-direction:row-reverse; align-items:center}
+    header.hero{padding:52px 0 30px}
+  }
+  @media print{
+    body{background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    html.js-anim .reveal{opacity:1 !important; transform:none !important}
+    header.hero, .stages, .rules, .kit, .bento, .note, section .grid, .budget, footer, .cheat-toolbar .btn{display:none !important}
+    #cheat{display:block !important}
+    .check-tbl{min-width:0; font-size:11px}
+    .check-tbl th{position:static}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-hero>ARGUS MVP · Bill of Materials · build on IO Rodeo Full Kit</div>
+    <h1 class="reveal" data-hero>What to buy<br>on top of the Full Kit</h1>
+    <p class="lede reveal" data-hero>An inverted fluorescence <b>OpenFlexure</b> microscope (dry 40× objective, two fluorescence channels, sealed 37 °C + CO₂ box, Raspberry Pi outside the box). The mechanics come ready as the <b>IO Rodeo Full Kit ($200)</b>. Below is only what you still need to source on top of it — a clean technical spec, no vendor links.</p>
+    <div class="meta-chips reveal" data-hero>
+      <div class="mchip">Full Kit <span>= base</span></div>
+      <div class="mchip tnum">23 <span>items to add</span></div>
+      <div class="mchip">4 <span>blocks</span></div>
+      <div class="mchip tnum">≈ $2,000–4,100 <span>MVP budget</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- KIT -->
+  <section>
+    <div class="kit reveal">
+      <div class="kit-top">
+        <h3>Already in the kit — do NOT buy separately</h3>
+        <span class="pill">IO Rodeo Full Kit</span>
+        <span class="pr">$200</span>
+      </div>
+      <p class="sub">Complete assembly kit with printed plastic. Everything listed here is inside the box.</p>
+      <div class="kit-grid">
+        <div class="k"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div><b>Microscope body</b> — printed plastic parts</div></div>
+        <div class="k"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div><b>Brightfield illumination</b> — LED board <b>+ diffusers</b></div></div>
+        <div class="k"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div><b>Sangaboard v0.5</b> — motor controller (pre‑flashed)</div></div>
+        <div class="k"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div><b>3× 28BYJ‑48 motors</b> — X / Y / Z axes</div></div>
+        <div class="k"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div><b>Condenser lens 5 mm</b> + oil</div></div>
+        <div class="k"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div><b>microSD 64 GB</b> with OpenFlexure OS</div></div>
+        <div class="k"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div><b>Hardware</b> — M3 screws / nuts / washers + O‑rings</div></div>
+        <div class="k"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div><b>Assembly tools</b></div></div>
+        <div class="k no"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><div><b>Camera v2</b> — included, but <b>NOT used</b> (we fit HQ, item 2)</div></div>
+      </div>
+    </div>
+
+    <div class="note danger reveal"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg><div><b>Don't confuse the microscope body with the sealed box.</b> The kit contains the plastic body of the microscope itself. The sealed incubation box (37 °C + CO₂) built <b>around the whole microscope</b> is a separate laser‑cut enclosure (Block C).</div></div>
+    <div class="note warn reveal"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg><div><b>Check the kit's plastic for heat resistance.</b> The microscope lives permanently at <b>37 °C in a humid box</b>. Confirm the body material: if it's PLA it will warp at 37 °C and must be reprinted in <b>ASA or PETG</b>. ASA/PETG is fine.</div></div>
+  </section>
+
+  <!-- STAGES -->
+  <div class="stages">
+    <div class="stage s1 reveal">
+      <span class="tag">STAGE 1 — start immediately</span>
+      <h3>The robot works</h3>
+      <p>Brightfield (already in the kit), cheap cells. Verify: holds 37 °C and CO₂, autofocus stable, catches division, controlled online. Independent of a biology lab.</p>
+    </div>
+    <div class="stage s2 reveal">
+      <span class="tag">STAGE 2 — order optics now, use later</span>
+      <h3>See the centrioles</h3>
+      <p>Fluorescence + labelled cells. Requires a confirmed lab. Objective, filters and excitation LEDs have the longest lead time — order them first.</p>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="rules reveal">
+    <h4>Three rules you must not break</h4>
+    <ul>
+      <li><span class="rn">1</span><div><b>Plastic living at 37 °C — only ASA/PETG, never PLA.</b> Applies to the kit body (verify the material) and any extra printing.</div></li>
+      <li><span class="rn">2</span><div><b>CO₂ sensor — 0–20% range only.</b> Sensirion SCD30 won't work: it reads up to ~4%, while the setpoint is 5%.</div></li>
+      <li><span class="rn">3</span><div><b>Labelled cells (stage 2) — do not order until a lab is confirmed.</b> Stage‑1 cells can and should be ordered (Block D).</div></li>
+    </ul>
+  </div>
+
+  <!-- CHEAT SHEET -->
+  <section id="cheat">
+    <div class="sec-head reveal">
+      <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+      <div><div class="sec-num">CHECKLIST</div><h2>What to add — bill of materials</h2></div>
+    </div>
+    <p class="sec-sub reveal">Only what's not in the Full Kit. Checkboxes are saved in this browser. Priority shows what to order first.</p>
+    <div class="cheat-toolbar reveal">
+      <div class="hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Ordered: <b id="cheat-count">0 / 24</b></div>
+      <button class="btn" id="cheat-print"><svg viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>Print</button>
+      <button class="btn" id="cheat-reset"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+    </div>
+    <div class="check-wrap reveal"><div class="scroll-x"><table class="check-tbl">
+      <thead><tr><th></th><th>#</th><th>Item</th><th>Qty</th><th>Spec / notes</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr class="base"><td class="c-chk"><input class="chk" type="checkbox" data-id="k"></td><td class="cnum">B</td><td class="c-name"><b>IO Rodeo Full Kit</b> (body, board, motors, illumination, hardware)</td><td class="c-qty">1 kit</td><td>base of the build</td><td><span class="prio base">base</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="1"></td><td class="cnum">1</td><td class="c-name"><b>Raspberry Pi 4B</b> 4/8 GB + 15 W PSU</td><td class="c-qty">1</td><td>not Pi 5 · microSD from kit</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="2"></td><td class="cnum">2</td><td class="c-name"><b>HQ Camera</b> IMX477 + C→RMS adapter</td><td class="c-qty">1</td><td>replaces kit v2</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="3"></td><td class="cnum">3</td><td class="c-name"><b>Camera ribbon</b> 15‑pin, 300–500 mm</td><td class="c-qty">1</td><td>Pi 4B — no adapter</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="4"></td><td class="cnum">4</td><td class="c-name"><b>SSD 1 TB</b> USB 3.0</td><td class="c-qty">1</td><td>time‑lapse storage</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="5"></td><td class="cnum">5</td><td class="c-name"><b>Pi 4B case</b> + heatsink</td><td class="c-qty">1</td><td>cooling</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="6"></td><td class="cnum">6</td><td class="c-name"><b>Objective 40×</b> RMS · 160/0.17 · NA 0.75</td><td class="c-qty">1</td><td>not ∞, no Ph, dry</td><td><span class="prio p1">order first</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="7"></td><td class="cnum">7</td><td class="c-name"><b>Achromatic doublet</b> f≈50, Ø25</td><td class="c-qty">1</td><td>tube lens, per module spec</td><td><span class="prio p1">order first</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="8"></td><td class="cnum">8</td><td class="c-name"><b>GFP filter set</b></td><td class="c-qty">1</td><td>ex 470/40, dic ~495, em 510–540</td><td><span class="prio p1">order first</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="9"></td><td class="cnum">9</td><td class="c-name"><b>RFP filter set</b></td><td class="c-qty">1</td><td>ex 545/30, dic ~570, em 590–630</td><td><span class="prio p1">order first</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="10"></td><td class="cnum">10</td><td class="c-name"><b>LED 470 nm</b> (blue, GFP) + CC driver</td><td class="c-qty">1</td><td>within ex band</td><td><span class="prio p1">order first</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="11"></td><td class="cnum">11</td><td class="c-name"><b>LED 530–560 nm</b> (green, RFP) + CC driver</td><td class="c-qty">1</td><td>avoid 565 edge</td><td><span class="prio p1">order first</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="12"></td><td class="cnum">12</td><td class="c-name"><b>Sealed box</b> 350×350×400, knock‑down, latches</td><td class="c-qty">1</td><td>black acrylic 5–6 mm</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="13"></td><td class="cnum">13</td><td class="c-name"><b>CO₂ sensor 0–20%</b> SprintIR‑6S‑20</td><td class="c-qty">1</td><td>not SCD30</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="14"></td><td class="cnum">14</td><td class="c-name"><b>Temp/humidity sensors</b> SHT31/BME280</td><td class="c-qty">2</td><td>I²C</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="15"></td><td class="cnum">15</td><td class="c-name"><b>Heating</b>: Peltier ×2 + PID ITC‑100VH + SSR</td><td class="c-qty">1</td><td>not W1209/ITC‑308</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="16"></td><td class="cnum">16</td><td class="c-name"><b>CO₂ supply</b>: cylinder + regulator + 12 V solenoid + needle valve</td><td class="c-qty">1</td><td>refillable</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="17"></td><td class="cnum">17</td><td class="c-name"><b>Cable glands</b> M16/M20</td><td class="c-qty">3</td><td>IP68</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="18"></td><td class="cnum">18</td><td class="c-name"><b>Consumables</b>: neutral silicone, 4 mm tubing, barbs, tray</td><td class="c-qty">set</td><td>neutral cure only</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="19"></td><td class="cnum">19</td><td class="c-name"><b>Anti‑vibration feet</b> + leak sensor</td><td class="c-qty">set</td><td>—</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="20"></td><td class="cnum">20</td><td class="c-name"><b>Stage‑1 cell line</b> HeLa/U2OS/NIH‑3T3</td><td class="c-qty">1</td><td>BSL‑1</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="21"></td><td class="cnum">21</td><td class="c-name"><b>Medium, FBS, antibiotics, trypsin</b></td><td class="c-qty">1</td><td>per cell line</td><td><span class="prio hold">with lab</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="22"></td><td class="cnum">22</td><td class="c-name"><b>Glass‑bottom dishes</b> 35 mm #1.5</td><td class="c-qty">1</td><td>#1.5 cover glass</td><td><span class="prio now">anytime</span></td></tr>
+        <tr><td class="c-chk"><input class="chk" type="checkbox" data-id="23"></td><td class="cnum">23</td><td class="c-name"><b>Labelled cells</b> (stage 2, centrioles)</td><td class="c-qty">—</td><td>needs a lab</td><td><span class="prio stop">frozen</span></td></tr>
+      </tbody>
+    </table></div></div>
+  </section>
+
+  <!-- BLOCK A -->
+  <section>
+    <div class="sec-head reveal">
+      <div class="sec-ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M7 7l2-3h6l2 3"/><circle cx="12" cy="14" r="4"/></svg></div>
+      <div><div class="sec-num">BLOCK A</div><h2>Control &amp; camera</h2></div>
+    </div>
+    <p class="sec-sub reveal">The Raspberry Pi sits <b>outside the box</b>. The kit ships camera v2 and a microSD with OS — we replace the camera with the <b>HQ</b> (sensitivity and field of view) and keep the kit microSD.</p>
+    <div class="grid">
+      <div class="item span2 reveal">
+        <div class="item-top"><div class="inum">2</div><div><h3>HQ Camera IMX477 <span style="color:var(--muted);font-weight:500">+ C→RMS adapter</span> · replaces kit v2</h3></div>
+          <div class="item-head-r"><img class="thumb" src="https://images.prismic.io/rpf-products/12dad121-ba00-4121-873c-3d10abc13207_HQ+CS%3AM12.jpg" alt="Raspberry Pi HQ Camera" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="chips"><span class="chip">IMX477 sensor, 12.3 MP</span><span class="chip">C/CS‑mount</span><span class="chip">RMS adapter</span><span class="chip warn">kit v2 not used</span></div>
+        <p class="desc">Higher sensitivity and field of view — critical for weak fluorescence. The <b>C→RMS adapter</b> is needed to thread in the objective (not included with the camera).</p>
+        <div class="foot"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div>Must be IMX477; ships with C↔CS adapter. Requires the high‑res optics module (item 7).</div></div>
+        <div style="margin-top:10px"><span class="price-tag">$60–120</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">1</div><div><h3>Raspberry Pi 4B, 4/8 GB + 15 W USB‑C PSU</h3></div>
+          <div class="item-head-r"><img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Raspberry_Pi_4_Model_B_-_Top.jpg/500px-Raspberry_Pi_4_Model_B_-_Top.jpg" alt="Raspberry Pi 4B" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="chips"><span class="chip">Pi 4B · 4/8 GB</span><span class="chip">15 W USB‑C PSU</span><span class="chip">microSD — from kit</span><span class="chip warn">not Pi 5</span></div>
+        <p class="desc"><b>Pi 4B, not Pi 5</b> — OpenFlexure officially supports 3B/3B+/4B; Pi 5 is unsupported (different camera connector/stack). The kit microSD matches Pi 4B.</p>
+        <div class="foot"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div>Genuine 5.1 V / 3 A PSU. HQ camera works on Pi 4B (picamera2).</div></div>
+        <div style="margin-top:10px"><span class="price-tag">$55–100</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">3</div><div><h3>Long camera ribbon (standard 15‑pin)</h3></div></div>
+        <div class="chips"><span class="chip">CSI 15‑pin, 300–500 mm</span><span class="chip">Pi 4B — no adapter</span></div>
+        <p class="desc">The Pi is outside the box, so the kit's 200 mm ribbon is too short. Pi 4B uses the standard 15‑pin connector — just a longer ribbon, no 22↔15 adapter.</p>
+        <div style="margin-top:10px"><span class="price-tag">$10–30</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">4</div><div><h3>SSD 1 TB, USB 3.0</h3></div></div>
+        <div class="chips"><span class="chip">1 TB</span><span class="chip">USB 3.0</span></div>
+        <p class="desc">Time‑lapse storage — tens/hundreds of GB per run. Don't write this to microSD.</p>
+        <div style="margin-top:10px"><span class="price-tag">$70–110</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">5</div><div><h3>Pi 4B case + heatsink</h3></div></div>
+        <div class="chips"><span class="chip">Pi 4B specific</span><span class="chip">cooling</span></div>
+        <p class="desc">The Pi sits next to a warm box for months — needs heat dissipation and dust protection.</p>
+        <div style="margin-top:10px"><span class="price-tag">$15–30</span></div>
+      </div>
+    </div>
+
+    <div class="buy-label reveal" style="margin-top:22px">Why we swap the kit camera (v2) for HQ</div>
+    <div class="scroll-x reveal">
+      <table class="tbl">
+        <thead><tr><th>Parameter</th><th>Camera v2 (in kit)</th><th>HQ Camera — we use</th></tr></thead>
+        <tbody>
+          <tr><td>Sensor</td><td>IMX219, 8 MP</td><td><b>IMX477, 12.3 MP</b></td></tr>
+          <tr><td>Pixel / light</td><td>smaller</td><td>≈ 50% larger → better in low light</td></tr>
+          <tr><td>Field of view</td><td>smaller</td><td>larger → more cells per frame</td></tr>
+          <tr><td>Objective mount</td><td>fixed</td><td>C/CS‑mount → RMS adapter for objective</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BLOCK B -->
+  <section>
+    <div class="sec-head reveal">
+      <div class="sec-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+      <div><div class="sec-num">BLOCK B · <span class="badge b-first"><span class="bd"></span>order first (long lead time)</span></div><h2>Optics &amp; fluorescence</h2></div>
+    </div>
+    <p class="sec-sub reveal">The kit only has the condenser and brightfield light. Everything for magnification and fluorescence is added here. The specs below are <b>mandatory, not preferences</b>.</p>
+    <div class="grid">
+      <div class="item span2 reveal">
+        <div class="item-top"><div class="inum">6</div><div><h3>Objective 40×, dry, RMS thread</h3></div>
+          <div class="item-head-r"><img class="thumb" src="https://www.fiberoptics4sale.com/cdn/shop/products/TTN088610-xl.jpg" alt="RMS microscope objective" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="chips"><span class="chip mono">RMS</span><span class="chip mono">NA 0.75</span><span class="chip mono">finite / 160 mm</span><span class="chip mono">parfocal 45 mm</span><span class="chip warn">not ∞ · no Ph · not NA 0.95</span></div>
+        <p class="desc">Critical: <b>RMS thread</b>, <b>160 mm finite</b> (marking <code>160/0.17</code>, not «∞»), <b>parfocal 45 mm</b>, dry, <b>no phase ring (Ph)</b>. Take NA 0.75 for ~⅓ more light. A used Nikon/Zeiss/Olympus fluorite fits best; NA 0.65 achromats also work.</p>
+        <div class="foot"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div>Engraved <code>40</code>, NA and <code>160/0.17</code> (if <code>∞</code> — return). Lenses free of fungus, scratches, haze.</div></div>
+        <div style="margin-top:10px"><span class="price-tag">$25–450</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">7</div><div><h3>Achromatic doublet (tube lens)</h3></div></div>
+        <div class="chips"><span class="chip">per module spec (f≈50, Ø25)</span><span class="chip">VIS coating</span></div>
+        <p class="desc">Tube lens of the high‑res optics module for the HQ camera. Take exact focal length/diameter from the module documentation.</p>
+        <div style="margin-top:10px"><span class="price-tag">$20–60</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">8</div><div><h3>Filter set — GFP (green channel)</h3></div></div>
+        <div class="chips"><span class="chip">ex 470/40</span><span class="chip">dichroic ~495 nm</span><span class="chip">em 510–540 nm</span></div>
+        <p class="desc">No fluorescence without filters. Match cube dimensions to the OpenFlexure filter‑cube documentation before ordering.</p>
+        <div style="margin-top:10px"><span class="price-tag">$150–1,400</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">9</div><div><h3>Filter set — RFP (red channel)</h3></div></div>
+        <div class="chips"><span class="chip">ex 545/30</span><span class="chip">dichroic ~570 nm</span><span class="chip">em 590–630 nm</span></div>
+        <p class="desc">Second channel is required — to distinguish the old centriole from the new one you need a second marker and channel.</p>
+        <div style="margin-top:10px"><span class="price-tag">$150–1,400</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">10</div><div><h3>Excitation LED — blue (channel 1)</h3></div></div>
+        <div class="chips"><span class="chip">470 nm</span><span class="chip">within ex 470/40 band</span><span class="chip">constant‑current driver</span></div>
+        <p class="desc">Excites the green marker. Wavelength must fall inside the filter's excitation band. Driver must be <b>constant‑current</b> (PWM‑dimmable for frame sync).</p>
+        <div style="margin-top:10px"><span class="price-tag">$40–300</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">11</div><div><h3>Excitation LED — green (channel 2)</h3></div></div>
+        <div class="chips"><span class="chip">530–560 nm</span><span class="chip">within ex 545/30 band</span><span class="chip warn">avoid 565 nm edge</span></div>
+        <p class="desc">Second channel (TRITC/DsRed). Ideal ~545–550 nm; 530 nm also fits the band. Same constant‑current driver as the blue LED.</p>
+        <div style="margin-top:10px"><span class="price-tag">$40–300</span></div>
+      </div>
+    </div>
+    <div class="note info reveal"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><div><b>The brightfield LED is not needed here</b> — it's already in the Full Kit. This block is magnification optics + fluorescence only.</div></div>
+  </section>
+
+  <!-- BLOCK C -->
+  <section>
+    <div class="sec-head reveal">
+      <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+      <div><div class="sec-num">BLOCK C</div><h2>Sealed box &amp; climate</h2></div>
+    </div>
+    <p class="sec-sub reveal">A separate sealed enclosure <b>around the whole microscope</b> (not the kit body): 37 °C, 5% CO₂, humidity. Sized generously so it can be ordered now: <b>350 × 350 × 400 mm internal</b>, <b>knock‑down with toggle latches</b>.</p>
+    <div class="grid">
+      <div class="item span2 reveal">
+        <div class="item-top"><div class="inum">12</div><div><h3>Sealed box — laser‑cut acrylic</h3></div></div>
+        <div class="chips"><span class="chip">knock‑down · toggle latches</span><span class="chip">black acrylic/PC 5–6 mm</span><span class="chip">perimeter gasket</span><span class="chip">3 glands + 2 CO₂ ports</span></div>
+        <p class="desc">Opaque (fluorescence needs darkness). <b>Knock‑down on toggle latches</b> with a perimeter gasket — assembles/opens in minutes, no glue.</p>
+        <div style="display:grid; grid-template-columns:auto 1fr; gap:7px 14px; font-size:13.5px; margin:2px 0 14px; padding:14px 16px; background:#f6f7f9; border:1px solid var(--line2); border-radius:12px">
+          <div style="color:var(--muted)">Microscope (approx.)</div><div>≈ 150 × 150 × 150 mm (OpenFlexure high‑res, Pi outside)</div>
+          <div style="color:var(--muted)">Formula</div><div>envelope + 80 mm each side + 100 mm above</div>
+          <div style="color:var(--ink); font-weight:700">Internal — order this</div><div style="font-weight:700; color:var(--ink); font-family:var(--mono)">350 × 350 × 400 mm (W×D×H)</div>
+          <div style="color:var(--muted)">External</div><div>≈ 362 × 362 × 412 mm (6 mm walls)</div>
+          <div style="color:var(--muted)">Panels (6)</div><div>base 350×350 · 4 walls 350×400 · lid 350×350</div>
+          <div style="color:var(--ink); font-weight:600">Assembly</div><div><b>knock‑down, no glue</b>: panels joined by toggle latches + perimeter gasket</div>
+          <div style="color:var(--muted)">Entries</div><div>3× M16/M20 cable glands · 2× 4 mm CO₂ barbs (in/out on opposite walls)</div>
+          <div style="color:var(--muted)">Floor</div><div>slope to one corner + low point for condensate (leak sensor there)</div>
+        </div>
+        <div class="foot"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><div>Give the shop: internal size + thickness + "knock‑down on latches, perimeter gasket, 3 glands, 2 ports". Generate the cut file at <a href="https://www.festi.info/boxes.py/" target="_blank" rel="noopener">boxes.py</a>.</div></div>
+        <div style="margin-top:10px"><span class="price-tag">$150–400</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">13</div><div><h3>CO₂ sensor, 0–20% range</h3></div>
+          <div class="item-head-r"><img class="thumb" src="https://www.co2meter.com/cdn/shop/files/SprintIR_-6S20_CO2SensorlCO2Meter.jpg" alt="SprintIR CO2 sensor" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="chips"><span class="chip">GSS SprintIR‑6S‑20</span><span class="chip warn">not SCD30</span></div>
+        <p class="desc">Setpoint is 5% CO₂. Consumer sensors (incl. SCD30) top out ~4% and are useless here. NDIR, UART.</p>
+        <div style="margin-top:10px"><span class="price-tag">$197–318</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">15</div><div><h3>Heating + PID controller</h3></div>
+          <div class="item-head-r"><img class="thumb" src="https://www.inkbird.com/cdn/shop/files/pid-temperature-controller-itc-100-series-476102.png" alt="Inkbird ITC-100VH PID" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="chips"><span class="chip">Peltier TEC1‑12706 ×2</span><span class="chip">PID + SSR</span><span class="chip warn">not W1209/ITC‑308</span></div>
+        <p class="desc">Holds 37 °C to ±0.3 °C. A true PID + PWM is required (ITC‑100VH + SSR), not a relay thermostat.</p>
+        <div style="margin-top:10px"><span class="price-tag">$80–150</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">14</div><div><h3>Temp/humidity sensors ×2</h3></div></div>
+        <div class="chips"><span class="chip">SHT31 / BME280</span><span class="chip">I²C</span></div>
+        <p class="desc">One at the sample, one in another corner — check uniformity. Beware fake BME280 that are actually BMP280 (no humidity).</p>
+        <div style="margin-top:10px"><span class="price-tag">$15–30</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">16</div><div><h3>CO₂ supply (refillable)</h3></div></div>
+        <div class="chips"><span class="chip">cylinder ≥100 g</span><span class="chip">regulator</span><span class="chip">12 V solenoid</span><span class="chip">needle valve</span></div>
+        <p class="desc">Solenoid controlled by the Pi via the sensor. A refillable cylinder — 16 g cartridges last only hours.</p>
+        <div style="margin-top:10px"><span class="price-tag">$70–140</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">17</div><div><h3>Cable glands M16/M20 ×3</h3></div></div>
+        <div class="chips"><span class="chip">IP68</span></div>
+        <p class="desc">Cables enter the box without breaking the seal.</p>
+        <div style="margin-top:10px"><span class="price-tag">$10–20</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">18</div><div><h3>Sealing consumables</h3></div></div>
+        <div class="chips"><span class="chip">neutral silicone</span><span class="chip">Ø4 mm tubing</span><span class="chip">4 mm barbs</span><span class="chip warn">not acidic</span></div>
+        <p class="desc">A water tray gives humidity passively. Sealant must be <b>neutral‑cure</b> — acidic silicone releases acetic acid and harms cells.</p>
+        <div style="margin-top:10px"><span class="price-tag">$25–50</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">19</div><div><h3>Anti‑vibration feet + leak sensor</h3></div></div>
+        <div class="chips"><span class="chip">isolation feet</span><span class="chip">leak sensor</span></div>
+        <p class="desc">Feet damp vibration from fans/table (otherwise frames blur). Leak sensor at the low point where condensate collects.</p>
+        <div style="margin-top:10px"><span class="price-tag">$15–30</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK D -->
+  <section>
+    <div class="sec-head reveal">
+      <div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7 15h10"/></svg></div>
+      <div><div class="sec-num">BLOCK D</div><h2>Cells &amp; consumables</h2></div>
+    </div>
+    <p class="sec-sub reveal">Don't mix them: stage 1 uses simple cheap cells to see division; stage 2 uses labelled cells (frozen until a lab is confirmed).</p>
+    <div class="grid">
+      <div class="item span2 reveal">
+        <div class="item-top"><div class="inum">20</div><div><h3>Cell line for validation (stage 1)</h3></div></div>
+        <div class="chips"><span class="chip">HeLa</span><span class="chip">U2OS</span><span class="chip">NIH‑3T3</span><span class="chip">BSL‑1</span></div>
+        <p class="desc">Any of the three: cheap, hardy, fast‑dividing, adherent. <b>U2OS is convenient</b> — large flat cells, division clearly visible in brightfield (no labels needed).</p>
+        <div style="margin-top:10px"><span class="price-tag">$100–300</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">22</div><div><h3>Glass‑bottom dishes 35 mm</h3></div></div>
+        <div class="chips"><span class="chip">#1.5 cover glass (0.17 mm)</span><span class="chip warn">not plastic bottom</span></div>
+        <p class="desc">Glass bottom is mandatory: the objective looks up through it. You cannot image through ordinary plastic.</p>
+        <div style="margin-top:10px"><span class="price-tag">$100–200</span></div>
+      </div>
+
+      <div class="item reveal">
+        <div class="item-top"><div class="inum">21</div><div><h3>Medium, FBS, antibiotics, trypsin</h3></div></div>
+        <div class="chips"><span class="chip">DMEM</span><span class="chip">FBS</span><span class="chip">Pen/Strep</span><span class="chip">trypsin</span></div>
+        <p class="desc">Medium type depends on the chosen line. Ordered by whoever runs the culture.</p>
+        <div style="margin-top:10px"><span class="price-tag">$200–400</span></div>
+      </div>
+
+      <div class="item span2 reveal" style="border-style:dashed; background:#fbfbfc">
+        <div class="item-top"><div class="inum" style="background:#8a8a8f">23</div><div><h3>Cells with centriole markers <span class="badge b-frozen" style="margin-left:6px"><span class="bd"></span>frozen until lab</span></h3></div></div>
+        <div class="chips"><span class="chip">stage 2</span><span class="chip">two‑channel constructs</span></div>
+        <p class="desc"><b>Do not order until a lab is confirmed.</b> Stage 1 is not blocked — the instrument can be fully built and validated on ordinary cells.</p>
+        <div style="margin-top:6px"><span class="price-tag">TBD</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section>
+    <div class="budget reveal">
+      <h2>Budget: Full Kit + everything added</h2>
+      <div class="brow"><span>IO Rodeo Full Kit (body, board, motors, illumination, hardware)</span><span class="price tnum">$200</span></div>
+      <div class="brow"><span>Block A · Pi 4B, HQ camera, ribbon, SSD, case</span><span class="price tnum">$215–400</span></div>
+      <div class="brow"><span>Block B · optics: objective, doublet, 2× filters, 2× LEDs</span><span class="price tnum">$600–1,400</span></div>
+      <div class="brow"><span>Block C · box, heating, gas, sensors, consumables</span><span class="price tnum">$562–1,138</span></div>
+      <div class="brow"><span>Block D · stage‑1 cells &amp; consumables</span><span class="price tnum">$400–900</span></div>
+      <div class="btotal"><span class="lab">MVP total <span style="opacity:.7">(stage‑2 labelled cells budgeted separately, after a lab)</span></span><span class="sum tnum">≈ $2,000–4,100</span></div>
+    </div>
+  </section>
+
+  <!-- WHAT'S LEFT -->
+  <section>
+    <div class="rules reveal" style="background:linear-gradient(180deg,#fff,#f7f9ff)">
+      <h4>Open questions</h4>
+      <ul>
+        <li><span class="rn" style="background:#e6f0fd; color:var(--blue-ink)">?</span><div><b>Where is the lab for stage 2?</b> Needed for the labelled cells. Until then item 23 is frozen, but <b>stage 1 is not blocked</b>.</div></li>
+        <li><span class="rn" style="background:var(--amber-bg); color:var(--amber)">!</span><div><b>Kit body material.</b> Confirm with IO Rodeo — if PLA, reprint in ASA/PETG for life at 37 °C.</div></li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    OpenFlexure microscope build on the <b>IO Rodeo Full Kit</b> · ARGUS MVP · technical bill of materials.<br>
+    Mechanics and optics follow the official OpenFlexure documentation. · <a href="microscopio-argus-sborka.html">Assembly guide →</a>
+  </div>
+</footer>
+<!-- Guaranteed reveal system (no CDN dependency) -->
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+  var root = document.documentElement;
+  root.classList.add('js-anim');
+  function revealAll(){ var n=document.querySelectorAll('.reveal'); for(var i=0;i<n.length;i++) n[i].classList.add('in'); }
+  if(!('IntersectionObserver' in window)){ revealAll(); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { rootMargin:'0px 0px -8% 0px', threshold:0.08 });
+  function boot(){ var n=document.querySelectorAll('.reveal'); for(var i=0;i<n.length;i++) io.observe(n[i]); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  setTimeout(revealAll, 2600);
+})();
+</script>
+<!-- Framer Motion enhancement (bonus) -->
+<script type="module">
+  try{
+    const { animate, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce){
+      const hero = document.querySelectorAll('[data-hero]');
+      if(hero.length) animate(hero, { opacity:[0,1], y:[18,0] }, { duration:.7, delay: stagger(0.08), easing:[.16,1,.3,1] });
+    }
+  }catch(e){ /* CDN недоступен — hero уже виден */ }
+</script>
+<!-- Cheat sheet: галочки сохраняются в браузере -->
+<script>
+(function(){
+  var KEY='argus_bom_en_v1', state={};
+  try{ state=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+  var boxes=[].slice.call(document.querySelectorAll('.check-tbl input.chk'));
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+  function count(){ var d=0; boxes.forEach(function(b){ if(b.checked) d++; }); var el=document.getElementById('cheat-count'); if(el) el.textContent=d+' / '+boxes.length; }
+  boxes.forEach(function(b){
+    var id=b.getAttribute('data-id'), tr=b.closest('tr');
+    if(state[id]){ b.checked=true; tr.classList.add('done'); }
+    b.addEventListener('change',function(){ state[id]=b.checked; tr.classList.toggle('done', b.checked); save(); count(); });
+  });
+  var p=document.getElementById('cheat-print'); if(p) p.addEventListener('click',function(){ window.print(); });
+  var r=document.getElementById('cheat-reset'); if(r) r.addEventListener('click',function(){
+    boxes.forEach(function(b){ b.checked=false; b.closest('tr').classList.remove('done'); });
+    state={}; try{ localStorage.removeItem(KEY); }catch(e){} count();
+  });
+  count();
+})();
+</script>
+</body>
+</html>
