@@ -129,6 +129,22 @@
   .note b{color:var(--gold-soft)}
   .note.warn b{color:var(--warn)}
 
+  /* meteor comparison */
+  .mtable{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);backdrop-filter:blur(14px)}
+  .mtable table{width:100%;border-collapse:collapse;font-size:.93rem;min-width:640px}
+  .mtable th,.mtable td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
+  .mtable thead th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-2);font-weight:600;background:var(--bg-2)}
+  .mtable tbody td{color:var(--muted)}
+  .mtable tbody td:first-child{color:var(--text);font-weight:600}
+  .mtable tbody tr:last-child td{border-bottom:none}
+  .mtable tbody tr.win td:first-child{color:var(--gold-soft)}
+  .mtable tbody tr.win{background:rgba(255,206,107,.05)}
+  .mrate{display:flex;align-items:center;gap:11px;min-width:160px}
+  .mrate .bar{flex:1;height:8px;border-radius:100px;background:rgba(255,255,255,.08);overflow:hidden}
+  .mrate .bar span{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--blue),var(--gold))}
+  .mrate .n{font-weight:600;color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums;font-size:.86rem}
+  .tag2{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;margin-left:7px;background:rgba(255,157,92,.16);color:#ffd9be;vertical-align:middle}
+
   footer{padding:50px 0 62px;border-top:1px solid var(--border);margin-top:26px}
   footer .wrap{color:var(--muted-2);font-size:13px;line-height:1.7}
   footer a{color:var(--muted)}
@@ -334,6 +350,33 @@
       </article>
 
     </div>
+  </div>
+</section>
+
+<!-- METEOR COMPARISON -->
+<section id="meteors">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Сравнение · сколько метеоров</span>
+      <h2>Насколько отличается «улов» Персеид</h2>
+      <p>Все шесть — северное полушарие, поэтому радиант везде высоко (58–70°) и разница <b>умеренная</b>. Геометрия почти не различает — решают тёмность неба (Bortle) и ясность августа. Оценка — метеоров в час ясной ночью в предрассветном окне.</p>
+    </div>
+    <div class="mtable reveal">
+      <table>
+        <thead><tr><th>Направление</th><th>Радиант</th><th>Небо</th><th>Ясно в авг.</th><th>~Метеоров/час</th></tr></thead>
+        <tbody>
+          <tr class="win"><td>США · Долина Смерти</td><td>69°</td><td>Bortle 1</td><td>~90%</td><td><div class="mrate"><div class="bar"><span style="width:96%"></span></div><span class="n">50–60</span></div></td></tr>
+          <tr><td>Марокко · Мерзуга<span class="tag2">★ +затмение</span></td><td>63°</td><td>Bortle 1–2</td><td>~90%</td><td><div class="mrate"><div class="bar"><span style="width:84%"></span></div><span class="n">45–55</span></div></td></tr>
+          <tr><td>Испания · Ла-Пальма<span class="tag2">★ +затмение</span></td><td>61°</td><td>Bortle 1–2</td><td>~88%</td><td><div class="mrate"><div class="bar"><span style="width:84%"></span></div><span class="n">45–55</span></div></td></tr>
+          <tr><td>Египет · Луксор<span class="tag2">★ +затмение</span></td><td>58°</td><td>Bortle ~2</td><td>~93%</td><td><div class="mrate"><div class="bar"><span style="width:74%"></span></div><span class="n">40–50</span></div></td></tr>
+          <tr><td>Иордания · Вади-Рам</td><td>62°</td><td>Bortle 2</td><td>~96%</td><td><div class="mrate"><div class="bar"><span style="width:74%"></span></div><span class="n">40–50</span></div></td></tr>
+          <tr><td>Португалия · Alqueva</td><td>70°</td><td>Bortle 3–4</td><td>~80%</td><td><div class="mrate"><div class="bar"><span style="width:58%"></span></div><span class="n">30–40</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note reveal">📊 <b>Разница умеренная — в пределах ~2×.</b> Почти все дают ~40–55 метеоров/час ясной ночью; максимум у <b>Долины Смерти</b> (Bortle 1 + широта 36°N подняли радиант выше всех). Отстаёт только <b>Alqueva</b> — там небо ядра резерва Bortle 3–4 (светлее пустынь), хотя радиант там самый высокий.</div>
+    <div class="note reveal">🎯 <b>На практике решает ясность.</b> В пустынях (Иордания ~96%, Египет ~93%, Марокко/США ~90%) в августе почти гарантированно ясно — ты реально увидишь поток. У Португалии небо чуть капризнее (~80%), так что «на бумаге» и «по факту» там могут разойтись сильнее.</div>
+    <div class="note warn reveal">☀️ <b>Второй фактор — затмение.</b> Египет, Испания и Марокко (★) дают ещё и полное затмение 2 августа. За это стоит уступить пару метеоров в час: −5–10/ч по Персеидам, зато +6 минут дневной «ночи» с короной Солнца.</div>
   </div>
 </section>
 
