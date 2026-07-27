@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Персеиды + затмение 2027 — лучшие страны, откуда смотреть</title>
+<meta name="description" content="Куда ехать в августе 2027, чтобы поймать полное солнечное затмение 2 августа («затмение века», до 6 мин 23 с) и звездопад Персеиды 12–13 августа: 6 лучших стран северного полушария с турами. Египет, Испания, Марокко, США, Иордания, Португалия." />
+<meta property="og:title" content="Персеиды + затмение 2027 — лучшие страны" />
+<meta property="og:description" content="Одна августовская поездка = полное затмение 2 августа + звездопад Персеиды. 6 лучших стран с турами." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#05070e;--bg-2:#0a0f1c;
+    --surface:rgba(255,255,255,.045);--surface-2:rgba(255,255,255,.07);
+    --border:rgba(255,255,255,.10);--border-strong:rgba(255,255,255,.20);
+    --text:#f4f6fb;--muted:#9aa4b6;--muted-2:#6f7a8d;
+    --gold:#ffce6b;--gold-soft:#ffe0a3;--blue:#6f9bff;--violet:#b09bff;
+    --good:#4ade80;--warn:#fbbf24;--sun:#ff9d5c;
+    --r-xl:28px;--r-lg:22px;--r-md:16px;--r-sm:11px;--maxw:1160px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.62;font-size:17px;letter-spacing:-.011em;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  #sky{position:fixed;inset:0;z-index:-2;display:block}
+  .glow{position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(90px);opacity:.5}
+  .glow.a{top:-140px;left:-90px;width:440px;height:440px;background:radial-gradient(circle,rgba(255,157,92,.28),transparent 70%)}
+  .glow.b{top:28%;right:-160px;width:560px;height:560px;background:radial-gradient(circle,rgba(176,155,255,.24),transparent 70%)}
+  .glow.c{bottom:-180px;left:14%;width:640px;height:640px;background:radial-gradient(circle,rgba(255,206,107,.13),transparent 70%)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  a{color:var(--gold-soft);text-decoration:none;border-bottom:1px solid rgba(255,224,163,.28);transition:border-color .2s,color .2s}
+  a:hover{color:#fff;border-color:var(--gold)}
+  a.plain{border:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);padding:8px 15px;border:1px solid var(--border);border-radius:100px;background:var(--surface);backdrop-filter:blur(10px)}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--sun);box-shadow:0 0 12px var(--sun);animation:pulse 2.6s var(--ease) infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
+  h1,h2,h3{letter-spacing:-.026em;line-height:1.08;font-weight:700}
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:0}
+
+  header.hero{position:relative;padding:116px 0 56px;text-align:center}
+  .hero h1{font-size:clamp(2.4rem,6.6vw,4.8rem);margin:24px auto 0;max-width:16ch}
+  .hero h1 .serif{color:var(--gold-soft);font-style:italic}
+  .hero .sub{font-size:clamp(1.04rem,2.2vw,1.32rem);color:var(--muted);max-width:52ch;margin:22px auto 0;line-height:1.55}
+  .hero .tldr{display:inline-flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:36px}
+  .chip{display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border-radius:100px;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(12px);font-size:14px;font-weight:500}
+  .chip b{color:var(--gold-soft);font-weight:600}
+  .chip svg{width:16px;height:16px;flex:none;opacity:.9}
+
+  section{padding:60px 0;position:relative}
+  .sec-head{max-width:58ch;margin-bottom:38px}
+  .sec-head.center{margin-inline:auto;text-align:center}
+  .sec-head h2{font-size:clamp(1.85rem,4vw,2.8rem)}
+  .sec-head p{color:var(--muted);font-size:clamp(1rem,2vw,1.16rem);margin-top:14px}
+  .kicker{color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:13px;display:block}
+
+  /* 2027 events strip */
+  .events{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:820px){.events{grid-template-columns:1fr}}
+  .ev-c{border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);backdrop-filter:blur(14px);padding:24px;transition:transform .4s var(--ease),border-color .4s}
+  .ev-c:hover{transform:translateY(-3px);border-color:var(--border-strong)}
+  .ev-c .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:15px;border:1px solid var(--border)}
+  .ev-c.sun .ic{background:rgba(255,157,92,.15);color:var(--sun)}
+  .ev-c.met .ic{background:rgba(111,155,255,.14);color:var(--blue)}
+  .ev-c.aim .ic{background:rgba(74,222,128,.13);color:var(--good)}
+  .ev-c .ic svg{width:24px;height:24px}
+  .ev-c h3{font-size:1.16rem;margin-bottom:4px}
+  .ev-c .date{font-size:.82rem;color:var(--muted-2);letter-spacing:.02em;margin-bottom:11px}
+  .ev-c p{color:var(--muted);font-size:.94rem}
+
+  /* country cards */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media(max-width:900px){.cards{grid-template-columns:1fr}}
+  .card{display:flex;flex-direction:column;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);backdrop-filter:blur(14px);transition:transform .45s var(--ease),border-color .45s,box-shadow .45s}
+  .card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
+  .card.top{border-color:rgba(255,206,107,.4);box-shadow:0 0 0 1px rgba(255,206,107,.12)}
+  .card .ph{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(135deg,#0d1424,#161d33)}
+  .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);opacity:.92}
+  .card:hover .ph img{transform:scale(1.05)}
+  .card .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,7,14,.94) 3%,rgba(5,7,14,.2) 48%,transparent 78%)}
+  .card .rank{position:absolute;top:14px;left:14px;z-index:2;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:15px;color:#05070e;background:linear-gradient(135deg,var(--gold-soft),var(--gold));box-shadow:0 6px 16px rgba(255,206,107,.35)}
+  .card .verd{position:absolute;top:16px;right:14px;z-index:2;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:6px 11px;border-radius:100px;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2)}
+  .verd.both{background:rgba(255,157,92,.22);color:#ffd9be}
+  .verd.per{background:rgba(111,155,255,.2);color:#cadcff}
+  .card .head{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:18px 22px}
+  .card .head .where{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--gold-soft);font-weight:500;margin-bottom:5px}
+  .card .head .where svg{width:14px;height:14px}
+  .card .head h3{font-size:1.42rem;letter-spacing:-.02em}
+  .card .body{padding:22px;display:flex;flex-direction:column;flex:1}
+  .card .body>p{color:var(--muted);font-size:.97rem}
+  .specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;margin:18px 0}
+  .spec{background:var(--bg-2);padding:11px 14px}
+  .spec .l{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-2);margin-bottom:3px}
+  .spec .v{font-size:.93rem;font-weight:600}
+  .card .foot{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:16px;border-top:1px solid var(--border)}
+  .card .bestfor{font-size:.86rem;color:var(--muted)}
+  .card .bestfor b{color:var(--gold-soft)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:100px;font-weight:600;font-size:14px;background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#05070e;border:none;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px -10px rgba(255,206,107,.6);color:#05070e;border:none}
+  .btn svg{width:15px;height:15px}
+  .links{display:flex;flex-wrap:wrap;gap:7px 16px;margin-top:14px;font-size:13px}
+
+  /* verdict */
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:820px){.vgrid{grid-template-columns:1fr}}
+  .vcard{border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);padding:24px}
+  .vcard .medal{font-size:1.8rem;line-height:1;margin-bottom:12px}
+  .vcard h3{font-size:1.12rem;margin-bottom:6px}
+  .vcard p{color:var(--muted);font-size:.93rem}
+  .vcard.g{border-color:rgba(255,206,107,.35);background:linear-gradient(160deg,rgba(255,206,107,.08),transparent)}
+
+  /* plan steps */
+  .plan{border:1px solid var(--border);border-radius:var(--r-xl);background:var(--surface);backdrop-filter:blur(14px);padding:8px}
+  .tl{position:relative;padding:22px 26px 22px 44px}
+  .tl::before{content:"";position:absolute;left:24px;top:30px;bottom:30px;width:2px;background:linear-gradient(var(--sun),var(--gold),rgba(111,155,255,.4))}
+  .ev-row{position:relative;padding:0 0 20px}
+  .ev-row:last-child{padding-bottom:0}
+  .ev-row::before{content:"";position:absolute;left:-25px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(255,206,107,.14)}
+  .ev-row.sun::before{background:var(--sun);box-shadow:0 0 0 4px rgba(255,157,92,.18),0 0 12px var(--sun)}
+  .ev-row.met::before{background:var(--blue);box-shadow:0 0 0 4px rgba(111,155,255,.18),0 0 12px var(--blue)}
+  .ev-row .d{font-size:12.5px;font-weight:700;color:var(--gold-soft)}
+  .ev-row.sun .d{color:var(--sun)}.ev-row.met .d{color:#cadcff}
+  .ev-row p{color:var(--muted);font-size:.94rem;margin-top:3px}
+
+  .note{margin-top:22px;padding:18px 20px;border-left:2px solid var(--gold);background:rgba(255,206,107,.06);border-radius:0 var(--r-sm) var(--r-sm) 0;color:var(--muted);font-size:.95rem}
+  .note+.note{margin-top:12px}
+  .note.warn{border-color:var(--warn);background:rgba(251,191,36,.07)}
+  .note b{color:var(--gold-soft)}
+  .note.warn b{color:var(--warn)}
+
+  footer{padding:50px 0 62px;border-top:1px solid var(--border);margin-top:26px}
+  footer .wrap{color:var(--muted-2);font-size:13px;line-height:1.7}
+  footer a{color:var(--muted)}
+  .src{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px}
+
+  .reveal{opacity:0;transform:translateY(24px)}
+  .no-motion .reveal{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.card .ph img{transform:none!important}}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<div class="glow a"></div><div class="glow b"></div><div class="glow c"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>Август 2027 · два события в одну поездку</span>
+    <h1>Персеиды <span class="serif">и затмение</span> 2027: откуда смотреть</h1>
+    <p class="sub">2 августа — полное солнечное затмение века (до 6 мин 23 с), а 12–13 августа — звездопад Персеиды. Всего 10 дней между ними. Вот 6 лучших стран, где поймать оба.</p>
+    <div class="tldr">
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>Затмение <b>2 авг</b></span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 20L14 9M14 9l1.6-4.6L20 3l-1.4 4.4L14 9zM7 15l-2 .6L5.6 13"/></svg>Персеиды <b>12–13 авг</b></span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-5.2-7-10a7 7 0 0 1 14 0c0 4.8-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg><b>6 стран</b> · сев. полушарие</span>
+    </div>
+    <p style="margin-top:32px;color:var(--muted-2);font-size:13px;letter-spacing:.04em">Россия исключена · южное полушарие — не для Персеид (почему, см. в конце)</p>
+  </div>
+</header>
+
+<!-- 2027 EVENTS -->
+<section id="events">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Что именно ловим в 2027</span>
+      <h2>Два события — и оба в августе</h2>
+      <p>Такое совпадение — редкость: главное затмение десятилетия и один из лучших звездопадов в одном месяце, в 10 днях друг от друга. Одна поездка закрывает оба.</p>
+    </div>
+    <div class="events">
+      <div class="ev-c sun reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="9" stroke-dasharray="2 3"/></svg></div>
+        <h3>Полное затмение</h3>
+        <div class="date">2 августа 2027 · «затмение века»</div>
+        <p>Луна полностью закроет Солнце до <b>6 мин 23 с</b> — самое долгое затмение на суше в этом веке. Полоса: юг Испании, Гибралтар, Марокко, Алжир, Ливия, Египет (Луксор — максимум), Саудовская Аравия, Йемен.</p>
+      </div>
+      <div class="ev-c met reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20L15 9M15 9l1.8-5L21 3l-1.4 4.6L15 9zM8 16l-2.5 .7L6.2 14M11 19l-1.5 .4"/></svg></div>
+        <h3>Персеиды</h3>
+        <div class="date">Пик 12–13 августа 2027 · до ~60/ч</div>
+        <p>Быстрые яркие метеоры, часто со следами. Радиант в Персее — высоко в <b>северном полушарии</b>. В 2027-м Луна растущая (~78%), но заходит после полуночи → лучшее окно под утро.</p>
+      </div>
+      <div class="ev-c aim reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+        <h3>Одна поездка — оба</h3>
+        <div class="date">~30 июля → ~14 августа</div>
+        <p>Прилетаешь к затмению 2 августа на полосу (Луксор / Кадис / Танжер), проводишь тёмные ночи в пустыне или у обсерватории, и через 10 дней ловишь Персеиды под утро. Идеальные страны — ниже.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRY CARDS -->
+<section id="countries">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Подборка · 6 стран</span>
+      <h2>Где смотреть: от Луксора до Alqueva</h2>
+      <p>Отсортировано под твою цель. Значок <b style="color:#ffd9be">★ 2 события</b> — страна ловит и затмение, и Персеиды; <b style="color:#cadcff">Персеиды</b> — только звездопад (затмение частное или мимо).</p>
+    </div>
+    <div class="cards">
+
+      <!-- 1 EGYPT -->
+      <article class="card top reveal">
+        <div class="ph">
+          <div class="rank">1</div><span class="verd both">★ 2 события · топ</span>
+          <img loading="lazy" alt="Луксор, Египет — храм на пути затмения 2027" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/1550_bis_1070_v._Chr._ca._wurde_der_Tempel_von_Luxor_erbaut._01.jpg/1280px-1550_bis_1070_v._Chr._ca._wurde_der_Tempel_von_Luxor_erbaut._01.jpg" onerror="this.style.display='none'"/>
+          <div class="head"><div class="where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.2-7-10a7 7 0 0 1 14 0c0 4.8-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg>Египет · Луксор</div><h3>Луксор — максимум затмения + Сахара</h3></div>
+        </div>
+        <div class="body">
+          <p>Абсолютный топ 2027: над Луксором затмение длится <b>~6,5 минуты</b> — максимум на всей планете. Плюс сухое пустынное небо Сахары для Персеид и храмы с круизом по Нилу днём. Одной поездкой — оба события.</p>
+          <div class="specs">
+            <div class="spec"><div class="l">Затмение</div><div class="v">Полное ~6,5 мин ✓</div></div>
+            <div class="spec"><div class="l">Персеиды</div><div class="v">Сухая пустыня, отлично</div></div>
+            <div class="spec"><div class="l">Небо</div><div class="v">Сахара, ясно и сухо</div></div>
+            <div class="spec"><div class="l">Нюанс</div><div class="v">Бронь за 6–12 мес</div></div>
+          </div>
+          <div class="foot">
+            <div class="bestfor">Лучше всего: <b>затмение + Персеиды разом</b></div>
+            <a class="btn plain" href="https://www.astro-trails.com/" target="_blank" rel="noopener">Эклипс-туры<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="links"><a href="https://nationaleclipse.com/maps/map_08022027.html" target="_blank" rel="noopener">Карта пути затмения</a><a href="https://en.wikipedia.org/wiki/Solar_eclipse_of_August_2,_2027" target="_blank" rel="noopener">О затмении</a></div>
+        </div>
+      </article>
+
+      <!-- 2 SPAIN -->
+      <article class="card reveal">
+        <div class="ph">
+          <div class="rank">2</div><span class="verd both">★ 2 события</span>
+          <img loading="lazy" alt="Обсерватория Roque de los Muchachos, Ла-Пальма, Испания" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Ing_telescopes_sunset_la_palma_july_2001.jpg/1280px-Ing_telescopes_sunset_la_palma_july_2001.jpg" onerror="this.style.display='none'"/>
+          <div class="head"><div class="where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.2-7-10a7 7 0 0 1 14 0c0 4.8-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg>Испания · Андалусия + Канары</div><h3>Кадис для затмения, Ла-Пальма для Персеид</h3></div>
+        </div>
+        <div class="body">
+          <p>Лучший баланс «доступность + оба события» для европейца. Полоса затмения идёт над югом материка (<b>Кадис, Гибралтар</b>), а Персеиды ловятся на <b>Ла-Пальме</b> — заповеднике тёмного неба ЮНЕСКО с обсерваторией Roque de los Muchachos, либо на Тенерифе (Тейде).</p>
+          <div class="specs">
+            <div class="spec"><div class="l">Затмение</div><div class="v">Полное (юг материка) ✓</div></div>
+            <div class="spec"><div class="l">Персеиды</div><div class="v">Ла-Пальма/Тенерифе</div></div>
+            <div class="spec"><div class="l">Небо</div><div class="v">UNESCO Starlight</div></div>
+            <div class="spec"><div class="l">Доступ</div><div class="v">Ближе всего из Европы</div></div>
+          </div>
+          <div class="foot">
+            <div class="bestfor">Лучше всего: <b>удобство + оба события</b></div>
+            <a class="btn plain" href="https://lapalmastars.com/en/" target="_blank" rel="noopener">Туры Ла-Пальма<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="links"><a href="https://www.volcanoteide.com/en/activities/stars" target="_blank" rel="noopener">Тейде · Тенерифе</a><a href="https://www.adastralapalma.com/en/" target="_blank" rel="noopener">Ad Astra La Palma</a></div>
+        </div>
+      </article>
+
+      <!-- 3 MOROCCO -->
+      <article class="card reveal">
+        <div class="ph">
+          <div class="rank">3</div><span class="verd both">★ 2 события</span>
+          <img loading="lazy" alt="Дюны Мерзуги (Эрг-Шебби), Марокко" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Merzouga%2C_Morocco.jpg/1280px-Merzouga%2C_Morocco.jpg" onerror="this.style.display='none'"/>
+          <div class="head"><div class="where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.2-7-10a7 7 0 0 1 14 0c0 4.8-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg>Марокко · север + Сахара</div><h3>Танжер для затмения, дюны для Персеид</h3></div>
+        </div>
+        <div class="body">
+          <p>Экзотика и бюджет. Полоса затмения проходит над <b>севером страны</b> (Танжер, Тетуан), а Персеиды роскошны в дюнах <b>Мерзуги / Эрг-Шебби</b> и в горах Атласа — сухое пустынное небо, астро-кемпы под открытым небом.</p>
+          <div class="specs">
+            <div class="spec"><div class="l">Затмение</div><div class="v">Полное (север) ✓</div></div>
+            <div class="spec"><div class="l">Персеиды</div><div class="v">Дюны Сахары</div></div>
+            <div class="spec"><div class="l">Небо</div><div class="v">Пустыня, сухо</div></div>
+            <div class="spec"><div class="l">Плюс</div><div class="v">Цена + колорит</div></div>
+          </div>
+          <div class="foot">
+            <div class="bestfor">Лучше всего: <b>экзотика + оба события</b></div>
+            <a class="btn plain" href="https://nationaleclipse.com/maps/map_08022027.html" target="_blank" rel="noopener">Путь затмения<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="links"><a href="https://www.astro-trails.com/" target="_blank" rel="noopener">Эклипс-туры (Марокко)</a></div>
+        </div>
+      </article>
+
+      <!-- 4 USA -->
+      <article class="card reveal">
+        <div class="ph">
+          <div class="rank">4</div><span class="verd per">Персеиды</span>
+          <img loading="lazy" alt="Дюны Меските, Долина Смерти, США" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mesquite_Sand_Dunes_in_Death_Valley.jpg/1280px-Mesquite_Sand_Dunes_in_Death_Valley.jpg" onerror="this.style.display='none'"/>
+          <div class="head"><div class="where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.2-7-10a7 7 0 0 1 14 0c0 4.8-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg>США · Долина Смерти / Cherry Springs</div><h3>Одни из самых тёмных парков планеты</h3></div>
+        </div>
+        <div class="body">
+          <p>Затмение сюда не заходит, зато Персеиды — идеально: сертифицированные тёмные парки Bortle 1–2, сухо, развитая инфраструктура. <b>Долина Смерти</b> (Калифорния), <b>Cherry Springs</b> (Пенсильвания), <b>Big Bend</b> (Техас).</p>
+          <div class="specs">
+            <div class="spec"><div class="l">Затмение</div><div class="v">Нет (мимо)</div></div>
+            <div class="spec"><div class="l">Персеиды</div><div class="v">Отлично, север</div></div>
+            <div class="spec"><div class="l">Небо</div><div class="v">Bortle 1–2</div></div>
+            <div class="spec"><div class="l">Плюс</div><div class="v">Инфраструктура</div></div>
+          </div>
+          <div class="foot">
+            <div class="bestfor">Лучше всего: <b>только Персеиды, с комфортом</b></div>
+            <a class="btn plain" href="https://www.nps.gov/deva/index.htm" target="_blank" rel="noopener">Death Valley NPS<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 JORDAN -->
+      <article class="card reveal">
+        <div class="ph">
+          <div class="rank">5</div><span class="verd per">Персеиды</span>
+          <img loading="lazy" alt="Пустыня Вади-Рам, Иордания" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Mountain_in_Wadi_Rum%2C_Jordan.jpg/1280px-Mountain_in_Wadi_Rum%2C_Jordan.jpg" onerror="this.style.display='none'"/>
+          <div class="head"><div class="where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.2-7-10a7 7 0 0 1 14 0c0 4.8-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg>Иордания · Вади-Рам</div><h3>Персеиды в «марсианской» пустыне</h3></div>
+        </div>
+        <div class="body">
+          <p>Драматичные красные скалы и бедуинские <b>астро-кемпы</b> под открытым небом — Персеиды здесь незабываемы. Затмение — глубокая частная фаза (полоса чуть южнее, над Саудовской Аравией). Бонус — Петра рядом.</p>
+          <div class="specs">
+            <div class="spec"><div class="l">Затмение</div><div class="v">Частное (высокое)</div></div>
+            <div class="spec"><div class="l">Персеиды</div><div class="v">Пустыня, отлично</div></div>
+            <div class="spec"><div class="l">Небо</div><div class="v">Сухо, тёмно</div></div>
+            <div class="spec"><div class="l">Плюс</div><div class="v">Кемпы + Петра</div></div>
+          </div>
+          <div class="foot">
+            <div class="bestfor">Лучше всего: <b>атмосфера + Персеиды</b></div>
+            <a class="btn plain" href="https://www.visitwadirum.com/" target="_blank" rel="noopener">Кемпы Вади-Рам<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 PORTUGAL -->
+      <article class="card reveal">
+        <div class="ph">
+          <div class="rank">6</div><span class="verd per">Персеиды</span>
+          <img loading="lazy" alt="Монсараж и водохранилище Алкева, Португалия" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Monsaraz_and_the_Alqueva_Reservoir.jpg/1280px-Monsaraz_and_the_Alqueva_Reservoir.jpg" onerror="this.style.display='none'"/>
+          <div class="head"><div class="where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.2-7-10a7 7 0 0 1 14 0c0 4.8-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg>Португалия · Alqueva (Алентежу)</div><h3>Первый в мире «Starlight» регион</h3></div>
+        </div>
+        <div class="body">
+          <p>Dark Sky Alqueva — первый в мире сертифицированный туристический регион тёмного неба. Астро-отели, наблюдения с гидами, даже лодки-обсерватории на озере. Доступно из Европы, уютно. Затмение — частное (полоса южнее).</p>
+          <div class="specs">
+            <div class="spec"><div class="l">Затмение</div><div class="v">Частное</div></div>
+            <div class="spec"><div class="l">Персеиды</div><div class="v">Хорошо, север</div></div>
+            <div class="spec"><div class="l">Небо</div><div class="v">Starlight Reserve</div></div>
+            <div class="spec"><div class="l">Доступ</div><div class="v">Легко из Европы</div></div>
+          </div>
+          <div class="foot">
+            <div class="bestfor">Лучше всего: <b>уют + Персеиды в Европе</b></div>
+            <a class="btn plain" href="https://www.darkskyalqueva.com/en/" target="_blank" rel="noopener">Dark Sky Alqueva<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Какой вариант — лучший</span>
+      <h2>Коротко: что выбрать</h2>
+    </div>
+    <div class="vgrid">
+      <div class="vcard g reveal">
+        <div class="medal">🥇</div>
+        <h3>Египет — Луксор</h3>
+        <p>Топ 2027: самое долгое затмение века (~6,5 мин) прямо над Луксором + пустыня Сахары для Персеид. Одной поездкой — оба события. Минус — бронировать сильно заранее.</p>
+      </div>
+      <div class="vcard reveal">
+        <div class="medal">🥈</div>
+        <h3>Испания</h3>
+        <p>Лучший баланс: полоса затмения над югом материка (Кадис) + Персеиды с Ла-Пальмы (небо ЮНЕСКО). Ближе и проще всего из Европы, оба события реальны.</p>
+      </div>
+      <div class="vcard reveal">
+        <div class="medal">🥉</div>
+        <h3>Марокко</h3>
+        <p>Экзотика и цена: затмение над севером, Персеиды в дюнах Сахары. Максимум атмосферы за минимум бюджета — и тоже оба события.</p>
+      </div>
+    </div>
+    <div class="note reveal">🔭 <b>Только Персеиды, без затмения</b> — тогда США (Долина Смерти), Иордания (Вади-Рам) или Португалия (Alqueva): всё в северном полушарии, где радиант Персея высоко.</div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section id="plan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Откуда смотреть · план на август 2027</span>
+      <h2>Одна поездка — оба события</h2>
+      <p>На примере топ-варианта. Прилетаешь к затмению, проводишь тёмные ночи, ловишь Персеиды под утро. Между событиями — 10 дней на храмы/пустыню/город.</p>
+    </div>
+    <div class="plan reveal">
+      <div class="tl">
+        <div class="ev-row"><div class="d">~30 июля · прилёт</div><p>Прилёт в страну на полосе затмения (Луксор / Кадис / Танжер). Заранее бронь отеля — их разбирают за месяцы.</p></div>
+        <div class="ev-row sun"><div class="d">2 августа · затмение</div><p>Выезд на центральную линию полосы. Полная фаза до ~6,5 мин (Луксор) — днём наступает «ночь», видно корону Солнца. Очки для затмения обязательны.</p></div>
+        <div class="ev-row"><div class="d">3–11 августа · между событиями</div><p>Пустыня / храмы / город + первые тёмные ночи под звёздами. Присмотреть тёмную точку для Персеид (Bortle 1–3).</p></div>
+        <div class="ev-row met"><div class="d">12–13 августа · Персеиды</div><p>Наблюдение под утро, после захода Луны (~после полуночи) и до рассвета — тогда небо темнее всего. Смотреть глазами, лёжа, в зенит.</p></div>
+        <div class="ev-row"><div class="d">14 августа · домой</div><p>Или продлить под спокойные ночи — δ-Аквариды тоже ещё активны.</p></div>
+      </div>
+    </div>
+    <div class="note warn reveal">☀️ <b>Безопасность затмения:</b> смотреть на Солнце можно только через сертифицированные очки для затмения (ISO 12312-2). Без защиты — лишь короткие секунды полной фазы, когда диск полностью закрыт.</div>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section id="notes">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="kicker">Честно и по делу</span><h2>Три важных уточнения</h2></div>
+    <div class="note reveal">🌍 <b>Почему не Чили/Намибия/Новая Зеландия.</b> Это лучшее небо планеты — но для <b>Персеид</b> они не годятся: радиант в Персее лежит на севере и из южного полушария почти не поднимается, а полоса затмения туда не доходит. Под твою цель — только северное полушарие.</div>
+    <div class="note reveal">🌙 <b>Луна на Персеиды-2027.</b> Пик 12–13 августа совпадает с растущей Луной (~78%), которая светит вечером, но <b>заходит после полуночи</b>. Поэтому целься в предрассветные часы — после захода Луны небо чистое, а метеоров под утро и так больше всего.</div>
+    <div class="note reveal">🇷🇺 <b>Россия исключена</b> — по твоей просьбе. Полоса затмения 2027 её не задевает, а для Персеид есть более тёмные и сухие точки из списка выше.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Подборка под события августа 2027: полное солнечное затмение 2 августа и звездопад Персеиды 12–13 августа. Данные и ссылки на операторов/инфо проверены на работоспособность, июль 2026. Цены и туры уточняйте у операторов; эклипс-туры и отели на полосе бронируют за 6–12 месяцев.</div>
+    <div class="src">
+      <span>Источники:</span>
+      <a href="https://nationaleclipse.com/maps/map_08022027.html" target="_blank" rel="noopener">NationalEclipse (карта)</a>
+      <a href="https://en.wikipedia.org/wiki/Solar_eclipse_of_August_2,_2027" target="_blank" rel="noopener">Wikipedia · затмение</a>
+      <a href="https://www.imo.net/meteor-shower-calendar-2027/" target="_blank" rel="noopener">IMO 2027</a>
+      <a href="https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/" target="_blank" rel="noopener">AMS</a>
+      <a href="https://lapalmastars.com/en/" target="_blank" rel="noopener">AstroLaPalma</a>
+      <a href="https://www.darkskyalqueva.com/en/" target="_blank" rel="noopener">Dark Sky Alqueva</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const c=document.getElementById('sky'), x=c.getContext('2d');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w,h,stars=[],shooters=[];
+  function resize(){w=c.width=innerWidth;h=c.height=innerHeight;build();}
+  function build(){stars=[];const n=Math.min(240,Math.floor(w*h/8500));for(let i=0;i<n;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.3+.2,a:Math.random()*.6+.2,t:Math.random()*6.28,s:Math.random()*.9+.25});}
+  function shoot(){if(reduce)return;const fl=Math.random()>.5;shooters.push({x:fl?Math.random()*w*.5:w*.5+Math.random()*w*.5,y:Math.random()*h*.4,len:0,maxLen:Math.random()*220+140,vx:(fl?1:-1)*(Math.random()*3+4),vy:Math.random()*2+2.4,life:0});}
+  let last=0;
+  function draw(ts){
+    x.clearRect(0,0,w,h);
+    for(const st of stars){st.t+=0.02*st.s;const tw=st.a+Math.sin(st.t)*.28;x.beginPath();x.arc(st.x,st.y,st.r,0,6.29);x.fillStyle='rgba(255,255,255,'+Math.max(0,tw)+')';x.fill();}
+    for(let i=shooters.length-1;i>=0;i--){const s=shooters[i];s.x+=s.vx;s.y+=s.vy;s.len=Math.min(s.maxLen,s.len+14);s.life++;const g=x.createLinearGradient(s.x,s.y,s.x-s.vx*8,s.y-s.vy*8);g.addColorStop(0,'rgba(255,236,196,.95)');g.addColorStop(1,'rgba(255,236,196,0)');x.strokeStyle=g;x.lineWidth=2;x.lineCap='round';x.beginPath();x.moveTo(s.x,s.y);x.lineTo(s.x-s.vx*(s.len/14),s.y-s.vy*(s.len/14));x.stroke();if(s.x<-50||s.x>w+50||s.y>h+50||s.life>140)shooters.splice(i,1);}
+    if(!reduce && ts-last>1600 && Math.random()>.4){shoot();last=ts;}
+    requestAnimationFrame(draw);
+  }
+  resize();addEventListener('resize',resize);requestAnimationFrame(draw);
+})();
+</script>
+<script type="module">
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){document.body.classList.add('no-motion');}
+  else{
+    try{
+      const { animate, inView, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+      document.querySelectorAll('.events, .cards, .vgrid').forEach(g=>{
+        inView(g,()=>{const it=[...(g.classList.contains('reveal')?[g]:[]),...g.querySelectorAll('.reveal, .ev-c, .card, .vcard')];animate(it,{opacity:[0,1],transform:['translateY(24px)','translateY(0)']},{duration:.6,delay:stagger(.07),easing:[.22,.61,.36,1]});},{margin:"0px 0px -12% 0px"});
+      });
+      document.querySelectorAll('.reveal').forEach(el=>{if(el.closest('.events,.cards,.vgrid'))return;inView(el,()=>{animate(el,{opacity:[0,1],transform:['translateY(24px)','translateY(0)']},{duration:.6,easing:[.22,.61,.36,1]});},{margin:"0px 0px -10% 0px"});});
+    }catch(e){document.body.classList.add('no-motion');}
+  }
+</script>
+</body>
+</html>
