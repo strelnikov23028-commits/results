@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Чё похавать? — бот, который составит меню на неделю</title>
+<meta name="description" content="Телеграм-бот подбирает меню на неделю под твои калории, цель и бюджет: считает БЖУ, даёт рецепты и список покупок со ссылками в «Ленту». Бесплатно.">
+<meta property="og:title" content="Чё похавать? — меню на неделю за 10 секунд">
+<meta property="og:description" content="Меню под твои калории и бюджет, БЖУ, список покупок, дневник веса, напоминания и PDF. Бесплатно, всё кнопками.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #FFF7ED; --surface: #FFFFFF; --ink: #1A130D; --mut: #7A6A5C;
+    --primary: #EA580C; --primary-2: #F97316; --tg: #229ED9; --tg-d: #1B8ABF;
+    --border: #F3E3D6; --soft: #FDF0E7; --ok: #16A34A;
+    --sh: 0 1px 2px rgba(120,70,30,.04), 0 8px 30px rgba(120,70,30,.06);
+    --sh-lg: 0 20px 60px rgba(120,70,30,.14);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+  .accent { color: var(--primary); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,247,237,.82); backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -.02em; }
+  .logo .mark { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg,var(--primary),var(--primary-2)); display: grid; place-items: center; box-shadow: var(--sh); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px;
+    padding: 11px 20px; border-radius: 999px; cursor: pointer; border: none;
+    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    white-space: nowrap;
+  }
+  .btn-tg { background: var(--tg); color: #fff; box-shadow: 0 6px 18px rgba(34,158,217,.32); }
+  .btn-tg:hover { transform: translateY(-2px); background: var(--tg-d); box-shadow: 0 10px 26px rgba(34,158,217,.4); }
+  .btn-lg { padding: 16px 30px; font-size: 17px; }
+  .btn-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border); box-shadow: var(--sh); }
+  .btn-ghost:hover { transform: translateY(-2px); }
+
+  /* HERO */
+  header { padding: 64px 0 40px; position: relative; }
+  .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; background: var(--soft); color: var(--primary); font-weight: 600; font-size: 13.5px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border); }
+  h1 { font-size: clamp(34px, 6vw, 60px); line-height: 1.04; letter-spacing: -.035em; font-weight: 900; margin: 20px 0 18px; }
+  .lead { font-size: clamp(16.5px, 2.2vw, 20px); color: var(--mut); max-width: 30ch; margin-bottom: 28px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .free-note { font-size: 14px; color: var(--mut); margin-top: 16px; display: flex; align-items: center; gap: 7px; }
+
+  /* PHONE MOCKUP */
+  .phone-stage { display: flex; justify-content: center; }
+  .phone {
+    width: 300px; background: #1A130D; border-radius: 42px; padding: 11px;
+    box-shadow: var(--sh-lg); position: relative;
+  }
+  .phone .notch { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 110px; height: 26px; background: #1A130D; border-radius: 999px; z-index: 3; }
+  .screen { background: #ECE5DD; border-radius: 32px; overflow: hidden; height: 590px; display: flex; flex-direction: column; }
+  .chat-top { background: var(--tg); color: #fff; padding: 30px 16px 12px; display: flex; align-items: center; gap: 10px; }
+  .chat-top .av { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,var(--primary),var(--primary-2)); display: grid; place-items: center; font-size: 17px; flex: none; }
+  .chat-top .nm { font-weight: 700; font-size: 14.5px; line-height: 1.2; }
+  .chat-top .st { font-size: 11.5px; opacity: .85; }
+  .chat-body { flex: 1; padding: 14px 12px; display: flex; flex-direction: column; gap: 9px; overflow: hidden; }
+  .bub { max-width: 82%; padding: 9px 12px; border-radius: 15px; font-size: 13px; line-height: 1.45; box-shadow: 0 1px 1px rgba(0,0,0,.05); }
+  .bub.in { background: #fff; align-self: flex-start; border-bottom-left-radius: 5px; }
+  .bub.out { background: #DCF6C6; align-self: flex-end; border-bottom-right-radius: 5px; }
+  .bub .t { font-weight: 700; }
+  .bub .m { color: #5b5148; font-size: 12px; }
+  .kbd { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .key { background: #fff; color: var(--tg); font-weight: 600; font-size: 11.5px; padding: 7px 11px; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+
+  /* SECTIONS */
+  section { padding: 58px 0; }
+  .eyebrow { color: var(--primary); font-weight: 700; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+  .h2 { font-size: clamp(26px, 4vw, 40px); letter-spacing: -.03em; font-weight: 800; margin: 10px 0 14px; line-height: 1.1; }
+  .sub { color: var(--mut); font-size: 17px; max-width: 60ch; }
+  .center { text-align: center; }
+  .center .sub { margin: 0 auto; }
+
+  /* STEPS */
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 40px; }
+  .step { background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 26px 24px; box-shadow: var(--sh); }
+  .step .n { width: 40px; height: 40px; border-radius: 12px; background: var(--soft); color: var(--primary); font-weight: 800; font-size: 18px; display: grid; place-items: center; margin-bottom: 16px; }
+  .step h3 { font-size: 18.5px; letter-spacing: -.01em; margin-bottom: 7px; }
+  .step p { color: var(--mut); font-size: 15px; }
+
+  /* FEATURES */
+  .grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 42px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: var(--sh); transition: transform .18s ease, box-shadow .18s ease; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(120,70,30,.12); }
+  .ic { width: 46px; height: 46px; border-radius: 13px; background: var(--soft); display: grid; place-items: center; margin-bottom: 15px; }
+  .ic svg { width: 24px; height: 24px; stroke: var(--primary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .card h3 { font-size: 17.5px; letter-spacing: -.01em; margin-bottom: 6px; }
+  .card p { color: var(--mut); font-size: 14.5px; line-height: 1.55; }
+
+  /* HIGHLIGHTS band */
+  .band { background: linear-gradient(135deg,#FFF1E6,#FFE7D6); border: 1px solid var(--border); border-radius: 30px; padding: 44px; }
+  .hl { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; text-align: center; }
+  .hl .big { font-size: clamp(30px,5vw,44px); font-weight: 900; letter-spacing: -.03em; background: linear-gradient(135deg,var(--primary),var(--primary-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hl p { color: var(--mut); font-size: 15px; margin-top: 4px; }
+
+  /* FINAL CTA */
+  .final { text-align: center; background: var(--ink); color: #fff; border-radius: 34px; padding: 66px 30px; position: relative; overflow: hidden; }
+  .final::before { content: ""; position: absolute; inset: -40% -10% auto -10%; height: 320px; background: radial-gradient(closest-side, rgba(234,88,12,.5), transparent); filter: blur(20px); }
+  .final h2 { font-size: clamp(28px,5vw,46px); font-weight: 900; letter-spacing: -.03em; position: relative; }
+  .final p { color: #d8cec5; font-size: 18px; margin: 14px auto 30px; max-width: 44ch; position: relative; }
+  .final .btn { position: relative; }
+
+  footer { padding: 40px 0 60px; text-align: center; color: var(--mut); font-size: 14px; }
+  footer .logo { justify-content: center; margin-bottom: 12px; color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; text-align: center; }
+    .lead { max-width: none; }
+    .cta-row, .free-note { justify-content: center; }
+    .pill { margin: 0 auto; }
+    .phone-stage { margin-top: 20px; order: 2; }
+    .steps, .grid, .hl { grid-template-columns: 1fr; }
+    .grid { gap: 14px; }
+    .band { padding: 32px 22px; }
+    .hl { gap: 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#top"><span class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M12 3c2.5 2 2.5 6 0 8"/><path d="M8 11c0 5 1.6 8 4 8s4-3 4-8"/></svg></span>Чё похавать?</a>
+    <a class="btn btn-tg" href="https://t.me/che_sednya_pohavat_bot" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3l-3.3 15.6c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15L17.4 6.3c.4-.36-.09-.56-.62-.2L6.9 12.4l-4.98-1.56c-1.08-.34-1.1-1.08.23-1.6l19.46-7.5c.9-.34 1.69.2 1.29 2.06z"/></svg>
+      Открыть бота
+    </a>
+  </div>
+</nav>
+
+<a id="top"></a>
+<header>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="pill reveal">🍳 Твой личный шеф в Telegram</span>
+        <h1 class="reveal">Меню на неделю<br>за <span class="accent">10 секунд</span></h1>
+        <p class="lead reveal">Бот сам подберёт рацион под твои калории, цель и бюджет. Посчитает БЖУ, даст рецепты и список покупок со ссылками в «Ленту».</p>
+        <div class="cta-row reveal">
+          <a class="btn btn-tg btn-lg" href="https://t.me/che_sednya_pohavat_bot" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3l-3.3 15.6c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15L17.4 6.3c.4-.36-.09-.56-.62-.2L6.9 12.4l-4.98-1.56c-1.08-.34-1.1-1.08.23-1.6l19.46-7.5c.9-.34 1.69.2 1.29 2.06z"/></svg>
+            Начать бесплатно
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#features">Что умеет</a>
+        </div>
+        <div class="free-note reveal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Полностью бесплатно · управление кнопками · без установки
+        </div>
+      </div>
+
+      <div class="phone-stage reveal">
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="chat-top">
+              <div class="av">🍽</div>
+              <div><div class="nm">Чё похавать?</div><div class="st">бот · онлайн</div></div>
+            </div>
+            <div class="chat-body">
+              <div class="bub out">Составь меню на неделю 🙌</div>
+              <div class="bub in">
+                <div class="t">📅 Понедельник · 2000 ккал</div>
+                <div class="m">🍳 Овсянка с бананом — 600 ккал<br>🍲 Курица с рисом — 780 ккал<br>🍽 Творог с ягодами — 420 ккал</div>
+              </div>
+              <div class="bub in" style="max-width:88%">
+                <div class="t">🛒 Список покупок готов</div>
+                <div class="m">28 продуктов · ≈ 4 900 ₽ на неделю<br>с ссылками в «Ленту»</div>
+                <div class="kbd">
+                  <span class="key">🛒 Открыть список</span>
+                  <span class="key">🌐 В PDF</span>
+                </div>
+              </div>
+              <div class="bub out">🔥 Красота, спасибо!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap center">
+    <span class="eyebrow reveal">Как это работает</span>
+    <div class="h2 reveal">Три шага — и ужин расписан</div>
+    <p class="sub reveal">Никаких таблиц и подсчётов вручную. Отвечаешь на пару вопросов кнопками — дальше бот.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n">1</div>
+        <h3>Расскажи о себе</h3>
+        <p>Пол, вес, цель, число приёмов, город и бюджет. Всё кнопками, за минуту.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">2</div>
+        <h3>Получи меню</h3>
+        <p>7 дней с рецептами и БЖУ под твою норму калорий и белка. Не нравится блюдо — замена в тап.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">3</div>
+        <h3>Иди за продуктами</h3>
+        <p>Готовый список со ссылками в «Ленту» и оценкой суммы. Чек-лист, что уже купил.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow reveal">Возможности</span>
+      <div class="h2 reveal">Всё, чтобы не думать о еде</div>
+      <p class="sub reveal">От расчёта калорий до напоминаний — бот закрывает весь цикл: спланировать, купить, приготовить.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0z"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Калории и БЖУ</h3>
+        <p>Считает норму по формуле Миффлина–Сан-Жеора и держит каждый день в ±5% от цели. У блюд — белки, жиры, углеводы и время готовки.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 4v16"/><path d="M18 4v16"/><path d="M6 8h12"/><path d="M4 8h2M18 8h2"/><circle cx="12" cy="14" r="3"/></svg></div>
+        <h3>Дни тренировок</h3>
+        <p>В тренировочные дни — больше калорий и углеводов, в дни отдыха меньше. Недельная сумма сохраняется.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 3v18"/><path d="M5 8h6a3 3 0 010 6H5"/><path d="M19 3c-2 2-2 6 0 8v10"/></svg></div>
+        <h3>Кухни и режимы</h3>
+        <p>Русская, итальянская, азиатская, грузинская и другие. Быстрые рецепты ≤10/20/30 мин и режим заготовок впрок.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6L5 3H2"/></svg></div>
+        <h3>Список покупок</h3>
+        <p>Каждый продукт — ссылка на поиск в «Ленте» с живыми ценами. Оценка суммы под бюджет и кнопка «подогнать дешевле».</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h3>Чек-лист и «есть дома»</h3>
+        <p>Отмечай купленное, а то, что уже есть в холодильнике, бот не добавит в список. Экспорт одним файлом.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <h3>Дневник веса</h3>
+        <p>Записывай вес — бот строит динамику и сам подскажет подкрутить калории, если прогресс встал.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9z"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></div>
+        <h3>Напоминания</h3>
+        <p>Утром пришлёт «что сегодня», а в выбранный день сам составит меню на новую неделю — по времени твоего города.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6M9 18h4"/></svg></div>
+        <h3>Меню страницей и в PDF</h3>
+        <p>Одна кнопка — красивая страница меню. Сохрани в PDF, распечатай или скинь ссылкой близким.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L8 13.9l-6-4.5h7.6z"/></svg></div>
+        <h3>Спортпит и цели</h3>
+        <p>Учитывает протеин и гейнер, вычитает их из нормы. Можно задать свои калории и белок вручную.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="band reveal">
+      <div class="hl">
+        <div><div class="big">0 ₽</div><p>Полностью бесплатно, без подписок и лимитов</p></div>
+        <div><div class="big">2–6</div><p>Приёмов пищи в день — как удобно тебе</p></div>
+        <div><div class="big">7 дней</div><p>Готовое меню с рецептами и БЖУ за один тап</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final reveal">
+      <h2>Хватит думать «что приготовить»</h2>
+      <p>Открой бота, ответь на пару вопросов — и меню с покупками готово. Прямо сейчас.</p>
+      <a class="btn btn-tg btn-lg" href="https://t.me/che_sednya_pohavat_bot" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3l-3.3 15.6c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15L17.4 6.3c.4-.36-.09-.56-.62-.2L6.9 12.4l-4.98-1.56c-1.08-.34-1.1-1.08.23-1.6l19.46-7.5c.9-.34 1.69.2 1.29 2.06z"/></svg>
+        @che_sednya_pohavat_bot
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo"><span class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M12 3c2.5 2 2.5 6 0 8"/><path d="M8 11c0 5 1.6 8 4 8s4-3 4-8"/></svg></span>Чё похавать?</div>
+    <p>Личный помощник по питанию в Telegram · меню, БЖУ, покупки, напоминания</p>
+  </div>
+</footer>
+
+<script type="module">
+  const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!rm) {
+    try {
+      const { animate, inView, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+      // Герой — сразу
+      document.querySelectorAll("header .reveal").forEach((el, i) => {
+        animate(el, { opacity: [0, 1], y: [22, 0] }, { duration: .6, delay: i * .08, easing: [.22,.9,.3,1] });
+      });
+      // Секции — по мере прокрутки
+      inView("section .reveal", (el) => {
+        animate(el, { opacity: [0, 1], y: [26, 0] }, { duration: .55, easing: [.22,.9,.3,1] });
+      }, { margin: "0px 0px -80px 0px" });
+      // Карточки фич — со стаггером внутри своей сетки
+      inView(".grid", (el) => {
+        animate(el.querySelectorAll(".card"), { opacity: [0, 1], y: [26, 0] }, { duration: .5, delay: stagger(.06) });
+      }, { margin: "0px 0px -60px 0px" });
+      // Лёгкое «дыхание» телефона
+      animate(".phone", { y: [0, -9, 0] }, { duration: 5, repeat: Infinity, easing: "ease-in-out" });
+    } catch (e) { /* нет сети до CDN — контент виден по умолчанию */ }
+  }
+</script>
+</body>
+</html>
