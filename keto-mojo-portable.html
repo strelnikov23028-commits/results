@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keto-Mojo GK+ — портативный монитор глюкозы и кетонов</title>
+<meta name="description" content="Разбор Keto-Mojo GK+: один прибор меряет глюкозу и кетоны из капли крови, считает GKI и синхронится в приложение. Спеки, наборы, полоски, портативность, цены и честные минусы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F6F7;
+    --surface:#FFFFFF;
+    --surface-2:#FBFCFC;
+    --ink:#12171B;
+    --ink-2:#3D474F;
+    --ink-3:#6B767F;
+    --line:#E7EBEE;
+    --line-2:#DDE3E7;
+    /* semantics matching the device: ketone = teal, glucose = mocha */
+    --teal:#0C93A6;
+    --teal-strong:#0A7C8C;
+    --teal-tint:#E7F6F8;
+    --mocha:#7A5C46;
+    --mocha-tint:#F3EDE8;
+    --green:#16A34A;
+    --green-tint:#E7F6EC;
+    --amber:#B26A0E;
+    --amber-tint:#FBF0DE;
+    --radius:22px;
+    --radius-sm:14px;
+    --shadow:0 1px 2px rgba(16,24,32,.04), 0 10px 30px -12px rgba(16,24,32,.12);
+    --shadow-lg:0 2px 4px rgba(16,24,32,.05), 0 24px 60px -20px rgba(16,24,32,.20);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    line-height:1.6;font-size:17px;
+  }
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .section{padding:76px 0}
+  @media(max-width:640px){.section{padding:52px 0}}
+
+  /* hide reveal targets ONLY when JS animation is active */
+  .js-anim .reveal{opacity:0;transform:translateY(22px)}
+  @media(prefers-reduced-motion:reduce){.js-anim .reveal{opacity:1;transform:none}}
+
+  /* ---------- top nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(244,246,247,.72);
+    backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);
+    border-bottom:1px solid var(--line)}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em;font-size:17px}
+  .brand .k{color:var(--teal)}
+  .brand .m{color:var(--mocha)}
+  .nav-links{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+  .nav-links a{font-size:14px;color:var(--ink-2);text-decoration:none;padding:7px 12px;border-radius:999px;font-weight:500;transition:background .2s,color .2s}
+  .nav-links a:hover{background:var(--teal-tint);color:var(--teal-strong)}
+  .nav-cta{background:var(--ink);color:#fff !important;font-weight:600}
+  .nav-cta:hover{background:var(--teal-strong) !important}
+  @media(max-width:860px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 26px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--teal-strong);
+    background:var(--teal-tint);padding:7px 14px;border-radius:999px;letter-spacing:.01em}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(12,147,166,.16)}
+  h1{font-size:clamp(2.3rem,6vw,4.05rem);line-height:1.02;letter-spacing:-.035em;font-weight:900;margin:.5em 0 .28em}
+  h1 .grad{background:linear-gradient(115deg,var(--teal) 0%,var(--green) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:clamp(1.05rem,2.2vw,1.28rem);color:var(--ink-2);max-width:36ch;font-weight:420}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:26px}}
+  .hero-photo{background:linear-gradient(180deg,#fff, #F7FAFB);border:1px solid var(--line);border-radius:26px;
+    padding:18px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+  .hero-photo img{border-radius:14px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;
+    text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .18s ease,background .2s,box-shadow .2s}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{background:var(--teal-strong);transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(10,124,140,.6)}
+  .btn-ghost{background:#fff;border-color:var(--line-2);color:var(--ink)}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--teal);color:var(--teal-strong)}
+  .chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
+  .chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:9px 13px;font-size:13.5px;font-weight:600;color:var(--ink-2)}
+  .chip svg{width:15px;height:15px;flex:none}
+  .chip .v{color:var(--ink);font-weight:800}
+
+  /* ---------- generic section head ---------- */
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-strong)}
+  h2{font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.08;letter-spacing:-.03em;font-weight:850;margin:12px 0 0}
+  .sub{color:var(--ink-2);font-size:1.05rem;max-width:60ch;margin-top:14px}
+  .head{margin-bottom:36px}
+
+  /* ---------- bento / cards ---------- */
+  .grid{display:grid;gap:18px}
+  .g-2{grid-template-columns:repeat(2,1fr)}
+  .g-3{grid-template-columns:repeat(3,1fr)}
+  .g-4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.g-3,.g-4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);
+    transition:transform .2s ease,box-shadow .2s ease,border-color .2s}
+  .card.hoverable:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--line-2)}
+  .card h3{margin:0 0 8px;font-size:1.16rem;letter-spacing:-.02em;font-weight:750}
+  .card p{margin:0;color:var(--ink-2);font-size:15px}
+  .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px}
+  .ico svg{width:22px;height:22px}
+  .ico.teal{background:var(--teal-tint);color:var(--teal-strong)}
+  .ico.mocha{background:var(--mocha-tint);color:var(--mocha)}
+  .ico.green{background:var(--green-tint);color:var(--green)}
+  .ico.amber{background:var(--amber-tint);color:var(--amber)}
+
+  /* device spec block */
+  .device{display:grid;grid-template-columns:.95fr 1.05fr;gap:30px;align-items:center}
+  @media(max-width:900px){.device{grid-template-columns:1fr}}
+  .photo-card{background:linear-gradient(180deg,#fff,#F7FAFB);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px;box-shadow:var(--shadow)}
+  .photo-card img{border-radius:14px}
+  .photo-cap{font-size:12.5px;color:var(--ink-3);text-align:center;margin-top:10px}
+  .specs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:520px){.specs{grid-template-columns:1fr}}
+  .spec{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:15px 16px}
+  .spec .l{font-size:12px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em}
+  .spec .n{font-size:1.32rem;font-weight:800;letter-spacing:-.02em;margin-top:3px;font-variant-numeric:tabular-nums}
+  .spec .n small{font-size:.62em;font-weight:600;color:var(--ink-3)}
+
+  /* dual read badges */
+  .dual{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+  .tag{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
+  .tag.ket{background:var(--teal-tint);color:var(--teal-strong)}
+  .tag.glu{background:var(--mocha-tint);color:var(--mocha)}
+  .tag .sw{width:9px;height:9px;border-radius:50%}
+  .tag.ket .sw{background:var(--teal)}
+  .tag.glu .sw{background:var(--mocha)}
+
+  /* travel */
+  .travel{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+  @media(max-width:900px){.travel{grid-template-columns:1fr}}
+  .tlist{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:14px}
+  .tlist li{display:flex;gap:13px;align-items:flex-start}
+  .tlist .ti{width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;background:var(--teal-tint);color:var(--teal-strong)}
+  .tlist .ti svg{width:18px;height:18px}
+  .tlist b{font-weight:700}
+  .tlist span{color:var(--ink-2);font-size:14.5px}
+
+  /* kits comparison */
+  .kits{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.kits{grid-template-columns:1fr}}
+  .kit{position:relative;overflow:hidden}
+  .kit .price{font-size:2rem;font-weight:900;letter-spacing:-.03em}
+  .kit .price small{font-size:.5em;color:var(--ink-3);font-weight:600}
+  .kit ul{list-style:none;padding:0;margin:16px 0 20px;display:grid;gap:9px}
+  .kit li{display:flex;gap:9px;font-size:14.5px;color:var(--ink-2)}
+  .kit li svg{width:17px;height:17px;flex:none;color:var(--green);margin-top:3px}
+  .kit .best{position:absolute;top:16px;right:16px;background:var(--green);color:#fff;font-size:11.5px;font-weight:800;
+    padding:5px 11px;border-radius:999px;letter-spacing:.03em}
+  .kit.feat{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-tint),var(--shadow)}
+
+  /* strips / economics */
+  .strip-econ{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+  @media(max-width:640px){.strip-econ{grid-template-columns:1fr}}
+  .econ{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px}
+  .econ .big{font-size:1.7rem;font-weight:900;letter-spacing:-.02em}
+  .econ .lbl{font-size:13px;color:var(--ink-3);font-weight:600;margin-top:2px}
+
+  /* app */
+  .app{display:grid;grid-template-columns:.8fr 1.2fr;gap:34px;align-items:center}
+  @media(max-width:900px){.app{grid-template-columns:1fr}}
+  .app-phone{max-width:290px;margin:0 auto;border-radius:30px;border:1px solid var(--line);box-shadow:var(--shadow-lg);
+    background:#000;padding:8px}
+  .app-phone img{border-radius:24px}
+  .feat-list{display:grid;gap:14px}
+  .feat-list .f{display:flex;gap:13px;align-items:flex-start}
+  .feat-list .fi{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center;background:var(--teal-tint);color:var(--teal-strong)}
+  .feat-list .fi svg{width:19px;height:19px}
+  .feat-list b{font-weight:700}
+  .feat-list p{margin:2px 0 0;color:var(--ink-2);font-size:14.5px}
+
+  /* steps */
+  .steps{counter-reset:s;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:20px;position:relative}
+  .step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:9px;
+    background:var(--ink);color:#fff;font-weight:800;font-size:14px;margin-bottom:12px}
+  .step b{display:block;font-size:14.5px;letter-spacing:-.01em}
+  .step span{font-size:13px;color:var(--ink-3)}
+
+  /* honest / pros-cons */
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.pc{grid-template-columns:1fr}}
+  .pc-col{border-radius:var(--radius);padding:24px;border:1px solid var(--line)}
+  .pc-col.pro{background:var(--green-tint);border-color:#CDEBD6}
+  .pc-col.con{background:var(--amber-tint);border-color:#F1DFC0}
+  .pc-col h3{margin:0 0 14px;font-size:1.1rem;display:flex;align-items:center;gap:9px}
+  .pc-col ul{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+  .pc-col li{display:flex;gap:10px;font-size:14.5px;color:var(--ink-2)}
+  .pc-col li svg{width:17px;height:17px;flex:none;margin-top:3px}
+  .pro li svg{color:var(--green)}
+  .con li svg{color:var(--amber)}
+
+  /* audience */
+  .aud{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:900px){.aud{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.aud{grid-template-columns:1fr}}
+
+  /* price / buy table */
+  .buy{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .buy-row{display:grid;grid-template-columns:1.4fr .8fr auto;gap:16px;align-items:center;padding:18px 22px;border-top:1px solid var(--line)}
+  .buy-row:first-child{border-top:none}
+  .buy-row .name{font-weight:700;letter-spacing:-.01em}
+  .buy-row .name small{display:block;font-weight:500;color:var(--ink-3);font-size:13px;margin-top:2px}
+  .buy-row .pr{font-weight:800;font-size:1.15rem;font-variant-numeric:tabular-nums}
+  .buy-row .pr small{font-weight:600;color:var(--ink-3);font-size:.62em}
+  .buy-row .go{display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;text-decoration:none;
+    padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;transition:background .2s,transform .18s}
+  .buy-row .go:hover{background:var(--teal-strong);transform:translateY(-1px)}
+  @media(max-width:640px){.buy-row{grid-template-columns:1fr auto}.buy-row .pr{grid-column:1}}
+
+  .note{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;
+    padding:15px 18px;font-size:14px;color:var(--ink-2);margin-top:18px}
+  .note b{color:var(--ink)}
+
+  /* footer */
+  footer{background:#0E1417;color:#B9C3CA;padding:52px 0 40px;margin-top:20px}
+  footer .wrap{display:grid;gap:22px}
+  footer h4{color:#fff;margin:0 0 8px;font-size:15px}
+  .disc{font-size:13px;line-height:1.7;color:#8B969E;max-width:70ch}
+  .src{font-size:13px;color:#8B969E;display:flex;flex-wrap:wrap;gap:8px 18px}
+  .src a{color:#9FD9E1;text-decoration:none}
+  .src a:hover{text-decoration:underline}
+  .foot-meta{font-size:12.5px;color:#6C767E;border-top:1px solid #23303610;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+
+  .divider{height:1px;background:var(--line);margin:0}
+  .center{text-align:center}
+  .mt-s{margin-top:10px}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js-anim');</script>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <div class="brand"><span class="k">keto</span>·<span class="m">mojo</span></div>
+    <div class="nav-links">
+      <a href="#device">Прибор</a>
+      <a href="#travel">В дорогу</a>
+      <a href="#kits">Наборы</a>
+      <a href="#strips">Полоски</a>
+      <a href="#app">Приложение</a>
+      <a href="#buy" class="nav-cta">Купить</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow reveal"><span class="dot"></span>Разбор устройства · портативный монитор</span>
+        <h1 class="reveal">Глюкоза <span class="grad">и кетоны</span> — из одной капли, в кармане</h1>
+        <p class="lead reveal">Keto-Mojo <b>GK+</b> — компактный глюкометр-кетометр. Один прибор, одна капля крови, две метрики за секунды и автоматический индекс GKI. Всё синхронится в бесплатное приложение — удобно вести дневник каждый день и брать с собой в поездку.</p>
+        <div class="cta-row reveal">
+          <a href="#buy" class="btn btn-primary">Наборы и цены
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="17" height="17"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#device" class="btn btn-ghost">Характеристики прибора</a>
+        </div>
+        <div class="chips reveal">
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" stroke-linejoin="round"/></svg><span class="v">5 сек</span> глюкоза</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 0 3.5 3.5M12 8 8.5 11.5M6 20a6 6 0 0 1 12 0z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="v">10 сек</span> кетоны</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V9m5 9V5m5 13v-7m5 7V8" stroke-linecap="round"/></svg>авто-<span class="v">GKI</span></span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10-5 5V2l5 5L7 17" stroke-linejoin="round"/></svg><span class="v">Bluetooth</span></span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="14" height="10" rx="2"/><path d="M18 10h2v4h-2" stroke-linecap="round"/></svg><span class="v">~600</span> тестов</span>
+        </div>
+      </div>
+      <div class="hero-photo reveal">
+        <img src="img/keto-mojo/km-hero.jpg" alt="Два прибора Keto-Mojo GK+: слева показывает кетоны 1.8 mmol/L, справа — глюкозу" loading="eager" width="1500" height="1500">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- WHAT IS IT -->
+<section class="section" id="what">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Что это такое</div>
+      <h2>По сути — один прибор, вокруг которого всё построено</h2>
+      <p class="sub">У Keto-Mojo нет «зоопарка» моделей: сегодня бренд сфокусирован на одном флагманском мониторе <b>GK+</b> (раньше был бюджетный не-Bluetooth Classic, сейчас он вытеснен). Различаются только комплекты, расходники и аксессуары вокруг него.</p>
+    </div>
+    <div class="grid g-3">
+      <div class="card hoverable reveal">
+        <div class="ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Две метрики из одной капли</h3>
+        <p>Кровяные <b>β-кетоны</b> и <b>глюкоза</b> одним прибором — просто вставляешь нужную полоску. Это точнее полосок для мочи и дыхательных анализаторов.</p>
+        <div class="dual"><span class="tag ket"><span class="sw"></span>кетоны</span><span class="tag glu"><span class="sw"></span>глюкоза</span></div>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="ico mocha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V9m5 9V5m5 13v-7m5 7V8" stroke-linecap="round"/></svg></div>
+        <h3>Автоматический GKI</h3>
+        <p>Индекс «глюкоза–кетоны» (Glucose Ketone Index) прибор и приложение считают сами — ключевой показатель для терапевтического кето и протоколов голодания.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="ico green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 6h2" stroke-linecap="round"/></svg></div>
+        <h3>Дневник в телефоне</h3>
+        <p>По Bluetooth замеры улетают в бесплатное приложение MyMojoHealth: тренды, теги (до/после еды), графики. Ежедневный контроль без бумажек.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DEVICE SPECS -->
+<section class="section" id="device">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Прибор</div>
+      <h2>Keto-Mojo GK+ вблизи</h2>
+      <p class="sub">Клинически проверенная точность в кармане: FDA 510(k) для глюкозы, лабораторные показатели по кетонам. Ниже — фактические характеристики.</p>
+    </div>
+    <div class="device">
+      <div class="photo-card reveal">
+        <img src="img/keto-mojo/km-kit.jpg" alt="Keto-Mojo GK+: прибор, приложение MyMojoHealth, ручка-прокалыватель, чехол, полоски и контрольные растворы" loading="lazy" width="1400" height="1400">
+        <div class="photo-cap">Комплект GK+: прибор · приложение · прокалыватель с ланцетами · жёсткий чехол · полоски · контрольные растворы</div>
+      </div>
+      <div class="reveal">
+        <div class="specs">
+          <div class="spec"><div class="l">Глюкоза</div><div class="n">20–600 <small>mg/dL · 5 c</small></div></div>
+          <div class="spec"><div class="l">Кетоны (β-HB)</div><div class="n">0–8.0 <small>mmol/L · 10 c</small></div></div>
+          <div class="spec"><div class="l">Капля крови</div><div class="n">0.5 / 1.0 <small>µL глю / кет</small></div></div>
+          <div class="spec"><div class="l">Память</div><div class="n">1000 <small>замеров</small></div></div>
+          <div class="spec"><div class="l">Питание</div><div class="n">2×AAA <small>~600 тестов</small></div></div>
+          <div class="spec"><div class="l">Точность глюкозы</div><div class="n">MARD 8.1% <small>98% ISO</small></div></div>
+          <div class="spec"><div class="l">Точность кетонов</div><div class="n">CV 3.6% <small>лаб.</small></div></div>
+          <div class="spec"><div class="l">Связь</div><div class="n">Bluetooth <small>+ CSV-экспорт</small></div></div>
+        </div>
+        <div class="note reveal"><b>FDA 510(k) cleared</b> для измерения глюкозы (используется при диабете). Единицы переключаются между mg/dL и mmol/L — удобно и для СНГ-привычной шкалы кетонов в mmol/L.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRAVEL / PORTABILITY -->
+<section class="section" id="travel">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">В дорогу</div>
+      <h2>Почему его удобно возить с собой</h2>
+      <p class="sub">Главный запрос — портативность. Здесь Keto-Mojo как раз силён: весь набор живёт в одном жёстком чехле-«очечнике», а питание — обычные батарейки, а не проприетарная зарядка.</p>
+    </div>
+    <div class="travel">
+      <div class="reveal">
+        <ul class="tlist">
+          <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-linecap="round"/></svg></span><div><b>Всё в одном чехле.</b> <span>Прибор, ручка-прокалыватель, ланцеты, полоски и контрольные растворы помещаются в жёсткий чехол на молнии размером с пенал.</span></div></li>
+          <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="14" height="10" rx="2"/><path d="M18 10h2v4h-2" stroke-linecap="round"/></svg></span><div><b>Батарейки AAA, не зарядка.</b> <span>Не нужен кабель и повербанк: сели — купил две «мизинчиковые» в любой стране. Заряда хватает примерно на 600 тестов.</span></div></li>
+          <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h4l2-7 4 14 2-7h6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Без интернета.</b> <span>Прибор работает автономно и хранит до 1000 замеров. Приложение синхронит их позже, когда появится сеть.</span></div></li>
+          <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z" stroke-linejoin="round"/></svg></span><div><b>Дружелюбен к перелётам.</b> <span>Глюкометр — разрешённый в ручной клади медицинский прибор. Полоски вози в оригинальной упаковке; ланцеты — по правилам авиакомпании.</span></div></li>
+          <li><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Что взять на неделю.</b> <span>Прибор + по 10–14 полосок глюкозы и кетонов на человека, ланцеты, спиртовые салфетки. Полоски беречь от жары и влаги.</span></div></li>
+        </ul>
+      </div>
+      <div class="photo-card reveal">
+        <img src="img/keto-mojo/km-case.jpg" alt="Открытый чехол Keto-Mojo GK+ с прибором в сетчатом кармане, ланцетами и ручкой-прокалывателем, рядом инструкция" loading="lazy" width="900" height="1200">
+        <div class="photo-cap">Тот самый чехол в дороге: прибор, прокалыватель и ланцеты — всё в одном месте</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KITS -->
+<section class="section" id="kits">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Наборы</div>
+      <h2>Какой стартовый набор брать</h2>
+      <p class="sub">Прибор один и тот же — отличается количество расходников и «бонусов». Для «просто попробовать» хватит Essential; если знаете, что будете мерить регулярно, Ultimate выгоднее по цене за полоску.</p>
+    </div>
+    <div class="kits">
+      <div class="card kit reveal">
+        <h3>Essential · стартовый</h3>
+        <div class="price">$49,99 <small>у ритейлеров ~$55</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Прибор GK+ (Bluetooth, FDA-cleared)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>10 полосок глюкозы + 10 кетонов</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Прокалыватель + 20 ланцетов</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Контрольные растворы, чехол, 2×AAA</li>
+        </ul>
+        <a href="https://shop.keto-mojo.com/products/keto-mojo-gk-plus-blood-glucose-ketone-meter-basic-starter-kit" target="_blank" rel="noopener" class="btn btn-ghost">Смотреть в магазине</a>
+      </div>
+      <div class="card kit feat reveal">
+        <span class="best">Выгоднее за полоску</span>
+        <h3>Ultimate · максимальный</h3>
+        <div class="price">$114,99</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Прибор GK+ (Bluetooth, FDA-cleared)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>140 полосок</b> (60+60 в коробке, +10+10 в чехле)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Прокалыватель + 120 ланцетов</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Гайд Keto Kickstart, макро-постеры</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>90 дней доступа в Community by Keto-Mojo</li>
+        </ul>
+        <a href="https://shop.keto-mojo.com/products/ultimate-keto-mojo-blood-glucose-ketone-meter-kit" target="_blank" rel="noopener" class="btn btn-primary">Смотреть в магазине</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STRIPS -->
+<section class="section" id="strips">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Расходники</div>
+      <h2>Полоски — главная статья расходов</h2>
+      <p class="sub">Сам прибор покупается один раз, а полоски — постоянно. Их берут отдельно: по-отдельности или комбо-упаковкой 60+60 (выгоднее). Полоски подходят <b>только</b> к GK+.</p>
+    </div>
+    <div class="device">
+      <div class="photo-card reveal">
+        <img src="img/keto-mojo/km-strips.jpg" alt="Комбо-упаковка Keto-Mojo GK+: 60 полосок глюкозы и 60 полосок кетонов, каждая в индивидуальной обёртке" loading="lazy" width="1400" height="1400">
+        <div class="photo-cap">Комбо 60+60: полоски глюкозы (коричневые) и кетонов (бирюзовые), каждая в отдельной обёртке</div>
+      </div>
+      <div class="reveal">
+        <p class="sub" style="margin-top:0">Ориентир по цене за полоску (кетоновые — одни из самых доступных на рынке):</p>
+        <div class="strip-econ">
+          <div class="econ"><div class="big">≈ $0,50</div><div class="lbl">за полоску глюкозы</div></div>
+          <div class="econ"><div class="big">≈ $1,00</div><div class="lbl">за полоску кетонов</div></div>
+          <div class="econ"><div class="big">≈ $1,50</div><div class="lbl">один полный замер (глю+кет)</div></div>
+        </div>
+        <div class="note reveal">Если меряете <b>раз в день оба показателя</b> — это примерно <b>$45 в месяц</b> на расходники. Только глюкоза натощак — около $15/мес. Комбо-упаковка снижает цену за полоску против покупки по отдельности.</div>
+        <div class="dual" style="margin-top:16px">
+          <span class="tag glu"><span class="sw"></span>полоски глюкозы · 60 шт</span>
+          <span class="tag ket"><span class="sw"></span>полоски кетонов · 60 шт</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- APP -->
+<section class="section" id="app">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Приложение</div>
+      <h2>MyMojoHealth — бесплатно и ведёт дневник за вас</h2>
+      <p class="sub">Замеры приходят по Bluetooth, приложение само считает GKI и рисует тренды. Данные можно отдать врачу или тренеру, экспортировать или связать с другими сервисами.</p>
+    </div>
+    <div class="app">
+      <div class="reveal">
+        <div class="app-phone">
+          <img src="img/keto-mojo/km-app.jpg" alt="Экран приложения MyMojoHealth: круговой индикатор GKI 1.6, глюкоза 70 mg/dl, кетоны 2.3 mmol/L, тег before-meal" loading="lazy" width="961" height="2080">
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="feat-list">
+          <div class="f"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V9m5 9V5m5 13v-7m5 7V8" stroke-linecap="round"/></svg></span><div><b>Авто-GKI и зоны кетоза</b><p>Наглядный циферблат: сразу видно, в какой зоне вы сейчас — оптимальный кетоз, лёгкий, вне кетоза.</p></div></div>
+          <div class="f"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4" stroke-linecap="round"/></svg></span><div><b>Теги и фильтры</b><p>Помечайте замеры «до/после еды», «натощак», «тренировка» — потом легко искать закономерности.</p></div></div>
+          <div class="f"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Экспорт и синхронизация</b><p>Apple Health, Cronometer, Carb Manager и выгрузка в CSV — данные не заперты внутри приложения.</p></div></div>
+          <div class="f"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3.13a4 4 0 0 1 0 7.75M22 21v-2a4 4 0 0 0-3-3.87M8 3.13a4 4 0 1 0 0 7.75M2 21v-2a4 4 0 0 1 3-3.87" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Поделиться с врачом</b><p>Отправляйте историю замеров врачу или коучу — удобно для терапевтических протоколов и сопровождения.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW TO -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Как это работает</div>
+      <h2>Один замер — меньше минуты</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><b>Вымыть и высушить руки</b><span>Тёплая вода улучшает кровоток в пальце.</span></div>
+      <div class="step reveal"><b>Вставить полоску</b><span>Глюкоза или кетоны — прибор включится сам.</span></div>
+      <div class="step reveal"><b>Проколоть палец</b><span>Ручкой-прокалывателем, сбоку подушечки.</span></div>
+      <div class="step reveal"><b>Поднести каплю</b><span>Полоска втянет кровь сама (0.5–1 µL).</span></div>
+      <div class="step reveal"><b>Считать результат</b><span>5–10 секунд → синхрон в приложение.</span></div>
+    </div>
+    <div class="note reveal">Практика: для кетонов нужна капля чуть больше, чем для глюкозы — ставьте прокол на 1–2 деления глубже, чтобы не пришлось колоть дважды.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HONEST -->
+<section class="section" id="honest">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Честно</div>
+      <h2>Плюсы и о чём стоит знать заранее</h2>
+    </div>
+    <div class="pc">
+      <div class="pc-col pro reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" width="20" height="20"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Сильные стороны</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Глюкоза и кетоны в одном приборе + автоматический GKI</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Клинически проверенная точность, FDA 510(k) по глюкозе</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Одни из самых дешёвых кетоновых полосок на рынке</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Реально портативен: чехол + батарейки AAA, работает без сети</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>Бесплатное приложение без подписки, экспорт данных</li>
+        </ul>
+      </div>
+      <div class="pc-col con reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.2" width="20" height="20"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>О чём знать заранее</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>Это прокол пальца, а не непрерывный сенсор (не CGM)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>Полоски — регулярный расход; кетоновые ощутимо дороже глюкозных</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>Совместим только со «своими» полосками GK+</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>Для кетонов нужна капля побольше — иногда приходится колоть глубже</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>Крышка отсека и мелочи из пластика — придирки к сборке в отзывах</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note reveal"><b>Keto-Mojo vs CGM.</b> Если нужна только глюкоза в реальном времени 24/7 — смотрите в сторону сенсоров (Abbott Lingo, Dexcom Stelo). Но кетоны они не меряют: для контроля кето и GKI точечный анализ крови Keto-Mojo пока остаётся «золотым стандартом» для дома.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AUDIENCE -->
+<section class="section" id="who">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Кому подходит</div>
+      <h2>Когда он реально полезен</h2>
+    </div>
+    <div class="aud">
+      <div class="card hoverable reveal">
+        <div class="ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3C7 8 7 13 12 21c5-8 5-13 0-18z" stroke-linejoin="round"/></svg></div>
+        <h3>Кето и карнивор</h3>
+        <p>Проверить, что вы действительно в кетозе, а не «на веру».</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="ico mocha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M8 12h8" stroke-linecap="round"/></svg></div>
+        <h3>Голодание и фастинг</h3>
+        <p>Отслеживать GKI и вход в глубокий кетоз по дням.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="ico green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Терапевтическое кето</h3>
+        <p>Протоколы по GKI (в т.ч. под наблюдением врача).</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="ico amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6a6 6 0 0 0 12 0V3M6 21h12M12 15v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Спорт и биохакинг</h3>
+        <p>Понять реакцию тела на еду, нагрузку и сон.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUY -->
+<section class="section" id="buy">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="kicker">Где купить</div>
+      <h2>Наборы, расходники и цены</h2>
+      <p class="sub">Цены — ориентир в USD с официального магазина Keto-Mojo. Стоимость расходников может меняться (акции, комплекты) — точную сумму смотрите по ссылке.</p>
+    </div>
+    <div class="buy reveal">
+      <div class="buy-row">
+        <div class="name">Essential — стартовый набор<small>Прибор GK+ + 10+10 полосок, прокалыватель, чехол</small></div>
+        <div class="pr">$49,99</div>
+        <a class="go" href="https://shop.keto-mojo.com/products/keto-mojo-gk-plus-blood-glucose-ketone-meter-basic-starter-kit" target="_blank" rel="noopener">Магазин →</a>
+      </div>
+      <div class="buy-row">
+        <div class="name">Ultimate — максимальный набор<small>Прибор GK+ + 140 полосок, 120 ланцетов, гайды, комьюнити</small></div>
+        <div class="pr">$114,99</div>
+        <a class="go" href="https://shop.keto-mojo.com/products/ultimate-keto-mojo-blood-glucose-ketone-meter-kit" target="_blank" rel="noopener">Магазин →</a>
+      </div>
+      <div class="buy-row">
+        <div class="name">Комбо-полоски 60 + 60<small>60 глюкозы + 60 кетонов — самый выгодный расход</small></div>
+        <div class="pr">≈ $60 <small>/120 шт</small></div>
+        <a class="go" href="https://shop.keto-mojo.com/products/gk-plus-combo-test-strips-glucose-and-ketones" target="_blank" rel="noopener">Магазин →</a>
+      </div>
+      <div class="buy-row">
+        <div class="name">Полоски глюкозы · 60 шт<small>≈ $0,50 за полоску</small></div>
+        <div class="pr">≈ $30</div>
+        <a class="go" href="https://shop.keto-mojo.com/products/keto-mojo-gk-plus-glucose-test-strips-60-pack" target="_blank" rel="noopener">Магазин →</a>
+      </div>
+      <div class="buy-row">
+        <div class="name">Полоски кетонов · 60 шт<small>≈ $1 за полоску</small></div>
+        <div class="pr">≈ $40</div>
+        <a class="go" href="https://shop.keto-mojo.com/products/keto-mojo-gk-plus-ketone-test-strips-60-pack" target="_blank" rel="noopener">Магазин →</a>
+      </div>
+      <div class="buy-row">
+        <div class="name">Тот же прибор на Amazon<small>Стартовый набор GK+ с полосками и прокалывателем</small></div>
+        <div class="pr">~$55</div>
+        <a class="go" href="https://www.amazon.com/dp/B08G5BZQVL" target="_blank" rel="noopener">Amazon →</a>
+      </div>
+    </div>
+    <div class="note reveal"><b>Доставка за пределы США.</b> У Keto-Mojo есть отдельные магазины для <a href="https://shop.uk.keto-mojo.com" target="_blank" rel="noopener" style="color:var(--teal-strong)">UK/Европы</a> и международная отправка через <a href="https://keto-mojo.com" target="_blank" rel="noopener" style="color:var(--teal-strong)">keto-mojo.com</a>. В других странах прибор и полоски часто есть на локальных маркетплейсах — берите только «родные» полоски GK+.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div>
+      <h4>Важно</h4>
+      <p class="disc">Материал носит информационный характер и не является медицинской рекомендацией или рекламой. Keto-Mojo GK+ предназначен для самоконтроля; при диабете и любых медицинских решениях консультируйтесь с врачом. Названия, логотипы и фотографии принадлежат их правообладателям (Keto-Mojo). Цены и характеристики актуальны на дату сборки страницы и могут меняться — проверяйте на официальном сайте.</p>
+    </div>
+    <div>
+      <h4>Источники</h4>
+      <div class="src">
+        <a href="https://shop.keto-mojo.com/" target="_blank" rel="noopener">Официальный магазин Keto-Mojo</a>
+        <a href="https://shop.keto-mojo.com/products/ultimate-keto-mojo-blood-glucose-ketone-meter-kit" target="_blank" rel="noopener">Ultimate Kit</a>
+        <a href="https://shop.keto-mojo.com/products/keto-mojo-gk-plus-blood-glucose-ketone-meter-basic-starter-kit" target="_blank" rel="noopener">Essential Kit</a>
+        <a href="https://medgrade.org/reviews/keto-mojo-gk-plus-review/" target="_blank" rel="noopener">MedGrade: обзор GK+ (спеки/точность)</a>
+        <a href="https://www.amazon.com/dp/B08G5BZQVL" target="_blank" rel="noopener">Amazon: GK+ kit</a>
+        <a href="https://keto-mojo.com/wp-content/uploads/2020/09/Keto-Mojo-GK-US-Users-Manual-English.pdf" target="_blank" rel="noopener">Инструкция GK+ (PDF)</a>
+      </div>
+    </div>
+    <div class="foot-meta">Собрано 29 июля 2026 · реальные фото производителя и Amazon · не спонсировано</div>
+  </div>
+</footer>
+
+<!-- Framer Motion (vanilla) -->
+<script type="module">
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = Array.from(document.querySelectorAll('.reveal'));
+  // safety fallback: never leave content hidden
+  const forceShow = () => { document.documentElement.classList.remove('js-anim');
+    targets.forEach(el => { el.style.opacity = ''; el.style.transform=''; }); };
+  const safety = setTimeout(forceShow, 1400);
+
+  if (reduce) { forceShow(); }
+  else {
+    try {
+      const { animate, inView, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      clearTimeout(safety);
+      // group reveals by their section for staggered entrance
+      const groups = new Map();
+      targets.forEach(el => {
+        const key = el.closest('section, header, .wrap') || document.body;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(el);
+      });
+      groups.forEach(els => {
+        els.forEach(el => { // ensure hidden state set inline
+          el.style.opacity = '0'; el.style.transform = 'translateY(22px)';
+        });
+        inView(els[0].closest('section, header') || els[0], () => {
+          animate(els, { opacity: [0,1], transform: ['translateY(22px)','translateY(0px)'] },
+            { duration: .62, delay: stagger(0.07), easing: [0.16,1,0.3,1] });
+        }, { amount: 0.15 });
+      });
+      // extra guard if a section never triggers inView
+      setTimeout(() => { targets.forEach(el => {
+        if (getComputedStyle(el).opacity === '0') { el.style.opacity=''; el.style.transform=''; }
+      }); }, 4000);
+    } catch(e) { forceShow(); }
+  }
+
+  // subtle hover lift already via CSS; add tap scale on primary buttons
+  document.querySelectorAll('.btn, .go').forEach(b => {
+    b.addEventListener('pointerdown', () => b.style.transform = 'scale(.97)');
+    b.addEventListener('pointerup',   () => b.style.transform = '');
+    b.addEventListener('pointerleave',() => b.style.transform = '');
+  });
+</script>
+</body>
+</html>
