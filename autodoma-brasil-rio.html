@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аренда автодомов в Бразилии — Рио и Сан-Паулу: гид по рынку и near-luxury</title>
+<meta name="description" content="Как устроена аренда автодомов (motorhome/campervan) в Бразилии: виды, цены BRL, бронирование за 6 мес vs 2 мес, электрика и BYD, near-luxury провайдеры в Рио и Сан-Паулу. Аналогия с яхтингом.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7;
+  --card:#FFFFFF;
+  --ink:#1D1D1F;
+  --ink-2:#424245;
+  --muted:#6E6E73;
+  --line:#E3E3E6;
+  --blue:#0071E3;
+  --blue-ink:#0059B3;
+  --navy:#0A2540;
+  --navy-2:#12385F;
+  --gold:#B8860B;
+  --teal:#0E7C86;
+  --green:#1B7A43;
+  --red:#C4362B;
+  --amber:#B4690E;
+  --radius:22px;
+  --radius-s:16px;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 30px rgba(0,0,0,.06);
+  --shadow-h:0 4px 10px rgba(0,0,0,.06),0 18px 50px rgba(0,0,0,.12);
+  --maxw:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--ink);
+  line-height:1.6;font-size:17px;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif;letter-spacing:-.01em;line-height:1.12;color:var(--ink)}
+h2{font-size:clamp(28px,4.4vw,42px);font-weight:600;margin-bottom:10px}
+h3{font-size:clamp(20px,2.6vw,25px);font-weight:600}
+p{color:var(--ink-2)}
+a{color:var(--blue-ink);text-decoration:none}
+a:hover{text-decoration:underline}
+.eyebrow{font-family:'Inter';font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+section{padding:64px 0}
+.sec-lead{font-size:19px;color:var(--muted);max-width:720px;margin-top:6px}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;min-height:88vh;display:flex;align-items:flex-end;
+  padding:0;overflow:hidden;background:#0A2540;
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero-bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,37,64,.35) 0%,rgba(10,37,64,.55) 55%,rgba(10,37,64,.92) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;padding:0 22px 60px;max-width:var(--maxw);margin:0 auto}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;color:#EAF3FF;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);padding:7px 15px;border-radius:100px;font-size:13.5px;font-weight:500;backdrop-filter:blur(8px);margin-bottom:22px}
+.hero h1{color:#fff;font-size:clamp(38px,7vw,74px);font-weight:700;max-width:15ch}
+.hero .sub{color:#D7E3F2;font-size:clamp(17px,2.3vw,22px);max-width:60ch;margin-top:20px;font-weight:300}
+.hero-stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.hero-stats .s{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;padding:14px 18px;backdrop-filter:blur(6px);min-width:150px}
+.hero-stats .s b{display:block;font-family:'Playfair Display',serif;font-size:26px;color:#fff;font-weight:600}
+.hero-stats .s span{font-size:13px;color:#B9CCE2}
+
+/* ---------- CARDS / BENTO ---------- */
+.grid{display:grid;gap:18px}
+.bento{grid-template-columns:repeat(12,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);
+  transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+.col-4{grid-column:span 4}.col-6{grid-column:span 6}.col-8{grid-column:span 8}.col-12{grid-column:span 12}
+.card .k{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.card h3{margin-bottom:8px}
+.card p{font-size:15.5px}
+.big-num{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--ink);line-height:1}
+.big-num small{font-size:16px;font-weight:400;color:var(--muted);font-family:'Inter'}
+
+/* ---------- MODEL / PROVIDER CARDS ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
+.pcard .ph{position:relative;aspect-ratio:16/10;background:#e9edf2;overflow:hidden}
+.pcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.pcard:hover .ph img{transform:scale(1.045)}
+.pcard .badge{position:absolute;top:12px;left:12px;background:rgba(10,37,64,.9);color:#fff;font-size:11.5px;font-weight:600;
+  letter-spacing:.04em;padding:5px 11px;border-radius:100px;backdrop-filter:blur(4px)}
+.pcard .badge.p2p{background:rgba(14,124,134,.92)}
+.pcard .badge.lux{background:linear-gradient(90deg,#B8860B,#946c08)}
+.pcard .bd{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+.pcard h3{font-size:20px;margin-bottom:4px}
+.pcard .base{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:12px}
+.pcard ul{list-style:none;margin:4px 0 14px;display:flex;flex-direction:column;gap:6px}
+.pcard ul li{font-size:14px;color:var(--ink-2);padding-left:20px;position:relative}
+.pcard ul li::before{content:"";position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.pcard .price{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pcard .price b{font-family:'Playfair Display',serif;font-size:22px;color:var(--ink)}
+.pcard .price .u{font-size:12.5px;color:var(--muted)}
+.pcard .price a{font-size:14px;font-weight:600;white-space:nowrap}
+.cap{font-size:12px;color:var(--muted);padding:0 20px 14px;margin-top:-6px}
+.cap.top{padding:10px 20px 0;margin:0}
+
+/* ---------- YACHT CALLOUT ---------- */
+.yacht{background:linear-gradient(135deg,#0A2540,#12385F);color:#EAF2FB;border-radius:var(--radius);padding:26px 28px;
+  border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
+.yacht::before{content:"";position:absolute;right:-30px;top:-30px;width:160px;height:160px;border-radius:50%;
+  background:radial-gradient(circle,rgba(84,150,225,.35),transparent 70%)}
+.yacht .lbl{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8FBEF0;margin-bottom:12px}
+.yacht h3{color:#fff;font-size:22px;margin-bottom:8px}
+.yacht p{color:#C7D8EC;font-size:15.5px}
+.yacht svg{flex:none}
+
+/* ---------- TABLE ---------- */
+.tw{overflow-x:auto;border-radius:var(--radius-s);border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;min-width:560px;font-size:15px}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:#FAFAFB;font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);position:sticky;top:0}
+td b{font-family:'Inter';font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:#F7F9FC}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:100px}
+.pill.hi{background:#FCEBE9;color:var(--red)}
+.pill.lo{background:#E7F5EC;color:var(--green)}
+.pill.mid{background:#FEF3E2;color:var(--amber)}
+
+/* ---------- KEY VERDICT BLOCK ---------- */
+.verdict{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:var(--radius);
+  padding:28px 30px;box-shadow:var(--shadow)}
+.verdict.warn{border-left-color:var(--amber)}
+.verdict.good{border-left-color:var(--green)}
+.verdict h3{margin-bottom:10px}
+.verdict p{font-size:16px}
+.verdict .tldr{font-weight:600;color:var(--ink);font-size:17px}
+
+/* ---------- SEASON CALENDAR ---------- */
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-top:8px}
+.mo{border-radius:11px;padding:12px 6px;text-align:center;font-size:12px;font-weight:600}
+.mo span{display:block;font-size:10px;font-weight:500;opacity:.8;margin-top:3px}
+.mo.hi{background:#FCEBE9;color:var(--red)}
+.mo.lo{background:#E7F5EC;color:var(--green)}
+.mo.pk{background:#F6DAD6;color:#8f231a;box-shadow:inset 0 0 0 2px rgba(196,54,43,.4)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-1px;margin-right:6px}
+
+/* ---------- LIST FEATURES ---------- */
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.feat{display:flex;gap:13px;align-items:flex-start}
+.feat .ic{flex:none;width:38px;height:38px;border-radius:11px;background:#EAF3FF;display:flex;align-items:center;justify-content:center;color:var(--blue)}
+.feat h4{font-size:15.5px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.feat p{font-size:14px}
+
+/* electric */
+.ev-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border-radius:var(--radius);overflow:hidden;background:#0f1115;color:#E9ECF2;box-shadow:var(--shadow-h)}
+.ev-hero .txt{padding:34px}
+.ev-hero .txt .k{color:#7FD8E0}
+.ev-hero h3{color:#fff;font-size:26px;margin:6px 0 12px}
+.ev-hero p{color:#B7BECB;font-size:15.5px}
+.ev-hero .pic{position:relative;min-height:280px;background:#1a1d24}
+.ev-hero .pic img{width:100%;height:100%;object-fit:cover}
+.ev-hero .pic .cp{position:absolute;bottom:0;left:0;right:0;padding:12px 16px;font-size:12px;color:#cdd4df;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)}
+
+.chk{list-style:none;display:flex;flex-direction:column;gap:12px}
+.chk li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;color:var(--ink-2)}
+.chk li svg{flex:none;margin-top:3px}
+.no li svg{color:var(--red)}
+.yes li svg{color:var(--green)}
+
+.src{font-size:13px;color:var(--muted)}
+.src a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.foot{background:#0A2540;color:#AEC2D8;padding:50px 0 40px;margin-top:20px}
+.foot h3{color:#fff;margin-bottom:14px}
+.foot a{color:#9FC6F0}
+.foot .disc{font-size:13px;color:#7C93AC;border-top:1px solid rgba(255,255,255,.1);margin-top:26px;padding-top:20px;line-height:1.6}
+.divider{height:1px;background:var(--line);max-width:var(--maxw);margin:0 auto}
+.note{background:#FFFDF5;border:1px solid #F0E3C0;border-radius:var(--radius-s);padding:16px 20px;font-size:14.5px;color:#6a5a2e}
+.note b{color:#4a3f1c}
+
+/* reveal: ВИДИМ по умолчанию всегда; motion лишь добавляет появление при входе в кадр */
+.reveal{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .col-4,.col-6,.col-8{grid-column:span 12}
+  .ev-hero{grid-template-columns:1fr}
+  .ev-hero .pic{min-height:220px}
+  section{padding:50px 0}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .months{grid-template-columns:repeat(6,1fr)}
+  .hero-stats .s{min-width:calc(50% - 7px)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-bg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/A_imensid%C3%A3o_do_mar_azul.JPG/1280px-A_imensid%C3%A3o_do_mar_azul.JPG" alt="Бирюзовое побережье Arraial do Cabo, Рио-де-Жанейро">
+  </div>
+  <div class="hero-inner">
+    <span class="tag">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      Гид по рынку · Бразилия · Рио → Сан-Паулу
+    </span>
+    <h1>Автодома в аренду в Бразилии</h1>
+    <p class="sub">Как устроен рынок motorhome и campervan, сколько это стоит в реалах, меняется ли цена при брони за полгода и за 2 месяца, есть ли электрика (и при чём тут BYD) — и у кого брать, чтобы получить отдых уровня <em>near-luxury</em>. С аналогиями из яхтинга, чтобы было понятнее.</p>
+    <div class="hero-stats">
+      <div class="s"><b>R$647–747</b><span>старт/сутки в Рио (LIBBER)</span></div>
+      <div class="s"><b>~R$900</b><span>медиана «на 4 чел.»/сутки</span></div>
+      <div class="s"><b>0</b><span>электро-автодомов в прокате</span></div>
+      <div class="s"><b>Кат. B</b><span>прав хватает почти всегда</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TL;DR ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Коротко — 6 главных выводов</div>
+    <h2 class="reveal">Если совсем нет времени читать</h2>
+    <div class="grid bento" style="margin-top:28px">
+      <div class="card col-4 reveal">
+        <div class="k">Рынок</div>
+        <h3>Тонкий и P2P-центричный</h3>
+        <p>В Рио нет крупного «проката из офиса». Работает <b>LIBBER</b> (Airbnb для автодомов) и локальный <b>CamperVamos</b> (Niterói), а флиты из SP/Куритибы заходят <b>доставкой</b>.</p>
+      </div>
+      <div class="card col-4 reveal">
+        <div class="k">Цена vs срок</div>
+        <h3>За 6 мес ≠ дешевле</h3>
+        <p>Стоимость задаёт <b>сезон</b>, а не то, за сколько бронируешь. Ранняя бронь решает <b>наличие</b>, а не цену. Настоящих «early bird скидок» в Бразилии нет.</p>
+      </div>
+      <div class="card col-4 reveal">
+        <div class="k">Электрика</div>
+        <h3>Пока невозможно</h3>
+        <p>Электро-автодом в аренду <b>не взять</b>. У BYD в Бразилии кемперов нет — только гибрид <b>Shark</b> с розетками для кемпинга. Единственный электро-motorhome — <b>Arrow EVolve</b>, и он на продажу.</p>
+      </div>
+      <div class="card col-6 reveal">
+        <div class="k">Near-luxury</div>
+        <h3>«Люкс» = топовая местная сборка на Sprinter/Ducato</h3>
+        <p>Заводского импорта (Hymer, Airstream, Winnebago) в прокате Бразилии подтвердить не удалось. Реальный премиум — <b>Sunrise «Big Confort»</b> (есть доставка в Рио) и <b>Fifty</b> на Mercedes Sprinter. Бюджет ~<b>R$850–1200/сутки</b>.</p>
+      </div>
+      <div class="card col-6 reveal">
+        <div class="k">Экономия</div>
+        <h3>Не в ранней брони, а в трёх рычагах</h3>
+        <p>Реальная скидка — это <b>низкий сезон</b> (−40% к высокому), <b>длинный срок</b> (progressive-скидка) и <b>класс</b> (Kombi вместо motorhome). Плюс держать в уме уборку, перепробег и caução.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= КАК УСТРОЕН РЫНОК + ЯХТИНГ ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Как это работает</div>
+    <h2 class="reveal">Устройство рынка: две модели аренды</h2>
+    <p class="sec-lead reveal">Как и в яхтинге, где есть чартерные компании со своим флотом и P2P-площадки от частных владельцев, — рынок автодомов делится на два типа игроков.</p>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:30px">
+      <div class="card reveal">
+        <div class="k">Модель 1 · Fleet</div>
+        <h3>Прокатные компании со своим парком</h3>
+        <p>Свой автопарк, единый стандарт, договор напрямую. В Бразилии это <b>Sunrise</b>, <b>Motorhomes Pura Vida</b>, <b>Fifty</b>, <b>Kirsch</b>, <b>Nomadis</b>, <b>Patagônia</b> и десятки мелких. Многие базируются в Сан-Паулу и Куритибе и подают машину в Рио доставкой.</p>
+      </div>
+      <div class="card reveal">
+        <div class="k">Модель 2 · P2P-маркетплейс</div>
+        <h3>Площадка «владелец → путешественник»</h3>
+        <p>Аналог Airbnb: платформа не владеет машинами, а соединяет стороны, берёт на себя страховку и оплату. Главный игрок — <b>LIBBER Campers</b> (&gt;70 бортов по стране, ~10 лет на рынке). Локально в Рио — <b>CamperVamos</b> (штаб в Niterói) и <b>Holmy</b>.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <div class="yacht reveal">
+        <div class="lbl">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M5 10l7-4 7 4M4 14l8 6 8-6"/></svg>
+          Аналогия с яхтингом
+        </div>
+        <h3>Bareboat vs со шкипером</h3>
+        <p>Почти все автодома в Бразилии сдаются <b>self-drive</b> — сам за рулём, по обычным правам категории B. Это прямой аналог <b>bareboat-чартера</b> (аренда лодки без экипажа). Формат «с водителем/сопровождением» — редкость, как <b>crewed charter со шкипером</b>. А длина и планировка автодома — это «класс лодки»: Sprinter и Iveco Daily длиннее Fiat Ducato, значит больше спальных мест и выше «класс».</p>
+      </div>
+    </div>
+
+    <!-- ПРАВА -->
+    <div style="margin-top:30px" class="reveal">
+      <h3 style="margin-bottom:14px">Права: категории B почти всегда хватает</h3>
+      <div class="feats">
+        <div class="feat">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="8" cy="18" r="1.6"/><circle cx="16" cy="18" r="1.6"/></svg></div>
+          <div><h4>Категория B</h4><p>Motorhome с полной массой до <b>6 000 кг</b> + прицеп до 6 000 кг. Сюда попадает почти весь арендный парк: Kombi, campervan, лёгкий motorhome, трейлеры.</p></div>
+        </div>
+        <div class="feat">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18M5 17V9l4-3h6l4 3v8"/></svg></div>
+          <div><h4>Категория C</h4><p>Нужна, только если сам motorhome тяжелее <b>6 000 кг</b>. В прокате такие почти не встречаются.</p></div>
+        </div>
+        <div class="feat">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 17h6l2-4h8l4 4M2 17v-3h6"/><circle cx="7" cy="19" r="1.5"/><circle cx="18" cy="19" r="1.5"/></svg></div>
+          <div><h4>Категория E</h4><p>Только для тяжёлых связок «тягач + прицеп ≥ 6 000 кг». Для туриста — не актуально.</p></div>
+        </div>
+      </div>
+      <p class="src" style="margin-top:14px">Регулирует Lei nº 14.440/2022. Иностранцу достаточно международного водительского удостоверения категории B. Источники: <a href="https://www.portaldotransito.com.br/noticias/trailer-e-motor-home-tem-nova-categoria-de-habilitacao/">portaldotransito</a>, <a href="https://www.libbercampers.com/perguntas-frequentes/">LIBBER FAQ</a>.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= ВИДЫ АВТОДОМОВ ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Классы «на воде и на колёсах»</div>
+    <h2 class="reveal">Какие бывают автодома</h2>
+    <p class="sec-lead reveal">Шесть форматов — от «палатки на крыше» до полноразмерного дома на колёсах. Как классы яхт: от швертбота до моторной яхты с каютами.</p>
+
+    <div class="cards" style="margin-top:30px">
+      <!-- Motorhome -->
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Minnie_Winnie%2C_Bryce_Canyon_National_Park%2C_Utah_%283446233919%29.jpg/960px-Minnie_Winnie%2C_Bryce_Canyon_National_Park%2C_Utah_%283446233919%29.jpg" alt="Полноразмерный motorhome"><span class="badge lux">Топ-комфорт</span></div>
+        <div class="bd">
+          <h3>Motorhome</h3>
+          <div class="base">Самоходный дом · база Sprinter / Ducato / Iveco Daily</div>
+          <ul>
+            <li>Санузел, горячий душ, кухня, большие баки</li>
+            <li>Integrado / semi-integrado / perfilado</li>
+            <li>Для семьи и группы, максимум автономии</li>
+          </ul>
+          <div class="price"><span><b>R$550–1 390</b> <span class="u">/ сутки</span></span></div>
+        </div>
+      </article>
+      <!-- Campervan -->
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg/960px-2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg" alt="Campervan на базе фургона Mercedes Sprinter"><span class="badge">Баланс</span></div>
+        <div class="bd">
+          <h3>Campervan / Camper</h3>
+          <div class="base">Переоборудованный фургон · Ducato, Sprinter, Master</div>
+          <ul>
+            <li>Легко водить, пролезает везде</li>
+            <li>Лучший «cost-benefit», часто без санузла</li>
+            <li>2–4 места</li>
+          </ul>
+          <div class="price"><span><b>R$229–890</b> <span class="u">/ сутки</span></span></div>
+        </div>
+      </article>
+      <!-- Kombi -->
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Volkswagen_Type_2_at_The_Henry_Ford_-_July_2017.jpg/960px-Volkswagen_Type_2_at_The_Henry_Ford_-_July_2017.jpg" alt="VW Kombi camper (Westfalia)"><span class="badge">Культовый бюджет</span></div>
+        <div class="bd">
+          <h3>Kombi camper</h3>
+          <div class="base">Легендарная VW Kombi (выпускалась в Бразилии до 2013)</div>
+          <ul>
+            <li>Самый дешёвый вход в тему</li>
+            <li>Много «artesanais» переделок</li>
+            <li>Компактно, романтично, без излишеств</li>
+          </ul>
+          <div class="price"><span><b>R$199–500</b> <span class="u">/ сутки</span></span></div>
+        </div>
+      </article>
+      <!-- Trailer -->
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/2008_Safari_canyonlands_1.jpg/960px-2008_Safari_canyonlands_1.jpg" alt="Прицеп-дом (trailer) Airstream"><span class="badge">Отцепил — и свободен</span></div>
+        <div class="bd">
+          <h3>Trailer / Reboque</h3>
+          <div class="base">Прицеп-дом без мотора · нужен тягач</div>
+          <ul>
+            <li>Дёшево, машина остаётся для разъездов</li>
+            <li>Нужен навык вождения с прицепом</li>
+            <li>На месте отцепляется как «база»</li>
+          </ul>
+          <div class="price"><span><b>R$300–390</b> <span class="u">/ сутки</span></span></div>
+        </div>
+      </article>
+      <!-- Roof tent -->
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Citro%C3%ABn_Jumper_%282024%29_DSC_8018.jpg/960px-Citro%C3%ABn_Jumper_%282024%29_DSC_8018.jpg" alt="Компактный camper-фургон на базе платформы Ducato"><span class="badge">Минимум</span></div>
+        <div class="bd">
+          <h3>Barraca de teto</h3>
+          <div class="base">Палатка на крыше авто · самый лёгкий формат</div>
+          <ul>
+            <li>Самый дешёвый способ «попробовать»</li>
+            <li>Ставится на обычную легковушку/внедорожник</li>
+            <li>Без кухни и санузла</li>
+          </ul>
+          <div class="price"><span><b>R$99–129</b> <span class="u">/ сутки</span></span></div>
+        </div>
+      </article>
+      <!-- Onibus/4x4 -->
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Airstream_and_GMC_Truck.jpg/960px-Airstream_and_GMC_Truck.jpg" alt="Экспедиционный автодом с тягачом"><span class="badge">Нишевый</span></div>
+        <div class="bd">
+          <h3>Ônibus / 4×4 overland</h3>
+          <div class="base">Переделанный (микро)автобус, экспедиционник</div>
+          <ul>
+            <li>Про владение, а не про аренду</li>
+            <li>Для дальних экспедиций и бездорожья</li>
+            <li>В прокате встречается редко</li>
+          </ul>
+          <div class="price"><span><b>~R$795</b> <span class="u">/ сутки (редко)</span></span></div>
+        </div>
+      </article>
+    </div>
+    <p class="src" style="margin-top:18px">Фото классов — иллюстрации типажа (Wikimedia Commons): VW Type 2, Mercedes Sprinter, Citroën Jumper (платформа Ducato), Airstream, Winnebago. Диапазоны цен — агрегировано по <a href="https://ocamping.com.br/quanto-custa-alugar-um-motorhome-guia-de-precos-e-taxas/">ocamping</a>, <a href="https://www.locahomes.com.br/blog/quanto-custa-alugar-motorhome-brasil">LocaHomes</a>, <a href="https://getoutside.com.br/onde-e-quanto-custa-alugar-motorhome-no-brasil/">getoutside</a>.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= ЦЕНЫ ПО КЛАССАМ ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Сколько это стоит</div>
+    <h2 class="reveal">Цены по классам и скрытые расходы</h2>
+    <p class="sec-lead reveal">Ставки в реалах за сутки, низкий/регулярный сезон, до праздничных надбавок. Ориентир по курсу: <b>1&nbsp;USD ≈ 5,4&nbsp;BRL</b> (июль 2026).</p>
+
+    <div class="tw reveal" style="margin-top:26px">
+      <table>
+        <thead><tr><th>Класс</th><th>BRL / сутки</th><th>≈ USD</th><th>Комментарий</th></tr></thead>
+        <tbody>
+          <tr><td><b>Barraca de teto</b></td><td><b>R$99–129</b></td><td>$18–24</td><td>Самый дешёвый вход</td></tr>
+          <tr><td><b>Kombi / KombiHome</b></td><td><b>R$199–500</b></td><td>$37–93</td><td>LIBBER — от R$229</td></tr>
+          <tr><td><b>Trailer / Reboque</b></td><td><b>R$300–390</b></td><td>$56–72</td><td>Нужен тягач</td></tr>
+          <tr><td><b>Campervan / Van</b></td><td><b>R$229–890</b></td><td>$42–165</td><td>Огромный разброс по оснащению</td></tr>
+          <tr><td><b>Motorhome</b> (integrado)</td><td><b>R$550–1 390</b></td><td>$102–257</td><td>Pura Vida — до R$1 390</td></tr>
+          <tr><td><b>«Средний на 4 чел.»</b></td><td><b>~R$900</b></td><td>~$167</td><td>Часто цитируемая медиана рынка</td></tr>
+          <tr><td style="color:var(--gold)"><b>Premium / near-luxury</b></td><td><b>R$850–1 200+</b></td><td>$157–222</td><td>Sprinter-база; пакет 14 дней ≈ R$12 000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:34px 0 14px" class="reveal">Что накидывается сверху ставки</h3>
+    <div class="feats reveal">
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3v18"/></svg></div><div><h4>Уборка (higienização)</h4><p>Разово <b>R$150–350</b>, обязательна.</p></div></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h4>Перепробег</h4><p><b>R$0,50–1,50/км</b> сверх лимита (в Рио у LIBBER ~350 км/сутки).</p></div></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/></svg></div><div><h4>Caução (депозит)</h4><p>Блокировка на карте, <b>возвратная</b>. Не оплата брони.</p></div></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><div><h4>Топливо / страховка</h4><p>Топливо <b>не входит</b>; базовая страховка включена. Снижение франшизы — опция <b>R$88–118/сутки</b>.</p></div></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10l8-6 8 6v10M9 20v-6h6v6"/></svg></div><div><h4>Кемпинги</h4><p><b>R$30–150/чел</b> за ночь; можно чередовать с бесплатными стоянками.</p></div></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div><h4>Минимальный срок</h4><p>Обычно <b>2–5 суток</b>; на праздники — больше.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 6 МЕС vs 2 МЕС ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Главный вопрос</div>
+    <h2 class="reveal">Бронировать за полгода или за 2 месяца?</h2>
+    <p class="sec-lead reveal">Ты спрашивал, меняется ли стоимость при раннем съёме. Разбираем честно и предметно.</p>
+
+    <div style="margin-top:28px" class="grid bento">
+      <div class="verdict col-8 reveal">
+        <h3>Цена: за одни и те же даты — почти не отличается</h3>
+        <p class="tldr">6 месяцев vs 2 месяца → та же ставка.</p>
+        <p style="margin-top:8px">Бразильские локадоры используют <b>«tabela de preços dinâmica»</b>, где суточная зависит от <b>периода года и длительности</b> аренды, а не от того, за сколько ты бронируешь. Структурированных «early bird −40%» в Бразилии <b>нет</b> — жёсткие ранние скидки, которые всплывают в блогах, относятся к прокату в <b>США/Канаде</b> (Fraserway, Four Seasons), а не к бразильскому рынку. Бразильские формулировки мягкие: «чем раньше — тем выше шанс поймать разовое промо», но это не гарантированная скидка.</p>
+      </div>
+      <div class="card col-4 reveal" style="display:flex;flex-direction:column;justify-content:center;text-align:center">
+        <div class="big-num">≈ 0%</div>
+        <p style="margin-top:8px">разница в ставке между бронью за 6 мес и за 2 мес на одни даты</p>
+      </div>
+
+      <div class="verdict good col-6 reveal">
+        <h3>Зато за 6 мес решается наличие</h3>
+        <p>Парк маленький, а на <b>декабрь–февраль, Réveillon, Carnaval и июльские каникулы</b> хорошие машины (удачная локация, полная комплектация) <b>разбирают заранее</b>. За 2 месяца до Réveillon рискуешь получить «объедки» или ничего — и вот это уже косвенно бьёт по кошельку и по качеству отдыха.</p>
+      </div>
+      <div class="verdict warn col-6 reveal">
+        <h3>Где реальная экономия</h3>
+        <p>Не в ранней брони, а в трёх рычагах: <b>сдвиг дат в низкий сезон</b> (−40% к высокому), <b>длинный срок</b> (progressive-скидка: пример Patagônia — R$950/сут при 5 днях → <b>R$700/сут от 30 дней</b>) и <b>выбор класса</b> (Kombi/campervan вместо motorhome).</p>
+      </div>
+    </div>
+
+    <div class="yacht reveal" style="margin-top:20px">
+      <div class="lbl">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M5 10l7-4 7 4M4 14l8 6 8-6"/></svg>
+        Аналогия с яхтингом
+      </div>
+      <h3>Как high season в чартере</h3>
+      <p>В яхтинге ранняя бронь на пиковую неделю (Новый год в Карибах, август в Средиземном) — это тоже прежде всего про <b>доступность лодки нужного класса</b>, а не про скидку: ставка недели держится сезоном. С автодомами в Бразилии ровно так же — Réveillon и Carnaval это «регата», на которую флот раскупают за полгода.</p>
+    </div>
+
+    <!-- SEASON CALENDAR -->
+    <div style="margin-top:34px" class="reveal">
+      <h3 style="margin-bottom:6px">Сезонность спроса и цен</h3>
+      <p style="font-size:15px;margin-bottom:14px">Южное полушарие: лето и главные праздники — зимой по нашему календарю.</p>
+      <div class="months">
+        <div class="mo pk">Янв<span>пик</span></div>
+        <div class="mo hi">Фев<span>высокий</span></div>
+        <div class="mo lo">Мар<span>низкий</span></div>
+        <div class="mo lo">Апр<span>низкий</span></div>
+        <div class="mo lo">Май<span>низкий</span></div>
+        <div class="mo lo">Июн<span>низкий</span></div>
+        <div class="mo hi">Июл<span>каникулы</span></div>
+        <div class="mo lo">Авг<span>низкий</span></div>
+        <div class="mo lo">Сен<span>лучший</span></div>
+        <div class="mo lo">Окт<span>низкий</span></div>
+        <div class="mo lo">Ноя<span>лучший</span></div>
+        <div class="mo pk">Дек<span>пик</span></div>
+      </div>
+      <div class="legend">
+        <span><i style="background:#F6DAD6"></i>Пик (Réveillon, Carnaval — бронь за 4–6 мес)</span>
+        <span><i style="background:#FCEBE9"></i>Высокий сезон</span>
+        <span><i style="background:#E7F5EC"></i>Низкий сезон (−40%, свободный выбор)</span>
+      </div>
+      <p class="src" style="margin-top:14px">Carnaval «плавает» (февраль–начало марта). Лучшие месяцы по «погода + цена»: сентябрь и ноябрь. Источники: <a href="https://www.libbercampers.com/conteudos/melhor-epoca-viajar-motorhome-brasil/">LIBBER</a>, <a href="https://koalaturismo.com.br/viagem-de-motorhome-pelo-brasil/">koalaturismo</a>, <a href="https://garagem360.com.br/preco-do-aluguel-de-um-motorhome-em-sao-paulo-veja-comparativo/">garagem360</a>.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= ПРОВАЙДЕРЫ РИО ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Старт из Рио-де-Жанейро</div>
+    <h2 class="reveal">Где брать в Рио</h2>
+    <p class="sec-lead reveal">Реальная картина: «прокат из офиса в Рио» почти отсутствует. Локальные машины дают P2P-площадки; флиты заходят доставкой из SP/Куритибы. Маршруты мечты — Região dos Lagos (Cabo Frio, Búzios, Arraial do Cabo), Serra (Petrópolis, Teresópolis), Paraty.</p>
+
+    <div class="cards" style="margin-top:30px">
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg/960px-2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg" alt="Класс машин LIBBER — campervan/motorhome"><span class="badge p2p">P2P · #1 в стране</span></div>
+        <div class="bd">
+          <h3>LIBBER Campers</h3>
+          <div class="base">«Airbnb для автодомов» · есть листинги в RJ (Inoã, Maricá, Niterói)</div>
+          <ul>
+            <li>&gt;70 бортов по стране, права кат. B</li>
+            <li>Лимит ~350 км/сутки + докупка, pet-friendly</li>
+            <li>Страховка и поддержка включены</li>
+          </ul>
+          <div class="price"><span><b>R$647–747</b> <span class="u">/ сутки (старт в Рио)</span></span><a href="https://www.libbercampers.com/conteudos/aluguel-de-motorhome-no-rio-de-janeiro-onde-alugar-quanto-custa-e-ideias-de-roteiro/" target="_blank" rel="noopener">Сайт →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Volkswagen_Type_2_at_The_Henry_Ford_-_July_2017.jpg/960px-Volkswagen_Type_2_at_The_Henry_Ford_-_July_2017.jpg" alt="Класс машин CamperVamos — camper/Kombi"><span class="badge p2p">P2P · локальный</span></div>
+        <div class="bd">
+          <h3>CamperVamos</h3>
+          <div class="base">Штаб в Niterói, RJ · платформа владелец → путешественник</div>
+          <ul>
+            <li>Самый «рио-местный» игрок</li>
+            <li>Локальные борта в Niterói/Maricá</li>
+            <li>Instagram @campervamos</li>
+          </ul>
+          <div class="price"><span class="u">цены — по запросу на площадке</span><a href="https://campervamos.com.br/" target="_blank" rel="noopener">Сайт →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://sunrisemotorhomes.com.br/wp-content/uploads/2022/11/WhatsApp-Image-2022-11-22-at-13.42.31-1.jpeg" alt="Sunrise Big Confort motorhome" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg/960px-2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg'"><span class="badge">Fleet · доставка в Рио</span></div>
+        <div class="bd">
+          <h3>Sunrise Motorhomes</h3>
+          <div class="base">Свой парк (SP) · отдельная страница /rio-de-janeiro/</div>
+          <ul>
+            <li>Линейка: Big Confort, Arizona, Califórnia…</li>
+            <li>Позиционируют под Costa do Sol (Cabo Frio, Búzios)</li>
+            <li>Компакт от R$647, крупные от R$747</li>
+          </ul>
+          <div class="price"><span><b>от R$647</b> <span class="u">/ сутки</span></span><a href="https://sunrisemotorhomes.com.br/rio-de-janeiro/" target="_blank" rel="noopener">Сайт →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Minnie_Winnie%2C_Bryce_Canyon_National_Park%2C_Utah_%283446233919%29.jpg/960px-Minnie_Winnie%2C_Bryce_Canyon_National_Park%2C_Utah_%283446233919%29.jpg" alt="Класс машин Pura Vida — полноразмерный motorhome"><span class="badge">Fleet · заходит в Рио</span></div>
+        <div class="bd">
+          <h3>Motorhomes Pura Vida</h3>
+          <div class="base">База в Куритибе · «новое присутствие в аренде в Рио»</div>
+          <ul>
+            <li>Солнечные панели, кондиционер, санузел, кухня</li>
+            <li>Газовый душ, TV, маркиза, барбекю</li>
+            <li>Верх линейки — до R$1 390/сутки</li>
+          </ul>
+          <div class="price"><span><b>R$890–1 390</b> <span class="u">/ сутки</span></span><a href="https://motorhomespuravida.com/" target="_blank" rel="noopener">Сайт →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://sunrisemotorhomes.com.br/wp-content/uploads/2023/09/trailer-coyote-460-sp-image-1454006919.jpeg" alt="Camper-RJ — сборка автодомов" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/2008_Safari_canyonlands_1.jpg/960px-2008_Safari_canyonlands_1.jpg'"><span class="badge">Местный · фабрика</span></div>
+        <div class="bd">
+          <h3>Camper-RJ / Holmy</h3>
+          <div class="base">Camper-RJ — фабрика автодомов в Рио · Holmy — жильё на колёсах (SP/MG/RJ)</div>
+          <ul>
+            <li>Camper-RJ строит и монтирует автодома</li>
+            <li>Holmy — трейлеры/вэны/Kombi «на стоянке»</li>
+            <li>Точки контакта по теме в самом Рио</li>
+          </ul>
+          <div class="price"><span class="u">формат/цены — по запросу</span><a href="https://www.holmy.com.br/hospedagens-tipo/sobre-rodas/" target="_blank" rel="noopener">Holmy →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Citro%C3%ABn_Jumper_%282024%29_DSC_8018.jpg/960px-Citro%C3%ABn_Jumper_%282024%29_DSC_8018.jpg" alt="Частные объявления — камперы"><span class="badge">C2C · частники</span></div>
+        <div class="bd">
+          <h3>Mercado Livre / OLX</h3>
+          <div class="base">Частные объявления аренды в RJ</div>
+          <ul>
+            <li>Реальные локальные машины и цены напрямую</li>
+            <li>Но без гарантий/страховки платформы</li>
+            <li>Проверять владельца и договор самому</li>
+          </ul>
+          <div class="price"><span class="u">цена — напрямую у владельца</span><a href="https://lista.mercadolivre.com.br/motorhome-aluguel-rio-janeiro" target="_blank" rel="noopener">Mercado Livre →</a></div>
+        </div>
+      </article>
+    </div>
+    <p class="src" style="margin-top:18px">Фото LIBBER/CamperVamos/Pura Vida/частников — иллюстрации класса машины (Wikimedia); фото Sunrise — с сайта провайдера. Точные посуточные цены и фото конкретных бортов уточняются на сайтах/в Instagram. Цены LIBBER по Рио — с их гида по RJ.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= САН-ПАУЛУ + ПРЕМИУМ ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Если из Рио мало — старт из Сан-Паулу</div>
+    <h2 class="reveal">Сан-Паулу: крупнейший рынок и премиум-парк</h2>
+    <p class="sec-lead reveal">SP — самый глубокий рынок Бразилии по автодомам. Здесь и топовые местные сборки, и лучшие шасси. Именно отсюда идёт доставка премиум-машин в Рио.</p>
+
+    <div class="cards" style="margin-top:30px">
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://sunrisemotorhomes.com.br/wp-content/uploads/2025/09/motorhome-arizona-image-715107186.jpg" alt="Sunrise Arizona motorhome" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg/960px-2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg'"><span class="badge">Fleet · доставка в Рио</span></div>
+        <div class="bd">
+          <h3>Sunrise «Arizona»</h3>
+          <div class="base">Santana de Parnaíba (SP) · линейка Confort/Home</div>
+          <ul>
+            <li>Полная планировка: душ, кухня, кондиционер</li>
+            <li>Модели Big Confort / Confort Family — топ линейки</li>
+            <li>Есть маршрут доставки в RJ</li>
+          </ul>
+          <div class="price"><span><b>от R$647</b> <span class="u">/ сутки</span></span><a href="https://sunrisemotorhomes.com.br/veiculo/" target="_blank" rel="noopener">Модели →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg/960px-2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg" alt="Fifty Motorhome на базе Mercedes Sprinter"><span class="badge lux">Fleet · премиум-шасси</span></div>
+        <div class="bd">
+          <h3>Fifty Motorhome</h3>
+          <div class="base">Свой парк · шасси Mercedes-Benz Sprinter, до 4 чел.</div>
+          <ul>
+            <li>Самое «люксовое» шасси среди прокатчиков SP</li>
+            <li>Права кат. B, аренда без водителя</li>
+            <li>Сезонная тарификация</li>
+          </ul>
+          <div class="price"><span class="u">цены — по сезонам на сайте</span><a href="https://www.fiftymotorhome.com.br/" target="_blank" rel="noopener">Сайт →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://sunrisemotorhomes.com.br/wp-content/uploads/2025/07/motorhome-santa-monica-image-252075868.jpeg" alt="Motorhome класса Confort" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Minnie_Winnie%2C_Bryce_Canyon_National_Park%2C_Utah_%283446233919%29.jpg/960px-Minnie_Winnie%2C_Bryce_Canyon_National_Park%2C_Utah_%283446233919%29.jpg'"><span class="badge">Fleet · импорт под запрос</span></div>
+        <div class="bd">
+          <h3>Kirsch Motorhomes</h3>
+          <div class="base">&gt;20 лет на рынке · продажа и аренда, есть импорт</div>
+          <ul>
+            <li>Единственный реальный шанс на европейский бренд</li>
+            <li>Стоит запросить импортные модели напрямую</li>
+            <li>Национальные и импортные автодома</li>
+          </ul>
+          <div class="price"><span class="u">импорт — по запросу</span><a href="https://kirschmotorhomes.com.br/" target="_blank" rel="noopener">Сайт →</a></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="note reveal" style="margin-top:24px">
+      <b>Честно про «заводской люкс».</b> Полноценный импортный люкс (Hymer, Dethleffs, Knaus, Carthago, Jayco, Thor, Winnebago, Airstream) в <b>открытом прокате</b> Бразилии подтвердить не удалось — такие бренды встречаются скорее в продаже (Kirsch), а не в аренде. «Люкс» на бразильском рынке аренды = <b>топовая местная сборка</b> на Mercedes Sprinter / Fiat Ducato с полной комплектацией (queen-size кровать, кондиционер, горячий душ, био-туалет, большой холодильник, солнечные панели). Для сравнения: сам «люкс-motorhome» как товар в Бразилии стартует <b>от R$1 млн</b> в покупке (<a href="https://www.libbercampers.com/conteudos/quanto-custa-um-motorhome-de-luxo-no-brasil/">LIBBER</a>).
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= ЭЛЕКТРИКА / BYD ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Электрика и BYD</div>
+    <h2 class="reveal">Можно ли взять электро-автодом? Пока нет.</h2>
+    <p class="sec-lead reveal">Ты спрашивал про электрику «от BYD к примеру». Разбираемся трезво: что есть в мире, что в Бразилии и при чём тут BYD.</p>
+
+    <div class="ev-hero reveal" style="margin-top:28px">
+      <div class="txt">
+        <div class="k">Единственный «BYD для кемпинга» в Бразилии</div>
+        <h3>BYD Shark — гибрид, а не электротяга</h3>
+        <p>В Бразилии у BYD <b>нет ни одного кемпера/автодома</b>. Есть легковые (Dolphin, King, Song), электрофургоны <b>eT3 / eVali</b> (потенциальная база под переделку, но готовых конверсий нет) и плагин-гибридный пикап <b>Shark</b> (~R$379 800). У Shark есть <b>V2L до 3,3 кВт</b> — розетки 110/220 В, и BYD прямо маркетирует его «для кемпинга». Но электрозапас всего ~100 км, дальше бензин — это <b>не электрический автодом</b>. Заводские BYD-кемперы существуют только за рубежом (UK-конверсия ETP3 «Clee», китайские сторонние переделки).</p>
+      </div>
+      <div class="pic">
+        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/2025_BYD_Shark_6_front.jpg/960px-2025_BYD_Shark_6_front.jpg" alt="BYD Shark 6 — плагин-гибридный пикап с V2L">
+        <div class="cp">BYD Shark 6 · плагин-гибрид с V2L-розетками · фото: Wikimedia Commons</div>
+      </div>
+    </div>
+
+    <div class="grid bento" style="margin-top:20px">
+      <div class="card col-6 reveal">
+        <div class="k">Что реально в Бразилии</div>
+        <h3>Arrow «EVolve» — первый электро-motorhome страны</h3>
+        <p>Показан на Expo Motorhome (ноябрь 2025). Стартап Arrow Mobility + кузов Vegini, <b>бразильское шасси</b> (не BYD). Мотор 183 л.с.; батареи <b>82 кВт·ч (~200 км)</b> или <b>140 кВт·ч (~350 км)</b>, DC-заряд 80% за 25 мин, полная комплектация. Но цена <b>~R$1,35–1,45 млн</b> и это <b>продажа</b>, а не прокат.</p>
+      </div>
+      <div class="card col-6 reveal">
+        <div class="k">Off-grid ≠ электротяга</div>
+        <h3>«Эко»-кемперы с солнцем — про быт, не про движение</h3>
+        <p>Многие бразильские автодома продают как «autônomo/eco»: солнечные панели + большие <b>LiFePO4 бытовые батареи</b> дают 3–5 дней автономии для холодильника, света, зарядки. Но <b>тяга остаётся дизель/бензин</b> — машина всё равно жжёт топливо, чтобы ехать. Это энергонезависимость стоянки, а не zero-emission.</p>
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:20px">
+      <div class="card reveal">
+        <h3 style="margin-bottom:14px">Почему электро-автодомов почти нет в прокате</h3>
+        <ul class="chk no">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>Батарея добавляет <b>300–600 кг</b>, съедая полезную нагрузку</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>Реальный запас доступных моделей — <b>170–400 км</b>, тяжёлая машина сажает его быстрее</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>Зарядки стоят не там, где кемпят; после 80% заряд замедляется</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>Больше запас → больше батарея → больше вес → нужна ещё бо́льшая батарея</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3 style="margin-bottom:14px">Инфраструктура зарядок (2025)</h3>
+        <ul class="chk yes">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>&gt;4 000 км трасс с быстрой DC-зарядкой</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Ось <b>SP–Rio–Sul</b> покрыта ~каждые 100 км</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" opacity="0"/><path d="M12 2v10l4-2"/><circle cx="12" cy="12" r="9"/></svg>Norte/Nordeste — редко; вне магистралей рискованно</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Мир: Winnebago eRV2 (~174 км), Iridium E-Mobil (до 400 км), Embark EREV (аренда в США с 2026)</li>
+        </ul>
+      </div>
+    </div>
+    <p class="src" style="margin-top:18px">Источники: <a href="https://www.byd.com/br/car/shark">BYD Brasil · Shark</a>, <a href="https://autopapo.com.br/curta/startup-gaucha-apresenta-o-e-volve-primeiro-motorhome-eletrico-do-brasil/">autopapo · EVolve</a>, <a href="https://www.cccampers.co.uk/products/byd-etp3-clee-electric-camper-conversion">CCCampers · BYD ETP3 Clee</a>, <a href="https://www.winnebago.com/all-electric">Winnebago eRV2</a>, <a href="https://www.diariodocentrodomundo.com.br/essencial/brasil-amplia-rede-de-recarga-para-carros-eletricos-em-rodovias/">DCM · зарядки</a>.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= NEAR-LUXURY РЕКОМЕНДАЦИЯ ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Итог · что брать для near-luxury</div>
+    <h2 class="reveal">Рекомендация: у кого и какие модели</h2>
+    <p class="sec-lead reveal">Цель — отдых уровня near-luxury с выдачей в Рио или Сан-Паулу. Вот на что ставить, по приоритету.</p>
+
+    <div class="cards" style="margin-top:30px">
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://sunrisemotorhomes.com.br/wp-content/uploads/2022/11/WhatsApp-Image-2022-11-22-at-13.42.31-1.jpeg" alt="Sunrise Big Confort — рекомендация №1" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg/960px-2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg'"><span class="badge lux">Выбор №1 под Рио</span></div>
+        <div class="bd">
+          <h3>Sunrise «Big Confort» / «Confort Family»</h3>
+          <div class="base">Топ линейки Sunrise · есть доставка в Рио-де-Жанейро</div>
+          <ul>
+            <li>Полная комплектация, максимум места</li>
+            <li>Единственный найденный с явной подачей в RJ</li>
+            <li>Идеален под Costa do Sol: Búzios, Cabo Frio</li>
+          </ul>
+          <div class="price"><span><b>~R$850–1 200</b> <span class="u">/ сутки (премиум)</span></span><a href="https://sunrisemotorhomes.com.br/rio-de-janeiro/" target="_blank" rel="noopener">Sunrise →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg/960px-2019_Mercedes-Benz_Sprinter_314_CDi_2.1.jpg" alt="Fifty на Mercedes Sprinter — выбор по шасси"><span class="badge lux">Выбор по шасси (SP)</span></div>
+        <div class="bd">
+          <h3>Fifty — на Mercedes Sprinter</h3>
+          <div class="base">Старт из Сан-Паулу · до 4 человек</div>
+          <ul>
+            <li>Лучшее «люксовое» шасси среди прокатчиков</li>
+            <li>Плавность хода и статус Mercedes</li>
+            <li>Если важен премиум базы, а не размер</li>
+          </ul>
+          <div class="price"><span class="u">по сезону на сайте</span><a href="https://www.fiftymotorhome.com.br/" target="_blank" rel="noopener">Fifty →</a></div>
+        </div>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="ph"><img loading="lazy" src="https://sunrisemotorhomes.com.br/wp-content/uploads/2025/08/coyote-360-image-1513220114.jpg" alt="Motorhome Pura Vida — полная off-grid комплектация" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Minnie_Winnie%2C_Bryce_Canyon_National_Park%2C_Utah_%283446233919%29.jpg/960px-Minnie_Winnie%2C_Bryce_Canyon_National_Park%2C_Utah_%283446233919%29.jpg'"><span class="badge lux">Off-grid комфорт</span></div>
+        <div class="bd">
+          <h3>Motorhomes Pura Vida</h3>
+          <div class="base">Заходит в Рио · максимум автономии</div>
+          <ul>
+            <li>Солнечные панели, кондиционер, газовый душ</li>
+            <li>Маркиза, барбекю, TV — «глэмпинг на колёсах»</li>
+            <li>Верх линейки до R$1 390/сутки</li>
+          </ul>
+          <div class="price"><span><b>R$890–1 390</b> <span class="u">/ сутки</span></span><a href="https://motorhomespuravida.com/" target="_blank" rel="noopener">Pura Vida →</a></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="grid bento" style="margin-top:22px">
+      <div class="verdict good col-8 reveal">
+        <h3>Стратегия под near-luxury</h3>
+        <p style="margin-bottom:10px"><b>1.</b> Если старт из Рио — <b>Sunrise Big Confort/Confort Family</b> с доставкой. Это самый прямой путь к премиуму на месте.<br>
+        <b>2.</b> Если готов стартовать из <b>Сан-Паулу</b> и важен уровень базы — <b>Fifty на Mercedes Sprinter</b>.<br>
+        <b>3.</b> Хочешь максимум автономии и «глэмпинг» — <b>Pura Vida</b> с солнечными панелями и барбекю.<br>
+        <b>4.</b> Мечтаешь о европейском бренде — напрямую запроси импорт у <b>Kirsch</b> (единственный реальный шанс).<br>
+        <b>5.</b> Хочешь выбрать конкретный борт с отзывами — смотри листинги на <b>LIBBER</b> и локальном <b>CamperVamos</b>.</p>
+      </div>
+      <div class="verdict col-4 reveal" style="display:flex;flex-direction:column;justify-content:center">
+        <div class="k" style="color:var(--gold);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Бюджет near-luxury</div>
+        <div class="big-num" style="color:var(--gold)">R$850–1 200<small>/сутки</small></div>
+        <p style="margin-top:10px">+ уборка R$150–350, страховка/франшиза, топливо, caução. Пакет 14 дней ≈ <b>R$12 000</b>.</p>
+      </div>
+    </div>
+
+    <div class="yacht reveal" style="margin-top:20px">
+      <div class="lbl">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M5 10l7-4 7 4M4 14l8 6 8-6"/></svg>
+        Аналогия с яхтингом · финал
+      </div>
+      <h3>Near-luxury motorhome = crewed-катамаран среднего класса</h3>
+      <p>Это не суперяхта (заводского Hymer/Airstream в прокате нет), но полный набор удобств — душ, кондиционер, кухня — и главное, <b>свобода маршрута</b>. Как хороший чартерный катамаран: не рекорд роскоши, но комфортно, статусно и ты сам выбираешь бухту. В переводе на колёса — сам выбираешь пляж Região dos Lagos.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= СТОЯНКИ ================= -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow reveal">Где ночевать · «марины для колёс»</div>
+    <h2 class="reveal">Стоянки, кемпинги и приложения</h2>
+    <div class="feats reveal" style="margin-top:26px">
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10l8-6 8 6v10M9 20v-6h6v6"/></svg></div><div><h4>Camping Clube do Brasil</h4><p>Сеть платных кемпингов по стране: вода 110/220 В, слив, зоны под motorhome. ~R$120/сутки на пару.</p></div></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><h4>iOverlander · Park4Night · MaCamp</h4><p>Карты кемпингов, «pontos de apoio» (вода/электричество/слив), АЗС и диких стоянок с отзывами.</p></div></div>
+      <div class="feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg></div><div><h4>Дикие стоянки (pernoite grátis)</h4><p>АЗС, парковки, pontos de apoio. Совет: чередовать платные кемпинги и бесплатные ночёвки — экономия и безопасность.</p></div></div>
+    </div>
+    <p class="src" style="margin-top:16px">Источники: <a href="https://macamp.com.br/">MaCamp</a>, <a href="https://ioverlander.com/">iOverlander</a>, <a href="https://levemundo.com.br/5-apps-para-viajar-de-motorhome/">levemundo (5 apps)</a>.</p>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap">
+    <h3 class="serif">Как читать этот гид</h3>
+    <p style="max-width:70ch;color:#C3D4E6">Материал собран на основе ~90 веб-запросов по бразильским локадорам, платформам и обзорам 2021–2026 гг. Диапазоны цен реальны, но не заменяют актуальную котировку у конкретного провайдера на твои даты. Разделяй уровни точности: цены LIBBER по Рио и модельный ряд Sunrise — с сайтов; премиум-ставки и часть фото конкретных бортов — приблизительно, уточняются напрямую.</p>
+    <div class="disc">
+      <b>Ключевые источники:</b> LIBBER Campers, Sunrise Motorhomes, Motorhomes Pura Vida, Fifty Motorhome, Kirsch, CamperVamos, Holmy, garagem360, ocamping, LocaHomes, koalaturismo, BYD Brasil, Arrow Mobility, Winnebago, portaldotransito (Lei 14.440/2022). Фото: сайты провайдеров (Sunrise) и Wikimedia Commons (BYD Shark, VW Type 2, Mercedes Sprinter, Fiat/Citroën Jumper, Airstream, Winnebago, Arraial do Cabo).<br><br>
+      Курс 1 USD ≈ 5,4 BRL — ориентировочный, июль 2026. Аналогии с яхтингом даны для наглядности и не являются юридической/финансовой рекомендацией. Подготовлено в июле 2026.
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  // Контент виден по умолчанию (CSS opacity:1). Motion лишь добавляет мягкое появление
+  // при входе секции в кадр. Если motion не загрузится или JS отключён — всё остаётся видимым.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    try {
+      const { animate, inView } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      inView('.reveal', (el) => {
+        animate(el, { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
+                { duration: 0.6, easing: [.2, .7, .3, 1] });
+      }, { amount: 0.15 });
+    } catch (e) { /* контент уже виден по умолчанию — ничего не делаем */ }
+  }
+</script>
+</body>
+</html>
