@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тихий блендер для фарша, смузи-боулов и пюре — подборка для Рио</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --sub:#6E6E73;
+    --line:#E5E5EA; --blue:#0071E3; --green:#34C759; --orange:#FF9F0A;
+    --walita:#0071E3; --arno:#E1571A;
+    --radius:22px; --shadow:0 1px 3px rgba(0,0,0,.06),0 8px 30px rgba(0,0,0,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.5;
+    -webkit-font-smoothing:antialiased; padding:0 20px;
+  }
+  .wrap{max-width:1080px; margin:0 auto}
+  header{padding:88px 0 56px; text-align:center}
+  .kicker{display:inline-block; font-size:13px; font-weight:600; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--blue); background:rgba(0,113,227,.1);
+    padding:7px 14px; border-radius:100px; margin-bottom:22px}
+  h1{font-size:clamp(34px,5.6vw,58px); font-weight:800; letter-spacing:-.03em; line-height:1.08}
+  .lead{font-size:clamp(17px,2.4vw,21px); color:var(--sub); max-width:660px;
+    margin:22px auto 0; font-weight:400}
+  .criteria{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:26px}
+  .chip{font-size:13px; font-weight:600; color:var(--ink); background:#fff; border:1px solid var(--line);
+    padding:8px 14px; border-radius:100px; box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  h2{font-size:clamp(24px,3.6vw,34px); font-weight:700; letter-spacing:-.02em; margin:0 0 8px}
+  .sec-sub{color:var(--sub); font-size:16px; margin-bottom:34px; max-width:640px}
+  section{padding:40px 0}
+  .cards{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+  .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:30px; transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s;
+    border:1px solid rgba(0,0,0,.02); overflow:hidden; display:flex; flex-direction:column}
+  .card:hover{transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.1)}
+  .card .ph{display:block; width:100%; aspect-ratio:4/3; object-fit:contain;
+    background:#FAFAFC; border-radius:16px; margin-bottom:22px}
+  .badge{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.04em;
+    text-transform:uppercase; padding:5px 11px; border-radius:8px; margin-bottom:12px; color:#fff}
+  .badge.walita{background:var(--walita)} .badge.arno{background:var(--arno)}
+  .card h3{font-size:23px; font-weight:700; letter-spacing:-.02em}
+  .card .tag{color:var(--sub); font-size:15px; margin:6px 0 16px}
+  .specs-mini{list-style:none; margin-bottom:18px}
+  .specs-mini li{font-size:14px; color:#3A3A3C; padding:5px 0 5px 22px; position:relative}
+  .specs-mini li::before{content:'✓'; position:absolute; left:0; top:5px; font-size:12px;
+    font-weight:800; color:var(--green)}
+  .price{font-size:28px; font-weight:800; letter-spacing:-.02em; margin-top:auto; padding-top:10px}
+  .price small{font-size:14px; font-weight:500; color:var(--sub); display:block; margin-top:2px}
+  .buylinks{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px}
+  .buylinks a{font-size:13px; font-weight:600; color:var(--blue); text-decoration:none;
+    border:1px solid var(--line); padding:7px 12px; border-radius:100px; transition:background .2s, border-color .2s}
+  .buylinks a:hover{background:rgba(0,113,227,.08); border-color:var(--blue)}
+  .tablecard{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+    overflow:hidden; border:1px solid rgba(0,0,0,.02)}
+  .tablewrap{overflow-x:auto}
+  table{width:100%; border-collapse:collapse; min-width:560px}
+  th,td{padding:16px 20px; text-align:left; font-size:15px; border-bottom:1px solid var(--line)}
+  thead th{font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--sub);
+    font-weight:600; background:#FBFBFD}
+  tbody tr:last-child td{border-bottom:none}
+  td:first-child,th:first-child{font-weight:600; color:var(--ink)}
+  .col-walita{color:var(--walita); font-weight:600}
+  .col-arno{color:var(--arno); font-weight:600}
+  .win{position:relative}
+  .win::after{content:'✓'; margin-left:7px; color:var(--green); font-weight:800}
+  tbody tr{transition:background .2s}
+  tbody tr:hover{background:#FBFBFD}
+  .howto{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:32px; border:1px solid rgba(0,0,0,.02)}
+  .howto ol{margin-left:20px; margin-top:14px}
+  .howto li{font-size:15.5px; color:#3A3A3C; padding:6px 0}
+  .howto b{color:var(--ink)}
+  .verdicts{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+  .verdict{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:30px; border-top:4px solid; transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  .verdict:hover{transform:translateY(-4px)}
+  .verdict.walita{border-color:var(--walita)} .verdict.arno{border-color:var(--arno)}
+  .verdict h3{font-size:19px; font-weight:700; margin-bottom:6px}
+  .verdict .who{font-size:14px; color:var(--sub); margin-bottom:16px}
+  .verdict ul{list-style:none}
+  .verdict li{font-size:14.5px; padding:8px 0 8px 26px; position:relative; color:#3A3A3C}
+  .verdict li::before{content:''; position:absolute; left:0; top:14px; width:15px; height:15px;
+    background:var(--green); border-radius:50%; opacity:.15}
+  .verdict li::after{content:'✓'; position:absolute; left:3px; top:7.5px; font-size:10px;
+    font-weight:800; color:var(--green)}
+  .note{background:linear-gradient(135deg,#fff,#FBFBFD); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:34px; border:1px solid rgba(0,0,0,.03)}
+  .note h2{font-size:22px; margin-bottom:14px}
+  .note p{color:#3A3A3C; font-size:15.5px; max-width:760px}
+  .note p+p{margin-top:12px}
+  .note b{color:var(--ink)}
+  .rejected{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px}
+  .rejected .item{padding:18px 20px; background:#FBFBFD; border-radius:14px; border:1px solid var(--line)}
+  .rejected .item h4{font-size:15px; margin-bottom:6px}
+  .rejected .item p{font-size:14px; color:var(--sub)}
+  .voltage{margin-top:24px; padding:16px 20px; background:#FFF8EC; border:1px solid #FBE4B8; border-radius:14px; font-size:14px; color:#7A4E00}
+  footer{padding:50px 0 70px; text-align:center; color:var(--sub); font-size:13px}
+  footer a{color:var(--blue); text-decoration:none}
+  .anim{opacity:0}
+  html:not(.js) .anim{opacity:1}
+  @media(max-width:720px){
+    .cards,.verdicts,.rejected{grid-template-columns:1fr}
+    header{padding:60px 0 36px}
+    th,td{padding:13px 14px; font-size:14px}
+    body{padding:0 16px}
+  }
+  @media(prefers-reduced-motion:reduce){.anim{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="kicker anim">Подборка для Рио-де-Жанейро</span>
+    <h1 class="anim">Тихий блендер: фарш, смузи-боулы, пюре</h1>
+    <p class="lead anim">Два реальных варианта со стеклянной чашей, доступных в бразильской рознице с быстрой доставкой в Рио — оба укладываются в $200–250 с запасом.</p>
+    <div class="criteria anim">
+      <span class="chip">Чаша только стекло</span>
+      <span class="chip">Относительно тихий мотор</span>
+      <span class="chip">Пульс-режим для фарша</span>
+      <span class="chip">Густые смузи-боулы</span>
+      <span class="chip">Пюре из овощей</span>
+      <span class="chip">До $250</span>
+    </div>
+  </header>
+
+  <!-- CARDS -->
+  <section>
+    <div class="cards">
+      <div class="card anim">
+        <img class="ph" src="https://walitastore.vtexassets.com/arquivos/ids/158814/RI2242_93_Liquidificador-Serie-5000-Jarra-Vidro-Philips-Walita-Preto_Frente_1.png" alt="Philips Walita Série 5000 RI2242 — блендер со стеклянной чашей 2 л" loading="lazy">
+        <span class="badge walita">Лучший баланс</span>
+        <h3>Philips Walita Série 5000 (RI2242)</h3>
+        <p class="tag">1200 Вт · стеклянная чаша 2 л · ProBlend 6</p>
+        <ul class="specs-mini">
+          <li>6 съёмных ножей из нержавейки — легче мыть и увереннее с мясом</li>
+          <li>12 скоростей + импульсный режим (Pulse)</li>
+          <li>4.8★ (12 000+ оценок на Mercado Livre) — отмечают именно тихую работу при мощности</li>
+        </ul>
+        <div class="price">R$ 339–407 <small>≈ $66–80 · курс R$5,10/$1</small></div>
+        <div class="buylinks">
+          <a href="https://www.amazon.com.br/Liquidificador-Philips-Walita-RI2242-93/dp/B09YMT1YKV" target="_blank" rel="noopener">Amazon.com.br</a>
+          <a href="https://www.mercadolivre.com.br/liquidificador-serie-5000-ri2242-3l-preto-philips-walita/p/MLB17852312" target="_blank" rel="noopener">Mercado Livre</a>
+          <a href="https://www.magazineluiza.com.br/liquidificador-philips-serie-5000-com-12-velocidades-e-jarra-de-vidro-com-2-litros-ri2242-philips-walita/p/dk78bkc54f/ep/liqu/" target="_blank" rel="noopener">Magazine Luiza</a>
+          <a href="https://www.walita.com.br/liquidificador-philips-walita-serie-5000-110v_ri2242-93_preto/p" target="_blank" rel="noopener">Walita.com.br</a>
+        </div>
+      </div>
+      <div class="card anim">
+        <img class="ph" src="https://lojaarno.vtexassets.com/arquivos/ids/182166-800-auto?v=639064165987100000&width=800&height=auto&aspect=true" alt="Arno Ultraforce Pro LN93 — блендер со стеклянной чашей, стойкой к перепаду температур" loading="lazy">
+        <span class="badge arno">Больше мощности</span>
+        <h3>Arno Ultraforce Pro (LN93)</h3>
+        <p class="tag">1100 Вт · стеклянная чаша 2 л, термостойкая · корпус нержавейка</p>
+        <ul class="specs-mini">
+          <li>6 ножей Powelix Life — держат заточку до 2× дольше по заявлению бренда</li>
+          <li>Тяжёлый стальной корпус не «ходит» по столу при дроблении льда/мяса</li>
+          <li>Готовые программы: смузи, суп, дроблёный лёд</li>
+        </ul>
+        <div class="price">от R$ 599,99 <small>≈ $118 · обычная цена ~R$920 (≈$180)</small></div>
+        <div class="buylinks">
+          <a href="https://www.amazon.com.br/Liquidificador-Arno-Ultraforce-Jarra-Vidro/dp/B0D27PKQTX" target="_blank" rel="noopener">Amazon.com.br</a>
+          <a href="https://produto.mercadolivre.com.br/MLB-4641823732-liquidificador-arno-ultraforce-pro-inox-vidro-ln93-_JM" target="_blank" rel="noopener">Mercado Livre</a>
+          <a href="https://www.magazineluiza.com.br/liquidificador-arno-ultraforce-pro-ln93-copo-de-vidro-12-velocidades-1100w-inox/p/238861400/ep/liqu/" target="_blank" rel="noopener">Magazine Luiza</a>
+          <a href="https://www.arno.com.br/liquidificador-arno-ultraforce-pro-jarra-de-vidro-127v-7211419239_pai-1-1/p" target="_blank" rel="noopener">Arno.com.br</a>
+        </div>
+      </div>
+    </div>
+    <div class="voltage anim">⚡ В Рио встречаются и 110–127V, и 220V розетки в разных домах — перед заказом уточни напряжение у себя: обе модели продаются в обеих версиях (110V и 220V), но это разные SKU.</div>
+  </section>
+
+  <!-- SPEC TABLE -->
+  <section>
+    <h2 class="anim">Характеристики один к одному</h2>
+    <p class="sec-sub anim">Зелёная галочка — где модель объективно сильнее.</p>
+    <div class="tablecard anim">
+      <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Параметр</th><th class="col-walita">Walita RI2242</th><th class="col-arno">Arno LN93</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Мощность</td><td class="win">1200 Вт</td><td>1100 Вт</td></tr>
+          <tr><td>Материал чаши</td><td>стекло, 2 л (общий объём 3 л)</td><td>стекло, 2 л, термостойкое к перепаду</td></tr>
+          <tr><td>Ножи</td><td class="win">6 шт., съёмные, легче мыть</td><td>6 шт. Powelix Life</td></tr>
+          <tr><td>Скорости</td><td class="win">12 + Pulse</td><td>12 + 3 программы</td></tr>
+          <tr><td>Корпус</td><td>пластик</td><td class="win">нержавеющая сталь — устойчивее при нагрузке</td></tr>
+          <tr><td>Репутация по шуму</td><td class="win">отмечают как тихий для своей мощности</td><td>заметно тише конкурентов на пике, но данных меньше</td></tr>
+          <tr><td>Рейтинг</td><td class="win">4.8★ / 12000+ оценок (ML)</td><td>4.7★ / 27 оценок (сайт бренда)</td></tr>
+          <tr><td>Цена</td><td class="win">R$339–407 (≈$66–80)</td><td>от R$600 (≈$118)</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO -->
+  <section>
+    <h2 class="anim">Как крутить фарш в блендере (пульс-метод)</h2>
+    <p class="sec-sub anim">Ни один блендер в этом бюджете не заменит мясорубку буквально — но пульс-режим на 1100–1200 Вт с острыми ножами уверенно превращает кубики мяса в фарш для котлет, кеббе, тартара и начинок. Это стандартный приём, а не костыль.</p>
+    <div class="howto anim">
+      <ol>
+        <li>Нарежь мясо <b>кубиками 2–3 см</b> и подморозь 15–20 минут в морозилке — так оно режется, а не размазывается.</li>
+        <li>Загружай <b>не больше 200–250 г</b> за раз — иначе нижний слой превратится в пасту раньше, чем верхний измельчится.</li>
+        <li>Работай только <b>импульсами (Pulse)</b> по 1–2 секунды, встряхивая чашу между нажатиями.</li>
+        <li>Останови, как только текстура стала похожа на фарш — лишняя пара импульсов превратит его в пюре.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- VERDICT -->
+  <section>
+    <h2 class="anim">Что выбрать</h2>
+    <p class="sec-sub anim">Коротко по сценариям использования.</p>
+    <div class="verdicts">
+      <div class="verdict walita anim">
+        <h3>Бери Walita RI2242, если…</h3>
+        <p class="who">Хочешь максимум за минимальные деньги</p>
+        <ul>
+          <li>Бюджет — не проблема, но переплачивать не хочется (в 2 раза дешевле Arno)</li>
+          <li>Важна репутация по шуму — самый упоминаемый «тихий» вариант в категории</li>
+          <li>Нужна самая большая чаша (2 л полезного объёма) для смузи-боулов на семью</li>
+          <li>12 000+ реальных отзывов — редкость такого объёма обратной связи для бытовой техники</li>
+        </ul>
+      </div>
+      <div class="verdict arno anim">
+        <h3>Бери Arno Ultraforce Pro, если…</h3>
+        <p class="who">Приоритет — мощность и устойчивость чаши</p>
+        <ul>
+          <li>Стальной корпус тяжелее и не скачет по столу при дроблении льда или фарша</li>
+          <li>Чаша прямо заявлена термостойкой — спокойно наливать горячий суп-пюре сразу после варки</li>
+          <li>Готовая программа «Смузи» и «Суп» — меньше думать о скорости вручную</li>
+          <li>Есть запас по бюджету до $250 и хочется максимум мощности из представленных</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- REJECTED -->
+  <section>
+    <div class="note anim">
+      <h2>Что не подошло и почему</h2>
+      <p>Проверил ещё два очевидных варианта — оба отсеялись по конкретной причине, а не «на глаз».</p>
+      <div class="rejected">
+        <div class="item">
+          <h4>KitchenAid K400</h4>
+          <p>В США стоит ~$230 и был бы идеален. Но в Бразилии из-за импортной наценки продаётся за <b>R$1600–2500 (≈$310–490)</b> — вылетает за бюджет в 1,5–2 раза.</p>
+        </div>
+        <div class="item">
+          <h4>Oster Xpert Series (флагман)</h4>
+          <p>Реверсивный мотор (крутит нож в обе стороны) отлично подошёл бы для контролируемого измельчения фарша. Но по спецификации чаша — <b>пластик Tritan™, не стекло</b>, что прямо нарушает главное условие.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Данные и цены: Amazon.com.br, Mercado Livre, Magazine Luiza, walita.com.br, arno.com.br, oster.com.br — на 30–31.07.2026. Курс R$5,10 за $1.
+    Amazon Prime и Mercado Livre Full дают доставку 1 день / 1–3 дня в Рио-де-Жанейро для этих категорий. Цены в рознице меняются часто — проверяй актуальную перед заказом.
+  </footer>
+
+</div>
+
+<script type="module">
+  const items = document.querySelectorAll('.anim');
+  const reveal = (el) => { el.style.opacity = 1; el.style.transform = 'none'; };
+  const revealAll = () => items.forEach(reveal);
+
+  try {
+    const { animate, inView, stagger } =
+      await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { revealAll(); }
+    else {
+      animate(".kicker", { opacity:[0,1], y:[16,0] }, { duration:.5 });
+      animate("h1",      { opacity:[0,1], y:[24,0] }, { duration:.6, delay:.08 });
+      animate(".lead",   { opacity:[0,1], y:[20,0] }, { duration:.6, delay:.18 });
+      animate(".criteria",{ opacity:[0,1], y:[16,0] }, { duration:.6, delay:.26 });
+
+      inView(".anim:not(.kicker):not(h1):not(.lead):not(.criteria)", (el) => {
+        animate(el, { opacity:[0,1], y:[28,0] }, { duration:.6, easing:[.2,.7,.2,1] });
+      }, { amount:.15 });
+    }
+
+    setTimeout(revealAll, 2600);
+  } catch (e) {
+    revealAll();
+  }
+</script>
+</body>
+</html>
