@@ -1,5 +1,5 @@
 {
-  "ts": "2026-07-31T08:53:08.680309+00:00",
+  "ts": "2026-08-01T08:24:21.566675+00:00",
   "findings": {},
   "errors": {
     "Navigare Yachting Turkey": "http_403",
@@ -7,6 +7,7 @@
     "Rotaneta home": "http_503",
     "Yacht-Rent Turkey": "http_403",
     "Gulet Escapes (UK)": "http_403",
-    "GuletYacht.net": "http_403"
+    "GuletYacht.net": "http_403",
+    "Wondergulets": "request_error: SSLError: HTTPSConnectionPool(host='www.wondergulets.com', port=443): Max retries exceeded with url: /en (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))"
   }
 }
