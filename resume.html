@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Стрельников Ярослав — Руководитель проектов · Автоматизация · Операционка</title>
+<meta name="description" content="Резюме: руководитель проектов и operations. Разработка Telegram-ботов и автоматизаций, международная логистика, 70+ аналитических материалов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0b0c;
+    --ink-2:#3a3d42;
+    --muted:#6b7075;
+    --line:#e7e8ea;
+    --line-2:#f0f1f2;
+    --bg:#f5f5f7;
+    --card:#ffffff;
+    --accent:#0071e3;
+    --accent-soft:#eaf3ff;
+    --chip:#f2f3f5;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',-apple-system,'SF Pro Text','Helvetica Neue',Arial,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    font-size:15px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .sheet{
+    max-width:880px;
+    margin:26px auto;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:44px 48px 40px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04),0 16px 40px -24px rgba(0,0,0,.18);
+  }
+
+  /* ---------- Header ---------- */
+  header.top{display:flex;justify-content:space-between;gap:28px;align-items:flex-start;flex-wrap:wrap;}
+  h1{font-size:30px;line-height:1.1;letter-spacing:-.5px;margin:0 0 4px;font-weight:800;}
+  .tagline{font-size:15px;font-weight:600;color:var(--accent);margin:0 0 10px;}
+  .subline{font-size:13.5px;color:var(--muted);margin:0;}
+  .contact{text-align:right;font-size:13.5px;color:var(--ink-2);line-height:1.9;min-width:220px;}
+  .contact .salary{font-weight:800;font-size:18px;color:var(--ink);letter-spacing:-.3px;margin-bottom:4px;}
+  .contact a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line);}
+  .contact a:hover{color:var(--accent);border-color:var(--accent);}
+
+  /* ---------- Sections ---------- */
+  h2{
+    font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);
+    font-weight:700;margin:30px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:9px;
+  }
+  h2::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;}
+  p.summary{font-size:15.5px;color:var(--ink-2);margin:0;line-height:1.62;}
+  p.summary b{color:var(--ink);font-weight:700;}
+
+  /* ---------- KPI ---------- */
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:4px;}
+  .kpi .cell{background:var(--bg);border:1px solid var(--line-2);border-radius:var(--radius);padding:14px 15px;}
+  .kpi .n{font-size:22px;font-weight:800;letter-spacing:-.6px;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .kpi .n span{color:var(--accent);}
+  .kpi .l{font-size:12px;color:var(--muted);line-height:1.4;margin-top:3px;}
+
+  /* ---------- Experience ---------- */
+  .job{margin-bottom:20px;}
+  .job:last-child{margin-bottom:4px;}
+  .job-head{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;}
+  .job h3{font-size:16.5px;margin:0;font-weight:700;letter-spacing:-.2px;}
+  .job .role{font-size:14px;font-weight:600;color:var(--accent);margin:1px 0 0;}
+  .job .meta{font-size:12.5px;color:var(--muted);margin:3px 0 0;}
+  .job .dates{font-size:12.5px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .job .lead{font-size:14px;color:var(--ink-2);margin:9px 0 7px;}
+  .job ul{margin:6px 0 0;padding-left:0;list-style:none;}
+  .job li{font-size:13.7px;color:var(--ink-2);padding:3px 0 3px 18px;position:relative;line-height:1.5;}
+  .job li::before{content:"";position:absolute;left:2px;top:11px;width:5px;height:5px;border-radius:1px;background:var(--accent);opacity:.55;}
+  .job li b{color:var(--ink);font-weight:700;}
+
+  /* ---------- Project groups ---------- */
+  .pgroup{margin-bottom:18px;}
+  .pgroup:last-child{margin-bottom:2px;}
+  .pgroup .ghead{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+  .pgroup .gtitle{font-size:15px;font-weight:700;letter-spacing:-.2px;}
+  .pgroup .gtag{font-size:11.5px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:20px;white-space:nowrap;}
+  .pgroup .gnote{font-size:13.5px;color:var(--muted);margin:0 0 9px;}
+  .plist{display:grid;gap:9px;}
+  .pcard{border:1px solid var(--line-2);border-radius:var(--radius);padding:11px 14px;background:#fff;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
+  .pcard:hover{transform:translateY(-2px);box-shadow:0 10px 24px -18px rgba(0,0,0,.35);border-color:var(--line);}
+  .pcard .pt{font-size:13.8px;font-weight:700;color:var(--ink);}
+  .pcard .pd{font-size:13px;color:var(--ink-2);margin-top:2px;line-height:1.48;}
+  .pcard .stack{font-size:11.5px;color:var(--muted);margin-top:5px;font-variant-numeric:tabular-nums;}
+  .pcard .stack b{color:var(--ink-2);font-weight:600;}
+
+  .flow{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+
+  /* ---------- Skills ---------- */
+  .skills{display:grid;grid-template-columns:150px 1fr;gap:9px 16px;align-items:start;}
+  .skills .k{font-size:12.5px;color:var(--muted);font-weight:600;padding-top:2px;}
+  .skills .v{font-size:13.6px;color:var(--ink-2);line-height:1.5;}
+  .skills .v b{color:var(--ink);font-weight:700;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{font-size:12px;background:var(--chip);color:var(--ink-2);border-radius:7px;padding:4px 9px;line-height:1.2;}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:6px 26px;}
+  .line{font-size:13.8px;color:var(--ink-2);padding:3px 0;}
+  .line b{color:var(--ink);font-weight:700;}
+
+  footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  /* ---------- Reveal (visible by default; JS only enhances) ---------- */
+  .reveal{opacity:1;transform:none;}
+  html.js .reveal{opacity:0;transform:translateY(16px);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:720px){
+    .sheet{padding:26px 20px;margin:12px;border-radius:16px;}
+    h1{font-size:25px;}
+    .contact{text-align:left;min-width:0;}
+    header.top{gap:14px;}
+    .kpi{grid-template-columns:repeat(2,1fr);}
+    .skills{grid-template-columns:1fr;gap:2px 0;}
+    .skills .k{padding-top:10px;}
+    .flow,.two{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion:reduce){
+    html.js .reveal{opacity:1 !important;transform:none !important;}
+    .pcard{transition:none;}
+  }
+
+  /* ---------- Print ---------- */
+  @media print{
+    body{background:#fff;font-size:11pt;}
+    .sheet{box-shadow:none;border:none;margin:0;max-width:none;padding:0;border-radius:0;}
+    .reveal{opacity:1 !important;transform:none !important;}
+    .pcard:hover{transform:none;box-shadow:none;}
+    .job,.pgroup,.pcard{page-break-inside:avoid;}
+    h2{page-break-after:avoid;}
+    a{color:inherit;}
+  }
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+
+<div class="sheet">
+
+  <!-- HEADER -->
+  <header class="top reveal">
+    <div>
+      <h1>Стрельников Ярослав Игоревич</h1>
+      <p class="tagline">Руководитель проектов · Operations · Автоматизация и Telegram-боты</p>
+      <p class="subline">27 лет · Тольятти · удалённо / гибрид / готов к командировкам</p>
+    </div>
+    <div class="contact">
+      <div class="salary">от 70 000 ₽</div>
+      <div>+7 (912) 193-94-25</div>
+      <div><a href="mailto:strelnikov2302.7@icloud.com">strelnikov2302.7@icloud.com</a></div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <h2 class="reveal">О себе</h2>
+  <p class="summary reveal">
+    Руководитель проектов и operations, который не только выстраивает процессы, но и <b>сам собирает под них инструменты</b>.
+    Веду задачи от идеи до прод-эксплуатации: продукт, процессы, люди, бюджет. Управлял компанией и командой из 4 руководителей
+    отделов, выстроил HR-функцию с нуля под бизнес с 4 моделями. Параллельно — <b>практическая разработка</b>: 10+ Telegram-ботов
+    и автоматизаций (serverless, LLM-интеграции, мониторинг), <b>международная логистика</b> и организация поездок «под ключ»,
+    <b>70+ опубликованных</b> аналитических материалов и подборок. Работал по задачам в 4+ странах <b>без знания языка</b> —
+    через структуру процессов и подрядчиков.
+  </p>
+
+  <!-- KPI -->
+  <h2 class="reveal">Ключевые результаты</h2>
+  <div class="kpi reveal">
+    <div class="cell"><div class="n">23</div><div class="l">человека в подчинении, ФОТ &gt;1 млн ₽/мес</div></div>
+    <div class="cell"><div class="n">10<span>+</span></div><div class="l">собственных Telegram-ботов и автоматизаций</div></div>
+    <div class="cell"><div class="n">70<span>+</span></div><div class="l">аналитических материалов на GitHub Pages</div></div>
+    <div class="cell"><div class="n">0 → 300k</div><div class="l">действий/мес после автоматизации (потенциал 450k)</div></div>
+    <div class="cell"><div class="n">×5</div><div class="l">ускорение маркировки рекламы (10 → 2 мин)</div></div>
+    <div class="cell"><div class="n">15 000<span>+</span></div><div class="l">пользователей/мес фильтрует антиспам-бот</div></div>
+    <div class="cell"><div class="n">~30%</div><div class="l">экономии на легальном ввозе оборудования из США</div></div>
+    <div class="cell"><div class="n">4</div><div class="l">страны — задачи закрыты без знания языка</div></div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <h2 class="reveal">Опыт работы</h2>
+
+  <div class="job reveal">
+    <div class="job-head">
+      <div>
+        <h3>MolecularMeal</h3>
+        <div class="role">Директор по персоналу (HRD) · фактически Chief of Staff</div>
+        <div class="meta">Москва · продукты питания · 4 бизнес-модели (ивенты + обучение + e-com + франчайзинг)</div>
+      </div>
+      <div class="dates">Июнь 2025 — Февраль 2026</div>
+    </div>
+    <p class="lead">Нанят, чтобы превратить найм и операционку из «по знакомым» в систему. В подчинении <b>23 человека</b>, ФОТ <b>&gt;1 млн ₽/мес</b>.</p>
+    <ul>
+      <li><b>Закрыл 15+ вакансий</b> по 6 направлениям (креаторы, продавцы, маркетинг/SMM, поддержка, склад, ивенты) без агентств — через стандартизированные профили ролей и матрицы компетенций.</li>
+      <li>Запустил систему адаптации <b>30/60/90</b> с чек-листами и контрольными точками — стабилизировал результаты испытательного срока.</li>
+      <li>Перевёл коммерческие команды на <b>KPI-модель</b> (выручка / маржа / качество сервиса), внедрил SLA между маркетингом и продажами.</li>
+      <li>Пересобрал <b>C&amp;B</b>: фикс + переменная по результатам, прозрачные правила пересмотров — убрал ручной торг.</li>
+      <li>Запустил <b>HR-аналитику</b> (текучесть, cost-per-hire, укомплектованность смен) — еженедельный отчёт собственнику; снял с него кадровые и юридические риски (КДП, договоры, дисциплинарные кейсы).</li>
+    </ul>
+  </div>
+
+  <div class="job reveal">
+    <div class="job-head">
+      <div>
+        <h3>UMA Marketing</h3>
+        <div class="role">Руководитель компании</div>
+        <div class="meta">Стек: Make, n8n, Telegram-боты, AI-агенты, AmoCRM, Bitrix24, «Квант», Miro</div>
+      </div>
+      <div class="dates">Сентябрь 2024 — Май 2025</div>
+    </div>
+    <p class="lead">Управлял компанией: стратегия, цели по кварталам, планирование по всем отделам. В прямом подчинении — <b>4 руководителя отделов</b> (маркетинг, инвайт, модерация, продажи).</p>
+    <ul>
+      <li><b>Антиспам-бот с нуля</b> — фильтрует <b>15 000+ пользователей/мес</b>, разгрузил модерацию и снизил долю фрод-аккаунтов.</li>
+      <li><b>Отдел инвайта: 0 → 300 000 действий/мес</b> (потенциал 450 000) после автоматизации на n8n + кастомных Telegram-ботах и AI-агентах.</li>
+      <li><b>×5 ускорение маркировки рекламы</b> (10 → 2 мин на запись) через интеграцию в Make.</li>
+      <li><b>3 отдела выведены в автономный режим</b> — убрал ручное микро-управление, перевёл коммуникации и эскалации в стандарт.</li>
+      <li>Внедрил прозрачную финансовую отчётность и контроль расходов; запустил <b>еженедельные эфиры</b> на аудиторию <b>60 000+</b> и участие компании в профильной конференции со своим стендом.</li>
+    </ul>
+  </div>
+
+  <div class="job reveal">
+    <div class="job-head">
+      <div>
+        <h3>Мультибизнесмен · UMA Marketing · MolecularMeal</h3>
+        <div class="role">Operations Manager / Бизнес-ассистент собственника</div>
+        <div class="meta">Параллельные роли в трёх компаниях одного собственника</div>
+      </div>
+      <div class="dates">Январь 2024 — Сентябрь 2024</div>
+    </div>
+    <ul>
+      <li>С нуля <b>открыл отдел инвайта</b>: подбор инструментов, регламенты, метрики; собрал сквозной поток задач между 4 отделами.</li>
+      <li>Решал нестандартные операционные задачи — например, <b>с нуля внедрил маркировку рекламы</b> после изменения законодательства.</li>
+      <li>Поиск и найм ключевых сотрудников; контроль работы команды и расчёта ЗП; <b>ТЗ для программистов</b>; функциональные схемы процессов в <b>Miro</b> и управленческой системе «Квант».</li>
+      <li>Поддержка IT-инфраструктуры и производственного конвейера; автоматизация передачи цен на маркетплейсы.</li>
+    </ul>
+  </div>
+
+  <div class="job reveal">
+    <div class="job-head">
+      <div>
+        <h3>Мультибизнесмен · EasySkills.net</h3>
+        <div class="role">Бизнес-ассистент</div>
+      </div>
+      <div class="dates">Июль 2023 — Декабрь 2023</div>
+    </div>
+    <ul>
+      <li>Планирование календаря и созвонов руководителя, организация командировок, конспектирование переговоров и постановка задач по итогам.</li>
+      <li>Создание контента и КП, работа с Google Sheets и нейросетями; <b>анализ конкурентов</b> и <b>проектирование воронок продаж</b>.</li>
+    </ul>
+  </div>
+
+  <!-- OWN PROJECTS -->
+  <h2 class="reveal">Собственные проекты и разработка</h2>
+
+  <!-- Bots -->
+  <div class="pgroup reveal">
+    <div class="ghead"><span class="gtitle">Telegram-боты и автоматизации</span><span class="gtag">10+ проектов</span></div>
+    <p class="gnote">Проектирование, разработка и деплой полностью самостоятельно — от идеи до работающего продукта в проде.</p>
+    <div class="plist">
+      <div class="pcard">
+        <div class="pt">Бот учёта личных финансов</div>
+        <div class="pd">Трата → «сколько часов твоей жизни» она стоит; долги с напоминаниями, месячная сводка, бюджет-лимиты, экспорт в CSV.</div>
+        <div class="stack"><b>Cloudflare Workers</b> · KV · шифрование Web Crypto AES-GCM · Cron Triggers · авто-деплой через GitHub Actions · (Python/aiogram-версия с 77 тестами)</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Планировщик меню на неделю + список покупок</div>
+        <div class="pd">7 дней × 3 приёма под калории/белок/цель (Миффлин–Сан-Жеор), рецепты и список покупок со ссылками в магазин + оценка бюджета. Мультиюзер.</div>
+        <div class="stack"><b>LLM (Groq)</b> · Cloudflare Worker · KV · управление через кнопки</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Ассистент для таск-трекера YouGile</div>
+        <div class="pd">На новую задачу читает регламенты из приватной Google-таблицы, обогащает знаниями LLM + живыми данными (погода, курс) и пишет бриф в чат задачи менее чем за 5 секунд.</div>
+        <div class="stack">Node.js · <b>service account (JWT RS256)</b> · Google Sheets API · DeepSeek · webhook + Caddy + Let's Encrypt</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Универсальный бот-мониторинг</div>
+        <div class="pd">Следит за появлением чего угодно (товары, яхты, билеты); LLM сам определяет, что и где искать, и присылает ссылки. Мультиюзер.</div>
+        <div class="stack">aiogram 3 · <b>SearXNG + DuckDuckGo + Telegram-каналы (Telethon)</b> · Groq · APScheduler</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Точечный мониторинг рынка</div>
+        <div class="pd">Ежедневный обход ~60 источников на появление конкретной модели; diff-уведомления только по новому, дневной отчёт.</div>
+        <div class="stack"><b>GitHub Actions (cron)</b> · Telegram Bot API · стейт в репозитории</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Сканер инфлюенсеров</div>
+        <div class="pd">Ежечасный скан Instagram / TikTok / YouTube Shorts на новые аккаунты в нише, <b>семантический LLM-фильтр</b> отсеивает нерелевантное, выгрузка в Google Sheets.</div>
+        <div class="stack">Python · APScheduler · Apify · Groq · systemd</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">AI-звонилка</div>
+        <div class="pd">Бот, совершающий телефонные звонки от имени пользователя AI-голосом; расшифровка разговора приходит в Telegram на русском.</div>
+        <div class="stack"><b>Bland.ai (US-номер, AI ASR/TTS/LLM)</b> · Voximplant (fallback) · webhook</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Личный ассистент памяти</div>
+        <div class="pd">Читает выбранные переписки, отвечает «обещал ли я X», ловит обещания/факты/дни рождения, шлёт напоминания и недельные дайджесты.</div>
+        <div class="stack">Python · Telethon · LLM · <b>Whisper STT</b> · SQLite/FTS5 · синк с базой знаний</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Игровой бот городского квеста</div>
+        <div class="pd">Команды ищут коды на точках и решают задания; рандомизация координат по командам, толерантный разбор ответов. 3000+ строк.</div>
+        <div class="stack">python-telegram-bot · SQLite · порт на Cloudflare Workers + KV</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Инфраструктура и деплой</div>
+        <div class="pd">Перенёс 5+ ботов с VPS-polling на <b>serverless</b> (webhook + KV + Cron), деплой напрямую через Cloudflare API. Развернул self-hosted менеджер паролей (Vaultwarden) с Caddy + TLS.</div>
+        <div class="stack">Cloudflare Workers/KV · VPS (Ubuntu, systemd) · Docker · Caddy · Let's Encrypt</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logistics -->
+  <div class="pgroup reveal">
+    <div class="ghead"><span class="gtitle">Международная логистика и организация поездок</span><span class="gtag">6+ стран</span></div>
+    <p class="gnote">Достать то, что «не продаётся», в стране, языка которой не знаешь — дешевле и в срок.</p>
+    <div class="flow">
+      <div class="pcard">
+        <div class="pt">Строительство частного объекта в Чили — удалённо</div>
+        <div class="pd">Координация подрядчиков на испанском в другом часовом поясе, контроль бюджета и этапов, закупка и доставка оборудования. <b>Сдан без срыва сроков</b>, без выезда заказчика.</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Ввоз оборудования из США в обход пошлины</div>
+        <div class="pd">Нашёл легальную схему ввоза криокамеры и оформил маршрут — <b>экономия ~30%</b> стоимости, десятки тысяч долларов с одной поставки.</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Поставка снятых с производства лекарств</div>
+        <div class="pd">Выстроил цепочку производитель → лаборатория → логистика → получатель. <b>Дни вместо недель</b> там, где стандартные сервисы отказывали.</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Утилизация крупногабаритной техники в Сербии</div>
+        <div class="pd">Нашёл подрядчика, договорился о цене, проконтролировал вывоз — <b>без знания языка</b>, через переводчик и логику процессов, без посредников.</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Визы, ВНЖ и релокация «под ключ»</div>
+        <div class="pd">Маршруты и документы: визы (Германия, Шенген из Бразилии и РФ), ВНЖ (Казахстан, Уругвай), справки и апостиль, срочная доставка документов Белград ↔ Москва.</div>
+      </div>
+      <div class="pcard">
+        <div class="pt">Закупки и международная доставка</div>
+        <div class="pd">Маршруты US → Сербия/Турция без переплат по налогам, комплектующие для научного прибора с доставкой в Рио/Батуми, гаджеты в Грузию/Казахстан/Узбекистан. Плюс организация поездок (аренда автодома в Бразилии, астро-туры).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Research -->
+  <div class="pgroup reveal">
+    <div class="ghead"><span class="gtitle">Аналитика и публикации</span><span class="gtag">70+ материалов</span></div>
+    <p class="gnote">Ресёрч «с нуля до готового результата», оформленный как самостоятельные страницы и опубликованный на GitHub Pages.</p>
+    <div class="plist">
+      <div class="pcard">
+        <div class="pd">
+          <b>Сравнения и подборки устройств</b> — девайсы для сна, коррекции осанки, портативные проекторы, весы, беговые дорожки, блендеры, Flipper Zero (с реальными фото, ценами и ссылками на покупку).<br>
+          <b>Медицинский ресёрч</b> — онкомаркеры и ВПЧ, контроль миопии, InBody, портативные глюкометры/кетометры, tVNS- и фотобиомодуляционные девайсы.<br>
+          <b>Web3 и техно</b> — гайды по ENS/IPFS, тесты non-ICANN доменов, self-hosting, онбординг сотрудника на Mac/VPS, анализ выделенных серверов.
+        </div>
+        <div class="stack"><b>HTML/CSS/JS</b> · Apple-минимализм · Framer Motion · публикация через GitHub Pages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <h2 class="reveal">Навыки</h2>
+  <div class="skills reveal">
+    <div class="k">Разработка</div>
+    <div class="v"><b>JavaScript (Cloudflare Workers)</b>, <b>Python (aiogram, Telethon)</b>, Telegram Bot API, serverless, webhooks, REST/API-интеграции, KV/SQLite, cron, <b>GitHub Actions (CI/CD)</b>, HTML/CSS</div>
+
+    <div class="k">AI / LLM</div>
+    <div class="v">интеграция <b>Groq · DeepSeek · Anthropic</b>, промпт-инжиниринг, JSON-mode, Whisper (STT), AI-агенты, нейросети для контента</div>
+
+    <div class="k">Автоматизация</div>
+    <div class="v"><b>Make · n8n</b>, no-code / low-code интеграции, сервисные аккаунты (Google API, JWT)</div>
+
+    <div class="k">Инфраструктура</div>
+    <div class="v">VPS (Ubuntu, systemd), Docker, Caddy, Let's Encrypt, self-hosting, Cloudflare</div>
+
+    <div class="k">Управление</div>
+    <div class="v">управление проектами от идеи до запуска, оргструктура с нуля, регламенты и SLA, performance-цикл (1:1, KPI/OKR), ТЗ для разработчиков, команды до 23 человек</div>
+
+    <div class="k">Финансы</div>
+    <div class="v">бюджетирование ФОТ (&gt;1 млн ₽/мес), C&amp;B-модели, контроль расходов, прозрачная отчётность</div>
+
+    <div class="k">Инструменты</div>
+    <div class="v">AmoCRM, Bitrix24, «Квант», Miro, Google Sheets/API</div>
+
+    <div class="k">Теги</div>
+    <div class="v">
+      <div class="chips">
+        <span class="chip">Управление проектами</span>
+        <span class="chip">Project Management</span>
+        <span class="chip">Operations</span>
+        <span class="chip">Telegram Bots</span>
+        <span class="chip">Cloudflare Workers</span>
+        <span class="chip">Python</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">AI-агенты</span>
+        <span class="chip">LLM-интеграции</span>
+        <span class="chip">Make</span>
+        <span class="chip">n8n</span>
+        <span class="chip">Автоматизация процессов</span>
+        <span class="chip">Международная логистика</span>
+        <span class="chip">KPI / OKR</span>
+        <span class="chip">Подбор персонала</span>
+        <span class="chip">Работа в неопределённости</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDU + LANG -->
+  <h2 class="reveal">Образование и языки</h2>
+  <div class="two reveal">
+    <div class="line"><b>Балаковский политехнический техникум</b> · 2019</div>
+    <div class="line">Русский — родной · Английский — A1</div>
+    <div class="line">Системный администратор (среднее специальное)</div>
+    <div class="line">Права кат. B · готов к командировкам</div>
+  </div>
+
+  <footer class="reveal">
+    <span>Стрельников Ярослав · резюме</span>
+    <span>Обновлено: август 2026</span>
+  </footer>
+
+</div>
+
+<script type="module">
+  const reveals = Array.from(document.querySelectorAll('.reveal'));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Страховка: если что-то пойдёт не так — показать весь контент через 1.5с
+  const showAll = () => reveals.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+  const fallback = setTimeout(showAll, 1500);
+
+  if (reduce) { showAll(); clearTimeout(fallback); }
+  else {
+    try {
+      const { animate, inView, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      inView(reveals, (el) => {
+        animate(el, { opacity: [0, 1], y: [16, 0] }, { duration: 0.5, delay: 0.02, easing: [0.22, 1, 0.36, 1] });
+      }, { margin: '0px 0px -8% 0px' });
+      // микроанимация карточек проектов внутри секции
+      document.querySelectorAll('.plist, .flow').forEach(list => {
+        inView(list, () => {
+          const cards = list.querySelectorAll('.pcard');
+          animate(cards, { opacity: [0, 1], y: [12, 0] }, { delay: stagger(0.05), duration: 0.45 });
+        });
+      });
+      clearTimeout(fallback);
+      setTimeout(() => { /* на случай элементов вне вьюпорта при печати */ }, 0);
+    } catch (e) {
+      showAll(); clearTimeout(fallback);
+    }
+  }
+</script>
+
+</body>
+</html>
