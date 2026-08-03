@@ -115,9 +115,8 @@
 
   footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 
-  /* ---------- Reveal (visible by default; JS only enhances) ---------- */
+  /* ---------- Reveal: контент ВСЕГДА виден; анимация — только поверх ---------- */
   .reveal{opacity:1;transform:none;}
-  html.js .reveal{opacity:0;transform:translateY(16px);}
 
   /* ---------- Responsive ---------- */
   @media (max-width:720px){
@@ -133,7 +132,7 @@
 
   /* ---------- Reduced motion ---------- */
   @media (prefers-reduced-motion:reduce){
-    html.js .reveal{opacity:1 !important;transform:none !important;}
+    .reveal{opacity:1 !important;transform:none !important;}
     .pcard{transition:none;}
   }
 
@@ -150,7 +149,6 @@
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add('js');</script>
 
 <div class="sheet">
 
@@ -437,32 +435,19 @@
 </div>
 
 <script type="module">
-  const reveals = Array.from(document.querySelectorAll('.reveal'));
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // Страховка: если что-то пойдёт не так — показать весь контент через 1.5с
-  const showAll = () => reveals.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
-  const fallback = setTimeout(showAll, 1500);
-
-  if (reduce) { showAll(); clearTimeout(fallback); }
-  else {
-    try {
-      const { animate, inView, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
-      inView(reveals, (el) => {
-        animate(el, { opacity: [0, 1], y: [16, 0] }, { duration: 0.5, delay: 0.02, easing: [0.22, 1, 0.36, 1] });
-      }, { margin: '0px 0px -8% 0px' });
-      // микроанимация карточек проектов внутри секции
-      document.querySelectorAll('.plist, .flow').forEach(list => {
-        inView(list, () => {
-          const cards = list.querySelectorAll('.pcard');
-          animate(cards, { opacity: [0, 1], y: [12, 0] }, { delay: stagger(0.05), duration: 0.45 });
-        });
-      });
-      clearTimeout(fallback);
-      setTimeout(() => { /* на случай элементов вне вьюпорта при печати */ }, 0);
-    } catch (e) {
-      showAll(); clearTimeout(fallback);
+  // Контент виден всегда (CSS: .reveal{opacity:1}). Ниже — ТОЛЬКО ненавязчивое
+  // улучшение: если Framer Motion не загрузится или браузер не поддержит —
+  // страница просто останется статичной и полностью видимой. Никаких скрытий.
+  try {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const { animate, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      // мягкое появление всей страницы (opacity стартует с видимого 0.4 → 1)
+      animate('.sheet', { opacity: [0.4, 1], y: [8, 0] }, { duration: 0.5, easing: [0.22, 1, 0.36, 1] });
+      // лёгкий stagger карточек — двигаем только по Y, прозрачность не трогаем
+      const cards = document.querySelectorAll('.pcard');
+      if (cards.length) animate(cards, { y: [10, 0] }, { delay: stagger(0.03), duration: 0.4, easing: 'ease-out' });
     }
-  }
+  } catch (e) { /* нет анимации — контент всё равно полностью виден */ }
 </script>
 
 </body>
