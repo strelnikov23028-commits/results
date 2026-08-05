@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Внешний SSD на MacBook — крепление, которое удобно купить в Рио</title>
+<meta name="description" content="Как прицепить выносной SSD к MacBook: почему алюминий не магнитится, три рабочих способа крепления и конкретные товары с ценами в реалах, доступные в Рио-де-Жанейро.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --ink-2:#6E6E73; --ink-3:#86868B;
+    --blue:#0071E3; --blue-ink:#0066CC; --line:#E5E5EA; --green:#1D9B4E; --amber:#B25E00;
+    --shadow:0 1px 3px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.05);
+    --shadow-h:0 4px 12px rgba(0,0,0,.08),0 18px 46px rgba(0,0,0,.10);
+    --radius:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  /* reveal (видим по умолчанию, JS плавно проявляет) */
+  .js .reveal{opacity:0;transform:translateY(24px);will-change:opacity,transform}
+  @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1!important;transform:none!important}}
+
+  /* HERO */
+  header.hero{padding:96px 0 54px;text-align:center}
+  .kicker{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--blue-ink);background:rgba(0,113,227,.09);padding:7px 14px;border-radius:100px;margin-bottom:22px}
+  h1{font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1.06}
+  h1 .grad{background:linear-gradient(120deg,#0071E3,#7F5AF0);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{max-width:640px;margin:22px auto 0;font-size:clamp(17px,2.4vw,21px);color:var(--ink-2);font-weight:400}
+  .meta-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+  .chip{font-size:13.5px;font-weight:500;color:var(--ink-2);background:var(--card);border:1px solid var(--line);
+    padding:8px 15px;border-radius:100px;box-shadow:var(--shadow)}
+
+  section{padding:44px 0}
+  .sec-head{margin-bottom:26px}
+  .sec-tag{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:700;letter-spacing:-.02em;margin-top:6px;line-height:1.12}
+  .sec-note{color:var(--ink-2);font-size:16.5px;margin-top:10px;max-width:720px}
+
+  /* KEY FACT callout */
+  .fact{background:linear-gradient(135deg,#0B1220,#1B2436);color:#fff;border-radius:26px;padding:40px 38px;
+    position:relative;overflow:hidden;box-shadow:var(--shadow-h)}
+  .fact::after{content:"";position:absolute;right:-70px;top:-70px;width:260px;height:260px;
+    background:radial-gradient(circle,rgba(127,90,240,.5),transparent 70%);filter:blur(8px)}
+  .fact .lbl{font-size:13px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#7FB2FF;position:relative}
+  .fact h3{font-size:clamp(22px,3.4vw,30px);font-weight:700;letter-spacing:-.02em;margin:12px 0 14px;position:relative;line-height:1.2}
+  .fact p{color:#C7CBD4;font-size:16.5px;position:relative;max-width:760px}
+  .fact strong{color:#fff;font-weight:600}
+
+  /* 3 recipes */
+  .recipes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .recipe{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;
+    box-shadow:var(--shadow);transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s;display:flex;flex-direction:column}
+  .recipe:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+  .r-badge{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:20px;font-weight:700;color:#fff;margin-bottom:16px}
+  .r1{background:linear-gradient(135deg,#0071E3,#4AA3FF)}
+  .r2{background:linear-gradient(135deg,#1D9B4E,#57C878)}
+  .r3{background:linear-gradient(135deg,#7F5AF0,#B08BFF)}
+  .recipe h3{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+  .recipe p{color:var(--ink-2);font-size:15px;flex-grow:1}
+  .recipe .r-price{margin-top:16px;font-size:14px;font-weight:600;color:var(--ink)}
+  .recipe .r-price span{color:var(--ink-3);font-weight:500}
+  .r-tag{display:inline-block;margin-top:12px;font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:100px}
+  .r-tag.best{color:var(--green);background:rgba(29,155,78,.1)}
+  .r-tag.cheap{color:var(--blue-ink);background:rgba(0,113,227,.1)}
+  .r-tag.diy{color:var(--amber);background:rgba(178,94,0,.1)}
+
+  /* Product grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+  .ph{position:relative;background:#fff;height:190px;display:grid;place-items:center;padding:18px;border-bottom:1px solid var(--line)}
+  .ph img{max-height:154px;width:auto;object-fit:contain}
+  .ph .noimg{display:none;font-size:13px;color:var(--ink-3);text-align:center;padding:0 14px}
+  .ph .noimg a{color:var(--blue-ink);font-weight:600}
+  .rank{position:absolute;top:12px;left:12px;font-size:12px;font-weight:700;color:#fff;background:rgba(0,0,0,.72);
+    padding:4px 10px;border-radius:100px;letter-spacing:.02em}
+  .rank.pick{background:var(--green)}
+  .cbody{padding:18px 18px 20px;display:flex;flex-direction:column;flex-grow:1}
+  .cbody h3{font-size:16px;font-weight:650;letter-spacing:-.01em;line-height:1.3}
+  .cdesc{color:var(--ink-2);font-size:13.5px;margin-top:7px;flex-grow:1}
+  .price{margin-top:14px;font-size:22px;font-weight:750;letter-spacing:-.02em}
+  .price small{font-size:13px;font-weight:500;color:var(--ink-3);margin-left:3px}
+  .seller{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:12.5px;color:var(--ink-2);flex-wrap:wrap}
+  .fba{font-weight:600;color:var(--green);background:rgba(29,155,78,.1);padding:3px 9px;border-radius:100px;font-size:11.5px}
+  .store{font-weight:600;color:var(--blue-ink);background:rgba(0,113,227,.08);padding:3px 9px;border-radius:100px;font-size:11.5px}
+  .buy{margin-top:15px;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    background:var(--blue);color:#fff;font-weight:600;font-size:14.5px;padding:11px 16px;border-radius:12px;
+    transition:background .2s,transform .15s}
+  .buy:hover{background:var(--blue-ink)}
+  .buy:active{transform:scale(.98)}
+  .buy svg{width:15px;height:15px}
+
+  /* import section variant */
+  .import .price{font-size:18px;color:var(--ink-2)}
+  .import .buy{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .import .buy:hover{background:#F5F5F7}
+
+  /* Warnings */
+  .warn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .warn{background:#FFF9F0;border:1px solid #F2E2C7;border-radius:16px;padding:22px 20px}
+  .warn h4{font-size:15.5px;font-weight:700;color:var(--amber);margin-bottom:7px;display:flex;gap:8px;align-items:center}
+  .warn p{font-size:14px;color:#8A6A38}
+
+  /* Recommendation block */
+  .reco{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:38px;box-shadow:var(--shadow-h)}
+  .reco h3{font-size:22px;font-weight:750;letter-spacing:-.02em;margin-bottom:6px}
+  .reco .rlead{color:var(--ink-2);font-size:16px;margin-bottom:24px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .step{background:var(--bg);border-radius:16px;padding:20px}
+  .step .n{font-size:13px;font-weight:700;color:var(--blue-ink)}
+  .step h4{font-size:16px;font-weight:650;margin:6px 0 5px}
+  .step p{font-size:13.5px;color:var(--ink-2)}
+  .step .sp{margin-top:10px;font-size:15px;font-weight:700;letter-spacing:-.01em}
+  .total{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px}
+  .total .lab{color:var(--ink-2);font-size:15px}
+  .total .val{font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .total .val small{font-size:14px;color:var(--ink-3);font-weight:500}
+
+  /* footer */
+  footer{padding:50px 0 70px;text-align:center;color:var(--ink-3)}
+  footer .disc{max-width:680px;margin:0 auto 18px;font-size:13.5px;line-height:1.65}
+  footer a{color:var(--blue-ink);font-weight:500}
+  .divider{height:1px;background:var(--line);margin:0 auto;max-width:1036px}
+
+  @media (max-width:860px){
+    .recipes,.grid,.warn-grid,.steps{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:560px){
+    header.hero{padding:70px 0 40px}
+    .recipes,.grid,.warn-grid,.steps{grid-template-columns:1fr}
+    .fact,.reco{padding:28px 22px}
+    section{padding:34px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker reveal">Гид для Рио-де-Жанейро · август 2026</span>
+    <h1 class="reveal">Прицепить <span class="grad">внешний SSD</span><br>прямо к MacBook</h1>
+    <p class="sub reveal">Чтобы диск ехал вместе с ноутом, а не болтался на проводе. Разбираем, как это крепится на самом деле, и собираем комплект из того, что реально купить в Рио с доставкой за пару дней.</p>
+    <div class="meta-row reveal">
+      <span class="chip">🇧🇷 Цены в реалах (BRL)</span>
+      <span class="chip">📦 Amazon.com.br · Kabum</span>
+      <span class="chip">✅ Наличие проверено 05.08.2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- KEY FACT -->
+<section>
+  <div class="wrap">
+    <div class="fact reveal">
+      <span class="lbl">Главное, что нужно понять до покупки</span>
+      <h3>Корпус MacBook — алюминий. Магнит к нему не липнет.</h3>
+      <p>Алюминий не ферромагнитен, а разъём MagSafe у MacBook — это <strong>только магнитное питание слева</strong>, не площадка для аксессуаров, как кольцо MagSafe в iPhone. Поэтому «магнитный SSD» сам по себе к крышке не пристанет. Работают ровно три способа: <strong>(1)</strong> наклеить на ноут тонкую стальную пластину — и уже к ней притягивать магнитный держатель; <strong>(2)</strong> зажим-обойма, который держит сам диск; <strong>(3)</strong> клеевой карман без всякого магнита. Ниже — все три, с товарами под каждый.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 RECIPES -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Три рабочих способа</span>
+      <h2>Как именно это держится</h2>
+      <p class="sec-note">Выбираете принцип — дальше под него подобраны конкретные товары из Бразилии.</p>
+    </div>
+    <div class="recipes">
+      <div class="recipe reveal">
+        <div class="r-badge r1">1</div>
+        <h3>Магнитный зажим-обойма</h3>
+        <p>Обойма зажимает сам SSD (Samsung T7 / T9 и т. п.), а её магнитное основание притягивается к стальному кольцу на крышке. В комплекте у таких зажимов обычно идёт наклейка-кольцо. Самый аккуратный «диск на виду».</p>
+        <div class="r-price">от R$ 154 <span>· POWRIG / SMALLRIG</span></div>
+        <span class="r-tag best">👍 Удобнее всего</span>
+      </div>
+      <div class="recipe reveal">
+        <div class="r-badge r2">2</div>
+        <h3>Пластина 3M + магнит</h3>
+        <p>Клеите на ноут стальную пластину на скотче 3M (стоит копейки), а к ней — любой магнитный держатель или магнитный кейс с диском. Самый гибкий и дешёвый путь, если готовы собрать связку сами.</p>
+        <div class="r-price">от R$ 28 <span>· пластина + держатель</span></div>
+        <span class="r-tag cheap">💸 Дешевле всего</span>
+      </div>
+      <div class="recipe reveal">
+        <div class="r-badge r3">3</div>
+        <h3>Клеевой карман</h3>
+        <p>Никакого металла и магнитов: эластичный кармашек на многоразовом скотче 3M клеится под дно или на крышку, SSD вставляется внутрь. В Бразилии из этого класса дешевле всего держатель на присоске.</p>
+        <div class="r-price">от R$ 30 <span>· без наклейки-металла</span></div>
+        <span class="r-tag diy">🧩 Проще всего</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOUNTS available in Rio -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Крепления · есть в Рио</span>
+      <h2>Держатели и пластины</h2>
+      <p class="sec-note">Это и есть «крепление, которое удобно купить». Позиции с бейджем <b style="color:var(--green)">Enviado por Amazon</b> едут по логистике Amazon — до Рио обычно 1–4 дня.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank pick">Выбор под T7</span>
+          <img src="https://m.media-amazon.com/images/I/31rEq8QMoxL._AC_.jpg" alt="POWRIG магнитный зажим для SSD Samsung T5 T7 T9" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0DXN2QGBX" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>POWRIG — магнитный зажим SSD</h3>
+          <p class="cdesc">Быстросъёмная обойма под ширину корпуса Samsung T5 / T7 / T9. Самый профильный вариант «прицепить T7 к крышке».</p>
+          <div class="price tnum">R$ 181,73</div>
+          <div class="seller"><span class="fba">Enviado por Amazon</span> POWRIG · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0DXN2QGBX" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">MagSafe 45–70 мм</span>
+          <img src="https://m.media-amazon.com/images/I/41rm1lIcwhL._AC_.jpg" alt="SMALLRIG магнитный держатель SSD с MagSafe" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0F43L934X" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>SMALLRIG — держатель SSD MagSafe</h3>
+          <p class="cdesc">Раздвижной магнитный держатель 45–70 мм. Обычно комплектуется стальным кольцом-наклейкой для ноутбуков без MagSafe.</p>
+          <div class="price tnum">R$ 154,52</div>
+          <div class="seller"><span class="fba">Enviado por Amazon</span> SmallRig · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0F43L934X" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">2-в-1 · cold shoe</span>
+          <img src="https://m.media-amazon.com/images/I/41QOOhAnT3L._AC_.jpg" alt="SMALLRIG держатель SSD 2 в 1 MagSafe и cold shoe" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0DB55MKJT" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>SMALLRIG — SSD-холдер 2-в-1</h3>
+          <p class="cdesc">MagSafe + крепление cold shoe. Пригодится, если помимо ноутбука цепляете диск к камере / штативу / риг-системе.</p>
+          <div class="price tnum">R$ 215,13</div>
+          <div class="seller"><span class="fba">Enviado por Amazon</span> SmallRig · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0DB55MKJT" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank pick">Дёшево · нац. продавец</span>
+          <img src="https://m.media-amazon.com/images/I/31pDE5OomEL._AC_.jpg" alt="ARTBOX3D держатель для внешнего HD SSD на присоске" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0DJ3G25MN" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>ARTBOX3D — держатель на присоске</h3>
+          <p class="cdesc">Бразильский 3D-печатный держатель для внешнего HD/SSD. Без магнита и наклеек — крепится присоской. Дёшево и быстро внутри страны.</p>
+          <div class="price tnum">R$ 29,97</div>
+          <div class="seller"><span class="store">Nacional</span> ARTBOX3D · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0DJ3G25MN" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Для способа №2</span>
+          <img src="https://m.media-amazon.com/images/I/41QZkRFjBJL._AC_.jpg" alt="Комплект металлических пластин-наклеек 3M для магнитного крепления" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0H9MG9SPN" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>Kit 2× стальные пластины 3M</h3>
+          <p class="cdesc">Те самые ферромагнитные пластины-наклейки на скотче 3M. Клеите на MacBook — и любой магнитный держатель/кейс держится намертво.</p>
+          <div class="price tnum">R$ 28,00</div>
+          <div class="seller"><span class="store">Amazon.br</span> KavamataStore · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0H9MG9SPN" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Альтернатива каналу</span>
+          <span class="noimg" style="display:block">🔎 Те же держатели и пластины есть на <a href="https://lista.mercadolivre.com.br/suporte-magnetico-ssd-notebook" target="_blank" rel="noopener">Mercado Livre</a> — цену смотреть вручную в браузере (площадка не отдаёт её ботам)</span>
+        </div>
+        <div class="cbody">
+          <h3>Mercado Livre — запасной канал</h3>
+          <p class="cdesc">«suporte magnético SSD», «placa metálica adesiva», кейсы Baseus/Orico. Часто дешевле и с Full-доставкой в Рио, но живую цену надо проверить самому.</p>
+          <div class="price" style="font-size:16px;color:var(--ink-2)">Цену уточнить</div>
+          <div class="seller"><span class="store">Mercado Livre</span> Full · Рио</div>
+          <a class="buy" href="https://lista.mercadolivre.com.br/suporte-magnetico-ssd-notebook" target="_blank" rel="noopener">Открыть поиск
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAGNETIC M.2 CASES -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Собрать свой магнитный SSD</span>
+      <h2>Магнитные кейсы для M.2 NVMe</h2>
+      <p class="sec-note">Вставляете свою планку M.2 — и получаете внешний SSD с магнитом прямо в корпусе. К MacBook всё равно нужна стальная пластина (способ №2), зато диск можно «переставлять» между устройствами.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Из твоего списка · ORICO</span>
+          <img src="https://m.media-amazon.com/images/I/41437ztILOL._AC_.jpg" alt="ORICO магнитный кейс SSD M.2 NVMe 10Gbps PD100W" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0FMJR4Z88" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>ORICO — магнитный кейс M.2 NVMe</h3>
+          <p class="cdesc">10 Гбит/с, транзит PD 100 Вт, поддержка записи 4K. Магнит в корпусе. <b>Somente 4 em estoque</b> — берут быстро.</p>
+          <div class="price tnum">R$ 169,90</div>
+          <div class="seller"><span class="store">Amazon.br</span> Achadinhos de Formiga</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0FMJR4Z88" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Компакт 2230</span>
+          <img src="https://m.media-amazon.com/images/I/31RQAlcGCtL._AC_.jpg" alt="Магнитный кейс M.2 2230 NVMe USB 3.2 PD100W 4K" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0FXQ89GBC" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>Магнитный кейс M.2 2230</h3>
+          <p class="cdesc">Мини-формат под планку 2230 — самый маленький и лёгкий магнитный SSD. USB 3.2, PD 100 Вт, 4K. Хорош, чтобы почти не выпирал за крышку.</p>
+          <div class="price tnum">R$ 125,62</div>
+          <div class="seller"><span class="store">Amazon.br</span> taiyuanjisimu · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0FXQ89GBC" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Обычный · UGREEN</span>
+          <img src="https://m.media-amazon.com/images/I/41quzN6SDuL._AC_.jpg" alt="UGREEN корпус для SSD M.2 NVMe 10Gbps алюминий" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0BQ6SYQWL" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>UGREEN — корпус M.2 NVMe</h3>
+          <p class="cdesc">Алюминий, 10 Гбит/с, без инструмента. Магнита нет — под способ №2 (пластина + держатель поверх). <b>Somente 3 em estoque</b>.</p>
+          <div class="price tnum">R$ 188,88</div>
+          <div class="seller"><span class="store">Amazon.br</span> ARicci · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0BQ6SYQWL" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Kabum · дешевле</span>
+          <img src="https://images9.kabum.com.br/produtos/fotos/sync_mirakl/408099/xlarge/Case-para-SSD-M-2-Ugreen-Duplo-Protocolo-Nvme-sata-10GB-Uasp_1772396319.png" alt="UGREEN кейс SSD M.2 NVMe SATA 10Gb Kabum" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.kabum.com.br/produto/408099/case-para-ssd-m-2-ugreen-duplo-protocolo-nvme-sata-10gb-uasp" target="_blank" rel="noopener">на карточке Kabum</a></span>
+        </div>
+        <div class="cbody">
+          <h3>UGREEN — кейс M.2 (Kabum)</h3>
+          <p class="cdesc">Двойной протокол NVMe + SATA, 10 Гбит/с, UASP. Тот же UGREEN, но заметно дешевле при оплате PIX.</p>
+          <div class="price tnum">R$ 136,90 <small>no PIX</small></div>
+          <div class="seller"><span class="store">Kabum</span> BFTECH · Frete grátis*</div>
+          <a class="buy" href="https://www.kabum.com.br/produto/408099/case-para-ssd-m-2-ugreen-duplo-protocolo-nvme-sata-10gb-uasp" target="_blank" rel="noopener">Открыть на Kabum
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Kabum · Orico</span>
+          <img src="https://images9.kabum.com.br/produtos/fotos/sync_mirakl/1003819/xlarge/Case-Orico-Para-SSD-M-2-Nvme-PCie-10gbps-Usb-3-2-Tipo-c-Alta-Velocidade_1784907217.webp" alt="Orico кейс SSD M.2 NVMe PCIe 10Gbps USB-C Kabum" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.kabum.com.br/produto/1003819/case-orico-para-ssd-m-2-nvme-pcie-10gbps-usb-3-2-tipo-c-alta-velocidade" target="_blank" rel="noopener">на карточке Kabum</a></span>
+        </div>
+        <div class="cbody">
+          <h3>Orico — кейс M.2 NVMe (Kabum)</h3>
+          <p class="cdesc">PCIe NVMe, 10 Гбит/с, USB-C. Простой надёжный корпус под способ №2, если планка уже есть.</p>
+          <div class="price tnum">R$ 149,98</div>
+          <div class="seller"><span class="store">Kabum</span> IPTVELETRO · Em estoque</div>
+          <a class="buy" href="https://www.kabum.com.br/produto/1003819/case-orico-para-ssd-m-2-nvme-pcie-10gbps-usb-3-2-tipo-c-alta-velocidade" target="_blank" rel="noopener">Открыть на Kabum
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- READY SSDs -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Сам диск · готовые SSD</span>
+      <h2>Если SSD ещё нет</h2>
+      <p class="sec-note">Готовые портативные SSD в наличии на Amazon.com.br. Все идеально ложатся в зажимы из первого блока. Kabum по этим моделям сейчас в основном «esgotado», поэтому канал — Amazon.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank pick">Лучшая цена</span>
+          <img src="https://m.media-amazon.com/images/I/41eTFK7clfL._AC_.jpg" alt="SanDisk Extreme Portable SSD 1TB" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B08GTYFC37" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>SanDisk Extreme 1 ТБ</h3>
+          <p class="cdesc">1050 МБ/с, защита IP-класса, компактный. Самый доступный из «взрослых» портативных SSD в Рио.</p>
+          <div class="price tnum">R$ 1.302,90</div>
+          <div class="seller"><span class="store">Amazon.br</span> Orbitek · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B08GTYFC37" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Под зажимы идеально</span>
+          <img src="https://m.media-amazon.com/images/I/21mARCvUWxL._AC_.jpg" alt="Samsung T7 Shield 1TB SSD" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B09VLK9W3S" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>Samsung T7 Shield 1 ТБ</h3>
+          <p class="cdesc">1050 МБ/с, IP65 (пыль/вода), прорезиненный корпус. Именно под его размер сделаны зажимы POWRIG и SMALLRIG.</p>
+          <div class="price tnum">R$ 1.731,00</div>
+          <div class="seller"><span class="store">Amazon.br</span> Midgard Loja · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B09VLK9W3S" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph"><span class="rank">Import · дороже</span>
+          <img src="https://m.media-amazon.com/images/I/21zZ8gegOOL._AC_.jpg" alt="Crucial X9 Portable SSD 1TB" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://www.amazon.com.br/dp/B0CGW1FQV4" target="_blank" rel="noopener">на карточке Amazon</a></span>
+        </div>
+        <div class="cbody">
+          <h3>Crucial X9 1 ТБ</h3>
+          <p class="cdesc">1050 МБ/с, очень компактный. Это импортный листинг Amazon Global — дороже, зато <b>Enviado por Amazon</b>.</p>
+          <div class="price tnum">R$ 1.987,32</div>
+          <div class="seller"><span class="fba">Enviado por Amazon</span> Global · Em estoque</div>
+          <a class="buy" href="https://www.amazon.com.br/dp/B0CGW1FQV4" target="_blank" rel="noopener">Открыть на Amazon.br
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IMPORT PREMIUM -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Премиум · под заказ из-за границы</span>
+      <h2>Красивее, но везти издалека</h2>
+      <p class="sec-note">Специализированные крепления «под Apple». В Бразилии их нет — только импорт (дольше и с таможней). Показываю честно, чтобы был ориентир по «как бывает в идеале».</p>
+    </div>
+    <div class="grid import">
+
+      <div class="card reveal">
+        <div class="ph">
+          <img src="https://deltahub.io/cdn/shop/files/HOLDX-1x_silver.jpg" alt="DeltaHub HoldX Magnetic Mount" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://deltahub.io/products/holdx-magnetic-mount" target="_blank" rel="noopener">на deltahub.io</a></span>
+        </div>
+        <div class="cbody">
+          <h3>DeltaHub HoldX</h3>
+          <p class="cdesc">Алюминиевая площадка на 3M с mu-metal (экранирует диск). Держит до 1,2 кг, снимается без следов. Премиум-исполнение.</p>
+          <div class="price tnum">≈ $39,90</div>
+          <div class="seller"><span class="store">Импорт</span> deltahub.io</div>
+          <a class="buy" href="https://deltahub.io/products/holdx-magnetic-mount" target="_blank" rel="noopener">Смотреть
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph">
+          <img src="https://crap.supply/cdn/shop/files/SM-UNIVERSAL.jpg?v=1780115424" alt="Universal ScreenMount для MacBook" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://crap.supply/products/universal-screenmount" target="_blank" rel="noopener">на crap.supply</a></span>
+        </div>
+        <div class="cbody">
+          <h3>Universal ScreenMount</h3>
+          <p class="cdesc">Стальное кольцо на крышку + держатель с ремешком под любой SSD. Явно позиционируется для MacBook.</p>
+          <div class="price tnum">≈ €20</div>
+          <div class="seller"><span class="store">Импорт</span> crap.supply</div>
+          <a class="buy" href="https://crap.supply/products/universal-screenmount" target="_blank" rel="noopener">Смотреть
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="ph">
+          <img src="https://tekmomo.com/cdn/shop/files/DSC02842_1024x1024@2x.jpg?v=1763049015" alt="Tekmomo MagSafe SSD Mount" loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <span class="noimg">Фото — <a href="https://tekmomo.com/products/tekmomo-magsafe%C2%AE-ssd-macbook-iphone-mount" target="_blank" rel="noopener">на tekmomo.com</a></span>
+        </div>
+        <div class="cbody">
+          <h3>Tekmomo MagSafe SSD Mount</h3>
+          <p class="cdesc">Дешёвый набор: магнитное кольцо на 3M + пластина на SSD. Кросс-девайс — Mac, iPhone 12+, iPad.</p>
+          <div class="price tnum">≈ $14,99</div>
+          <div class="seller"><span class="store">Импорт</span> tekmomo.com</div>
+          <a class="buy" href="https://tekmomo.com/products/tekmomo-magsafe%C2%AE-ssd-macbook-iphone-mount" target="_blank" rel="noopener">Смотреть
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WARNINGS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Прежде чем клеить</span>
+      <h2>Три вещи, чтобы не пожалеть</h2>
+    </div>
+    <div class="warn-grid">
+      <div class="warn reveal">
+        <h4>⚠️ Матрица экрана</h4>
+        <p>Если повесить диск на крышку и закрыть ноут (или впихнуть в тесный рюкзак) — диск может продавить и <b>треснуть матрицу</b>. Снимайте SSD перед закрытием.</p>
+      </div>
+      <div class="warn reveal">
+        <h4>🔌 Натяжение USB-C</h4>
+        <p>Крепление убирает «болтанку», но следите, чтобы кабель не тянул порт под углом. Берите короткий кабель или модель с фиксатором штекера.</p>
+      </div>
+      <div class="warn reveal">
+        <h4>🌡️ Не под дно вплотную</h4>
+        <p>Клеить карман под днище можно, но не перекрывайте вентиляционные щели и ножки — иначе ноут греется. Лучше сбоку или на крышке.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDATION -->
+<section>
+  <div class="wrap">
+    <div class="reco reveal">
+      <h3>🎯 Мой выбор под задачу «прицепить к MacBook в Рио»</h3>
+      <p class="rlead">Оптимальный баланс «работает сразу / быстро приедет / не переплата». Всё — Amazon.com.br с доставкой в Рио.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="n">Шаг 1 · диск</div>
+          <h4>Samsung T7 Shield 1 ТБ</h4>
+          <p>Прочный, защищённый, именно под него сделаны зажимы. Есть SanDisk Extreme дешевле, если бюджет в приоритете.</p>
+          <div class="sp tnum">R$ 1.731,00</div>
+        </div>
+        <div class="step">
+          <div class="n">Шаг 2 · крепление</div>
+          <h4>POWRIG магнитный зажим</h4>
+          <p>Точно под ширину T7, быстросъёмный, Enviado por Amazon. Диск на виду, снимается одним движением.</p>
+          <div class="sp tnum">R$ 181,73</div>
+        </div>
+        <div class="step">
+          <div class="n">Шаг 3 · страховка</div>
+          <h4>Kit пластин 3M</h4>
+          <p>Чтобы магнит держался на алюминии наверняка — клеим стальную пластину на крышку. Копеечная, но решает всё.</p>
+          <div class="sp tnum">R$ 28,00</div>
+        </div>
+      </div>
+      <div class="total">
+        <span class="lab">Полный комплект «диск + крепление» под ключ</span>
+        <span class="val tnum">≈ R$ 1.941 <small>· или без диска — R$ 210</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <div class="wrap">
+    <p class="disc">
+      Цены и наличие проверены <b>5 августа 2026</b> на <a href="https://www.amazon.com.br" target="_blank" rel="noopener">Amazon.com.br</a> и <a href="https://www.kabum.com.br" target="_blank" rel="noopener">Kabum</a> и со временем меняются — сверяйтесь на странице товара перед покупкой. «Enviado por Amazon» = доставка логистикой Amazon (в Рио обычно 1–4 дня). Цены Mercado Livre и импортных позиций (DeltaHub, ScreenMount, Tekmomo) не фиксировались — это ориентир. Ключевой факт про алюминий и MagSafe подтверждён источниками Apple и производителей креплений.
+    </p>
+    <p style="font-size:13px">Собрано для Рио-де-Жанейро · MacBook + внешний SSD 🇧🇷</p>
+  </div>
+</footer>
+
+<script type="module">
+  import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduce) {
+    // одиночные reveal-блоки
+    inView(".reveal:not(.grid .reveal):not(.recipes .reveal):not(.warn-grid .reveal):not(.steps .reveal):not(.meta-row.reveal)",
+      (el) => { animate(el, { opacity: [0, 1], transform: ["translateY(24px)", "translateY(0px)"] }, { duration: .6, easing: [.2,.7,.3,1] }); },
+      { amount: .18 });
+
+    // сетки карточек — со stagger
+    document.querySelectorAll(".grid, .recipes, .warn-grid, .steps, .meta-row").forEach((group) => {
+      const items = group.querySelectorAll(".reveal, .chip");
+      if (!items.length) return;
+      inView(group, () => {
+        animate(items, { opacity: [0, 1], transform: ["translateY(22px)", "translateY(0px)"] },
+          { duration: .55, delay: stagger(.06), easing: [.2,.7,.3,1] });
+      }, { amount: .12 });
+    });
+  } else {
+    document.querySelectorAll(".reveal").forEach(e => { e.style.opacity = 1; e.style.transform = "none"; });
+  }
+
+  // страховка: что бы ни случилось — через 2.5с всё видно
+  setTimeout(() => {
+    document.querySelectorAll(".reveal").forEach(e => { e.style.opacity = 1; e.style.transform = "none"; });
+  }, 2500);
+</script>
+
+</body>
+</html>
