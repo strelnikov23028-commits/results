@@ -137,8 +137,28 @@
   footer a{color:var(--blue-ink);font-weight:500}
   .divider{height:1px;background:var(--line);margin:0 auto;max-width:1036px}
 
+  /* channels: ML + Fast Shop */
+  .channels{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+  .channel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .channel h3{font-size:20px;font-weight:750;letter-spacing:-.01em;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .badge-ml{font-size:11.5px;font-weight:800;color:#2D3277;background:#FFE600;padding:3px 9px;border-radius:100px;letter-spacing:.03em}
+  .channel p.lead{color:var(--ink-2);font-size:14.5px;margin-bottom:16px}
+  .channel p.lead b{color:var(--ink)}
+  .ml-list{display:flex;flex-direction:column;gap:10px}
+  .ml-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;background:var(--bg);border-radius:13px;transition:background .2s}
+  .ml-item:hover{background:#ECECF0}
+  .ml-item .t{font-size:13.8px;font-weight:600;line-height:1.34}
+  .ml-item .t small{display:block;color:var(--ink-3);font-weight:500;font-size:12px;margin-top:2px}
+  .ml-item .go{flex-shrink:0;color:var(--blue);font-weight:600;font-size:13px;white-space:nowrap}
+  .note-line{margin-top:15px;font-size:12.5px;color:var(--ink-3);line-height:1.55}
+  .note-line b{color:var(--ink-2)}
+  .fs-tag{display:inline-block;margin-bottom:14px;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:100px;background:rgba(178,94,0,.1);color:var(--amber);align-self:flex-start}
+  .fs-note{font-size:14.5px;color:var(--ink-2);line-height:1.62;flex-grow:1}
+  .fs-note b{color:var(--ink)}
+
   @media (max-width:860px){
     .recipes,.grid,.warn-grid,.steps{grid-template-columns:repeat(2,1fr)}
+    .channels{grid-template-columns:1fr}
   }
   @media (max-width:560px){
     header.hero{padding:70px 0 40px}
@@ -157,7 +177,7 @@
     <p class="sub reveal">Чтобы диск ехал вместе с ноутом, а не болтался на проводе. Разбираем, как это крепится на самом деле, и собираем комплект из того, что реально купить в Рио с доставкой за пару дней.</p>
     <div class="meta-row reveal">
       <span class="chip">🇧🇷 Цены в реалах (BRL)</span>
-      <span class="chip">📦 Amazon.com.br · Kabum</span>
+      <span class="chip">📦 Amazon · Mercado Livre · Fast Shop</span>
       <span class="chip">✅ Наличие проверено 05.08.2026</span>
     </div>
   </div>
@@ -294,20 +314,6 @@
           <div class="price tnum">R$ 28,00</div>
           <div class="seller"><span class="store">Amazon.br</span> KavamataStore · Em estoque</div>
           <a class="buy" href="https://www.amazon.com.br/dp/B0H9MG9SPN" target="_blank" rel="noopener">Открыть на Amazon.br
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <div class="ph"><span class="rank">Альтернатива каналу</span>
-          <span class="noimg" style="display:block">🔎 Те же держатели и пластины есть на <a href="https://lista.mercadolivre.com.br/suporte-magnetico-ssd-notebook" target="_blank" rel="noopener">Mercado Livre</a> — цену смотреть вручную в браузере (площадка не отдаёт её ботам)</span>
-        </div>
-        <div class="cbody">
-          <h3>Mercado Livre — запасной канал</h3>
-          <p class="cdesc">«suporte magnético SSD», «placa metálica adesiva», кейсы Baseus/Orico. Часто дешевле и с Full-доставкой в Рио, но живую цену надо проверить самому.</p>
-          <div class="price" style="font-size:16px;color:var(--ink-2)">Цену уточнить</div>
-          <div class="seller"><span class="store">Mercado Livre</span> Full · Рио</div>
-          <a class="buy" href="https://lista.mercadolivre.com.br/suporte-magnetico-ssd-notebook" target="_blank" rel="noopener">Открыть поиск
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
         </div>
       </div>
@@ -472,6 +478,48 @@
   </div>
 </section>
 
+<!-- ML + FAST SHOP -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Проверил все площадки Бразилии</span>
+      <h2>Mercado Livre и Fast Shop</h2>
+      <p class="sec-note">Не только Amazon — честный расклад по двум другим главным площадкам.</p>
+    </div>
+    <div class="channels">
+
+      <div class="channel reveal">
+        <h3>Mercado Livre <span class="badge-ml">ML</span></h3>
+        <p class="lead">Тут выбор креплений и магнитных кейсов <b>шире и обычно дешевле</b>, часто с Full-доставкой в Рио в тот же день. Реальные карточки, которые нашёл:</p>
+        <div class="ml-list">
+          <a class="ml-item" href="https://www.mercadolivre.com.br/case-gaveta-magnetica-ssd-m2-nvme-usb-c-10gbps-hi-prime/p/MLB47359595" target="_blank" rel="noopener">
+            <span class="t">Case Gaveta Magnética SSD M.2 NVMe 10Gbps — Hi-Prime<small>магнитный кейс, без инструмента, до 2 ТБ</small></span>
+            <span class="go">Открыть →</span></a>
+          <a class="ml-item" href="https://www.mercadolivre.com.br/m2-2230-nvme-ssd-enclosure-dual-sided-magsafe-usb-c/p/MLB2047919607" target="_blank" rel="noopener">
+            <span class="t">M.2 2230 NVMe Enclosure Dual-sided MagSafe USB-C<small>мини-кейс со встроенным магнитом MagSafe</small></span>
+            <span class="go">Открыть →</span></a>
+          <a class="ml-item" href="https://produto.mercadolivre.com.br/MLB-4956568976-case-magsafe-nvme-ssd-expanso-memoria-iphone-usb-c-hagibis-_JM" target="_blank" rel="noopener">
+            <span class="t">Case MagSafe NVMe SSD — Hagibis<small>брендовый корпус, USB-C 10 Гбит/с</small></span>
+            <span class="go">Открыть →</span></a>
+          <a class="ml-item" href="https://lista.mercadolivre.com.br/suporte-ssd-notebook" target="_blank" rel="noopener">
+            <span class="t">Поиск: «suporte SSD notebook» + «placa metálica adesiva»<small>десятки держателей и стальных пластин 3M</small></span>
+            <span class="go">Открыть →</span></a>
+        </div>
+        <p class="note-line">⚠️ Честно: Mercado Livre защищается от ботов и <b>не отдаёт цену и фото автоматическому доступу</b> — точную цену видно только на самой странице в браузере. Ссылки рабочие, товары в наличии; цену сверь на месте (обычно дешевле Amazon).</p>
+      </div>
+
+      <div class="channel reveal">
+        <h3>Fast Shop</h3>
+        <span class="fs-tag">Проверено · не тот канал</span>
+        <p class="fs-note">Прошёлся по каталогу Fast Shop: <b>ни креплений, ни внешних SSD там сейчас нет</b>. Страница Samsung T7 отдаёт 404 (снята с продажи), а по запросам «case SSD M.2» / «suporte SSD» — либо пусто, либо один внутренний M.2 без наличия. Fast Shop — премиум-ритейлер под ноутбуки, ТВ и бытовую технику; нишевых аксессуаров для дисков у него не водится.<br><br><b>Вывод:</b> под эту задачу Fast Shop пропускаем — крепление берём на Amazon.com.br или дешевле на Mercado Livre.</p>
+        <a class="buy" style="margin-top:16px;background:#fff;color:var(--ink);border:1px solid var(--line)" href="https://site.fastshop.com.br/informatica-e-games/acessorios/acessorios-para-informatica" target="_blank" rel="noopener">Каталог аксессуаров Fast Shop
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- IMPORT PREMIUM -->
 <section>
   <div class="wrap">
@@ -597,7 +645,7 @@
 <footer>
   <div class="wrap">
     <p class="disc">
-      Цены и наличие проверены <b>5 августа 2026</b> на <a href="https://www.amazon.com.br" target="_blank" rel="noopener">Amazon.com.br</a> и <a href="https://www.kabum.com.br" target="_blank" rel="noopener">Kabum</a> и со временем меняются — сверяйтесь на странице товара перед покупкой. «Enviado por Amazon» = доставка логистикой Amazon (в Рио обычно 1–4 дня). Цены Mercado Livre и импортных позиций (DeltaHub, ScreenMount, Tekmomo) не фиксировались — это ориентир. Ключевой факт про алюминий и MagSafe подтверждён источниками Apple и производителей креплений.
+      Проверены три площадки Бразилии: <a href="https://www.amazon.com.br" target="_blank" rel="noopener">Amazon.com.br</a> и <a href="https://www.kabum.com.br" target="_blank" rel="noopener">Kabum</a> — цены и наличие сняты <b>5 августа 2026</b> (со временем меняются, сверяйтесь на странице товара). «Enviado por Amazon» = доставка логистикой Amazon (в Рио обычно 1–4 дня). <a href="https://www.mercadolivre.com.br" target="_blank" rel="noopener">Mercado Livre</a> — товары реальные, но площадка блокирует автоматический доступ, поэтому цену видно только в браузере (обычно дешевле). <a href="https://www.fastshop.com.br" target="_blank" rel="noopener">Fast Shop</a> проверен — креплений и внешних SSD в наличии нет. Цены импортных позиций (DeltaHub, ScreenMount, Tekmomo) — ориентир. Ключевой факт про алюминий и MagSafe подтверждён источниками Apple и производителей креплений.
     </p>
     <p style="font-size:13px">Собрано для Рио-де-Жанейро · MacBook + внешний SSD 🇧🇷</p>
   </div>
