@@ -120,6 +120,27 @@
   .buy:hover{background:var(--blue-press);text-decoration:none}
   .buy svg{width:16px;height:16px}
 
+  /* ——— мультиплощадка: где купить ——— */
+  .buys{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+  .shopline{
+    display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:13px;
+    font-size:14.5px;font-weight:600;border:1px solid var(--line);transition:.18s ease;
+  }
+  .shopline .nm{display:flex;align-items:center;gap:8px}
+  .shopline .val{margin-left:auto;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:7px}
+  .shopline .val svg{width:15px;height:15px;opacity:.85}
+  .shopline.amz{background:var(--blue);border-color:var(--blue);color:#fff}
+  .shopline.amz:hover{background:var(--blue-press);text-decoration:none}
+  .shopline.amz .old{font-size:12.5px;font-weight:600;opacity:.7;text-decoration:line-through;margin-right:2px}
+  .shopline.ml{background:#FFFDF3;border-color:#F2E6B8;color:#5C4A12}
+  .shopline.ml:hover{background:#FFF8DF;text-decoration:none}
+  .shopline.fs{background:#F4F6FF;border-color:#D9E1FF;color:#2B3A8C}
+  .shopline.fs:hover{background:#ECF0FF;text-decoration:none}
+  .frete{font-size:11px;font-weight:700;letter-spacing:.01em;background:rgba(52,199,89,.16);color:#1E7B3C;padding:3px 7px;border-radius:6px;text-transform:none}
+  .buys .hint{font-size:12px;color:var(--ink-3);text-align:center;margin-top:1px}
+
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+
   /* ——— store list ——— */
   .stores{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   .store{
@@ -164,7 +185,7 @@
 
   @media(max-width:760px){
     .choose{grid-template-columns:1fr}
-    .grid{grid-template-columns:1fr}
+    .grid,.grid-3{grid-template-columns:1fr}
     .stores{grid-template-columns:1fr}
     .deliv{grid-template-columns:1fr}
     header.hero{padding:64px 0 40px}
@@ -181,7 +202,7 @@
 
   <div class="tldr reveal">
     <h2>Короткий вывод</h2>
-    <p>Хочешь просто и сейчас — иди в <strong>Kalunga</strong> или <strong>Fast Shop</strong> прямо в BarraShopping, репитеры лежат на полке. Оптимальная модель по цене/качеству — <strong>TP-Link RE305</strong> (dual-band, ~R$210). Совсем бюджетно — <strong>TL-WA850RE</strong> (~R$135). Готов подождать пару часов — закажи с <strong>Amazon Prime</strong> или <strong>Mercado Livre Full</strong> с доставкой в тот же день.</p>
+    <p>Забрать сегодня в зале BarraShopping: в <strong>Fast Shop</strong> есть репитер <strong>Xiaomi Mi Range Extender Pro</strong> всего за ~R$90, в <strong>Kalunga</strong> — выбор TP-Link и Intelbras. Лучшая по цене/качеству модель — <strong>TP-Link RE305</strong> (dual-band, ~R$210 на Amazon). Готов подождать пару часов — <strong>Amazon Prime</strong> или <strong>Mercado Livre Full</strong> привезут в тот же день, причём на <strong>Mercado Livre</strong> часто дешевле — сравни перед покупкой.</p>
   </div>
 
   <!-- ——— КАК ВЫБРАТЬ ——— -->
@@ -243,12 +264,16 @@
           <span class="chip">в розетку</span>
         </div>
         <p class="note">Самый простой способ добить сигнал. Кнопка WPS — настройка за минуту, без приложений.</p>
-        <div class="price-row">
-          <span class="price">R$&nbsp;135<small>,03</small></span>
-          <span class="price-src">Amazon.com.br</span>
+        <div class="buys">
+          <a class="shopline amz" href="https://www.amazon.com.br/dp/B00E98O7GC" target="_blank" rel="noopener">
+            <span class="nm">Amazon</span>
+            <span class="val">R$&nbsp;135,03 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+          <a class="shopline ml" href="https://lista.mercadolivre.com.br/tp-link-tl-wa850re" target="_blank" rel="noopener">
+            <span class="nm">Mercado Livre</span>
+            <span class="val muted">сравнить&nbsp;→</span>
+          </a>
         </div>
-        <a class="buy" href="https://www.amazon.com.br/dp/B00E98O7GC" target="_blank" rel="noopener">Открыть на Amazon
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
       </div>
     </article>
 
@@ -268,12 +293,16 @@
           <span class="chip">в розетку</span>
         </div>
         <p class="note">Национальный бренд, местная поддержка. Бесшовная mesh-сеть, а не вторая точка. Управление через приложение.</p>
-        <div class="price-row">
-          <span class="price">R$&nbsp;189<small>,90</small></span>
-          <span class="price-src">Amazon.com.br</span>
+        <div class="buys">
+          <a class="shopline amz" href="https://www.amazon.com.br/dp/B0BW17HFDP" target="_blank" rel="noopener">
+            <span class="nm">Amazon</span>
+            <span class="val">R$&nbsp;189,90 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+          <a class="shopline ml" href="https://lista.mercadolivre.com.br/intelbras-twibi-force-plug" target="_blank" rel="noopener">
+            <span class="nm">Mercado Livre</span>
+            <span class="val muted">сравнить&nbsp;→</span>
+          </a>
         </div>
-        <a class="buy" href="https://www.amazon.com.br/dp/B0BW17HFDP" target="_blank" rel="noopener">Открыть на Amazon
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
       </div>
     </article>
 
@@ -294,12 +323,16 @@
           <span class="chip">OneMesh</span>
         </div>
         <p class="note">Лучший баланс цены и качества. 5 ГГц держит скорость для стриминга, OneMesh даёт единое имя сети с совместимым роутером TP-Link.</p>
-        <div class="price-row">
-          <span class="price">R$&nbsp;209<small>,90</small></span>
-          <span class="price-src">Amazon.com.br</span>
+        <div class="buys">
+          <a class="shopline amz" href="https://www.amazon.com.br/dp/B075KFFSMR" target="_blank" rel="noopener">
+            <span class="nm">Amazon</span>
+            <span class="val">R$&nbsp;209,90 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+          <a class="shopline ml" href="https://lista.mercadolivre.com.br/tp-link-re305" target="_blank" rel="noopener">
+            <span class="nm">Mercado Livre <em class="frete">frete grátis</em></span>
+            <span class="val muted">сравнить&nbsp;→</span>
+          </a>
         </div>
-        <a class="buy" href="https://www.amazon.com.br/dp/B075KFFSMR" target="_blank" rel="noopener">Открыть на Amazon
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
       </div>
     </article>
 
@@ -320,12 +353,16 @@
           <span class="chip">3 антенны</span>
         </div>
         <p class="note">Три внешние антенны и гигабитный порт — берёт большую площадь и толстые стены. Для просторной квартиры или если репитер один на всё.</p>
-        <div class="price-row">
-          <span class="price">R$&nbsp;364<small>,90</small></span>
-          <span class="price-src">Amazon.com.br</span>
+        <div class="buys">
+          <a class="shopline amz" href="https://www.amazon.com.br/dp/B07BB4BY7Z" target="_blank" rel="noopener">
+            <span class="nm">Amazon</span>
+            <span class="val">R$&nbsp;364,90 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+          <a class="shopline ml" href="https://lista.mercadolivre.com.br/tp-link-re450" target="_blank" rel="noopener">
+            <span class="nm">Mercado Livre <em class="frete">frete grátis</em></span>
+            <span class="val muted">сравнить&nbsp;→</span>
+          </a>
         </div>
-        <a class="buy" href="https://www.amazon.com.br/dp/B07BB4BY7Z" target="_blank" rel="noopener">Открыть на Amazon
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
       </div>
     </article>
 
@@ -346,19 +383,106 @@
           <span class="chip">OneMesh</span>
         </div>
         <p class="note">Запас на будущее: Wi-Fi 6 лучше работает, когда к сети подключено много устройств. Имеет смысл, если роутер тоже Wi-Fi 6.</p>
-        <div class="price-row">
-          <span class="price">R$&nbsp;648<small>,00</small></span>
-          <span class="price-src">Amazon.com.br</span>
+        <div class="buys">
+          <a class="shopline amz" href="https://www.amazon.com.br/dp/B08GDBXVMS" target="_blank" rel="noopener">
+            <span class="nm">Amazon</span>
+            <span class="val">R$&nbsp;648,00 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+          <a class="shopline ml" href="https://lista.mercadolivre.com.br/tp-link-re605x" target="_blank" rel="noopener">
+            <span class="nm">Mercado Livre <em class="frete">frete grátis</em></span>
+            <span class="val muted">сравнить&nbsp;→</span>
+          </a>
         </div>
-        <a class="buy" href="https://www.amazon.com.br/dp/B08GDBXVMS" target="_blank" rel="noopener">Открыть на Amazon
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
       </div>
     </article>
 
   </div>
 
   <div class="disc reveal">
-    <b>Про цены.</b> Суммы выше — с Amazon.com.br, зафиксированы 5 августа 2026 и могут меняться. В магазинах BarraShopping/Via Parque цену и точное наличие модели уточняй на месте или по телефону — в этой сессии их подтвердить автоматически не удалось (сайты блокируют доступ). Модель <b>TP-Link RE315</b> сейчас на Amazon перекуплена сторонним продавцом за ~R$520 (обычно ~R$180–230) — при равных деньгах RE305 выгоднее.
+    <b>Про цены и площадки.</b> Цены на 5 моделей выше — с <a href="https://www.amazon.com.br/" target="_blank" rel="noopener">Amazon.com.br</a>, зафиксированы 5 августа 2026. Кнопка <b>Mercado Livre</b> ведёт на поиск по модели: живую цену ML автоматически снять не получилось (жёсткая антибот-стена), но под своим логином ты увидишь цену и значок <b>FULL/«chegará amanhã»</b> — по RE305/RE450/RE605X там подтверждён frete grátis, часто дешевле Amazon. Модель <b>TP-Link RE315</b> на Amazon сейчас перекуплена за ~R$520 (обычно ~R$180–230) — при равных деньгах RE305 выгоднее. Ни одной из этих пяти моделей <b>Fast Shop не возит</b> — что у них реально есть для самовывоза, смотри ниже.
+  </div>
+
+  <!-- ——— FAST SHOP ——— -->
+  <div class="sec reveal">
+    <span class="eyebrow">Fast Shop · забрать в зале BarraShopping</span>
+    <h2>Что реально есть в Fast Shop</h2>
+    <p class="lead">Проверено в каталоге <a href="https://site.fastshop.com.br/" target="_blank" rel="noopener">Fast Shop</a> (в наличии, 5 августа 2026). TP-Link RE у них нет, но есть настоящий репитер Xiaomi за ~R$90 и mesh-системы — всё можно забрать в BarraShopping сегодня.</p>
+  </div>
+
+  <div class="grid grid-3">
+
+    <article class="card reveal">
+      <div class="ph">
+        <span class="badge b-budget">Дешевле всех</span>
+        <img src="https://fastshopbr.vtexassets.com/arquivos/ids/5313391/17800806464512.jpg?v=639203481935400000" alt="Xiaomi Mi Range Extender Pro — репитер WiFi" loading="lazy" width="180" height="180">
+      </div>
+      <div class="body">
+        <span class="brand"><a href="https://www.mi.com/br/" target="_blank" rel="noopener">Xiaomi</a></span>
+        <h3>Mi Range Extender Pro</h3>
+        <div class="chips">
+          <span class="chip">репитер</span>
+          <span class="chip">2.4 ГГц</span>
+          <span class="chip">300 Mbps</span>
+          <span class="chip">в розетку</span>
+        </div>
+        <p class="note">Самый дешёвый способ добить сигнал — и его можно забрать в зале сегодня. Единственный настоящий репитер в наличии у Fast Shop.</p>
+        <div class="buys">
+          <a class="shopline fs" href="https://site.fastshop.com.br/repetidor-wifi-mi-range-extender-pro-xiaomi-preto-182091-192288/p" target="_blank" rel="noopener">
+            <span class="nm">Fast Shop</span>
+            <span class="val"><span class="old">R$&nbsp;99,70</span> R$&nbsp;89,73 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal">
+      <div class="ph">
+        <span class="badge b-mesh">Mesh · Wi-Fi 6</span>
+        <img src="https://fastshopbr.vteximg.com.br/arquivos/ids/5109798/0_0_675b4340447c42f8bd09f713.jpg?v=639180062945500000" alt="Intelbras Twibi Force AX 1500 — mesh Wi-Fi 6" loading="lazy" width="180" height="180">
+      </div>
+      <div class="body">
+        <span class="brand"><a href="https://www.intelbras.com/pt-br/" target="_blank" rel="noopener">Intelbras</a></span>
+        <h3>Twibi Force AX 1500</h3>
+        <div class="chips">
+          <span class="chip">Wi-Fi 6</span>
+          <span class="chip">dual-band</span>
+          <span class="chip">до 280 м²</span>
+          <span class="chip">1-pack, mesh</span>
+        </div>
+        <p class="note">Одна mesh-нода вместо репитера — единая бесшовная сеть. Докупаешь ещё узел, если площади не хватит. Национальный бренд.</p>
+        <div class="buys">
+          <a class="shopline fs" href="https://site.fastshop.com.br/roteador-mesh-twibi-force-ax-1500-intelbras-wi-fi-6--suporta-ate-600mb--cobertura-ate-280m%C2%B2--128-dispositivos--1-pack-is4750129bco_prd/p" target="_blank" rel="noopener">
+            <span class="nm">Fast Shop</span>
+            <span class="val"><span class="old">R$&nbsp;609</span> R$&nbsp;467,02 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal">
+      <div class="ph">
+        <span class="badge b-big">Для дома</span>
+        <img src="https://fastshopbr.vteximg.com.br/arquivos/ids/5109828/0_0_675b44da447c42f8bd0a17ef.jpg?v=639180064154900000" alt="TP-Link Deco S7 — mesh-система AC1900, 2 узла" loading="lazy" width="180" height="180">
+      </div>
+      <div class="body">
+        <span class="brand"><a href="https://www.tp-link.com/br/" target="_blank" rel="noopener">TP-Link</a></span>
+        <h3>Deco S7 · 2 узла</h3>
+        <div class="chips">
+          <span class="chip">Wi-Fi 5 · AC1900</span>
+          <span class="chip">dual-band</span>
+          <span class="chip">до 360 м²</span>
+          <span class="chip">mesh-комплект</span>
+        </div>
+        <p class="note">Полноценная замена сети для большой квартиры/дома: два узла покрывают до 360 м² без мёртвых зон. Дороже, но это уже не костыль.</p>
+        <div class="buys">
+          <a class="shopline fs" href="https://site.fastshop.com.br/roteador-mesh-wi-fi-5-gigabit-dual-band-ac1900-tplink-deco-s7-2-pack--ate-360m%C2%B2--ate-1900-mbps--ate-100-dispositivos-ytdecos72bco_prd/p" target="_blank" rel="noopener">
+            <span class="nm">Fast Shop</span>
+            <span class="val"><span class="old">R$&nbsp;1.059</span> R$&nbsp;818,09 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </article>
+
   </div>
 
   <!-- ——— ГДЕ КУПИТЬ ——— -->
@@ -391,7 +515,7 @@
         <dt>Адрес</dt><dd>Av. das Américas, 4666</dd>
         <dt>Тел.</dt><dd>+55 21 2138-6200</dd>
       </dl>
-      <span class="instock">Электроника и сети — репитеры/mesh в ассортименте</span>
+      <span class="instock">В наличии: Xiaomi-репитер ~R$90, mesh Twibi/Deco (см. выше)</span>
     </div>
 
     <div class="store reveal">
@@ -455,7 +579,7 @@
   </div>
 
   <footer>
-    <div>Цены на усилители — <a href="https://www.amazon.com.br/" target="_blank" rel="noopener">Amazon.com.br</a>, проверены 5 августа 2026. Магазины — по данным <a href="https://www.barrashopping.com.br/" target="_blank" rel="noopener">BarraShopping</a> и каталогов Via Parque.</div>
+    <div>Цены проверены 5 августа 2026: 5 моделей — <a href="https://www.amazon.com.br/" target="_blank" rel="noopener">Amazon.com.br</a>, блок Fast Shop — каталог <a href="https://site.fastshop.com.br/" target="_blank" rel="noopener">Fast Shop</a> (в наличии). Кнопки <a href="https://www.mercadolivre.com.br/" target="_blank" rel="noopener">Mercado Livre</a> — поиск по модели (цену смотри под своим логином). Магазины — по данным <a href="https://www.barrashopping.com.br/" target="_blank" rel="noopener">BarraShopping</a> и каталогов Via Parque.</div>
     <div style="margin-top:6px">Наличие и цены могут меняться — уточняй перед поездкой. Собрано для квартиры в Barra da Tijuca, Rio de Janeiro.</div>
   </footer>
 
