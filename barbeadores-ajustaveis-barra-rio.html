@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бритвы с регулируемым триммером — купить в Рио (Barra)</title>
+<meta name="description" content="Подборка электробритв и триммеров с регулируемой длиной среза: доставка за сутки в Barra da Tijuca и где забрать сегодня рядом с Barra Shopping. Реальные фото, цены, ссылки на Amazon и Mercado Livre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7;
+    --surface:#FFFFFF;
+    --ink:#1D1D1F;
+    --ink-2:#6E6E73;
+    --ink-3:#86868B;
+    --line:#E8E8ED;
+    --blue:#0071E3;
+    --blue-ink:#0058B9;
+    --green:#1DA25A;
+    --green-bg:#E7F7EE;
+    --amber:#B25E00;
+    --amber-bg:#FFF3E0;
+    --ml:#2D3277;
+    --ml-yellow:#FFE600;
+    --radius:22px;
+    --radius-sm:14px;
+    --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 30px rgba(0,0,0,.06);
+    --shadow-hover:0 4px 10px rgba(0,0,0,.06),0 18px 50px rgba(0,0,0,.10);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  /* Reveal — контент виден по умолчанию, прячем только когда motion готов */
+  .reveal{opacity:1;transform:none}
+  html.motion-ready .reveal{opacity:0;transform:translateY(22px)}
+  @media (prefers-reduced-motion:reduce){
+    html.motion-ready .reveal{opacity:1 !important;transform:none !important}
+  }
+
+  /* HERO */
+  header.hero{padding:76px 0 34px;text-align:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--surface);border:1px solid var(--line);
+    color:var(--ink-2);font-weight:600;font-size:13px;
+    padding:7px 14px;border-radius:999px;box-shadow:var(--shadow);
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px var(--green-bg)}
+  h1{
+    font-size:clamp(30px,5.4vw,52px);line-height:1.06;letter-spacing:-.02em;
+    font-weight:800;margin:0 auto 18px;max-width:16ch;
+  }
+  .lede{font-size:clamp(16px,2.2vw,20px);color:var(--ink-2);max-width:52ch;margin:0 auto 30px}
+  .lede b{color:var(--ink);font-weight:600}
+
+  .pillars{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
+  .pillar{
+    display:flex;align-items:center;gap:12px;text-align:left;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:13px 17px;box-shadow:var(--shadow);min-width:230px;
+  }
+  .pillar .ic{
+    width:38px;height:38px;flex:0 0 38px;border-radius:11px;display:grid;place-items:center;
+    background:#EAF3FF;color:var(--blue);
+  }
+  .pillar .ic.g{background:var(--green-bg);color:var(--green)}
+  .pillar .ic.a{background:var(--amber-bg);color:var(--amber)}
+  .pillar b{display:block;font-size:14px;font-weight:700;line-height:1.2}
+  .pillar span{font-size:12.5px;color:var(--ink-3)}
+
+  /* SECTION */
+  section{padding:38px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+  .sec-head .tt{max-width:44ch}
+  h2{font-size:clamp(23px,3.4vw,34px);letter-spacing:-.02em;font-weight:800;margin:0 0 8px;display:flex;align-items:center;gap:11px}
+  h2 .badge{font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;letter-spacing:.01em}
+  .badge.now{background:var(--green-bg);color:#0E7A3E}
+  .badge.local{background:#EAF3FF;color:var(--blue-ink)}
+  .badge.more{background:#F0EFF5;color:#5B5B78}
+  .sec-sub{color:var(--ink-2);font-size:15.5px;margin:0;max-width:60ch}
+
+  /* GRID CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s;
+    position:relative;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .card.feat{border-color:#C9E2FF;box-shadow:0 0 0 1px #C9E2FF,var(--shadow)}
+  .ribbon{
+    position:absolute;top:14px;left:14px;z-index:2;
+    background:rgba(29,162,90,.96);color:#fff;font-size:11.5px;font-weight:700;
+    padding:6px 11px;border-radius:999px;letter-spacing:.01em;backdrop-filter:blur(4px);
+    display:inline-flex;align-items:center;gap:5px;
+  }
+  .ribbon.blue{background:rgba(0,113,227,.96)}
+  .ribbon.amber{background:rgba(178,94,0,.96)}
+  .ph{
+    background:linear-gradient(180deg,#FBFBFD,#F1F1F4);
+    padding:26px;aspect-ratio:1/.82;display:grid;place-items:center;
+  }
+  .ph img{width:auto;height:100%;max-height:200px;object-fit:contain;mix-blend-mode:multiply}
+  .body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+  .brandrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
+  .brand{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  .tag{font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:#EAF3FF;color:var(--blue-ink);white-space:nowrap}
+  .tag.amber{background:var(--amber-bg);color:var(--amber)}
+  .tag.green{background:var(--green-bg);color:#0E7A3E}
+  .name{font-size:18px;font-weight:700;letter-spacing:-.01em;margin:0 0 4px;line-height:1.25}
+  .model{font-size:12.5px;color:var(--ink-3);margin:0 0 12px}
+  .adj{
+    display:flex;align-items:flex-start;gap:9px;background:#F7F7FA;border:1px solid var(--line);
+    border-radius:12px;padding:10px 12px;margin-bottom:12px;
+  }
+  .adj svg{flex:0 0 18px;margin-top:2px;color:var(--blue)}
+  .adj b{font-weight:700}
+  .adj span{font-size:13px;color:var(--ink-2);line-height:1.45}
+  .specs{list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:7px}
+  .specs li{font-size:13.5px;color:var(--ink-2);display:flex;gap:9px;align-items:flex-start;line-height:1.4}
+  .specs li svg{flex:0 0 15px;margin-top:3px;color:var(--green)}
+  .who{font-size:13px;color:var(--ink-3);font-style:italic;margin:0 0 16px}
+  .pricerow{display:flex;align-items:baseline;gap:10px;margin:auto 0 15px;flex-wrap:wrap}
+  .price{font-size:25px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .price small{font-size:14px;font-weight:600;color:var(--ink-2)}
+  .old{font-size:15px;color:var(--ink-3);text-decoration:line-through;font-variant-numeric:tabular-nums}
+  .off{font-size:12px;font-weight:700;color:#0E7A3E;background:var(--green-bg);padding:3px 8px;border-radius:7px}
+  .price-note{font-size:12.5px;color:var(--ink-3);margin:auto 0 14px}
+  .btns{display:flex;flex-direction:column;gap:9px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    padding:12px 16px;border-radius:12px;font-weight:600;font-size:14.5px;
+    text-decoration:none;transition:filter .2s,transform .12s,background .2s;cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn.amazon{background:#0F1111;color:#fff}
+  .btn.amazon:hover{filter:brightness(1.35)}
+  .btn.amazon .k{color:#FF9900;font-weight:800}
+  .btn.ml{background:var(--ml-yellow);color:#2D3277}
+  .btn.ml:hover{filter:brightness(.97)}
+  .btn.blue{background:var(--blue);color:#fff}
+  .btn.blue:hover{filter:brightness(1.08)}
+  .btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:#C9C9CE;background:#FAFAFB}
+  .btn svg{flex:0 0 16px}
+
+  /* ML extra listings inside a card */
+  .ml-list{margin-top:14px;border-top:1px dashed var(--line);padding-top:13px}
+  .ml-list .h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:9px;display:flex;align-items:center;gap:7px}
+  .ml-list a{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;
+    padding:8px 10px;border-radius:9px;font-size:13px;color:var(--ink);transition:background .18s;
+  }
+  .ml-list a:hover{background:#FAFAF6}
+  .ml-list a .p{font-weight:700;font-variant-numeric:tabular-nums;color:#0E7A3E;white-space:nowrap}
+  .ml-list a .p.unk{color:var(--ink-3);font-weight:600}
+
+  /* LOCATIONS */
+  .loc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+  .loc{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;box-shadow:var(--shadow);transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s;
+    display:flex;flex-direction:column;
+  }
+  .loc:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .loc.hi{border-color:#C9E2FF;box-shadow:0 0 0 1px #C9E2FF,var(--shadow)}
+  .loc .top{display:flex;align-items:center;gap:13px;margin-bottom:13px}
+  .loc .logo{
+    width:46px;height:46px;flex:0 0 46px;border-radius:13px;display:grid;place-items:center;
+    font-weight:800;font-size:15px;color:#fff;letter-spacing:-.02em;
+  }
+  .loc h3{font-size:17px;font-weight:700;margin:0;line-height:1.2}
+  .loc .mall{font-size:12.5px;color:var(--ink-3)}
+  .loc .desc{font-size:13.5px;color:var(--ink-2);margin:0 0 14px;line-height:1.5}
+  .loc .meta{list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:8px}
+  .loc .meta li{font-size:13px;color:var(--ink-2);display:flex;gap:9px;align-items:flex-start}
+  .loc .meta li svg{flex:0 0 15px;margin-top:3px;color:var(--ink-3)}
+  .loc .foot{margin-top:auto;display:flex;flex-wrap:wrap;gap:9px}
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+    padding:6px 11px;border-radius:999px;background:#F2F2F5;color:var(--ink-2);text-decoration:none;
+    transition:background .18s;
+  }
+  .chip:hover{background:#E9E9EF}
+  .chip.map{background:#EAF3FF;color:var(--blue-ink)}
+
+  /* GUIDE */
+  .guide{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,4vw,38px);box-shadow:var(--shadow)}
+  .gtable{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:8px}
+  .gcol{background:#F7F7FA;border:1px solid var(--line);border-radius:16px;padding:18px}
+  .gcol h4{margin:0 0 6px;font-size:15.5px;font-weight:700;display:flex;align-items:center;gap:9px}
+  .gcol h4 .d{width:9px;height:9px;border-radius:50%}
+  .gcol p{margin:0 0 10px;font-size:13.5px;color:var(--ink-2)}
+  .gcol .ex{font-size:12.5px;color:var(--ink-3)}
+  .gcol .ex b{color:var(--ink);font-weight:600}
+  .ruler{margin-top:26px}
+  .ruler .lab{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-3);margin-bottom:7px;font-variant-numeric:tabular-nums}
+  .ruler .track{height:12px;border-radius:999px;background:linear-gradient(90deg,#EAF3FF,#0071E3);position:relative}
+  .ruler .marks{display:flex;justify-content:space-between;margin-top:10px;gap:8px;flex-wrap:wrap}
+  .ruler .mk{font-size:12.5px;color:var(--ink-2);flex:1;min-width:120px}
+  .ruler .mk b{display:block;color:var(--ink);font-weight:700;font-size:13px}
+
+  /* DISCLAIMER */
+  .note{
+    background:#FFFDF7;border:1px solid #F0E6C8;border-radius:var(--radius);
+    padding:clamp(20px,3.5vw,30px);
+  }
+  .note h3{margin:0 0 14px;font-size:17px;font-weight:700;display:flex;align-items:center;gap:9px}
+  .note ul{margin:0;padding-left:2px;list-style:none;display:flex;flex-direction:column;gap:11px}
+  .note li{font-size:13.5px;color:#5c5236;display:flex;gap:11px;align-items:flex-start;line-height:1.5}
+  .note li svg{flex:0 0 16px;margin-top:2px;color:var(--amber)}
+  .note a{color:var(--blue-ink);text-decoration:none;font-weight:600}
+  .note a:hover{text-decoration:underline}
+
+  footer{padding:44px 0 60px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .src{max-width:70ch;margin:14px auto 0;font-size:12px;line-height:1.7}
+  footer a{color:var(--ink-2);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+
+  @media (max-width:640px){
+    header.hero{padding:52px 0 24px}
+    .pillar{min-width:100%}
+    section{padding:30px 0}
+    .btns{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="dot"></span> Рио-де-Жанейро · Barra da Tijuca · проверено 05.08.2026</div>
+    <h1 class="reveal">Бритвы с регулируемым триммером</h1>
+    <p class="lede reveal">Модели с настройкой длины среза, которые можно <b>купить прямо сейчас</b> и получить <b>за сутки</b> в Барре — плюс где забрать сегодня рядом с <b>Barra Shopping</b>.</p>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="ic g">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div><b>Доставка за 24 ч</b><span>Amazon «Chega hoje» на CEP Барры</span></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg>
+        </div>
+        <div><b>Забрать сегодня</b><span>Fast Shop и др. в Barra Shopping</span></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="ic a">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3" fill="currentColor" stroke="none"/><path d="M4 6h16M4 18h16" opacity=".4"/></svg>
+        </div>
+        <div><b>Регулируемая длина</b><span>колёсико, диск или гребни</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= БЛОК 1: ЗА 24 ЧАСА ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tt">
+        <h2 class="reveal">Приедет за 24 часа в Барру <span class="badge now">Amazon · Chega hoje</span></h2>
+        <p class="sec-sub reveal">Все позиции — «Em estoque», доставка Amazon с меткой <b>«GRÁTIS Hoje»</b> на CEP 22640-102 (Barra da Tijuca) при заказе в первой половине дня. Цены и фото проверены 05.08.2026.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <!-- OneBlade Pro QP6532 -->
+      <article class="card feat reveal">
+        <span class="ribbon">Лучший универсал</span>
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://images.philips.com/is/image/philipsconsumer/feee367a32ec42f498d7b31e00f32516?$png$&amp;wid=410&amp;hei=410&amp;fit=constrain"
+          alt="Philips OneBlade Pro QP6532/10 — чёрный корпус с лаймовым лезвием и гребнем-диском"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Philips</span><span class="tag green">Стрижёт + бреет</span></div>
+          <h3 class="name">OneBlade Pro</h3>
+          <p class="model">QP6532/10 · Wet &amp; Dry</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>Гребень-диск, 12 длин</b> — от щетины до бороды, а без гребня бреет лезвием почти «под ноль».</span>
+          </div>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Влажное и сухое бритьё, моется под краном</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Аккумулятор ~90 мин, лезвие меняется</li>
+          </ul>
+          <p class="who">Если нужен один прибор «оформить контур и побриться».</p>
+          <div class="pricerow"><span class="price">R$ 299<small>,90</small></span><span class="old">R$ 436,43</span><span class="off">−31%</span></div>
+          <div class="btns">
+            <a class="btn amazon" href="https://www.amazon.com.br/dp/B0F3BKFZR7" target="_blank" rel="noopener">Купить на <span class="k">amazon</span>.com.br → Hoje</a>
+            <a class="btn ml" href="https://www.mercadolivre.com.br/aparador-de-pelo-philips-oneblade-pro-qp6510-preto/p/MLB14962522" target="_blank" rel="noopener">Тот же тип на Mercado Livre</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- BT3617 -->
+      <article class="card feat reveal">
+        <span class="ribbon blue">Настоящее колёсико длины</span>
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://images.philips.com/is/image/philipsconsumer/c83d94e57f8a44f58ad2b2970121ca79?$png$&amp;wid=410&amp;hei=410&amp;fit=constrain"
+          alt="Philips Beard Trimmer BT3617/15 — серо-синий триммер для бороды с регулируемым гребнем"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Philips</span><span class="tag">20 длин</span></div>
+          <h3 class="name">Beard Trimmer 3000</h3>
+          <p class="model">BT3617/15 · Wet &amp; Dry</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>Колёсико на 20 позиций, 0,5–10 мм</b> — плавная фиксированная длина, шаг 0,5 мм.</span>
+          </div>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Самозатачивающиеся лезвия с закруглёнными концами</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Работает и от сети, и от аккумулятора</li>
+          </ul>
+          <p class="who">Чистый триммер для бороды с точной длиной — без лишнего.</p>
+          <div class="pricerow"><span class="price">R$ 198<small>,54</small></span><span class="old">R$ 229,90</span><span class="off">−14%</span></div>
+          <div class="btns">
+            <a class="btn amazon" href="https://www.amazon.com.br/dp/B0FMXLJHQV" target="_blank" rel="noopener">Купить на <span class="k">amazon</span>.com.br → Hoje</a>
+            <a class="btn ml" href="https://www.mercadolivre.com.br/aparador-de-barba-philips-bt361715-para-barba-umida-e-seca-3000/p/MLB62401823" target="_blank" rel="noopener">Эта же модель на Mercado Livre</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- MG9532 -->
+      <article class="card reveal">
+        <span class="ribbon amber">Всё в одном · 16 насадок</span>
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://images.philips.com/is/image/philipsconsumer/d2d4abb16f5346e08e05b2ed00d92b6d?$png$&amp;wid=410&amp;hei=410&amp;fit=constrain"
+          alt="Philips All-in-One Trimmer 9000 MG9532/15 — серебристый корпус с 15 насадками"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Philips</span><span class="tag">16-в-1</span></div>
+          <h3 class="name">All-in-One 9000</h3>
+          <p class="model">MG9532/15 · лицо + голова + тело</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>Регулируемый гребень + набор насадок</b> — борода, стрижка головы, нос, тело.</span>
+          </div>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>16 насадок в комплекте, стальные лезвия</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Топовая серия 9000, металлический корпус</li>
+          </ul>
+          <p class="who">Кому нужен один набор на бороду, стрижку и тело.</p>
+          <div class="pricerow"><span class="price">R$ 573<small>,12</small></span><span class="old">R$ 799,90</span><span class="off">−28%</span></div>
+          <div class="btns">
+            <a class="btn amazon" href="https://www.amazon.com.br/dp/B0FRNCB6XX" target="_blank" rel="noopener">Купить на <span class="k">amazon</span>.com.br → Hoje</a>
+            <a class="btn ml" href="https://lista.mercadolivre.com.br/aparador-de-barba-philips-multigroom" target="_blank" rel="noopener">Multigroom на Mercado Livre</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- QP2824 -->
+      <article class="card reveal">
+        <span class="ribbon">Просто и дёшево</span>
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://images.philips.com/is/image/philipsconsumer/8033ca897b5e45e2b6baaf8d0077dc97?$png$&amp;wid=410&amp;hei=410&amp;fit=constrain"
+          alt="Philips OneBlade QP2824/10 Rosto e Corpo — чёрно-лаймовый прибор с насадками"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Philips</span><span class="tag green">Лицо + тело</span></div>
+          <h3 class="name">OneBlade</h3>
+          <p class="model">QP2824/10 · Rosto e Corpo</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>3 гребня-насадки</b> (1/3/5 мм) + гребень для тела — ступенчатая длина, бритьё лезвием.</span>
+          </div>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Тот же принцип OneBlade, дешевле Pro</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Влагостойкий, аккумулятор</li>
+          </ul>
+          <p class="who">Начать с OneBlade, не переплачивая за Pro.</p>
+          <div class="pricerow"><span class="price">R$ 209<small>,00</small></span><span class="old">R$ 329,90</span><span class="off">−37%</span></div>
+          <div class="btns">
+            <a class="btn amazon" href="https://www.amazon.com.br/dp/B0C2877GJS" target="_blank" rel="noopener">Купить на <span class="k">amazon</span>.com.br → Hoje</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Mondial -->
+      <article class="card reveal">
+        <span class="ribbon amber">Дешевле всего</span>
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://lojamondial.vtexassets.com/arquivos/ids/156733-800-auto"
+          alt="Mondial Super Groom 10 BG-03 — чёрно-синий триммер с зарядной базой и насадками"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Mondial · BR</span><span class="tag amber">Бюджет</span></div>
+          <h3 class="name">Super Groom 10</h3>
+          <p class="model">BG-03 · 10 аксессуаров</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>Регулируемый гребень (16 уровней)</b> + фиксированные 3/6/9/12 мм.</span>
+          </div>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Li-ion до 90 мин, зарядная база, bivolt</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Бразильский бренд — гарантия и сервис на месте</li>
+          </ul>
+          <p class="who">Попробовать формат «всё в одном» с минимальным бюджетом.</p>
+          <div class="pricerow"><span class="price">R$ 85<small>,40</small></span><span class="price-note" style="margin:0">на офсайте Mondial — R$ 150,21</span></div>
+          <div class="btns">
+            <a class="btn amazon" href="https://www.amazon.com.br/dp/B07DP2S4PC" target="_blank" rel="noopener">Купить на <span class="k">amazon</span>.com.br → Hoje</a>
+            <a class="btn ml" href="https://www.mercadolivre.com.br/aparador-de-pelos-super-groom-10-preto-azul-bg-03-mondial/p/MLB24001849" target="_blank" rel="noopener">Эта же модель на Mercado Livre</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= БЛОК 2: ДРУГИЕ БРЕНДЫ ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tt">
+        <h2 class="reveal">Другие бренды с регулировкой <span class="badge more">Braun · Panasonic · Wahl · Xiaomi · Gillette</span></h2>
+        <p class="sec-sub reveal">Разнообразие, если Philips не заходит. Фото и характеристики проверены. Часть этих моделей — импорт или «под заказ»: доставка обычно <b>не за сутки</b>, а цену смотри прямо на карточке (Mercado Livre режет автосбор цен, но страницы рабочие — открывай и проверяй).</p>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <!-- BRAUN -->
+      <article class="card reveal">
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://www.worten.pt/i/aca972858c674aa639cdb8d68c8135c08a9a3d6e"
+          alt="Braun Beard Trimmer BT3221 — триммер для бороды с колёсиком регулировки длины"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Braun</span><span class="tag">Колёсико 20 длин</span></div>
+          <h3 class="name">Beard Trimmer 3 · BT3221</h3>
+          <p class="model">колёсико ProWheel, 0,5–10 мм, шаг 0,5 мм</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>Плавное колёсико длины</b> — как у Philips BT, «пожизненно острые» лезвия, автономность ~50 мин.</span>
+          </div>
+          <p class="who">На Amazon.com.br это импорт (BT-серия почти не завозится официально) — цену проверь на странице.</p>
+          <div class="btns">
+            <a class="btn ghost" href="https://www.amazon.com.br/dp/B07XZSN2N3" target="_blank" rel="noopener">Открыть на amazon.com.br</a>
+          </div>
+          <div class="ml-list">
+            <div class="h">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z" opacity=".3"/><path d="M7 13l3 3 7-7"/></svg>
+              Braun на Mercado Livre — цены проверены 05.08
+            </div>
+            <a href="https://www.mercadolivre.com.br/recortador-braun-series-7-allinone-40-ajustes-0-5mm-120min/p/MLB2089002807" target="_blank" rel="noopener"><span>Series 7 All-in-One · 40 длин от 0,5 мм</span><span class="p">R$ 547,37</span></a>
+            <a href="https://www.mercadolivre.com.br/braun-barbeador-mgk3060-8em1-kit-de-aparador-de-barbear/p/MLB25202324" target="_blank" rel="noopener"><span>MGK3060 · 8-в-1, набор гребней</span><span class="p">R$ 582,28</span></a>
+            <a href="https://www.mercadolivre.com.br/maquina-de-barbear-braun-series-3-5-em-1-aio3450-cor-preta/p/MLB25860830" target="_blank" rel="noopener"><span>Series 3 AIO3450 · 5-в-1</span><span class="p">R$ 561,70</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PANASONIC -->
+      <article class="card reveal">
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://shop.panasonic.com/cdn/shop/products/o1wfyftfphm4yxnka7o7.jpg?v=1779299945&amp;width=1200"
+          alt="Panasonic ER-GB96-K — триммер с диском быстрой регулировки длины до 30 мм"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Panasonic</span><span class="tag">Диск · 58 длин</span></div>
+          <h3 class="name">ER-GB96-K</h3>
+          <p class="model">диск 1–30 мм · для длинной бороды</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>Диск быстрой регулировки, 58 позиций до 30 мм</b> — максимум для густой/длинной бороды. IPX7, моется целиком.</span>
+          </div>
+          <p class="who">Кому нужна реально длинная борода и объём до 3 см.</p>
+          <div class="btns">
+            <a class="btn ghost" href="https://www.amazon.com.br/dp/B088CP227V" target="_blank" rel="noopener">ER-GB96 на amazon.com.br</a>
+          </div>
+          <div class="ml-list">
+            <div class="h">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z" opacity=".3"/><path d="M7 13l3 3 7-7"/></svg>
+              Дешевле на Mercado Livre / Amazon
+            </div>
+            <a href="https://www.mercadolivre.com.br/barbeador-panasonic-er-389/p/MLB23166963" target="_blank" rel="noopener"><span>ER-389 · гребень 3–18 мм (проще)</span><span class="p unk">смотреть цену</span></a>
+            <a href="https://www.amazon.com.br/dp/B07X9PK6JY" target="_blank" rel="noopener"><span>ER-389K на Amazon</span><span class="p">от R$ 174,87</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- XIAOMI -->
+      <article class="card reveal">
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://d1r6yjixh9u0er.cloudfront.net/Custom/Content/Products/50/95/5095_barbeador-eletrico-uniblade-xiaomi-x00758_z1_638315258284935862.webp"
+          alt="Xiaomi UniBlade Trimmer — чёрный гибрид триммер-бритва с регулируемым гребнем"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Xiaomi</span><span class="tag green">Стрижёт + бреет</span></div>
+          <h3 class="name">UniBlade Trimmer</h3>
+          <p class="model">X00758 · аналог OneBlade</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>Регулируемый гребень, 14 длин 0,4–8 мм</b> + бритьё без гребня. IPX7, аккумулятор ~60 мин.</span>
+          </div>
+          <p class="who">Универсал «подровнять + побрить» по цене ниже OneBlade Pro.</p>
+          <div class="pricerow"><span class="price">R$ 399<small>,99</small></span><span class="price-note" style="margin:0">офсайт Xiaomi Brasil</span></div>
+          <div class="btns">
+            <a class="btn ghost" href="https://www.mibrasil.com.br/barbeador-eletrico-uniblade-xiaomi-x00758-p5095" target="_blank" rel="noopener">Xiaomi Brasil (mibrasil)</a>
+            <a class="btn ml" href="https://www.mercadolivre.com.br/maquina-de-barbear-preta-xiaomi-uniblade-trimmer/p/MLB28584980" target="_blank" rel="noopener">Открыть на Mercado Livre</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- WAHL -->
+      <article class="card reveal">
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://wahlclipper.vtexassets.com/arquivos/ids/158469/1.jpg?v=638694329908570000"
+          alt="Wahl Beard Trimmer — серебристый триммер с Li-ion аккумулятором и USB-зарядкой"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">Wahl</span><span class="tag">USB · до 4 ч</span></div>
+          <h3 class="name">Beard Trimmer Li-Ion</h3>
+          <p class="model">регулируемый гребень 10 поз. + 1,5/3/4,7 мм</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>Регулируемый гребень + сменные насадки</b> — упор на контуры и детализацию. USB-зарядка, автономность до 4 ч.</span>
+          </div>
+          <p class="who">Для чётких контуров бороды и долгой работы от батареи.</p>
+          <div class="pricerow"><span class="price">≈ R$ 227<small>–336</small></span><span class="price-note" style="margin:0">зависит от продавца</span></div>
+          <div class="btns">
+            <a class="btn amazon" href="https://www.amazon.com.br/dp/B0CZW6TJC8" target="_blank" rel="noopener">Wahl 2-в-1 на <span class="k">amazon</span></a>
+            <a class="btn ml" href="https://www.mercadolivre.com.br/aparador-cabelo-barba-pelos-sem-fio-wahl-beard-trimmer-usb-cor-prateado-110v220v/p/MLB35899633" target="_blank" rel="noopener">Beard Trimmer USB на Mercado Livre</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- GILLETTE -->
+      <article class="card reveal">
+        <div class="ph"><img loading="lazy" referrerpolicy="no-referrer" width="410" height="410"
+          src="https://images.ctfassets.net/4t2g4k2vpevh/1WKMwUKbkgyUe2Wo2SgdBm/5e6925d5f8c0c9adb85c10b0d0be7fb5/Gillette_KCG_608_Beard_Trimmer_Lay_flat_in_the_box_2x.png"
+          alt="King C. Gillette Aparador de Barba — триммер с тремя сменными гребнями в коробке"></div>
+        <div class="body">
+          <div class="brandrow"><span class="brand">King C. Gillette</span><span class="tag">11 длин · 1–21 мм</span></div>
+          <h3 class="name">Aparador de Barba</h3>
+          <p class="model">Style Master · 3 гребня</p>
+          <div class="adj">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12h16"/><circle cx="9" cy="12" r="3"/></svg>
+            <span><b>3 сменных гребня — 11 длин, 1–21 мм</b> (1 мм · 3–11 мм · 13–21 мм). Регулировка ступенчатая, через насадки.</span>
+          </div>
+          <p class="who">Известный бренд с простой понятной регулировкой гребнями.</p>
+          <div class="btns">
+            <a class="btn amazon" href="https://www.amazon.com.br/dp/B08DJSDV9C" target="_blank" rel="noopener">Открыть на <span class="k">amazon</span>.com.br</a>
+            <a class="btn ml" href="https://www.mercadolivre.com.br/aparador-barba-king-c-gillette-style-master-com-3-laminas-cor-preto/p/MLB26653414" target="_blank" rel="noopener">Style Master на Mercado Livre</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= БЛОК 3: ОФЛАЙН ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tt">
+        <h2 class="reveal">Забрать сегодня рядом с Barra Shopping <span class="badge local">офлайн</span></h2>
+        <p class="sec-sub reveal">Самый быстрый способ «купить сейчас» — зайти в магазин электроники прямо внутри <b>Barra Shopping</b> (Av. das Américas, 4666) и взять триммер с полки. Все точки ниже — в самом ТЦ.</p>
+      </div>
+    </div>
+
+    <div class="loc-grid">
+
+      <div class="loc hi reveal">
+        <div class="top">
+          <div class="logo" style="background:#111">FS</div>
+          <div><h3>Fast Shop</h3><div class="mall">Barra Shopping · 1-й этаж</div></div>
+        </div>
+        <p class="desc">Профильная электроника — самый широкий выбор бритв и триммеров: Philips (OneBlade, серии 3000/5000/7000), Braun, Panasonic, Wahl. Берёшь с полки — уносишь сразу.</p>
+        <ul class="meta">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Av. das Américas, 4666 — Barra da Tijuca</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Пн–сб ~10:00–22:00, вс 13:00–21:00 (часы ТЦ)</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4z"/><path d="M8 20h8"/></svg>Тел. +55 21 2138-6200 — можно позвонить о наличии</li>
+        </ul>
+        <div class="foot">
+          <a class="chip map" href="https://www.google.com/maps/search/Fast+Shop+Barra+Shopping+Rio+de+Janeiro" target="_blank" rel="noopener">Google Maps</a>
+          <a class="chip" href="https://www.barrashopping.com.br/lojas/fast-shop/" target="_blank" rel="noopener">Страница в ТЦ</a>
+        </div>
+      </div>
+
+      <div class="loc reveal">
+        <div class="top">
+          <div class="logo" style="background:#EE1C25">CB</div>
+          <div><h3>Casas Bahia</h3><div class="mall">Barra Shopping</div></div>
+        </div>
+        <p class="desc">Бытовая техника массовых брендов: Philips, Mondial, Gama, Wahl, Braun — обычно в зале. Есть услуга «Retire Rápido» (самовывоз в тот же день для товара в наличии).</p>
+        <ul class="meta">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Av. das Américas, 4666 — внутри Barra Shopping</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Пн–сб ~10:00–22:00, вс 13:00–21:00</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>«Retire Rápido» — забрать сегодня</li>
+        </ul>
+        <div class="foot">
+          <a class="chip map" href="https://www.google.com/maps/search/Casas+Bahia+Barra+Shopping+Rio+de+Janeiro" target="_blank" rel="noopener">Google Maps</a>
+          <a class="chip" href="https://www.casasbahia.com.br/" target="_blank" rel="noopener">casasbahia.com.br</a>
+        </div>
+      </div>
+
+      <div class="loc reveal">
+        <div class="top">
+          <div class="logo" style="background:#0086FF">ML</div>
+          <div><h3>Magazine Luiza</h3><div class="mall">Barra Shopping</div></div>
+        </div>
+        <p class="desc">Barbeadores Philips, Mondial, Multilaser, Gama. Подтверждённый «retire na loja»: вводишь CEP на странице товара, оплачиваешь и забираешь после письма о наличии — для локального товара реально в тот же день.</p>
+        <ul class="meta">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Av. das Américas, 4666 — внутри Barra Shopping</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Пн–сб 10:00–22:00, вс 13:00–21:00</li>
+        </ul>
+        <div class="foot">
+          <a class="chip map" href="https://lojas.magazineluiza.com.br/filiais/1644/rio-de-janeiro" target="_blank" rel="noopener">Локатор Magalu</a>
+          <a class="chip" href="https://www.barrashopping.com.br/lojas/magazine-luiza" target="_blank" rel="noopener">Страница в ТЦ</a>
+        </div>
+      </div>
+
+      <div class="loc reveal">
+        <div class="top">
+          <div class="logo" style="background:#111">FS</div>
+          <div><h3>Fast Shop</h3><div class="mall">Village Mall · ~1 км</div></div>
+        </div>
+        <p class="desc">Соседний премиум-ТЦ (Av. das Américas, 3900), пешком/2 минуты на машине. Те же бренды бритв и триммеров — запасной вариант, если в Barra Shopping нет нужной модели.</p>
+        <ul class="meta">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Av. das Américas, 3900 — Village Mall</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Пн–сб 10:00–22:00, вс 14:00–20:00</li>
+        </ul>
+        <div class="foot">
+          <a class="chip map" href="https://www.google.com/maps/search/Fast+Shop+Village+Mall+Rio+de+Janeiro" target="_blank" rel="noopener">Google Maps</a>
+        </div>
+      </div>
+
+    </div>
+    <p class="sec-sub reveal" style="margin-top:18px">Также в Barra Shopping есть <b>Ponto</b>, <b>Lojas Americanas</b> и аптека <b>Drogaria Raia</b> — там держат недорогие триммеры (Mondial, Multilaser, Gillette). Важно: <b>Fnac в Бразилии закрылся ещё в 2018 году</b> — старые справочники показывают его в Barra Shopping ошибочно.</p>
+  </div>
+</section>
+
+<!-- ================= БЛОК 4: ГАЙД ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div class="tt">
+      <h2 class="reveal">Как выбрать: колёсико, диск или гребни</h2>
+      <p class="sec-sub reveal">«Регулируемый триммер» бывает трёх типов — от этого зависит точность и удобство.</p>
+    </div></div>
+    <div class="guide reveal">
+      <div class="gtable">
+        <div class="gcol">
+          <h4><span class="d" style="background:#0071E3"></span>Колёсико / диск</h4>
+          <p>Плавно крутишь — фиксируется точная длина. Самый удобный и точный способ.</p>
+          <p class="ex"><b>Philips BT3617</b> (20 длин), <b>Braun BT3221</b> (20 длин), <b>Panasonic ER-GB96</b> (58 длин, до 30 мм)</p>
+        </div>
+        <div class="gcol">
+          <h4><span class="d" style="background:#1DA25A"></span>OneBlade / гибрид</h4>
+          <p>Гребень с несколькими длинами + бритьё лезвием почти «под ноль» без гребня.</p>
+          <p class="ex"><b>Philips OneBlade Pro</b> (12 длин), <b>OneBlade QP2824</b>, <b>Xiaomi UniBlade</b> (14 длин)</p>
+        </div>
+        <div class="gcol">
+          <h4><span class="d" style="background:#B25E00"></span>Сменные гребни</h4>
+          <p>Ступенчатая длина: меняешь насадку. Дешевле, но менее гибко.</p>
+          <p class="ex"><b>King C. Gillette</b> (1–21 мм), <b>Mondial BG-03</b>, любой мультигрумер</p>
+        </div>
+      </div>
+      <div class="ruler">
+        <div class="lab"><span>0,5 мм</span><span>какую длину брать</span><span>30 мм</span></div>
+        <div class="track"></div>
+        <div class="marks">
+          <div class="mk"><b>0,5–3 мм</b>лёгкая щетина, «трёхдневная»</div>
+          <div class="mk"><b>3–6 мм</b>аккуратная короткая борода</div>
+          <div class="mk"><b>6–10 мм</b>средняя борода</div>
+          <div class="mk"><b>10–30 мм</b>длинная/густая (нужен Panasonic-диск)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= БЛОК 5: ПРОВЕРЯЕМОСТЬ ================= -->
+<section>
+  <div class="wrap">
+    <div class="note reveal">
+      <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>Честно о ценах и наличии</h3>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>Цены Philips и Mondial</b> проверены 05.08.2026 на <a href="https://www.amazon.com.br" target="_blank" rel="noopener">Amazon.com.br</a> с CEP 22640-102 (Barra da Tijuca). Метка «Chega hoje» — на первый заказ бесплатно; закажи в первой половине дня. Цены на маркетплейсах меняются — сверяйся на странице.</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>Цены Braun на Mercado Livre</b> (R$ 547 / 582 / 561) сняты вручную из живой выдачи ML 05.08.2026. Остальные ссылки ML ведут на рабочие карточки товара, но цену автосбор снять не смог (антибот) — <b>открывай страницу и смотри цену там</b>, заодно проверяй метку доставки «Full» / «Chegará amanhã».</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>Braun BT / Panasonic ER-GB96 / Gillette</b> на Amazon.com.br — часто импорт от сторонних продавцов: доставка дольше суток и дороже. За 24 часа надёжно приходят только помеченные «Hoje» Philips и Mondial.</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>В офлайн-магазинах</b> наличие конкретной модели не гарантировано — бренды указаны как типовой ассортимент сети. Перед выездом позвони (Fast Shop +55 21 2138-6200) или проверь «retirar na loja» по CEP на сайте.</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg><b>Все фото</b> — реальные снимки именно этих моделей с офсайтов Philips, Panasonic, Mondial, Wahl, Xiaomi и Gillette.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Подборка для Barra da Tijuca, Рио-де-Жанейро · обновлено 05.08.2026</div>
+    <div class="src">Источники: <a href="https://www.amazon.com.br" target="_blank" rel="noopener">Amazon.com.br</a> · <a href="https://www.mercadolivre.com.br" target="_blank" rel="noopener">Mercado Livre</a> · <a href="https://www.philips.com.br" target="_blank" rel="noopener">Philips Brasil</a> · <a href="https://www.mondial.com.br" target="_blank" rel="noopener">Mondial</a> · <a href="https://www.barrashopping.com.br" target="_blank" rel="noopener">Barra Shopping</a>. Цены и наличие актуальны на дату проверки и могут измениться.</div>
+  </div>
+</footer>
+
+<script type="module">
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const items = Array.from(document.querySelectorAll('.reveal'));
+  // страховка: всё видимо через 2.5 с в любом случае
+  const failsafe = setTimeout(() => {
+    document.documentElement.classList.remove('motion-ready');
+  }, 2500);
+
+  if (!reduce) {
+    try {
+      const { animate, inView, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      document.documentElement.classList.add('motion-ready');
+
+      // группируем по секциям для stagger
+      const groups = new Map();
+      items.forEach(el => {
+        const sec = el.closest('section, header') || document.body;
+        if (!groups.has(sec)) groups.set(sec, []);
+        groups.get(sec).push(el);
+      });
+
+      groups.forEach((els) => {
+        inView(els[0].closest('section, header') || els[0], () => {
+          animate(els, { opacity: [0, 1], y: [22, 0] },
+            { duration: 0.55, delay: stagger(0.06), easing: [0.2, 0.7, 0.2, 1] });
+        }, { amount: 0.12 });
+      });
+
+      clearTimeout(failsafe);
+      // подстраховка: если inView не выстрелил (элемент уже во вьюпорте на очень длинных экранах)
+      setTimeout(() => {
+        items.forEach(el => { if (getComputedStyle(el).opacity === '0') el.style.opacity = '1', el.style.transform = 'none'; });
+      }, 1800);
+    } catch (e) {
+      // motion не загрузился — снимаем прятанье, контент виден
+      document.documentElement.classList.remove('motion-ready');
+      clearTimeout(failsafe);
+    }
+  } else {
+    clearTimeout(failsafe);
+  }
+</script>
+
+</body>
+</html>
