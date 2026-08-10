@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSD 1 ТБ с отпечатком пальца — что реально купить в Рио</title>
+<meta name="description" content="Внешние SSD на 1 ТБ со сканером отпечатка: что есть на Mercado Livre и Amazon.com.br в августе 2026, какие модели не перегреваются и почему. Реальные фото, цены в реалах, ссылки, сроки доставки в Рио.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7;
+    --surface:#FFFFFF;
+    --ink:#1D1D1F;
+    --ink-2:#6E6E73;
+    --ink-3:#86868B;
+    --line:#E8E8ED;
+    --blue:#0071E3;
+    --blue-ink:#0058B9;
+    --green:#1DA25A;
+    --green-bg:#E7F7EE;
+    --amber:#B25E00;
+    --amber-bg:#FFF3E0;
+    --red:#C4304A;
+    --red-bg:#FDEBEF;
+    --cool:#0E7490;
+    --cool-bg:#E0F5FA;
+    --radius:22px;
+    --radius-sm:14px;
+    --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 30px rgba(0,0,0,.06);
+    --shadow-hover:0 4px 10px rgba(0,0,0,.06),0 18px 50px rgba(0,0,0,.10);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  .reveal{opacity:1;transform:none}
+  html.motion-ready .reveal{opacity:0;transform:translateY(22px)}
+  @media (prefers-reduced-motion:reduce){
+    html.motion-ready .reveal{opacity:1 !important;transform:none !important}
+  }
+
+  /* HERO */
+  header.hero{padding:76px 0 30px;text-align:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--surface);border:1px solid var(--line);
+    color:var(--ink-2);font-weight:600;font-size:13px;
+    padding:7px 14px;border-radius:999px;box-shadow:var(--shadow);
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px var(--green-bg)}
+  h1{
+    font-size:clamp(30px,5.4vw,52px);line-height:1.06;letter-spacing:-.02em;
+    font-weight:800;margin:0 auto 18px;max-width:17ch;
+  }
+  .lede{font-size:clamp(16px,2.2vw,20px);color:var(--ink-2);max-width:56ch;margin:0 auto 30px}
+  .lede b{color:var(--ink);font-weight:600}
+
+  .pillars{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
+  .pillar{
+    display:flex;align-items:center;gap:12px;text-align:left;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:13px 17px;box-shadow:var(--shadow);min-width:236px;
+  }
+  .pillar .ic{
+    width:38px;height:38px;flex:0 0 38px;border-radius:11px;display:grid;place-items:center;
+    background:#EAF3FF;color:var(--blue);
+  }
+  .pillar .ic.g{background:var(--green-bg);color:var(--green)}
+  .pillar .ic.c{background:var(--cool-bg);color:var(--cool)}
+  .pillar b{display:block;font-size:14px;font-weight:700;line-height:1.2}
+  .pillar span{font-size:12.5px;color:var(--ink-3)}
+
+  /* SECTION */
+  section{padding:38px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+  .sec-head .tt{max-width:52ch}
+  h2{font-size:clamp(23px,3.4vw,34px);letter-spacing:-.02em;font-weight:800;margin:0 0 8px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+  h2 .badge{font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;letter-spacing:.01em}
+  .badge.now{background:var(--green-bg);color:#0E7A3E}
+  .badge.local{background:#EAF3FF;color:var(--blue-ink)}
+  .badge.more{background:#F0EFF5;color:#5B5B78}
+  .badge.warn{background:var(--amber-bg);color:var(--amber)}
+  .sec-sub{color:var(--ink-2);font-size:15.5px;margin:0;max-width:66ch}
+
+  /* GRID CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+  .grid.two{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s;
+    position:relative;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .card.feat{border-color:#C9E2FF;box-shadow:0 0 0 1px #C9E2FF,var(--shadow)}
+  .card.muted{opacity:.94}
+  .ribbon{
+    position:absolute;top:14px;left:14px;z-index:2;
+    background:rgba(29,162,90,.96);color:#fff;font-size:11.5px;font-weight:700;
+    padding:6px 11px;border-radius:999px;letter-spacing:.01em;backdrop-filter:blur(4px);
+    display:inline-flex;align-items:center;gap:5px;
+  }
+  .ribbon.blue{background:rgba(0,113,227,.96)}
+  .ribbon.amber{background:rgba(178,94,0,.96)}
+  .ribbon.red{background:rgba(196,48,74,.96)}
+  .ribbon.gray{background:rgba(110,110,115,.96)}
+  .ph{
+    background:linear-gradient(180deg,#FBFBFD,#F1F1F4);
+    padding:26px;aspect-ratio:1/.82;display:grid;place-items:center;
+  }
+  .ph img{width:auto;height:100%;max-height:200px;object-fit:contain;mix-blend-mode:multiply}
+  .body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+  .brand{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+  .name{font-size:17.5px;font-weight:700;letter-spacing:-.01em;line-height:1.28;margin:0 0 10px}
+  .why{font-size:14px;color:var(--ink-2);margin:0 0 14px}
+  .why b{color:var(--ink);font-weight:600}
+  .specs{list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:7px}
+  .specs li{display:flex;gap:9px;font-size:13.5px;color:var(--ink-2);align-items:flex-start}
+  .specs svg{flex:0 0 15px;margin-top:4px;color:var(--ink-3)}
+  .specs b{color:var(--ink);font-weight:600}
+  .heat{
+    display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;
+    padding:6px 11px;border-radius:999px;margin-bottom:14px;align-self:flex-start;
+  }
+  .heat.cold{background:var(--cool-bg);color:var(--cool)}
+  .heat.warm{background:var(--amber-bg);color:var(--amber)}
+  .heat.hot{background:var(--red-bg);color:var(--red)}
+  .foot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .price{display:flex;flex-direction:column;line-height:1.15}
+  .price .v{font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .price .n{font-size:12px;color:var(--ink-3);margin-top:3px}
+  .btn{
+    display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:#fff;
+    text-decoration:none;font-weight:600;font-size:14px;padding:11px 17px;border-radius:12px;
+    transition:background .2s,transform .2s;white-space:nowrap;
+  }
+  .btn:hover{background:var(--blue-ink);transform:translateY(-1px)}
+  .btn.ghost{background:#F0F0F5;color:var(--ink)}
+  .btn.ghost:hover{background:#E4E4EC}
+
+  /* COMBO */
+  .combo{
+    background:var(--surface);border:1px solid #C9E2FF;border-radius:var(--radius);
+    box-shadow:0 0 0 1px #C9E2FF,var(--shadow);padding:24px;margin-top:20px;
+    display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  }
+  .combo .txt{max-width:60ch}
+  .combo h3{margin:0 0 6px;font-size:19px;font-weight:700;letter-spacing:-.01em}
+  .combo p{margin:0;font-size:14.5px;color:var(--ink-2)}
+  .combo .sum{text-align:right}
+  .combo .sum .v{font-size:30px;font-weight:800;letter-spacing:-.02em;display:block}
+  .combo .sum .n{font-size:12.5px;color:var(--ink-3)}
+
+  /* TABLE */
+  .tbl-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:640px}
+  th,td{padding:15px 18px;text-align:left;font-size:14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:700;background:#FBFBFD}
+  tr:last-child td{border-bottom:none}
+  td b{font-weight:600}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+  .chip.cold{background:var(--cool-bg);color:var(--cool)}
+  .chip.warm{background:var(--amber-bg);color:var(--amber)}
+  .chip.hot{background:var(--red-bg);color:var(--red)}
+
+  /* NOTE BOX */
+  .note{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:26px 28px;
+  }
+  .note h3{margin:0 0 14px;font-size:19px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .note ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+  .note li{display:flex;gap:11px;font-size:14.5px;color:var(--ink-2);align-items:flex-start}
+  .note li svg{flex:0 0 17px;margin-top:4px;color:var(--green)}
+  .note li b{color:var(--ink);font-weight:600}
+  .note.warn li svg{color:var(--amber)}
+  .note.stop li svg{color:var(--red)}
+
+  .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px}
+
+  /* OFFLINE */
+  .shop{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;gap:10px;
+    transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s;
+  }
+  .shop:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+  .shop .top{display:flex;align-items:center;gap:11px}
+  .shop .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#EAF3FF;color:var(--blue);flex:0 0 40px}
+  .shop .ic.g{background:var(--green-bg);color:var(--green)}
+  .shop .ic.r{background:var(--red-bg);color:var(--red)}
+  .shop h4{margin:0;font-size:16.5px;font-weight:700;letter-spacing:-.01em}
+  .shop .addr{font-size:12.5px;color:var(--ink-3)}
+  .shop p{margin:0;font-size:14px;color:var(--ink-2)}
+  .shop a.lnk{font-size:13.5px;font-weight:600;color:var(--blue);text-decoration:none}
+  .shop a.lnk:hover{text-decoration:underline}
+
+  footer{padding:44px 0 60px;text-align:center;color:var(--ink-3);font-size:13px}
+  footer .src{margin-top:10px;font-size:12.5px;line-height:1.7;max-width:74ch;margin-left:auto;margin-right:auto}
+  footer a{color:var(--ink-2)}
+
+  @media (max-width:640px){
+    header.hero{padding:52px 0 22px}
+    .combo{flex-direction:column;align-items:flex-start}
+    .combo .sum{text-align:left}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="dot"></span>Проверено 10 августа 2026 · Рио-де-Жанейро</div>
+    <h1 class="reveal">SSD 1 ТБ с отпечатком пальца, который не греется</h1>
+    <p class="lede reveal">Готовых внешних SSD на 1 ТБ со сканером в Бразилии почти не осталось: Samsung снял <b>T7 Touch</b> с производства, Hikvision T100F и Verbatim сюда не завозят. Зато есть путь дешевле и холоднее — <b>корпус с биометрией + обычный SATA-диск</b>.</p>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="ic c"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+        <div><b>SATA почти не греется</b><span>~450 МБ/с против 1050 у NVMe</span></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="ic g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1v6m0 0l3-3m-3 3L9 4M5 12a7 7 0 0114 0v3a4 4 0 01-4 4H9a4 4 0 01-4-4v-3z"/></svg></div>
+        <div><b>R$ 791 за 1 ТБ</b><span>корпус SSK + SanDisk Plus</span></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><b>Всё с Mercado Livre</b><span>цены и сроки под твоим логином</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tt">
+        <h2 class="reveal">Почему одни греются, а другие нет <span class="badge local">физика, не маркетинг</span></h2>
+        <p class="sec-sub reveal">Нагрев внешнего SSD определяется не брендом, а скоростью интерфейса и тем, что внутри: SATA-диск в алюминиевом корпусе рассеивает единицы ватт, NVMe на 20 Гбит/с — на порядок больше. Дальше — три класса, между которыми и делается выбор.</p>
+      </div>
+    </div>
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead>
+          <tr><th>Класс</th><th>Скорость</th><th>Что внутри</th><th>Нагрев</th><th>Кому</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>USB 3.0 / 3.2 Gen1</b><br><span style="color:var(--ink-3);font-size:13px">5 Гбит/с</span></td>
+            <td>430–520 МБ/с</td>
+            <td>SATA SSD 2.5" в алюминии</td>
+            <td><span class="chip cold">Холодный</span></td>
+            <td>Архив, документы, бэкапы, фото</td>
+          </tr>
+          <tr>
+            <td><b>USB 3.2 Gen2</b><br><span style="color:var(--ink-3);font-size:13px">10 Гбит/с</span></td>
+            <td>1000–1050 МБ/с</td>
+            <td>NVMe + мост, часто без радиатора</td>
+            <td><span class="chip warm">Тёплый</span></td>
+            <td>Монтаж 4K, перенос больших проектов</td>
+          </tr>
+          <tr>
+            <td><b>USB 3.2 Gen2x2 / TB</b><br><span style="color:var(--ink-3);font-size:13px">20–40 Гбит/с</span></td>
+            <td>2000+ МБ/с</td>
+            <td>NVMe PCIe 3.0/4.0</td>
+            <td><span class="chip hot">Горячий</span></td>
+            <td>Только если реально упираешься в скорость</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note reveal" style="margin-top:20px">
+      <h3><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--blue)"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>Что известно про нагрев конкретно T7 Touch</h3>
+      <ul>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>Рабочий диапазон 0–45 °C</b> — так указано в характеристиках самого лота на Mercado Livre; Samsung заявляет Dynamic Thermal Guard и материал ePCM, удерживающие поверхность ниже 45 °C.</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>PCWorld в обзоре:</b> диск «ran only slightly warm during long transfers» — то есть при длительных передачах только слегка тёплый.</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>Скорость всё равно падает,</b> но не из-за температуры: после исчерпания SLC-кэша запись на 500-гиговой версии проседала с 500+ МБ/с до ~325 МБ/с примерно на 20-м гигабайте.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tt">
+        <h2 class="reveal">Вариант 1: собрать самому <span class="badge now">лучший по деньгам и теплу</span></h2>
+        <p class="sec-sub reveal">Корпус с биометрией на Mercado Livre стоит <b>R$ 35,50</b>, и в него встаёт любой SATA SSD 2.5". Получается 1 ТБ с разблокировкой пальцем за 791 реал — дешевле любого готового решения и с почти нулевым нагревом, потому что SATA через USB 3.0 упирается в 430–450 МБ/с.</p>
+      </div>
+    </div>
+    <div class="grid">
+
+      <article class="card feat reveal">
+        <div class="ribbon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>25 шт в наличии</div>
+        <div class="ph"><img src="https://http2.mlstatic.com/D_NQ_NP_792386-MLB104016486751_012026-O-case-para-hd-25-sata-ssk-she013-com-leitor-biometrico.webp" alt="Корпус SSK SHE013 для SSD 2.5 дюйма с биометрическим сканером"></div>
+        <div class="body">
+          <div class="brand">SSK · Mercado Livre</div>
+          <h3 class="name">Case SSK SHE013 — корпус 2.5" со сканером отпечатка</h3>
+          <span class="heat cold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1L19.1 4.9"/></svg>Холодный — USB 3.0</span>
+          <p class="why">Сердце всей схемы: алюминиево-пластиковый бокс с встроенным биометрическим считывателем, куда ставится любой SATA-диск. Отпечаток снимается на самом корпусе — <b>не зависит от компьютера и ОС</b>.</p>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Интерфейс: <b>USB 3.0 → SATA III</b>, поддержка HDD и SSD 2.5"</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Корпус: <b>алюминий + пластик</b>, LED-индикатор</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>В комплекте: кабель USB, защитный чехол, винты, диск с ПО</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Доставка бесплатно, <b>прибудет до 18 августа</b>; продавец GTECHSTOREOFICIAL</li>
+          </ul>
+          <div class="foot">
+            <div class="price"><span class="v">R$ 35,50</span><span class="n">новый · возврат 30 дней</span></div>
+            <a class="btn" href="https://produto.mercadolivre.com.br/MLB-4407219141-case-para-hd-25-sata-ssk-she013-com-leitor-biometrico-_JM" target="_blank" rel="noopener">Открыть на ML
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card feat reveal">
+        <div class="ribbon blue"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Приедет 12–13 августа</div>
+        <div class="ph"><img src="https://http2.mlstatic.com/D_NQ_NP_895451-MLA104118489232_012026-O.webp" alt="SanDisk SSD Plus 1TB SATA 2.5 дюйма"></div>
+        <div class="body">
+          <div class="brand">SanDisk · Mercado Livre</div>
+          <h3 class="name">SanDisk SSD Plus 1 ТБ SATA III (SDSSDA-1T00-G28)</h3>
+          <span class="heat cold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1L19.1 4.9"/></svg>Холодный — SATA</span>
+          <p class="why">Начинка для корпуса. SATA-накопитель по определению не может перегреться в боксе: потолок интерфейса — около 550 МБ/с, а через USB 3.0 реально <b>430–450 МБ/с</b>. Бренд первого эшелона, самый дешёвый терабайт из адекватных.</p>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Форм-фактор <b>2.5" 7 мм</b> — точно встаёт в SSK SHE013</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Доставка <b>бесплатно, среда–четверг</b> (быстрее корпуса)</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Есть в наличии, продаётся официальным листингом каталога</li>
+          </ul>
+          <div class="foot">
+            <div class="price"><span class="v">R$ 756</span><span class="n">новый · 10× без процентов</span></div>
+            <a class="btn" href="https://www.mercadolivre.com.br/ssd-sandisk-1tb-plus-25-sata-3-sdssda-1t00-g28-preto/p/MLB62060928" target="_blank" rel="noopener">Открыть на ML
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://http2.mlstatic.com/D_Q_NP_2X_693424-MLA99982194207_112025-E.webp" alt="SSD Western Digital Green 1TB SATA"></div>
+        <div class="body">
+          <div class="brand">Western Digital · альтернатива</div>
+          <h3 class="name">WD Green 1 ТБ SATA III 2.5"</h3>
+          <span class="heat cold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1L19.1 4.9"/></svg>Холодный — SATA</span>
+          <p class="why">Если SanDisk закончится — берётся это. Тот же класс, те же 2.5" и SATA, разница в 23 реала. Ещё варианты в том же поиске: Lexar 1 ТБ — R$ 960, Crucial BX500 1 ТБ — R$ 1080 (переплата без выигрыша).</p>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Заявленное чтение <b>545 МБ/с</b> — в корпусе упрётся в USB 3.0</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Такой же 7-мм корпус, совместим с боксом</li>
+          </ul>
+          <div class="foot">
+            <div class="price"><span class="v">R$ 779</span><span class="n">новый</span></div>
+            <a class="btn ghost" href="https://www.mercadolivre.com.br/ssd-interno-western-digital-green-1-tb-para-notebook-e-pc/p/MLB24517921" target="_blank" rel="noopener">Открыть на ML
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="combo reveal">
+      <div class="txt">
+        <h3>Итог сборки: 1 ТБ с отпечатком за R$ 791,50</h3>
+        <p>Корпус SSK SHE013 (R$ 35,50) + SanDisk SSD Plus 1 ТБ (R$ 756). Обе позиции — Mercado Livre, доставка бесплатная, диск приедет раньше корпуса. Сборка — четыре винта и отвёртка, ПО с диска нужно только для регистрации отпечатков.</p>
+      </div>
+      <div class="sum">
+        <span class="v">R$ 791,50</span>
+        <span class="n">против R$ 4 156,91 за готовый TWOPAN</span>
+      </div>
+    </div>
+
+    <div class="note warn reveal" style="margin-top:20px">
+      <h3><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--amber)"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>Честно про ограничения этой схемы</h3>
+      <ul>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg><b>Продавец не заявляет аппаратное AES-256.</b> В описании — только «биометрический считыватель для доступа к данным». Это блокировка доступа, а не сертифицированное шифрование уровня Samsung или Kingston IronKey. Для «чтобы не залезли в мои файлы» — достаточно; для коммерческой тайны с юридическими последствиями — нет.</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg><b>USB 3.0, а не Type-C 10 Гбит/с.</b> Для монтажа 4K с диска будет медленно; для документов, фото, архивов и бэкапов — незаметно.</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg><b>Никаких обзоров на эту модель корпуса нет.</b> Купить стоит с расчётом на возврат в 30 дней, который ML даёт по умолчанию, — и проверить сканер в первый же день.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tt">
+        <h2 class="reveal">Вариант 2: готовые с отпечатком <span class="badge more">то, что осталось на рынке</span></h2>
+        <p class="sec-sub reveal">Все проверено сегодня под твоим аккаунтом на ML и на Amazon.com.br. Единственный терабайтник со сканером на Меркадо — <b>б/у T7 Touch за R$ 699</b>, последний экземпляр у продавца с пятью продажами.</p>
+      </div>
+    </div>
+    <div class="grid">
+
+      <article class="card reveal">
+        <div class="ribbon amber"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 8v5M12 16h.01"/></svg>Последний, б/у</div>
+        <div class="ph"><img src="https://http2.mlstatic.com/D_NQ_NP_980649-MLA112110562662_062026-O-externo-samsung-t7-touch-mupc1t0-1tb-prata.webp" alt="Samsung Portable SSD T7 Touch 1TB серебристый"></div>
+        <div class="body">
+          <div class="brand">Samsung · Mercado Livre</div>
+          <h3 class="name">Samsung T7 Touch 1 ТБ, MU-PC1T0S (б/у)</h3>
+          <span class="heat warm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 2v10a4 4 0 108 0V2M12 18v4"/></svg>Тёплый — Gen2, но с ePCM</span>
+          <p class="why">Тот самый эталон жанра: сканер прямо на крышке, <b>аппаратное AES-256</b>, 1050 МБ/с. Samsung снял модель с производства — нового 1 ТБ в Бразилии нет ни у кого, поэтому б/у по этой цене выглядит как лучшая покупка из готовых.</p>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>USB 3.2, вес 57 г, корпус металлический, ударопрочный</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Комплект: кабели USB-C→C и USB-C→A; Windows, macOS, Android</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Доставка бесплатно, до 18 августа; возврат — 12 дней</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Риск: продавец LANAI_TORRES, всего <b>+5 продаж</b>, гарантии нет</li>
+          </ul>
+          <div class="foot">
+            <div class="price"><span class="v">R$ 699</span><span class="n">б/у · последний экземпляр</span></div>
+            <a class="btn" href="https://www.mercadolivre.com.br/externo-samsung-t7-touch-mupc1t0-1tb-prata/up/MLBU4107394060" target="_blank" rel="noopener">Открыть на ML
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ribbon blue"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 14h4l2 6 4-16 2 6h4"/></svg>С вентилятором</div>
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/71qTLo6tBiL._AC_SX679_.jpg" alt="TWOPAN Pro магнитный SSD 1TB с отпечатком пальца и LCD-экраном"></div>
+        <div class="body">
+          <div class="brand">TWOPAN · Amazon.com.br</div>
+          <h3 class="name">TWOPAN Pro MagSafe 1 ТБ с отпечатком, LCD и кулером</h3>
+          <span class="heat cold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1L19.1 4.9"/></svg>Активное охлаждение</span>
+          <p class="why">Единственный найденный SSD, который решает вопрос перегрева честно — <b>встроенным вентилятором</b>, а на экранчике 2,2 см в реальном времени показывает температуру, скорость и состояние диска. Отпечаток — на корпусе, без приложений и паролей.</p>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>1050 МБ/с чтение/запись, USB-C с DP1.4 и зарядкой PD 40 Вт</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Магниты MagSafe, запись ProRes 4K 60 fps прямо с iPhone 15/16/17 Pro</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Осталось <b>6 штук</b>; доставка R$ 8,90, приедет <b>20 августа</b></li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Минус один: цена в 5,3 раза выше самосборного варианта</li>
+          </ul>
+          <div class="foot">
+            <div class="price"><span class="v">R$ 4 156,91</span><span class="n">новый · Amazon.com.br</span></div>
+            <a class="btn" href="https://www.amazon.com.br/dp/B0G3PQBQKN" target="_blank" rel="noopener">Открыть на Amazon
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card muted reveal">
+        <div class="ribbon gray"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Не 1 ТБ</div>
+        <div class="ph"><img src="https://http2.mlstatic.com/D_NQ_NP_850675-MLB100279795516_122025-O-ssd-samsung-t7-touch-id.webp" alt="Samsung T7 Touch 500GB на Mercado Livre"></div>
+        <div class="body">
+          <div class="brand">Samsung · Mercado Livre</div>
+          <h3 class="name">Samsung T7 Touch 500 ГБ, MU-PC500K/WW (новый)</h3>
+          <span class="heat warm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 2v10a4 4 0 108 0V2M12 18v4"/></svg>Тёплый — Gen2</span>
+          <p class="why">Показываю, чтобы не купил по ошибке: это <b>половина терабайта за 1980 реалов</b> и с пометкой «Sem garantia» в описании. Вдвое дороже сборки на 1 ТБ при вдвое меньшем объёме — брать нет смысла.</p>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Заявлен как новый, продано 1 шт., в наличии есть</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Рабочая температура <b>0–45 °C</b> — по паспорту Samsung</li>
+          </ul>
+          <div class="foot">
+            <div class="price"><span class="v">R$ 1 980</span><span class="n">500 ГБ · без гарантии</span></div>
+            <a class="btn ghost" href="https://www.mercadolivre.com.br/ssd-samsung-t7-touch-id/up/MLBU3658461785" target="_blank" rel="noopener">Посмотреть
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card muted reveal">
+        <div class="ribbon gray"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Максимум 512 ГБ</div>
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/61opwZ7EvyL._AC_UL320_.jpg" alt="TWOPAN Nano SSD 512GB с отпечатком пальца"></div>
+        <div class="body">
+          <div class="brand">TWOPAN · Amazon.com.br</div>
+          <h3 class="name">TWOPAN Nano 512 ГБ с отпечатком</h3>
+          <span class="heat cold"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v20M4.9 4.9l14.2 14.2M2 12h20M4.9 19.1L19.1 4.9"/></svg>Холодный — 450 МБ/с</span>
+          <p class="why">Самый маленький в мире SSD со сканером: 20×13×5 мм, 5 граммов, корпус фрезерован из алюминия, IP65, до 10 отпечатков с отдельными разделами. <b>Версии на 1 ТБ у Nano не существует</b> — только 256 и 512 ГБ.</p>
+          <ul class="specs">
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>USB 3.1 Gen1, до 450 МБ/с — по этой причине и не греется</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Версия 256 ГБ рядом — R$ 1 087,65</li>
+          </ul>
+          <div class="foot">
+            <div class="price"><span class="v">R$ 1 225,66</span><span class="n">512 ГБ · Amazon.com.br</span></div>
+            <a class="btn ghost" href="https://www.amazon.com.br/dp/B0FBWHM94H" target="_blank" rel="noopener">Посмотреть
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tt">
+        <h2 class="reveal">Рядом с Barra Shopping <span class="badge warn">со сканером — нигде</span></h2>
+        <p class="sec-sub reveal">Проверил ассортимент магазинов у Барры: SSD с биометрией офлайн в Рио не продаётся ни в одном. Если нужно забрать железо сегодня — это будет обычный внешний SSD, а отпечаток придётся сделать программно (как — в блоке ниже).</p>
+      </div>
+    </div>
+    <div class="two-col">
+
+      <div class="shop reveal">
+        <div class="top">
+          <div class="ic g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/></svg></div>
+          <div><h4>Kalunga</h4><div class="addr">BarraShopping · Av. das Américas, 4666</div></div>
+        </div>
+        <p>Единственный у Барры, где внешние SSD есть физически в ассортименте — семь позиций. Самый близкий по классу: <b>Kingston XS1000 1 ТБ — R$ 2 089,91</b> (à vista). Без биометрии и втрое дороже сборки, зато забрать можно сегодня.</p>
+        <a class="lnk" href="https://www.kalunga.com.br/prod/ssd-externo-portatil-kingston-1tb-usb-3-2-leitura-1-050mb-s-e-gravacao-1-050mb-s-sxs1000-1000g-kingston-cx-1-un/243050" target="_blank" rel="noopener">Карточка товара на сайте Kalunga →</a>
+        <a class="lnk" href="https://www.barrashopping.com.br/lojas/kalunga/" target="_blank" rel="noopener">Магазин в BarraShopping →</a>
+      </div>
+
+      <div class="shop reveal">
+        <div class="top">
+          <div class="ic r"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></div>
+          <div><h4>Fast Shop</h4><div class="addr">BarraShopping</div></div>
+        </div>
+        <p>Проверил каталог напрямую через их поиск: по запросу «ssd» выдаются <b>только ноутбуки</b> — внешних накопителей в ассортименте нет вообще. Ехать за диском туда бессмысленно.</p>
+        <a class="lnk" href="https://www.barrashopping.com.br/lojas/fast-shop/" target="_blank" rel="noopener">Страница магазина →</a>
+      </div>
+
+      <div class="shop reveal">
+        <div class="top">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg></div>
+          <div><h4>iPlace</h4><div class="addr">BarraShopping · Apple Premium Partner</div></div>
+        </div>
+        <p>Apple-ассортимент: накопителей со сканером у Apple нет в природе. Смысл заезжать только если нужен адаптер USB-C или кабель к диску в тот же день.</p>
+        <a class="lnk" href="https://www.barrashopping.com.br/lojas/iplace/" target="_blank" rel="noopener">Страница магазина →</a>
+      </div>
+
+      <div class="shop reveal">
+        <div class="top">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+          <div><h4>Computer &amp; Co</h4><div class="addr">BarraShopping</div></div>
+        </div>
+        <p>Небольшой компьютерный магазин в том же ТЦ. Ассортимент онлайн не публикуется — единственная точка, где имеет смысл спросить про корпус с биометрией лично, но рассчитывать на это не стоит.</p>
+        <a class="lnk" href="https://www.barrashopping.com.br/lojas/computer-co" target="_blank" rel="noopener">Страница магазина →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="two-col">
+      <div class="note reveal">
+        <h3><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--green)"><path d="M12 15v2M7 11V7a5 5 0 0110 0v4M5 11h14v10H5z"/></svg>Отпечаток без специального железа</h3>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>macOS:</b> любой внешний диск форматируется в APFS с шифрованием, пароль сохраняется в связке ключей — дальше доступ к связке подтверждается Touch ID. Работает с любым диском, включая тот, что купишь в Барре сегодня.</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>Windows:</b> BitLocker To Go шифрует диск, а вход в саму систему делается отпечатком через Windows Hello; на доверенном ПК диск разблокируется автоматически.</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>Разница принципиальная:</b> сканер на самом диске работает на любом чужом компьютере и без ОС, программное шифрование привязано к твоей системе. Если диск нужен «показать данные на чужом ноуте» — нужен именно аппаратный сканер.</li>
+        </ul>
+      </div>
+
+      <div class="note stop reveal">
+        <h3><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--red)"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>Проверил и не нашёл в Бразилии</h3>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><b>Hikvision HS-ESSD-T100F 1 ТБ</b> — металлический корпус, 5 шифрованных разделов, до 10 отпечатков. Идеально подошёл бы, но на ML его нет, а на Amazon US — «currently unavailable».</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><b>Verbatim Executive Fingerprint Secure 1 ТБ (53657)</b> — AES-256, алюминий, 344 МБ/с, до 8 пользователей. В Бразилию не завозится, на Amazon US тоже нет в наличии.</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><b>Новый Samsung T7 Touch на 1 ТБ</b> — снят с производства. У Samsung сейчас T7 Shield и T9, и <b>сканера отпечатка в них нет</b>: не перепутай при покупке, названия почти одинаковые.</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><b>Kingston IronKey Vault Privacy 80</b> в KaBuM (R$ 4 270, 960 ГБ) — защита есть, но <b>PIN-экраном, а не пальцем</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="note reveal">
+      <h3><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--blue)"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Что я бы взял на твоём месте</h3>
+      <ul>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>Основной сценарий — сборка за R$ 791,50.</b> Терабайт, отпечаток на самом корпусе, холодный SATA, обе позиции с бесплатной доставкой и возвратом. Если сканер в корпусе окажется кривым — вернёшь корпус за 35 реалов, а диск останется полезным в любом случае.</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>Если нужен бренд и скорость 1050 МБ/с</b> — б/у T7 Touch за R$ 699, но проверь диск в первые 12 дней: возврат ограничен этим сроком, а гарантии Samsung на б/у нет.</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>Если бюджет не вопрос и важен именно нагрев</b> — TWOPAN Pro: единственный с активным вентилятором и датчиком температуры на экране. Но 4157 реалов и ждать до 20 августа.</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><b>Чего точно не делать</b> — не платить 1980 за T7 Touch на 500 ГБ без гарантии и не ехать за диском со сканером в ТЦ: там их нет.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Подборка для Рио-де-Жанейро · проверено 10 августа 2026</div>
+    <div class="src">Цены и наличие сняты вручную с карточек товаров: <a href="https://www.mercadolivre.com.br" target="_blank" rel="noopener">Mercado Livre</a> (под авторизацией), <a href="https://www.amazon.com.br" target="_blank" rel="noopener">Amazon.com.br</a>, <a href="https://www.kalunga.com.br" target="_blank" rel="noopener">Kalunga</a>, <a href="https://www.kabum.com.br" target="_blank" rel="noopener">KaBuM!</a>, <a href="https://site.fastshop.com.br" target="_blank" rel="noopener">Fast Shop</a>. Характеристики T7 Touch — по <a href="https://www.samsung.com" target="_blank" rel="noopener">данным Samsung</a> и обзору <a href="https://www.pcworld.com/article/398724/samsung-portable-ssd-t7-touch-review.html" target="_blank" rel="noopener">PCWorld</a>. Все фото — реальные снимки товаров с карточек продавцов. Цены могут измениться.</div>
+  </div>
+</footer>
+
+<script type="module">
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const items = Array.from(document.querySelectorAll('.reveal'));
+  const failsafe = setTimeout(() => {
+    document.documentElement.classList.remove('motion-ready');
+  }, 2500);
+
+  if (!reduce) {
+    try {
+      const { animate, inView, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      document.documentElement.classList.add('motion-ready');
+
+      const groups = new Map();
+      items.forEach(el => {
+        const sec = el.closest('section, header') || document.body;
+        if (!groups.has(sec)) groups.set(sec, []);
+        groups.get(sec).push(el);
+      });
+
+      groups.forEach((els) => {
+        inView(els[0].closest('section, header') || els[0], () => {
+          animate(els, { opacity: [0, 1], y: [22, 0] },
+            { duration: 0.55, delay: stagger(0.06), easing: [0.2, 0.7, 0.2, 1] });
+        }, { amount: 0.12 });
+      });
+
+      clearTimeout(failsafe);
+      setTimeout(() => {
+        items.forEach(el => { if (getComputedStyle(el).opacity === '0') { el.style.opacity = '1'; el.style.transform = 'none'; } });
+      }, 1800);
+    } catch (e) {
+      document.documentElement.classList.remove('motion-ready');
+      clearTimeout(failsafe);
+    }
+  } else {
+    clearTimeout(failsafe);
+  }
+</script>
+
+</body>
+</html>
