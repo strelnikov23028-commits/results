@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Робот-пылесос без импорта и налогов — Рио, 12.08.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --surface:#FFFFFF; --text:#1D1D1F; --text-2:#6E6E73; --text-3:#86868B;
+    --blue:#0071E3; --green:#00875A; --amber:#B25E00; --red:#D70015;
+    --border:#E5E5EA; --radius:20px;
+    --shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+    --shadow-h:0 4px 12px rgba(0,0,0,.07), 0 16px 40px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;font-size:17px;
+    -webkit-font-smoothing:antialiased;padding:0 20px 100px}
+  .wrap{max-width:1120px;margin:0 auto}
+
+  header{padding:78px 0 50px;text-align:center}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--green);margin-bottom:20px}
+  h1{font-size:clamp(32px,5.2vw,54px);font-weight:700;letter-spacing:-.025em;line-height:1.09;margin-bottom:20px}
+  .sub{font-size:clamp(17px,2.2vw,21px);color:var(--text-2);max-width:730px;margin:0 auto 28px}
+  .meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--text-3)}
+  .meta span{background:var(--surface);border:1px solid var(--border);padding:7px 15px;border-radius:100px;font-weight:500}
+
+  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:36px 34px;margin-bottom:34px;box-shadow:var(--shadow);border-left:4px solid var(--green)}
+  .verdict h2{font-size:23px;font-weight:600;letter-spacing:-.015em;margin-bottom:14px}
+  .verdict p{color:var(--text-2);margin-bottom:13px;font-size:16px}
+  .verdict p:last-child{margin-bottom:0}
+  .verdict strong{color:var(--text);font-weight:600}
+  .money{font-variant-numeric:tabular-nums;font-weight:600;color:var(--text);white-space:nowrap}
+
+  .tax{background:#FFF9F2;border:1px solid #F0E0CC;border-radius:var(--radius);
+    padding:32px 30px;margin-bottom:56px;border-left:4px solid var(--amber)}
+  .tax h2{font-size:21px;font-weight:600;margin-bottom:12px}
+  .tax p{color:var(--text-2);margin-bottom:12px;font-size:15.5px}
+  .tax p:last-child{margin-bottom:0}
+  .tax strong{color:var(--text);font-weight:600}
+  .calc{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;margin:16px 0;font-size:14.5px}
+  .calc-row{display:flex;justify-content:space-between;gap:16px;padding:6px 0;
+    border-bottom:1px solid #F4F4F6;font-variant-numeric:tabular-nums}
+  .calc-row:last-child{border-bottom:none;font-weight:700;color:var(--text);padding-top:10px}
+  .calc-row span:first-child{color:var(--text-2)}
+
+  section{margin-bottom:68px}
+  .sec-head{margin-bottom:26px}
+  h2.sec{font-size:clamp(25px,3.3vw,33px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  .sec-sub{color:var(--text-2);font-size:16px;max-width:780px}
+
+  .grid{display:grid;gap:22px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(400px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;
+    transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1)}
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
+  .card.top{border-top:4px solid var(--green)}
+
+  .hero-card{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:34px;align-items:start}
+  @media(max-width:820px){.hero-card{grid-template-columns:1fr;gap:24px}}
+
+  .shot{background:#FAFAFC;border:1px solid var(--border);border-radius:16px;
+    display:flex;align-items:center;justify-content:center;padding:18px;overflow:hidden}
+  .shot img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+  .shot-lg{aspect-ratio:1/1}
+  .shot-sm{aspect-ratio:4/3;margin-bottom:20px}
+
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+    padding:5px 12px;border-radius:100px;margin-bottom:13px}
+  .b-blue{background:rgba(0,113,227,.09);color:var(--blue)}
+  .b-green{background:rgba(0,135,90,.1);color:var(--green)}
+  .b-amber{background:rgba(178,94,0,.1);color:var(--amber)}
+  .b-red{background:rgba(215,0,21,.08);color:var(--red)}
+
+  .card h3{font-size:21px;font-weight:600;letter-spacing:-.015em;margin-bottom:6px;line-height:1.25}
+  .hero-card h3{font-size:29px}
+  .brand{font-size:13px;color:var(--text-3);font-weight:500;margin-bottom:16px}
+
+  .price-row{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:16px}
+  .price{font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .hero-card .price{font-size:34px}
+  .price-usd{font-size:14px;color:var(--text-3);font-weight:500;font-variant-numeric:tabular-nums}
+
+  .specs{list-style:none;margin-bottom:18px}
+  .specs li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;
+    border-bottom:1px solid #F0F0F2;font-size:14.5px;color:var(--text-2)}
+  .specs li:last-child{border-bottom:none}
+  .specs li svg{flex-shrink:0;margin-top:4px}
+  .specs b{color:var(--text);font-weight:600}
+
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px;margin-bottom:18px}
+  .kv dt{color:var(--text-3);font-weight:500;white-space:nowrap}
+  .kv dd{color:var(--text);font-weight:500}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);
+    color:#fff;text-decoration:none;padding:13px 26px;border-radius:100px;font-size:15px;font-weight:600;
+    transition:background .2s,transform .2s;cursor:pointer;min-height:44px;margin-top:auto}
+  .btn:hover{background:#0077ED;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid rgba(0,113,227,.4);outline-offset:2px}
+  .btn-green{background:var(--green)}
+  .btn-green:hover{background:#009B66}
+  .btn-ghost{background:transparent;color:var(--blue);border:1px solid var(--border)}
+  .btn-ghost:hover{background:#F0F7FF;border-color:var(--blue)}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+
+  .note{font-size:13.5px;color:var(--text-3);margin-top:13px;padding-top:13px;
+    border-top:1px solid #F0F0F2;line-height:1.5}
+
+  .table-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:880px;font-size:14.5px}
+  th,td{padding:14px 15px;text-align:left;border-bottom:1px solid #F0F0F2;vertical-align:middle}
+  th{font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--text-3);background:#FAFAFC;white-space:nowrap}
+  td:first-child{font-weight:600;color:var(--text)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.win{background:rgba(0,135,90,.05)}
+  tbody tr.bad{background:rgba(215,0,21,.03)}
+  tbody tr:hover{background:#FAFAFC}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .yes{color:var(--green);font-weight:600}
+  .no{color:var(--red);font-weight:600}
+  .mid{color:var(--amber);font-weight:600}
+
+  .facts{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:32px 30px;box-shadow:var(--shadow)}
+  .facts ol{list-style:none;counter-reset:c}
+  .facts li{counter-increment:c;position:relative;padding-left:44px;margin-bottom:20px;
+    font-size:15.5px;color:var(--text-2)}
+  .facts li:last-child{margin-bottom:0}
+  .facts li::before{content:counter(c);position:absolute;left:0;top:-1px;width:28px;height:28px;
+    border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;
+    justify-content:center;font-size:13px;font-weight:600}
+  .facts b{color:var(--text);font-weight:600}
+
+  footer{text-align:center;padding-top:42px;border-top:1px solid var(--border);
+    font-size:13.5px;color:var(--text-3);line-height:1.7}
+  footer a{color:var(--blue);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  a.inline{color:var(--blue);text-decoration:none;font-weight:500}
+  a.inline:hover{text-decoration:underline}
+
+  .js-motion .reveal{opacity:0}
+  @media (prefers-reduced-motion:reduce){
+    .js-motion .reveal{opacity:1!important;transform:none!important}
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Подборка без импорта · Рио-де-Жанейро · 12 августа 2026</div>
+  <h1>Робот-пылесос<br>без таможни и переплат</h1>
+  <p class="sub">Только товары со складов внутри Бразилии: никаких импортных пошлин, никакого ожидания таможни. Сеть 127 В, полная станция с мойкой мопов, доставка за дни.</p>
+  <div class="meta">
+    <span>Только местные склады</span>
+    <span>127 В</span>
+    <span>Пороги 2–2,5 см</span>
+    <span>Курс R$ 5,10 / $1</span>
+    <span>Цены сняты 12.08.2026</span>
+  </div>
+</header>
+
+<div class="verdict reveal">
+  <h2>Короткий ответ</h2>
+  <p>Нашёл: <strong>Xiaomi Robot Vacuum H50 в версии 127 В за <span class="money">R$ 2 949</span></strong> — это <span class="money">$578</span>. Отправка со склада в Бразилии, импортных налогов нет, вилка родная, сертификат ANATEL. Станция сама моет мопы, сушит их, доливает воду в робота и вытряхивает пыль в мешок на 75 дней.</p>
+  <p>Это <strong>единственная модель</strong>, где сходятся сразу все ваши требования при местной поставке. Все остальные варианты либо дороже на R$ 850–1 800, либо идут импортом, либо работают только от 220 В.</p>
+  <p>Одна оговорка, о которой честно: у H50 предел порога <strong>20 мм</strong>. Пороги 2 см он возьмёт, а вот 2,5 см — уже нет. Если такой порог есть, под него нужен <a class="inline" href="#rampa">пандус за R$ 105</a> — тоже с местного склада.</p>
+</div>
+
+<div class="tax reveal">
+  <h2>Почему импортные карточки — плохая идея</h2>
+  <p>На Mercado Livre полно роботов с пометкой <strong>«Internacional»</strong>, и они выглядят дешевле. Но с мая 2026 при ввозе посылки дороже <strong>$50</strong> действует импортная пошлина <strong>60%</strong> (со скидкой $20 от суммы налога) плюс <strong>ICMS 17–20%</strong>, который считается «изнутри», то есть на сумму товара вместе с доставкой и самой пошлиной.</p>
+  <p>Вот как это выглядит на роботе за $538 — том самом Ecovacs T50 Pro Omni, что кажется выгодным:</p>
+  <div class="calc">
+    <div class="calc-row"><span>Цена товара</span><span>$538 · R$ 2 742</span></div>
+    <div class="calc-row"><span>Импортная пошлина 60% минус скидка $20</span><span>+ R$ 1 543</span></div>
+    <div class="calc-row"><span>ICMS 20% «изнутри»</span><span>+ R$ 1 071</span></div>
+    <div class="calc-row"><span>Итого при полном обложении</span><span>≈ R$ 5 356 · $1 050</span></div>
+  </div>
+  <p>Площадки в программе Remessa Conforme <strong>обычно включают налог в цену на этапе оплаты</strong> — тогда переплаты не будет. Но проверить это можно только в корзине, после ввода CEP, и гарантия всё равно останется «через площадку», а посылка будет идти <strong>1–3 недели</strong> с риском задержки на таможне.</p>
+  <p>Поэтому в этой подборке <strong>ни одного импортного товара нет</strong> — только то, что уже лежит на складе в Бразилии.</p>
+</div>
+
+<!-- ============ ПОБЕДИТЕЛЬ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Выбор №1</h2>
+    <p class="sec-sub">Дешевле всех местных вариантов и при этом закрывает все требования: станция с водой, лидар, приложение, 127 В.</p>
+  </div>
+
+  <div class="card hero-card top reveal">
+    <div class="shot shot-lg">
+      <img src="https://http2.mlstatic.com/D_NQ_NP_779219-MLA110348183166_052026-O-robo-aspirador-xiaomi-h50-10000pa--127v-branco.webp" alt="Робот-пылесос Xiaomi Robot Vacuum H50 со станцией самоочистки" loading="lazy" width="300" height="300">
+    </div>
+    <div style="display:flex;flex-direction:column;min-width:0">
+      <span class="badge b-green">Местный склад · без налогов · 127 В</span>
+      <h3>Xiaomi Robot Vacuum H50</h3>
+      <div class="brand">Xiaomi · 10 000 Па · порог 20 мм · сертификат ANATEL</div>
+
+      <div class="price-row">
+        <span class="price">R$ 2 949</span>
+        <span class="price-usd">≈ $578 · продавец с 1000+ продаж</span>
+      </div>
+
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Полная станция:</b> баки 4 л чистой и 4 л грязной воды, мешок для пыли на 75 дней, мойка и сушка мопов, автодолив воды в робота</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Два вращающихся мопа 180 об/мин</b> с прижимом — настоящая мойка, а не влажная тряпка. Моющая доска в базе оттирает их под струёй</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Лидар <b>LDS 360°</b>, карты комнат, зоны запрета, расписание — через Xiaomi Home. Alexa и Google Assistant</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Батарея 5200 мА·ч — <b>до 180 минут</b> и до 240 м² за одну уборку. Подъём мопа 10 мм на коврах</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Тяга <b>10 000 Па</b> — не рекорд, но для плитки и ламината в Рио с запасом</span></li>
+      </ul>
+
+      <dl class="kv">
+        <dt>Поставка</dt><dd>склад в Бразилии, импортных налогов нет</dd>
+        <dt>Вольтаж</dt><dd>127 В, родная вилка</dd>
+        <dt>Порог</dt><dd>20 мм — на 2,5 см нужен пандус</dd>
+      </dl>
+
+      <div class="btns">
+        <a class="btn btn-green" href="https://www.mercadolivre.com.br/robo-aspirador-xiaomi-h50-10000pa--127v-branco/up/MLBU4373892026" target="_blank" rel="noopener">Купить · R$ 2 949</a>
+        <a class="btn btn-ghost" href="https://lista.mercadolivre.com.br/xiaomi-h50-127v-robo-aspirador" target="_blank" rel="noopener">Другие продавцы 127 В</a>
+      </div>
+      <p class="note">Есть карточки того же H50 в 127 В за R$ 2 999, R$ 3 199 и R$ 3 299 — берите ту, где лучше рейтинг продавца и срок доставки для вашего CEP. Версия за R$ 2 699 существует, но она <b>220 В</b> — не берите её.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ПАНДУС ============ -->
+<section id="rampa">
+  <div class="sec-head reveal">
+    <h2 class="sec">Если порог 2,5 см</h2>
+    <p class="sec-sub">25 мм — выше предела любого робота из этой подборки (у них 18–22 мм). Решается за R$ 105, тоже без импорта.</p>
+  </div>
+
+  <div class="card reveal" style="max-width:640px">
+    <div class="shot shot-sm">
+      <img src="https://http2.mlstatic.com/D_NQ_NP_819664-MLB113842209260_072026-O-rampa-universal-robo-aspirador-soleira-pronta-entrega-5cm.webp" alt="Пандус BE NEXT для робота-пылесоса под порог" loading="lazy">
+    </div>
+    <span class="badge b-green">Местный склад · доставка бесплатно</span>
+    <h3>Пандус BE NEXT</h3>
+    <div class="brand">Бразильский бренд · универсальный · 7 дней на возврат</div>
+    <div class="price-row">
+      <span class="price">R$ 105</span>
+      <span class="price-usd">≈ $21 за штуку, версия под 3,5 см</span>
+    </div>
+    <ul class="specs">
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Есть версии под <b>3,5 см и 5 см</b> — для порога 2,5 см берите с запасом</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Нужен <b>с обеих сторон</b> порога — робот возвращается на базу тем же путём</span></li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Берите по ширине проёма и зафиксируйте к полу, иначе робот сдвинет его колесом</span></li>
+    </ul>
+    <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/rampa-universal-robo-aspirador-soleira-pronta-entrega-5cm/up/MLBU4381469038" target="_blank" rel="noopener">Смотреть пандусы BE NEXT</a>
+    <p class="note">Независимых тестов именно этих пандусов я не нашёл — оценка по механике. Возьмите один на самый проблемный порог и проверьте, прежде чем докупать остальные.</p>
+  </div>
+</section>
+
+<!-- ============ АЛЬТЕРНАТИВЫ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Другие местные варианты</h2>
+    <p class="sec-sub">Все три тоже без импорта и в вашем бюджете. Каждый дороже H50, но за конкретное преимущество.</p>
+  </div>
+
+  <div class="grid grid-3">
+
+    <div class="card reveal">
+      <div class="shot shot-sm">
+        <img src="https://images6.kabum.com.br/produtos/fotos/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000p-110v-branco-ksar400010br_1783338049_gg.jpg" alt="Робот-пылесос KaBuM! smart K4000 с базой самоочистки" loading="lazy">
+      </div>
+      <span class="badge b-blue">Гарантия магазина в Бразилии</span>
+      <h3>KaBuM! smart K4000</h3>
+      <div class="brand">KaBuM! · 20 000 Па · 127 В · в наличии</div>
+      <div class="price-row">
+        <span class="price">R$ 3 800</span>
+        <span class="price-usd">≈ $745 в PIX (−10%)</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Самая мощная тяга подборки — <b>20 000 Па</b>, баки 4 л + 3,5 л, мешок 3,5 л</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Моп выезжает на 10 мм к плинтусам, поднимается на 15 мм на коврах</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Гарантия и сервис <b>через сам магазин</b>, а не через маркетплейс</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Высота порога <b>не указана</b> в спецификации — единственная модель с такой дырой</span></li>
+      </ul>
+      <a class="btn" href="https://www.kabum.com.br/produto/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000pa-127v-branco-ksar400010br" target="_blank" rel="noopener">Смотреть на KaBuM</a>
+      <p class="note">Собственная марка магазина, а не Xiaomi или Ecovacs: с обновлениями приложения и запчастями через пару лет может быть хуже. Берите, если важна гарантия в один клик.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot shot-sm">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_783853-MLA112254926893_052026-O.webp" alt="Робот-пылесос Xiaomi H50 Pro со станцией и горячей мойкой" loading="lazy">
+      </div>
+      <span class="badge b-blue">Мощнее и берёт углы</span>
+      <h3>Xiaomi H50 Pro</h3>
+      <div class="brand">Xiaomi · 15 000 Па · 127 В · в наличии</div>
+      <div class="price-row">
+        <span class="price">R$ 3 999</span>
+        <span class="price-usd">≈ $784</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мойка мопов <b>горячей водой</b> и сушка горячим воздухом — меньше шансов на запах</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Две выдвижные «руки»: щётка и моп <b>выезжают в углы</b> и под мебель</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>15 000 Па</b> — в полтора раза мощнее обычного H50</span></li>
+      </ul>
+      <a class="btn" href="https://www.mercadolivre.com.br/robo-aspirador-xiaomi-vacuum-h50-pro-branco-127v/p/MLB70270895" target="_blank" rel="noopener">Смотреть · R$ 3 999</a>
+      <p class="note">Переплата к обычному H50 — R$ 1 050. Оправдана, если в квартире много углов, мебели на ножках и хочется горячую мойку.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot shot-sm">
+        <img src="https://m.media-amazon.com/images/I/610gG5FXmeL._AC_SX679_.jpg" alt="Робот-пылесос MOVA E40 Ultra со станцией самоочистки" loading="lazy">
+      </div>
+      <span class="badge b-amber">Чуть выше бюджета</span>
+      <h3>MOVA E40 Ultra</h3>
+      <div class="brand">MOVA (суббренд Dreame) · 19 000 Па · бивольт</div>
+      <div class="price-row">
+        <span class="price">R$ 4 741</span>
+        <span class="price-usd">≈ $930</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Бивольт 100–240 В</b> — про розетку можно вообще не думать</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Порог <b>22 мм</b> — лучший в подборке, баки 4,5 л + 4 л, мешок на 75 дней</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Amazon со <b>склада в Бразилии</b> — доставка за пару дней</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.amazon.com.br/dp/B0H5FXY424" target="_blank" rel="noopener">Смотреть на Amazon</a>
+      <p class="note">Выходит за озвученный потолок $800 на $130. Смысл переплаты — порог 22 мм и бивольт: если пороги ближе к 2,2 см, это единственный местный вариант, который их возьмёт.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ТАБЛИЦА ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Всё в одной таблице</h2>
+    <p class="sec-sub">Сверху — местные варианты, снизу — импортные для сравнения. У всех полная станция с мойкой мопов и автодоливом воды.</p>
+  </div>
+  <div class="table-scroll reveal">
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Цена</th><th>Поставка</th><th>Налоги</th>
+          <th>127 В</th><th>Порог</th><th>Тяга</th><th>Срок</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="win">
+          <td>Xiaomi H50</td><td class="num">R$ 2 949</td><td class="yes">Бразилия</td><td class="yes">Нет</td>
+          <td class="yes">Да</td><td class="num">20 мм</td><td class="num">10 000 Па</td><td class="yes">Дни</td>
+        </tr>
+        <tr class="win">
+          <td>KaBuM! K4000</td><td class="num">R$ 3 800</td><td class="yes">Бразилия</td><td class="yes">Нет</td>
+          <td class="yes">Да</td><td class="mid">н/д</td><td class="num">20 000 Па</td><td class="yes">Дни</td>
+        </tr>
+        <tr class="win">
+          <td>Xiaomi H50 Pro</td><td class="num">R$ 3 999</td><td class="yes">Бразилия</td><td class="yes">Нет</td>
+          <td class="yes">Да</td><td class="num">20 мм</td><td class="num">15 000 Па</td><td class="yes">Дни</td>
+        </tr>
+        <tr>
+          <td>MOVA E40 Ultra</td><td class="num">R$ 4 741</td><td class="yes">Бразилия</td><td class="yes">Нет</td>
+          <td class="yes">Бивольт</td><td class="num">22 мм</td><td class="num">19 000 Па</td><td class="yes">Дни</td>
+        </tr>
+        <tr>
+          <td>eufy C20 Omni</td><td class="num">R$ 3 749</td><td class="yes">Бразилия</td><td class="yes">Нет</td>
+          <td class="no">Нет, 220 В</td><td class="no">18 мм</td><td class="num">7 000 Па</td><td class="yes">14 авг.</td>
+        </tr>
+        <tr class="bad">
+          <td>Ecovacs T50 Pro Omni</td><td class="num">R$ 2 742</td><td class="no">Импорт US</td><td class="no">60% + ICMS</td>
+          <td class="yes">Да</td><td class="num">22 мм</td><td class="num">15 000 Па</td><td class="no">1–3 нед.</td>
+        </tr>
+        <tr class="bad">
+          <td>Ecovacs X9 Pro Omni</td><td class="num">R$ 3 385</td><td class="no">Импорт</td><td class="no">60% + ICMS</td>
+          <td class="mid">Уточнить</td><td class="num">20 мм</td><td class="num">16 600 Па</td><td class="no">1–3 нед.</td>
+        </tr>
+        <tr class="bad">
+          <td>Roborock Qrevo QV 35A</td><td class="num">R$ 3 661</td><td class="no">Импорт</td><td class="no">60% + ICMS</td>
+          <td class="yes">Да</td><td class="num">20 мм</td><td class="num">8 000 Па</td><td class="no">1–3 нед.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="border-top:none;padding-top:12px">eufy C20 Omni едет со склада в Бразилии и без налогов, но работает только от 220 В — с вашей сетью 127 В понадобится трансформатор от 1000 ВА, это ещё R$ 400–600 и коробка размером с обувную. Поэтому в тройку он не попал.</p>
+</section>
+
+<!-- ============ ЧЕКЛИСТ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Перед оплатой</h2>
+  </div>
+  <div class="facts reveal">
+    <ol>
+      <li><b>Проверьте, что в карточке нет слова «Internacional».</b> Это главный маркер импорта на Mercado Livre. Если оно есть — закрывайте и ищите другого продавца.</li>
+      <li><b>Убедитесь, что версия именно 127 В.</b> У H50 в продаже есть и 220 В за R$ 2 699 — она дешевле, и именно поэтому её легко купить по ошибке. Вилка и напряжение должны быть указаны прямо в карточке.</li>
+      <li><b>Введите свой CEP до оплаты.</b> Площадка покажет точный срок и стоимость доставки в Барру. Для местных товаров это обычно 2–5 дней.</li>
+      <li><b>Померьте каждый порог линейкой.</b> До 20 мм — H50 проедет сам. Ровно 25 мм — нужен пандус на этот проём или MOVA E40 Ultra с её 22 мм.</li>
+      <li><b>Место под станцию.</b> База — тумба примерно 45×35×50 см, ей нужна розетка и по 30 см свободного места с боков и спереди. Ставьте её там, куда робот попадает без порогов.</li>
+      <li><b>Wi-Fi только 2,4 ГГц.</b> Если роутер раздаёт общую сеть 2,4 + 5 ГГц, на время настройки 5 ГГц лучше отключить — иначе робот не подключится.</li>
+      <li><b>Заложите расходники.</b> Мешки, мопы и щётки — примерно R$ 150–250 в год. Для Xiaomi H50 наборы есть и на Amazon, и на ML.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>Цены, наличие и тип поставки проверены вручную 12 августа 2026 года на Mercado Livre, Amazon.com.br и KaBuM!. Курс — R$ 5,10 за $1.<br>Расчёт налогов приведён по правилам режима Remessa Conforme, действующим с мая 2026 года: пошлина 60% на посылки дороже $50 со скидкой $20, плюс ICMS 17–20%.</p>
+  <p style="margin-top:10px">Источники: <a href="https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona" target="_blank" rel="noopener">Receita Federal о Remessa Conforme</a>, <a href="https://www.mi.com/global/product/xiaomi-robot-vacuum-h50/" target="_blank" rel="noopener">спецификация Xiaomi H50</a>.</p>
+  <p style="margin-top:14px"><a href="robo-aspirador-omni-rio.html">← Полная подборка: 11 моделей с omni-станцией, включая импортные</a></p>
+</footer>
+
+</div>
+
+<script type="module">
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const showAll = () => document.documentElement.classList.remove('js-motion');
+
+  if (!reduced && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-motion');
+    const fallback = setTimeout(showAll, 2500);
+
+    try {
+      const { animate, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      clearTimeout(fallback);
+
+      const reveal = (el) => {
+        const kids = el.matches('.grid') ? el.querySelectorAll('.card') : null;
+        const many = kids && kids.length > 1;
+        animate(many ? kids : el,
+          { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
+          { duration: 0.55, delay: many ? stagger(0.06) : 0, easing: [0.22, 0.61, 0.36, 1] }
+        );
+      };
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          io.unobserve(entry.target);
+          entry.target.style.opacity = '1';
+          reveal(entry.target);
+        });
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
+
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach((el) => {
+          if (getComputedStyle(el).opacity === '0') el.style.opacity = '1';
+        });
+      }, 6000);
+
+    } catch (e) {
+      clearTimeout(fallback);
+      showAll();
+    }
+  }
+</script>
+</body>
+</html>
