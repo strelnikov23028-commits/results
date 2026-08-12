@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Роботы без мойки пола, с автоопорожнением — Рио, 12.08.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --surface:#FFFFFF; --text:#1D1D1F; --text-2:#6E6E73; --text-3:#86868B;
+    --blue:#0071E3; --green:#00875A; --amber:#B25E00; --red:#D70015;
+    --border:#E5E5EA; --radius:20px;
+    --shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+    --shadow-h:0 4px 12px rgba(0,0,0,.07), 0 16px 40px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;font-size:17px;
+    -webkit-font-smoothing:antialiased;padding:0 20px 100px}
+  .wrap{max-width:1120px;margin:0 auto}
+
+  header{padding:78px 0 46px;text-align:center}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--blue);margin-bottom:20px}
+  h1{font-size:clamp(31px,5vw,52px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:20px}
+  .sub{font-size:clamp(17px,2.2vw,21px);color:var(--text-2);max-width:740px;margin:0 auto 28px}
+  .meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--text-3)}
+  .meta span{background:var(--surface);border:1px solid var(--border);padding:7px 15px;border-radius:100px;font-weight:500}
+
+  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:36px 34px;margin-bottom:30px;box-shadow:var(--shadow);border-left:4px solid var(--amber)}
+  .verdict h2{font-size:23px;font-weight:600;letter-spacing:-.015em;margin-bottom:14px}
+  .verdict p{color:var(--text-2);margin-bottom:13px;font-size:16px}
+  .verdict p:last-child{margin-bottom:0}
+  .verdict strong{color:var(--text);font-weight:600}
+  .money{font-variant-numeric:tabular-nums;font-weight:600;color:var(--text);white-space:nowrap}
+
+  .crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:20px 0 0}
+  .crit-item{background:#FAFAFC;border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+  .crit-item .c-name{font-size:13px;color:var(--text-3);font-weight:500;margin-bottom:5px}
+  .crit-item .c-val{font-size:15px;font-weight:600;line-height:1.4}
+  .c-ok{color:var(--green)}
+  .c-no{color:var(--red)}
+  .c-mid{color:var(--amber)}
+
+  section{margin-bottom:66px}
+  .sec-head{margin-bottom:26px}
+  h2.sec{font-size:clamp(25px,3.3vw,33px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  .sec-sub{color:var(--text-2);font-size:16px;max-width:800px}
+
+  .grid{display:grid;gap:22px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(400px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;
+    transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1)}
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
+  .card.top{border-top:4px solid var(--green)}
+
+  .hero-card{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:34px;align-items:start}
+  @media(max-width:820px){.hero-card{grid-template-columns:1fr;gap:24px}}
+
+  .shot{background:#FAFAFC;border:1px solid var(--border);border-radius:16px;
+    display:flex;align-items:center;justify-content:center;padding:18px;overflow:hidden}
+  .shot img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+  .shot-lg{aspect-ratio:1/1}
+  .shot-sm{aspect-ratio:4/3;margin-bottom:20px}
+
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+    padding:5px 12px;border-radius:100px;margin-bottom:13px}
+  .b-blue{background:rgba(0,113,227,.09);color:var(--blue)}
+  .b-green{background:rgba(0,135,90,.1);color:var(--green)}
+  .b-amber{background:rgba(178,94,0,.1);color:var(--amber)}
+
+  .card h3{font-size:21px;font-weight:600;letter-spacing:-.015em;margin-bottom:6px;line-height:1.25}
+  .hero-card h3{font-size:29px}
+  .brand{font-size:13px;color:var(--text-3);font-weight:500;margin-bottom:16px}
+
+  .price-row{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:16px}
+  .price{font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .hero-card .price{font-size:34px}
+  .price-usd{font-size:14px;color:var(--text-3);font-weight:500;font-variant-numeric:tabular-nums}
+
+  .specs{list-style:none;margin-bottom:18px}
+  .specs li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;
+    border-bottom:1px solid #F0F0F2;font-size:14.5px;color:var(--text-2)}
+  .specs li:last-child{border-bottom:none}
+  .specs li svg{flex-shrink:0;margin-top:4px}
+  .specs b{color:var(--text);font-weight:600}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);
+    color:#fff;text-decoration:none;padding:13px 26px;border-radius:100px;font-size:15px;font-weight:600;
+    transition:background .2s,transform .2s;cursor:pointer;min-height:44px;margin-top:auto}
+  .btn:hover{background:#0077ED;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid rgba(0,113,227,.4);outline-offset:2px}
+  .btn-green{background:var(--green)}
+  .btn-green:hover{background:#009B66}
+  .btn-ghost{background:transparent;color:var(--blue);border:1px solid var(--border)}
+  .btn-ghost:hover{background:#F0F7FF;border-color:var(--blue)}
+
+  .note{font-size:13.5px;color:var(--text-3);margin-top:13px;padding-top:13px;
+    border-top:1px solid #F0F0F2;line-height:1.5}
+
+  .table-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:900px;font-size:14.5px}
+  th,td{padding:14px 15px;text-align:left;border-bottom:1px solid #F0F0F2;vertical-align:middle}
+  th{font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--text-3);background:#FAFAFC;white-space:nowrap}
+  td:first-child{font-weight:600;color:var(--text)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.win{background:rgba(0,135,90,.05)}
+  tbody tr:hover{background:#FAFAFC}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .yes{color:var(--green);font-weight:600}
+  .no{color:var(--red);font-weight:600}
+  .mid{color:var(--amber);font-weight:600}
+
+  .facts{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:32px 30px;box-shadow:var(--shadow)}
+  .facts ol{list-style:none;counter-reset:c}
+  .facts li{counter-increment:c;position:relative;padding-left:44px;margin-bottom:20px;
+    font-size:15.5px;color:var(--text-2)}
+  .facts li:last-child{margin-bottom:0}
+  .facts li::before{content:counter(c);position:absolute;left:0;top:-1px;width:28px;height:28px;
+    border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;
+    justify-content:center;font-size:13px;font-weight:600}
+  .facts b{color:var(--text);font-weight:600}
+
+  footer{text-align:center;padding-top:42px;border-top:1px solid var(--border);
+    font-size:13.5px;color:var(--text-3);line-height:1.7}
+  footer a{color:var(--blue);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  a.inline{color:var(--blue);text-decoration:none;font-weight:500}
+  a.inline:hover{text-decoration:underline}
+
+  .js-motion .reveal{opacity:0}
+  @media (prefers-reduced-motion:reduce){
+    .js-motion .reveal{opacity:1!important;transform:none!important}
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Дополнительная подборка · Рио-де-Жанейро · 12 августа 2026</div>
+  <h1>Роботы без мойки пола,<br>но с автоопорожнением</h1>
+  <p class="sub">Станция только вытряхивает пыль в мешок — никакой возни с водой. Проверил, что реально есть на складах в Бразилии, и где ваши критерии упираются в рынок.</p>
+  <div class="meta">
+    <span>Только местные склады</span>
+    <span>127 В / бивольт</span>
+    <span>Порог от 20 мм</span>
+    <span>Курс R$ 5,10 / $1</span>
+    <span>Цены сняты 12.08.2026</span>
+  </div>
+</header>
+
+<div class="verdict reveal">
+  <h2>Сразу честно: два критерия рынок не закрывает</h2>
+  <p>Вы задали пять условий. Три из них выполнимы, а два — нет, и лучше знать об этом до покупки, чем после.</p>
+  <div class="crit">
+    <div class="crit-item">
+      <div class="c-name">Автоопорожнение в мешок</div>
+      <div class="c-val c-ok">Есть, много вариантов</div>
+    </div>
+    <div class="crit-item">
+      <div class="c-name">127 В или бивольт</div>
+      <div class="c-val c-ok">Есть</div>
+    </div>
+    <div class="crit-item">
+      <div class="c-name">Порог от 20 мм</div>
+      <div class="c-val c-ok">Есть</div>
+    </div>
+    <div class="crit-item">
+      <div class="c-name">От 15 000 Па без мойки</div>
+      <div class="c-val c-no">Нет ни одной</div>
+    </div>
+    <div class="crit-item">
+      <div class="c-name">Подтверждённые ≤ 62 дБ</div>
+      <div class="c-val c-no">Нет данных ни у кого</div>
+    </div>
+  </div>
+  <p style="margin-top:20px"><strong>Про мощность.</strong> Среди моделей, где станция только вытряхивает пыль, потолок в Бразилии — <strong>13 000 Па</strong>. Всё, что мощнее 15 000 Па, идёт исключительно в исполнении omni, то есть с мойкой мопов. Производители просто не делают мощные модели «без воды» — верхний сегмент весь ушёл в мойку.</p>
+  <p><strong>Про шум.</strong> Dreame, Roborock и Xiaomi <strong>вообще не публикуют уровень шума</strong> для этих моделей — я проверил их спецификации. Единственные подтверждённые цифры на рынке: WAP W4000 — 65 дБ, Ecovacs T50 Pro Omni — 63 дБ. Ни одной локальной модели с заявленными 62 дБ и ниже не существует. Обещать вам «до 62 дБ» я не могу, потому что это нечем подтвердить.</p>
+</div>
+
+<!-- ============ ЛУЧШИЙ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Лучшее из реального</h2>
+    <p class="sec-sub">Максимум мощности среди моделей без мойки, официальный продавец и цена ниже всех конкурентов в классе.</p>
+  </div>
+
+  <div class="card hero-card top reveal">
+    <div class="shot shot-lg">
+      <img src="https://m.media-amazon.com/images/I/61N-ZmR2MxL._AC_SX679_.jpg" alt="Робот-пылесос Dreame D15 Plus со станцией автоопорожнения" loading="lazy" width="300" height="300">
+    </div>
+    <div style="display:flex;flex-direction:column;min-width:0">
+      <span class="badge b-green">Местный склад · официальный продавец · 127 В</span>
+      <h3>Dreame D15 Plus</h3>
+      <div class="brand">Dreame · 13 000 Па · мешок 4 л на 90 дней</div>
+
+      <div class="price-row">
+        <span class="price">R$ 2 564</span>
+        <span class="price-usd">≈ $503 · доставка бесплатно, 14 августа</span>
+      </div>
+
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>13 000 Па Vormax</b> — потолок среди моделей без мойки мопов на бразильском рынке</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мешок <b>4 л на 90 дней</b> — трогать станцию нужно раз в квартал, а не раз в неделю</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Продавец — <b>DREAME LTDA</b>, то есть сам производитель, а не перекупщик. Гарантия напрямую</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Лидар, карты нескольких этажей, <b>300 минут</b> работы и до 270 м² за раз, Carpet Boost, антизапутывание волос</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Моп в комплекте есть, но станция его <b>не моет</b> — снимите насадку, и это чистый пылесос</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span><b>Уровень шума Dreame не публикует</b> — ни в карточке, ни в спецификации на сайте</span></li>
+      </ul>
+
+      <a class="btn btn-green" href="https://www.amazon.com.br/dp/B0GXFFSVYM" target="_blank" rel="noopener">Смотреть на Amazon · R$ 2 564</a>
+      <p class="note">Высота порога в спецификации D15 Plus тоже не указана. По остальным моделям линейки Dreame (D10 Plus Gen 2 и родственные) это <b>20 мм</b> — ваши 2 см должны проходить, но гарантировать не могу: точной цифры именно для D15 Plus производитель не даёт.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ОБХОДНОЙ ПУТЬ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Если 15 000 Па принципиальны</h2>
+    <p class="sec-sub">Единственный способ получить такую мощность локально — взять omni-модель и просто не ставить мопы. Станция тогда работает как обычное автоопорожнение, воду в неё можно не заливать.</p>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card reveal">
+      <div class="shot shot-sm">
+        <img src="https://images6.kabum.com.br/produtos/fotos/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000p-110v-branco-ksar400010br_1783338049_gg.jpg" alt="Робот-пылесос KaBuM! smart K4000" loading="lazy">
+      </div>
+      <span class="badge b-blue">20 000 Па · максимум мощности</span>
+      <h3>KaBuM! smart K4000</h3>
+      <div class="brand">KaBuM! · 127 В · гарантия магазина</div>
+      <div class="price-row">
+        <span class="price">R$ 3 800</span>
+        <span class="price-usd">≈ $745 в PIX (−10%)</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>20 000 Па</b> — в полтора раза больше вашего минимума</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мешок 3,5 л, гарантия через сам магазин, версия 127 В из коробки</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Переплата R$ 1 236 к D15 Plus за функции мойки, которыми вы не будете пользоваться</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.kabum.com.br/produto/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000pa-127v-branco-ksar400010br" target="_blank" rel="noopener">Смотреть на KaBuM</a>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot shot-sm">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_783853-MLA112254926893_052026-O.webp" alt="Робот-пылесос Xiaomi H50 Pro" loading="lazy">
+      </div>
+      <span class="badge b-blue">15 000 Па · ровно ваш минимум</span>
+      <h3>Xiaomi H50 Pro</h3>
+      <div class="brand">Xiaomi · 127 В · порог 20 мм</div>
+      <div class="price-row">
+        <span class="price">R$ 3 999</span>
+        <span class="price-usd">≈ $784</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>15 000 Па</b> и подтверждённый производителем <b>порог 20 мм</b></span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Единственная официальная цифра по шуму на рынке — <b>57 дБ</b>, но она для режима мойки, где всасывание выключено</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Шум в режиме пылесоса Xiaomi не публикует. Независимый тест обычного H50 (он слабее) дал <b>65 дБ</b></span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/robo-aspirador-xiaomi-vacuum-h50-pro-branco-127v/p/MLB70270895" target="_blank" rel="noopener">Смотреть · R$ 3 999</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ОСТАЛЬНЫЕ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Остальные модели без мойки</h2>
+    <p class="sec-sub">Все с автоопорожнением в мешок и локальной доставкой. Проигрывают D15 Plus по мощности или цене.</p>
+  </div>
+
+  <div class="grid grid-3">
+
+    <div class="card reveal">
+      <div class="shot shot-sm">
+        <img src="https://m.media-amazon.com/images/I/51jD2sxgd7L._AC_SX679_.jpg" alt="Робот-пылесос MOVA E20s Pro Plus" loading="lazy">
+      </div>
+      <span class="badge b-blue">Бивольт</span>
+      <h3>MOVA E20s Pro Plus</h3>
+      <div class="brand">MOVA · 13 000 Па · порог 18 мм</div>
+      <div class="price-row">
+        <span class="price">R$ 3 791</span>
+        <span class="price-usd">≈ $743</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Бивольт 100–240 В</b>, мешок 4 л, лидар LDS</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Порог <b>18 мм</b> — ниже ваших 20 мм</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Та же мощность, что у D15 Plus, но <b>дороже на R$ 1 227</b></span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.amazon.com.br/dp/B0H5FLWD7X" target="_blank" rel="noopener">Смотреть на Amazon</a>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot shot-sm">
+        <img src="https://m.media-amazon.com/images/I/5177weAHzsL._AC_SX679_.jpg" alt="Робот-пылесос Roborock Q10 VF+" loading="lazy">
+      </div>
+      <span class="badge b-blue">Имя бренда</span>
+      <h3>Roborock Q10 VF+</h3>
+      <div class="brand">Roborock · 10 000 Па · порог 20 мм</div>
+      <div class="price-row">
+        <span class="price">R$ 3 134</span>
+        <span class="price-usd">≈ $615</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Лидар PreciSense, мешок 2,7 л на 7 недель, двойное антизапутывание</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Всего <b>10 000 Па</b> и цена выше D15 Plus на R$ 570</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Цена выросла: в начале августа он стоил R$ 2 359</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.amazon.com.br/dp/B0FHK1FY8X" target="_blank" rel="noopener">Смотреть на Amazon</a>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot shot-sm">
+        <img src="https://m.media-amazon.com/images/I/61JleLDj4mL._AC_SX679_.jpg" alt="Робот-пылесос Velds V50 PRO" loading="lazy">
+      </div>
+      <span class="badge b-green">Самый дешёвый</span>
+      <h3>Velds V50 PRO</h3>
+      <div class="brand">Velds · 10 000 Па · порог 20 мм · 127 В</div>
+      <div class="price-row">
+        <span class="price">R$ 2 375</span>
+        <span class="price-usd">≈ $466</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Порог <b>20 мм</b> прямо заявлен, мешок 3 л, лидар, рейтинг 4,4 из 5</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Дешевле D15 Plus на R$ 189</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Малоизвестный бренд: <b>10 000 Па</b> и вопрос с поддержкой через пару лет</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.amazon.com.br/dp/B0GWK793DQ" target="_blank" rel="noopener">Смотреть на Amazon</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ТАБЛИЦА ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Сводная таблица</h2>
+    <p class="sec-sub">Колонка «шум» показывает главную проблему: производители почти нигде его не публикуют. «н/д» значит, что цифры нет ни в карточке, ни в официальной спецификации.</p>
+  </div>
+  <div class="table-scroll reveal">
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Цена</th><th>Тяга</th><th>Станция</th>
+          <th>Порог</th><th>Шум</th><th>127 В</th><th>Поставка</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="win">
+          <td>Dreame D15 Plus</td><td class="num">R$ 2 564</td><td class="num">13 000 Па</td>
+          <td class="yes">Мешок 4 л</td><td class="mid">~20 мм</td><td class="mid">н/д</td><td class="yes">127 В</td><td class="yes">Бразилия</td>
+        </tr>
+        <tr>
+          <td>Velds V50 PRO</td><td class="num">R$ 2 375</td><td class="num">10 000 Па</td>
+          <td class="yes">Мешок 3 л</td><td class="yes">20 мм</td><td class="mid">н/д</td><td class="yes">127 В</td><td class="yes">Бразилия</td>
+        </tr>
+        <tr>
+          <td>Roborock Q10 VF+</td><td class="num">R$ 3 134</td><td class="num">10 000 Па</td>
+          <td class="yes">Мешок 2,7 л</td><td class="yes">20 мм</td><td class="mid">н/д</td><td class="yes">127 В</td><td class="yes">Бразилия</td>
+        </tr>
+        <tr>
+          <td>MOVA E20s Pro Plus</td><td class="num">R$ 3 791</td><td class="num">13 000 Па</td>
+          <td class="yes">Мешок 4 л</td><td class="no">18 мм</td><td class="mid">н/д</td><td class="yes">Бивольт</td><td class="yes">Бразилия</td>
+        </tr>
+        <tr>
+          <td>Liectroux T9</td><td class="num">R$ 2 609</td><td class="mid">н/д</td>
+          <td class="yes">Мешок 3 л</td><td class="mid">н/д</td><td class="mid">н/д</td><td class="yes">110 В</td><td class="yes">Бразилия</td>
+        </tr>
+        <tr>
+          <td>Xiaomi H50 Pro <span style="font-weight:400;color:var(--text-3)">(omni)</span></td><td class="num">R$ 3 999</td><td class="num">15 000 Па</td>
+          <td class="yes">Мешок + вода</td><td class="yes">20 мм</td><td class="mid">57 дБ*</td><td class="yes">127 В</td><td class="yes">Бразилия</td>
+        </tr>
+        <tr>
+          <td>KaBuM! K4000 <span style="font-weight:400;color:var(--text-3)">(omni)</span></td><td class="num">R$ 3 800</td><td class="num">20 000 Па</td>
+          <td class="yes">Мешок + вода</td><td class="mid">н/д</td><td class="mid">н/д</td><td class="yes">127 В</td><td class="yes">Бразилия</td>
+        </tr>
+        <tr>
+          <td>WAP ROBOT W4000</td><td class="num">R$ 2 819</td><td class="mid">н/д</td>
+          <td class="yes">Мешок</td><td class="mid">н/д</td><td class="no">65 дБ</td><td class="yes">127 В</td><td class="yes">Бразилия</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="border-top:none;padding-top:12px">* 57 дБ у Xiaomi H50 Pro относятся к режиму мойки с выключенным всасыванием — это не шум пылесоса. Для режима уборки цифры нет.</p>
+</section>
+
+<!-- ============ ЧЕКЛИСТ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Что учесть</h2>
+  </div>
+  <div class="facts reveal">
+    <ol>
+      <li><b>Мешок — это расходник.</b> Станция без мойки проще и дешевле, но мешки надо докупать: примерно R$ 100–150 в год. Зато нет возни с заливкой и сливом воды, и база занимает меньше места.</li>
+      <li><b>Автоопорожнение — самый громкий момент.</b> Даже у тихой модели док выдаёт 75–81 дБ, но всего 10–15 секунд. В приложении обычно есть режим «не беспокоить», чтобы это не случалось ночью.</li>
+      <li><b>Моп можно просто снять.</b> Роботов совсем без мопа сейчас почти не выпускают — насадка идёт в комплекте у всех. Если мойка не нужна, не ставьте её: робот будет работать как чистый пылесос, а станция всё равно вытряхнет пыль.</li>
+      <li><b>Про 62 дБ.</b> Если тишина действительно критична, единственная модель с честно заявленной цифрой для полноценной уборки — <b>Ecovacs T50 Pro Omni с 63 дБ</b>. Но она идёт импортом со всеми пошлинами, а её станция моет мопы, то есть это уже другая категория.</li>
+      <li><b>Проверьте вольтаж и порог у продавца.</b> У Dreame D15 Plus в спецификации нет высоты порога, у половины моделей нет уровня шума. Спросите продавца до оплаты — по закону он обязан ответить.</li>
+      <li><b>Wi-Fi только 2,4 ГГц.</b> Если роутер раздаёт общую сеть 2,4 + 5 ГГц, на время настройки 5 ГГц лучше отключить.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>Цены, наличие и тип поставки проверены вручную 12 августа 2026 года на Amazon.com.br, Mercado Livre и KaBuM!. Курс — R$ 5,10 за $1.<br>Отметка «н/д» означает, что производитель не публикует эту характеристику — я не подставлял приблизительные значения вместо неё.</p>
+  <p style="margin-top:10px">Источники по шуму: <a href="https://www.mi.com/global/product/xiaomi-robot-vacuum-h50-pro/" target="_blank" rel="noopener">Xiaomi H50 Pro</a>, <a href="https://www.robot-vacuum-guru.com/test-h50-robot-vacuum-with-mop-function-and-lifting-mop-10000-pa-suction-power-dual-anti-tangle-system-self-cleaning-mop-and-station-automatic-emptying-lds-navigation-app-and-voice-control" target="_blank" rel="noopener">независимый тест Xiaomi H50</a>, <a href="https://us.narwal.com/blogs/robot-vacuum/noise-levels-db-guide-quiet-model-tips" target="_blank" rel="noopener">замеры шума док-станций</a>.</p>
+  <p style="margin-top:14px"><a href="robo-aspirador-sem-importacao-rio.html">← Подборка без импорта: модели с мойкой пола</a></p>
+</footer>
+
+</div>
+
+<script type="module">
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const showAll = () => document.documentElement.classList.remove('js-motion');
+
+  if (!reduced && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-motion');
+    const fallback = setTimeout(showAll, 2500);
+
+    try {
+      const { animate, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      clearTimeout(fallback);
+
+      const reveal = (el) => {
+        const kids = el.matches('.grid') ? el.querySelectorAll('.card') : null;
+        const many = kids && kids.length > 1;
+        animate(many ? kids : el,
+          { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
+          { duration: 0.55, delay: many ? stagger(0.06) : 0, easing: [0.22, 0.61, 0.36, 1] }
+        );
+      };
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          io.unobserve(entry.target);
+          entry.target.style.opacity = '1';
+          reveal(entry.target);
+        });
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
+
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach((el) => {
+          if (getComputedStyle(el).opacity === '0') el.style.opacity = '1';
+        });
+      }, 6000);
+
+    } catch (e) {
+      clearTimeout(fallback);
+      showAll();
+    }
+  }
+</script>
+</body>
+</html>
