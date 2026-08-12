@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Робот-пылесос для порогов 3–4 см — Рио-де-Жанейро, 10.08.2026</title>
+<title>Робот-пылесос с omni-станцией — Рио-де-Жанейро, 12.08.2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,80 +17,85 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-serif;
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-serif;
     background:var(--bg);color:var(--text);line-height:1.6;font-size:17px;
-    -webkit-font-smoothing:antialiased;padding:0 20px 100px;
-  }
+    -webkit-font-smoothing:antialiased;padding:0 20px 100px}
   .wrap{max-width:1120px;margin:0 auto}
 
-  header{padding:80px 0 52px;text-align:center}
+  header{padding:78px 0 50px;text-align:center}
   .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.06em;
     text-transform:uppercase;color:var(--blue);margin-bottom:20px}
-  h1{font-size:clamp(33px,5.4vw,56px);font-weight:700;letter-spacing:-.025em;line-height:1.08;margin-bottom:20px}
-  .sub{font-size:clamp(17px,2.2vw,21px);color:var(--text-2);max-width:700px;margin:0 auto 28px}
+  h1{font-size:clamp(32px,5.2vw,54px);font-weight:700;letter-spacing:-.025em;line-height:1.09;margin-bottom:20px}
+  .sub{font-size:clamp(17px,2.2vw,21px);color:var(--text-2);max-width:720px;margin:0 auto 28px}
   .meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--text-3)}
   .meta span{background:var(--surface);border:1px solid var(--border);padding:7px 15px;border-radius:100px;font-weight:500}
 
-  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-    padding:36px 34px;margin-bottom:56px;box-shadow:var(--shadow);border-left:4px solid var(--red)}
-  .verdict h2{font-size:23px;font-weight:600;letter-spacing:-.015em;margin-bottom:14px}
-  .verdict p{color:var(--text-2);margin-bottom:14px;font-size:16px}
-  .verdict p:last-child{margin-bottom:0}
-  .verdict strong{color:var(--text);font-weight:600}
+  .callout{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:34px 32px;margin-bottom:56px;box-shadow:var(--shadow);border-left:4px solid var(--amber)}
+  .callout h2{font-size:22px;font-weight:600;letter-spacing:-.015em;margin-bottom:13px}
+  .callout p{color:var(--text-2);margin-bottom:13px;font-size:16px}
+  .callout p:last-child{margin-bottom:0}
+  .callout strong{color:var(--text);font-weight:600}
   .money{font-variant-numeric:tabular-nums;font-weight:600;color:var(--text);white-space:nowrap}
 
-  section{margin-bottom:70px}
-  .sec-head{margin-bottom:28px}
-  h2.sec{font-size:clamp(26px,3.4vw,34px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
-  .sec-sub{color:var(--text-2);font-size:16px;max-width:760px}
+  section{margin-bottom:68px}
+  .sec-head{margin-bottom:26px}
+  h2.sec{font-size:clamp(25px,3.3vw,33px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  .sec-sub{color:var(--text-2);font-size:16px;max-width:780px}
+
+  .table-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:940px;font-size:14.5px}
+  th,td{padding:14px 15px;text-align:left;border-bottom:1px solid #F0F0F2;vertical-align:middle}
+  th{font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--text-3);background:#FAFAFC;white-space:nowrap}
+  td:first-child{font-weight:600;color:var(--text)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.win{background:rgba(0,113,227,.04)}
+  tbody tr:hover{background:#FAFAFC}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .yes{color:var(--green);font-weight:600}
+  .no{color:var(--red);font-weight:600}
+  .mid{color:var(--amber);font-weight:600}
 
   .grid{display:grid;gap:22px}
-  .grid-3{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
   .grid-2{grid-template-columns:repeat(auto-fit,minmax(400px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
 
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
     padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;
     transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1)}
   .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
+  .card.top{border-top:4px solid var(--blue)}
+  .card.value{border-top:4px solid var(--green)}
 
-  .hero-card{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:34px;align-items:start;
-    border:1px solid var(--border);border-top:4px solid var(--blue)}
-  @media(max-width:820px){.hero-card{grid-template-columns:1fr;gap:24px}}
-
-  .shot{background:#FAFAFC;border:1px solid var(--border);border-radius:16px;aspect-ratio:1/1;
-    display:flex;align-items:center;justify-content:center;padding:18px;overflow:hidden}
+  .shot{background:#FAFAFC;border:1px solid var(--border);border-radius:16px;aspect-ratio:4/3;
+    display:flex;align-items:center;justify-content:center;padding:18px;overflow:hidden;margin-bottom:20px}
   .shot img{max-width:100%;max-height:100%;object-fit:contain;display:block}
-  .shot-sm{aspect-ratio:4/3;margin-bottom:20px}
 
   .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
-    padding:5px 12px;border-radius:100px;margin-bottom:14px}
+    padding:5px 12px;border-radius:100px;margin-bottom:13px}
   .b-blue{background:rgba(0,113,227,.09);color:var(--blue)}
   .b-green{background:rgba(0,135,90,.1);color:var(--green)}
   .b-amber{background:rgba(178,94,0,.1);color:var(--amber)}
-  .b-red{background:rgba(215,0,21,.08);color:var(--red)}
+  .b-grey{background:#F2F2F4;color:var(--text-2)}
 
-  .card h3{font-size:22px;font-weight:600;letter-spacing:-.015em;margin-bottom:6px;line-height:1.25}
-  .hero-card h3{font-size:29px}
+  .card h3{font-size:21px;font-weight:600;letter-spacing:-.015em;margin-bottom:6px;line-height:1.25}
   .brand{font-size:13px;color:var(--text-3);font-weight:500;margin-bottom:16px}
 
-  .price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-  .price{font-size:30px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .price-usd{font-size:15px;color:var(--text-3);font-weight:500;font-variant-numeric:tabular-nums}
+  .price-row{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:16px}
+  .price{font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .price-usd{font-size:14px;color:var(--text-3);font-weight:500;font-variant-numeric:tabular-nums}
 
-  .specs{list-style:none;margin-bottom:20px}
-  .specs li{display:flex;gap:11px;align-items:flex-start;padding:8px 0;
-    border-bottom:1px solid #F0F0F2;font-size:15px;color:var(--text-2)}
+  .specs{list-style:none;margin-bottom:18px}
+  .specs li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;
+    border-bottom:1px solid #F0F0F2;font-size:14.5px;color:var(--text-2)}
   .specs li:last-child{border-bottom:none}
   .specs li svg{flex-shrink:0;margin-top:4px}
   .specs b{color:var(--text);font-weight:600}
 
-  .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px;margin-bottom:20px}
-  .kv dt{color:var(--text-3);font-weight:500;white-space:nowrap}
-  .kv dd{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
-
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);
-    color:#fff;text-decoration:none;padding:13px 26px;border-radius:100px;font-size:15px;font-weight:600;
+    color:#fff;text-decoration:none;padding:12px 24px;border-radius:100px;font-size:15px;font-weight:600;
     transition:background .2s,transform .2s;cursor:pointer;min-height:44px;margin-top:auto}
   .btn:hover{background:#0077ED;transform:translateY(-1px)}
   .btn:focus-visible{outline:3px solid rgba(0,113,227,.4);outline-offset:2px}
@@ -98,40 +103,17 @@
   .btn-ghost:hover{background:#F0F7FF;border-color:var(--blue)}
   .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
 
-  .note{font-size:13.5px;color:var(--text-3);margin-top:14px;padding-top:14px;
+  .note{font-size:13.5px;color:var(--text-3);margin-top:13px;padding-top:13px;
     border-top:1px solid #F0F0F2;line-height:1.5}
-  .note-plain{border-top:none;padding-top:0;margin-top:0}
 
-  /* Пути */
-  .paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:22px;margin-bottom:12px}
-  .path{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-    padding:30px 28px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
-  .path:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
-  .path.win{border-top:4px solid var(--green)}
-  .path.alt{border-top:4px solid var(--text-3)}
-  .path h3{font-size:21px;font-weight:600;margin-bottom:6px}
-  .path .total{font-size:34px;font-weight:700;letter-spacing:-.02em;margin:14px 0 4px;font-variant-numeric:tabular-nums}
-  .path .total-sub{font-size:14px;color:var(--text-3);margin-bottom:18px}
-  .path ul{list-style:none;font-size:15px;color:var(--text-2)}
-  .path ul li{padding:7px 0;border-bottom:1px solid #F0F0F2;display:flex;gap:10px;align-items:flex-start}
-  .path ul li:last-child{border-bottom:none}
-  .path ul b{color:var(--text)}
-
-  .table-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--border);
-    border-radius:var(--radius);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
-  table{border-collapse:collapse;width:100%;min-width:820px;font-size:14.5px}
-  th,td{padding:15px 16px;text-align:left;border-bottom:1px solid #F0F0F2;vertical-align:middle}
-  th{font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;
-    color:var(--text-3);background:#FAFAFC;white-space:nowrap}
-  td:first-child{font-weight:600;color:var(--text)}
-  tbody tr:last-child td{border-bottom:none}
-  tbody tr.win{background:rgba(0,135,90,.04)}
-  tbody tr.bad{background:rgba(215,0,21,.03)}
-  tbody tr:hover{background:#FAFAFC}
-  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
-  .yes{color:var(--green);font-weight:600}
-  .no{color:var(--red);font-weight:600}
-  .mid{color:var(--amber);font-weight:600}
+  .pick{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;
+    transition:transform .25s,box-shadow .25s}
+  .pick:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
+  .pick .lbl{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--text-3);margin-bottom:8px}
+  .pick h4{font-size:19px;font-weight:600;margin-bottom:6px}
+  .pick p{font-size:14.5px;color:var(--text-2)}
+  .pick .p{font-size:15px;font-weight:600;color:var(--text);margin-top:10px;font-variant-numeric:tabular-nums}
 
   .warn-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
     padding:20px 22px;display:flex;gap:18px;align-items:flex-start;transition:transform .25s,box-shadow .25s}
@@ -154,18 +136,18 @@
   .store a{color:var(--blue);text-decoration:none;font-weight:500}
   .store a:hover{text-decoration:underline}
 
-  .check{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  .facts{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
     padding:32px 30px;box-shadow:var(--shadow)}
-  .check ol{list-style:none;counter-reset:c}
-  .check li{counter-increment:c;position:relative;padding-left:44px;margin-bottom:20px;
+  .facts ol{list-style:none;counter-reset:c}
+  .facts li{counter-increment:c;position:relative;padding-left:44px;margin-bottom:20px;
     font-size:15.5px;color:var(--text-2)}
-  .check li:last-child{margin-bottom:0}
-  .check li::before{content:counter(c);position:absolute;left:0;top:-1px;width:28px;height:28px;
+  .facts li:last-child{margin-bottom:0}
+  .facts li::before{content:counter(c);position:absolute;left:0;top:-1px;width:28px;height:28px;
     border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;
     justify-content:center;font-size:13px;font-weight:600}
-  .check b{color:var(--text);font-weight:600}
+  .facts b{color:var(--text);font-weight:600}
 
-  footer{text-align:center;padding-top:44px;border-top:1px solid var(--border);
+  footer{text-align:center;padding-top:42px;border-top:1px solid var(--border);
     font-size:13.5px;color:var(--text-3);line-height:1.7}
   footer a{color:var(--blue);text-decoration:none}
   footer a:hover{text-decoration:underline}
@@ -183,252 +165,382 @@
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">Подборка · Рио-де-Жанейро · обновлено 10 августа 2026</div>
-  <h1>Робот-пылесос<br>для порогов 3–4 см</h1>
-  <p class="sub">Пороги 3–4 см отсекают 99% рынка: обычные роботы берут максимум 2 см. Разбираем два рабочих пути и считаем, какой дешевле в 2,5 раза.</p>
+  <div class="eyebrow">Подборка · Рио-де-Жанейро · 12 августа 2026</div>
+  <h1>Робот-пылесос,<br>который правда моет пол</h1>
+  <p class="sub">Одиннадцать моделей со станцией, которая моет мопы и сама доливает воду в робота. Все доступны в Бразилии, с ценами, вольтажом и реальной высотой порога.</p>
   <div class="meta">
-    <span>Пороги 3–4 см</span>
+    <span>Пороги 2–2,5 см</span>
     <span>Сеть 127 В</span>
     <span>Курс R$ 5,10 / $1</span>
-    <span>Цены проверены вручную</span>
+    <span>Цены сняты вручную 12.08.2026</span>
   </div>
 </header>
 
-<div class="verdict reveal">
-  <h2>Что меняют пороги 3–4 см</h2>
-  <p>Обычный робот перелезает препятствие <strong>до 2 см</strong> — это физический предел диаметра колеса. Лучший вариант из первой версии этой подборки, Ecovacs T50 Pro Omni, берёт <strong>22 мм</strong>. До ваших порогов ему не хватает почти вдвое, и никакая мощность мотора тут не поможет.</p>
-  <p>Дальше только два пути: <strong>положить пандусы</strong> и оставить недорогого робота, либо купить <strong>робота с подъёмным шасси</strong>. Второй путь честнее, но стоит от <span class="money">R$ 8 440</span> вместо <span class="money">R$ 2 742</span>.</p>
-  <p>И главное предупреждение: <strong>подъёмное шасси есть далеко не у всех дорогих моделей</strong>. Dreame X40 Ultra за <span class="money">R$ 7 999</span> берёт всего 2,2 см и, по отзывам, регулярно застревает — за эти деньги он ваши пороги не возьмёт. Разбор ниже.</p>
+<div class="callout reveal">
+  <h2>Два факта, которые решают выбор</h2>
+  <p><strong>Первое.</strong> Надпись «base autolimpante» в бразильских карточках почти ничего не значит: у большинства моделей до <span class="money">R$ 2 600</span> станция всего лишь вытряхивает пыль в мешок. Мопы у них моют вручную в раковине, воду в бачок заливают руками. В эту подборку такие не попали — их разбор в конце страницы.</p>
+  <p><strong>Второе, и оно важнее.</strong> Порог <strong>2 см</strong> берут все модели отсюда. А вот <strong>2,5 см — это 25 мм, и это выше предела почти всех роботов</strong>: их потолок 20–22 мм. Если хоть один порог в квартире действительно 25 мм, у вас три варианта: взять <a class="inline" href="#curv">Roborock Qrevo Curv</a> с подъёмным шасси, подложить под этот единственный порог пандус за <span class="money">R$ 105</span>, или смириться, что робот в ту комнату не заедет.</p>
+  <p>Поэтому первым делом — <strong>померьте линейкой каждый порог отдельно</strong>. Разница между 20 и 25 мм здесь решает всё.</p>
 </div>
-
-<!-- ============ ДВА ПУТИ ============ -->
-<section>
-  <div class="sec-head reveal">
-    <h2 class="sec">Два пути и их цена</h2>
-    <p class="sec-sub">Расчёт для двух дверных проёмов. Пандусы нужны с обеих сторон порога — робот ведь ездит туда и обратно, — поэтому в комплекте их четыре.</p>
-  </div>
-
-  <div class="paths">
-    <div class="path win reveal">
-      <span class="badge b-green">Рекомендую начать с этого</span>
-      <h3>Пандусы + хороший робот</h3>
-      <div class="total">R$ 3 221</div>
-      <div class="total-sub">≈ $632 · Ecovacs T50 Pro Omni + 4 пандуса</div>
-      <ul>
-        <li><span>Робот <b>Ecovacs T50 Pro Omni</b></span></li>
-        <li><span><b>R$ 2 742</b> — 15 000 Па, мойка мопов водой 70 °C, лидар</span></li>
-        <li><span>4 пандуса BE NEXT по <b>R$ 119,70</b> = R$ 479</span></li>
-        <li><span>Итого экономия против X50 Ultra: <b>R$ 5 219</b></span></li>
-      </ul>
-      <p class="note">Минус: пандусы придётся подгонять под конкретный порог, и они остаются лежать в проёме — это заметно глазу и можно споткнуться.</p>
-    </div>
-
-    <div class="path alt reveal">
-      <span class="badge b-blue">Без костылей, но дорого</span>
-      <h3>Робот, который перелезает сам</h3>
-      <div class="total">R$ 8 440</div>
-      <div class="total-sub">≈ $1 655 · Dreame X50 Ultra, 127 В</div>
-      <ul>
-        <li><span>Единственный, кто <b>надёжно</b> берёт 4,2 см</span></li>
-        <li><span>Ничего не лежит на полу, проёмы свободны</span></li>
-        <li><span>20 000 Па — вдвое мощнее нужного</span></li>
-        <li><span>Дороже комбо с пандусами <b>в 2,6 раза</b></span></li>
-      </ul>
-      <p class="note">Минус: цена и импортная поставка. Плюс — если пороги когда-нибудь станут выше или добавится ступенька, робот справится и с этим.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ПУТЬ 1: ПАНДУСЫ ============ -->
-<section>
-  <div class="sec-head reveal">
-    <h2 class="sec">Путь 1. Пандусы</h2>
-    <p class="sec-sub">В Бразилии это готовый продукт, а не самоделка: бренд <b>BE NEXT</b> делает пандусы под конкретную высоту порога, с местного склада и бесплатной доставкой.</p>
-  </div>
-
-  <div class="grid grid-2">
-    <div class="card reveal">
-      <div class="shot shot-sm">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_819664-MLB113842209260_072026-O-rampa-universal-robo-aspirador-soleira-pronta-entrega-5cm.webp" alt="Пандус BE NEXT для робота-пылесоса под порог 5 см" loading="lazy">
-      </div>
-      <span class="badge b-green">Ваш размер</span>
-      <h3>BE NEXT, пандус под порог 5 см</h3>
-      <div class="brand">BE NEXT · универсальный, любые марки роботов</div>
-      <div class="price-row">
-        <span class="price">R$ 119,70</span>
-        <span class="price-usd">≈ $23 за штуку · доставка бесплатно</span>
-      </div>
-      <p class="note-plain" style="font-size:15px;color:var(--text-2);margin-bottom:18px">Берёт запас по высоте: ваши 3–4 см пройдут с гарантией. Есть версии под <b>3,5 см</b> (R$ 104,90), <b>3 см</b> (R$ 168,62) и <b>8 см</b> (R$ 349,90) — но лучше брать с запасом, чем впритык.</p>
-      <a class="btn" href="https://www.mercadolivre.com.br/rampa-universal-robo-aspirador-soleira-pronta-entrega-5cm/up/MLBU4381469038" target="_blank" rel="noopener">Смотреть на Mercado Livre</a>
-    </div>
-
-    <div class="card reveal">
-      <div class="shot shot-sm">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_731025-MLB113842195356_072026-O-rampa-universal-robo-aspirador-soleira-degrau-pronta-entrega.webp" alt="Пандус BE NEXT под высокий порог 8 см" loading="lazy">
-      </div>
-      <span class="badge b-blue">Если порог окажется выше</span>
-      <h3>BE NEXT, версия под 8 см</h3>
-      <div class="brand">BE NEXT · тот же продавец, гарантия 7 дней</div>
-      <div class="price-row">
-        <span class="price">R$ 349,90</span>
-        <span class="price-usd">≈ $69 за штуку</span>
-      </div>
-      <p class="note-plain" style="font-size:15px;color:var(--text-2);margin-bottom:18px">Запасной вариант, если при замере окажется, что какой-то порог выше 5 см. Для порогов 3–4 см переплачивать за него смысла нет.</p>
-      <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/rampa-universal-robo-aspirador-soleira-degrau-pronta-entrega/up/MLBU4424291385" target="_blank" rel="noopener">Смотреть на Mercado Livre</a>
-    </div>
-  </div>
-
-  <div class="card reveal" style="margin-top:22px;border-left:4px solid var(--amber)">
-    <h3 style="font-size:19px">Честно о рисках пандусов</h3>
-    <p style="color:var(--text-2);font-size:15.5px;margin-top:10px">Независимых тестов именно этих бразильских пандусов я не нашёл — оценка ниже по механике, а не по чужим замерам. Три вещи, которые стоит проверить в первую неделю:</p>
-    <ul class="specs" style="margin-top:14px">
-      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span><b>Нужны с обеих сторон порога.</b> Робот заезжает в комнату и должен вернуться на базу тем же путём. Один пандус = билет в один конец.</span></li>
-      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span><b>Ширина проёма.</b> Робот около 35 см в диаметре и въезжает не строго по центру. Узкий пандус он может задеть колесом и съехать боком — берите по ширине проёма или ставьте несколько встык.</span></li>
-      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span><b>Фиксация к полу.</b> Незакреплённый пандус робот со временем сдвигает. Двусторонний скотч решает, но снимать его с паркета потом неприятно.</span></li>
-    </ul>
-    <p class="note">Разумная тактика: купить <b>один</b> пандус за R$ 119,70, проверить на самом проблемном пороге, и только потом докупать остальные. Продавец даёт 7 дней на возврат.</p>
-  </div>
-</section>
-
-<!-- ============ ПУТЬ 2: ПОДЪЁМНОЕ ШАССИ ============ -->
-<section>
-  <div class="sec-head reveal">
-    <h2 class="sec">Путь 2. Роботы с подъёмным шасси</h2>
-    <p class="sec-sub">На Amazon.com.br их нет вообще — только Mercado Livre. И только один из трёх реально решает вашу задачу.</p>
-  </div>
-
-  <div class="card hero-card reveal">
-    <div class="shot">
-      <img src="https://http2.mlstatic.com/D_NQ_NP_710675-CBT108325829340_032026-O.webp" alt="Робот-пылесос Dreame X50 Ultra с подъёмным шасси ProLeap" loading="lazy" width="300" height="300">
-    </div>
-    <div style="display:flex;flex-direction:column;min-width:0">
-      <span class="badge b-green">Единственный надёжный вариант для 3–4 см</span>
-      <h3>Dreame X50 Ultra Complete</h3>
-      <div class="brand">Dreame · ProLeap · 20 000 Па · версия 127 В</div>
-      <div class="price-row">
-        <span class="price">R$ 8 440</span>
-        <span class="price-usd">≈ $1 655 · в наличии</span>
-      </div>
-      <ul class="specs">
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Одиночный порог до 4,2 см</b>, многоступенчатый до 6 см — выдвигает опорные «ноги» и перешагивает</span></li>
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vacuum Wars за <b>три месяца ежедневной работы</b> не зафиксировали ни одного застревания на порогах</span></li>
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Полная omni-станция: моет мопы, сушит, <b>сама доливает воду в робота</b>, мешок для пыли</span></li>
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Щётки поднимаются при мойке (боковая на 10 мм) — не мокнут и не пахнут</span></li>
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Выдвижной моп <b>MopExtend</b> достаёт до плинтусов и под нависающую мебель</span></li>
-      </ul>
-      <dl class="kv">
-        <dt>Вольтаж</dt><dd>127 В — прямо указан в карточке</dd>
-        <dt>Тяга</dt><dd>20 000 Па</dd>
-        <dt>Поставка</dt><dd>импорт, отметка «Internacional»</dd>
-      </dl>
-      <div class="btns">
-        <a class="btn" href="https://www.mercadolivre.com.br/robot-vacuum-and-mop-dreame-x50-ultra-complete-white/p/MLB2076965962" target="_blank" rel="noopener">Смотреть · R$ 8 440</a>
-      </div>
-      <p class="note"><b>Что обсуждают в обзорах как минус:</b> спуск с высокого порога заметно шумный — робот довольно громко «падает» на пол. На тишину в обычной уборке это не влияет, но ночью запускать не стоит.</p>
-    </div>
-  </div>
-
-  <div class="grid grid-2" style="margin-top:22px">
-    <div class="warn-card reveal">
-      <div class="warn-thumb"><img src="https://http2.mlstatic.com/D_NQ_NP_710381-MLB113993498628_072026-O-aspirador-rob-roborock-qrevo-curv-original-novo.webp" alt="Roborock Qrevo Curv" loading="lazy"></div>
-      <div class="warn-body">
-        <h4>Roborock Qrevo Curv — рискованно</h4>
-        <p class="why">Заявлено «до 4 см», но это про <b>двойной</b> порог; одиночный — 3 см. В независимых тестах уверенно берёт <b>2–2,5 см</b>, а на 2,5–3 см уже есть риск застрять — зависит от формы порога. На ваши 3–4 см это лотерея.</p>
-        <p class="warn-price">R$ 7 490 · <a href="https://produto.mercadolivre.com.br/MLB-4966595451-aspirador-rob-roborock-qrevo-curv-original-novo-_JM" target="_blank" rel="noopener">Mercado Livre</a></p>
-      </div>
-    </div>
-
-    <div class="warn-card reveal" style="border-left:3px solid var(--red)">
-      <div class="warn-thumb"><img src="https://http2.mlstatic.com/D_NQ_NP_994332-MLA83441922708_042025-O.webp" alt="Dreame X40 Ultra" loading="lazy"></div>
-      <div class="warn-body">
-        <h4>Dreame X40 Ultra — не берите</h4>
-        <p class="why">Легко спутать с X50 Ultra, но <b>ProLeap у него нет</b>: предел — <b>2,2 см</b>, и обзорщики отмечают, что он часто застревает. За R$ 7 999 вы получите робота, который ваши пороги не преодолеет вообще.</p>
-        <p class="warn-price">R$ 7 999 · <a href="https://www.mercadolivre.com.br/aspirador-robotico-dreame-x40-ultra-12000pa-y-mopa/p/MLB48039689" target="_blank" rel="noopener">Mercado Livre</a></p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============ ТАБЛИЦА ============ -->
 <section>
   <div class="sec-head reveal">
-    <h2 class="sec">Кто какой порог берёт на самом деле</h2>
-    <p class="sec-sub">Колонка «реально» — по независимым тестам, а не по обещаниям в карточке. Красная зона — модель ваши пороги не возьмёт.</p>
+    <h2 class="sec">Все одиннадцать моделей</h2>
+    <p class="sec-sub">Отсортировано по цене. Высота порога — из спецификации производителя. У всех полная omni-станция: моет мопы, сушит, сама доливает воду в робота и вытряхивает пыль в мешок.</p>
   </div>
   <div class="table-scroll reveal">
     <table>
       <thead>
         <tr>
-          <th>Модель</th><th>Цена</th><th>Заявлено</th><th>Реально</th>
-          <th>Ваши 3–4 см</th><th>Omni-станция</th><th>127 В</th>
+          <th>Модель</th><th>Цена</th><th>Порог</th><th>Порог 2,5 см</th>
+          <th>Тяга</th><th>Тип мопа</th><th>Мойка мопов</th><th>127 В</th><th>Поставка</th>
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td>Xiaomi H50</td><td class="num">R$ 2 699</td><td class="num">20 мм</td><td class="no">Нет</td>
+          <td class="num">10 000 Па</td><td>2 диска</td><td class="yes">Да</td><td class="mid">220 В*</td><td class="yes">Локально</td>
+        </tr>
         <tr class="win">
-          <td>Dreame X50 Ultra</td><td class="num">R$ 8 440</td>
-          <td class="num">4,2 см / 6 см</td><td class="num">4,2 см подтв.</td>
-          <td class="yes">Да, надёжно</td><td class="yes">Да</td><td class="yes">Да</td>
+          <td>Ecovacs T50 Pro Omni</td><td class="num">R$ 2 742</td><td class="num">22 мм</td><td class="no">Нет</td>
+          <td class="num">15 000 Па</td><td>2 диска</td><td class="yes">Да, 70 °C</td><td class="yes">Да</td><td class="mid">Импорт</td>
         </tr>
         <tr>
-          <td>Roborock Qrevo Curv</td><td class="num">R$ 7 490</td>
-          <td class="num">3 см / 4 см</td><td class="num">2–2,5 см</td>
-          <td class="mid">Лотерея</td><td class="yes">Да</td><td class="mid">Уточнить</td>
+          <td>Ecovacs T50 Omni</td><td class="num">R$ 2 843</td><td class="num">22 мм</td><td class="no">Нет</td>
+          <td class="num">12 800 Па</td><td>2 диска</td><td class="yes">Да</td><td class="yes">Да</td><td class="mid">Импорт</td>
         </tr>
-        <tr class="bad">
-          <td>Dreame X40 Ultra</td><td class="num">R$ 7 999</td>
-          <td class="num">2,2 см</td><td class="num">2,2 см, застревает</td>
-          <td class="no">Нет</td><td class="yes">Да</td><td class="mid">Уточнить</td>
+        <tr>
+          <td>Xiaomi H50 (127 В)</td><td class="num">R$ 3 145</td><td class="num">20 мм</td><td class="no">Нет</td>
+          <td class="num">10 000 Па</td><td>2 диска</td><td class="yes">Да</td><td class="yes">Да</td><td class="yes">Локально</td>
         </tr>
-        <tr class="bad">
-          <td>Ecovacs T50 Pro Omni</td><td class="num">R$ 2 742</td>
-          <td class="num">2,2 см</td><td class="num">2,2 см</td>
-          <td class="no">Только с пандусом</td><td class="yes">Да</td><td class="yes">Да</td>
+        <tr class="win">
+          <td>Ecovacs X9 Pro Omni</td><td class="num">R$ 3 385</td><td class="num">20 мм</td><td class="no">Нет</td>
+          <td class="num">16 600 Па</td><td class="yes">Ролик</td><td class="yes">Да, 75 °C</td><td class="mid">Уточнить</td><td class="mid">Импорт</td>
         </tr>
-        <tr class="bad">
-          <td>KaBuM! K4000</td><td class="num">R$ 3 800</td>
-          <td class="mid">не указано</td><td class="mid">н/д</td>
-          <td class="no">Только с пандусом</td><td class="yes">Да</td><td class="yes">Да</td>
+        <tr>
+          <td>Roborock Qrevo QV 35A</td><td class="num">R$ 3 661</td><td class="num">20 мм</td><td class="no">Нет</td>
+          <td class="num">8 000 Па</td><td>2 диска</td><td class="yes">Да</td><td class="yes">Да</td><td class="mid">Импорт</td>
         </tr>
-        <tr class="bad">
-          <td>MOVA E40 Ultra</td><td class="num">R$ 4 741</td>
-          <td class="num">2,2 см</td><td class="num">2,2 см</td>
-          <td class="no">Только с пандусом</td><td class="yes">Да</td><td class="yes">Бивольт</td>
+        <tr>
+          <td>eufy C20 Omni</td><td class="num">R$ 3 749</td><td class="no">18 мм</td><td class="no">Нет</td>
+          <td class="num">7 000 Па</td><td>2 диска</td><td class="yes">Да</td><td class="no">Нет, 220 В</td><td class="yes">Локально</td>
+        </tr>
+        <tr>
+          <td>KaBuM! smart K4000</td><td class="num">R$ 3 800</td><td class="mid">н/д</td><td class="mid">н/д</td>
+          <td class="num">20 000 Па</td><td>2 выдвижных</td><td class="yes">Да + сушка</td><td class="yes">Да</td><td class="yes">Локально</td>
+        </tr>
+        <tr>
+          <td>Xiaomi H50 Pro</td><td class="num">R$ 3 999</td><td class="num">20 мм</td><td class="no">Нет</td>
+          <td class="num">15 000 Па</td><td>2 диска + «руки»</td><td class="yes">Да, горячая</td><td class="yes">Да</td><td class="yes">Локально</td>
+        </tr>
+        <tr>
+          <td>Roborock Qrevo Edge S5A</td><td class="num">R$ 4 380</td><td class="num">20 мм</td><td class="no">Нет</td>
+          <td class="num">17 000 Па</td><td>2 диска</td><td class="yes">Да, горячая</td><td class="mid">Уточнить</td><td class="mid">Импорт</td>
+        </tr>
+        <tr>
+          <td>MOVA E40 Ultra</td><td class="num">R$ 4 741</td><td class="num">22 мм</td><td class="no">Нет</td>
+          <td class="num">19 000 Па</td><td>2 выдвижных</td><td class="yes">Да</td><td class="yes">Бивольт</td><td class="yes">Локально</td>
+        </tr>
+        <tr class="win">
+          <td>Roborock Qrevo Curv</td><td class="num">R$ 7 258</td><td class="yes">30 мм</td><td class="yes">Да</td>
+          <td class="num">18 500 Па</td><td>2 диска</td><td class="yes">Да, горячая</td><td class="mid">Уточнить</td><td class="mid">Импорт</td>
         </tr>
       </tbody>
     </table>
   </div>
+  <p class="note" style="border-top:none;padding-top:12px">* Xiaomi H50 за R$ 2 699 продаётся в версии 220 В; версия 127 В — отдельная карточка за R$ 3 145. На 220 В понадобится трансформатор от 1000 ВА, это ещё R$ 400–600.</p>
 </section>
 
-<!-- ============ БАЗА: ЧТО БРАТЬ С ПАНДУСАМИ ============ -->
+<!-- ============ ТОП-3 ============ -->
 <section>
   <div class="sec-head reveal">
-    <h2 class="sec">Робот для связки с пандусами</h2>
-    <p class="sec-sub">Если идёте первым путём, вот та самая модель — лучшее соотношение цены и качества мойки на бразильском рынке.</p>
+    <h2 class="sec">Три модели, которые стоит рассматривать всерьёз</h2>
+    <p class="sec-sub">Если все ваши пороги 2 см — берите из этой тройки. Остальные либо дороже при тех же возможностях, либо проигрывают по важной детали.</p>
   </div>
 
-  <div class="card hero-card reveal">
-    <div class="shot">
-      <img src="https://http2.mlstatic.com/D_NQ_NP_770724-MLB101864647638_122025-O.webp" alt="Робот-пылесос Ecovacs Deebot T50 Pro Omni с док-станцией" loading="lazy" width="300" height="300">
-    </div>
-    <div style="display:flex;flex-direction:column;min-width:0">
-      <span class="badge b-blue">Лучшая мойка за свои деньги</span>
-      <h3>Ecovacs Deebot T50 Pro Omni</h3>
-      <div class="brand">Ecovacs · 15 000 Па · корпус 8,1 см · 63 дБ</div>
+  <div class="grid grid-3">
+
+    <div class="card top reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_717817-CBT115365494261_072026-O.webp" alt="Робот-пылесос Ecovacs Deebot X9 Pro Omni с роликовым мопом" loading="lazy">
+      </div>
+      <span class="badge b-blue">Лучшая мойка пола</span>
+      <h3>Ecovacs X9 Pro Omni</h3>
+      <div class="brand">Ecovacs · 16 600 Па · порог 20 мм</div>
       <div class="price-row">
-        <span class="price">R$ 2 742</span>
-        <span class="price-usd">≈ $538 · есть версия 127/220 В за R$ 2 836</span>
+        <span class="price">R$ 3 385</span>
+        <span class="price-usd">≈ $664</span>
       </div>
       <ul class="specs">
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Станция моет мопы <b>горячей водой 70 °C</b>, сушит воздухом 45 °C и <b>сама доливает воду в робота</b></span></li>
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>OZMO Turbo 2.0</b> — два вращающихся мопа, 180 об/мин с прижимом: настоящая мойка, а не влажная тряпка</span></li>
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Лидар dToF + AIVI 3D 3.0, карты нескольких этажей, <b>63 дБ</b></span></li>
-        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Порог <b>22 мм</b> — ваши 3–4 см только через пандус</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Роликовый моп OZMO Roller</b> вместо дисков: валик 175 мм жмёт на пол с силой 3 700 Па и промывается прямо на ходу — грязь собирается, а не размазывается</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Станция моет валик <b>водой 75 °C</b> и сушит горячим воздухом 63 °C</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Самая мощная тяга среди недорогих — <b>16 600 Па</b>, сертификат ANATEL</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Вольтаж в карточке не указан — <b>спросить продавца до оплаты</b></span></li>
+      </ul>
+      <a class="btn" href="https://www.mercadolivre.com.br/robot-vacuum-cleaner-ecovacs-deebot-x9-pro-omni-blast-16600/p/MLB2070986847" target="_blank" rel="noopener">Смотреть · R$ 3 385</a>
+      <p class="note">Если для вас главное, чтобы пол реально отмывался, а не просто протирался влажной тряпкой, — это лучший вариант в подборке.</p>
+    </div>
+
+    <div class="card value reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_770724-MLB101864647638_122025-O.webp" alt="Робот-пылесос Ecovacs Deebot T50 Pro Omni с док-станцией" loading="lazy">
+      </div>
+      <span class="badge b-green">Лучший баланс цены</span>
+      <h3>Ecovacs T50 Pro Omni</h3>
+      <div class="brand">Ecovacs · 15 000 Па · порог 22 мм · 63 дБ</div>
+      <div class="price-row">
+        <span class="price">R$ 2 742</span>
+        <span class="price-usd">≈ $538 · белый 127/220 В — R$ 2 836</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Самый высокий порог из недорогих — 22 мм.</b> На порогах ровно 2 см это даёт запас, которого нет у моделей с 18–20 мм</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мойка мопов <b>водой 70 °C</b>, сушка 45 °C, автодолив воды в робота</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>63 дБ</b> — самый тихий здесь. Лидар dToF + AIVI 3D, корпус 8,1 см</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Есть версия с прямо указанным <b>127/220 В</b> за R$ 2 836</span></li>
       </ul>
       <div class="btns">
         <a class="btn" href="https://www.mercadolivre.com.br/robo-aspirador-ecovacs-deebot-t50-pro-omni-15000pa/p/MLB2056754608" target="_blank" rel="noopener">Чёрный · R$ 2 742</a>
-        <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/robot-vacuum-ecovacs-deebot-t50-pro-omni-15000-pa-white/p/MLB2097215460" target="_blank" rel="noopener">Белый 127/220 В · R$ 2 836</a>
+        <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/robot-vacuum-ecovacs-deebot-t50-pro-omni-15000-pa-white/p/MLB2097215460" target="_blank" rel="noopener">Белый 127/220 В</a>
       </div>
-      <p class="note">Обе карточки — импорт из США («Internacional»), это обычно 1–3 недели. Налоги в цену включены, точный срок площадка покажет после ввода CEP.</p>
+      <p class="note">Поставка импортная, 1–3 недели. По совокупности — самая сбалансированная модель: мощная, тихая, с горячей мойкой и максимальным порогом среди доступных.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_779219-MLA110348183166_052026-O-robo-aspirador-xiaomi-h50-10000pa-110v.webp" alt="Робот-пылесос Xiaomi Robot Vacuum H50 со станцией" loading="lazy">
+      </div>
+      <span class="badge b-green">Локальная поставка</span>
+      <h3>Xiaomi H50</h3>
+      <div class="brand">Xiaomi · 10 000 Па · порог 20 мм · ANATEL</div>
+      <div class="price-row">
+        <span class="price">R$ 3 145</span>
+        <span class="price-usd">≈ $617 в версии 127 В · 220 В — R$ 2 699</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Едет <b>по Бразилии</b>, а не из-за границы — никакого ожидания импорта</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Баки <b>4 л чистой + 4 л грязной</b>, мешок на 75 дней, до 240 м² за раз</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Два мопа 180 об/мин, подъём на коврах 10 мм, приложение Xiaomi Home</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Тяга <b>10 000 Па</b> — заметно слабее конкурентов, это её слабая позиция</span></li>
+      </ul>
+      <a class="btn" href="https://www.mercadolivre.com.br/robo-aspirador-xiaomi-h50-10000pa-110v/up/MLBU4028838205" target="_blank" rel="noopener">Версия 127 В · R$ 3 145</a>
+      <p class="note">Внимание: в описании карточки 127 В продавец указал «5000 Pa», хотя по спецификации Xiaomi у H50 — 10 000 Па. Похоже на ошибку продавца, но лучше уточнить.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ЕСЛИ ПОРОГ 2,5 ============ -->
+<section id="curv">
+  <div class="sec-head reveal">
+    <h2 class="sec">Если хоть один порог всё-таки 2,5 см</h2>
+    <p class="sec-sub">25 мм — выше предела любой модели из таблицы, кроме одной. Вот она, и вот дешёвая альтернатива ей.</p>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card top reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_710381-MLB113993498628_072026-O-aspirador-rob-roborock-qrevo-curv-original-novo.webp" alt="Робот-пылесос Roborock Qrevo Curv с подъёмным шасси AdaptiLift" loading="lazy">
+      </div>
+      <span class="badge b-blue">Единственный, кто заедет сам</span>
+      <h3>Roborock Qrevo Curv</h3>
+      <div class="brand">Roborock · AdaptiLift · 18 500 Па</div>
+      <div class="price-row">
+        <span class="price">R$ 7 258</span>
+        <span class="price-usd">≈ $1 423 · есть за R$ 7 490 по Бразилии</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Шасси AdaptiLift</b> приподнимает колёса по отдельности: заявлено 30 мм на одиночном пороге, 40 мм на двойном</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>В независимом тесте Galaxus <b>2–2,5 см проходит уверенно</b> — ровно ваш случай</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мойка мопов горячей водой 75 °C, сушка тёплым воздухом 45 °C</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Единственная модель здесь с <b>запасом по высоте</b>: остальные упираются в 20–22 мм</span></li>
+      </ul>
+      <div class="btns">
+        <a class="btn" href="https://www.mercadolivre.com.br/roborock-qrevo-curv-robot-vacuum-mop/p/MLB2046676205" target="_blank" rel="noopener">Импорт · R$ 7 258</a>
+        <a class="btn btn-ghost" href="https://produto.mercadolivre.com.br/MLB-4966595451-aspirador-rob-roborock-qrevo-curv-original-novo-_JM" target="_blank" rel="noopener">По Бразилии · R$ 7 490</a>
+      </div>
+      <p class="note">Честно: переплата к Ecovacs T50 Pro Omni — <b>R$ 4 516</b>. Она оправдана, только если порогов 2,5 см много и класть под каждый пандус не хочется.</p>
+    </div>
+
+    <div class="card value reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_819664-MLB113842209260_072026-O-rampa-universal-robo-aspirador-soleira-pronta-entrega-5cm.webp" alt="Пандус BE NEXT для робота-пылесоса" loading="lazy">
+      </div>
+      <span class="badge b-green">Решение за 3% от цены</span>
+      <h3>Пандус под один порог</h3>
+      <div class="brand">BE NEXT · местный склад · доставка бесплатно</div>
+      <div class="price-row">
+        <span class="price">R$ 105</span>
+        <span class="price-usd">≈ $21 за штуку, версия под 3,5 см</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Если порог 2,5 см всего <b>один-два</b>, дешевле подложить пандус, чем доплачивать R$ 4 516 за Qrevo Curv</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Бразильский бренд, <b>7 дней на возврат</b> — дешёвая проверка идеи</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Нужен <b>с обеих сторон</b> порога: робот возвращается на базу тем же путём</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Берите по ширине проёма и фиксируйте к полу, иначе робот сдвинет его колесом</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/rampa-universal-robo-aspirador-soleira-pronta-entrega-5cm/up/MLBU4381469038" target="_blank" rel="noopener">Смотреть пандусы BE NEXT</a>
+      <p class="note">Независимых тестов именно этих пандусов я не нашёл — оценка по механике. Купите один и проверьте на самом проблемном пороге, прежде чем брать остальные.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ОСТАЛЬНЫЕ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Остальные варианты</h2>
+    <p class="sec-sub">Не отбраковка — просто каждая проигрывает тройке выше по конкретному пункту.</p>
+  </div>
+
+  <div class="grid grid-2">
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_Q_NP_2X_611003-CBT108325888526_032026-E.webp" alt="Робот-пылесос Roborock Qrevo QV 35A с многофункциональной станцией" loading="lazy">
+      </div>
+      <span class="badge b-blue">Самый доступный Roborock с omni</span>
+      <h3>Roborock Qrevo QV 35A</h3>
+      <div class="brand">Roborock · 8 000 Па · порог 20 мм · 127 В</div>
+      <div class="price-row">
+        <span class="price">R$ 3 661</span>
+        <span class="price-usd">≈ $718</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Полная станция: мешок 2,7 л на 7 недель, бак 4 л, мойка и сушка мопов, автодолив</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мопы 200 об/мин, <b>30 уровней подачи воды</b>, лидар PreciSense</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Щётки с сертификатом SGS <b>0% запутывания волос</b> — сильная сторона Roborock</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Тяга <b>8 000 Па</b> — самая слабая в подборке после eufy</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/rob-aspirador-e-passa-pano-roborock-qrevo-series-8000pa-negro-110v/p/MLB2066613463" target="_blank" rel="noopener">Смотреть · R$ 3 661</a>
+      <p class="note">Хороший выбор, если важно имя Roborock и приложение с картами. Но Ecovacs X9 Pro Omni за R$ 3 385 даёт вдвое больше тяги и роликовый моп.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_Q_NP_2X_720599-CBT109310847342_042026-E.webp" alt="Робот-пылесос Roborock Qrevo Edge S5A" loading="lazy">
+      </div>
+      <span class="badge b-amber">Осторожно с названием</span>
+      <h3>Roborock Qrevo Edge S5A</h3>
+      <div class="brand">Roborock · 17 000 Па · порог 20 мм</div>
+      <div class="price-row">
+        <span class="price">R$ 4 380</span>
+        <span class="price-usd">≈ $859</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>17 000 Па, мойка мопов <b>горячей водой</b>, сушка тёплым воздухом</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Тоньше обычного Edge на 5 мм — лучше пролезает под мебель</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>AdaptiLift у версии S5A нет</b>, хотя у обычного Qrevo Edge он есть. Потолок S5A — 20 мм, а не 40 мм. Легко купить не то, ориентируясь на название</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/roborock-qrevo-edge-s5a-robot-aspirador-y-trapeador-18500/p/MLB2097451932" target="_blank" rel="noopener">Смотреть · R$ 4 380</a>
+      <p class="note">Проверено по <a class="inline" href="https://support.roborock.com/hc/en-us/articles/43425130876825-What-are-the-differences-and-similarities-between-Qrevo-Edge-S5A-and-Qrevo-Edge" target="_blank" rel="noopener">официальному сравнению Roborock</a>: у S5A подъёмного шасси нет, урезаны батарея и камера.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://images6.kabum.com.br/produtos/fotos/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000p-110v-branco-ksar400010br_1783338049_gg.jpg" alt="Робот-пылесос KaBuM! smart K4000 с базой самоочистки" loading="lazy">
+      </div>
+      <span class="badge b-blue">Гарантия в Бразилии</span>
+      <h3>KaBuM! smart K4000</h3>
+      <div class="brand">KaBuM! · 20 000 Па · сразу 127 В</div>
+      <div class="price-row">
+        <span class="price">R$ 3 800</span>
+        <span class="price-usd">≈ $745 · в PIX (−10%)</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Самая мощная тяга подборки — <b>20 000 Па</b>, баки 4 л + 3,5 л</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Гарантия и сервис <b>местные</b>, версия 127 В из коробки</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span><b>Высота порога не указана</b> нигде в спецификации — единственная модель здесь с такой дырой</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.kabum.com.br/produto/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000pa-127v-branco-ksar400010br" target="_blank" rel="noopener">Смотреть на KaBuM</a>
+      <p class="note">Собственная марка магазина, а не Ecovacs или Roborock: с обновлениями приложения и запчастями через пару лет может быть хуже.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_783853-MLA112254926893_052026-O.webp" alt="Робот-пылесос Xiaomi H50 Pro со станцией и горячей мойкой" loading="lazy">
+      </div>
+      <span class="badge b-blue">Углы и плинтусы</span>
+      <h3>Xiaomi H50 Pro</h3>
+      <div class="brand">Xiaomi · 15 000 Па · 127 В · локально</div>
+      <div class="price-row">
+        <span class="price">R$ 3 999</span>
+        <span class="price-usd">≈ $784</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Две выдвижные «руки»: щётка и моп <b>выезжают в углы</b> и под мебель</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мойка мопов <b>горячей водой</b> и сушка горячим воздухом, 15 000 Па</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Широкоугольный лазер лучше видит провода и мелочь на полу</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.mercadolivre.com.br/robo-aspirador-xiaomi-vacuum-h50-pro-branco-127v/p/MLB70270895" target="_blank" rel="noopener">Смотреть · R$ 3 999</a>
+      <p class="note">Переплата R$ 854 к обычному H50 оправдана, если в квартире много углов и мебели на ножках.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://m.media-amazon.com/images/I/610gG5FXmeL._AC_SX679_.jpg" alt="Робот-пылесос MOVA E40 Ultra со станцией самоочистки" loading="lazy">
+      </div>
+      <span class="badge b-blue">Быстрая доставка</span>
+      <h3>MOVA E40 Ultra</h3>
+      <div class="brand">MOVA (суббренд Dreame) · 19 000 Па · бивольт</div>
+      <div class="price-row">
+        <span class="price">R$ 4 741</span>
+        <span class="price-usd">≈ $930</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Бивольт 100–240 В</b> — про розетку можно не думать вообще</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Порог <b>22 мм</b>, баки 4,5 л + 4 л, моп выдвигается на 40 мм в углы</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Amazon с местного склада — <b>доставка за пару дней</b></span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.amazon.com.br/dp/B0H5FXY424" target="_blank" rel="noopener">Смотреть на Amazon</a>
+      <p class="note">Мойка мопов холодной водой, сушка тёплая. За те же деньги Ecovacs X9 Pro Omni моет валиком при 75 °C и стоит на R$ 1 356 дешевле.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://m.media-amazon.com/images/I/71L9NltLIxL._AC_SX679_.jpg" alt="Робот-пылесос eufy C20 Omni с полной станцией" loading="lazy">
+      </div>
+      <span class="badge b-amber">Слабое место — порог 18 мм</span>
+      <h3>eufy C20 Omni</h3>
+      <div class="brand">eufy (Anker) · 7 000 Па · только 220 В</div>
+      <div class="price-row">
+        <span class="price">R$ 3 749</span>
+        <span class="price-usd">≈ $735 + трансформатор</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мопы с прижимом <b>6 Н</b>, корпус 8,5 см, продавец AnkerDirect BR</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Порог всего 18 мм</b> — даже на ваши 2 см уже впритык, владельцы пишут о «наполовину заехал и выдал ошибку»</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Строго 220 В</b> — трансформатор от 1000 ВА, это ещё R$ 400–600</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.amazon.com.br/dp/B0G6Z6PTJG" target="_blank" rel="noopener">Смотреть на Amazon</a>
+      <p class="note">Самая слабая тяга при высокой цене, самый низкий порог и неподходящий вольтаж. В вашей ситуации брать смысла нет — оставлен для полноты картины.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ БЫСТРЫЙ ВЫБОР ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Если решать быстро</h2>
+  </div>
+  <div class="grid grid-3">
+    <div class="pick reveal">
+      <div class="lbl">Если главное — чистый пол</div>
+      <h4>Ecovacs X9 Pro Omni</h4>
+      <p>Роликовый моп с промывкой на ходу — единственная здесь технология, которая не размазывает грязь, а собирает её.</p>
+      <p class="p">R$ 3 385</p>
+    </div>
+    <div class="pick reveal">
+      <div class="lbl">Если главное — цена и тишина</div>
+      <h4>Ecovacs T50 Pro Omni</h4>
+      <p>63 дБ, 15 000 Па, горячая мойка и порог 22 мм — за наименьшие деньги в подборке.</p>
+      <p class="p">R$ 2 742</p>
+    </div>
+    <div class="pick reveal">
+      <div class="lbl">Если пороги всё же 2,5 см</div>
+      <h4>Qrevo Curv или пандус</h4>
+      <p>Подъёмное шасси за R$ 7 258 либо пандус за R$ 105 под конкретный проём. Второе разумнее, если таких порогов один-два.</p>
+      <p class="p">R$ 105 или R$ 7 258</p>
     </div>
   </div>
 </section>
@@ -437,7 +549,7 @@
 <section>
   <div class="sec-head reveal">
     <h2 class="sec">Отдельно: «base autolimpante» ≠ мойка мопов</h2>
-    <p class="sec-sub">Эти модели стоят в бюджете и выглядят подходяще, но станция у них только вытряхивает пыль. Мопы придётся стирать руками после каждой уборки — плюс они всё равно не перелезут ваши пороги.</p>
+    <p class="sec-sub">Эти модели стоят дешевле и выглядят подходяще, но станция у них только вытряхивает пыль. Мопы придётся стирать руками после каждой уборки, воду заливать вручную.</p>
   </div>
 
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
@@ -445,7 +557,7 @@
       <div class="warn-thumb"><img src="https://m.media-amazon.com/images/I/5177weAHzsL._AC_SX679_.jpg" alt="Roborock Q10 VF+" loading="lazy"></div>
       <div class="warn-body">
         <h4>Roborock Q10 VF+</h4>
-        <p class="why">Мешок есть, но моп <b>вибрационный</b> и станция его не моет.</p>
+        <p class="why">Мешок есть, но моп <b>вибрационный</b> и станция его не моет. Хороший бренд, не тот класс задачи.</p>
         <p class="warn-price">R$ 2 359 · <a href="https://www.amazon.com.br/dp/B0FHK1FY8X" target="_blank" rel="noopener">Amazon</a></p>
       </div>
     </div>
@@ -453,7 +565,7 @@
       <div class="warn-thumb"><img src="https://m.media-amazon.com/images/I/61JleLDj4mL._AC_SX679_.jpg" alt="Velds V50 PRO" loading="lazy"></div>
       <div class="warn-body">
         <h4>Velds V50 PRO</h4>
-        <p class="why">Мопы вращающиеся, но станция <b>только опорожняет пыль</b>. Воду заливаете сами.</p>
+        <p class="why">Мопы вращающиеся, но станция <b>только опорожняет пыль</b>. Воду в бачок 300 мл заливаете сами.</p>
         <p class="warn-price">R$ 2 375 · <a href="https://www.amazon.com.br/dp/B0GWK793DQ" target="_blank" rel="noopener">Amazon</a></p>
       </div>
     </div>
@@ -473,6 +585,22 @@
         <p class="warn-price">R$ 3 791 · <a href="https://www.amazon.com.br/dp/B0H5FLWD7X" target="_blank" rel="noopener">Amazon</a></p>
       </div>
     </div>
+    <div class="warn-card reveal">
+      <div class="warn-thumb"><img src="https://m.media-amazon.com/images/I/51UOeydXmlL._AC_SX679_.jpg" alt="WAP ROBOT W4000" loading="lazy"></div>
+      <div class="warn-body">
+        <h4>WAP ROBOT W4000</h4>
+        <p class="why">Бразильский бренд, сервис рядом. Но станция моет только пыль, а <b>65 дБ</b> заметно громче Ecovacs.</p>
+        <p class="warn-price">R$ 2 457 · <a href="https://www.amazon.com.br/dp/B0DJWFD2RH" target="_blank" rel="noopener">Amazon</a></p>
+      </div>
+    </div>
+    <div class="warn-card reveal">
+      <div class="warn-thumb"><img src="https://m.media-amazon.com/images/I/61KtvwNs59L._AC_SX679_.jpg" alt="Liectroux T9" loading="lazy"></div>
+      <div class="warn-body">
+        <h4>Liectroux T9</h4>
+        <p class="why">Заявлено «4 в 1 с автоочисткой», по факту — <b>мешок 3 л и всё</b>. Мойки мопов в станции нет.</p>
+        <p class="warn-price">R$ 2 609 · <a href="https://www.amazon.com.br/dp/B0H8HLN71W" target="_blank" rel="noopener">Amazon</a></p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -480,23 +608,23 @@
 <section>
   <div class="sec-head reveal">
     <h2 class="sec">Офлайн в Барре</h2>
-    <p class="sec-sub">Роботов с подъёмным шасси в магазинах района <b>нет вообще</b> — ни одного. Заказывать в любом случае онлайн.</p>
+    <p class="sec-sub">Проверил магазины электроники района: <b>ни в одном нет робота с полноценной omni-станцией</b>. За такой придётся заказывать онлайн.</p>
   </div>
   <div class="grid grid-3">
     <div class="store reveal">
       <h4>Fast Shop</h4>
       <p class="addr">BarraShopping, Av. das Américas, 4666 · CEP 22640-102</p>
-      <p class="stock">Roborock Q10 VF+ за R$ 3 299 (на Amazon он же за R$ 2 359), QR598 за R$ 6 049, Electrolux, Midea. Порог у всех — 2 см. <a href="https://site.fastshop.com.br/" target="_blank" rel="noopener">Сайт</a></p>
+      <p class="stock">Roborock Q10 VF+ за R$ 3 299 (на Amazon он же за R$ 2 359), QR598 за R$ 6 049, Electrolux, Midea. Мойки мопов в станции нет ни у одного. <a href="https://site.fastshop.com.br/" target="_blank" rel="noopener">Сайт</a></p>
     </div>
     <div class="store reveal">
       <h4>Mi Store (Xiaomi)</h4>
       <p class="addr">BarraShopping, Nível Lagoa, Portaria M · пн–сб 10:00–22:00, вс 13:00–21:00</p>
-      <p class="stock">H40 за R$ 3 496, S40 за R$ 2 760. Ни omni-станций, ни подъёмного шасси. <a href="https://www.mibrasil.com.br/lojas-oficiais" target="_blank" rel="noopener">Магазины</a></p>
+      <p class="stock">H40 за R$ 3 496, S40 за R$ 2 760, S40C за R$ 2 700. Omni-станций нет, и H40 здесь на R$ 1 400 дороже, чем на Amazon. <a href="https://www.mibrasil.com.br/lojas-oficiais" target="_blank" rel="noopener">Магазины</a></p>
     </div>
     <div class="store reveal">
       <h4>Americanas, Casas Bahia, Ponto, Carrefour</h4>
       <p class="addr">BarraShopping / Barra World / Av. das Américas</p>
-      <p class="stock">Только Electrolux, Mondial, Philco, WAP — простые роботы без станции с водой. Часть сайтов закрыта от автопроверки, наличие уточнить по телефону.</p>
+      <p class="stock">Только Electrolux, Mondial, Philco и WAP — простые роботы без станции с водой. Часть сайтов закрыта от автопроверки, наличие уточнить по телефону.</p>
     </div>
   </div>
 </section>
@@ -506,21 +634,23 @@
   <div class="sec-head reveal">
     <h2 class="sec">Что сделать перед покупкой</h2>
   </div>
-  <div class="check reveal">
+  <div class="facts reveal">
     <ol>
-      <li><b>Померьте каждый порог отдельно.</b> Разброс 3–4 см — это разница между «подойдёт пандус на 3,5 см» и «нужен на 5 см». Меряйте по самой высокой точке.</li>
-      <li><b>Посмотрите, есть ли скос.</b> Порог со скошенной кромкой робот берёт заметно легче вертикального. Если кромка вертикальная и высота 4 см — вариантов, кроме X50 Ultra или пандуса, нет.</li>
-      <li><b>Посчитайте проёмы.</b> Каждый порог = 2 пандуса. При четырёх и более проёмах комбо с пандусами теряет смысл: R$ 2 742 + 8 × R$ 119,70 = R$ 3 700, и по полу разложено восемь пластиковых горок.</li>
-      <li><b>Начните с одного пандуса.</b> R$ 119,70 и 7 дней на возврат — дешёвая проверка гипотезы до того, как вкладывать R$ 8 440 в X50 Ultra.</li>
-      <li><b>Проверьте вольтаж.</b> У вас 127 В. У X50 Ultra и белого T50 Pro Omni он прямо указан в карточке; у Qrevo Curv и X40 Ultra — нет, спрашивайте продавца до оплаты.</li>
-      <li><b>Место под станцию.</b> Omni-база — тумба примерно 45×35×50 см, ей нужна розетка и по 30 см свободного места с боков и спереди. Ставить её надо в той зоне, куда робот попадает <b>без</b> преодоления порогов.</li>
+      <li><b>Померьте каждый порог линейкой по самой высокой точке.</b> Если все окажутся 20 мм и ниже — подойдёт любая модель из тройки. Если хоть один 25 мм — либо Qrevo Curv, либо пандус именно на этот проём.</li>
+      <li><b>Разница 18 / 20 / 22 мм важнее, чем кажется.</b> Робот подъезжает к порогу не всегда перпендикулярно, а мопы добавляют сопротивление. Запас в пару миллиметров — это разница между «проезжает всегда» и «застревает раз в неделю».</li>
+      <li><b>Роликовый моп против дисковых.</b> Два вращающихся диска возят по полу одну и ту же тряпку, постепенно превращая её в грязную. Валик у X9 Pro Omni промывается прямо во время уборки — по сути швабра с постоянно чистой поверхностью.</li>
+      <li><b>Тяга в паскалях — не главное.</b> Разница между 10 000 и 20 000 Па заметна на коврах с длинным ворсом. На плитке и ламинате, которые преобладают в Рио, важнее качество мопа и щёток.</li>
+      <li><b>Проверьте вольтаж до оплаты.</b> У вас 127 В. У Ecovacs X9 Pro Omni, Qrevo Edge S5A и Qrevo Curv он в карточках не указан — спрашивайте продавца. «220V» = трансформатор от 1000 ВА и ещё R$ 400–600 сверху.</li>
+      <li><b>Импорт против локальной поставки.</b> Пометка «Internacional» на Mercado Livre означает 1–3 недели и гарантию через площадку. Налоги в цену включены, точный срок появится после ввода CEP.</li>
+      <li><b>Место под станцию.</b> Omni-база — тумба примерно 45×35×50 см, ей нужна розетка и по 30 см свободного места с боков и спереди. Ставьте её в той зоне, куда робот попадает без преодоления порогов.</li>
+      <li><b>Wi-Fi только 2,4 ГГц.</b> Все модели подключаются исключительно к 2,4 ГГц. Если роутер раздаёт общую сеть 2,4 + 5 ГГц, на время настройки 5 ГГц лучше выключить.</li>
     </ol>
   </div>
 </section>
 
 <footer>
-  <p>Цены и наличие проверены вручную 10 августа 2026 года на Amazon.com.br, Mercado Livre, KaBuM!, Fast Shop, Mi Store Brasil и Americanas. Курс — R$ 5,10 за $1.<br>Высота преодолеваемых порогов сверена с независимыми тестами, а не только с описаниями продавцов.</p>
-  <p style="margin-top:10px">Источники по порогам: <a href="https://global.dreametech.com/products/dreame-x50-ultra-complete" target="_blank" rel="noopener">Dreame X50 Ultra</a>, <a href="https://vacuumwars.com/dreame-announces-x50-ultra-featuring-breakthrough-threshold-handling/" target="_blank" rel="noopener">Vacuum Wars о ProLeap</a>, <a href="https://www.galaxus.at/en/page/robot-vacuum-review-how-high-can-the-roborock-qrevo-curv-really-climb-35850" target="_blank" rel="noopener">Galaxus: тест Qrevo Curv</a>, <a href="https://ca.dreametech.com/blogs/blog/dreame-x50-ultra-vs-x40-ultra" target="_blank" rel="noopener">Dreame: X50 против X40</a>.</p>
+  <p>Цены и наличие проверены вручную 12 августа 2026 года на Mercado Livre, Amazon.com.br, KaBuM!, Fast Shop, Mi Store Brasil и Americanas. Курс — R$ 5,10 за $1.<br>Высота порогов взята из спецификаций производителей и независимых тестов, а не из описаний продавцов.</p>
+  <p style="margin-top:10px">Источники: <a href="https://www.ecovacs.com/us/shop/deebot-robotic-vacuum-cleaner/deebot-x9-pro-omni" target="_blank" rel="noopener">Ecovacs X9 Pro Omni</a>, <a href="https://www.ecovacs.com/us/shop/deebot-robotic-vacuum-cleaner/deebot-t50-pro-omni" target="_blank" rel="noopener">Ecovacs T50 Pro Omni</a>, <a href="https://www.mi.com/global/product/xiaomi-robot-vacuum-h50/" target="_blank" rel="noopener">Xiaomi H50</a>, <a href="https://support.roborock.com/hc/en-us/articles/43425130876825-What-are-the-differences-and-similarities-between-Qrevo-Edge-S5A-and-Qrevo-Edge" target="_blank" rel="noopener">Roborock: Qrevo Edge S5A против Qrevo Edge</a>, <a href="https://www.galaxus.at/en/page/robot-vacuum-review-how-high-can-the-roborock-qrevo-curv-really-climb-35850" target="_blank" rel="noopener">Galaxus: тест Qrevo Curv</a>.</p>
 </footer>
 
 </div>
@@ -538,9 +668,7 @@
       clearTimeout(fallback);
 
       const reveal = (el) => {
-        const kids = (el.matches('.grid') || el.matches('.paths'))
-          ? el.querySelectorAll('.card, .warn-card, .store, .path')
-          : null;
+        const kids = el.matches('.grid') ? el.querySelectorAll('.card, .pick, .warn-card, .store') : null;
         const many = kids && kids.length > 1;
         animate(many ? kids : el,
           { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
