@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Виджет чата на Tilda → amoCRM: подборка решений и подводные камни</title>
+<meta name="description" content="Разбор: как связать виджет мессенджеров на сайте Tilda с amoCRM так, чтобы повторные обращения падали в существующую карточку. 12 решений с ценами, механика контроля дублей, единый формат телефона.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7;
+  --surface:#FFFFFF;
+  --surface-2:#FAFAFC;
+  --ink:#1D1D1F;
+  --ink-2:#4A4A4F;
+  --muted:#86868B;
+  --line:#E3E3E8;
+  --blue:#0071E3;
+  --blue-soft:#EAF3FE;
+  --green:#1D8F4E;
+  --green-soft:#E7F5EC;
+  --amber:#B45309;
+  --amber-soft:#FDF3E3;
+  --red:#C8332B;
+  --red-soft:#FCECEA;
+  --radius:20px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+  --shadow-lg:0 2px 6px rgba(0,0,0,.05), 0 18px 44px rgba(0,0,0,.09);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.15;margin:0}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* nav */
+.nav{
+  position:sticky;top:0;z-index:100;background:rgba(245,245,247,.82);
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;gap:22px;height:52px;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav a{color:var(--ink-2);font-size:14px;font-weight:500;white-space:nowrap;padding:6px 0;border-bottom:2px solid transparent}
+.nav a:hover{color:var(--ink);text-decoration:none;border-bottom-color:var(--blue)}
+.nav .brand{font-weight:600;color:var(--ink);margin-right:4px}
+
+/* hero */
+.hero{padding:76px 0 56px;text-align:center}
+.hero h1{font-size:clamp(34px,5.2vw,60px);font-weight:700}
+.hero .sub{max-width:760px;margin:22px auto 0;font-size:clamp(17px,2vw,21px);color:var(--ink-2)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13px;color:var(--muted);font-weight:500;box-shadow:var(--shadow)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:28px}
+
+section{padding:56px 0}
+.sec-head{margin-bottom:28px}
+.sec-head .kicker{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.sec-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:700}
+.sec-head p{color:var(--ink-2);max-width:820px;margin:14px 0 0;font-size:17px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);transition:transform .25s ease, box-shadow .25s ease}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;letter-spacing:.01em}
+.t-blue{background:var(--blue-soft);color:#0058B0}
+.t-green{background:var(--green-soft);color:var(--green)}
+.t-amber{background:var(--amber-soft);color:var(--amber)}
+.t-red{background:var(--red-soft);color:var(--red)}
+.t-gray{background:#EFEFF3;color:var(--ink-2)}
+
+.note{font-size:14px;color:var(--muted)}
+.lead{font-size:19px;color:var(--ink-2)}
+ul.clean{margin:0;padding-left:20px}
+ul.clean li{margin:8px 0}
+ul.none{list-style:none;margin:0;padding:0}
+ul.none li{position:relative;padding-left:26px;margin:10px 0}
+ul.none li::before{content:"";position:absolute;left:6px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+
+/* reveal — контент виден по умолчанию, скрывается только при работающем JS */
+.js-motion .reveal{opacity:0;transform:translateY(22px)}
+@media (prefers-reduced-motion: reduce){
+  .js-motion .reveal{opacity:1 !important;transform:none !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="nav">
+  <div class="wrap nav-inner">
+    <span class="brand">Чат → amoCRM</span>
+    <a href="#zadacha">Задача</a>
+    <a href="#mehanika">Как amo узнаёт клиента</a>
+    <a href="#shema">Схема</a>
+    <a href="#podborka">Подборка</a>
+    <a href="#tablica">Таблица</a>
+    <a href="#vybor">Что выбрать</a>
+    <a href="#telefon">Формат телефона</a>
+    <a href="#instrumenty">Инструменты</a>
+    <a href="#kamni">Подводные камни</a>
+    <a href="#plan">План внедрения</a>
+    <a href="#istochniki">Источники</a>
+  </div>
+</div>
+<main>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Виджет чата на Tilda → amoCRM</h1>
+    <p class="sub">Человек пишет в чат на сайте — amoCRM должна понять, новый это клиент или уже знакомый, и не плодить карточки. Разбор механики, 12 решений с ценами и список мест, где эта схема ломается.</p>
+    <div class="hero-meta">
+      <span class="pill">Проверено 12 августа 2026</span>
+      <span class="pill">Цены — с официальных сайтов</span>
+      <span class="pill">Все источники в конце страницы</span>
+    </div>
+  </div>
+</header>
+
+<section id="zadacha">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Задача</div>
+      <h2>Что именно нужно построить</h2>
+      <p>Сайт на <a href="https://tilda.cc/ru/" target="_blank" rel="noopener">Tilda</a>, в правом нижнем углу — виджет с мессенджерами (как у <a href="https://livetex.ru/" target="_blank" rel="noopener">LiveTex</a>). Посетитель пишет, обращение уходит в <a href="https://www.amocrm.ru/" target="_blank" rel="noopener">amoCRM</a>. Если человек обращается впервые — создаётся карточка. Если уже был — подсвечивается существующая. Связка по номеру телефона, формат номера везде одинаковый.</p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card reveal">
+        <span class="tag t-red">Главное ограничение</span>
+        <h3 style="font-size:19px;margin:14px 0 10px">Чат на сайте не знает номер</h3>
+        <p style="margin:0;color:var(--ink-2);font-size:15px">Посетитель сайта анонимен: у виджета есть cookie и <em>chat_id</em>, но нет телефона. Связка по номеру возможна только там, где номер вообще собран — в pre-chat форме, в вопросе бота или в канале WhatsApp.</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag t-blue">Что решает задачу</span>
+        <h3 style="font-size:19px;margin:14px 0 10px">Контроль дублей в amoCRM</h3>
+        <p style="margin:0;color:var(--ink-2);font-size:15px">Это штатный механизм самой amoCRM, настраивается по каждой воронке. Он ищет входящую заявку среди существующих по телефону, email, пикселю и BIG DATA — и обновляет найденную сделку вместо создания новой.</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag t-green">Вывод коротко</span>
+        <h3 style="font-size:19px;margin:14px 0 10px">Виджет вторичен, настройка первична</h3>
+        <p style="margin:0;color:var(--ink-2);font-size:15px">Ни один виджет сам по себе не «склеивает» карточки. Склеивает amoCRM — при условии, что виджет отдаёт ей телефон в первом же сообщении, а контроль дублей включён для этого источника.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:18px;background:var(--surface-2)">
+      <p class="note" style="margin:0">Скриншот, о котором шла речь в задаче, до меня не дошёл — файл не приложился. Разбор построен на предположении, что речь про виджет-«шторку» с выбором мессенджеров и онлайн-чатом в правом нижнем углу, как на сайте LiveTex. Если на скрине было что-то другое — пришлите, скорректирую подборку.</p>
+    </div>
+  </div>
+</section>
+
+<section id="mehanika" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Механика</div>
+      <h2>Как amoCRM понимает, кто пишет</h2>
+      <p>В amoCRM есть пять разных способов узнать клиента, и они работают в разных ситуациях. Ниже — что говорит официальная документация раздела «Контроль дублей».</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3 style="font-size:20px;margin-bottom:6px">1. Телефон</h3>
+        <span class="tag t-green">Работает для форм, API и чатов — с условием</span>
+        <p style="color:var(--ink-2);font-size:15px;margin:14px 0 0">amoCRM ищет контакт с таким же телефоном и связанные с ним сделки, где найденный контакт — основной. Ключевая оговорка из документации: для чатов проверка работает, <strong>«если интеграция передает номер телефона вместе с профилем в первом сообщении»</strong>.</p>
+        <p style="color:var(--ink-2);font-size:15px;margin:14px 0 0">Про формат там же сказано прямо: <strong>«все телефоны приводятся для поиска к международному формату. Если передан, например, внутренний номер, то поиск может не произойти или произойти не корректно»</strong>.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:20px;margin-bottom:6px">2. Email</h3>
+        <span class="tag t-amber">Формы и API, но не чаты</span>
+        <p style="color:var(--ink-2);font-size:15px;margin:14px 0 0">Ищется контакт с тем же email и сделки, где он основной контакт. Важная деталь: в описании этого параметра чаты в списке источников <strong>не упомянуты</strong> — в отличие от телефона. Проверяется при создании заявок из форм и через метод <span class="mono">/api/v4/leads/complex</span>.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:20px;margin-bottom:6px">3. Пиксель</h3>
+        <span class="tag t-blue">Только для чатов</span>
+        <p style="color:var(--ink-2);font-size:15px;margin:14px 0 0">Посетитель получает пиксель, когда взаимодействует со страницами сайта, <strong>на которых стоит форма amoCRM или CRM Plugin</strong>. Дальше amoCRM ищет сделки, связанные с этим пикселем. Именно этот механизм «узнаёт» вернувшегося посетителя в том же браузере — без всякого телефона.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:20px;margin-bottom:6px">4. BIG DATA</h3>
+        <span class="tag t-amber">Есть жёсткое условие</span>
+        <p style="color:var(--ink-2);font-size:15px;margin:14px 0 0">Машинное обучение amoCRM. Для чатов работает синхронно, для остальных каналов — асинхронно, уже после добавления заявки. Но объединение произойдёт, <strong>только если одна из дублирующихся сущностей находится в статусе «неразобранное»</strong>. Сделка, которую менеджер уже принял в работу, в склейку не попадёт.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:20px;margin-bottom:6px">5. Дополнительное поле</h3>
+        <span class="tag t-gray">Текст и число</span>
+        <p style="color:var(--ink-2);font-size:15px;margin:14px 0 0">Можно сравнивать по своим полям сделки и контакта — например, по ИНН или номеру договора. Работает для форм и метода <span class="mono">/api/v4/leads/complex</span>.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:20px;margin-bottom:6px">6. Идентификатор чата</h3>
+        <span class="tag t-gray">Внутри одного канала</span>
+        <p style="color:var(--ink-2);font-size:15px;margin:14px 0 0">В API чатов участник диалога определяется полями <span class="mono">conversation_id</span> и <span class="mono">user.id</span>, а в профиле можно передать <span class="mono">phone</span> и <span class="mono">email</span>. Пока человек пишет из того же аккаунта мессенджера или того же браузера — переписка ложится в тот же контакт автоматически, никакой контроль дублей для этого не нужен.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:22px">
+      <h3 style="font-size:20px;margin-bottom:16px">Когда склейка сработает, а когда нет</h3>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:15px;min-width:640px">
+          <thead>
+            <tr style="text-align:left;border-bottom:2px solid var(--line)">
+              <th style="padding:10px 12px 10px 0">Ситуация</th>
+              <th style="padding:10px 12px">Что произойдёт</th>
+              <th style="padding:10px 0 10px 12px">Почему</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:12px 12px 12px 0">Вернулся в тот же браузер, пишет в тот же чат</td>
+              <td style="padding:12px"><span class="tag t-green">Та же карточка</span></td>
+              <td style="padding:12px 0 12px 12px;color:var(--ink-2)">Cookie чата и пиксель</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:12px 12px 12px 0">Писал с телефона, вернулся с ноутбука, номер не оставлял</td>
+              <td style="padding:12px"><span class="tag t-red">Новая карточка</span></td>
+              <td style="padding:12px 0 12px 12px;color:var(--ink-2)">Другой браузер = другой пиксель и другой chat_id</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:12px 12px 12px 0">Оставил номер в pre-chat форме, раньше уже был контакт с этим номером</td>
+              <td style="padding:12px"><span class="tag t-green">Склейка по телефону</span></td>
+              <td style="padding:12px 0 12px 12px;color:var(--ink-2)">Если контроль дублей включён и номер ушёл в профиль</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:12px 12px 12px 0">Написал в WhatsApp с номера, который уже есть в базе</td>
+              <td style="padding:12px"><span class="tag t-green">Склейка по телефону</span></td>
+              <td style="padding:12px 0 12px 12px;color:var(--ink-2)">В WhatsApp номер и есть идентификатор</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:12px 12px 12px 0">Написал в Telegram, номер в профиле скрыт</td>
+              <td style="padding:12px"><span class="tag t-red">Новая карточка</span></td>
+              <td style="padding:12px 0 12px 12px;color:var(--ink-2)">Telegram не отдаёт скрытый номер, остаётся только username</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line)">
+              <td style="padding:12px 12px 12px 0">Старая сделка уже в работе, не в «неразобранном»</td>
+              <td style="padding:12px"><span class="tag t-amber">Зависит от параметра</span></td>
+              <td style="padding:12px 0 12px 12px;color:var(--ink-2)">BIG DATA не сработает; телефон и email — сработают, если статус входит в выбранные</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 12px 12px 0">В базе уже 4+ карточки с этим номером</td>
+              <td style="padding:12px"><span class="tag t-red">Склейки не будет</span></td>
+              <td style="padding:12px 0 12px 12px;color:var(--ink-2)">«Если дублей найдено более 3, объединение не произойдет»</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin:16px 0 0">Формулировки в кавычках — дословно из <a href="https://www.amocrm.ru/developers/content/crm_platform/duplication-control" target="_blank" rel="noopener">документации amoCRM «Контроль дублей»</a>.</p>
+    </div>
+
+    <div class="card reveal" style="margin-top:18px;border-left:3px solid var(--blue)">
+      <h3 style="font-size:20px;margin-bottom:12px">Две штатные функции, которые постоянно путают</h3>
+      <div class="grid g2" style="gap:20px">
+        <div>
+          <span class="tag t-blue">Превентивно</span>
+          <h4 style="font-size:17px;margin:12px 0 8px"><a href="https://www.amocrm.ru/support/incoming_leads/kontrol-dublej/" target="_blank" rel="noopener">Контроль дублей</a></h4>
+          <p style="margin:0;font-size:15px;color:var(--ink-2)">Сделки → настройки воронки. Работает автоматически на входящем потоке, для чатов проверяет сразу. Это то, что нужно настроить для задачи «не плодить карточки».</p>
+        </div>
+        <div>
+          <span class="tag t-gray">Ретроспективно</span>
+          <h4 style="font-size:17px;margin:12px 0 8px"><a href="https://www.amocrm.ru/support/leads/merge_duplicate_leads/" target="_blank" rel="noopener">Поиск дублей</a></h4>
+          <p style="margin:0;font-size:15px;color:var(--ink-2)">Сделки → «…» → Поиск дублей. Ручной разбор уже созданного, алгоритм самообучаемый. Доступен только пользователям с полными правами и только в браузерной версии — в мобильном приложении его нет.</p>
+        </div>
+      </div>
+      <p style="margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--ink-2)"><strong>Общее ограничение обоих:</strong> они работают со <strong>сделками</strong>, а не с контактами. Две карточки одного человека штатная amoCRM автоматически не склеит — для этого нужен отдельный виджет.</p>
+    </div>
+  </div>
+</section>
+
+<section id="shema">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Архитектура</div>
+      <h2>Путь обращения от кнопки до карточки</h2>
+      <p>Три слоя, и в каждом свои требования. Виджет отвечает за сбор номера, канал — за доставку, amoCRM — за склейку.</p>
+    </div>
+    <div class="card reveal" style="padding:34px 26px">
+      <div class="flow">
+        <div class="flow-col">
+          <div class="flow-badge">1</div>
+          <h4>Сайт на Tilda</h4>
+          <p>Код виджета вставлен в <strong>Настройки сайта → Еще → HTML-код для вставки внутрь head</strong> либо в блок <span class="mono">T123</span> (Библиотека блоков → Другое → HTML-код). Для Jivo есть готовый блок <span class="mono">T133</span>; чтобы он работал на всех страницах, его кладут на пустую страницу и назначают её как Header.</p>
+          <p class="flow-note">Здесь же — формы Tilda с полем «Телефон» и маской.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#86868B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+        <div class="flow-col">
+          <div class="flow-badge">2</div>
+          <h4>Виджет и каналы</h4>
+          <p>Онлайн-чат, WhatsApp, Telegram, MAX, VK, Avito. Ключевая настройка — <strong>обязательный запрос телефона</strong> до или в начале диалога.</p>
+          <p class="flow-note">Номер должен уйти в профиль чата вместе с первым сообщением.</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#86868B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+        <div class="flow-col">
+          <div class="flow-badge">3</div>
+          <h4>amoCRM</h4>
+          <p>Обращение падает в <strong>Неразобранное</strong> выбранной воронки. Включённый <strong>контроль дублей</strong> сверяет телефон, email, пиксель и BIG DATA и либо обновляет найденную сделку, либо создаёт новую.</p>
+          <p class="flow-note">Один источник живёт только в одной воронке.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="podborka">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Подборка</div>
+      <h2>Решения и цены</h2>
+      <p>Три разных класса продуктов, которые часто путают. <strong>Нативные инструменты amoCRM</strong> — бесплатны, но простые. <strong>Чат-платформы</strong> — свой виджет, свои операторы, свои боты. <strong>Коннекторы мессенджеров</strong> — виджета на сайт обычно нет, зато переписка идёт прямо в карточке amoCRM. Цены — с официальных сайтов на 12 августа 2026.</p>
+    </div>
+
+    <h3 class="cat-title">Нативно в amoCRM</h3>
+    <div class="grid g2">
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=amocrm.ru&sz=128" alt="Логотип amoCRM" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://www.amocrm.ru/" target="_blank" rel="noopener">CRM Plugin + онлайн-чат amoCRM</a></h4>
+            <span class="tag t-green">0 ₽ сверх лицензии</span>
+          </div>
+        </header>
+        <p class="svc-price">0 ₽ <span>+ сама amoCRM: 599 / 1 299 / 1 799 ₽ за пользователя в месяц, оплата минимум за 6 месяцев</span></p>
+        <dl class="svc-dl">
+          <dt>Что это</dt><dd>Кнопка с мессенджерами и онлайн-чат, которые настраиваются прямо в воронке: Сделки → Настроить → добавить источник → «Разместить кнопку на сайте» → скопировать скрипт.</dd>
+          <dt>Каналы</dt><dd>Онлайн-чат amoCRM + те мессенджеры, что подключены к аккаунту.</dd>
+          <dt>Дедупликация</dt><dd>Лучшая в подборке по одной причине: именно CRM Plugin ставит на сайт <strong>пиксель</strong>, а склейка по пикселю работает только для чатов и только при наличии на сайте формы amoCRM или CRM Plugin.</dd>
+          <dt>Tilda</dt><dd>Скрипт в head сайта или в блок T123.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> ничего не платим сверху, обращения сразу в неразобранном, пиксель из коробки, переписка внутри amoCRM.</p>
+          <p><strong>Против:</strong> слабее по операторским функциям и ботам, чем специализированные платформы; лимиты контактов по тарифу; источник живёт в одной воронке.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=tilda.cc&sz=128" alt="Логотип Tilda" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://help-ru.tilda.cc/forms/amo" target="_blank" rel="noopener">Приёмщик amoCRM в Tilda</a></h4>
+            <span class="tag t-green">0 ₽</span>
+          </div>
+        </header>
+        <p class="svc-price">0 ₽ <span>входит в тариф Tilda</span></p>
+        <dl class="svc-dl">
+          <dt>Что это</dt><dd>Не чат, а канал для форм: Настройки сайта → Формы → AmoCRM. Нужен параллельно любому виджету, чтобы заявки с форм тоже попадали в CRM.</dd>
+          <dt>Дедупликация</dt><dd>В настройках приёмщика есть отдельная опция — отправлять заявки «способом добавления сделок с поиском дублей». Её надо включить, иначе каждая форма создаёт новую сделку.</dd>
+          <dt>Поля</dt><dd>Передаются name, email, phone, referer. Поля, созданные интеграцией, удалять нельзя — сломается.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> бесплатно, настраивается за пять минут, поддерживает поиск дублей.</p>
+          <p><strong>Против:</strong> только формы, живого диалога нет.</p>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="cat-title">Чат-платформы: свой виджет на сайт</h3>
+    <div class="grid g2" id="platforms">
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=umnico.com&sz=128" alt="Логотип Umnico" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://umnico.com/ru/" target="_blank" rel="noopener">Umnico</a></h4>
+            <span class="tag t-green">Лучшая цена входа</span>
+          </div>
+        </header>
+        <p class="svc-price">0 ₽ <span>чат на сайте — Free, интеграция с amoCRM — Free, первый оператор бесплатно. Платите только за мессенджеры</span></p>
+        <dl class="svc-dl">
+          <dt>Цены каналов</dt><dd>WhatsApp, Telegram Личный, MAX — по 3 500 ₽ за канал в месяц (2 275 ₽ при оплате за год, −35%). Telegram Бот и ВКонтакте — 1 500 ₽ (975 ₽). Авито — 2 000 ₽. Каждый следующий оператор — 500 ₽ в месяц (325 ₽ при годовой).</dd>
+          <dt>amoCRM</dt><dd>Бесплатная интеграция, доплаты за пользователей amoCRM нет.</dd>
+          <dt>Телефон в чате</dt><dd>В виджете настраиваются формы: «Укажите, какие данные нужно запросить в чате у собеседника». Обязательность и попадание номера в профиль чата надо проверить на триале.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> можно запустить связку «чат на сайте + amoCRM» вообще без абонентской платы.</p>
+          <p><strong>Против:</strong> триал 3 дня; цены за канал суммируются; докупить канал можно только на тот же период, что и основной тариф.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=pact.im&sz=128" alt="Логотип Pact" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://pact.im/" target="_blank" rel="noopener">Pact</a></h4>
+            <span class="tag t-green">Виджет и CRM — 0 ₽</span>
+          </div>
+        </header>
+        <p class="svc-price">0 ₽ <span>виджет на сайт и интеграция с amoCRM бесплатны — платите только за подключённые каналы</span></p>
+        <dl class="svc-dl">
+          <dt>Цены каналов</dt><dd>МАКС, WhatsApp, Telegram Personal, Instagram — 3 500 ₽ в месяц (3 150 ₽ при годовой). WABA — 6 000 ₽ (5 000 ₽). Пакет «Корпоративный» — от 2 000 ₽ в месяц, «Всё включено» — от 6 000 ₽.</dd>
+          <dt>amoCRM</dt><dd>Готовая интеграция, заявлена как бесплатная, с отдельными связками под WhatsApp, Telegram, Instagram, ВКонтакте и МАКС.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> самый предсказуемый расчёт для Tilda — виджет бесплатно плюс один-два канала; на рынке с 2016 года.</p>
+          <p><strong>Против:</strong> минимальная сумма пополнения баланса — 6 000 ₽, то есть «от 2 000 ₽ в месяц» не значит, что можно занести две тысячи.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=verbox.ru&sz=128" alt="Логотип Verbox" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://verbox.ru/" target="_blank" rel="noopener">Verbox</a></h4>
+            <span class="tag t-green">Дешевле всех с amoCRM</span>
+          </div>
+        </header>
+        <p class="svc-price">870 ₽ <span>тариф «Профи» за оператора в месяц: безлимит обращений и все функции. Есть бесплатный тариф на 1 оператора</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>Бесплатный — 0 ₽ навсегда, 1 оператор, ограниченный функционал. «Стартап» — 550 ₽ за оператора в месяц (пакет 50 обращений). «Профи» — 870 ₽. Периоды оплаты от 1 дня до 24 месяцев. AI-ассистент — плюс 90 ₽ за оператора.</dd>
+          <dt>amoCRM</dt><dd>Создаются сделка, контакт и компания, поддержаны связанные сущности, сопоставление операторов чата с пользователями CRM, поиск по базе CRM и кастомные поля.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> самый дешёвый полноценный онлайн-чат с готовой интеграцией amoCRM среди проверенных.</p>
+          <p><strong>Против:</strong> классический чат-first сервис — агрегатора мессенджеров уровня Wazzup здесь ждать не стоит.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=jivo.ru&sz=128" alt="Логотип Jivo" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://www.jivo.ru/" target="_blank" rel="noopener">Jivo</a></h4>
+            <span class="tag t-blue">Самый распространённый</span>
+          </div>
+        </header>
+        <p class="svc-price">742 ₽ <span>за оператора в месяц на тарифе «Базовая» при оплате лицензии на 2 года — это минимальный тариф с интеграциями в 1 клик с CRM</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>FREE — 0 ₽, до 2 операторов (чат для сайта, MAX, Telegram, Одноклассники, Viber, Email, обратный звонок), но <strong>без CRM-интеграций</strong>. BASE — 742 ₽. PRO — 1 342 ₽. VIP — от 3 142 ₽. WhatsApp — отдельно 2 711 ₽ в месяц.</dd>
+          <dt>amoCRM</dt><dd>Нативная интеграция «в 1 клик» прямо из приложения Jivo: Управление → Расширения → Интеграции → amoCRM, дальше OAuth. Нужны права администратора в amoCRM.</dd>
+          <dt>Телефон в чате</dt><dd>Форма контактов, режим «Перед началом диалога»: «Форма появится сразу после того, как посетитель напишет в чат», заполнение обязательно. Поля можно пометить обязательными, среди них должно быть хотя бы одно системное — имя, почта или телефон.</dd>
+          <dt>Tilda</dt><dd>Единственный сервис с готовым блоком в библиотеке Tilda — T133.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> зрелый продукт, бесплатный тариф для старта, готовая интеграция с Tilda, CRM уже на базовом тарифе.</p>
+          <p><strong>Против:</strong> в справке прямо сказано, что общение ведётся в приложении Jivo и «отвечать клиентам из CRM не получится»; сделки в amoCRM по умолчанию не создаются — нужна отдельная настройка; ценник на витрине — это оплата сразу за 2 года.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=livetex.ru&sz=128" alt="Логотип LiveTex" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://livetex.ru/" target="_blank" rel="noopener">LiveTex</a></h4>
+            <span class="tag t-amber">Тот самый виджет со скрина</span>
+          </div>
+        </header>
+        <p class="svc-price">от 2 168 ₽ <span>в месяц: лицензия «Продвинутый» от 1 445 ₽ + канал «чат для сайта» от 723 ₽. Обе цифры — со скидкой 25% при единовременной оплате 24 месяцев</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>Бесплатный — 0 ₽ (чат на сайте, 1 оператор, без ботов и исходящих). Базовый — от 450 ₽. Продвинутый — от 1 445 ₽ за операторскую лицензию. On-premise — по расчёту.</dd>
+          <dt>Каналы отдельно</dt><dd>Это не «всё включено»: чат для сайта — от 723 ₽ в месяц, WhatsApp — от 803 ₽, MAX — от 803 ₽, Telegram и Viber — от 322 ₽, чат в мобильном приложении — от 563 ₽.</dd>
+          <dt>amoCRM</dt><dd><strong>Готовой интеграции нет.</strong> В базе знаний единственная коробочная CRM-интеграция — с Битрикс24; про остальные сказано: «API LiveTex универсален и позволяет подключить как популярные, так и самописные CRM», и там же — «это не интеграция в один клик».</dd>
+          <dt>Телефон в чате</dt><dd>Есть пречат-поля: «Пользователю необходимо заполнить его перед тем, как начать чат с оператором» — можно сделать полем ввода телефона и отметить обязательным.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> сильная операторская часть — супервизор, SLA, маршрутизация; есть развёртывание на своих серверах.</p>
+          <p><strong>Против:</strong> связка с amoCRM — отдельный проект с разработкой; цена собирается из лицензий и каналов; витринные цифры действуют при оплате за 24 месяца.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=chat2desk.com&sz=128" alt="Логотип Chat2Desk" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://chat2desk.com/" target="_blank" rel="noopener">Chat2Desk</a></h4>
+            <span class="tag t-blue">Для большого потока</span>
+          </div>
+        </header>
+        <p class="svc-price">5 000 ₽ <span>тариф «Базовый» при помесячной оплате (4 500 ₽ при оплате за 3 месяца) + 600 ₽ за каждого оператора</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>Базовый 5 000 ₽ (2 мессенджера, 1 000 диалогов), Стандартный 9 000 ₽ (4 канала, 4 000 диалогов), Профессиональный 15 000 ₽ (6 каналов, 8 000 диалогов). Диалог сверх пакета — 2,5 ₽. Операторы: 600 ₽ при 1–10 лицензиях, дальше дешевле.</dd>
+          <dt>Онлайн-чат</dt><dd>Виджет на сайт бесплатный и не занимает лимит: «онлайн-чат с виджетом на сайте не учитывается как отдельный мессенджер и доступен бесплатно в каждом тарифе».</dd>
+          <dt>Телефон в чате</dt><dd>Есть настройка «Запрашивать данные у посетителя»: поле «Телефон» сохраняется в стандартное поле карточки клиента.</dd>
+          <dt>amoCRM</dt><dd>Официальная интеграция, подключение через OAuth из личного кабинета. Отдельной платы за неё на сайте не заявлено.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> зрелая платформа, MAX и классифайды (Авито, Дром, Авто.ру), Enterprise и выделенный сервер.</p>
+          <p><strong>Против:</strong> дорого на старте; конструктор ботов (3 500 ₽) и онлайн-мониторинг (8 000 ₽) не входят ни в один тариф; WABA — 8 000 ₽ в месяц сверху.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=teletype.app&sz=128" alt="Логотип Teletype App" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://teletype.app/" target="_blank" rel="noopener">Teletype App</a></h4>
+            <span class="tag t-gray">Конструктор тарифа</span>
+          </div>
+        </header>
+        <p class="svc-price">2 490 ₽ <span>тариф Light при помесячной оплате (1 992 ₽ в пересчёте на месяц при годовой): 1 оператор, 1 канал, 500 диалогов</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>Light 2 490 ₽, Basic 5 250 ₽, Business 9 900 ₽, Pro 15 900 ₽ в месяц. При годовой оплате — 12 месяцев + 3 в подарок.</dd>
+          <dt>Поштучно</dt><dd>Чат на сайте — 540 ₽ за канал в месяц, кнопка с мессенджерами — 540 ₽, WhatsApp — 3 750 ₽, Telegram через бота — 990 ₽, дополнительный оператор — 720 ₽.</dd>
+          <dt>Телефон в чате</dt><dd>Обязательный запрос телефона до начала диалога в документации не подтверждён — описан только сбор контактов ботом в нерабочее время. Проверять на триале.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> платите ровно за нужные каналы и операторов, интеграция с amoCRM есть.</p>
+          <p><strong>Против:</strong> бесплатного тарифа нет, триал 3 дня; онлайн-чат и кнопку мессенджеров нельзя поставить на сайт одновременно; убрать ссылку «Работает на Teletype» — 360 ₽ в месяц.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=carrotquest.io&sz=128" alt="Логотип Carrot quest" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://carrotquest.io/" target="_blank" rel="noopener">Carrot quest</a></h4>
+            <span class="tag t-blue">Чат + маркетинг</span>
+          </div>
+        </header>
+        <p class="svc-price">4 490 ₽ <span>тариф «Общение» при оплате за 3 месяца (3 592 ₽ при годовой) для сайта до 10 000 уникальных посетителей в месяц</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>«Общение» 4 490 ₽ — онлайн-чат, мессенджеры, почта. «Маркетинг» 10 990 ₽ и «Маркетинг Эксперт» 14 287 ₽ — лид-боты, поп-апы, рассылки, сценарии.</dd>
+          <dt>Логика цены</dt><dd>Считается от уникальных посетителей сайта, а не от числа операторов: «Количество подключаемых членов команды не влияет на цену». Помесячной оплаты нет — минимум 3 месяца.</dd>
+          <dt>Телефон в чате</dt><dd>Собирается Welcome-ботом до назначения диалога на оператора. На тарифе «Маркетинг» это платный модуль — 2 990 ₽ в месяц, на «Эксперте» входит в стоимость.</dd>
+          <dt>amoCRM</dt><dd>Двусторонняя интеграция: в сделку передаётся весь диалог, между карточками появляется связка.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> сильные боты и сценарии, аналитика, единая история пользователя.</p>
+          <p><strong>Против:</strong> перерасход по посетителям тарифицируется отдельно; каждый сайт оплачивается отдельно; цены без НДС.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=talk-me.ru&sz=128" alt="Логотип Talk-Me" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://talk-me.ru/" target="_blank" rel="noopener">Talk-Me</a></h4>
+            <span class="tag t-green">Бюджетный вариант</span>
+          </div>
+        </header>
+        <p class="svc-price">870 ₽ <span>тариф PRO за оператора в месяц для одного сайта; 2 350 ₽ за 3 месяца, 6 380 ₽ за год. Есть бесплатный тариф без интеграций</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>FREE — 0 ₽ бессрочно, 1 оператор, любое количество сайтов, ограниченный функционал. START — 110 ₽ за 10 обращений (220 ₽ за 20, дальше линейно). PRO — 870 ₽ в месяц / 6 380 ₽ в год.</dd>
+          <dt>amoCRM</dt><dd>Нативная интеграция с отдельной статьёй в базе знаний, подключается в личном кабинете. Первая строка статьи: «Интеграция недоступна для бесплатной версии» — то есть нужен START или PRO.</dd>
+          <dt>Телефон в чате</dt><dd>В настройках сбора данных три режима, среди них «Обязательная форма»: она показывается в момент отправки сообщения, и без её заполнения посетитель не сможет отправить сообщение.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> самая низкая цена среди полноценных чат-платформ; модель «плата за обращения» удобна при редком трафике.</p>
+          <p><strong>Против:</strong> лицензия считается по сайтам, каждый сайт — отдельная покупка; на бесплатном тарифе интеграции нет вообще.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <h3 class="cat-title">Виджеты захвата лида</h3>
+    <div class="grid g2">
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=envybox.io&sz=128" alt="Логотип Envybox" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://envybox.io/" target="_blank" rel="noopener">Envybox</a></h4>
+            <span class="tag t-gray">Мультикнопка и callback</span>
+          </div>
+        </header>
+        <p class="svc-price">840 ₽ <span>за оператора в месяц при оплате за год (1 063 ₽ при оплате за 3 месяца) — цена каждого виджета отдельно</span></p>
+        <dl class="svc-dl">
+          <dt>Что это</dt><dd>Не чат-платформа, а набор виджетов: онлайн-чат, мультикнопка со всеми мессенджерами, обратный звонок за 30 секунд, генератор клиентов, квизы. Каждый продукт оплачивается отдельно.</dd>
+          <dt>amoCRM</dt><dd>Заявлена интеграция с amoCRM и Битрикс24, у онлайн-чата есть отдельная инструкция по подключению к amoCRM.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> закрывает сценарий «мультикнопка + чат + обратный звонок» на Tilda одним поставщиком.</p>
+          <p><strong>Против:</strong> считать надо сумму по всем нужным виджетам; лучшая цена — только при годовой предоплате.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=callibri.ru&sz=128" alt="Логотип Callibri" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://callibri.ru/crm-chat" target="_blank" rel="noopener">Callibri CRM-чат</a></h4>
+            <span class="tag t-blue">Чат + сквозная аналитика</span>
+          </div>
+        </header>
+        <p class="svc-price">4 500 ₽ <span>тариф L за 30 дней — минимальный, на котором доступен сам виджет чата. Тариф XL — 8 100 ₽</span></p>
+        <dl class="svc-dl">
+          <dt>Что это</dt><dd>Чат на сайте, склеенный с коллтрекингом и сквозной аналитикой: видно, из какого канала и объявления пришёл диалог. Собирает WhatsApp, Telegram, MAX.</dd>
+          <dt>amoCRM</dt><dd>«Работаем с Битрикс24 и amoCRM», есть отдельные посадочные под связки WhatsApp + amoCRM, Telegram + amoCRM, MAX + amoCRM.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> единственный в подборке, кто связывает обращение из чата с рекламным источником.</p>
+          <p><strong>Против:</strong> дорого для просто чата; на младших тарифах S и M виджета нет — прямая оговорка на сайте.</p>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="cat-title">Коннекторы мессенджеров в amoCRM</h3>
+    <div class="grid g2" id="connectors">
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=wazzup24.ru&sz=128" alt="Логотип Wazzup" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://wazzup24.ru/" target="_blank" rel="noopener">Wazzup24</a></h4>
+            <span class="tag t-blue">Стандарт для amoCRM</span>
+          </div>
+        </header>
+        <p class="svc-price">от 1 000 ₽ <span>за один канал в месяц (WhatsApp, тариф START, 50 диалогов). −10% при оплате за полгода, −20% за год</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы канала</dt><dd>START 1 000 ₽ (50 диалогов, можно писать первым), INBOX 2 000 ₽ (500 диалогов, писать первым нельзя), PRO 4 000 ₽ (500 диалогов, групповые чаты), MAX 6 000 ₽ (безлимит, расшифровка аудио). При оплате за год — 800 / 1 600 / 3 200 / 4 800 ₽. WhatsApp Business API — 6 000 ₽ (4 800 ₽ при годовой).</dd>
+          <dt>Бесплатно</dt><dd>Telegram Bot, ВКонтакте и MAX Bot есть на тарифе FREE — 0 ₽ за канал, 500 диалогов в месяц, писать первым нельзя. Это самый дешёвый способ завести мессенджеры в amoCRM.</dd>
+          <dt>Каналы</dt><dd>WhatsApp, WABA, Telegram Personal и Bot, MAX, Viber, ВКонтакте, Instagram, Авито, Циан.</dd>
+          <dt>Дедупликация</dt><dd>У сервиса отдельная инструкция «Как избавиться от дублей»: включить «Контроль дублей» в настройках воронки, отметить там источник Wazzup, включить вебхуки, не откреплять чаты от контактов и удалить старый виджет.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> самый обкатанный коннектор для amoCRM, переписка ведётся прямо в карточке сделки.</p>
+          <p><strong>Против:</strong> это не виджет для сайта — кнопку и чат придётся брать отдельно; цена считается за каждый номер.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=radist.online&sz=128" alt="Логотип Radist.Online" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://radist.online/" target="_blank" rel="noopener">Radist.Online</a></h4>
+            <span class="tag t-gray">Дешевле на входе</span>
+          </div>
+        </header>
+        <p class="svc-price">1 000 ₽ <span>тариф «Начальный» за один номер в месяц при помесячной оплате (800 ₽ при оплате за год): входящие без ограничений, писать первым — 50 новых чатов в месяц</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>Начальный 1 000 ₽, Стандартный 4 000 ₽ за номер в месяц — безлимит диалогов, рассылки, групповые чаты. Скидки: −10% за 3 месяца, −15% за полгода, −20% за год.</dd>
+          <dt>amoCRM</dt><dd>Профильный продукт: отдельные интеграции под WhatsApp, WABA, Telegram, МАКС, ВКонтакте, Avito, Одноклассники, плюс приём платежей в переписке.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> низкий порог входа для WhatsApp в amoCRM, платёжные интеграции в чате.</p>
+          <p><strong>Против:</strong> виджета для сайта нет; цена за каждый номер; на «Начальном» инициировать можно только 50 новых диалогов в месяц.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=chatapp.online&sz=128" alt="Логотип ChatApp" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://chatapp.online/" target="_blank" rel="noopener">ChatApp</a></h4>
+            <span class="tag t-blue">Коннектор со своим чатом</span>
+          </div>
+        </header>
+        <p class="svc-price">1 000 ₽ <span>тариф «Стартовый» в месяц (50 диалогов). Онлайн-чат на сайт — отдельный канал за 450 ₽ в месяц</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>Стартовый 1 000 ₽, Профессиональный 4 000 ₽ (безлимит диалогов, групповые чаты, конструктор ботов), Максимальный 6 000 ₽ (премиум-поддержка, AI-ассистент, расшифровка).</dd>
+          <dt>amoCRM</dt><dd>Ставится одним виджетом, после чего все линии доступны внутри карточки сделки: автосоздание сделок и контактов, статусы доставки и прочтения, старт диалога по номеру телефона.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> редкое сочетание — агрегатор мессенджеров, у которого есть и собственный чат на сайт как подключаемый канал.</p>
+          <p><strong>Против:</strong> онлайн-чат в тариф не входит и оплачивается отдельно.</p>
+        </div>
+      </article>
+
+      <article class="card svc reveal">
+        <header class="svc-h">
+          <img class="svc-logo" src="https://www.google.com/s2/favicons?domain=i2crm.ru&sz=128" alt="Логотип i2crm" width="44" height="44" loading="lazy">
+          <div>
+            <h4><a href="https://i2crm.ru/" target="_blank" rel="noopener">i2crm</a></h4>
+            <span class="tag t-gray">Сертифицированный интегратор</span>
+          </div>
+        </header>
+        <p class="svc-price">1 990 ₽ <span>тариф «Ограниченный» за один аккаунт мессенджера в месяц, не более 150 сообщений в сутки</span></p>
+        <dl class="svc-dl">
+          <dt>Тарифы</dt><dd>Ограниченный 1 990 ₽, Безлимитный 3 990 ₽, Максимальный 5 990 ₽ за аккаунт в месяц. Скидка до 20% за длительный срок, 7 дней бесплатного теста.</dd>
+          <dt>amoCRM</dt><dd>Профильная интеграция с отдельными страницами под WhatsApp, Telegram, Instagram, ВКонтакте, Avito, MAX.</dd>
+        </dl>
+        <div class="svc-pm">
+          <p><strong>За:</strong> длинный тестовый период — 7 дней против трёх у конкурентов; сильная сторона в Instagram-каналах.</p>
+          <p><strong>Против:</strong> дороже Wazzup и Radist на входе; виджета чата на сайт нет; на младшем тарифе лимит 150 сообщений в сутки.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="tablica" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Сравнение</div>
+      <h2>Всё в одной таблице</h2>
+      <p>«Цена входа» — минимальная сумма, при которой связка с amoCRM работает: для чат-платформ это тариф с CRM-интеграцией, для коннекторов — один канал.</p>
+    </div>
+    <div class="card reveal" style="padding:0;overflow:hidden">
+      <div style="overflow-x:auto">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th>Решение</th>
+              <th>Класс</th>
+              <th>Цена входа</th>
+              <th>Свой виджет на сайт</th>
+              <th>amoCRM</th>
+              <th>Телефон до диалога</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-l="Решение"><a href="https://www.amocrm.ru/" target="_blank" rel="noopener">CRM Plugin amoCRM</a></td>
+              <td data-l="Класс">Нативно</td>
+              <td data-l="Цена входа" class="mono">0 ₽</td>
+              <td data-l="Виджет">Да, чат + кнопки</td>
+              <td data-l="amoCRM">Внутри самой CRM</td>
+              <td data-l="Телефон">Настраивается</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://umnico.com/ru/" target="_blank" rel="noopener">Umnico</a></td>
+              <td data-l="Класс">Чат-платформа</td>
+              <td data-l="Цена входа" class="mono">0 ₽</td>
+              <td data-l="Виджет">Да, Free</td>
+              <td data-l="amoCRM">Free</td>
+              <td data-l="Телефон">Формы в виджете</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://pact.im/" target="_blank" rel="noopener">Pact</a></td>
+              <td data-l="Класс">Чат-платформа</td>
+              <td data-l="Цена входа" class="mono">0 ₽ + канал</td>
+              <td data-l="Виджет">Да, бесплатно</td>
+              <td data-l="amoCRM">Бесплатно</td>
+              <td data-l="Телефон">Есть формы</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://verbox.ru/" target="_blank" rel="noopener">Verbox</a></td>
+              <td data-l="Класс">Чат-платформа</td>
+              <td data-l="Цена входа" class="mono">870 ₽/мес</td>
+              <td data-l="Виджет">Да</td>
+              <td data-l="amoCRM">Сделка, контакт, компания</td>
+              <td data-l="Телефон">Есть формы</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://talk-me.ru/" target="_blank" rel="noopener">Talk-Me</a></td>
+              <td data-l="Класс">Чат-платформа</td>
+              <td data-l="Цена входа" class="mono">870 ₽/мес</td>
+              <td data-l="Виджет">Да</td>
+              <td data-l="amoCRM">На платных тарифах</td>
+              <td data-l="Телефон">Да, «обязательная форма»</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://www.jivo.ru/" target="_blank" rel="noopener">Jivo</a></td>
+              <td data-l="Класс">Чат-платформа</td>
+              <td data-l="Цена входа" class="mono">742 ₽/мес</td>
+              <td data-l="Виджет">Да, блок T133 в Tilda</td>
+              <td data-l="amoCRM">С тарифа BASE, в 1 клик</td>
+              <td data-l="Телефон">Да, обязательные поля</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://teletype.app/" target="_blank" rel="noopener">Teletype App</a></td>
+              <td data-l="Класс">Чат-платформа</td>
+              <td data-l="Цена входа" class="mono">2 490 ₽/мес</td>
+              <td data-l="Виджет">Да, 540 ₽ за канал</td>
+              <td data-l="amoCRM">Есть</td>
+              <td data-l="Телефон">Не подтверждено</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://carrotquest.io/" target="_blank" rel="noopener">Carrot quest</a></td>
+              <td data-l="Класс">Чат + маркетинг</td>
+              <td data-l="Цена входа" class="mono">4 490 ₽/мес</td>
+              <td data-l="Виджет">Да</td>
+              <td data-l="amoCRM">Двусторонняя</td>
+              <td data-l="Телефон">Welcome-бот</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://chat2desk.com/" target="_blank" rel="noopener">Chat2Desk</a></td>
+              <td data-l="Класс">Чат-платформа</td>
+              <td data-l="Цена входа" class="mono">5 600 ₽/мес</td>
+              <td data-l="Виджет">Да, бесплатно</td>
+              <td data-l="amoCRM">Официальная</td>
+              <td data-l="Телефон">Да, в карточку клиента</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://livetex.ru/" target="_blank" rel="noopener">LiveTex</a></td>
+              <td data-l="Класс">Чат-платформа</td>
+              <td data-l="Цена входа" class="mono">от 2 168 ₽/мес</td>
+              <td data-l="Виджет">Да, канал оплачивается отдельно</td>
+              <td data-l="amoCRM">Готовой нет, только API</td>
+              <td data-l="Телефон">Да, пречат-поля</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://wazzup24.ru/" target="_blank" rel="noopener">Wazzup24</a></td>
+              <td data-l="Класс">Коннектор</td>
+              <td data-l="Цена входа" class="mono">0 ₽ (TG-бот, ВК)</td>
+              <td data-l="Виджет">Нет</td>
+              <td data-l="amoCRM">Профильная</td>
+              <td data-l="Телефон">В WhatsApp номер и есть ID</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://envybox.io/" target="_blank" rel="noopener">Envybox</a></td>
+              <td data-l="Класс">Виджеты захвата</td>
+              <td data-l="Цена входа" class="mono">840 ₽/мес</td>
+              <td data-l="Виджет">Чат, мультикнопка, callback</td>
+              <td data-l="amoCRM">Есть</td>
+              <td data-l="Телефон">Да, это профиль продукта</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://callibri.ru/crm-chat" target="_blank" rel="noopener">Callibri</a></td>
+              <td data-l="Класс">Чат + аналитика</td>
+              <td data-l="Цена входа" class="mono">4 500 ₽/30 дней</td>
+              <td data-l="Виджет">Да, с тарифа L</td>
+              <td data-l="amoCRM">Есть</td>
+              <td data-l="Телефон">Есть формы</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://chatapp.online/" target="_blank" rel="noopener">ChatApp</a></td>
+              <td data-l="Класс">Коннектор + чат</td>
+              <td data-l="Цена входа" class="mono">1 450 ₽/мес</td>
+              <td data-l="Виджет">Да, канал за 450 ₽</td>
+              <td data-l="amoCRM">Виджет в CRM</td>
+              <td data-l="Телефон">Есть формы</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://radist.online/" target="_blank" rel="noopener">Radist.Online</a></td>
+              <td data-l="Класс">Коннектор</td>
+              <td data-l="Цена входа" class="mono">1 000 ₽/мес</td>
+              <td data-l="Виджет">Нет</td>
+              <td data-l="amoCRM">Да</td>
+              <td data-l="Телефон">В WhatsApp номер и есть ID</td>
+            </tr>
+            <tr>
+              <td data-l="Решение"><a href="https://i2crm.ru/" target="_blank" rel="noopener">i2crm</a></td>
+              <td data-l="Класс">Коннектор</td>
+              <td data-l="Цена входа" class="mono">1 990 ₽/мес</td>
+              <td data-l="Виджет">Нет</td>
+              <td data-l="amoCRM">Да</td>
+              <td data-l="Телефон">В WhatsApp номер и есть ID</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="note" style="margin-top:14px">Цена входа Chat2Desk посчитана как «Базовый 5 000 ₽ + один оператор 600 ₽», ChatApp — «Стартовый 1 000 ₽ + канал онлайн-чата 450 ₽»; у Jivo и LiveTex — за одну операторскую лицензию; у Carrot quest — за сайт до 10 000 посетителей при оплате за 3 месяца. Условия оплаты у сервисов разные, сравнивать «в лоб» одну цифру с другой некорректно.</p>
+    <div class="card reveal" style="margin-top:18px;background:var(--surface-2)">
+      <h3 style="font-size:18px;margin-bottom:12px">Кого проверили и не взяли — и почему</h3>
+      <ul class="none" style="margin:0;font-size:15px;color:var(--ink-2)">
+        <li><strong><a href="https://chatra.com/ru/" target="_blank" rel="noopener">Chatra</a></strong> — сервис жив, но на русской странице тарифов висит: «На данный момент к оплате не принимаются карты, выпущенные на территории РФ».</li>
+        <li><strong><a href="https://textback.ru/" target="_blank" rel="noopener">TextBack</a></strong> — жив, интеграция с amoCRM есть, но открытых тарифов подписки на сайте нет: только калькулятор и цены за сообщения. Сравнивать не с чем.</li>
+        <li><strong>Битрикс24 «Открытые линии»</strong> — модуль внутри конкурирующей CRM, в amoCRM не подключается.</li>
+        <li><strong><a href="https://albato.ru/" target="_blank" rel="noopener">Albato</a></strong> (2 200 ₽ в месяц) — не виджет, а промежуточный слой между сервисами. Пригодится, если понадобится своя логика поиска дублей перед записью в amoCRM. Make и n8n для оплаты из России проблемны.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="vybor">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Рекомендация</div>
+      <h2>Что брать под конкретную ситуацию</h2>
+    </div>
+    <div class="grid g2">
+      <div class="card reveal">
+        <span class="tag t-green">Сценарий 1 — минимальные вложения</span>
+        <h3 style="font-size:20px;margin:14px 0 10px">CRM Plugin + приёмщик Tilda</h3>
+        <p style="color:var(--ink-2);font-size:15px;margin:0">Ноль рублей сверх лицензии amoCRM. Ставим кнопку и чат от самой amoCRM, включаем контроль дублей, в форме чата делаем телефон обязательным. Пиксель ставится автоматически, повторные визиты из того же браузера склеиваются сами.</p>
+        <p style="color:var(--ink-2);font-size:15px;margin:12px 0 0"><strong>Кому:</strong> поток до нескольких десятков обращений в день, один-два менеджера.</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag t-blue">Сценарий 2 — нужен нормальный оператор</span>
+        <h3 style="font-size:20px;margin:14px 0 10px">Verbox, Pact или Umnico</h3>
+        <p style="color:var(--ink-2);font-size:15px;margin:0">Три разные логики цены. <strong>Verbox</strong> — 870 ₽ за оператора, дешевле всех, если операторов немного. <strong>Pact</strong> — виджет и интеграция бесплатны, платите за каналы (но баланс пополняется от 6 000 ₽). <strong>Umnico</strong> — то же самое, плюс щедрые скидки за длительную предоплату. Jivo берите, если важны зрелость продукта и готовый блок в Tilda, и не смущает, что отвечать придётся из интерфейса Jivo, а не из amoCRM.</p>
+        <p style="color:var(--ink-2);font-size:15px;margin:12px 0 0"><strong>Кому:</strong> отдел продаж 2–10 человек, обращения с сайта и из мессенджеров.</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag t-amber">Сценарий 3 — основной поток в мессенджерах</span>
+        <h3 style="font-size:20px;margin:14px 0 10px">Wazzup24 + CRM Plugin</h3>
+        <p style="color:var(--ink-2);font-size:15px;margin:0">Переписка идёт прямо в карточке amoCRM, а кнопку на сайт даёт бесплатный CRM Plugin. Для WhatsApp это лучший вариант по склейке: номер приходит вместе с сообщением, значит контроль дублей по телефону работает штатно.</p>
+        <p style="color:var(--ink-2);font-size:15px;margin:12px 0 0"><strong>Кому:</strong> ниши, где клиенты сами пишут в WhatsApp — услуги, недвижимость, авто.</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag t-gray">Сценарий 4 — поддержка и SLA</span>
+        <h3 style="font-size:20px;margin:14px 0 10px">Chat2Desk или LiveTex</h3>
+        <p style="color:var(--ink-2);font-size:15px;margin:0">Когда нужны очереди, распределение по отделам, контроль операторов, отчётность и вариант размещения на своих серверах. Обе платформы про поддержку, а не про «кнопку в углу».</p>
+        <p style="color:var(--ink-2);font-size:15px;margin:12px 0 0"><strong>Кому:</strong> контакт-центр от 10 операторов, тысячи диалогов в месяц.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="telefon" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Формат номера</div>
+      <h2>Как сделать так, чтобы номер везде был одинаковым</h2>
+      <p>Требование из задачи — единый формат ввода. Тут важно разделить две вещи: как amoCRM <em>ищет</em> и как amoCRM <em>хранит</em>. Ищет она по международному формату сама. Хранит — ровно то, что ей передали.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <span class="tag t-blue">Целевой формат</span>
+        <h3 style="font-size:19px;margin:14px 0 10px">E.164 — <span class="mono">+79161234567</span></h3>
+        <p style="margin:0;color:var(--ink-2);font-size:15px">Плюс, код страны, только цифры, без скобок, пробелов и дефисов. Это тот вид, к которому amoCRM приводит номера при поиске дублей, и он же понятен телефонии, рассылкам и выгрузкам.</p>
+        <p style="margin:12px 0 0;color:var(--ink-2);font-size:15px">Опасные варианты: <span class="mono">8 916…</span> без кода страны, добавочные и внутренние номера, номер в поле «Имя», номер с текстом вроде «раб.».</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag t-amber">Три точки входа</span>
+        <h3 style="font-size:19px;margin:14px 0 10px">Где номер попадает в базу</h3>
+        <ul class="none" style="margin:0">
+          <li><strong>Формы Tilda</strong> — поле телефона с маской, приёмщик amoCRM.</li>
+          <li><strong>Чат на сайте</strong> — pre-chat форма или вопрос бота.</li>
+          <li><strong>Мессенджеры</strong> — WhatsApp отдаёт номер сам, Telegram и VK чаще всего нет.</li>
+        </ul>
+        <p style="margin:14px 0 0;color:var(--ink-2);font-size:15px">Единый формат нужно навести во всех трёх, иначе в базе окажется три разных написания одного человека.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:18px">
+      <h3 style="font-size:20px;margin-bottom:14px">Что делать по шагам</h3>
+      <ol class="clean" style="margin:0;padding-left:22px;color:var(--ink-2);font-size:15.5px">
+        <li><strong style="color:var(--ink)">В формах Tilda</strong> — поставить тип поля «Телефон» и маску. В Tilda два вида масок: <strong>автоматическая с кодом страны</strong> (удобна, если клиенты из разных стран, — код подставляется по стране посетителя) и <strong>настраиваемая</strong>, где <span class="mono">9</span> — цифра, <span class="mono">a</span> — буква, <span class="mono">*</span> — любой символ. Для российской аудитории проще зафиксировать код <span class="mono">+7</span>.</li>
+        <li><strong style="color:var(--ink)">Проверить, что уходит в CRM.</strong> В справке Tilda нигде не сказано, передаётся ли номер вместе с символами маски или только цифры — это специально проверено по всем профильным страницам. Значит, один раз проверяем руками: отправляем тестовую заявку и смотрим, что легло в поле «Телефон» в amoCRM. От результата зависит, нужен ли нормализатор.</li>
+        <li><strong style="color:var(--ink)">В чате</strong> — сделать поле телефона обязательным до начала диалога, а не «по желанию в процессе». Тогда номер уйдёт в профиль вместе с первым сообщением — а это ровно то условие, при котором контроль дублей amoCRM умеет искать по телефону в чатах.</li>
+        <li><strong style="color:var(--ink)">В amoCRM</strong> — включить контроль дублей в воронке и отметить параметр «Телефон» (плюс Email и Пиксель для чатов).</li>
+        <li><strong style="color:var(--ink)">Сначала бесплатное.</strong> Проверьте настройки самого коннектора: у Wazzup, например, есть переключатель «Номера, записанные в CRM с 8, учитываются как +7», который действует на все каналы сразу. Это закрывает главную проблему формата без покупки виджета.</li>
+        <li><strong style="color:var(--ink)">Если не хватило</strong> — виджет-нормализатор либо виджет дублей, который сам сравнивает последние 10 цифр номера и потому не замечает разницы между <span class="mono">+7</span>, <span class="mono">8</span>, пробелами и дефисами. Второе часто выгоднее: одна подписка вместо двух.</li>
+        <li><strong style="color:var(--ink)">Разово почистить базу</strong> перед запуском: пока в базе лежат <span class="mono">8916…</span> и <span class="mono">+7 916…</span> как разные контакты, склейка будет промахиваться.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="kamni">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Подводные камни</div>
+      <h2>Где схема ломается</h2>
+      <p>Список составлен из официальной документации amoCRM и Tilda, баз знаний сервисов и требований, которые действуют в России на август 2026 года. Каждый пункт — с ответом, что с этим делать.</p>
+    </div>
+
+    <div class="grid g2" id="kamni-grid">
+      <div class="card reveal">
+        <span class="tag t-red">Дубли</span>
+        <h3 class="k-h">Чат на сайте не передаёт телефон сам по себе</h3>
+        <p class="k-p">Посетитель анонимен. Если не спросить номер, единственная связка — cookie и пиксель, то есть тот же браузер. Смена устройства = новая карточка.</p>
+        <p class="k-fix"><strong>Что делать:</strong> сделать телефон обязательным полем до начала диалога либо первым вопросом бота.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Дубли</span>
+        <h3 class="k-h">Номер должен уйти в первом сообщении</h3>
+        <p class="k-p">Документация amoCRM: поиск по телефону работает для чатов, «если интеграция передает номер телефона вместе с профилем в первом сообщении». Номер, который менеджер вписал в карточку через десять минут, склейку уже не запустит — кроме случая с BIG DATA.</p>
+        <p class="k-fix"><strong>Что делать:</strong> проверить у выбранного сервиса, что pre-chat форма попадает именно в профиль чата, а не в текст первого сообщения.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">Каналы</span>
+        <h3 class="k-h">Telegram не отдаёт скрытый номер</h3>
+        <p class="k-p">Если в настройках приватности номер закрыт, интеграция получает только username и id. Связка по телефону в этом канале невозможна в принципе.</p>
+        <p class="k-fix"><strong>Что делать:</strong> в Telegram-ветке бот должен спрашивать номер текстом, иначе принимать, что часть карточек придётся объединять руками.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">amoCRM</span>
+        <h3 class="k-h">BIG DATA работает только с «неразобранным»</h3>
+        <p class="k-p">Условие из документации: объединение произойдёт, только если одна из дублирующихся сущностей находится в статусе «неразобранное». Как только менеджер принял сделку в работу, этот механизм на неё не действует.</p>
+        <p class="k-fix"><strong>Что делать:</strong> не полагаться на BIG DATA как на основной механизм — телефон и email надёжнее.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">amoCRM</span>
+        <h3 class="k-h">Больше трёх дублей — склейки не будет</h3>
+        <p class="k-p">«Если дублей найдено более 3, объединение не произойдет». Заросшая база сама себя блокирует: чем больше накопилось дублей, тем хуже работает механизм, который должен их предотвращать.</p>
+        <p class="k-fix"><strong>Что делать:</strong> чистить базу до запуска, а не после.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">amoCRM</span>
+        <h3 class="k-h">Номер без кода страны ломает поиск</h3>
+        <p class="k-p">Телефоны приводятся к международному формату при поиске. Внутренний или неполный номер — «поиск может не произойти или произойти не корректно».</p>
+        <p class="k-fix"><strong>Что делать:</strong> маска с жёстким <span class="mono">+7</span> во всех формах и запрет на сохранение номера короче 11 цифр.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Интеграции</span>
+        <h3 class="k-h">Старые API-ключи не поддерживают контроль дублей</h3>
+        <p class="k-p">Метод идентифицирует источник по ID интеграции, поэтому при работе через старый API-ключ контроль дублей не включится. Контроль дублей живёт только в методе <span class="mono">/api/v4/leads/complex</span> — в обычные методы создания сделки его добавлять не планируют.</p>
+        <p class="k-fix"><strong>Что делать:</strong> выбирать сервис, у которого стоит галка «Интеграция поддерживает методы контроля дублей», и спрашивать это до оплаты.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">amoCRM</span>
+        <h3 class="k-h">Один источник — одна воронка</h3>
+        <p class="k-p">Источник добавляется только в одну воронку; чтобы перенести, придётся отключать интеграцию и удалять источник. Разводить обращения по разным воронкам одним виджетом не выйдет.</p>
+        <p class="k-fix"><strong>Что делать:</strong> заранее решить, в какую воронку падают обращения с сайта, и разводить дальше правилами внутри неё.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-blue">Tilda</span>
+        <h3 class="k-h">Поля приёмщика Tilda нельзя удалять</h3>
+        <p class="k-p">Справка Tilda предупреждает: поля, созданные интеграцией, удалять нельзя — это приведёт к ошибкам. Менять можно только заголовок поля.</p>
+        <p class="k-fix"><strong>Что делать:</strong> не «наводить порядок» в полях amoCRM после подключения приёмщика.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Tilda</span>
+        <h3 class="k-h">Родной блок мессенджеров Tilda не пишет в CRM</h3>
+        <p class="k-p">У Tilda есть свой «Виджет с мессенджерами» — блоки BF905 и BF905A. Выглядит ровно как то, что нужно, но настраиваются в нём только ссылки: клик уводит человека в мессенджер, и в CRM не уходит ничего. Шаг «подключить сервис приёма данных» справка описывает лишь для виджетов с формами — BF901, BF902N, BF903.</p>
+        <p class="k-fix"><strong>Что делать:</strong> использовать его только как декоративную кнопку, а обращения ловить виджетом чат-платформы, CRM Plugin или коннектором мессенджеров.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-blue">Tilda</span>
+        <h3 class="k-h">Приёмщик надо включить в каждой форме</h3>
+        <p class="k-p">Мало подключить amoCRM в настройках сайта — нужно ещё открыть блок с формой, нажать «Контент» и отметить сервис галочкой, затем опубликовать страницу. Либо на шаге подключения согласиться на «Добавить сервис ко всем формам на сайте».</p>
+        <p class="k-fix"><strong>Что делать:</strong> после настройки пройтись по всем формам сайта и проверить галочки — иначе часть заявок будет уходить в никуда.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-blue">Tilda</span>
+        <h3 class="k-h">Код виджета надо переопубликовать</h3>
+        <p class="k-p">Вставка в <strong>Настройки сайта → Ещё → HTML-код для вставки внутрь head</strong> применяется только после повторной публикации всех страниц. Частая история: «поставили виджет, а на половине страниц его нет».</p>
+        <p class="k-fix"><strong>Что делать:</strong> после вставки — переопубликовать сайт целиком и проверить наличие скрипта на внутренних страницах.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">Деньги</span>
+        <h3 class="k-h">Цена «за канал» умножается</h3>
+        <p class="k-p">У коннекторов мессенджеров тариф считается за каждый номер или канал: два номера WhatsApp и Telegram — это три оплаты, а не одна. У чат-платформ то же самое с операторскими лицензиями.</p>
+        <p class="k-fix"><strong>Что делать:</strong> считать стоимость как «каналы × месяцы + операторы × месяцы», а не по цене верхней строчки на лендинге.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">Деньги</span>
+        <h3 class="k-h">Лимиты контактов в тарифах amoCRM</h3>
+        <p class="k-p">На пользователя: 5 000 контактов на Базовом, 10 000 на Расширенном, 20 000 на Профессиональном. Дубли расходуют этот лимит наравне с настоящими клиентами. Оплата — минимум за 6 месяцев.</p>
+        <p class="k-fix"><strong>Что делать:</strong> держать дубли под контролем не только ради порядка, но и ради лимита.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Каналы</span>
+        <h3 class="k-h">WhatsApp в России фактически заблокирован</h3>
+        <p class="k-p">Хроника: 13 августа 2025 — ограничение звонков; 22 октября 2025 — РКН признаёт ограничение работы самих мессенджеров; 22 декабря 2025 — публичная угроза полной блокировки WhatsApp; 11 февраля 2026 — домены whatsapp.com и web.whatsapp.com исключены из НСДИ; 15 января 2026 — РКН заявляет, что оснований снимать ограничения нет. Летом 2026 доступ местами восстанавливался, но официально ограничения не сняты.</p>
+        <p class="k-fix"><strong>Что делать:</strong> не делать WhatsApp единственной точкой входа. WhatsApp Business API у российских провайдеров продаётся и работает, но гарантий стабильности канала нет.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">Каналы</span>
+        <h3 class="k-h">Telegram замедлен с февраля 2026</h3>
+        <p class="k-p">10 февраля 2026 Роскомнадзор официально начал замедление Telegram по всей стране. Слухи о полной блокировке с 1 апреля 2026 не подтвердились — на конец июля 2026 мессенджер замедлен, но не заблокирован. Запрета на приём заявок через Telegram-бота нет, но канал технически зависит от доступности мессенджера.</p>
+        <p class="k-fix"><strong>Что делать:</strong> держать Telegram как один из каналов, а не как основной, и обязательно иметь веб-чат на сайте.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-blue">Каналы</span>
+        <h3 class="k-h">MAX стал каналом, который нельзя игнорировать</h3>
+        <p class="k-p">Создан по ФЗ от 24 июня 2025 № 156-ФЗ, с 1 сентября 2025 обязателен к предустановке на все продаваемые в России смартфоны. По пресс-релизу VK от 6 мая 2026 — свыше 85 млн DAU и более 120 млн установок. Есть открытая документация и Bot API, но подключение партнёрских интеграций доступно только резидентам РФ и проходит модерацию.</p>
+        <p class="k-fix"><strong>Что делать:</strong> MAX поддерживают Jivo (даже на бесплатном тарифе), Chat2Desk, Wazzup, Radist, Umnico, ChatApp — при выборе сервиса проверьте наличие этого канала.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Право</span>
+        <h3 class="k-h">Согласие теперь оформляется отдельным документом</h3>
+        <p class="k-p">С 1 сентября 2025 (изменения в ст. 9 152-ФЗ, внесены ФЗ № 156-ФЗ) согласие на обработку ПДн должно оформляться отдельно от иных документов — галочка внутри пользовательского соглашения больше не годится. Обработка без согласия там, где оно требуется, — по ч. 2 ст. 13.11 КоАП от 300 до 700 тысяч рублей для юрлица, при повторе до 1,5 млн.</p>
+        <p class="k-fix"><strong>Что делать:</strong> в форме чата — отдельная галочка согласия и ссылка на политику; сама политика должна быть опубликована на сайте (иначе ч. 3 ст. 13.11 — 30–60 тысяч).</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Право</span>
+        <h3 class="k-h">Уведомление в Роскомнадзор — до начала обработки</h3>
+        <p class="k-p">По ч. 1 ст. 22 152-ФЗ оператор обязан уведомить РКН <em>до</em> начала обработки данных; с 1 сентября 2022 это касается практически всех. Подаётся через <a href="https://pd.rkn.gov.ru/operators-registry/notification/" target="_blank" rel="noopener">портал РКН</a>. Штраф за неподачу — ч. 10 ст. 13.11 КоАП, для юрлиц 100–300 тысяч рублей (действует с 30 мая 2025).</p>
+        <p class="k-fix"><strong>Что делать:</strong> подать уведомление до запуска виджета, а не после.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Право</span>
+        <h3 class="k-h">Зарубежный виджет — риск по локализации</h3>
+        <p class="k-p">По ч. 5 ст. 18 152-ФЗ первичная запись персональных данных россиян должна вестись в базах на территории России. Требование относится к моменту сбора, а не только к хранению: если посетитель оставляет имя и телефон в зарубежном чат-виджете, первичная запись происходит за рубежом. Санкция по ч. 8 ст. 13.11 КоАП — от 1 до 6 млн рублей, повторно до 18 млн.</p>
+        <p class="k-fix"><strong>Что делать:</strong> для российского сайта выбирать сервисы с серверами в РФ. Intercom, Tidio, Crisp и подобные — прямой риск; у Chatra вдобавок не принимаются карты, выпущенные в России.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">Право</span>
+        <h3 class="k-h">Утечка из связки «виджет + CRM» стоит миллионы</h3>
+        <p class="k-p">По редакции ст. 13.11 КоАП, действующей с 30 мая 2025: утечка данных на 1–10 тысяч субъектов — 3–5 млн рублей, 10–100 тысяч — 5–10 млн, неуведомление РКН об утечке — 1–3 млн, повторная утечка — оборотный штраф 1–3% выручки.</p>
+        <p class="k-fix"><strong>Что делать:</strong> ограничивать права менеджеров на выгрузку базы, вести журнал доступа, не держать в CRM лишние поля с чувствительными данными.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-blue">Эксплуатация</span>
+        <h3 class="k-h">Примечание о склейке ставится не всегда</h3>
+        <p class="k-p">Документация: примечание о склейке добавляется только в сделки, объединённые на основании BIG DATA и пикселя. По телефону и email склейка проходит молча — понять постфактум, что произошло, сложнее.</p>
+        <p class="k-fix"><strong>Что делать:</strong> включить создание задачи после объединения, чтобы у менеджера был след.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Дубли</span>
+        <h3 class="k-h">Виджет проверяет карточку раньше, чем она заполнена</h3>
+        <p class="k-p">Контакт из чата создаётся пустым, а телефон и имя интеграция дозаполняет через несколько секунд. Если виджет дублей успевает проверить карточку до этого, он не находит совпадения и создаёт дубль. Не случайно механизм отсрочки есть сразу у нескольких вендоров.</p>
+        <p class="k-fix"><strong>Что делать:</strong> включать в виджете задержку перед склейкой («для сложных интеграций», «отложенное срабатывание») — она существует именно для этого сценария.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-amber">Эксплуатация</span>
+        <h3 class="k-h">После склейки контактов появляются дубли каналов</h3>
+        <p class="k-p">Массовое объединение карточек даёт побочный эффект: в одном контакте оказывается по три-пять одинаковых чатов и номеров. При рассылке клиенту уходит несколько одинаковых сообщений. Под это у вендоров есть отдельные платные виджеты — «Дубли чатов» и «Удаление дублей каналов».</p>
+        <p class="k-fix"><strong>Что делать:</strong> закладывать чистку каналов в бюджет сразу, а не открывать её для себя после первой рассылки.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-red">Эксплуатация</span>
+        <h3 class="k-h">Удаление контактов только ухудшает ситуацию</h3>
+        <p class="k-p">Инструкция Wazzup прямо предупреждает: «Никогда не удаляйте контакты — это может привести к дублям и другим нарушениям в логике работы CRM». Правильный порядок другой: если дубль сделки лежит в «Неразобранном», его нужно отклонить — дубль контакта исчезнет сам.</p>
+        <p class="k-fix"><strong>Что делать:</strong> прописать в регламенте менеджеров: дубли — отклонять и объединять, а не удалять.</p>
+      </div>
+
+      <div class="card reveal">
+        <span class="tag t-blue">Эксплуатация</span>
+        <h3 class="k-h">Менеджеры сами создают дубли</h3>
+        <p class="k-p">Открепление чата от контакта, ручное создание карточки «чтобы быстрее», параллельно работающие старые виджеты — типовые причины дублей, которые не лечатся настройками интеграции.</p>
+        <p class="k-fix"><strong>Что делать:</strong> регламент для менеджеров и удаление старых виджетов после миграции.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="instrumenty" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Инструменты</div>
+      <h2>Чем добить дубли, когда штатного не хватает</h2>
+      <p>Штатный контроль дублей бесплатен, но у него три дыры: не склеивает контакты, пасует при четырёх и более дублях и требует, чтобы одна из сущностей была в «неразобранном». Ниже — что докупают и почём. Цены с сайтов вендоров на 12 августа 2026.</p>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:18px;background:var(--surface-2);border-left:3px solid var(--green)">
+      <h3 style="font-size:19px;margin-bottom:10px">Сначала бесплатное: настройка в самой интеграции</h3>
+      <p style="margin:0;font-size:15.5px;color:var(--ink-2)">У <a href="https://wazzup24.ru/" target="_blank" rel="noopener">Wazzup</a> в разделе «Интеграция с CRM → Дополнительно» есть переключатель <strong>«Номера, записанные в CRM с 8, учитываются как +7»</strong> — он действует сразу на все каналы и решает ровно ту проблему, ради которой обычно покупают виджет нормализации. Прежде чем платить, проверьте, нет ли похожей настройки у вашего коннектора.</p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card reveal">
+        <h3 style="font-size:18px;margin-bottom:6px"><a href="https://roydis.ru/doubles" target="_blank" rel="noopener">Roydis, «Дубли контактов и компаний»</a></h3>
+        <p class="svc-price" style="font-size:19px;margin:10px 0 12px">15 000 ₽/год <span>за каждые 30 пользователей; 6 месяцев — 10 000 ₽, 3 месяца — 6 000 ₽</span></p>
+        <p style="margin:0;font-size:15px;color:var(--ink-2)">Единственный, кто явно решает проблему формата без отдельного виджета: «по телефону сравнивает последние 10 цифр — игнорирует +7, 8, пробелы и тире». Есть разовая склейка всей базы, тестовый прогон на 10 случайных дублях и настраиваемая задержка перед склейкой.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 style="font-size:18px;margin-bottom:6px"><a href="https://bizandsoft.ru/vidzhety-amo/antidubl" target="_blank" rel="noopener">Бизнес и Софт, «Предотвращение дублей»</a></h3>
+        <p class="svc-price" style="font-size:19px;margin:10px 0 12px">1 400 ₽/мес <span>минимум 3 месяца, или 14 000 ₽ за год. Тест 10 дней</span></p>
+        <p style="margin:0;font-size:15px;color:var(--ink-2)">Проверяет контакт или компанию на дубль по любому полю и объединяет в фоне — при создании, при изменении и из цифровой воронки. Парный виджет «Поиск дубликатов» для разбора накопленного стоит столько же, но у него есть бесплатный режим — до 10 групп в день.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 style="font-size:18px;margin-bottom:6px"><a href="https://nova-amocrm.ru/widgets_list" target="_blank" rel="noopener">NOVA, «Объединение дублей контакта»</a></h3>
+        <p class="svc-price" style="font-size:19px;margin:10px 0 12px">999 ₽/мес <span>у соседних виджетов «Стандартизация номеров и почт» и «Удаление дублей каналов» — та же цена</span></p>
+        <p style="margin:0;font-size:15px;color:var(--ink-2)">Именно этот виджет рекомендует Wazzup в своей инструкции по борьбе с дублями: «оно склеивает дубли автоматически по заданным правилам». Комплект из трёх виджетов NOVA выходит примерно в 36 000 ₽ в год — самый дешёвый полный набор из проверенных.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 style="font-size:18px;margin-bottom:6px"><a href="https://roydis.ru/phone_email_rpc" target="_blank" rel="noopener">Roydis, «Стандартизация телефонов и email»</a></h3>
+        <p class="svc-price" style="font-size:19px;margin:10px 0 12px">15 000 ₽/год <span>за каждые 30 пользователей, тест 7 дней</span></p>
+        <p style="margin:0;font-size:15px;color:var(--ink-2)">Приводит номера и почты к международному формату, определяет страну и ставит флаг рядом с номером. Главное для интеграций — отложенный режим: виджет ждёт, пока интеграция дозаполнит карточку, и только потом форматирует.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3 style="font-size:18px;margin-bottom:6px"><a href="https://cmdf5.ru/widjety-amocrm/normalizer" target="_blank" rel="noopener">Команда F5, «Нормализатор»</a></h3>
+        <p class="svc-price" style="font-size:19px;margin:10px 0 12px">149 ₽/мес <span>за пользователя amoCRM, минимум 5 пользователей — то есть от 745 ₽ в месяц</span></p>
+        <p style="margin:0;font-size:15px;color:var(--ink-2)">Самый дешёвый инструмент нормализации: убирает пробелы, добавляет «+», подставляет недостающие цифры, есть шаблоны под разные страны. Бесплатен только по бонусной программе — если лицензии amoCRM куплены через этого партнёра.</p>
+      </div>
+
+      <div class="card reveal" style="border-left:3px solid var(--amber)">
+        <h3 style="font-size:18px;margin-bottom:6px"><a href="https://gnzs.ru/widgets/maska-nomera-dublikaty" target="_blank" rel="noopener">Генезис, «Маска номера»</a></h3>
+        <p class="svc-price" style="font-size:19px;margin:10px 0 12px">Цена не опубликована <span>на странице только заявка и демо-период</span></p>
+        <p style="margin:0;font-size:15px;color:var(--ink-2)">Ценен честной оговоркой, о которой молчат остальные: «Виджет работает только при ручном вводе данных в поля карточки. Если телефоны заполняются другими интеграциями (мессенджеры, IP-телефония и т.д.), то к этим данным маска автоматически не применяется». Проверяйте это у любого виджета маски.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Внедрение</div>
+      <h2>Порядок работ и тесты приёмки</h2>
+      <p>Последовательность, при которой ничего не приходится переделывать. Отдельно — сценарии, которыми проверяется, что склейка действительно работает.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3 style="font-size:20px;margin-bottom:14px">Шаги</h3>
+        <ol class="clean" style="margin:0;padding-left:22px;color:var(--ink-2);font-size:15.5px">
+          <li>Почистить существующую базу от дублей и привести номера к <span class="mono">+7…</span>.</li>
+          <li>Завести отдельную воронку (или выбрать существующую) под обращения с сайта.</li>
+          <li>Подключить виджет, добавить его как <strong>источник</strong> в эту воронку. Помнить: один источник живёт только в одной воронке.</li>
+          <li>Вставить код на Tilda: <strong>Настройки сайта → Ещё → HTML-код для вставки внутрь head</strong>, затем переопубликовать все страницы.</li>
+          <li>Настроить обязательный запрос телефона в чате и маску в формах Tilda.</li>
+          <li>В приёмщике amoCRM у форм Tilda включить «способ добавления сделок с поиском дублей».</li>
+          <li>Включить контроль дублей в воронке: отметить источники и параметры (телефон, email, пиксель, BIG DATA), выбрать статусы, в которых ищем, и поведение при конфликте данных.</li>
+          <li>Настроить, что делать при нескольких дублях, и нужна ли задача ответственному после склейки.</li>
+          <li>Прогнать тесты приёмки (справа), зафиксировать результат.</li>
+          <li>Через две недели выборочно проверить базу на новые дубли и донастроить.</li>
+        </ol>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:20px;margin-bottom:14px">Тесты приёмки</h3>
+        <ul class="none" style="margin:0;color:var(--ink-2);font-size:15.5px">
+          <li>Написать в чат с чистого браузера, оставить номер <span class="mono">+7 916 000-00-01</span> → создалась карточка, в поле «Телефон» лежит ровно тот формат, который вы ожидаете.</li>
+          <li>Написать снова из режима инкогнито, тем же номером в формате <span class="mono">8 916 000-00-01</span> → обращение легло в существующую сделку, новой карточки нет.</li>
+          <li>Написать с телефона (другое устройство, тот же номер) → та же карточка.</li>
+          <li>Написать с того же браузера, но без номера → должно подтянуться по пикселю к прошлому обращению.</li>
+          <li>Отправить форму Tilda с тем же номером → сделка не задвоилась.</li>
+          <li>Написать в WhatsApp с того же номера → та же карточка.</li>
+          <li>Написать в Telegram со скрытым номером → ожидаемо новая карточка, проверить, что менеджер видит подсказку и умеет объединить вручную.</li>
+          <li>Взять сделку в работу (вывести из «неразобранного») и написать снова → проверить, что склейка по телефону всё ещё работает, а по BIG DATA — уже нет.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="istochniki" style="background:var(--surface);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Проверяемость</div>
+      <h2>Источники</h2>
+      <p>Всё, на что опирается страница. Открывается и проверяется вручную.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card reveal">
+        <h3 style="font-size:17px;margin-bottom:12px">Документация amoCRM</h3>
+        <ul class="clean" style="font-size:14.5px;padding-left:18px">
+          <li><a href="https://www.amocrm.ru/developers/content/crm_platform/duplication-control" target="_blank" rel="noopener">Контроль дублей</a></li>
+          <li><a href="https://www.amocrm.ru/developers/content/crm_platform/leads-api" target="_blank" rel="noopener">Сделки, метод /leads/complex</a></li>
+          <li><a href="https://www.amocrm.ru/developers/content/crm_platform/unsorted-api" target="_blank" rel="noopener">Неразобранное</a></li>
+          <li><a href="https://www.amocrm.ru/developers/content/chats/chat-api" target="_blank" rel="noopener">API чатов</a></li>
+          <li><a href="https://www.amocrm.ru/support/incoming_leads/kontrol-dublej/" target="_blank" rel="noopener">Справка: Контроль дублей</a></li>
+          <li><a href="https://www.amocrm.ru/support/leads/merge_duplicate_leads/" target="_blank" rel="noopener">Справка: Поиск дублей</a></li>
+          <li><a href="https://www.amocrm.ru/buy" target="_blank" rel="noopener">Тарифы amoCRM</a></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:17px;margin-bottom:12px">Справка Tilda</h3>
+        <ul class="clean" style="font-size:14.5px;padding-left:18px">
+          <li><a href="https://help-ru.tilda.cc/forms/amo" target="_blank" rel="noopener">Приёмщик AmoCRM</a></li>
+          <li><a href="https://help-ru.tilda.cc/jivochat" target="_blank" rel="noopener">Виджет JivoChat (блок T133)</a></li>
+          <li><a href="https://tilda.cc/ru/answers/a/add-custom-html/" target="_blank" rel="noopener">Сторонний виджет через блок T123</a></li>
+          <li><a href="https://tilda.cc/ru/answers/a/html-in-head/" target="_blank" rel="noopener">HTML-код в head сайта</a></li>
+          <li><a href="https://help.tilda.cc/mask" target="_blank" rel="noopener">Маска ввода в форме</a></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:17px;margin-bottom:12px">Сервисы: тарифы</h3>
+        <ul class="clean" style="font-size:14.5px;padding-left:18px">
+          <li><a href="https://www.jivo.ru/pricing/" target="_blank" rel="noopener">Jivo</a>, <a href="https://www.jivo.ru/help/integrations/amocrm-integrasia.html" target="_blank" rel="noopener">справка по amoCRM</a></li>
+          <li><a href="https://livetex.ru/prices/" target="_blank" rel="noopener">LiveTex</a>, <a href="https://livetex.ru/crm/" target="_blank" rel="noopener">интеграция с CRM</a></li>
+          <li><a href="https://chat2desk.com/tarifi" target="_blank" rel="noopener">Chat2Desk</a></li>
+          <li><a href="https://teletype.app/tariffs" target="_blank" rel="noopener">Teletype App</a></li>
+          <li><a href="https://umnico.com/ru/payment/" target="_blank" rel="noopener">Umnico</a></li>
+          <li><a href="https://carrotquest.io/price/" target="_blank" rel="noopener">Carrot quest</a></li>
+          <li><a href="https://talk-me.ru/tariffs" target="_blank" rel="noopener">Talk-Me</a></li>
+          <li><a href="https://wazzup24.ru/pricing/" target="_blank" rel="noopener">Wazzup24</a>, <a href="https://wazzup24.ru/help/amocrm/how-to-get-rid-of-duplicates-in-amocrm/" target="_blank" rel="noopener">про дубли в amoCRM</a></li>
+          <li><a href="https://radist.online/price/" target="_blank" rel="noopener">Radist.Online</a>, <a href="https://i2crm.ru/" target="_blank" rel="noopener">i2crm</a>, <a href="https://chatapp.online/price/" target="_blank" rel="noopener">ChatApp</a></li>
+          <li><a href="https://pact.im/prices" target="_blank" rel="noopener">Pact</a>, <a href="https://verbox.ru/price" target="_blank" rel="noopener">Verbox</a>, <a href="https://envybox.io/tariffs/" target="_blank" rel="noopener">Envybox</a>, <a href="https://callibri.ru/crm-chat" target="_blank" rel="noopener">Callibri</a></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:17px;margin-bottom:12px">Виджеты против дублей</h3>
+        <ul class="clean" style="font-size:14.5px;padding-left:18px">
+          <li><a href="https://roydis.ru/doubles" target="_blank" rel="noopener">Roydis: дубли контактов</a> и <a href="https://roydis.ru/phone_email_rpc" target="_blank" rel="noopener">стандартизация номеров</a></li>
+          <li><a href="https://bizandsoft.ru/vidzhety-amo/antidubl" target="_blank" rel="noopener">Бизнес и Софт: предотвращение дублей</a></li>
+          <li><a href="https://nova-amocrm.ru/widgets_list" target="_blank" rel="noopener">Каталог виджетов NOVA</a></li>
+          <li><a href="https://cmdf5.ru/widjety-amocrm/normalizer" target="_blank" rel="noopener">Команда F5: Нормализатор</a></li>
+          <li><a href="https://gnzs.ru/widgets/maska-nomera-dublikaty" target="_blank" rel="noopener">Генезис: маска номера</a></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:17px;margin-bottom:12px">Каналы и право</h3>
+        <ul class="clean" style="font-size:14.5px;padding-left:18px">
+          <li><a href="https://www.consultant.ru/document/cons_doc_LAW_61801/" target="_blank" rel="noopener">152-ФЗ «О персональных данных»</a></li>
+          <li><a href="https://www.consultant.ru/document/cons_doc_LAW_34661/1f421640c6775ff67079ebde06a7d2f6d17b96db/" target="_blank" rel="noopener">Ст. 13.11 КоАП РФ — санкции</a></li>
+          <li><a href="https://pd.rkn.gov.ru/operators-registry/notification/" target="_blank" rel="noopener">Портал уведомлений Роскомнадзора</a></li>
+          <li><a href="https://www.rbc.ru/politics/13/08/2025/689c8c7c9a79479b1087586d" target="_blank" rel="noopener">РБК: ограничение звонков, 13.08.2025</a></li>
+          <li><a href="https://www.interfax.ru/russia/1054011" target="_blank" rel="noopener">Интерфакс: ограничение мессенджеров, 22.10.2025</a></li>
+          <li><a href="https://dev.max.ru/" target="_blank" rel="noopener">Документация для разработчиков MAX</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<style>
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:stretch}
+.flow-col{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:22px}
+.flow-col h4{font-size:17px;margin:10px 0 8px}
+.flow-col p{margin:0 0 8px;font-size:14.5px;color:var(--ink-2)}
+.flow-note{font-size:13px !important;color:var(--muted) !important;margin:0 !important}
+.flow-badge{width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600}
+.flow-arrow{display:flex;align-items:center;justify-content:center}
+.k-h{font-size:18px;margin:14px 0 10px;line-height:1.25}
+.k-p{margin:0;color:var(--ink-2);font-size:15px}
+.k-fix{margin:12px 0 0;font-size:14.5px;color:var(--ink-2);padding-top:12px;border-top:1px solid var(--line)}
+.cat-title{font-size:15px;font-weight:600;letter-spacing:.02em;color:var(--muted);text-transform:uppercase;margin:34px 0 16px}
+.cat-title:first-of-type{margin-top:0}
+.svc{display:flex;flex-direction:column}
+.svc-h{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.svc-logo{width:44px;height:44px;border-radius:11px;object-fit:contain;background:var(--surface-2);border:1px solid var(--line);padding:5px;flex-shrink:0}
+.svc-h h4{font-size:19px;margin:0 0 7px}
+.svc-price{font-size:23px;font-weight:600;margin:0 0 16px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.svc-price span{display:block;font-size:13.5px;font-weight:400;color:var(--muted);letter-spacing:0;margin-top:5px;line-height:1.45}
+.svc-dl{margin:0;font-size:14.5px}
+.svc-dl dt{font-weight:600;color:var(--ink);margin-top:12px;font-size:13px;text-transform:uppercase;letter-spacing:.03em}
+.svc-dl dt:first-child{margin-top:0}
+.svc-dl dd{margin:5px 0 0;color:var(--ink-2)}
+.svc-pm{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.svc-pm p{margin:0 0 8px;font-size:14.5px;color:var(--ink-2)}
+.svc-pm p:last-child{margin-bottom:0}
+.cmp{width:100%;border-collapse:collapse;font-size:14.5px;min-width:860px}
+.cmp thead th{text-align:left;padding:16px 18px;background:var(--surface-2);border-bottom:1px solid var(--line);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600;white-space:nowrap}
+.cmp td{padding:14px 18px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+.cmp tbody tr:last-child td{border-bottom:none}
+.cmp tbody tr:hover{background:var(--surface-2)}
+.cmp td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+@media(max-width:760px){
+  .cmp{min-width:0;display:block}
+  .cmp thead{display:none}
+  .cmp tbody,.cmp tr,.cmp td{display:block;width:100%}
+  .cmp tr{border-bottom:1px solid var(--line);padding:12px 0}
+  .cmp td{border:none;padding:5px 18px;display:flex;gap:10px;justify-content:space-between}
+  .cmp td::before{content:attr(data-l);color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;flex-shrink:0}
+  .cmp td:first-child::before{content:none}
+}
+@media(max-width:900px){
+  .flow{grid-template-columns:1fr}
+  .flow-arrow{transform:rotate(90deg);height:34px}
+}
+footer{background:var(--surface);border-top:1px solid var(--line);padding:44px 0 60px}
+footer p{margin:0 0 10px;color:var(--muted);font-size:14px}
+</style>
+
+<footer>
+  <div class="wrap">
+    <p>Страница собрана 12 августа 2026 года. Цены сняты с официальных сайтов сервисов в этот же день и меняются без предупреждения — перед оплатой сверьтесь с прайсом вендора.</p>
+    <p>Механика amoCRM описана по официальной документации разделов «Контроль дублей», API чатов и API неразобранного. Всё, что не удалось подтвердить документально, помечено в тексте отдельно.</p>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-motion');
+  // страховка: если модуль анимации не загрузится, контент всё равно покажется
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (getComputedStyle(el).opacity === '0') { el.style.opacity = '1'; el.style.transform = 'none'; }
+    });
+  }, 2500);
+</script>
+<script type="module">
+  import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
+  const EASE = [0.16, 1, 0.3, 1]; // мягкий ease-out, близкий к пружине
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduce) {
+    document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+  } else {
+    inView('.reveal', (el) => {
+      animate(el, { opacity: [0, 1], y: [22, 0] }, { duration: 0.55, easing: EASE });
+    }, { margin: '0px 0px -8% 0px' });
+
+    animate('.hero h1, .hero .sub, .hero-meta', { opacity: [0, 1], y: [18, 0] }, { delay: stagger(0.08), duration: 0.55, easing: EASE });
+
+    // всё, что уже в зоне видимости, показываем не дожидаясь скролла
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && getComputedStyle(el).opacity === '0') {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }
+      });
+    }, 900);
+  }
+</script>
+</body>
+</html>
