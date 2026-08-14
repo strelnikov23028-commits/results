@@ -18,7 +18,10 @@
   --green:#34C759; --green-soft:#E7F8EC;
   --orange:#FF9500; --orange-soft:#FFF3E0;
   --red:#FF3B30; --red-soft:#FFEBEA;
-  --purple:#AF52DE;
+  --purple:#AF52DE; --purple-soft:#F4E9FB;
+  --gray:#8E8E93;   --gray-soft:#EFEFF2;
+  --bg-blur:rgba(245,245,247,.82);
+  --glass:rgba(255,255,255,.92);
   --shadow-sm:0 1px 2px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.06);
   --shadow:0 4px 16px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
   --shadow-lg:0 12px 40px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.05);
@@ -34,7 +37,10 @@
     --green:#30D158; --green-soft:#123420;
     --orange:#FF9F0A; --orange-soft:#3A2A0A;
     --red:#FF453A; --red-soft:#3A1512;
-    --purple:#BF5AF2;
+    --purple:#BF5AF2; --purple-soft:#2C1A38;
+    --gray:#8E8E93;   --gray-soft:#2C2C2E;
+    --bg-blur:rgba(0,0,0,.82);
+    --glass:rgba(28,28,30,.92);
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
     --shadow:0 4px 16px rgba(0,0,0,.4);
     --shadow-lg:0 12px 40px rgba(0,0,0,.55);
@@ -48,7 +54,10 @@
   --green:#30D158; --green-soft:#123420;
   --orange:#FF9F0A; --orange-soft:#3A2A0A;
   --red:#FF453A; --red-soft:#3A1512;
-  --purple:#BF5AF2;
+  --purple:#BF5AF2; --purple-soft:#2C1A38;
+  --gray:#8E8E93;   --gray-soft:#2C2C2E;
+  --bg-blur:rgba(0,0,0,.82);
+  --glass:rgba(28,28,30,.92);
   --shadow-sm:0 1px 2px rgba(0,0,0,.3);
   --shadow:0 4px 16px rgba(0,0,0,.4);
   --shadow-lg:0 12px 40px rgba(0,0,0,.55);
@@ -67,7 +76,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 header{
   position:sticky;top:0;z-index:100;
-  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  background:var(--bg-blur);
   backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
   border-bottom:1px solid var(--border); padding-top:env(safe-area-inset-top);
 }
@@ -85,7 +94,8 @@ header{
   transition:background .18s ease,color .18s ease}
 .icon-btn:hover{background:var(--surface-2);color:var(--text)}
 
-main{padding:34px 0 90px}
+/* нижний отступ учитывает домашнюю полоску iPhone */
+main{padding:34px 0 calc(90px + env(safe-area-inset-bottom))}
 .view[hidden]{display:none}
 
 h1{font-size:clamp(28px,5vw,38px);font-weight:700;letter-spacing:-.025em;line-height:1.15}
@@ -157,10 +167,14 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
   box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column}
 .face.back{transform:rotateY(180deg)}
 /* backface-visibility прячет обратную сторону визуально, но она остаётся кликабельной
-   и перехватывает нажатия (в т.ч. по кнопке звука) — гасим её для мыши явно */
-.face.back{pointer-events:none}
-.flip.is-back .face.back{pointer-events:auto}
-.flip.is-back .face.front{pointer-events:none}
+   и перехватывает нажатия (в т.ч. по кнопке звука) — гасим её для мыши явно.
+   Плюс на iOS Safari backface-visibility срабатывает не всегда и сквозь картинку
+   просвечивает зеркальный текст, поэтому дублируем скрытие через visibility. */
+.face.back{pointer-events:none;visibility:hidden}
+.face.front{visibility:visible}
+.flip.is-back .face.back{pointer-events:auto;visibility:visible}
+.flip.is-back .face.front{pointer-events:none;visibility:hidden}
+.face{transition:visibility 0s linear .28s}   /* переключаем ровно на середине поворота */
 
 /* верхняя панель карточки: подсказка + звук */
 .face-top{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:flex-start;
@@ -168,16 +182,14 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
 .face-top>*{pointer-events:auto}
 .hint-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:11px;
   font-size:13.5px;font-weight:500;min-height:40px;
-  background:color-mix(in srgb,var(--surface) 88%, transparent);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  background:var(--glass);
   border:1px solid var(--border);color:var(--text-2);box-shadow:var(--shadow-sm);
   transition:color .18s ease,border-color .18s ease}
 .hint-btn:hover{color:var(--text);border-color:var(--border-strong)}
 .hint-text{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px;font-weight:600;
   letter-spacing:.14em;color:var(--blue)}
 .sound-btn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;
-  background:color-mix(in srgb,var(--surface) 88%, transparent);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  background:var(--glass);
   border:1px solid var(--border);color:var(--blue);box-shadow:var(--shadow-sm);
   transition:background .18s ease,color .18s ease,transform .15s ease}
 .sound-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -204,8 +216,7 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
 
 /* символ вместо фото — для слов, которые фотографией не передать */
 .icon-face{flex:1;display:grid;place-items:center;padding:34px 24px 18px;min-height:0;
-  background:linear-gradient(160deg,
-    color-mix(in srgb,var(--ic) 12%,var(--surface)), var(--surface))}
+  background:linear-gradient(160deg, var(--ic-soft, var(--surface-2)), var(--surface))}
 .icon-face svg{width:min(46%,180px);height:auto;color:var(--ic);stroke-width:1.5}
 .wcard .th .icon-face{padding:14px}
 .wcard .th .icon-face svg{width:56px}
@@ -321,7 +332,8 @@ footer a{color:var(--text-2)}
   .hd{height:52px;gap:9px}
   .nav button{padding:7px 11px;font-size:13px}
   .logo span{display:none}
-  main{padding:22px 0 70px}
+  main{padding:18px 0 calc(60px + env(safe-area-inset-bottom))}
+  .wrap{padding:0 16px}
   .flip{min-height:min(56vh,420px)}
   .back-in{padding:66px 22px 20px}
   .cloze{padding:70px 22px 26px}
@@ -560,7 +572,10 @@ const hardCards = () => CARDS.filter(c => { const x = st(c.id); return x.miss >=
 const POS_RU = { 'nouns':'существительные','adjectives':'прилагательные','verbs':'глаголы',
                  'adverbs':'наречия','function words':'служебные' };
 const POS_COLOR = { 'nouns':'var(--blue)','adjectives':'var(--purple)','verbs':'var(--green)',
-                    'adverbs':'var(--orange)','function words':'var(--text-3)' };
+                    'adverbs':'var(--orange)','function words':'var(--gray)','phrases':'var(--red)' };
+/* мягкие фоны заданы переменными, а не color-mix: его не понимает Safari до 16.2 */
+const POS_SOFT  = { 'nouns':'var(--blue-soft)','adjectives':'var(--purple-soft)','verbs':'var(--green-soft)',
+                    'adverbs':'var(--orange-soft)','function words':'var(--gray-soft)','phrases':'var(--red-soft)' };
 const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const escRe = s => String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const shuffle = a => { const x=[...a]; for(let i=x.length-1;i>0;i--){ const j=(Math.random()*(i+1))|0; [x[i],x[j]]=[x[j],x[i]]; } return x; };
@@ -642,9 +657,12 @@ function renderHome(){
     <span style="margin-left:auto;color:var(--text-3)">«Выучено» = 3 раза подряд «знаю» и интервал от 21 дня</span>`;
 }
 function mode(id, title, desc, count, color, icon){
+  const soft = { 'var(--orange)':'var(--orange-soft)', 'var(--blue)':'var(--blue-soft)',
+                 'var(--purple)':'var(--purple-soft)', 'var(--red)':'var(--red-soft)',
+                 'var(--green)':'var(--green-soft)' }[color] || 'var(--surface-2)';
   return `<button class="mode" data-mode="${id}" ${count===0?'disabled':''}>
-    <div class="mode-ic" style="background:color-mix(in srgb,${color} 14%,transparent);color:${color}">${icon}</div>
-    <span class="cnt" style="background:color-mix(in srgb,${color} 14%,transparent);color:${color}">${count}</span>
+    <div class="mode-ic" style="background:${soft};color:${color}">${icon}</div>
+    <span class="cnt" style="background:${soft};color:${color}">${count}</span>
     <h3>${title}</h3><p>${desc}</p></button>`;
 }
 function streak(){
@@ -749,16 +767,20 @@ const ICONS = {
   thumbUp: ['M7 22V11l5-9a2 2 0 0 1 2 3l-1 5h5a2 2 0 0 1 2 2.5l-2 8a2 2 0 0 1-2 1.5H7zM7 11H3v11h4','var(--green)'],
   thumbDn: ['M17 2v11l-5 9a2 2 0 0 1-2-3l1-5H6a2 2 0 0 1-2-2.5l2-8A2 2 0 0 1 8 2h9zM17 13h4V2h-4','var(--red)'],
 };
+const SOFT_OF = { 'var(--green)':'var(--green-soft)', 'var(--red)':'var(--red-soft)',
+                  'var(--blue)':'var(--blue-soft)', 'var(--orange)':'var(--orange-soft)',
+                  'var(--purple)':'var(--purple-soft)', 'var(--text-2)':'var(--gray-soft)' };
 function iconHTML(name){
   const ic = ICONS[name] || ICONS.badge;
   const paths = ic[0].split('M').filter(Boolean).map(p => `<path d="M${p}"/>`).join('');
-  return `<div class="icon-face" style="--ic:${ic[1]}">
+  return `<div class="icon-face" style="--ic:${ic[1]};--ic-soft:${SOFT_OF[ic[1]] || 'var(--surface-2)'}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg></div>`;
 }
 
 function posTag(c){
-  return `<span class="pos-tag" style="background:color-mix(in srgb,${POS_COLOR[c.pos]} 14%,transparent);color:${POS_COLOR[c.pos]}">${POS_RU[c.pos]||c.pos}</span>`;
+  const col = POS_COLOR[c.pos] || 'var(--gray)', soft = POS_SOFT[c.pos] || 'var(--gray-soft)';
+  return `<span class="pos-tag" style="background:${soft};color:${col}">${POS_RU[c.pos]||c.pos}</span>`;
 }
 function topBar(c, showHint){
   return `<div class="face-top">
