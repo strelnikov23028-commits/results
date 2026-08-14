@@ -1,0 +1,977 @@
+[
+ {
+  "n": 1,
+  "pt": "coisa",
+  "en": "thing",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 2,
+  "pt": "casa",
+  "en": "house/home",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 3,
+  "pt": "tempo",
+  "en": "time/weather",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 4,
+  "pt": "ano",
+  "en": "year",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 5,
+  "pt": "dia",
+  "en": "day/morning",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 6,
+  "pt": "vez",
+  "en": "time/instance",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 7,
+  "pt": "homem",
+  "en": "man",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 8,
+  "pt": "mulher",
+  "en": "woman",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 9,
+  "pt": "senhora",
+  "en": "ma’am/lady",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 10,
+  "pt": "senhor",
+  "en": "sir/gentleman",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 11,
+  "pt": "mão",
+  "en": "hand",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 12,
+  "pt": "palavra",
+  "en": "word",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 13,
+  "pt": "filho(a)",
+  "en": "son/daughter",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 14,
+  "pt": "noite",
+  "en": "night",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 15,
+  "pt": "amigo(a)",
+  "en": "friend",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 16,
+  "pt": "rua",
+  "en": "street",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 17,
+  "pt": "vida",
+  "en": "life",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 18,
+  "pt": "pessoa",
+  "en": "person",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 19,
+  "pt": "moço(a)",
+  "en": "young man/woman",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 20,
+  "pt": "menino(a)",
+  "en": "boy/girl",
+  "pos": "nouns",
+  "ex": []
+ },
+ {
+  "n": 21,
+  "pt": "bom/boa",
+  "en": "good",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 22,
+  "pt": "ruim",
+  "en": "bad",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 23,
+  "pt": "grande",
+  "en": "big",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 24,
+  "pt": "pequeno(a)",
+  "en": "small",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 25,
+  "pt": "melhor",
+  "en": "better/best",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 26,
+  "pt": "pior",
+  "en": "worse/worst",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 27,
+  "pt": "certo(a)",
+  "en": "right/correct",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 28,
+  "pt": "errado(a)",
+  "en": "wrong/incorrect",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 29,
+  "pt": "velho(a)",
+  "en": "old",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 30,
+  "pt": "novo(a)",
+  "en": "new",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 31,
+  "pt": "difícil",
+  "en": "difficult/hard",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 32,
+  "pt": "fácil",
+  "en": "easy",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 33,
+  "pt": "bonito(a)",
+  "en": "beautiful/pretty",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 34,
+  "pt": "feio(a)",
+  "en": "ugly",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 35,
+  "pt": "forte",
+  "en": "strong",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 36,
+  "pt": "fraco(a)",
+  "en": "weak",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 37,
+  "pt": "feliz",
+  "en": "happy",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 38,
+  "pt": "triste",
+  "en": "sad",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 39,
+  "pt": "diferente",
+  "en": "different",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 40,
+  "pt": "importante",
+  "en": "important",
+  "pos": "adjectives",
+  "ex": []
+ },
+ {
+  "n": 41,
+  "pt": "ser",
+  "en": "to be",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 42,
+  "pt": "estar",
+  "en": "to be",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 43,
+  "pt": "ter",
+  "en": "to have",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 44,
+  "pt": "ir",
+  "en": "to go",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 45,
+  "pt": "dizer",
+  "en": "to say/tell",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 46,
+  "pt": "fazer",
+  "en": "to do/make",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 47,
+  "pt": "poder",
+  "en": "can/be able to",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 48,
+  "pt": "ver",
+  "en": "to see",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 49,
+  "pt": "dar",
+  "en": "to give",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 50,
+  "pt": "vir",
+  "en": "to come",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 51,
+  "pt": "querer",
+  "en": "to want",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 52,
+  "pt": "parecer",
+  "en": "to seem/look like",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 53,
+  "pt": "falar",
+  "en": "to speak/talk",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 54,
+  "pt": "ficar",
+  "en": "to stay/be (location)",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 55,
+  "pt": "ouvir",
+  "en": "to hear/listen",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 56,
+  "pt": "achar",
+  "en": "to think/find",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 57,
+  "pt": "sair",
+  "en": "to go out/leave",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 58,
+  "pt": "chegar",
+  "en": "to arrive/get",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 59,
+  "pt": "passar",
+  "en": "to spend/pass",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 60,
+  "pt": "pedir",
+  "en": "to ask for/order",
+  "pos": "verbs",
+  "ex": []
+ },
+ {
+  "n": 61,
+  "pt": "não",
+  "en": "no/not",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 62,
+  "pt": "sim",
+  "en": "yes",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 63,
+  "pt": "talvez",
+  "en": "maybe/might",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 64,
+  "pt": "muito",
+  "en": "very/many",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "O Brasil é muito grande.",
+    "en": "Brazil is very big."
+   }
+  ]
+ },
+ {
+  "n": 65,
+  "pt": "pouco",
+  "en": "a little",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 66,
+  "pt": "também",
+  "en": "also/too",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 67,
+  "pt": "perto",
+  "en": "near/close",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 68,
+  "pt": "longe",
+  "en": "far",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 69,
+  "pt": "sempre",
+  "en": "always",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Eu sempre passo o Natal com a família.",
+    "en": "I always spend Christmas with my family."
+   },
+   {
+    "pt": "Sempre há uma solução para tudo.",
+    "en": "There’s always a solution for everything."
+   }
+  ]
+ },
+ {
+  "n": 70,
+  "pt": "nunca",
+  "en": "never",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 71,
+  "pt": "agora",
+  "en": "now",
+  "pos": "adverbs",
+  "ex": []
+ },
+ {
+  "n": 72,
+  "pt": "antes",
+  "en": "before",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Eu leio um livro antes de dormir.",
+    "en": "I read a book before going to sleep."
+   },
+   {
+    "pt": "Devemos lavar as mãos antes de comer.",
+    "en": "We must wash our hands before eating."
+   }
+  ]
+ },
+ {
+  "n": 73,
+  "pt": "depois",
+  "en": "after/later",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Eu vou descansar depois da aula.",
+    "en": "I’m going to rest after class."
+   },
+   {
+    "pt": "Falamos sobre isso depois.",
+    "en": "We’ll talk about this later."
+   }
+  ]
+ },
+ {
+  "n": 74,
+  "pt": "aqui",
+  "en": "here",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Eu moro aqui.",
+    "en": "I live here."
+   },
+   {
+    "pt": "Você vem sempre aqui?",
+    "en": "Do you come here often?"
+   }
+  ]
+ },
+ {
+  "n": 75,
+  "pt": "lá",
+  "en": "there",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Eu estive lá ontem.",
+    "en": "I was there yesterday."
+   },
+   {
+    "pt": "O livro está lá.",
+    "en": "The book is there."
+   }
+  ]
+ },
+ {
+  "n": 76,
+  "pt": "apenas",
+  "en": "only/just",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "O show durou apenas uma hora.",
+    "en": "The show lasted only one hour."
+   },
+   {
+    "pt": "Meu sobrinho tem apenas 9 anos.",
+    "en": "My nephew is just 9 years old."
+   }
+  ]
+ },
+ {
+  "n": 77,
+  "pt": "mais",
+  "en": "more",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Ele é mais alto do que ela.",
+    "en": "He is taller than her."
+   },
+   {
+    "pt": "Gostaria de comer mais chocolate.",
+    "en": "I’d like to eat more chocolate."
+   }
+  ]
+ },
+ {
+  "n": 78,
+  "pt": "menos",
+  "en": "less",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Ela é menos alta do que ele.",
+    "en": "She is less tall than him."
+   },
+   {
+    "pt": "Eu deveria comer menos chocolate.",
+    "en": "I should eat less chocolate."
+   }
+  ]
+ },
+ {
+  "n": 79,
+  "pt": "cedo",
+  "en": "early",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Eu acordo cedo todos os dias.",
+    "en": "I wake up early every day."
+   },
+   {
+    "pt": "Ele chegou cedo à reunião.",
+    "en": "He arrived early at the meeting."
+   }
+  ]
+ },
+ {
+  "n": 80,
+  "pt": "tarde",
+  "en": "late",
+  "pos": "adverbs",
+  "ex": [
+   {
+    "pt": "Ontem fui dormir tarde.",
+    "en": "Yesterday I went to bed late."
+   },
+   {
+    "pt": "Antes tarde do que nunca!",
+    "en": "Better late than never!"
+   }
+  ]
+ },
+ {
+  "n": 81,
+  "pt": "o/a",
+  "en": "the",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "O livro está na estante.",
+    "en": "The book is on the shelf."
+   },
+   {
+    "pt": "A caneta está na gaveta.",
+    "en": "The pen is in the drawer."
+   }
+  ]
+ },
+ {
+  "n": 82,
+  "pt": "um/uma",
+  "en": "a/an",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Comprei um sapato novo.",
+    "en": "I bought a new shoe."
+   },
+   {
+    "pt": "Comprei uma blusa nova.",
+    "en": "I bought a new blouse."
+   }
+  ]
+ },
+ {
+  "n": 83,
+  "pt": "e",
+  "en": "and",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Eu trouxe um caderno e uma caneta.",
+    "en": "I brought a notebook and a pen."
+   },
+   {
+    "pt": "Meu marido e eu somos brasileiros.",
+    "en": "My husband and I are Brazilian."
+   }
+  ]
+ },
+ {
+  "n": 84,
+  "pt": "ou",
+  "en": "or",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Você quer chá ou café?",
+    "en": "Do you want tea or coffee?"
+   },
+   {
+    "pt": "Você prefere o inverno ou o verão?",
+    "en": "Do you prefer winter or summer?"
+   }
+  ]
+ },
+ {
+  "n": 85,
+  "pt": "mas",
+  "en": "but",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "A viagem foi boa, mas cansativa.",
+    "en": "The trip was good but tiring."
+   },
+   {
+    "pt": "Meu carro é velho, mas funciona bem.",
+    "en": "My car is old but runs well."
+   }
+  ]
+ },
+ {
+  "n": 86,
+  "pt": "de/da/do",
+  "en": "of/from",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Ele é de São Paulo.",
+    "en": "He is from São Paulo."
+   },
+   {
+    "pt": "Eu sou do Brasil.",
+    "en": "I am from Brazil."
+   }
+  ]
+ },
+ {
+  "n": 87,
+  "pt": "em/na/no",
+  "en": "in/on/at",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Eu moro em Nova Iorque.",
+    "en": "I live in New York."
+   },
+   {
+    "pt": "Ele está no banco.",
+    "en": "He is at the bank."
+   }
+  ]
+ },
+ {
+  "n": 88,
+  "pt": "para",
+  "en": "to/for",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Eu vou para o Brasil.",
+    "en": "I’m going to Brazil."
+   },
+   {
+    "pt": "Isto é para você.",
+    "en": "This is for you."
+   }
+  ]
+ },
+ {
+  "n": 89,
+  "pt": "por",
+  "en": "by/through/per",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Vou enviar isto por e-mail.",
+    "en": "I’ll send this by email."
+   },
+   {
+    "pt": "Faço exercícios duas vezes por semana.",
+    "en": "I exercise twice per week."
+   }
+  ]
+ },
+ {
+  "n": 90,
+  "pt": "com",
+  "en": "with",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Eu falo com meus amigos todo dia.",
+    "en": "I talk with my friends every day."
+   },
+   {
+    "pt": "Maria saiu com João.",
+    "en": "Maria went out with João."
+   }
+  ]
+ },
+ {
+  "n": 91,
+  "pt": "eu",
+  "en": "I",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Eu sou brasileira.",
+    "en": "I am Brazilian."
+   },
+   {
+    "pt": "Eu falo português.",
+    "en": "I speak Portuguese."
+   }
+  ]
+ },
+ {
+  "n": 92,
+  "pt": "você",
+  "en": "you",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "De onde você é?",
+    "en": "Where are you from?"
+   },
+   {
+    "pt": "Você fala português?",
+    "en": "Do you speak Portuguese?"
+   }
+  ]
+ },
+ {
+  "n": 93,
+  "pt": "ela/ele",
+  "en": "she/he",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Ela é brasileira.",
+    "en": "She is Brazilian."
+   },
+   {
+    "pt": "Ele é americano.",
+    "en": "He is American."
+   }
+  ]
+ },
+ {
+  "n": 94,
+  "pt": "a gente",
+  "en": "we (informal)",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "A gente é do Brasil.",
+    "en": "We are from Brazil."
+   },
+   {
+    "pt": "A gente fala português.",
+    "en": "We speak Portuguese."
+   }
+  ]
+ },
+ {
+  "n": 95,
+  "pt": "esta/este",
+  "en": "this",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Comprei esta blusa no Brasil.",
+    "en": "I bought this blouse in Brazil."
+   },
+   {
+    "pt": "Comprei este computador este ano.",
+    "en": "I bought this computer this year."
+   }
+  ]
+ },
+ {
+  "n": 96,
+  "pt": "minha/meu",
+  "en": "my",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Minha mãe mora no Brasil.",
+    "en": "My mother lives in Brazil."
+   },
+   {
+    "pt": "Meu irmão também mora no Brasil.",
+    "en": "My brother also lives in Brazil."
+   }
+  ]
+ },
+ {
+  "n": 97,
+  "pt": "sua/seu",
+  "en": "your",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Qual é o seu nome?",
+    "en": "What is your name?"
+   },
+   {
+    "pt": "Qual é a sua profissão?",
+    "en": "What is your profession?"
+   }
+  ]
+ },
+ {
+  "n": 98,
+  "pt": "que",
+  "en": "what/that",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Que horas são?",
+    "en": "What time is it?"
+   },
+   {
+    "pt": "Aqui está o livro que eu comprei.",
+    "en": "Here is the book that I bought."
+   }
+  ]
+ },
+ {
+  "n": 99,
+  "pt": "quem",
+  "en": "who/whom",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Quem é ela?",
+    "en": "Who is she?"
+   },
+   {
+    "pt": "Com quem você vai viajar?",
+    "en": "With whom are you traveling?"
+   }
+  ]
+ },
+ {
+  "n": 100,
+  "pt": "qual",
+  "en": "which/what",
+  "pos": "function words",
+  "ex": [
+   {
+    "pt": "Qual é o seu sobrenome?",
+    "en": "What is your last name?"
+   },
+   {
+    "pt": "Qual é sua cor favorita?",
+    "en": "What is your favorite color?"
+   }
+  ]
+ }
+]

@@ -1,0 +1,2367 @@
+[
+ {
+  "id": 1,
+  "pt": "coisa",
+  "en": "thing",
+  "ru": "вещь, штука",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Posso perguntar uma coisa?",
+    "en": "Can I ask you something?"
+   },
+   {
+    "pt": "Eu gostaria de comer alguma coisa.",
+    "en": "I’d like to eat something."
+   }
+  ],
+  "imgQuery": "assorted objects on table",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/8/85/Brooklyn_NY_assorted_photos_17_trash_left_on_restaurant_table.jpg",
+  "credit": {
+   "author": "Tomwsulcer",
+   "url": "https://commons.wikimedia.org/wiki/File:Brooklyn_NY_assorted_photos_17_trash_left_on_restaurant_table.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC0"
+  }
+ },
+ {
+  "id": 2,
+  "pt": "casa",
+  "en": "house/home",
+  "ru": "дом",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Estou em casa.",
+    "en": "I’m at home."
+   },
+   {
+    "pt": "Não esqueça de fazer seu dever de casa.",
+    "en": "Don’t forget to do your homework."
+   }
+  ],
+  "imgQuery": "house home exterior",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Benjamin_Harrison_Home_Exterior%2C_Indianapolis%2C_Indiana_-_Sarah_Stierch.jpg/960px-Benjamin_Harrison_Home_Exterior%2C_Indianapolis%2C_Indiana_-_Sarah_Stierch.jpg",
+  "credit": {
+   "author": "Sarah Stierch",
+   "url": "https://commons.wikimedia.org/wiki/File:Benjamin_Harrison_Home_Exterior,_Indianapolis,_Indiana_-_Sarah_Stierch.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 3,
+  "pt": "tempo",
+  "en": "time/weather",
+  "ru": "время; погода",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "O tempo está bom hoje.",
+    "en": "The weather is nice today."
+   },
+   {
+    "pt": "Gosto de passar tempo com minha família.",
+    "en": "I like to spend time with my family."
+   }
+  ],
+  "imgQuery": "clock time",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Pendulum_clock_by_Jacob_Kock%2C_antique_furniture_photography%2C_IMG_0931_edit.jpg/960px-Pendulum_clock_by_Jacob_Kock%2C_antique_furniture_photography%2C_IMG_0931_edit.jpg",
+  "credit": {
+   "author": "Christoph Braun",
+   "url": "https://commons.wikimedia.org/wiki/File:Pendulum_clock_by_Jacob_Kock,_antique_furniture_photography,_IMG_0931_edit.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC0"
+  }
+ },
+ {
+  "id": 4,
+  "pt": "ano",
+  "en": "year",
+  "ru": "год",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Feliz ano novo!",
+    "en": "Happy New Year!"
+   },
+   {
+    "pt": "Eu vou ao Brasil todo ano.",
+    "en": "I go to Brazil every year."
+   }
+  ],
+  "imgQuery": "calendar year",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/2020_calendar.jpg",
+  "credit": {
+   "author": "Alhassan Abdul-Manan",
+   "url": "https://commons.wikimedia.org/wiki/File:2020_calendar.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 5,
+  "pt": "dia",
+  "en": "day/morning",
+  "ru": "день; утро",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Bom dia!",
+    "en": "Good morning!"
+   },
+   {
+    "pt": "Eu falo português todo dia.",
+    "en": "I speak Portuguese every day."
+   }
+  ],
+  "imgQuery": "sunny day sky morning",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Green_karst_peaks_seen_from_the_top_of_Mount_Nam_Xay_a_sunny_morning_during_the_monsoon_Vang_Vieng_Laos.jpg/960px-Green_karst_peaks_seen_from_the_top_of_Mount_Nam_Xay_a_sunny_morning_during_the_monsoon_Vang_Vieng_Laos.jpg",
+  "credit": {
+   "author": "Basile Morin",
+   "url": "https://commons.wikimedia.org/wiki/File:Green_karst_peaks_seen_from_the_top_of_Mount_Nam_Xay_a_sunny_morning_during_the_monsoon_Vang_Vieng_Laos.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 6,
+  "pt": "vez",
+  "en": "time/instance",
+  "ru": "раз (случай)",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Vou ao Brasil uma vez por ano.",
+    "en": "I go to Brazil once a year."
+   },
+   {
+    "pt": "Vou à academia duas vezes por semana.",
+    "en": "I go to the gym twice a week."
+   }
+  ],
+  "imgQuery": "tally counting marks",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Strike_symbol_%2849778996432%29.jpg/960px-Strike_symbol_%2849778996432%29.jpg",
+  "credit": {
+   "author": "David Stewart",
+   "url": "https://commons.wikimedia.org/wiki/File:Strike_symbol_(49778996432).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 7,
+  "pt": "homem",
+  "en": "man",
+  "ru": "мужчина",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Aquele homem é brasileiro.",
+    "en": "That man is Brazilian."
+   },
+   {
+    "pt": "Quem é aquele homem?",
+    "en": "Who is that man?"
+   }
+  ],
+  "imgQuery": "man portrait",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Antonello_da_Messina_-_Portrait_of_a_Man_-_National_Gallery_London.jpg/960px-Antonello_da_Messina_-_Portrait_of_a_Man_-_National_Gallery_London.jpg",
+  "credit": {
+   "author": "Antonello da Messina",
+   "url": "https://commons.wikimedia.org/wiki/File:Antonello_da_Messina_-_Portrait_of_a_Man_-_National_Gallery_London.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 8,
+  "pt": "mulher",
+  "en": "woman",
+  "ru": "женщина",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Eu sou uma mulher brasileira.",
+    "en": "I am a Brazilian woman."
+   },
+   {
+    "pt": "Aquelas mulheres são brasileiras.",
+    "en": "Those women are Brazilian."
+   }
+  ],
+  "imgQuery": "woman portrait",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Vermeer-Portrait_of_a_Young_Woman.jpg/960px-Vermeer-Portrait_of_a_Young_Woman.jpg",
+  "credit": {
+   "author": "Johannes Vermeer",
+   "url": "https://commons.wikimedia.org/wiki/File:Vermeer-Portrait_of_a_Young_Woman.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 9,
+  "pt": "senhora",
+  "en": "ma’am/lady",
+  "ru": "госпожа, дама",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Aquela senhora é brasileira.",
+    "en": "That lady is Brazilian."
+   },
+   {
+    "pt": "Qual é o nome da senhora?",
+    "en": "What is your name, ma’am?"
+   }
+  ],
+  "imgQuery": "elegant older woman",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/An_elegant_woman_%281887%29%2C_by_Vittorio_Matteo_Corcos.jpg/960px-An_elegant_woman_%281887%29%2C_by_Vittorio_Matteo_Corcos.jpg",
+  "credit": {
+   "author": "Vittorio Matteo Corcos",
+   "url": "https://commons.wikimedia.org/wiki/File:An_elegant_woman_(1887),_by_Vittorio_Matteo_Corcos.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 10,
+  "pt": "senhor",
+  "en": "sir/gentleman",
+  "ru": "господин, мужчина (вежл.)",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Aquele senhor é brasileiro.",
+    "en": "That gentleman is Brazilian."
+   },
+   {
+    "pt": "Qual é o nome do senhor?",
+    "en": "What is your name, sir?"
+   }
+  ],
+  "imgQuery": "elegant older man",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/An_elegant_man.jpg/960px-An_elegant_man.jpg",
+  "credit": {
+   "author": "Ilya Mashkov",
+   "url": "https://commons.wikimedia.org/wiki/File:An_elegant_man.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 11,
+  "pt": "mão",
+  "en": "hand",
+  "ru": "рука (кисть)",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Eu uso um anel em minha mão esquerda.",
+    "en": "I wear a ring on my left hand."
+   },
+   {
+    "pt": "Eu lavo minhas mãos antes de comer.",
+    "en": "I wash my hands before eating."
+   }
+  ],
+  "imgQuery": "human hand",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Hand_and_power_stone_bracelets.jpg/960px-Hand_and_power_stone_bracelets.jpg",
+  "credit": {
+   "author": "Tomascastelazo",
+   "url": "https://commons.wikimedia.org/wiki/File:Hand_and_power_stone_bracelets.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 12,
+  "pt": "palavra",
+  "en": "word",
+  "ru": "слово",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Nesta lição, vamos estudar 100 palavras.",
+    "en": "In this lesson, we will study 100 words."
+   },
+   {
+    "pt": "Ele me deu sua palavra.",
+    "en": "He gave me his word."
+   }
+  ],
+  "imgQuery": "dictionary word page",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Barclay%27s_Universal_dictionary%3B_containing_an_explanation_of_difficult_words_and_technical_terms%2C_in_all_faculties_and_professions_Also_a_pronouncing_dictionary_The_origin_of_each_word_An_epitome_of_%2814763735035%29.jpg/960px-thumbnail.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:Barclay%27s_Universal_dictionary;_containing_an_explanation_of_difficult_words_and_technical_terms,_in_all_faculties_and_professions_Also_a_pronouncing_dictionary_The_origin_of_each_word_An_epitome_of_(14763735035).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 13,
+  "pt": "filho(a)",
+  "en": "son/daughter",
+  "ru": "сын; дочь",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Eles têm uma filha e um filho.",
+    "en": "They have a daughter and a son."
+   },
+   {
+    "pt": "Ela quer ter dois filhos.",
+    "en": "She wants to have two children."
+   }
+  ],
+  "imgQuery": "parent with child",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Madonna_with_child_and_angels.jpg/960px-Madonna_with_child_and_angels.jpg",
+  "credit": {
+   "author": "Giovanni Battista Salvi da Sassoferrato",
+   "url": "https://commons.wikimedia.org/wiki/File:Madonna_with_child_and_angels.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 14,
+  "pt": "noite",
+  "en": "night",
+  "ru": "ночь; вечер",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Boa noite!",
+    "en": "Good night!"
+   },
+   {
+    "pt": "Eu leio todas as noites.",
+    "en": "I read every night."
+   }
+  ],
+  "imgQuery": "night sky stars",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Stars_01_%28MK%29.jpg/960px-Stars_01_%28MK%29.jpg",
+  "credit": {
+   "author": "Mathias Krumbholz",
+   "url": "https://commons.wikimedia.org/wiki/File:Stars_01_(MK).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 3.0"
+  }
+ },
+ {
+  "id": 15,
+  "pt": "amigo(a)",
+  "en": "friend",
+  "ru": "друг, подруга",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Ela é minha melhor amiga.",
+    "en": "She is my best friend."
+   },
+   {
+    "pt": "Vou sair com meus amigos.",
+    "en": "I’m going out with my friends."
+   }
+  ],
+  "imgQuery": "friends together laughing",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Two_friends_sitting_together%2C_chatting_and_laughing.jpg/960px-Two_friends_sitting_together%2C_chatting_and_laughing.jpg",
+  "credit": {
+   "author": "Ahmed Mo Abd Elaaty",
+   "url": "https://commons.wikimedia.org/wiki/File:Two_friends_sitting_together,_chatting_and_laughing.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 16,
+  "pt": "rua",
+  "en": "street",
+  "ru": "улица",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Moro na mesma rua há anos.",
+    "en": "I’ve lived on the same street for years."
+   },
+   {
+    "pt": "Não jogue lixo na rua.",
+    "en": "Don’t throw trash on the street."
+   }
+  ],
+  "imgQuery": "city street",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Eldridge_Street_Synagogue_%2842773%29.jpg/960px-Eldridge_Street_Synagogue_%2842773%29.jpg",
+  "credit": {
+   "author": "Rhododendrites",
+   "url": "https://commons.wikimedia.org/wiki/File:Eldridge_Street_Synagogue_(42773).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 17,
+  "pt": "vida",
+  "en": "life",
+  "ru": "жизнь",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Eu tenho uma vida muito boa.",
+    "en": "I have a very good life."
+   },
+   {
+    "pt": "Dizem que gatos têm sete vidas.",
+    "en": "They say cats have seven lives."
+   }
+  ],
+  "imgQuery": "life nature growth",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Animal_Life_and_the_World_of_Nature%3B_A_magazine_of_Natural_History_%281902%29_%2814767773652%29.jpg/960px-Animal_Life_and_the_World_of_Nature%3B_A_magazine_of_Natural_History_%281902%29_%2814767773652%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:Animal_Life_and_the_World_of_Nature;_A_magazine_of_Natural_History_(1902)_(14767773652).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 18,
+  "pt": "pessoa",
+  "en": "person",
+  "ru": "человек",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Quem é aquela pessoa?",
+    "en": "Who is that person?"
+   },
+   {
+    "pt": "Tinha muitas pessoas na festa.",
+    "en": "There were many people at the party."
+   }
+  ],
+  "imgQuery": "person standing",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Person_Standing_%28NIH_BioArt_555%29.png/960px-Person_Standing_%28NIH_BioArt_555%29.png",
+  "credit": {
+   "author": "Courtesy of NIAID\n\nRyan Kissinger",
+   "url": "https://commons.wikimedia.org/wiki/File:Person_Standing_(NIH_BioArt_555).png",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 19,
+  "pt": "moço(a)",
+  "en": "young man/woman",
+  "ru": "молодой человек; девушка",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Aquela moça é muito bonita.",
+    "en": "That young woman is very beautiful."
+   },
+   {
+    "pt": "Quem é aquele moço?",
+    "en": "Who is that young man?"
+   }
+  ],
+  "imgQuery": "young adult person",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Erected_young_adult_male_left_nipple.jpg/960px-Erected_young_adult_male_left_nipple.jpg",
+  "credit": {
+   "author": "Mastophilicaroace",
+   "url": "https://commons.wikimedia.org/wiki/File:Erected_young_adult_male_left_nipple.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC0"
+  }
+ },
+ {
+  "id": 20,
+  "pt": "menino(a)",
+  "en": "boy/girl",
+  "ru": "мальчик; девочка",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "João é um menino muito inteligente.",
+    "en": "João is a very smart boy."
+   },
+   {
+    "pt": "Vou sair com as meninas hoje.",
+    "en": "I’m going out with the girls today."
+   }
+  ],
+  "imgQuery": "child kid playing",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Child_development_Playing.jpg/960px-Child_development_Playing.jpg",
+  "credit": {
+   "author": "Andznakan",
+   "url": "https://commons.wikimedia.org/wiki/File:Child_development_Playing.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 21,
+  "pt": "bom/boa",
+  "en": "good",
+  "ru": "хороший",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "A sobremesa estava muito boa.",
+    "en": "The dessert was really good."
+   },
+   {
+    "pt": "O tempo está bom hoje.",
+    "en": "The weather is nice today."
+   }
+  ],
+  "imgQuery": "thumbs up approval",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Thumbs_up_floral_arrangement.png/960px-Thumbs_up_floral_arrangement.png",
+  "credit": {
+   "author": "Whoisjohngalt",
+   "url": "https://commons.wikimedia.org/wiki/File:Thumbs_up_floral_arrangement.png",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 22,
+  "pt": "ruim",
+  "en": "bad",
+  "ru": "плохой",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "A comida estava ruim.",
+    "en": "The food was bad."
+   },
+   {
+    "pt": "O filme foi muito ruim.",
+    "en": "The movie was really bad."
+   }
+  ],
+  "imgQuery": "thumbs down disapproval",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Thumbs_down._N.J._Solon_indicates_his_disapproval_of_Secretary_Perkins._Washington%2C_D.C.%2C_Feb._2._Rep._J._Parnell_Thomas%2C_republican_of_New_Jersey%2C_indicates_with_his_thumbs_his_disapproval_LCCN2016874947.jpg/960px-thumbnail.jpg",
+  "credit": {
+   "author": "Harris &amp; Ewing, photographer",
+   "url": "https://commons.wikimedia.org/wiki/File:Thumbs_down._N.J._Solon_indicates_his_disapproval_of_Secretary_Perkins._Washington,_D.C.,_Feb._2._Rep._J._Parnell_Thomas,_republican_of_New_Jersey,_indicates_with_his_thumbs_his_disapproval_LCCN2016874947.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 23,
+  "pt": "grande",
+  "en": "big",
+  "ru": "большой",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "São Paulo é uma cidade grande.",
+    "en": "São Paulo is a big city."
+   },
+   {
+    "pt": "Maria mora em uma casa grande.",
+    "en": "Maria lives in a big house."
+   }
+  ],
+  "imgQuery": "big elephant size",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/WA1215_87_Natural_History_Elephants_Elephant_Seal_3D.jpg/960px-WA1215_87_Natural_History_Elephants_Elephant_Seal_3D.jpg",
+  "credit": {
+   "author": "VasuVR",
+   "url": "https://commons.wikimedia.org/wiki/File:WA1215_87_Natural_History_Elephants_Elephant_Seal_3D.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 4.0"
+  }
+ },
+ {
+  "id": 24,
+  "pt": "pequeno(a)",
+  "en": "small",
+  "ru": "маленький",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Indaiatuba é uma cidade pequena.",
+    "en": "Indaiatuba is a small city."
+   },
+   {
+    "pt": "João mora em um apartamento pequeno.",
+    "en": "João lives in a small apartment."
+   }
+  ],
+  "imgQuery": "tiny small mouse",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Mickey_Mouse_Plant.png/960px-Mickey_Mouse_Plant.png",
+  "credit": {
+   "author": "Silverish Lily",
+   "url": "https://commons.wikimedia.org/wiki/File:Mickey_Mouse_Plant.png",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 25,
+  "pt": "melhor",
+  "en": "better/best",
+  "ru": "лучше, лучший",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Vou encontrar minha melhor amiga.",
+    "en": "I’m going to meet my best friend."
+   },
+   {
+    "pt": "Eles são melhores amigos.",
+    "en": "They are best friends."
+   }
+  ],
+  "imgQuery": "winner first place trophy",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Tewanima_%28winner%29%2C_Arquette_%28came_in_5th%29_LOC_2163457616.jpg/960px-Tewanima_%28winner%29%2C_Arquette_%28came_in_5th%29_LOC_2163457616.jpg",
+  "credit": {
+   "author": "The Library of Congress",
+   "url": "https://commons.wikimedia.org/wiki/File:Tewanima_(winner),_Arquette_(came_in_5th)_LOC_2163457616.jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 26,
+  "pt": "pior",
+  "en": "worse/worst",
+  "ru": "хуже, худший",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Aquele foi o pior filme que já vi.",
+    "en": "That was the worst movie I’ve ever seen."
+   },
+   {
+    "pt": "Sentir frio é pior do que sentir calor.",
+    "en": "Feeling cold is worse than feeling hot."
+   }
+  ],
+  "imgQuery": "broken damaged failure",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Broken_axle_%2828051144780%29.jpg/960px-Broken_axle_%2828051144780%29.jpg",
+  "credit": {
+   "author": "oaktree_brian_1976 from Canada",
+   "url": "https://commons.wikimedia.org/wiki/File:Broken_axle_(28051144780).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 27,
+  "pt": "certo(a)",
+  "en": "right/correct",
+  "ru": "правильный, верный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Isso está certo.",
+    "en": "That’s right."
+   },
+   {
+    "pt": "Esta resposta está certa.",
+    "en": "This answer is correct."
+   }
+  ],
+  "imgQuery": "green check mark correct",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Correct_multiple_check.png",
+  "credit": {
+   "author": "Nblund",
+   "url": "https://commons.wikimedia.org/wiki/File:Correct_multiple_check.png",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 28,
+  "pt": "errado(a)",
+  "en": "wrong/incorrect",
+  "ru": "неправильный, ошибочный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Isso está errado.",
+    "en": "That’s wrong."
+   },
+   {
+    "pt": "Esta resposta está errada.",
+    "en": "This answer is incorrect."
+   }
+  ],
+  "imgQuery": "red cross wrong mark",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/George_Frederic_Watts_-_Una_and_the_Red_Cross_%28study%29.jpg/960px-George_Frederic_Watts_-_Una_and_the_Red_Cross_%28study%29.jpg",
+  "credit": {
+   "author": "George Frederic Watts",
+   "url": "https://commons.wikimedia.org/wiki/File:George_Frederic_Watts_-_Una_and_the_Red_Cross_(study).jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 29,
+  "pt": "velho(a)",
+  "en": "old",
+  "ru": "старый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Esta casa é velha.",
+    "en": "This house is old."
+   },
+   {
+    "pt": "Ele é um velho amigo.",
+    "en": "He is an old friend."
+   }
+  ],
+  "imgQuery": "old weathered wooden door",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Old_wooden_door_with_signs_of_natural_weathering.jpg/960px-Old_wooden_door_with_signs_of_natural_weathering.jpg",
+  "credit": {
+   "author": "G-Lignum",
+   "url": "https://commons.wikimedia.org/wiki/File:Old_wooden_door_with_signs_of_natural_weathering.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 30,
+  "pt": "novo(a)",
+  "en": "new",
+  "ru": "новый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Preciso de um carro novo.",
+    "en": "I need a new car."
+   },
+   {
+    "pt": "Comprei uma bolsa nova.",
+    "en": "I bought a new bag."
+   }
+  ],
+  "imgQuery": "brand new shiny product",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/The_Ladies%27_home_journal_%281948%29_%2814581340289%29.jpg/960px-The_Ladies%27_home_journal_%281948%29_%2814581340289%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:The_Ladies%27_home_journal_(1948)_(14581340289).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 31,
+  "pt": "difícil",
+  "en": "difficult/hard",
+  "ru": "трудный, сложный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Correr uma maratona é difícil.",
+    "en": "Running a marathon is difficult."
+   },
+   {
+    "pt": "Aprender um novo idioma é difícil.",
+    "en": "Learning a new language is hard."
+   }
+  ],
+  "imgQuery": "steep mountain climbing effort",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/View_from_Beeston_Castle_%285647158828%29.jpg/960px-View_from_Beeston_Castle_%285647158828%29.jpg",
+  "credit": {
+   "author": "Berit from Redhill/Surrey, UK",
+   "url": "https://commons.wikimedia.org/wiki/File:View_from_Beeston_Castle_(5647158828).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 32,
+  "pt": "fácil",
+  "en": "easy",
+  "ru": "лёгкий, простой",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Esta lição é fácil.",
+    "en": "This lesson is easy."
+   },
+   {
+    "pt": "Não é fácil fazer novos amigos.",
+    "en": "It’s not easy to make new friends."
+   }
+  ],
+  "imgQuery": "easy relaxed hammock",
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 33,
+  "pt": "bonito(a)",
+  "en": "beautiful/pretty",
+  "ru": "красивый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Aquela menina é bonita.",
+    "en": "That girl is beautiful."
+   },
+   {
+    "pt": "Aquele menino é bonito.",
+    "en": "That boy is handsome."
+   }
+  ],
+  "imgQuery": "beautiful flower blossom",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Lovely_and_Beautiful_Flower_House.jpg/960px-Lovely_and_Beautiful_Flower_House.jpg",
+  "credit": {
+   "author": "Nilotpal Hazarika123",
+   "url": "https://commons.wikimedia.org/wiki/File:Lovely_and_Beautiful_Flower_House.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 34,
+  "pt": "feio(a)",
+  "en": "ugly",
+  "ru": "некрасивый, уродливый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Falar palavrão é feio.",
+    "en": "Using curse words is ugly."
+   },
+   {
+    "pt": "O tempo está feio hoje.",
+    "en": "The weather is bad today."
+   }
+  ],
+  "imgQuery": "garbage dump ugly",
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 35,
+  "pt": "forte",
+  "en": "strong",
+  "ru": "сильный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "O vento está muito forte hoje.",
+    "en": "The wind is very strong today."
+   },
+   {
+    "pt": "Eu gosto de café forte.",
+    "en": "I like strong coffee."
+   }
+  ],
+  "imgQuery": "strong muscular athlete",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/The_Indian_club_exercise_-_with_explanatory_figures_and_positions_-_photographed_from_life_-_also%2C_general_remarks_on_physical_culture_-_illustrated_with_portraitures_of_celebrated_athletes%2C_%2814769900505%29.jpg/960px-thumbnail.jpg",
+  "credit": {
+   "author": "Kehoe, Simon D",
+   "url": "https://commons.wikimedia.org/wiki/File:The_Indian_club_exercise_-_with_explanatory_figures_and_positions_-_photographed_from_life_-_also,_general_remarks_on_physical_culture_-_illustrated_with_portraitures_of_celebrated_athletes,_(14769900505).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 36,
+  "pt": "fraco(a)",
+  "en": "weak",
+  "ru": "слабый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Esta luz é muito fraca para ler.",
+    "en": "This light is too weak to read."
+   },
+   {
+    "pt": "Eu não gosto de café fraco.",
+    "en": "I don’t like weak coffee."
+   }
+  ],
+  "imgQuery": "wilted drooping plant",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Degraded_plant_condition%2C_overgrazing_and_drought%2C_South_Dakota.jpg/960px-Degraded_plant_condition%2C_overgrazing_and_drought%2C_South_Dakota.jpg",
+  "credit": {
+   "author": "USDA NRCS South Dakota",
+   "url": "https://commons.wikimedia.org/wiki/File:Degraded_plant_condition,_overgrazing_and_drought,_South_Dakota.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 37,
+  "pt": "feliz",
+  "en": "happy",
+  "ru": "счастливый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "O filme tem um final feliz.",
+    "en": "The movie has a happy ending."
+   },
+   {
+    "pt": "Eles estão felizes.",
+    "en": "They are happy."
+   }
+  ],
+  "imgQuery": "happy smiling person",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/f/fb/116302WiltonPortrait1945.jpg",
+  "credit": {
+   "author": "Not stated",
+   "url": "https://commons.wikimedia.org/wiki/File:116302WiltonPortrait1945.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 38,
+  "pt": "triste",
+  "en": "sad",
+  "ru": "грустный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "O filme tem um final triste.",
+    "en": "The movie has a sad ending."
+   },
+   {
+    "pt": "Eles estão tristes.",
+    "en": "They are sad."
+   }
+  ],
+  "imgQuery": "sad crying person",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Sad_girl_cropped.jpg/960px-Sad_girl_cropped.jpg",
+  "credit": {
+   "author": "xusenru, https://pixabay.com/en/users/xusenru-1829710/",
+   "url": "https://commons.wikimedia.org/wiki/File:Sad_girl_cropped.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC0"
+  }
+ },
+ {
+  "id": 39,
+  "pt": "diferente",
+  "en": "different",
+  "ru": "другой, непохожий",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Vamos fazer algo diferente hoje.",
+    "en": "Let’s do something different today."
+   },
+   {
+    "pt": "Cada cultura tem costumes diferentes.",
+    "en": "Each culture has different customs."
+   }
+  ],
+  "imgQuery": "one red apple among green",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Beyond_the_Pir_Panjal%3B_life_among_the_mountains_and_valleys_of_Kashmir_%281912%29_%2814778067324%29.jpg/960px-Beyond_the_Pir_Panjal%3B_life_among_the_mountains_and_valleys_of_Kashmir_%281912%29_%2814778067324%29.jpg",
+  "credit": {
+   "author": "Neve, Ernest Frederic, 1861-",
+   "url": "https://commons.wikimedia.org/wiki/File:Beyond_the_Pir_Panjal;_life_among_the_mountains_and_valleys_of_Kashmir_(1912)_(14778067324).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 40,
+  "pt": "importante",
+  "en": "important",
+  "ru": "важный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Minha família é importante para mim.",
+    "en": "My family is important to me."
+   },
+   {
+    "pt": "Tenho uma reunião importante hoje.",
+    "en": "I have an important meeting today."
+   }
+  ],
+  "imgQuery": "important document stamp",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/9/93/Belarusian_People%27s_Self-Help_20_pfennig_stamp_%281941-1944%29.jpg",
+  "credit": {
+   "author": "Unknown authorUnknown author",
+   "url": "https://commons.wikimedia.org/wiki/File:Belarusian_People%27s_Self-Help_20_pfennig_stamp_(1941-1944).jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 41,
+  "pt": "ser",
+  "en": "to be",
+  "ru": "быть (постоянно: кто/какой)",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu sou professora.",
+    "en": "I am a teacher."
+   },
+   {
+    "pt": "Nós somos brasileiros.",
+    "en": "We are Brazilian."
+   }
+  ],
+  "imgQuery": "identity badge profession",
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 42,
+  "pt": "estar",
+  "en": "to be",
+  "ru": "быть (временно: где/как сейчас)",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu estou em casa.",
+    "en": "I am at home."
+   },
+   {
+    "pt": "Eles estão felizes.",
+    "en": "They are happy."
+   }
+  ],
+  "imgQuery": "location pin map",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Map_tack_inserted.jpg/960px-Map_tack_inserted.jpg",
+  "credit": {
+   "author": "Arlo James Barnes",
+   "url": "https://commons.wikimedia.org/wiki/File:Map_tack_inserted.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 43,
+  "pt": "ter",
+  "en": "to have",
+  "ru": "иметь",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu tenho três irmãos.",
+    "en": "I have three siblings."
+   },
+   {
+    "pt": "Carlos tem um carro novo.",
+    "en": "Carlos has a new car."
+   }
+  ],
+  "imgQuery": "hands holding possession",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/RingsWWII.jpg/960px-RingsWWII.jpg",
+  "credit": {
+   "author": "Department of Defense. Department of the Army. Office of the Chief Signal Office",
+   "url": "https://commons.wikimedia.org/wiki/File:RingsWWII.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 44,
+  "pt": "ir",
+  "en": "to go",
+  "ru": "идти, ехать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu vou ao Brasil no verão.",
+    "en": "I go to Brazil in the summer."
+   },
+   {
+    "pt": "Eles vão ao trabalho de ônibus.",
+    "en": "They go to work by bus."
+   }
+  ],
+  "imgQuery": "person walking away road",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/A_person_walking_away_on_Earls_Court_Road_%2849961513171%29.jpg/960px-A_person_walking_away_on_Earls_Court_Road_%2849961513171%29.jpg",
+  "credit": {
+   "author": "Sanshiro KUBOTA from London, UK",
+   "url": "https://commons.wikimedia.org/wiki/File:A_person_walking_away_on_Earls_Court_Road_(49961513171).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 45,
+  "pt": "dizer",
+  "en": "to say/tell",
+  "ru": "сказать, говорить",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu sempre digo a verdade.",
+    "en": "I always tell the truth."
+   },
+   {
+    "pt": "Ele disse que sim.",
+    "en": "He said yes."
+   }
+  ],
+  "imgQuery": "person speaking megaphone",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Speaking_trumpets_-_San_Francisco_Fire_Department_Museum%2C_San_Francisco%2C_CA_-_PXL_20230825_210108140.jpg/960px-Speaking_trumpets_-_San_Francisco_Fire_Department_Museum%2C_San_Francisco%2C_CA_-_PXL_20230825_210108140.jpg",
+  "credit": {
+   "author": "Daderot",
+   "url": "https://commons.wikimedia.org/wiki/File:Speaking_trumpets_-_San_Francisco_Fire_Department_Museum,_San_Francisco,_CA_-_PXL_20230825_210108140.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC0"
+  }
+ },
+ {
+  "id": 46,
+  "pt": "fazer",
+  "en": "to do/make",
+  "ru": "делать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu faço exercícios regularmente.",
+    "en": "I exercise regularly."
+   },
+   {
+    "pt": "Meu marido fez o almoço hoje.",
+    "en": "My husband made lunch today."
+   }
+  ],
+  "imgQuery": "hands making crafting",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Working_hands._Bizzilla%2C_or_traditional_maltese_lace-making.jpg/960px-Working_hands._Bizzilla%2C_or_traditional_maltese_lace-making.jpg",
+  "credit": {
+   "author": "Renata Apan",
+   "url": "https://commons.wikimedia.org/wiki/File:Working_hands._Bizzilla,_or_traditional_maltese_lace-making.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 47,
+  "pt": "poder",
+  "en": "can/be able to",
+  "ru": "мочь, быть в состоянии",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu posso te ajudar a aprender português.",
+    "en": "I can help you learn Portuguese."
+   },
+   {
+    "pt": "Ela não pode beber porque é menor de idade.",
+    "en": "She can’t drink because she’s underage."
+   }
+  ],
+  "imgQuery": "person lifting weights power",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Aviano_2021_Power_Lifting_Competition_%286789614%29.jpg/960px-Aviano_2021_Power_Lifting_Competition_%286789614%29.jpg",
+  "credit": {
+   "author": "U.S. Air Force photo by Senior Airman Noah Sudolcan",
+   "url": "https://commons.wikimedia.org/wiki/File:Aviano_2021_Power_Lifting_Competition_(6789614).jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 48,
+  "pt": "ver",
+  "en": "to see",
+  "ru": "видеть",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu vejo meus amigos toda semana.",
+    "en": "I see my friends every week."
+   },
+   {
+    "pt": "Você viu o novo filme da Fernanda Torres?",
+    "en": "Did you see Fernanda Torres’ new movie?"
+   }
+  ],
+  "imgQuery": "human eye looking",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Eastern_screech_owl_rehabilitated_after_eye_injury_%2844333%29.jpg/960px-Eastern_screech_owl_rehabilitated_after_eye_injury_%2844333%29.jpg",
+  "credit": {
+   "author": "Rhododendrites",
+   "url": "https://commons.wikimedia.org/wiki/File:Eastern_screech_owl_rehabilitated_after_eye_injury_(44333).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 49,
+  "pt": "dar",
+  "en": "to give",
+  "ru": "давать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu dou presentes a meus amigos.",
+    "en": "I give gifts to my friends."
+   },
+   {
+    "pt": "Você deu comida ao cachorro?",
+    "en": "Did you feed the dog?"
+   }
+  ],
+  "imgQuery": "hand giving gift",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Giving_a_gift.jpg",
+  "credit": {
+   "author": "asenat29",
+   "url": "https://commons.wikimedia.org/wiki/File:Giving_a_gift.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 50,
+  "pt": "vir",
+  "en": "to come",
+  "ru": "приходить, приезжать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu sempre venho neste restaurante.",
+    "en": "I always come to this restaurant."
+   },
+   {
+    "pt": "Minha mãe vem me visitar no verão.",
+    "en": "My mom is coming to visit me in the summer."
+   }
+  ],
+  "imgQuery": "person arriving door",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Door_indicator_lights_of_TRTC_CR381A.jpg/960px-Door_indicator_lights_of_TRTC_CR381A.jpg",
+  "credit": {
+   "author": "臺北大眾捷運股份有限公司",
+   "url": "https://commons.wikimedia.org/wiki/File:Door_indicator_lights_of_TRTC_CR381A.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Attribution"
+  }
+ },
+ {
+  "id": 51,
+  "pt": "querer",
+  "en": "to want",
+  "ru": "хотеть",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu quero aprender alemão um dia.",
+    "en": "I want to learn German one day."
+   },
+   {
+    "pt": "Meus alunos querem viajar ao Brasil.",
+    "en": "My students want to travel to Brazil."
+   }
+  ],
+  "imgQuery": "child wanting reaching desire",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Frances_%28Appleton%29_Longfellow_to_Reverend_Samuel_Longfellow%2C_18_March_1849_%282e6c48ce-b4a3-4a70-b21d-93ce6e01ddb1%29.jpg/960px-Frances_%28Appleton%29_Longfellow_to_Reverend_Samuel_Longfellow%2C_18_March_1849_%282e6c48ce-b4a3-4a70-b21d-93ce6e01ddb1%29.jpg",
+  "credit": {
+   "author": "Fanny (Appleton) Longfellow (1817-1861)",
+   "url": "https://commons.wikimedia.org/wiki/File:Frances_(Appleton)_Longfellow_to_Reverend_Samuel_Longfellow,_18_March_1849_(2e6c48ce-b4a3-4a70-b21d-93ce6e01ddb1).jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 52,
+  "pt": "parecer",
+  "en": "to seem/look like",
+  "ru": "казаться, выглядеть",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu me pareço com minha mãe.",
+    "en": "I look like my mother."
+   },
+   {
+    "pt": "Este filme parece interessante.",
+    "en": "This movie seems interesting."
+   }
+  ],
+  "imgQuery": "mirror reflection",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Street_crowd_reflecting_in_the_polyhedral_mirrors_of_the_station_Tokyu_Plaza_Omotesando%2C_Harajuku%2C_Tokyo%2C_Japan.jpg/960px-Street_crowd_reflecting_in_the_polyhedral_mirrors_of_the_station_Tokyu_Plaza_Omotesando%2C_Harajuku%2C_Tokyo%2C_Japan.jpg",
+  "credit": {
+   "author": "Basile Morin",
+   "url": "https://commons.wikimedia.org/wiki/File:Street_crowd_reflecting_in_the_polyhedral_mirrors_of_the_station_Tokyu_Plaza_Omotesando,_Harajuku,_Tokyo,_Japan.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 53,
+  "pt": "falar",
+  "en": "to speak/talk",
+  "ru": "говорить, разговаривать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu falo português.",
+    "en": "I speak Portuguese."
+   },
+   {
+    "pt": "Ela fala com seus amigos todos os dias.",
+    "en": "She talks to her friends every day."
+   }
+  ],
+  "imgQuery": "two people talking conversation",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Conversation_in_the_garden_%281869-71%29%2C_by_Giuseppe_De_Nittis.jpg",
+  "credit": {
+   "author": "Giuseppe De Nittis",
+   "url": "https://commons.wikimedia.org/wiki/File:Conversation_in_the_garden_(1869-71),_by_Giuseppe_De_Nittis.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 54,
+  "pt": "ficar",
+  "en": "to stay/be (location)",
+  "ru": "оставаться; находиться",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Hoje à noite eu vou ficar em casa.",
+    "en": "Tonight I’m staying home."
+   },
+   {
+    "pt": "Onde fica o supermercado?",
+    "en": "Where is the supermarket?"
+   }
+  ],
+  "imgQuery": "person sitting staying home",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Bird_studies_for_home_and_school%3B_sixty_common_birds%2C_their_habits_and_haunts_%281911%29_%2814564567308%29.jpg/960px-Bird_studies_for_home_and_school%3B_sixty_common_birds%2C_their_habits_and_haunts_%281911%29_%2814564567308%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:Bird_studies_for_home_and_school;_sixty_common_birds,_their_habits_and_haunts_(1911)_(14564567308).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 55,
+  "pt": "ouvir",
+  "en": "to hear/listen",
+  "ru": "слышать, слушать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu ouço rádio todos os dias.",
+    "en": "I listen to the radio every day."
+   },
+   {
+    "pt": "Os filhos não ouvem os pais.",
+    "en": "Children don’t listen to their parents."
+   }
+  ],
+  "imgQuery": "person listening headphones ear",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Earphones%2C_940074_006.jpg/960px-Earphones%2C_940074_006.jpg",
+  "credit": {
+   "author": "Auckland Museum Tāmaki Paenga Hira",
+   "url": "https://commons.wikimedia.org/wiki/File:Earphones,_940074_006.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 4.0"
+  }
+ },
+ {
+  "id": 56,
+  "pt": "achar",
+  "en": "to think/find",
+  "ru": "считать, полагать; находить",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu acho que vai chover amanhã.",
+    "en": "I think it’s going to rain tomorrow."
+   },
+   {
+    "pt": "Eu achei o livro que estava procurando.",
+    "en": "I found the book I was looking for."
+   }
+  ],
+  "imgQuery": "person thinking magnifying glass",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Frances_%28Appleton%29_Longfellow_to_Emmeline_%28Austin%29_Wadsworth%2C_14_August_1841_%2830e5589d-c5ae-4709-8d5f-2c3c569e0d49%29.jpg/960px-Frances_%28Appleton%29_Longfellow_to_Emmeline_%28Austin%29_Wadsworth%2C_14_August_1841_%2830e5589d-c5ae-4709-8d5f-2c3c569e0d49%29.jpg",
+  "credit": {
+   "author": "Fanny (Appleton) Longfellow (1817-1861)",
+   "url": "https://commons.wikimedia.org/wiki/File:Frances_(Appleton)_Longfellow_to_Emmeline_(Austin)_Wadsworth,_14_August_1841_(30e5589d-c5ae-4709-8d5f-2c3c569e0d49).jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 57,
+  "pt": "sair",
+  "en": "to go out/leave",
+  "ru": "выходить, уходить",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Vou sair com meus amigos hoje.",
+    "en": "I’m going out with my friends today."
+   },
+   {
+    "pt": "Ele saiu cedo para o trabalho.",
+    "en": "He left early for work."
+   }
+  ],
+  "imgQuery": "person leaving exit door",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Aphrodisias_theatre_exit_4406.jpg/960px-Aphrodisias_theatre_exit_4406.jpg",
+  "credit": {
+   "author": "Dosseman",
+   "url": "https://commons.wikimedia.org/wiki/File:Aphrodisias_theatre_exit_4406.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 58,
+  "pt": "chegar",
+  "en": "to arrive/get",
+  "ru": "приходить, прибывать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Ele chegou ontem de viagem.",
+    "en": "He arrived from his trip yesterday."
+   },
+   {
+    "pt": "Que horas você chega em casa?",
+    "en": "What time do you get home?"
+   }
+  ],
+  "imgQuery": "airport arrival traveler",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/CBP_Quick_and_Easy_Trusted_Traveler_Global_Entry_Program_Arrives_at_Raleigh-Durham_International_Airport_%286982937960%29.jpg/960px-CBP_Quick_and_Easy_Trusted_Traveler_Global_Entry_Program_Arrives_at_Raleigh-Durham_International_Airport_%286982937960%29.jpg",
+  "credit": {
+   "author": "CBP Photography",
+   "url": "https://commons.wikimedia.org/wiki/File:CBP_Quick_and_Easy_Trusted_Traveler_Global_Entry_Program_Arrives_at_Raleigh-Durham_International_Airport_(6982937960).jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 59,
+  "pt": "passar",
+  "en": "to spend/pass",
+  "ru": "проводить (время); проходить",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu gosto de passar tempo com a família.",
+    "en": "I like to spend time with my family."
+   },
+   {
+    "pt": "O tempo passa rápido.",
+    "en": "Time passes quickly."
+   }
+  ],
+  "imgQuery": "hourglass passing time",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/The_God_of_Passing_Time_%28Eyrignac%29.JPG/960px-The_God_of_Passing_Time_%28Eyrignac%29.JPG",
+  "credit": {
+   "author": "TwoWings",
+   "url": "https://commons.wikimedia.org/wiki/File:The_God_of_Passing_Time_(Eyrignac).JPG",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 60,
+  "pt": "pedir",
+  "en": "to ask for/order",
+  "ru": "просить; заказывать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu vou pedir pizza para o jantar.",
+    "en": "I’m going to order pizza for dinner."
+   },
+   {
+    "pt": "Ele pediu um favor a um amigo.",
+    "en": "He asked a friend for a favor."
+   }
+  ],
+  "imgQuery": "ordering food restaurant waiter",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/A_man_sits_at_a_table_in_a_restaurant_and_orders_some_food_f_Wellcome_V0039374.jpg/960px-A_man_sits_at_a_table_in_a_restaurant_and_orders_some_food_f_Wellcome_V0039374.jpg",
+  "credit": {
+   "author": "",
+   "url": "https://commons.wikimedia.org/wiki/File:A_man_sits_at_a_table_in_a_restaurant_and_orders_some_food_f_Wellcome_V0039374.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 4.0"
+  }
+ },
+ {
+  "id": 61,
+  "pt": "não",
+  "en": "no/not",
+  "ru": "нет; не",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu não sei tocar piano.",
+    "en": "I don’t know how to play the piano."
+   },
+   {
+    "pt": "Eu acho que não.",
+    "en": "I don’t think so."
+   }
+  ],
+  "imgQuery": "no prohibition sign",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Duisburg%2C_Landschaftspark_Duisburg-Nord_--_2020_--_7772.jpg/960px-Duisburg%2C_Landschaftspark_Duisburg-Nord_--_2020_--_7772.jpg",
+  "credit": {
+   "author": "Dietmar Rabich",
+   "url": "https://commons.wikimedia.org/wiki/File:Duisburg,_Landschaftspark_Duisburg-Nord_--_2020_--_7772.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 62,
+  "pt": "sim",
+  "en": "yes",
+  "ru": "да",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Ela disse sim ao pedido de casamento.",
+    "en": "She said yes to the proposal."
+   },
+   {
+    "pt": "Eu acho que sim.",
+    "en": "I think so."
+   }
+  ],
+  "imgQuery": "nodding yes agreement",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/A_little_queen_of_hearts%3B_an_international_story_%281893%29_%2814772958633%29.jpg/960px-A_little_queen_of_hearts%3B_an_international_story_%281893%29_%2814772958633%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:A_little_queen_of_hearts;_an_international_story_(1893)_(14772958633).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 63,
+  "pt": "talvez",
+  "en": "maybe/might",
+  "ru": "может быть, возможно",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Talvez chova amanhã.",
+    "en": "It might rain tomorrow."
+   },
+   {
+    "pt": "Talvez eu viaje no fim de semana.",
+    "en": "Maybe I’ll travel this weekend."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 64,
+  "pt": "muito",
+  "en": "very/many",
+  "ru": "очень; много",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "O Brasil é muito grande.",
+    "en": "Brazil is very big."
+   },
+   {
+    "pt": "Eu tenho muitos alunos.",
+    "en": "I have many students."
+   }
+  ],
+  "imgQuery": "large crowd many people",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Many_people_are_riding_on_and_crowding_around_a_large_horse-_Wellcome_V0040195.jpg/960px-Many_people_are_riding_on_and_crowding_around_a_large_horse-_Wellcome_V0040195.jpg",
+  "credit": {
+   "author": "",
+   "url": "https://commons.wikimedia.org/wiki/File:Many_people_are_riding_on_and_crowding_around_a_large_horse-_Wellcome_V0040195.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 4.0"
+  }
+ },
+ {
+  "id": 65,
+  "pt": "pouco",
+  "en": "a little",
+  "ru": "мало, немного",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Hoje está um pouco frio.",
+    "en": "It’s a little cold today."
+   },
+   {
+    "pt": "Estou com um pouco de fome.",
+    "en": "I’m a little hungry."
+   }
+  ],
+  "imgQuery": "few coins little amount",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/The_dominion_of_Canada%2C_with_Newfoundland_and_an_excursion_to_Alaska_-_handbook_for_travellers_%281907%29_%2814577496228%29.jpg/960px-The_dominion_of_Canada%2C_with_Newfoundland_and_an_excursion_to_Alaska_-_handbook_for_travellers_%281907%29_%2814577496228%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:The_dominion_of_Canada,_with_Newfoundland_and_an_excursion_to_Alaska_-_handbook_for_travellers_(1907)_(14577496228).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 66,
+  "pt": "também",
+  "en": "also/too",
+  "ru": "тоже, также",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Meu marido também é brasileiro.",
+    "en": "My husband is also Brazilian."
+   },
+   {
+    "pt": "Eu também!",
+    "en": "Me too!"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 67,
+  "pt": "perto",
+  "en": "near/close",
+  "ru": "близко, рядом",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu moro perto de um parque.",
+    "en": "I live near a park."
+   },
+   {
+    "pt": "Tem um bom restaurante perto daqui.",
+    "en": "There’s a good restaurant near here."
+   }
+  ],
+  "imgQuery": "close up nearby distance",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Close-up_of_long_distance_sign_post_in_Snipe_Wood_-_geograph.org.uk_-_1409128.jpg",
+  "credit": {
+   "author": "David Anstiss",
+   "url": "https://commons.wikimedia.org/wiki/File:Close-up_of_long_distance_sign_post_in_Snipe_Wood_-_geograph.org.uk_-_1409128.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 68,
+  "pt": "longe",
+  "en": "far",
+  "ru": "далеко",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu moro longe da praia.",
+    "en": "I live far from the beach."
+   },
+   {
+    "pt": "Minha família mora longe.",
+    "en": "My family lives far away."
+   }
+  ],
+  "imgQuery": "distant horizon far away",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/New_Horizons_Explores_Ultima_Thule_%28noaoann19002a%29.jpg",
+  "credit": {
+   "author": "NASA, JHU/APL, and SWRI",
+   "url": "https://commons.wikimedia.org/wiki/File:New_Horizons_Explores_Ultima_Thule_(noaoann19002a).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 4.0"
+  }
+ },
+ {
+  "id": 69,
+  "pt": "sempre",
+  "en": "always",
+  "ru": "всегда",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu sempre passo o Natal com a família.",
+    "en": "I always spend Christmas with my family."
+   },
+   {
+    "pt": "Sempre há uma solução para tudo.",
+    "en": "There’s always a solution for everything."
+   }
+  ],
+  "imgQuery": "infinity endless loop",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/20190530_Dresden_-_Die_Welt_der_DDR_-_080.jpg/960px-20190530_Dresden_-_Die_Welt_der_DDR_-_080.jpg",
+  "credit": {
+   "author": "Stefan Kühn",
+   "url": "https://commons.wikimedia.org/wiki/File:20190530_Dresden_-_Die_Welt_der_DDR_-_080.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC0"
+  }
+ },
+ {
+  "id": 70,
+  "pt": "nunca",
+  "en": "never",
+  "ru": "никогда",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu nunca fui ao Alasca.",
+    "en": "I have never been to Alaska."
+   },
+   {
+    "pt": "Nunca diga nunca!",
+    "en": "Never say never!"
+   }
+  ],
+  "imgQuery": "crossed out calendar never",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Hughes_annual_%281918%29_%2814583234329%29.jpg/960px-Hughes_annual_%281918%29_%2814583234329%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:Hughes_annual_(1918)_(14583234329).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 71,
+  "pt": "agora",
+  "en": "now",
+  "ru": "сейчас",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Estou ocupada agora.",
+    "en": "I’m busy now."
+   },
+   {
+    "pt": "O que você está fazendo agora?",
+    "en": "What are you doing now?"
+   }
+  ],
+  "imgQuery": "clock now present moment",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Master_Humphrey%27s_clock_%281840%29_%2814763504354%29.jpg/960px-Master_Humphrey%27s_clock_%281840%29_%2814763504354%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:Master_Humphrey%27s_clock_(1840)_(14763504354).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 72,
+  "pt": "antes",
+  "en": "before",
+  "ru": "до, раньше",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu leio um livro antes de dormir.",
+    "en": "I read a book before going to sleep."
+   },
+   {
+    "pt": "Devemos lavar as mãos antes de comer.",
+    "en": "We must wash our hands before eating."
+   }
+  ],
+  "imgQuery": "before after comparison arrow",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Hakuto-R_Mission-1_impact_site_blink_animation_of_before_and_after_states_02.gif/960px-Hakuto-R_Mission-1_impact_site_blink_animation_of_before_and_after_states_02.gif",
+  "credit": {
+   "author": "NASA/GSFC/Arizona State University",
+   "url": "https://commons.wikimedia.org/wiki/File:Hakuto-R_Mission-1_impact_site_blink_animation_of_before_and_after_states_02.gif",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 73,
+  "pt": "depois",
+  "en": "after/later",
+  "ru": "после, потом",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu vou descansar depois da aula.",
+    "en": "I’m going to rest after class."
+   },
+   {
+    "pt": "Falamos sobre isso depois.",
+    "en": "We’ll talk about this later."
+   }
+  ],
+  "imgQuery": "arrow pointing forward next",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/1-8_CAV_Mustangs_Demonstrate_Combat_Readiness_During_Arrow_23_Media_Day_%287780438%29.jpg/960px-1-8_CAV_Mustangs_Demonstrate_Combat_Readiness_During_Arrow_23_Media_Day_%287780438%29.jpg",
+  "credit": {
+   "author": "U.S. Army National Guard photo by Sgt. John Schoebel",
+   "url": "https://commons.wikimedia.org/wiki/File:1-8_CAV_Mustangs_Demonstrate_Combat_Readiness_During_Arrow_23_Media_Day_(7780438).jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 74,
+  "pt": "aqui",
+  "en": "here",
+  "ru": "здесь, тут",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu moro aqui.",
+    "en": "I live here."
+   },
+   {
+    "pt": "Você vem sempre aqui?",
+    "en": "Do you come here often?"
+   }
+  ],
+  "imgQuery": "you are here map marker",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_You_Are_Here_%E2%80%93_Tourism_%E2%80%93_Simple.png",
+  "credit": {
+   "author": "Nicolas Mollet, Credits : jondemon Credits : Nicolas Mollet Buy me a beer",
+   "url": "https://commons.wikimedia.org/wiki/File:Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_You_Are_Here_%E2%80%93_Tourism_%E2%80%93_Simple.png",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 3.0"
+  }
+ },
+ {
+  "id": 75,
+  "pt": "lá",
+  "en": "there",
+  "ru": "там",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu estive lá ontem.",
+    "en": "I was there yesterday."
+   },
+   {
+    "pt": "O livro está lá.",
+    "en": "The book is there."
+   }
+  ],
+  "imgQuery": "pointing at distance",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Students_orientation%2C_KNUST.jpg/960px-Students_orientation%2C_KNUST.jpg",
+  "credit": {
+   "author": "Asamoah Daniel Kwame Oware",
+   "url": "https://commons.wikimedia.org/wiki/File:Students_orientation,_KNUST.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC0"
+  }
+ },
+ {
+  "id": 76,
+  "pt": "apenas",
+  "en": "only/just",
+  "ru": "только, всего лишь",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "O show durou apenas uma hora.",
+    "en": "The show lasted only one hour."
+   },
+   {
+    "pt": "Meu sobrinho tem apenas 9 anos.",
+    "en": "My nephew is just 9 years old."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 77,
+  "pt": "mais",
+  "en": "more",
+  "ru": "больше",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Ele é mais alto do que ela.",
+    "en": "He is taller than her."
+   },
+   {
+    "pt": "Gostaria de comer mais chocolate.",
+    "en": "I’d like to eat more chocolate."
+   }
+  ],
+  "imgQuery": "plus sign increase growth",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/3/34/Richard_Staunton_Cahill_-_6c24a1c9ed.jpg",
+  "credit": {
+   "author": "Richard Staunton Cahill",
+   "url": "https://commons.wikimedia.org/wiki/File:Richard_Staunton_Cahill_-_6c24a1c9ed.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  }
+ },
+ {
+  "id": 78,
+  "pt": "menos",
+  "en": "less",
+  "ru": "меньше",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Ela é menos alta do que ele.",
+    "en": "She is less tall than him."
+   },
+   {
+    "pt": "Eu deveria comer menos chocolate.",
+    "en": "I should eat less chocolate."
+   }
+  ],
+  "imgQuery": "minus decrease down arrow",
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 79,
+  "pt": "cedo",
+  "en": "early",
+  "ru": "рано",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu acordo cedo todos os dias.",
+    "en": "I wake up early every day."
+   },
+   {
+    "pt": "Ele chegou cedo à reunião.",
+    "en": "He arrived early at the meeting."
+   }
+  ],
+  "imgQuery": "sunrise early morning alarm",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Early_Risers_at_Cape_Henlopen.jpg/960px-Early_Risers_at_Cape_Henlopen.jpg",
+  "credit": {
+   "author": "Andrew Parlette",
+   "url": "https://commons.wikimedia.org/wiki/File:Early_Risers_at_Cape_Henlopen.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 80,
+  "pt": "tarde",
+  "en": "late",
+  "ru": "поздно; день (после полудня)",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Ontem fui dormir tarde.",
+    "en": "Yesterday I went to bed late."
+   },
+   {
+    "pt": "Antes tarde do que nunca!",
+    "en": "Better late than never!"
+   }
+  ],
+  "imgQuery": "late night clock midnight",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Manila_City_Hall_clock_tower_close-up_midnight_%28Manila%3B_12-30-2022%29.jpg/960px-Manila_City_Hall_clock_tower_close-up_midnight_%28Manila%3B_12-30-2022%29.jpg",
+  "credit": {
+   "author": "Patrickroque01",
+   "url": "https://commons.wikimedia.org/wiki/File:Manila_City_Hall_clock_tower_close-up_midnight_(Manila;_12-30-2022).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 81,
+  "pt": "o/a",
+  "en": "the",
+  "ru": "определённый артикль (муж./жен. род)",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "O livro está na estante.",
+    "en": "The book is on the shelf."
+   },
+   {
+    "pt": "A caneta está na gaveta.",
+    "en": "The pen is in the drawer."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 82,
+  "pt": "um/uma",
+  "en": "a/an",
+  "ru": "неопределённый артикль; один, одна",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Comprei um sapato novo.",
+    "en": "I bought a new shoe."
+   },
+   {
+    "pt": "Comprei uma blusa nova.",
+    "en": "I bought a new blouse."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 83,
+  "pt": "e",
+  "en": "and",
+  "ru": "и",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu trouxe um caderno e uma caneta.",
+    "en": "I brought a notebook and a pen."
+   },
+   {
+    "pt": "Meu marido e eu somos brasileiros.",
+    "en": "My husband and I are Brazilian."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 84,
+  "pt": "ou",
+  "en": "or",
+  "ru": "или",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Você quer chá ou café?",
+    "en": "Do you want tea or coffee?"
+   },
+   {
+    "pt": "Você prefere o inverno ou o verão?",
+    "en": "Do you prefer winter or summer?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 85,
+  "pt": "mas",
+  "en": "but",
+  "ru": "но",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "A viagem foi boa, mas cansativa.",
+    "en": "The trip was good but tiring."
+   },
+   {
+    "pt": "Meu carro é velho, mas funciona bem.",
+    "en": "My car is old but runs well."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 86,
+  "pt": "de/da/do",
+  "en": "of/from",
+  "ru": "из, от; (родительный падеж)",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Ele é de São Paulo.",
+    "en": "He is from São Paulo."
+   },
+   {
+    "pt": "Eu sou do Brasil.",
+    "en": "I am from Brazil."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 87,
+  "pt": "em/na/no",
+  "en": "in/on/at",
+  "ru": "в, на",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu moro em Nova Iorque.",
+    "en": "I live in New York."
+   },
+   {
+    "pt": "Ele está no banco.",
+    "en": "He is at the bank."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 88,
+  "pt": "para",
+  "en": "to/for",
+  "ru": "для, к, чтобы",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu vou para o Brasil.",
+    "en": "I’m going to Brazil."
+   },
+   {
+    "pt": "Isto é para você.",
+    "en": "This is for you."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 89,
+  "pt": "por",
+  "en": "by/through/per",
+  "ru": "по, через, за",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Vou enviar isto por e-mail.",
+    "en": "I’ll send this by email."
+   },
+   {
+    "pt": "Faço exercícios duas vezes por semana.",
+    "en": "I exercise twice per week."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 90,
+  "pt": "com",
+  "en": "with",
+  "ru": "с (вместе с)",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu falo com meus amigos todo dia.",
+    "en": "I talk with my friends every day."
+   },
+   {
+    "pt": "Maria saiu com João.",
+    "en": "Maria went out with João."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 91,
+  "pt": "eu",
+  "en": "I",
+  "ru": "я",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu sou brasileira.",
+    "en": "I am Brazilian."
+   },
+   {
+    "pt": "Eu falo português.",
+    "en": "I speak Portuguese."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 92,
+  "pt": "você",
+  "en": "you",
+  "ru": "ты, вы",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "De onde você é?",
+    "en": "Where are you from?"
+   },
+   {
+    "pt": "Você fala português?",
+    "en": "Do you speak Portuguese?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 93,
+  "pt": "ela/ele",
+  "en": "she/he",
+  "ru": "она / он",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Ela é brasileira.",
+    "en": "She is Brazilian."
+   },
+   {
+    "pt": "Ele é americano.",
+    "en": "He is American."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 94,
+  "pt": "a gente",
+  "en": "we (informal)",
+  "ru": "мы (разговорное)",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "A gente é do Brasil.",
+    "en": "We are from Brazil."
+   },
+   {
+    "pt": "A gente fala português.",
+    "en": "We speak Portuguese."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 95,
+  "pt": "esta/este",
+  "en": "this",
+  "ru": "эта / этот",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Comprei esta blusa no Brasil.",
+    "en": "I bought this blouse in Brazil."
+   },
+   {
+    "pt": "Comprei este computador este ano.",
+    "en": "I bought this computer this year."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 96,
+  "pt": "minha/meu",
+  "en": "my",
+  "ru": "моя / мой",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Minha mãe mora no Brasil.",
+    "en": "My mother lives in Brazil."
+   },
+   {
+    "pt": "Meu irmão também mora no Brasil.",
+    "en": "My brother also lives in Brazil."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 97,
+  "pt": "sua/seu",
+  "en": "your",
+  "ru": "твоя, ваша / твой, ваш",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Qual é o seu nome?",
+    "en": "What is your name?"
+   },
+   {
+    "pt": "Qual é a sua profissão?",
+    "en": "What is your profession?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 98,
+  "pt": "que",
+  "en": "what/that",
+  "ru": "что; который",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Que horas são?",
+    "en": "What time is it?"
+   },
+   {
+    "pt": "Aqui está o livro que eu comprei.",
+    "en": "Here is the book that I bought."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 99,
+  "pt": "quem",
+  "en": "who/whom",
+  "ru": "кто, кого",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Quem é ela?",
+    "en": "Who is she?"
+   },
+   {
+    "pt": "Com quem você vai viajar?",
+    "en": "With whom are you traveling?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 100,
+  "pt": "qual",
+  "en": "which/what",
+  "ru": "какой, который",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Qual é o seu sobrenome?",
+    "en": "What is your last name?"
+   },
+   {
+    "pt": "Qual é sua cor favorita?",
+    "en": "What is your favorite color?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ }
+]
