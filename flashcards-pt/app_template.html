@@ -156,6 +156,11 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
   background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);
   box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column}
 .face.back{transform:rotateY(180deg)}
+/* backface-visibility прячет обратную сторону визуально, но она остаётся кликабельной
+   и перехватывает нажатия (в т.ч. по кнопке звука) — гасим её для мыши явно */
+.face.back{pointer-events:none}
+.flip.is-back .face.back{pointer-events:auto}
+.flip.is-back .face.front{pointer-events:none}
 
 /* верхняя панель карточки: подсказка + звук */
 .face-top{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:flex-start;
@@ -179,19 +184,32 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
 .sound-btn:active{transform:scale(.9)}
 .sound-btn.playing{background:var(--blue);color:#fff;border-color:var(--blue)}
 
-.pic{flex:1;position:relative;background:var(--surface-2);overflow:hidden}
-.pic img{width:100%;height:100%;object-fit:cover;display:block}
+/* картинку показываем целиком (contain), а пустоту по краям заполняем
+   размытой копией той же картинки — иначе высокие фото обрезались бы */
+.pic{flex:1;position:relative;background:var(--surface-2);overflow:hidden;min-height:0}
+.pic img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pic img.bg{object-fit:cover;filter:blur(26px) saturate(1.25);transform:scale(1.15);opacity:.55}
+.pic img.fg{object-fit:contain;z-index:1}
 .pic .ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--text-3);font-size:13px;padding:20px;text-align:center}
 .pic .ph[hidden]{display:none}   /* атрибут hidden сам по себе слабее display:grid */
 .pic .credit{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 8px;font-size:10.5px;
   color:rgba(255,255,255,.9);background:linear-gradient(transparent,rgba(0,0,0,.6));text-align:right;line-height:1.35}
 
-.cloze{flex:1;display:flex;flex-direction:column;justify-content:center;padding:74px 32px 32px;gap:16px;
+/* слово на португальском под картинкой — видно сразу, вспоминаем перевод */
+.word-front{padding:18px 22px 20px;text-align:center;border-top:1px solid var(--border);
+  background:var(--surface);flex-shrink:0}
+.word-front .w{font-size:clamp(25px,5vw,36px);font-weight:700;letter-spacing:-.025em;line-height:1.15;
+  display:block;word-break:break-word}
+.word-front .ask{font-size:12px;color:var(--text-3);margin-top:6px}
+
+/* карточка без фото (служебные слова) — слово крупно на подложке + пример фразы */
+.noimg-front{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:74px 30px 26px;gap:14px;text-align:center;
   background:linear-gradient(160deg,var(--blue-soft),var(--surface))}
-.cloze .tag{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--blue)}
-.cloze .q{font-size:clamp(19px,3.6vw,26px);font-weight:600;letter-spacing:-.015em;line-height:1.45}
-.cloze .q u{text-decoration:none;border-bottom:3px dashed var(--blue);padding:0 28px 1px;color:transparent}
-.cloze .t{font-size:14.5px;color:var(--text-2);line-height:1.5}
+.noimg-front .big{font-size:clamp(34px,8vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1.1;
+  word-break:break-word}
+.noimg-front .ex-q{font-size:14.5px;color:var(--text-2);line-height:1.5;max-width:38ch}
+.noimg-front .ex-q b{color:var(--text);font-weight:600}
 
 .face .foot{padding:14px 22px;border-top:1px solid var(--border);display:flex;align-items:center;
   justify-content:space-between;gap:12px;background:var(--surface);flex-shrink:0;min-height:54px}
@@ -274,8 +292,10 @@ tbody tr:last-child td{border-bottom:none}
   box-shadow:var(--shadow-sm);display:flex;flex-direction:column;
   transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease}
 .wcard:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.wcard .th{height:118px;background:var(--surface-2);position:relative;overflow:hidden;flex-shrink:0}
-.wcard .th img{width:100%;height:100%;object-fit:cover}
+.wcard .th{height:130px;background:var(--surface-2);position:relative;overflow:hidden;flex-shrink:0}
+.wcard .th img{position:absolute;inset:0;width:100%;height:100%}
+.wcard .th img.bg{object-fit:cover;filter:blur(18px) saturate(1.2);transform:scale(1.15);opacity:.5}
+.wcard .th img.fg{object-fit:contain;z-index:1}
 .wcard .th .noimg{position:absolute;inset:0;display:grid;place-items:center;padding:12px;font-size:12.5px;
   color:var(--text-3);text-align:center;line-height:1.4;background:linear-gradient(160deg,var(--blue-soft),var(--surface-2))}
 .wcard .bd{padding:14px 15px;display:flex;flex-direction:column;gap:5px;flex:1}
@@ -679,14 +699,12 @@ function showCard(){
   document.getElementById('btn-shuffle').disabled = ss.i >= ss.queue.length - 1;
 }
 
-/* подсказка: первая буква + точки по числу оставшихся букв */
-function hintOf(pt){
-  return pt.split(/([\s/])/).map(p => {
-    if(p === ' ' || p === '/' || !p) return p === '/' ? ' / ' : p;
-    const m = p.match(/^([^(]*)(\(.*\))?$/);
-    const core = m ? m[1] : p, tail = m && m[2] ? m[2] : '';
-    if(!core) return p;
-    return core[0] + '·'.repeat(Math.max(0, core.length - 1)) + tail;
+/* Подсказка: первая буква + точки по числу оставшихся букв.
+   Даём её по русскому переводу — португальское слово на лицевой стороне и так видно. */
+function hintOf(text){
+  return text.split(/([\s,;/()])/).map(p => {
+    if(!p || /^[\s,;/()]$/.test(p)) return p;
+    return p[0] + '·'.repeat(Math.max(0, p.length - 1));
   }).join('');
 }
 
@@ -708,22 +726,26 @@ function frontHTML(c){
   if(c.image){
     const cr = c.credit ? `<div class="credit">${esc(c.credit.author||'')} · ${esc(c.credit.source||'')}${c.credit.license?' · '+esc(c.credit.license):''}</div>` : '';
     return topBar(c,true) + `<div class="pic">
-      <img src="${esc(c.image)}" alt="Иллюстрация к слову" loading="lazy"
-           onerror="this.style.display='none';this.parentNode.querySelector('.ph').hidden=false">
-      <div class="ph" hidden>Картинка не загрузилась — переверни карточку</div>${cr}</div>` + foot;
+      <img class="bg" src="${esc(c.image)}" alt="" aria-hidden="true" loading="lazy">
+      <img class="fg" src="${esc(c.image)}" alt="Иллюстрация к слову ${esc(c.pt)}" loading="lazy"
+           onerror="this.parentNode.querySelectorAll('img').forEach(i=>i.style.display='none');this.parentNode.querySelector('.ph').hidden=false">
+      <div class="ph" hidden>Картинка не загрузилась</div>${cr}</div>
+      <div class="word-front"><span class="w">${esc(c.pt)}</span>
+        <div class="ask">как это по-русски?</div></div>` + foot;
   }
+  // служебное слово: фото нет — показываем слово крупно и пример фразы с ним
   const ex = c.examples?.[0];
-  let q = '', tr = '';
+  let phrase = '';
   if(ex){
     const w = c.pt.split('/')[0].trim();
     const re = new RegExp('(^|[\\s«"(])(' + escRe(w) + ')($|[\\s,.!?»")])','i');
-    q = re.test(ex.pt) ? esc(ex.pt).replace(re, (_,a,__,b) => a + '<u>&nbsp;</u>' + b) : esc(ex.pt);
-    tr = esc(ex.en);
+    phrase = re.test(ex.pt) ? esc(ex.pt).replace(re, (_,a,m,b) => a + '<b>' + m + '</b>' + b) : esc(ex.pt);
   }
-  return topBar(c,true) + `<div class="cloze">
-    <span class="tag">Какое слово пропущено?</span>
-    <div class="q">${q || esc(c.en)}</div>
-    <div class="t">${tr}</div></div>` + foot;
+  return topBar(c,true) + `<div class="noimg-front">
+    <div class="big">${esc(c.pt)}</div>
+    ${phrase ? `<div class="ex-q">${phrase}</div>` : ''}
+    <div class="ask" style="font-size:12px;color:var(--text-3)">как это по-русски?</div>
+  </div>` + foot;
 }
 function backHTML(c){
   const ex = (c.examples||[]).map(e =>
@@ -759,7 +781,7 @@ document.addEventListener('click', e => {
   e.stopPropagation();
   const c = BY_ID[S.session.queue[S.session.i]];
   b.querySelector('[data-hint-slot]').innerHTML =
-    `<span class="hint-text">${esc(hintOf(c.pt))}</span>`;
+    `<span class="hint-text">${esc(hintOf(c.ru))}</span>`;
   hinted = true;
 });
 
@@ -993,8 +1015,10 @@ function renderWords(){
     const state = !x || !x.seen ? ['не начато','var(--text-3)']
       : learned(c) ? ['выучено','var(--green)'] : ['в работе','var(--blue)'];
     const th = c.image
-      ? `<img src="${esc(c.image)}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'фото не загрузилось'}))">`
-      : `<div class="noimg">служебное слово —<br>проверяется фразой</div>`;
+      ? `<img class="bg" src="${esc(c.image)}" alt="" aria-hidden="true" loading="lazy">
+         <img class="fg" src="${esc(c.image)}" alt="" loading="lazy"
+              onerror="this.parentNode.innerHTML='<div class=\\'noimg\\'>фото не загрузилось</div>'">`
+      : `<div class="noimg">служебное слово —<br>показывается фразой</div>`;
     return `<article class="wcard"><div class="th">${th}</div><div class="bd">
       <div class="p">${esc(c.pt)}</div>
       <div class="m">${esc(c.ru)}</div>
