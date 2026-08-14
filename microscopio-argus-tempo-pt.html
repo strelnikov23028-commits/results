@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARGUS MVP — estimativa de tempo de montagem</title>
+<meta name="description" content="Estimativa de horas de trabalho para montar o microscópio OpenFlexure (ARGUS) em 17 etapas: mecânica, óptica, eletrônica, software, caixa, clima, fluorescência.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --card:#FFFFFF; --ink:#1D1D1F; --ink2:#424245; --muted:#6E6E73;
+    --line:#E5E5EA; --line2:#EDEDF0; --blue:#0071E3; --blue-ink:#0058b8;
+    --green:#1a7f37; --green-bg:#e7f6ec; --amber:#8a5a00; --amber-bg:#fbf1dc;
+    --red:#b3261e; --red-bg:#fbe9e7; --purple:#6a3ea1; --purple-bg:#f0e9fa;
+    --radius:20px; --radius-sm:13px; --shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 30px rgba(0,0,0,.05);
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    font-feature-settings:"cv02","cv03","cv04","cv11";
+  }
+  a{color:var(--blue-ink); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 22px}
+  code, .mono{font-family:var(--mono); font-size:.86em}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:1; transform:none}
+  html.js-anim .reveal{opacity:0; transform:translateY(22px)}
+  html.js-anim .reveal.in{opacity:1; transform:none;
+    transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1)}
+  @media (prefers-reduced-motion: reduce){
+    html.js-anim .reveal{opacity:1; transform:none; transition:none}
+  }
+
+  /* ---------- hero ---------- */
+  header.hero{padding:76px 0 40px}
+  .eyebrow{font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--muted); text-transform:uppercase; margin-bottom:18px}
+  .eyebrow .dot{color:var(--blue)}
+  h1{font-size:clamp(34px,6vw,60px); line-height:1.05; letter-spacing:-.028em; font-weight:800; margin:0 0 20px}
+  .lede{font-size:clamp(17px,2.2vw,20px); color:var(--ink2); max-width:780px; margin:0 0 26px}
+  .lede b{color:var(--ink); font-weight:600}
+  .meta-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px}
+  .mchip{background:var(--card); border:1px solid var(--line); border-radius:100px; padding:9px 16px; font-size:14px; font-weight:600; box-shadow:var(--shadow)}
+  .mchip span{color:var(--muted); font-weight:500}
+
+  /* ---------- stages ---------- */
+  .stages{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:34px 0 8px}
+  .stage{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow)}
+  .stage .tag{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.04em; padding:5px 11px; border-radius:8px; margin-bottom:12px}
+  .stage.s1 .tag{background:var(--green-bg); color:var(--green)}
+  .stage.s2 .tag{background:var(--purple-bg); color:var(--purple)}
+  .stage h3{margin:0 0 8px; font-size:19px; letter-spacing:-.01em}
+  .stage p{margin:0; color:var(--ink2); font-size:15px}
+
+  /* ---------- rules ---------- */
+  .rules{background:linear-gradient(180deg,#fff, #fbfbfd); border:1px solid var(--line); border-radius:var(--radius); padding:26px 28px; margin:28px 0; box-shadow:var(--shadow)}
+  .rules h4{margin:0 0 16px; font-size:15px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted)}
+  .rules ul{list-style:none; margin:0; padding:0; display:grid; gap:14px}
+  .rules li{display:flex; gap:14px; align-items:flex-start; font-size:15.5px; color:var(--ink2)}
+  .rules li b{color:var(--ink)}
+  .rn{flex:0 0 auto; width:26px; height:26px; border-radius:8px; background:var(--red-bg); color:var(--red); display:grid; place-items:center; font-weight:700; font-size:14px; margin-top:1px}
+
+  /* ---------- section head ---------- */
+  section{padding:30px 0}
+  .sec-head{display:flex; align-items:center; gap:16px; margin-bottom:8px}
+  .sec-ico{flex:0 0 auto; width:46px; height:46px; border-radius:13px; background:var(--card); border:1px solid var(--line); display:grid; place-items:center; box-shadow:var(--shadow)}
+  .sec-ico svg{width:24px; height:24px; stroke:var(--ink); fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round}
+  .sec-num{font-family:var(--mono); font-size:13px; color:var(--blue); font-weight:600; letter-spacing:.02em}
+  .sec-head h2{margin:2px 0 0; font-size:clamp(23px,3vw,30px); letter-spacing:-.02em; font-weight:700}
+  .sec-sub{color:var(--ink2); font-size:15.5px; max-width:820px; margin:2px 0 22px}
+
+  /* ---------- badges ---------- */
+  .badge{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:4px 10px; border-radius:100px; letter-spacing:.01em; white-space:nowrap}
+  .b-local{background:var(--green-bg); color:var(--green)}
+  .b-import{background:var(--amber-bg); color:var(--amber)}
+  .b-first{background:#e6f0fd; color:var(--blue-ink)}
+  .b-frozen{background:#eef0f2; color:var(--muted)}
+  .badge .bd{width:6px; height:6px; border-radius:50%; background:currentColor}
+
+  /* ---------- kit-included block ---------- */
+  .kit{background:linear-gradient(180deg,#f0faf3,#ffffff); border:1px solid #cdeed7; border-radius:var(--radius); padding:26px 28px; box-shadow:var(--shadow)}
+  .kit-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 14px; margin-bottom:6px}
+  .kit-top h3{margin:0; font-size:21px; letter-spacing:-.01em}
+  .kit-top .pill{background:var(--green-bg); color:var(--green); font-size:12px; font-weight:700; padding:5px 12px; border-radius:100px}
+  .kit-top .pr{margin-left:auto; font-family:var(--mono); font-weight:600; font-size:18px}
+  .kit p.sub{margin:2px 0 18px; color:var(--ink2); font-size:15px}
+  .kit-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px 22px}
+  .kit-grid .k{display:flex; gap:11px; align-items:flex-start; font-size:14.5px; color:var(--ink2)}
+  .kit-grid .k svg{width:19px; height:19px; flex:0 0 auto; margin-top:2px; stroke:var(--green); fill:none; stroke-width:2.2}
+  .kit-grid .k b{color:var(--ink)}
+  .kit-grid .k.no svg{stroke:var(--muted)}
+  .kit-grid .k.no{color:var(--muted)}
+  .kit-cta{margin-top:20px; display:flex; flex-wrap:wrap; gap:10px}
+
+  /* ---------- item card ---------- */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .item{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .18s ease, box-shadow .18s ease}
+  .item:hover{transform:translateY(-2px); box-shadow:0 2px 6px rgba(0,0,0,.05), 0 18px 44px rgba(0,0,0,.08)}
+  .item.span2{grid-column:1 / -1}
+  .item-top{display:flex; gap:14px; align-items:flex-start; margin-bottom:12px}
+  .inum{flex:0 0 auto; width:34px; height:34px; border-radius:10px; background:#111; color:#fff; font-family:var(--mono); font-weight:600; font-size:15px; display:grid; place-items:center}
+  .item h3{margin:0; font-size:17.5px; letter-spacing:-.01em; line-height:1.3}
+  .item-head-r{margin-left:auto; display:flex; flex-direction:column; align-items:flex-end; gap:6px}
+  .thumb{width:74px; height:74px; border-radius:12px; border:1px solid var(--line); background:#fafafa; object-fit:contain; padding:6px; flex:0 0 auto}
+  .chips{display:flex; flex-wrap:wrap; gap:7px; margin:2px 0 12px}
+  .chip{background:#f2f2f4; border:1px solid var(--line2); border-radius:8px; padding:4px 9px; font-size:12.5px; font-weight:500; color:var(--ink2)}
+  .chip.warn{background:var(--red-bg); color:var(--red); border-color:#f3cfcb}
+  .chip.mono{font-family:var(--mono); font-size:11.5px}
+  .desc{font-size:14.5px; color:var(--ink2); margin:0 0 14px}
+  .desc b{color:var(--ink)}
+  .buy-label{font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; margin:2px 0 8px}
+  .buys{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px}
+  .buy{display:inline-flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-size:13.5px; font-weight:600; color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,.03); transition:border-color .15s, background .15s, transform .15s}
+  .buy:hover{border-color:var(--blue); background:#f5faff; text-decoration:none; transform:translateY(-1px)}
+  .buy .arr{width:13px; height:13px; stroke:var(--muted); fill:none; stroke-width:2}
+  .buy .price{font-family:var(--mono); font-weight:600; color:var(--muted); font-size:12.5px}
+  .foot{margin-top:auto; padding-top:14px; border-top:1px dashed var(--line); display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--muted)}
+  .foot svg{width:15px; height:15px; stroke:var(--green); fill:none; stroke-width:2; flex:0 0 auto; margin-top:2px}
+  .price-tag{font-family:var(--mono); font-weight:600; font-size:14px; color:var(--ink); background:#f2f2f4; border-radius:8px; padding:3px 9px; white-space:nowrap}
+
+  /* ---------- callout ---------- */
+  .note{border-radius:14px; padding:14px 16px; font-size:14px; margin:14px 0; display:flex; gap:11px; align-items:flex-start; line-height:1.5}
+  .note svg{width:18px; height:18px; flex:0 0 auto; margin-top:1px; fill:none; stroke-width:2}
+  .note.warn{background:var(--amber-bg); color:#6b4a04} .note.warn svg{stroke:var(--amber)}
+  .note.danger{background:var(--red-bg); color:#7a1a15} .note.danger svg{stroke:var(--red)}
+  .note.info{background:#eef4ff; color:#1a3b73} .note.info svg{stroke:var(--blue-ink)}
+  .note b{font-weight:700}
+
+  /* ---------- tables ---------- */
+  .tbl{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:var(--radius-sm); overflow:hidden; box-shadow:var(--shadow); font-size:14px}
+  .tbl th,.tbl td{padding:12px 15px; text-align:left; border-bottom:1px solid var(--line2); vertical-align:top}
+  .tbl th{background:#fafafb; font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); font-weight:600}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td .price{font-family:var(--mono); font-weight:600}
+  .scroll-x{overflow-x:auto; -webkit-overflow-scrolling:touch}
+
+  /* ---------- cheat sheet ---------- */
+  .cheat-toolbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:0 0 14px}
+  .cheat-toolbar .hint{font-size:13px; color:var(--muted); margin-right:auto; display:flex; align-items:center; gap:8px}
+  .cheat-toolbar .hint b{color:var(--ink); font-family:var(--mono)}
+  .btn{display:inline-flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 14px; font-size:13.5px; font-weight:600; color:var(--ink); cursor:pointer; box-shadow:var(--shadow); transition:border-color .15s, background .15s}
+  .btn:hover{border-color:var(--blue); background:#f5faff}
+  .btn svg{width:15px; height:15px; stroke:var(--ink2); fill:none; stroke-width:2}
+  .check-wrap{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
+  .check-tbl{width:100%; border-collapse:collapse; font-size:13.5px; min-width:920px}
+  .check-tbl th{position:sticky; top:0; background:#f4f4f6; z-index:2; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); font-weight:600; padding:12px 12px; text-align:left; border-bottom:1px solid var(--line)}
+  .check-tbl td{padding:11px 12px; border-bottom:1px solid var(--line2); vertical-align:top}
+  .check-tbl tbody tr:last-child td{border-bottom:none}
+  .check-tbl tbody tr:hover{background:#fafbfd}
+  .check-tbl tr.done{background:#f3faf5}
+  .check-tbl tr.base{background:#f0faf3}
+  .check-tbl tr.done td.c-name, .check-tbl tr.done td.c-who{opacity:.5; text-decoration:line-through}
+  .check-tbl td.c-chk{text-align:center; width:38px}
+  .chk{width:19px; height:19px; accent-color:var(--blue); cursor:pointer; vertical-align:middle}
+  .cnum{font-family:var(--mono); color:var(--muted); font-weight:600; width:34px}
+  .check-tbl .c-name b{font-weight:600}
+  .check-tbl .c-qty{white-space:nowrap; color:var(--ink2)}
+  .check-tbl .price{font-family:var(--mono); font-weight:600; white-space:nowrap}
+  .dtag{display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:100px; white-space:nowrap}
+  .dtag.l{background:var(--green-bg); color:var(--green)}
+  .dtag.b{background:#eaf1ff; color:#1a3b73}
+  .dtag.i{background:var(--amber-bg); color:var(--amber)}
+  .dtag.n{background:#eef0f2; color:var(--muted)}
+  .prio{display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:7px; white-space:nowrap}
+  .prio.p1{background:#e6f0fd; color:var(--blue-ink)}
+  .prio.now{background:var(--green-bg); color:var(--green)}
+  .prio.hold{background:#fbf1dc; color:var(--amber)}
+  .prio.stop{background:var(--red-bg); color:var(--red)}
+  .prio.base{background:#d9f0e1; color:var(--green)}
+  .legend{display:flex; flex-wrap:wrap; gap:14px; margin:14px 2px 0; font-size:12.5px; color:var(--muted)}
+  .legend span{display:inline-flex; align-items:center; gap:6px}
+
+  /* ---------- budget ---------- */
+  .budget{background:#111; color:#fff; border-radius:var(--radius); padding:30px; box-shadow:var(--shadow)}
+  .budget h2{color:#fff; margin:0 0 18px; font-size:24px; letter-spacing:-.01em}
+  .brow{display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.12); font-size:15px}
+  .brow span:first-child{color:#c7c7cc}
+  .brow .price{font-family:var(--mono); font-weight:600; color:#fff}
+  .btotal{display:flex; justify-content:space-between; gap:16px; margin-top:18px; padding-top:18px; border-top:2px solid rgba(255,255,255,.25); align-items:baseline}
+  .btotal .lab{font-size:15px; color:#c7c7cc; max-width:60%}
+  .btotal .sum{font-family:var(--mono); font-weight:600; font-size:26px}
+
+  footer{padding:50px 0 70px; color:var(--muted); font-size:13.5px; text-align:center; border-top:1px solid var(--line); margin-top:40px}
+  footer a{color:var(--muted); text-decoration:underline}
+
+  @media (max-width:820px){
+    .stages,.grid,.kit-grid{grid-template-columns:1fr}
+    .item-head-r{flex-direction:row-reverse; align-items:center}
+    header.hero{padding:52px 0 30px}
+  }
+  @media print{
+    body{background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    html.js-anim .reveal{opacity:1 !important; transform:none !important}
+    header.hero, .stages, .rules, .kit, .bento, .note, section .grid, .budget, footer, .cheat-toolbar .btn{display:none !important}
+    #cheat{display:block !important}
+    .check-tbl{min-width:0; font-size:11px}
+    .check-tbl th{position:static}
+  }
+</style>
+<style>
+    .pbar{margin-bottom:12px}.pbar-top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px}
+    .pbar-name{font-weight:600;display:flex;align-items:center;gap:8px}.pbar-dot{width:10px;height:10px;border-radius:50%}
+    .pbar-h{font-family:var(--mono);font-weight:600;color:var(--ink2)}
+    .pbar-track{height:9px;background:#e8e8ed;border-radius:100px;overflow:hidden}.pbar-fill{height:100%;border-radius:100px}
+    .scat{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;white-space:nowrap}
+    .diffdots{display:inline-flex;gap:3px}.diffdots .dot{width:8px;height:8px;border-radius:50%;background:#dcdce1}.diffdots .dot.on{background:#1d1d1f}
+    .switch{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 16px;box-shadow:var(--shadow)}
+    .switch:hover{border-color:var(--blue);text-decoration:none}
+    </style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+      <div class="eyebrow reveal" data-hero style="margin:0">ARGUS MVP · estimativa de tempo de montagem</div>
+      <a class="switch reveal" data-hero href="microscopio-argus-tempo-ru.html">Русский →</a>
+    </div>
+    <h1 class="reveal" data-hero>Quanto tempo<br>leva a montagem</h1>
+    <p class="lede reveal" data-hero>Estimativa das horas de trabalho manual para montar o microscópio OpenFlexure (ARGUS) sobre o IO Rodeo Full Kit — por etapa. Não incluído: impressão 3D / corte da caixa (feito pela oficina) e cultivo de células (laboratório).</p>
+    <div class="meta-chips reveal" data-hero>
+      <div class="mchip tnum">26,75–54 <span>horas de trabalho</span></div>
+      <div class="mchip tnum">≈ 5–9 <span>dias úteis</span></div>
+      <div class="mchip tnum">23,75–48 h <span>fase 1 sem fluorescência</span></div>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <section>
+    <div class="sec-head reveal"><div class="sec-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+      <div><div class="sec-num">Por fase</div><h2>Por fase</h2></div></div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow)">
+      <div class="pbar reveal"><div class="pbar-top"><span class="pbar-name"><span class="pbar-dot" style="background:#0071E3"></span>Mecânica</span><span class="pbar-h tnum">5,5–10,5 h</span></div><div class="pbar-track"><div class="pbar-fill" style="width:61%;background:#0071E3"></div></div></div><div class="pbar reveal"><div class="pbar-top"><span class="pbar-name"><span class="pbar-dot" style="background:#6a3ea1"></span>Óptica</span><span class="pbar-h tnum">2,25–4,5 h</span></div><div class="pbar-track"><div class="pbar-fill" style="width:26%;background:#6a3ea1"></div></div></div><div class="pbar reveal"><div class="pbar-top"><span class="pbar-name"><span class="pbar-dot" style="background:#b26a00"></span>Eletrônica</span><span class="pbar-h tnum">1,5–3 h</span></div><div class="pbar-track"><div class="pbar-fill" style="width:17%;background:#b26a00"></div></div></div><div class="pbar reveal"><div class="pbar-top"><span class="pbar-name"><span class="pbar-dot" style="background:#0a7d6b"></span>Software</span><span class="pbar-h tnum">3–6 h</span></div><div class="pbar-track"><div class="pbar-fill" style="width:35%;background:#0a7d6b"></div></div></div><div class="pbar reveal"><div class="pbar-top"><span class="pbar-name"><span class="pbar-dot" style="background:#4a5568"></span>Caixa</span><span class="pbar-h tnum">3,5–7 h</span></div><div class="pbar-track"><div class="pbar-fill" style="width:41%;background:#4a5568"></div></div></div><div class="pbar reveal"><div class="pbar-top"><span class="pbar-name"><span class="pbar-dot" style="background:#c0392b"></span>Clima</span><span class="pbar-h tnum">8–17 h</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:#c0392b"></div></div></div><div class="pbar reveal"><div class="pbar-top"><span class="pbar-name"><span class="pbar-dot" style="background:#1a7f37"></span>Fluorescência</span><span class="pbar-h tnum">3–6 h</span></div><div class="pbar-track"><div class="pbar-fill" style="width:35%;background:#1a7f37"></div></div></div>
+    </div>
+  </section>
+  <section>
+    <div class="scroll-x reveal">
+      <table class="tbl">
+        <thead><tr><th>#</th><th>Etapa</th><th>Fase</th><th>Dificuldade</th><th>Horas</th></tr></thead>
+        <tbody><tr><td class="tnum" style="color:var(--muted);font-weight:600">1</td><td><b>Corpo e flexuras</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Remover brim, cortar pontes, prensar porcas M3 — liberar as guias flexíveis</div></td><td><span class="scat" style="color:#0071E3;background:#e6f0fd">Mecânica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">1,5–3 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">2</td><td><b>Atuadores X/Y/Z + elásticos Viton</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Fusos, porcas de latão, engrenagens, montagem dos elásticos — a parte mais delicada</div></td><td><span class="scat" style="color:#0071E3;background:#e6f0fd">Mecânica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">2–4 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">3</td><td><b>Motores 28BYJ-48</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Montar 3 motores, engrenagens, engate e marcar cabos X/Y/Z</div></td><td><span class="scat" style="color:#0071E3;background:#e6f0fd">Mecânica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">1–2 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">4</td><td><b>Módulo óptico high-res + lente tubo</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Montar o módulo p/ câmera HQ, inserir o dubleto f=50</div></td><td><span class="scat" style="color:#6a3ea1;background:#f0e9fa">Óptica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">1–2 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">5</td><td><b>Objetiva 40× (C→RMS) + câmera HQ</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Rosquear a objetiva pelo adaptador e fixar a câmera HQ no módulo</div></td><td><span class="scat" style="color:#6a3ea1;background:#f0e9fa">Óptica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">0,75–1,5 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">6</td><td><b>Módulo no corpo (por baixo) + platina</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Instalar o módulo óptico, encaixar no suporte, platina LS10 e clipes</div></td><td><span class="scat" style="color:#0071E3;background:#e6f0fd">Mecânica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">1–1,5 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">7</td><td><b>Iluminação brightfield (do kit)</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Condensador 5 mm + placa de LED + difusor por cima</div></td><td><span class="scat" style="color:#6a3ea1;background:#f0e9fa">Óptica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">0,5–1 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">8</td><td><b>Eletrônica: motores e LED na Sangaboard</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Conectar os 3 motores (X/Y/Z) e a iluminação à placa</div></td><td><span class="scat" style="color:#b26a00;background:#fbf1dc">Eletrônica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">1–2 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">9</td><td><b>Sangaboard no Raspberry Pi 4B + flat da câmera</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Placa via USB, flat da câmera no conector 15-pin do Pi, organizar cabos</div></td><td><span class="scat" style="color:#b26a00;background:#fbf1dc">Eletrônica</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">0,5–1 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">10</td><td><b>Software: microSD com OpenFlexure OS, primeiro boot</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Ligar e acessar a interface web do OpenFlexure</div></td><td><span class="scat" style="color:#0a7d6b;background:#e2f4f0">Software</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">1–2 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">11</td><td><b>Calibração dos eixos, autofoco, teste brightfield</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Ajustar os passos, autofoco e verificar a captura de imagem</div></td><td><span class="scat" style="color:#0a7d6b;background:#e2f4f0">Software</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">2–4 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">12</td><td><b>Montagem da caixa desmontável</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Painéis + travas tipo borboleta + vedação no perímetro</div></td><td><span class="scat" style="color:#4a5568;background:#eceef1">Caixa</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">2–4 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">13</td><td><b>Montar o microscópio na caixa + Pi para fora</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Pés antivibração, passar flat/fios pelos prensa-cabos</div></td><td><span class="scat" style="color:#4a5568;background:#eceef1">Caixa</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">1,5–3 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">14</td><td><b>Sensores CO₂/temp + aquecimento Peltier + PID</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Instalar SprintIR e SHT31/BME280, Peltier com dissipadores, PID ITC-100VH + SSR</div></td><td><span class="scat" style="color:#c0392b;background:#fbe9e7">Clima</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">3–5 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">15</td><td><b>Circuito de CO₂, umidade, proteção de vazamento</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Cilindro→regulador→válvula 12V→bico, bandeja de água, sensor de vazamento</div></td><td><span class="scat" style="color:#c0392b;background:#fbe9e7">Clima</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">2–4 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">16</td><td><b>Fluorescência (fase 2): cubo de filtros, canais, LED, alinhamento</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Filtros GFP/RFP no cubo, LEDs de excitação 470/545, blindagem de luz</div></td><td><span class="scat" style="color:#1a7f37;background:#e7f6ec">Fluorescência</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">3–6 h</td></tr><tr><td class="tnum" style="color:var(--muted);font-weight:600">17</td><td><b>Comissionamento do clima: atingir 37 °C / 5 % CO₂</b><div style="color:var(--muted);font-size:12.5px;margin-top:2px">Ajuste do PID e do CO₂, estabilização — na maior parte, monitorar/esperar</div></td><td><span class="scat" style="color:#c0392b;background:#fbe9e7">Clima</span></td><td><span class="diffdots"><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span></td><td class="tnum" style="font-family:var(--mono);font-weight:600;white-space:nowrap">3–8 h</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+  <section>
+    <div class="budget reveal">
+      <h2>Total de trabalho manual</h2>
+      <div class="brow"><span>Montagem completa (fases 1 + 2)</span><span class="price tnum">26,75–54 h</span></div>
+      <div class="brow"><span>Somente fase 1 (sem fluorescência, item 16)</span><span class="price tnum">23,75–48 h</span></div>
+      <div class="btotal"><span class="lab">dias úteis</span><span class="sum tnum">≈ 5–9</span></div>
+    </div>
+  </section>
+  <section>
+    <div class="rules reveal"><h4>O que a estimativa considera</h4><ul style="gap:11px"><li>É o tempo líquido de trabalho. Parte é espera (download do software, estabilização do clima) e ocorre em paralelo.</li><li>Faixa: o menor valor é para um montador experiente; o maior, para uma primeira montagem do zero.</li><li>NÃO incluído: impressão 3D das peças e corte a laser da caixa (feito pela oficina), nem o cultivo de células (laboratório).</li><li>Fluorescência (item 16) é a fase 2; para um aparelho funcional básico (fase 1) ela pode ser adiada.</li><li>É prudente reservar no calendário ~1,5 a 2 semanas, considerando pausas e o comissionamento do clima.</li></ul></div>
+  </section>
+  <section>
+    <div class="sec-head reveal"><div class="sec-ico"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></div>
+      <div><div class="sec-num">Links</div><h2>Links</h2></div></div>
+    <div class="buys reveal"><a class="buy" href="microscopio-argus-sborka.html" target="_blank" rel="noopener">Guia de montagem (16 etapas, em russo)<svg class="arr" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a><a class="buy" href="https://build.openflexure.org/openflexure-microscope/" target="_blank" rel="noopener">Documentação oficial do OpenFlexure<svg class="arr" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a><a class="buy" href="https://openflexure.org/projects/microscope/build" target="_blank" rel="noopener">Instruções de montagem (OpenFlexure)<svg class="arr" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg></a></div>
+  </section>
+</div>
+<footer><div class="wrap">Estimativa de tempo de montagem do microscópio OpenFlexure · projeto ARGUS MVP. As faixas são aproximadas e dependem da experiência e do preparo das peças. · <a href="microscopio-argus-tempo-ru.html">Русский →</a></div></footer>
+<!-- Guaranteed reveal system (no CDN dependency) -->
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+  var root = document.documentElement;
+  root.classList.add('js-anim');
+  function revealAll(){ var n=document.querySelectorAll('.reveal'); for(var i=0;i<n.length;i++) n[i].classList.add('in'); }
+  if(!('IntersectionObserver' in window)){ revealAll(); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { rootMargin:'0px 0px -8% 0px', threshold:0.08 });
+  function boot(){ var n=document.querySelectorAll('.reveal'); for(var i=0;i<n.length;i++) io.observe(n[i]); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  setTimeout(revealAll, 2600);
+})();
+</script>
+<!-- Framer Motion enhancement (bonus) -->
+<script type="module">
+  try{
+    const { animate, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce){
+      const hero = document.querySelectorAll('[data-hero]');
+      if(hero.length) animate(hero, { opacity:[0,1], y:[18,0] }, { duration:.7, delay: stagger(0.08), easing:[.16,1,.3,1] });
+    }
+  }catch(e){ /* CDN недоступен — hero уже виден */ }
+</script>
+<!-- Cheat sheet: галочки сохраняются в браузере -->
+<script>
+(function(){
+  var KEY='argus_cheat_fullkit_v1', state={};
+  try{ state=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+  var boxes=[].slice.call(document.querySelectorAll('.check-tbl input.chk'));
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+  function count(){ var d=0; boxes.forEach(function(b){ if(b.checked) d++; }); var el=document.getElementById('cheat-count'); if(el) el.textContent=d+' / '+boxes.length; }
+  boxes.forEach(function(b){
+    var id=b.getAttribute('data-id'), tr=b.closest('tr');
+    if(state[id]){ b.checked=true; tr.classList.add('done'); }
+    b.addEventListener('change',function(){ state[id]=b.checked; tr.classList.toggle('done', b.checked); save(); count(); });
+  });
+  var p=document.getElementById('cheat-print'); if(p) p.addEventListener('click',function(){ window.print(); });
+  var r=document.getElementById('cheat-reset'); if(r) r.addEventListener('click',function(){
+    boxes.forEach(function(b){ b.checked=false; b.closest('tr').classList.remove('done'); });
+    state={}; try{ localStorage.removeItem(KEY); }catch(e){} count();
+  });
+  count();
+})();
+</script>
+</body>
+</html>
