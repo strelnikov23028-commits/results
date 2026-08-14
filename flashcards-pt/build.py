@@ -27,8 +27,8 @@ def main():
     html = open(TPL, encoding="utf-8").read()
 
     # в карточках оставляем только то, что нужно приложению
-    slim = [{k: c[k] for k in ("id", "pt", "en", "ru", "pos", "examples", "image", "credit")
-             if c.get(k) is not None} for c in cards]
+    keep = ("id", "pt", "en", "ru", "pos", "examples", "image", "credit", "icon", "note")
+    slim = [{k: c[k] for k in keep if c.get(k) is not None} for c in cards]
 
     def inject(marker, value, s):
         pat = re.compile(r"/\*__" + marker + r"__\*/.*?/\*__END__\*/", re.S)

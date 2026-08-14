@@ -1,0 +1,2372 @@
+[
+ {
+  "id": 1,
+  "pt": "coisa",
+  "en": "thing",
+  "ru": "вещь, штука",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Posso perguntar uma coisa?",
+    "en": "Can I ask you something?"
+   },
+   {
+    "pt": "Eu gostaria de comer alguma coisa.",
+    "en": "I’d like to eat something."
+   }
+  ],
+  "imgQuery": "household objects tools collection",
+  "image": "https://live.staticflickr.com/65535/48456834911_dfa3838b90_b.jpg",
+  "credit": {
+   "author": "dejankrsmanovic",
+   "url": "https://www.flickr.com/photos/155403590@N07/48456834911",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 2,
+  "pt": "casa",
+  "en": "house/home",
+  "ru": "дом",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Estou em casa.",
+    "en": "I’m at home."
+   },
+   {
+    "pt": "Não esqueça de fazer seu dever de casa.",
+    "en": "Don’t forget to do your homework."
+   }
+  ],
+  "imgQuery": "house home exterior",
+  "image": "https://live.staticflickr.com/5333/17458373552_c5c9dcb82f_b.jpg",
+  "credit": {
+   "author": "oatsy40",
+   "url": "https://www.flickr.com/photos/68089229@N06/17458373552",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 3,
+  "pt": "tempo",
+  "en": "time/weather",
+  "ru": "время; погода",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "O tempo está bom hoje.",
+    "en": "The weather is nice today."
+   },
+   {
+    "pt": "Gosto de passar tempo com minha família.",
+    "en": "I like to spend time with my family."
+   }
+  ],
+  "imgQuery": "clock face time",
+  "image": "https://live.staticflickr.com/7216/6883537002_b41f2019d6_b.jpg",
+  "credit": {
+   "author": "Nathan Reading",
+   "url": "https://www.flickr.com/photos/54976525@N08/6883537002",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 4,
+  "pt": "ano",
+  "en": "year",
+  "ru": "год",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Feliz ano novo!",
+    "en": "Happy New Year!"
+   },
+   {
+    "pt": "Eu vou ao Brasil todo ano.",
+    "en": "I go to Brazil every year."
+   }
+  ],
+  "imgQuery": "desk calendar year pages",
+  "image": "https://live.staticflickr.com/4099/4827013488_60953318d3_b.jpg",
+  "credit": {
+   "author": "Generationbass.com",
+   "url": "https://www.flickr.com/photos/46959536@N04/4827013488",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 5,
+  "pt": "dia",
+  "en": "day/morning",
+  "ru": "день; утро",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Bom dia!",
+    "en": "Good morning!"
+   },
+   {
+    "pt": "Eu falo português todo dia.",
+    "en": "I speak Portuguese every day."
+   }
+  ],
+  "imgQuery": "sunny day sky morning",
+  "image": "https://live.staticflickr.com/8123/8671781999_88fdd4c773_b.jpg",
+  "credit": {
+   "author": "SFB579 Namaste",
+   "url": "https://www.flickr.com/photos/50826080@N00/8671781999",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 6,
+  "pt": "vez",
+  "en": "time/instance",
+  "ru": "раз (случай)",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Vou ao Brasil uma vez por ano.",
+    "en": "I go to Brazil once a year."
+   },
+   {
+    "pt": "Vou à academia duas vezes por semana.",
+    "en": "I go to the gym twice a week."
+   }
+  ],
+  "imgQuery": "tally counting marks",
+  "image": "https://live.staticflickr.com/2821/13848268535_f7d32dafac_b.jpg",
+  "credit": {
+   "author": "marfis75",
+   "url": "https://www.flickr.com/photos/45409431@N00/13848268535",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 7,
+  "pt": "homem",
+  "en": "man",
+  "ru": "мужчина",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Aquele homem é brasileiro.",
+    "en": "That man is Brazilian."
+   },
+   {
+    "pt": "Quem é aquele homem?",
+    "en": "Who is that man?"
+   }
+  ],
+  "imgQuery": "man portrait face smiling",
+  "image": "https://live.staticflickr.com/2096/2183984614_64c841b923_b.jpg",
+  "credit": {
+   "author": "World Bank Photo Collection",
+   "url": "https://www.flickr.com/photos/10816734@N03/2183984614",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 8,
+  "pt": "mulher",
+  "en": "woman",
+  "ru": "женщина",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Eu sou uma mulher brasileira.",
+    "en": "I am a Brazilian woman."
+   },
+   {
+    "pt": "Aquelas mulheres são brasileiras.",
+    "en": "Those women are Brazilian."
+   }
+  ],
+  "imgQuery": "woman portrait face smiling",
+  "image": "https://live.staticflickr.com/3301/3435421041_2f830514ff_b.jpg",
+  "credit": {
+   "author": "-Jérôme-",
+   "url": "https://www.flickr.com/photos/76474448@N00/3435421041",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 9,
+  "pt": "senhora",
+  "en": "ma’am/lady",
+  "ru": "госпожа, дама",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Aquela senhora é brasileira.",
+    "en": "That lady is Brazilian."
+   },
+   {
+    "pt": "Qual é o nome da senhora?",
+    "en": "What is your name, ma’am?"
+   }
+  ],
+  "imgQuery": "elderly woman portrait smiling",
+  "image": "https://live.staticflickr.com/2322/2658288995_b626e1f573.jpg",
+  "credit": {
+   "author": "World Bank Photo Collection",
+   "url": "https://www.flickr.com/photos/10816734@N03/2658288995",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 10,
+  "pt": "senhor",
+  "en": "sir/gentleman",
+  "ru": "господин, мужчина (вежл.)",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Aquele senhor é brasileiro.",
+    "en": "That gentleman is Brazilian."
+   },
+   {
+    "pt": "Qual é o nome do senhor?",
+    "en": "What is your name, sir?"
+   }
+  ],
+  "imgQuery": "elderly man portrait smiling",
+  "image": "https://live.staticflickr.com/1246/1449135684_3508c54331_b.jpg",
+  "credit": {
+   "author": "Patrick Doheny",
+   "url": "https://www.flickr.com/photos/14132971@N05/1449135684",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 11,
+  "pt": "mão",
+  "en": "hand",
+  "ru": "рука (кисть)",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Eu uso um anel em minha mão esquerda.",
+    "en": "I wear a ring on my left hand."
+   },
+   {
+    "pt": "Eu lavo minhas mãos antes de comer.",
+    "en": "I wash my hands before eating."
+   }
+  ],
+  "imgQuery": "hand fingers palm",
+  "image": "https://live.staticflickr.com/2841/9343757575_94b9815800_b.jpg",
+  "credit": {
+   "author": "eltpics",
+   "url": "https://www.flickr.com/photos/54942754@N02/9343757575",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 12,
+  "pt": "palavra",
+  "en": "word",
+  "ru": "слово",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Nesta lição, vamos estudar 100 palavras.",
+    "en": "In this lesson, we will study 100 words."
+   },
+   {
+    "pt": "Ele me deu sua palavra.",
+    "en": "He gave me his word."
+   }
+  ],
+  "imgQuery": "dictionary word page",
+  "image": "https://live.staticflickr.com/5140/5510507276_90c81d56e8_b.jpg",
+  "credit": {
+   "author": "crdotx",
+   "url": "https://www.flickr.com/photos/56858900@N03/5510507276",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 13,
+  "pt": "filho(a)",
+  "en": "son/daughter",
+  "ru": "сын; дочь",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Eles têm uma filha e um filho.",
+    "en": "They have a daughter and a son."
+   },
+   {
+    "pt": "Ela quer ter dois filhos.",
+    "en": "She wants to have two children."
+   }
+  ],
+  "imgQuery": "family parents with children",
+  "image": "https://live.staticflickr.com/171/369712966_6655a2a53a.jpg",
+  "credit": {
+   "author": "rolands.lakis",
+   "url": "https://www.flickr.com/photos/26691915@N00/369712966",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 14,
+  "pt": "noite",
+  "en": "night",
+  "ru": "ночь; вечер",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Boa noite!",
+    "en": "Good night!"
+   },
+   {
+    "pt": "Eu leio todas as noites.",
+    "en": "I read every night."
+   }
+  ],
+  "imgQuery": "night sky stars",
+  "image": "https://live.staticflickr.com/96/233997267_5637ec69db_b.jpg",
+  "credit": {
+   "author": "dawn_perry",
+   "url": "https://www.flickr.com/photos/61569269@N00/233997267",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 15,
+  "pt": "amigo(a)",
+  "en": "friend",
+  "ru": "друг, подруга",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Ela é minha melhor amiga.",
+    "en": "She is my best friend."
+   },
+   {
+    "pt": "Vou sair com meus amigos.",
+    "en": "I’m going out with my friends."
+   }
+  ],
+  "imgQuery": "friends together laughing",
+  "image": "https://live.staticflickr.com/208/495605058_29f95740b4_b.jpg",
+  "credit": {
+   "author": "<def>",
+   "url": "https://www.flickr.com/photos/99051133@N00/495605058",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 16,
+  "pt": "rua",
+  "en": "street",
+  "ru": "улица",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Moro na mesma rua há anos.",
+    "en": "I’ve lived on the same street for years."
+   },
+   {
+    "pt": "Não jogue lixo na rua.",
+    "en": "Don’t throw trash on the street."
+   }
+  ],
+  "imgQuery": "city street",
+  "image": "https://live.staticflickr.com/6236/6359018635_3b1c238ab8_b.jpg",
+  "credit": {
+   "author": "World Bank Photo Collection",
+   "url": "https://www.flickr.com/photos/10816734@N03/6359018635",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 17,
+  "pt": "vida",
+  "en": "life",
+  "ru": "жизнь",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Eu tenho uma vida muito boa.",
+    "en": "I have a very good life."
+   },
+   {
+    "pt": "Dizem que gatos têm sete vidas.",
+    "en": "They say cats have seven lives."
+   }
+  ],
+  "imgQuery": "green sprout seedling growing",
+  "image": "https://live.staticflickr.com/7332/9044202806_42bcb98ac3.jpg",
+  "credit": {
+   "author": "Aproximando Ciência e Pessoas",
+   "url": "https://www.flickr.com/photos/97513256@N06/9044202806",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 18,
+  "pt": "pessoa",
+  "en": "person",
+  "ru": "человек",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Quem é aquela pessoa?",
+    "en": "Who is that person?"
+   },
+   {
+    "pt": "Tinha muitas pessoas na festa.",
+    "en": "There were many people at the party."
+   }
+  ],
+  "imgQuery": "man standing portrait person",
+  "image": "https://live.staticflickr.com/65535/49007189706_5964fd8291_b.jpg",
+  "credit": {
+   "author": "Fr@ηk",
+   "url": "https://www.flickr.com/photos/56936646@N07/49007189706",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 19,
+  "pt": "moço(a)",
+  "en": "young man/woman",
+  "ru": "молодой человек; девушка",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "Aquela moça é muito bonita.",
+    "en": "That young woman is very beautiful."
+   },
+   {
+    "pt": "Quem é aquele moço?",
+    "en": "Who is that young man?"
+   }
+  ],
+  "imgQuery": "young people smiling students",
+  "image": "https://live.staticflickr.com/8012/7658278494_cb249e8094_b.jpg",
+  "credit": {
+   "author": "CollegeDegrees360",
+   "url": "https://www.flickr.com/photos/83633410@N07/7658278494",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 20,
+  "pt": "menino(a)",
+  "en": "boy/girl",
+  "ru": "мальчик; девочка",
+  "pos": "nouns",
+  "examples": [
+   {
+    "pt": "João é um menino muito inteligente.",
+    "en": "João is a very smart boy."
+   },
+   {
+    "pt": "Vou sair com as meninas hoje.",
+    "en": "I’m going out with the girls today."
+   }
+  ],
+  "imgQuery": "children boy girl playing",
+  "image": "https://live.staticflickr.com/5477/14327415332_b163dcb480_b.jpg",
+  "credit": {
+   "author": "World Bank Photo Collection",
+   "url": "https://www.flickr.com/photos/10816734@N03/14327415332",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 21,
+  "pt": "bom/boa",
+  "en": "good",
+  "ru": "хороший",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "A sobremesa estava muito boa.",
+    "en": "The dessert was really good."
+   },
+   {
+    "pt": "O tempo está bom hoje.",
+    "en": "The weather is nice today."
+   }
+  ],
+  "imgQuery": "thumbs up hand gesture",
+  "image": "https://live.staticflickr.com/2426/3958637561_7b76bfe511_b.jpg",
+  "credit": {
+   "author": "apdk",
+   "url": "https://www.flickr.com/photos/62337512@N00/3958637561",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 22,
+  "pt": "ruim",
+  "en": "bad",
+  "ru": "плохой",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "A comida estava ruim.",
+    "en": "The food was bad."
+   },
+   {
+    "pt": "O filme foi muito ruim.",
+    "en": "The movie was really bad."
+   }
+  ],
+  "imgQuery": "thumbs down gesture",
+  "image": "https://live.staticflickr.com/65535/54783901538_8654a0e6cf_b.jpg",
+  "credit": {
+   "author": "exit78",
+   "url": "https://www.flickr.com/photos/28826830@N00/54783901538",
+   "source": "Openverse / Flickr",
+   "license": "CC CC0 1.0"
+  }
+ },
+ {
+  "id": 23,
+  "pt": "grande",
+  "en": "big",
+  "ru": "большой",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "São Paulo é uma cidade grande.",
+    "en": "São Paulo is a big city."
+   },
+   {
+    "pt": "Maria mora em uma casa grande.",
+    "en": "Maria lives in a big house."
+   }
+  ],
+  "imgQuery": "big elephant size",
+  "image": "https://live.staticflickr.com/5098/5426336798_bdd024543e_b.jpg",
+  "credit": {
+   "author": "jinterwas",
+   "url": "https://www.flickr.com/photos/32135758@N02/5426336798",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 24,
+  "pt": "pequeno(a)",
+  "en": "small",
+  "ru": "маленький",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Indaiatuba é uma cidade pequena.",
+    "en": "Indaiatuba is a small city."
+   },
+   {
+    "pt": "João mora em um apartamento pequeno.",
+    "en": "João lives in a small apartment."
+   }
+  ],
+  "imgQuery": "tiny small mouse",
+  "image": "https://live.staticflickr.com/3916/14742374113_0f528e4cdf_b.jpg",
+  "credit": {
+   "author": "Tambako the Jaguar",
+   "url": "https://www.flickr.com/photos/8070463@N03/14742374113",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-ND 2.0"
+  }
+ },
+ {
+  "id": 25,
+  "pt": "melhor",
+  "en": "better/best",
+  "ru": "лучше, лучший",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Vou encontrar minha melhor amiga.",
+    "en": "I’m going to meet my best friend."
+   },
+   {
+    "pt": "Eles são melhores amigos.",
+    "en": "They are best friends."
+   }
+  ],
+  "imgQuery": "winner first place trophy",
+  "image": "https://live.staticflickr.com/3319/3417340248_0f4bdb2a9c_b.jpg",
+  "credit": {
+   "author": "EvelynGiggles",
+   "url": "https://www.flickr.com/photos/23797059@N02/3417340248",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 26,
+  "pt": "pior",
+  "en": "worse/worst",
+  "ru": "хуже, худший",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Aquele foi o pior filme que já vi.",
+    "en": "That was the worst movie I’ve ever seen."
+   },
+   {
+    "pt": "Sentir frio é pior do que sentir calor.",
+    "en": "Feeling cold is worse than feeling hot."
+   }
+  ],
+  "imgQuery": "broken damaged destroyed",
+  "image": "https://live.staticflickr.com/431/20280442758_33f1af810c_b.jpg",
+  "credit": {
+   "author": "Outpost 51",
+   "url": "https://www.flickr.com/photos/89965037@N07/20280442758",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 27,
+  "pt": "certo(a)",
+  "en": "right/correct",
+  "ru": "правильный, верный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Isso está certo.",
+    "en": "That’s right."
+   },
+   {
+    "pt": "Esta resposta está certa.",
+    "en": "This answer is correct."
+   }
+  ],
+  "imgQuery": "green check mark tick",
+  "image": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTMxLXYtbDFkYnN6dW0uanBn.jpg",
+  "credit": {
+   "author": "",
+   "url": "https://www.rawpixel.com/image/6324854/vector-sticker-public-domain-shape",
+   "source": "Openverse / Rawpixel",
+   "license": "CC CC0 1.0"
+  }
+ },
+ {
+  "id": 28,
+  "pt": "errado(a)",
+  "en": "wrong/incorrect",
+  "ru": "неправильный, ошибочный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Isso está errado.",
+    "en": "That’s wrong."
+   },
+   {
+    "pt": "Esta resposta está errada.",
+    "en": "This answer is incorrect."
+   }
+  ],
+  "imgQuery": "red cross mark error",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Ghulam_Nabi_Azad_presenting_the_Red_Cross_award%2C_at_the_General_Body_meeting_of_the_Indian_Red_Cross_Society_and_St_John_Ambulance_%28India%29%2C_in_New_Delhi_on_September_27%2C_2011.jpg/1280px-thumbnail.jpg",
+  "credit": {
+   "author": "Ministry of Health and Family Welfare",
+   "url": "https://commons.wikimedia.org/wiki/File:Ghulam_Nabi_Azad_presenting_the_Red_Cross_award,_at_the_General_Body_meeting_of_the_Indian_Red_Cross_Society_and_St_John_Ambulance_(India),_in_New_Delhi_on_September_27,_2011.jpg",
+   "source": "Wikimedia Commons",
+   "license": "GODL-India"
+  }
+ },
+ {
+  "id": 29,
+  "pt": "velho(a)",
+  "en": "old",
+  "ru": "старый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Esta casa é velha.",
+    "en": "This house is old."
+   },
+   {
+    "pt": "Ele é um velho amigo.",
+    "en": "He is an old friend."
+   }
+  ],
+  "imgQuery": "old weathered wooden door",
+  "image": "https://live.staticflickr.com/7576/15940045866_b1862d89a3_b.jpg",
+  "credit": {
+   "author": "sagesolar",
+   "url": "https://www.flickr.com/photos/62356799@N06/15940045866",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 30,
+  "pt": "novo(a)",
+  "en": "new",
+  "ru": "новый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Preciso de um carro novo.",
+    "en": "I need a new car."
+   },
+   {
+    "pt": "Comprei uma bolsa nova.",
+    "en": "I bought a new bag."
+   }
+  ],
+  "imgQuery": "new sneakers shoes box",
+  "image": "https://live.staticflickr.com/7039/6776666006_3f1f2dc775_b.jpg",
+  "credit": {
+   "author": "Robert Stinnett",
+   "url": "https://www.flickr.com/photos/93732749@N00/6776666006",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 31,
+  "pt": "difícil",
+  "en": "difficult/hard",
+  "ru": "трудный, сложный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Correr uma maratona é difícil.",
+    "en": "Running a marathon is difficult."
+   },
+   {
+    "pt": "Aprender um novo idioma é difícil.",
+    "en": "Learning a new language is hard."
+   }
+  ],
+  "imgQuery": "steep rock climbing mountain",
+  "image": "https://live.staticflickr.com/3709/11841289425_ced2603c24_b.jpg",
+  "credit": {
+   "author": "Grand Canyon NPS",
+   "url": "https://www.flickr.com/photos/50693818@N08/11841289425",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 32,
+  "pt": "fácil",
+  "en": "easy",
+  "ru": "лёгкий, простой",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Esta lição é fácil.",
+    "en": "This lesson is easy."
+   },
+   {
+    "pt": "Não é fácil fazer novos amigos.",
+    "en": "It’s not easy to make new friends."
+   }
+  ],
+  "imgQuery": "relaxing hammock beach",
+  "image": "https://live.staticflickr.com/3754/9709333785_fac2fcb20a_b.jpg",
+  "credit": {
+   "author": "Riccardo Maria Mantero",
+   "url": "https://www.flickr.com/photos/8935325@N08/9709333785",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 33,
+  "pt": "bonito(a)",
+  "en": "beautiful/pretty",
+  "ru": "красивый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Aquela menina é bonita.",
+    "en": "That girl is beautiful."
+   },
+   {
+    "pt": "Aquele menino é bonito.",
+    "en": "That boy is handsome."
+   }
+  ],
+  "imgQuery": "beautiful flower blossom",
+  "image": "https://live.staticflickr.com/7661/27157557775_65146c8b6d_b.jpg",
+  "credit": {
+   "author": "Kobie M-C Photography",
+   "url": "https://www.flickr.com/photos/76368319@N08/27157557775",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 34,
+  "pt": "feio(a)",
+  "en": "ugly",
+  "ru": "некрасивый, уродливый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Falar palavrão é feio.",
+    "en": "Using curse words is ugly."
+   },
+   {
+    "pt": "O tempo está feio hoje.",
+    "en": "The weather is bad today."
+   }
+  ],
+  "imgQuery": "landfill garbage waste pile",
+  "image": "https://live.staticflickr.com/53/143991101_1f4f59f7b8_b.jpg",
+  "credit": {
+   "author": "zappowbang",
+   "url": "https://www.flickr.com/photos/72794895@N00/143991101",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 35,
+  "pt": "forte",
+  "en": "strong",
+  "ru": "сильный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "O vento está muito forte hoje.",
+    "en": "The wind is very strong today."
+   },
+   {
+    "pt": "Eu gosto de café forte.",
+    "en": "I like strong coffee."
+   }
+  ],
+  "imgQuery": "muscular strong man arms",
+  "image": "https://live.staticflickr.com/7890/32390489807_72b77e551c_b.jpg",
+  "credit": {
+   "author": "wcn247",
+   "url": "https://www.flickr.com/photos/35264349@N02/32390489807",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 36,
+  "pt": "fraco(a)",
+  "en": "weak",
+  "ru": "слабый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Esta luz é muito fraca para ler.",
+    "en": "This light is too weak to read."
+   },
+   {
+    "pt": "Eu não gosto de café fraco.",
+    "en": "I don’t like weak coffee."
+   }
+  ],
+  "imgQuery": "wilted dried plant pot",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/6/60/Catalogue_of_first_quality_plants_-_at_unheard_of_low_prices_%281895%29_%2819959001303%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:Catalogue_of_first_quality_plants_-_at_unheard_of_low_prices_(1895)_(19959001303).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  }
+ },
+ {
+  "id": 37,
+  "pt": "feliz",
+  "en": "happy",
+  "ru": "счастливый",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "O filme tem um final feliz.",
+    "en": "The movie has a happy ending."
+   },
+   {
+    "pt": "Eles estão felizes.",
+    "en": "They are happy."
+   }
+  ],
+  "imgQuery": "happy smiling person",
+  "image": "https://live.staticflickr.com/2425/3771659600_ce2e285b22_b.jpg",
+  "credit": {
+   "author": "cobalt123",
+   "url": "https://www.flickr.com/photos/66606673@N00/3771659600",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-SA 2.0"
+  }
+ },
+ {
+  "id": 38,
+  "pt": "triste",
+  "en": "sad",
+  "ru": "грустный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "O filme tem um final triste.",
+    "en": "The movie has a sad ending."
+   },
+   {
+    "pt": "Eles estão tristes.",
+    "en": "They are sad."
+   }
+  ],
+  "imgQuery": "sad crying person",
+  "image": "https://live.staticflickr.com/2698/4463180056_c1582c26ac_b.jpg",
+  "credit": {
+   "author": "♥KatB Photography♥",
+   "url": "https://www.flickr.com/photos/56695083@N00/4463180056",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 39,
+  "pt": "diferente",
+  "en": "different",
+  "ru": "другой, непохожий",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Vamos fazer algo diferente hoje.",
+    "en": "Let’s do something different today."
+   },
+   {
+    "pt": "Cada cultura tem costumes diferentes.",
+    "en": "Each culture has different customs."
+   }
+  ],
+  "imgQuery": "one red apple among green apples",
+  "image": "https://live.staticflickr.com/5287/5219630569_8876066935_b.jpg",
+  "credit": {
+   "author": "The Carouselambra Kid",
+   "url": "https://www.flickr.com/photos/34540417@N07/5219630569",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 40,
+  "pt": "importante",
+  "en": "important",
+  "ru": "важный",
+  "pos": "adjectives",
+  "examples": [
+   {
+    "pt": "Minha família é importante para mim.",
+    "en": "My family is important to me."
+   },
+   {
+    "pt": "Tenho uma reunião importante hoje.",
+    "en": "I have an important meeting today."
+   }
+  ],
+  "imgQuery": "important document stamp",
+  "image": "https://live.staticflickr.com/4028/4349874915_8777b77f88_b.jpg",
+  "credit": {
+   "author": "dfulmer",
+   "url": "https://www.flickr.com/photos/28376044@N00/4349874915",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 41,
+  "pt": "ser",
+  "en": "to be",
+  "ru": "быть (постоянно: кто/какой)",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu sou professora.",
+    "en": "I am a teacher."
+   },
+   {
+    "pt": "Nós somos brasileiros.",
+    "en": "We are Brazilian."
+   }
+  ],
+  "imgQuery": "chef cook professional working",
+  "image": "https://live.staticflickr.com/340/19235581793_c5d47c6c20_b.jpg",
+  "credit": {
+   "author": "Nestlé",
+   "url": "https://www.flickr.com/photos/28056346@N06/19235581793",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 42,
+  "pt": "estar",
+  "en": "to be",
+  "ru": "быть (временно: где/как сейчас)",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu estou em casa.",
+    "en": "I am at home."
+   },
+   {
+    "pt": "Eles estão felizes.",
+    "en": "They are happy."
+   }
+  ],
+  "imgQuery": "red map pin location",
+  "image": "https://live.staticflickr.com/8607/16649590005_0495358f4e_b.jpg",
+  "credit": {
+   "author": "Rusty Russ",
+   "url": "https://www.flickr.com/photos/10159247@N04/16649590005",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-SA 2.0"
+  }
+ },
+ {
+  "id": 43,
+  "pt": "ter",
+  "en": "to have",
+  "ru": "иметь",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu tenho três irmãos.",
+    "en": "I have three siblings."
+   },
+   {
+    "pt": "Carlos tem um carro novo.",
+    "en": "Carlos has a new car."
+   }
+  ],
+  "imgQuery": "person carrying many boxes",
+  "image": "https://live.staticflickr.com/65535/51917895405_71738c05ee_b.jpg",
+  "credit": {
+   "author": "Drugo More, Rijeka",
+   "url": "https://www.flickr.com/photos/62195395@N05/51917895405",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 44,
+  "pt": "ir",
+  "en": "to go",
+  "ru": "идти, ехать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu vou ao Brasil no verão.",
+    "en": "I go to Brazil in the summer."
+   },
+   {
+    "pt": "Eles vão ao trabalho de ônibus.",
+    "en": "They go to work by bus."
+   }
+  ],
+  "imgQuery": "person walking away road",
+  "image": "https://live.staticflickr.com/10/15163947_53da13734d_b.jpg",
+  "credit": {
+   "author": "timsamoff",
+   "url": "https://www.flickr.com/photos/44124439915@N01/15163947",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-ND 2.0"
+  }
+ },
+ {
+  "id": 45,
+  "pt": "dizer",
+  "en": "to say/tell",
+  "ru": "сказать, говорить",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu sempre digo a verdade.",
+    "en": "I always tell the truth."
+   },
+   {
+    "pt": "Ele disse que sim.",
+    "en": "He said yes."
+   }
+  ],
+  "imgQuery": "person speaking megaphone",
+  "image": "https://live.staticflickr.com/4907/31049242487_12803eb7c1.jpg",
+  "credit": {
+   "author": "www.ilmicrofono.it",
+   "url": "https://www.flickr.com/photos/115089924@N02/31049242487",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 46,
+  "pt": "fazer",
+  "en": "to do/make",
+  "ru": "делать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu faço exercícios regularmente.",
+    "en": "I exercise regularly."
+   },
+   {
+    "pt": "Meu marido fez o almoço hoje.",
+    "en": "My husband made lunch today."
+   }
+  ],
+  "imgQuery": "carpenter hands building wood",
+  "image": "https://live.staticflickr.com/4013/4273838960_71e877255d_b.jpg",
+  "credit": {
+   "author": "Horia Varlan",
+   "url": "https://www.flickr.com/photos/10361931@N06/4273838960",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 47,
+  "pt": "poder",
+  "en": "can/be able to",
+  "ru": "мочь, быть в состоянии",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu posso te ajudar a aprender português.",
+    "en": "I can help you learn Portuguese."
+   },
+   {
+    "pt": "Ela não pode beber porque é menor de idade.",
+    "en": "She can’t drink because she’s underage."
+   }
+  ],
+  "imgQuery": "weightlifter lifting heavy barbell",
+  "image": "https://live.staticflickr.com/8472/8364765619_d33f765d0f_b.jpg",
+  "credit": {
+   "author": "Gregor Winter",
+   "url": "https://www.flickr.com/photos/9280922@N04/8364765619",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-SA 2.0"
+  }
+ },
+ {
+  "id": 48,
+  "pt": "ver",
+  "en": "to see",
+  "ru": "видеть",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu vejo meus amigos toda semana.",
+    "en": "I see my friends every week."
+   },
+   {
+    "pt": "Você viu o novo filme da Fernanda Torres?",
+    "en": "Did you see Fernanda Torres’ new movie?"
+   }
+  ],
+  "imgQuery": "human eye close up",
+  "image": "https://live.staticflickr.com/65535/49443584791_4863b7d2ae_b.jpg",
+  "credit": {
+   "author": "Ivan Radic",
+   "url": "https://www.flickr.com/photos/26344495@N05/49443584791",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 49,
+  "pt": "dar",
+  "en": "to give",
+  "ru": "давать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu dou presentes a meus amigos.",
+    "en": "I give gifts to my friends."
+   },
+   {
+    "pt": "Você deu comida ao cachorro?",
+    "en": "Did you feed the dog?"
+   }
+  ],
+  "imgQuery": "hand giving gift",
+  "image": "https://live.staticflickr.com/7010/6510934443_8bd2942b79.jpg",
+  "credit": {
+   "author": "asenat29",
+   "url": "https://www.flickr.com/photos/72153088@N08/6510934443",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 50,
+  "pt": "vir",
+  "en": "to come",
+  "ru": "приходить, приезжать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu sempre venho neste restaurante.",
+    "en": "I always come to this restaurant."
+   },
+   {
+    "pt": "Minha mãe vem me visitar no verão.",
+    "en": "My mom is coming to visit me in the summer."
+   }
+  ],
+  "imgQuery": "person walking through open door",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Women_are_walking_through_the_outdoors_shopping_mall_in_the_Jodenbreestraat%3B_free_photo_Amsterdam%2C_Fons_Heijnsbroek%2C_12-10-2021.jpg/1280px-Women_are_walking_through_the_outdoors_shopping_mall_in_the_Jodenbreestraat%3B_free_photo_Amsterdam%2C_Fons_Heijnsbroek%2C_12-10-2021.jpg",
+  "credit": {
+   "author": "Fons Heijnsbroek",
+   "url": "https://commons.wikimedia.org/wiki/File:Women_are_walking_through_the_outdoors_shopping_mall_in_the_Jodenbreestraat;_free_photo_Amsterdam,_Fons_Heijnsbroek,_12-10-2021.jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC0"
+  }
+ },
+ {
+  "id": 51,
+  "pt": "querer",
+  "en": "to want",
+  "ru": "хотеть",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu quero aprender alemão um dia.",
+    "en": "I want to learn German one day."
+   },
+   {
+    "pt": "Meus alunos querem viajar ao Brasil.",
+    "en": "My students want to travel to Brazil."
+   }
+  ],
+  "imgQuery": "child wanting reaching desire",
+  "image": "https://live.staticflickr.com/5070/5724252408_a4966ab171_b.jpg",
+  "credit": {
+   "author": "Alejandro Ballesta",
+   "url": "https://www.flickr.com/photos/55127628@N06/5724252408",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 52,
+  "pt": "parecer",
+  "en": "to seem/look like",
+  "ru": "казаться, выглядеть",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu me pareço com minha mãe.",
+    "en": "I look like my mother."
+   },
+   {
+    "pt": "Este filme parece interessante.",
+    "en": "This movie seems interesting."
+   }
+  ],
+  "imgQuery": "mirror reflection",
+  "image": "https://live.staticflickr.com/7330/10590586675_b5bc9dbd30_b.jpg",
+  "credit": {
+   "author": "Stanley Zimny (Thank You for 50 Million views)",
+   "url": "https://www.flickr.com/photos/82256086@N00/10590586675",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 53,
+  "pt": "falar",
+  "en": "to speak/talk",
+  "ru": "говорить, разговаривать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu falo português.",
+    "en": "I speak Portuguese."
+   },
+   {
+    "pt": "Ela fala com seus amigos todos os dias.",
+    "en": "She talks to her friends every day."
+   }
+  ],
+  "imgQuery": "two people talking conversation",
+  "image": "https://live.staticflickr.com/2746/4334357860_237406ce27_b.jpg",
+  "credit": {
+   "author": "Ame Otoko",
+   "url": "https://www.flickr.com/photos/30674850@N00/4334357860",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-SA 2.0"
+  }
+ },
+ {
+  "id": 54,
+  "pt": "ficar",
+  "en": "to stay/be (location)",
+  "ru": "оставаться; находиться",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Hoje à noite eu vou ficar em casa.",
+    "en": "Tonight I’m staying home."
+   },
+   {
+    "pt": "Onde fica o supermercado?",
+    "en": "Where is the supermarket?"
+   }
+  ],
+  "imgQuery": "person relaxing home sofa",
+  "image": "https://live.staticflickr.com/8229/8551939166_b6e07e612c_m.jpg",
+  "credit": {
+   "author": "LyndaSanchez",
+   "url": "https://www.flickr.com/photos/93963757@N05/8551939166",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 55,
+  "pt": "ouvir",
+  "en": "to hear/listen",
+  "ru": "слышать, слушать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu ouço rádio todos os dias.",
+    "en": "I listen to the radio every day."
+   },
+   {
+    "pt": "Os filhos não ouvem os pais.",
+    "en": "Children don’t listen to their parents."
+   }
+  ],
+  "imgQuery": "person listening headphones ear",
+  "image": "https://live.staticflickr.com/4011/4696485792_b9a0ac0193_b.jpg",
+  "credit": {
+   "author": "Rob Ellis'",
+   "url": "https://www.flickr.com/photos/45597153@N05/4696485792",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 56,
+  "pt": "achar",
+  "en": "to think/find",
+  "ru": "считать, полагать; находить",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu acho que vai chover amanhã.",
+    "en": "I think it’s going to rain tomorrow."
+   },
+   {
+    "pt": "Eu achei o livro que estava procurando.",
+    "en": "I found the book I was looking for."
+   }
+  ],
+  "imgQuery": "magnifying glass searching",
+  "image": "https://live.staticflickr.com/3432/3358624010_d91380d902_b.jpg",
+  "credit": {
+   "author": "Emily Barney",
+   "url": "https://www.flickr.com/photos/60162443@N00/3358624010",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 57,
+  "pt": "sair",
+  "en": "to go out/leave",
+  "ru": "выходить, уходить",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Vou sair com meus amigos hoje.",
+    "en": "I’m going out with my friends today."
+   },
+   {
+    "pt": "Ele saiu cedo para o trabalho.",
+    "en": "He left early for work."
+   }
+  ],
+  "imgQuery": "exit sign door emergency",
+  "image": "https://live.staticflickr.com/1349/985738443_302c882b10_b.jpg",
+  "credit": {
+   "author": "sylvar",
+   "url": "https://www.flickr.com/photos/44124401501@N01/985738443",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 58,
+  "pt": "chegar",
+  "en": "to arrive/get",
+  "ru": "приходить, прибывать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Ele chegou ontem de viagem.",
+    "en": "He arrived from his trip yesterday."
+   },
+   {
+    "pt": "Que horas você chega em casa?",
+    "en": "What time do you get home?"
+   }
+  ],
+  "imgQuery": "airport arrival traveler",
+  "image": "https://live.staticflickr.com/3737/13380171124_16478ea41d_b.jpg",
+  "credit": {
+   "author": "Minister-president",
+   "url": "https://www.flickr.com/photos/51135196@N05/13380171124",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 59,
+  "pt": "passar",
+  "en": "to spend/pass",
+  "ru": "проводить (время); проходить",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu gosto de passar tempo com a família.",
+    "en": "I like to spend time with my family."
+   },
+   {
+    "pt": "O tempo passa rápido.",
+    "en": "Time passes quickly."
+   }
+  ],
+  "imgQuery": "hourglass sand falling",
+  "image": "https://live.staticflickr.com/5512/9453311019_afdaf46d15_b.jpg",
+  "credit": {
+   "author": "W Mustafeez",
+   "url": "https://www.flickr.com/photos/21663856@N08/9453311019",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 60,
+  "pt": "pedir",
+  "en": "to ask for/order",
+  "ru": "просить; заказывать",
+  "pos": "verbs",
+  "examples": [
+   {
+    "pt": "Eu vou pedir pizza para o jantar.",
+    "en": "I’m going to order pizza for dinner."
+   },
+   {
+    "pt": "Ele pediu um favor a um amigo.",
+    "en": "He asked a friend for a favor."
+   }
+  ],
+  "imgQuery": "ordering food restaurant waiter",
+  "image": "https://live.staticflickr.com/2187/2036828699_7340099929_b.jpg",
+  "credit": {
+   "author": "avlxyz",
+   "url": "https://www.flickr.com/photos/10559879@N00/2036828699",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 61,
+  "pt": "não",
+  "en": "no/not",
+  "ru": "нет; не",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu não sei tocar piano.",
+    "en": "I don’t know how to play the piano."
+   },
+   {
+    "pt": "Eu acho que não.",
+    "en": "I don’t think so."
+   }
+  ],
+  "imgQuery": "no prohibition sign",
+  "image": "https://live.staticflickr.com/5755/20654963020_e1304298ff_b.jpg",
+  "credit": {
+   "author": "gruntzooki",
+   "url": "https://www.flickr.com/photos/37996580417@N01/20654963020",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 62,
+  "pt": "sim",
+  "en": "yes",
+  "ru": "да",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Ela disse sim ao pedido de casamento.",
+    "en": "She said yes to the proposal."
+   },
+   {
+    "pt": "Eu acho que sim.",
+    "en": "I think so."
+   }
+  ],
+  "imgQuery": "thumbs up yes approval hand",
+  "image": "https://live.staticflickr.com/7861/47556436921_a562d472f4_b.jpg",
+  "credit": {
+   "author": "Skeptical Cat",
+   "url": "https://www.flickr.com/photos/146303603@N04/47556436921",
+   "source": "Openverse / Flickr",
+   "license": "CC CC0 1.0"
+  }
+ },
+ {
+  "id": 63,
+  "pt": "talvez",
+  "en": "maybe/might",
+  "ru": "может быть, возможно",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Talvez chova amanhã.",
+    "en": "It might rain tomorrow."
+   },
+   {
+    "pt": "Talvez eu viaje no fim de semana.",
+    "en": "Maybe I’ll travel this weekend."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 64,
+  "pt": "muito",
+  "en": "very/many",
+  "ru": "очень; много",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "O Brasil é muito grande.",
+    "en": "Brazil is very big."
+   },
+   {
+    "pt": "Eu tenho muitos alunos.",
+    "en": "I have many students."
+   }
+  ],
+  "imgQuery": "large crowd of people",
+  "image": "https://live.staticflickr.com/5499/11344773473_1a634719bc_b.jpg",
+  "credit": {
+   "author": "State Library Victoria Collections",
+   "url": "https://www.flickr.com/photos/60849810@N05/11344773473",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC 2.0"
+  }
+ },
+ {
+  "id": 65,
+  "pt": "pouco",
+  "en": "a little",
+  "ru": "мало, немного",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Hoje está um pouco frio.",
+    "en": "It’s a little cold today."
+   },
+   {
+    "pt": "Estou com um pouco de fome.",
+    "en": "I’m a little hungry."
+   }
+  ],
+  "imgQuery": "single small coin alone",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Coin_of_John%2C_moneyer_Willelm_%28FindID_437536%29.jpg/1280px-Coin_of_John%2C_moneyer_Willelm_%28FindID_437536%29.jpg",
+  "credit": {
+   "author": "The Portable Antiquities Scheme, Ian Richardson, 2014-07-09 14:07:26",
+   "url": "https://commons.wikimedia.org/wiki/File:Coin_of_John,_moneyer_Willelm_(FindID_437536).jpg",
+   "source": "Wikimedia Commons",
+   "license": "CC BY-SA 4.0"
+  }
+ },
+ {
+  "id": 66,
+  "pt": "também",
+  "en": "also/too",
+  "ru": "тоже, также",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Meu marido também é brasileiro.",
+    "en": "My husband is also Brazilian."
+   },
+   {
+    "pt": "Eu também!",
+    "en": "Me too!"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 67,
+  "pt": "perto",
+  "en": "near/close",
+  "ru": "близко, рядом",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu moro perto de um parque.",
+    "en": "I live near a park."
+   },
+   {
+    "pt": "Tem um bom restaurante perto daqui.",
+    "en": "There’s a good restaurant near here."
+   }
+  ],
+  "imgQuery": "two friends standing side by side close",
+  "image": "https://live.staticflickr.com/6022/5992125965_3839954b93_b.jpg",
+  "credit": {
+   "author": "gnuckx",
+   "url": "https://www.flickr.com/photos/34409164@N06/5992125965",
+   "source": "Openverse / Flickr",
+   "license": "CC CC0 1.0"
+  }
+ },
+ {
+  "id": 68,
+  "pt": "longe",
+  "en": "far",
+  "ru": "далеко",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu moro longe da praia.",
+    "en": "I live far from the beach."
+   },
+   {
+    "pt": "Minha família mora longe.",
+    "en": "My family lives far away."
+   }
+  ],
+  "imgQuery": "long empty road horizon",
+  "image": "https://live.staticflickr.com/4699/39720930201_aa9cd39087_b.jpg",
+  "credit": {
+   "author": "Fotografiecor.nl",
+   "url": "https://www.flickr.com/photos/61616043@N05/39720930201",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-SA 2.0"
+  }
+ },
+ {
+  "id": 69,
+  "pt": "sempre",
+  "en": "always",
+  "ru": "всегда",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu sempre passo o Natal com a família.",
+    "en": "I always spend Christmas with my family."
+   },
+   {
+    "pt": "Sempre há uma solução para tudo.",
+    "en": "There’s always a solution for everything."
+   }
+  ],
+  "imgQuery": "infinity symbol loop",
+  "image": "https://live.staticflickr.com/238/518536840_4a329bae73_b.jpg",
+  "credit": {
+   "author": "włodi",
+   "url": "https://www.flickr.com/photos/19716902@N00/518536840",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-SA 2.0"
+  }
+ },
+ {
+  "id": 70,
+  "pt": "nunca",
+  "en": "never",
+  "ru": "никогда",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu nunca fui ao Alasca.",
+    "en": "I have never been to Alaska."
+   },
+   {
+    "pt": "Nunca diga nunca!",
+    "en": "Never say never!"
+   }
+  ],
+  "imgQuery": "calendar crossed out red",
+  "image": "https://live.staticflickr.com/5825/22476968253_fbf07441c6_b.jpg",
+  "credit": {
+   "author": "unclibraries_commons",
+   "url": "https://www.flickr.com/photos/122654055@N06/22476968253",
+   "source": "Openverse / Flickr",
+   "license": "CC PDM 1.0"
+  }
+ },
+ {
+  "id": 71,
+  "pt": "agora",
+  "en": "now",
+  "ru": "сейчас",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Estou ocupada agora.",
+    "en": "I’m busy now."
+   },
+   {
+    "pt": "O que você está fazendo agora?",
+    "en": "What are you doing now?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 72,
+  "pt": "antes",
+  "en": "before",
+  "ru": "до, раньше",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu leio um livro antes de dormir.",
+    "en": "I read a book before going to sleep."
+   },
+   {
+    "pt": "Devemos lavar as mãos antes de comer.",
+    "en": "We must wash our hands before eating."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 73,
+  "pt": "depois",
+  "en": "after/later",
+  "ru": "после, потом",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu vou descansar depois da aula.",
+    "en": "I’m going to rest after class."
+   },
+   {
+    "pt": "Falamos sobre isso depois.",
+    "en": "We’ll talk about this later."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 74,
+  "pt": "aqui",
+  "en": "here",
+  "ru": "здесь, тут",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu moro aqui.",
+    "en": "I live here."
+   },
+   {
+    "pt": "Você vem sempre aqui?",
+    "en": "Do you come here often?"
+   }
+  ],
+  "imgQuery": "you are here map marker",
+  "image": "https://live.staticflickr.com/4096/4889439481_1cee05afb1_b.jpg",
+  "credit": {
+   "author": "Steve Rhodes",
+   "url": "https://www.flickr.com/photos/44124466908@N01/4889439481",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 75,
+  "pt": "lá",
+  "en": "there",
+  "ru": "там",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu estive lá ontem.",
+    "en": "I was there yesterday."
+   },
+   {
+    "pt": "O livro está lá.",
+    "en": "The book is there."
+   }
+  ],
+  "imgQuery": "distant mountains far horizon",
+  "image": "https://live.staticflickr.com/8147/7230142398_a722801f7a_b.jpg",
+  "credit": {
+   "author": "Alex Akopyan",
+   "url": "https://www.flickr.com/photos/45564176@N06/7230142398",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 76,
+  "pt": "apenas",
+  "en": "only/just",
+  "ru": "только, всего лишь",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "O show durou apenas uma hora.",
+    "en": "The show lasted only one hour."
+   },
+   {
+    "pt": "Meu sobrinho tem apenas 9 anos.",
+    "en": "My nephew is just 9 years old."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 77,
+  "pt": "mais",
+  "en": "more",
+  "ru": "больше",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Ele é mais alto do que ela.",
+    "en": "He is taller than her."
+   },
+   {
+    "pt": "Gostaria de comer mais chocolate.",
+    "en": "I’d like to eat more chocolate."
+   }
+  ],
+  "imgQuery": "plus sign symbol addition",
+  "image": "https://live.staticflickr.com/7073/7382239368_ba418d5b73_b.jpg",
+  "credit": {
+   "author": "FutUndBeidl",
+   "url": "https://www.flickr.com/photos/61423903@N06/7382239368",
+   "source": "Openverse / Flickr",
+   "license": "CC BY 2.0"
+  }
+ },
+ {
+  "id": 78,
+  "pt": "menos",
+  "en": "less",
+  "ru": "меньше",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Ela é menos alta do que ele.",
+    "en": "She is less tall than him."
+   },
+   {
+    "pt": "Eu deveria comer menos chocolate.",
+    "en": "I should eat less chocolate."
+   }
+  ],
+  "imgQuery": "minus math symbol sign",
+  "image": "https://images.rawpixel.com/image_png_1300/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2pvYjcyOS0wMzEtcC5wbmc.png",
+  "credit": {
+   "author": "",
+   "url": "https://www.rawpixel.com/image/6818774/png-sticker-public-domain",
+   "source": "Openverse / Rawpixel",
+   "license": "CC CC0 1.0"
+  }
+ },
+ {
+  "id": 79,
+  "pt": "cedo",
+  "en": "early",
+  "ru": "рано",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Eu acordo cedo todos os dias.",
+    "en": "I wake up early every day."
+   },
+   {
+    "pt": "Ele chegou cedo à reunião.",
+    "en": "He arrived early at the meeting."
+   }
+  ],
+  "imgQuery": "sunrise morning alarm clock",
+  "image": "https://live.staticflickr.com/3464/3309530911_30680b897a_b.jpg",
+  "credit": {
+   "author": "The Hamster Factor",
+   "url": "https://www.flickr.com/photos/83519847@N00/3309530911",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 80,
+  "pt": "tarde",
+  "en": "late",
+  "ru": "поздно; день (после полудня)",
+  "pos": "adverbs",
+  "examples": [
+   {
+    "pt": "Ontem fui dormir tarde.",
+    "en": "Yesterday I went to bed late."
+   },
+   {
+    "pt": "Antes tarde do que nunca!",
+    "en": "Better late than never!"
+   }
+  ],
+  "imgQuery": "night city lights evening",
+  "image": "https://live.staticflickr.com/1668/24280639854_f3d3d3b2a0_b.jpg",
+  "credit": {
+   "author": "@nufrankz",
+   "url": "https://www.flickr.com/photos/25875625@N07/24280639854",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-NC-ND 2.0"
+  }
+ },
+ {
+  "id": 81,
+  "pt": "o/a",
+  "en": "the",
+  "ru": "определённый артикль (муж./жен. род)",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "O livro está na estante.",
+    "en": "The book is on the shelf."
+   },
+   {
+    "pt": "A caneta está na gaveta.",
+    "en": "The pen is in the drawer."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 82,
+  "pt": "um/uma",
+  "en": "a/an",
+  "ru": "неопределённый артикль; один, одна",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Comprei um sapato novo.",
+    "en": "I bought a new shoe."
+   },
+   {
+    "pt": "Comprei uma blusa nova.",
+    "en": "I bought a new blouse."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 83,
+  "pt": "e",
+  "en": "and",
+  "ru": "и",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu trouxe um caderno e uma caneta.",
+    "en": "I brought a notebook and a pen."
+   },
+   {
+    "pt": "Meu marido e eu somos brasileiros.",
+    "en": "My husband and I are Brazilian."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 84,
+  "pt": "ou",
+  "en": "or",
+  "ru": "или",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Você quer chá ou café?",
+    "en": "Do you want tea or coffee?"
+   },
+   {
+    "pt": "Você prefere o inverno ou o verão?",
+    "en": "Do you prefer winter or summer?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 85,
+  "pt": "mas",
+  "en": "but",
+  "ru": "но",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "A viagem foi boa, mas cansativa.",
+    "en": "The trip was good but tiring."
+   },
+   {
+    "pt": "Meu carro é velho, mas funciona bem.",
+    "en": "My car is old but runs well."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 86,
+  "pt": "de/da/do",
+  "en": "of/from",
+  "ru": "из, от; (родительный падеж)",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Ele é de São Paulo.",
+    "en": "He is from São Paulo."
+   },
+   {
+    "pt": "Eu sou do Brasil.",
+    "en": "I am from Brazil."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 87,
+  "pt": "em/na/no",
+  "en": "in/on/at",
+  "ru": "в, на",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu moro em Nova Iorque.",
+    "en": "I live in New York."
+   },
+   {
+    "pt": "Ele está no banco.",
+    "en": "He is at the bank."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 88,
+  "pt": "para",
+  "en": "to/for",
+  "ru": "для, к, чтобы",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu vou para o Brasil.",
+    "en": "I’m going to Brazil."
+   },
+   {
+    "pt": "Isto é para você.",
+    "en": "This is for you."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 89,
+  "pt": "por",
+  "en": "by/through/per",
+  "ru": "по, через, за",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Vou enviar isto por e-mail.",
+    "en": "I’ll send this by email."
+   },
+   {
+    "pt": "Faço exercícios duas vezes por semana.",
+    "en": "I exercise twice per week."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 90,
+  "pt": "com",
+  "en": "with",
+  "ru": "с (вместе с)",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu falo com meus amigos todo dia.",
+    "en": "I talk with my friends every day."
+   },
+   {
+    "pt": "Maria saiu com João.",
+    "en": "Maria went out with João."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 91,
+  "pt": "eu",
+  "en": "I",
+  "ru": "я",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Eu sou brasileira.",
+    "en": "I am Brazilian."
+   },
+   {
+    "pt": "Eu falo português.",
+    "en": "I speak Portuguese."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 92,
+  "pt": "você",
+  "en": "you",
+  "ru": "ты, вы",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "De onde você é?",
+    "en": "Where are you from?"
+   },
+   {
+    "pt": "Você fala português?",
+    "en": "Do you speak Portuguese?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 93,
+  "pt": "ela/ele",
+  "en": "she/he",
+  "ru": "она / он",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Ela é brasileira.",
+    "en": "She is Brazilian."
+   },
+   {
+    "pt": "Ele é americano.",
+    "en": "He is American."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 94,
+  "pt": "a gente",
+  "en": "we (informal)",
+  "ru": "мы (разговорное)",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "A gente é do Brasil.",
+    "en": "We are from Brazil."
+   },
+   {
+    "pt": "A gente fala português.",
+    "en": "We speak Portuguese."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 95,
+  "pt": "esta/este",
+  "en": "this",
+  "ru": "эта / этот",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Comprei esta blusa no Brasil.",
+    "en": "I bought this blouse in Brazil."
+   },
+   {
+    "pt": "Comprei este computador este ano.",
+    "en": "I bought this computer this year."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 96,
+  "pt": "minha/meu",
+  "en": "my",
+  "ru": "моя / мой",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Minha mãe mora no Brasil.",
+    "en": "My mother lives in Brazil."
+   },
+   {
+    "pt": "Meu irmão também mora no Brasil.",
+    "en": "My brother also lives in Brazil."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 97,
+  "pt": "sua/seu",
+  "en": "your",
+  "ru": "твоя, ваша / твой, ваш",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Qual é o seu nome?",
+    "en": "What is your name?"
+   },
+   {
+    "pt": "Qual é a sua profissão?",
+    "en": "What is your profession?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 98,
+  "pt": "que",
+  "en": "what/that",
+  "ru": "что; который",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Que horas são?",
+    "en": "What time is it?"
+   },
+   {
+    "pt": "Aqui está o livro que eu comprei.",
+    "en": "Here is the book that I bought."
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 99,
+  "pt": "quem",
+  "en": "who/whom",
+  "ru": "кто, кого",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Quem é ela?",
+    "en": "Who is she?"
+   },
+   {
+    "pt": "Com quem você vai viajar?",
+    "en": "With whom are you traveling?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ },
+ {
+  "id": 100,
+  "pt": "qual",
+  "en": "which/what",
+  "ru": "какой, который",
+  "pos": "function words",
+  "examples": [
+   {
+    "pt": "Qual é o seu sobrenome?",
+    "en": "What is your last name?"
+   },
+   {
+    "pt": "Qual é sua cor favorita?",
+    "en": "What is your favorite color?"
+   }
+  ],
+  "imgQuery": null,
+  "image": null,
+  "credit": null
+ }
+]

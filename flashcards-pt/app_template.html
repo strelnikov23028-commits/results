@@ -202,6 +202,14 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
   display:block;word-break:break-word}
 .word-front .ask{font-size:12px;color:var(--text-3);margin-top:6px}
 
+/* символ вместо фото — для слов, которые фотографией не передать */
+.icon-face{flex:1;display:grid;place-items:center;padding:34px 24px 18px;min-height:0;
+  background:linear-gradient(160deg,
+    color-mix(in srgb,var(--ic) 12%,var(--surface)), var(--surface))}
+.icon-face svg{width:min(46%,180px);height:auto;color:var(--ic);stroke-width:1.5}
+.wcard .th .icon-face{padding:14px}
+.wcard .th .icon-face svg{width:56px}
+
 /* карточка без фото (служебные слова) — слово крупно на подложке + пример фразы */
 .noimg-front{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
   padding:74px 30px 26px;gap:14px;text-align:center;
@@ -708,6 +716,42 @@ function hintOf(text){
   }).join('');
 }
 
+/* ─── Символы вместо фото ───
+   Абстрактные слова («да», «нет», «больше», «никогда», «близко») фотопоиском
+   не передать — любой кадр будет случайным. Для них рисуем однозначный знак. */
+const ICONS = {
+  check:   ['M20 6 9 17l-5-5',                                   'var(--green)'],
+  cross:   ['M18 6 6 18M6 6l12 12',                              'var(--red)'],
+  ban:     ['M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM5 5l14 14','var(--red)'],
+  plus:    ['M12 4v16M4 12h16',                                  'var(--blue)'],
+  minus:   ['M4 12h16',                                          'var(--blue)'],
+  tally:   ['M5 6v12M9 6v12M13 6v12M17 6v12M3 18 19 6',           'var(--text-2)'],
+  checkCir:['M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8 12l3 3 5-5','var(--green)'],
+  crosshair:['M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 2v4M12 18v4M2 12h4M18 12h4M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4','var(--blue)'],
+  arrowFar:['M3 12h13M12 7l5 5-5 5M20 5v14',                     'var(--orange)'],
+  clock:   ['M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 6v6l4 2','var(--blue)'],
+  calendar:['M3 5h18v16H3zM3 10h18M8 2v5M16 2v5',                'var(--orange)'],
+  calCross:['M3 5h18v16H3zM3 10h18M8 2v5M16 2v5M9 14l6 6M15 14l-6 6','var(--red)'],
+  infinity:['M8 12a4 4 0 1 1 4 4c-2 0-3-2-4-4s-2-4-4-4a4 4 0 0 0 0 8c2 0 3-2 4-4s2-4 4-4a4 4 0 0 1 0 8','var(--purple)'],
+  pin:     ['M12 22s8-6.5 8-12a8 8 0 1 0-16 0c0 5.5 8 12 8 12zM12 8v4',   'var(--red)'],
+  /* близко: две стенки сдвинуты, стрелки внутрь; далеко: разведены, стрелки наружу */
+  near:    ['M5 5v14M19 5v14M8 12h8M8 12l3-3M8 12l3 3M16 12l-3-3M16 12l-3 3','var(--green)'],
+  far:     ['M2 5v14M22 5v14M6 12h12M6 12l3-3M6 12l3 3M18 12l-3-3M18 12l-3 3','var(--text-2)'],
+  few:     ['M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',                 'var(--text-2)'],
+  many:    ['M7 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM17 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM12 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM17 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM12 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z','var(--blue)'],
+  badge:   ['M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6zM9 12l2 2 4-4','var(--blue)'],
+  search:  ['M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4.5-4.5','var(--purple)'],
+  thumbUp: ['M7 22V11l5-9a2 2 0 0 1 2 3l-1 5h5a2 2 0 0 1 2 2.5l-2 8a2 2 0 0 1-2 1.5H7zM7 11H3v11h4','var(--green)'],
+  thumbDn: ['M17 2v11l-5 9a2 2 0 0 1-2-3l1-5H6a2 2 0 0 1-2-2.5l2-8A2 2 0 0 1 8 2h9zM17 13h4V2h-4','var(--red)'],
+};
+function iconHTML(name){
+  const ic = ICONS[name] || ICONS.badge;
+  const paths = ic[0].split('M').filter(Boolean).map(p => `<path d="M${p}"/>`).join('');
+  return `<div class="icon-face" style="--ic:${ic[1]}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg></div>`;
+}
+
 function posTag(c){
   return `<span class="pos-tag" style="background:color-mix(in srgb,${POS_COLOR[c.pos]} 14%,transparent);color:${POS_COLOR[c.pos]}">${POS_RU[c.pos]||c.pos}</span>`;
 }
@@ -723,6 +767,11 @@ function topBar(c, showHint){
 function frontHTML(c){
   const foot = `<div class="foot">${posTag(c)}<span class="tap-hint">
       <span class="kbd-only"><span class="kbd">Пробел</span> или</span> нажми карточку, чтобы перевернуть</span></div>`;
+  if(c.icon){
+    return topBar(c,true) + iconHTML(c.icon) +
+      `<div class="word-front"><span class="w">${esc(c.pt)}</span>
+         <div class="ask">как это по-русски?</div></div>` + foot;
+  }
   if(c.image){
     const cr = c.credit ? `<div class="credit">${esc(c.credit.author||'')} · ${esc(c.credit.source||'')}${c.credit.license?' · '+esc(c.credit.license):''}</div>` : '';
     return topBar(c,true) + `<div class="pic">
@@ -1014,11 +1063,12 @@ function renderWords(){
     const x = S.cards[c.id];
     const state = !x || !x.seen ? ['не начато','var(--text-3)']
       : learned(c) ? ['выучено','var(--green)'] : ['в работе','var(--blue)'];
-    const th = c.image
+    const th = c.icon ? iconHTML(c.icon)
+      : c.image
       ? `<img class="bg" src="${esc(c.image)}" alt="" aria-hidden="true" loading="lazy">
          <img class="fg" src="${esc(c.image)}" alt="" loading="lazy"
               onerror="this.parentNode.innerHTML='<div class=\\'noimg\\'>фото не загрузилось</div>'">`
-      : `<div class="noimg">служебное слово —<br>показывается фразой</div>`;
+      : `<div class="noimg">без картинки —<br>слово и перевод</div>`;
     return `<article class="wcard"><div class="th">${th}</div><div class="bd">
       <div class="p">${esc(c.pt)}</div>
       <div class="m">${esc(c.ru)}</div>

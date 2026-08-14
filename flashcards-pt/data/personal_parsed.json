@@ -1,0 +1,1659 @@
+{
+ "words": [
+  {
+   "pt": "Também",
+   "gloss": "too",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Também - too\n"
+  },
+  {
+   "pt": "maneiro",
+   "gloss": "cool",
+   "gloss_lang": "en",
+   "note": "интонация важна, можно оскорбить",
+   "raw": "maneiro - cool (интонация важна, можно оскорбить)\n"
+  },
+  {
+   "pt": "Muito de",
+   "gloss": "a lot/very of",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Muito de - a lot/very of\n"
+  },
+  {
+   "pt": "Comida",
+   "gloss": "food",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Comida - food\n"
+  },
+  {
+   "pt": "gosto",
+   "gloss": "gusta",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "gosto = gusta\n"
+  },
+  {
+   "pt": "nau",
+   "gloss": "no",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "nau - no\n"
+  },
+  {
+   "pt": "ativo",
+   "gloss": "active",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "ativo - active\n"
+  },
+  {
+   "pt": "trabalho",
+   "gloss": "работа",
+   "gloss_lang": "ru",
+   "note": "trabal'o; trabajo",
+   "raw": "trabalho - работа {trabal'o} (trabajo)\n"
+  },
+  {
+   "pt": "empresa",
+   "gloss": "company",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "empresa = company\n"
+  },
+  {
+   "pt": "se chama",
+   "gloss": "is called?",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "se chama = is called?\n"
+  },
+  {
+   "pt": "garafa",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "",
+   "raw": "garafa\n"
+  },
+  {
+   "pt": "mi braso",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "",
+   "raw": "mi braso \n"
+  },
+  {
+   "pt": "Onde",
+   "gloss": "Donde",
+   "gloss_lang": "en",
+   "note": "где, where",
+   "raw": "Onde = Donde (где, where) \n"
+  },
+  {
+   "pt": "Papel",
+   "gloss": "Paper",
+   "gloss_lang": "en",
+   "note": "papeu",
+   "raw": "Papel = Paper {papeu}\n"
+  },
+  {
+   "pt": "Bem",
+   "gloss": "well",
+   "gloss_lang": "en",
+   "note": "bien; beim",
+   "raw": "Bem = well (bien) {beim}\n"
+  },
+  {
+   "pt": "Bom, boa",
+   "gloss": "good",
+   "gloss_lang": "en",
+   "note": "bona",
+   "raw": "Bom, boa = good (bona)\n"
+  },
+  {
+   "pt": "ter",
+   "gloss": "tengo/have",
+   "gloss_lang": "en",
+   "note": "i have - ten'o; Vose tem..?",
+   "raw": "ter = tengo/have {i have - ten'o} (Vose tem..?)\n"
+  },
+  {
+   "pt": "aqui",
+   "gloss": "here",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "aqui = here\n"
+  },
+  {
+   "pt": "russo",
+   "gloss": "russo",
+   "gloss_lang": "en",
+   "note": "husso",
+   "raw": "russo = russo {husso}\n"
+  },
+  {
+   "pt": "rapido",
+   "gloss": "fast",
+   "gloss_lang": "en",
+   "note": "hapido; faster",
+   "raw": "rapido = fast {hapido} (faster)\n"
+  },
+  {
+   "pt": "retortar",
+   "gloss": "return",
+   "gloss_lang": "en",
+   "note": "hetornar",
+   "raw": "retortar = return {hetornar}\n"
+  },
+  {
+   "pt": "riso",
+   "gloss": "laugh",
+   "gloss_lang": "en",
+   "note": "hisso",
+   "raw": "riso = laugh {hisso}\n"
+  },
+  {
+   "pt": "roer",
+   "gloss": "bite",
+   "gloss_lang": "en",
+   "note": "bite",
+   "raw": "roer = bite (bite )\n"
+  },
+  {
+   "pt": "roer as unhas",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "hoer as un'as",
+   "raw": "roer as unhas = {hoer as un'as}\n"
+  },
+  {
+   "pt": "homem",
+   "gloss": "man",
+   "gloss_lang": "en",
+   "note": "omen",
+   "raw": "homem = man {omen}\n"
+  },
+  {
+   "pt": "mulher",
+   "gloss": "woman",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "mulher = woman\n"
+  },
+  {
+   "pt": "moro",
+   "gloss": "live",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "moro = live\n"
+  },
+  {
+   "pt": "frutas",
+   "gloss": "fruits",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "frutas = fruits\n"
+  },
+  {
+   "pt": "bonita",
+   "gloss": "beatiful",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "bonita = beatiful\n"
+  },
+  {
+   "pt": "CIDADE",
+   "gloss": "city",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "CIDADE = city\n"
+  },
+  {
+   "pt": "namorada",
+   "gloss": "girlfriend",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "namorada = girlfriend\n"
+  },
+  {
+   "pt": "comeca",
+   "gloss": "cup",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "comeca = cup\n"
+  },
+  {
+   "pt": "nasci",
+   "gloss": "born",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "nasci = born\n"
+  },
+  {
+   "pt": "preferi",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "",
+   "raw": "preferi = \n"
+  },
+  {
+   "pt": "agora",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "agora",
+   "raw": "agora = {agora}\n"
+  },
+  {
+   "pt": "ano, anos",
+   "gloss": "year, years",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "ano, anos = year, years\n"
+  },
+  {
+   "pt": "mas",
+   "gloss": "but",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "mas = but\n"
+  },
+  {
+   "pt": "con",
+   "gloss": "with",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "con = with\n"
+  },
+  {
+   "pt": "melhor",
+   "gloss": "mehor",
+   "gloss_lang": "en",
+   "note": "better",
+   "raw": "melhor = mehor (better)\n"
+  },
+  {
+   "pt": "pior",
+   "gloss": "worse",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "pior = worse\n"
+  },
+  {
+   "pt": "Lá",
+   "gloss": "there",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Lá = there\n"
+  },
+  {
+   "pt": "Voltei",
+   "gloss": "I'm back",
+   "gloss_lang": "en",
+   "note": "voltar = back",
+   "raw": "Voltei = I'm back (voltar = back)\n"
+  },
+  {
+   "pt": "hoje",
+   "gloss": "today",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "hoje = today\n"
+  },
+  {
+   "pt": "Deixa",
+   "gloss": "let",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Deixa = let\n"
+  },
+  {
+   "pt": "Casa",
+   "gloss": "casa",
+   "gloss_lang": "en",
+   "note": "home",
+   "raw": "Casa = casa (home)\n"
+  },
+  {
+   "pt": "pai",
+   "gloss": "papa",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "pai = papa\n"
+  },
+  {
+   "pt": "nomi",
+   "gloss": "nombre",
+   "gloss_lang": "en",
+   "note": "name",
+   "raw": "nomi = nombre (name)\n"
+  },
+  {
+   "pt": "I remember",
+   "gloss": "me lembro",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "me lembro = I remember\n"
+  },
+  {
+   "pt": "claro",
+   "gloss": "of course",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "claro = of course\n"
+  },
+  {
+   "pt": "disculpe",
+   "gloss": "sorry",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "disculpe = sorry\n"
+  },
+  {
+   "pt": "acho que",
+   "gloss": "think that",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "acho que = think that\n"
+  },
+  {
+   "pt": "talvez",
+   "gloss": "maybe",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "talvez = maybe\n"
+  },
+  {
+   "pt": "apenas",
+   "gloss": "just",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "apenas = just\n"
+  },
+  {
+   "pt": "às vezes",
+   "gloss": "sometimes",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "às vezes = sometimes\n"
+  },
+  {
+   "pt": "tchau",
+   "gloss": "chao",
+   "gloss_lang": "en",
+   "note": "пока",
+   "raw": "tchau = chao (пока)\n"
+  },
+  {
+   "pt": "tranquilo",
+   "gloss": "calm",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "tranquilo = calm\n"
+  },
+  {
+   "pt": "tudo",
+   "gloss": "everything",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "tudo = everything\n"
+  },
+  {
+   "pt": "todo",
+   "gloss": "all",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "todo = all\n"
+  },
+  {
+   "pt": "mundo",
+   "gloss": "world",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "mundo = world\n"
+  },
+  {
+   "pt": "Quase",
+   "gloss": "almost",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Quase = almost\n"
+  },
+  {
+   "pt": "fica",
+   "gloss": "from",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "fica = from\n"
+  },
+  {
+   "pt": "grange",
+   "gloss": "big",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "grange = big\n"
+  },
+  {
+   "pt": "medio",
+   "gloss": "medium",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "medio = medium\n"
+  },
+  {
+   "pt": "pequeno",
+   "gloss": "small",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "pequeno = small \n"
+  },
+  {
+   "pt": "fazer",
+   "gloss": "do",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "fazer = do\n"
+  },
+  {
+   "pt": "proprio",
+   "gloss": "own",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "proprio = own \n"
+  },
+  {
+   "pt": "negócio",
+   "gloss": "business",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "negócio = business\n"
+  },
+  {
+   "pt": "Então",
+   "gloss": "so",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Então = so\n"
+  },
+  {
+   "pt": "idade",
+   "gloss": "age",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "idade = age\n"
+  },
+  {
+   "pt": "Fêmea",
+   "gloss": "женский",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Fêmea = женский\n"
+  },
+  {
+   "pt": "estava",
+   "gloss": "was",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "estava = was\n"
+  },
+  {
+   "pt": "antes de",
+   "gloss": "before that",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "antes de = before that\n"
+  },
+  {
+   "pt": "depois",
+   "gloss": "after",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "depois = after\n"
+  },
+  {
+   "pt": "somente",
+   "gloss": "only",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "somente = only\n"
+  },
+  {
+   "pt": "estudar",
+   "gloss": "study",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "estudar = study\n"
+  },
+  {
+   "pt": "atras",
+   "gloss": "ago",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "atras = ago\n"
+  },
+  {
+   "pt": "início",
+   "gloss": "start",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "início = start\n"
+  },
+  {
+   "pt": "Quando",
+   "gloss": "when",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Quando = when\n"
+  },
+  {
+   "pt": "alguns",
+   "gloss": "few",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "alguns = few\n"
+  },
+  {
+   "pt": "tempo",
+   "gloss": "time",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "tempo = time \n"
+  },
+  {
+   "pt": "fácil",
+   "gloss": "easy",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "fácil = easy\n"
+  },
+  {
+   "pt": "mais",
+   "gloss": "bigger",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "mais = bigger\n"
+  },
+  {
+   "pt": "desafio",
+   "gloss": "challenge",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "desafio = challenge\n"
+  },
+  {
+   "pt": "impostos",
+   "gloss": "taxes",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "impostos = taxes\n"
+  },
+  {
+   "pt": "o mesmo",
+   "gloss": "same",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "o mesmo = same\n"
+  },
+  {
+   "pt": "do que",
+   "gloss": "than",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "do que = than \n"
+  },
+  {
+   "pt": "mas",
+   "gloss": "but",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "mas = but\n"
+  },
+  {
+   "pt": "vai",
+   "gloss": "go",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "vai = go\n"
+  },
+  {
+   "pt": "frequentemente",
+   "gloss": "often",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "frequentemente = often\n"
+  },
+  {
+   "pt": "infância",
+   "gloss": "childhood",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "infância = childhood\n"
+  },
+  {
+   "pt": "Quadra",
+   "gloss": "court",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Quadra - court\n"
+  },
+  {
+   "pt": "Bola",
+   "gloss": "ball",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Bola = ball\n"
+  },
+  {
+   "pt": "Raquete",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "Haquech",
+   "raw": "Raquete = {Haquech}\n"
+  },
+  {
+   "pt": "Jogador",
+   "gloss": "player",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Jogador = player\n"
+  },
+  {
+   "pt": "Professor",
+   "gloss": "teache",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Professor = teache\n"
+  },
+  {
+   "pt": "ainda",
+   "gloss": "still",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "ainda = still\n"
+  },
+  {
+   "pt": "a cada",
+   "gloss": "each",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "a cada = each\n"
+  },
+  {
+   "pt": "isso acontece",
+   "gloss": "it happens",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "isso acontece = it happens\n"
+  },
+  {
+   "pt": "aberta",
+   "gloss": "outdoor",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "aberta = outdoor\n"
+  },
+  {
+   "pt": "coberta",
+   "gloss": "indor",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "coberta = indor\n"
+  },
+  {
+   "pt": "copo",
+   "gloss": "cup",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "copo = cup\n"
+  },
+  {
+   "pt": "espero",
+   "gloss": "hope",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "espero = hope\n"
+  },
+  {
+   "pt": "Contar",
+   "gloss": "tell",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Contar = tell\n"
+  },
+  {
+   "pt": "perto",
+   "gloss": "close",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "perto = close\n"
+  },
+  {
+   "pt": "tomar",
+   "gloss": "take",
+   "gloss_lang": "en",
+   "note": "drink",
+   "raw": "tomar = take (drink)\n"
+  },
+  {
+   "pt": "beber",
+   "gloss": "drink",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "beber = drink\n"
+  },
+  {
+   "pt": "comer",
+   "gloss": "eat",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "comer = eat\n"
+  },
+  {
+   "pt": "conversa",
+   "gloss": "chat",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "conversa = chat\n"
+  },
+  {
+   "pt": "por",
+   "gloss": "by",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "por = by\n"
+  },
+  {
+   "pt": "desenvolvimento",
+   "gloss": "development",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "desenvolvimento = development\n"
+  },
+  {
+   "pt": "focar",
+   "gloss": "focus",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "focar = focus\n"
+  },
+  {
+   "pt": "vir",
+   "gloss": "come",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "vir = come\n"
+  },
+  {
+   "pt": "bacho",
+   "gloss": "below",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "bacho = below\n"
+  },
+  {
+   "pt": "Quanto",
+   "gloss": "how many",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Quanto = how many\n"
+  },
+  {
+   "pt": "festa",
+   "gloss": "fiesta",
+   "gloss_lang": "en",
+   "note": "party",
+   "raw": "festa = fiesta (party)\n"
+  },
+  {
+   "pt": "desde que",
+   "gloss": "since",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "desde que = since\n"
+  },
+  {
+   "pt": "como",
+   "gloss": "as",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "como = as\n"
+  },
+  {
+   "pt": "porque",
+   "gloss": "because",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "porque = because\n"
+  },
+  {
+   "pt": "embora",
+   "gloss": "although",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "embora = although\n"
+  },
+  {
+   "pt": "haver",
+   "gloss": "have",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "haver = have\n"
+  },
+  {
+   "pt": "nada",
+   "gloss": "nothing",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "nada = nothing \n"
+  },
+  {
+   "pt": "almocar",
+   "gloss": "have a lunch",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "almocar = have a lunch\n"
+  },
+  {
+   "pt": "jantar",
+   "gloss": "dinner",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "jantar = dinner\n"
+  },
+  {
+   "pt": "fim",
+   "gloss": "final",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "fim = final\n"
+  },
+  {
+   "pt": "especialmente",
+   "gloss": "especial",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "especialmente = especial\n"
+  },
+  {
+   "pt": "na area",
+   "gloss": "area",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "na area = area\n"
+  },
+  {
+   "pt": "clima",
+   "gloss": "climate",
+   "gloss_lang": "en",
+   "note": "мужской",
+   "raw": "clima = climate (мужской)\n"
+  },
+  {
+   "pt": "atmosfera",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "",
+   "raw": "atmosfera = \n"
+  },
+  {
+   "pt": "horário fuso",
+   "gloss": "часовой пояс",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "horário fuso = часовой пояс\n"
+  },
+  {
+   "pt": "insegurança",
+   "gloss": "unsecure",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "insegurança = unsecure\n"
+  },
+  {
+   "pt": "seguro",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "",
+   "raw": "seguro = \n"
+  },
+  {
+   "pt": "arma",
+   "gloss": "weapon",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "arma = weapon\n"
+  },
+  {
+   "pt": "drogas",
+   "gloss": "drugs",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "drogas = drugs\n"
+  },
+  {
+   "pt": "repetir",
+   "gloss": "repetito",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "repetir = repetito\n"
+  },
+  {
+   "pt": "sobrenome",
+   "gloss": "surname",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "sobrenome = surname\n"
+  },
+  {
+   "pt": "soletrar",
+   "gloss": "spell",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "soletrar = spell\n"
+  },
+  {
+   "pt": "aula",
+   "gloss": "lesson",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "aula = lesson\n"
+  },
+  {
+   "pt": "Nascimento",
+   "gloss": "birthday",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Nascimento = birthday\n"
+  },
+  {
+   "pt": "Reserva",
+   "gloss": "резервация",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Reserva - резервация\n"
+  },
+  {
+   "pt": "Brancos",
+   "gloss": "белые",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Brancos - белые\n"
+  },
+  {
+   "pt": "Pessos",
+   "gloss": "people",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Pessos - people\n"
+  },
+  {
+   "pt": "Oi",
+   "gloss": "hello, ok",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Oi - hello, ok\n"
+  },
+  {
+   "pt": "Guerro",
+   "gloss": "gold",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Guerro - gold\n"
+  },
+  {
+   "pt": "Transito",
+   "gloss": "пробка",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Transito - пробка\n"
+  },
+  {
+   "pt": "Sentar-se",
+   "gloss": "Сидеть",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Сидеть - Sentar-se\n"
+  },
+  {
+   "pt": "ficar em pé",
+   "gloss": "Стоять",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Стоять - ficar em pé\n"
+  },
+  {
+   "pt": "Levante",
+   "gloss": "rise",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Levante - rise\n"
+  },
+  {
+   "pt": "como",
+   "gloss": "Like, as, how",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Like, as, how - como\n"
+  },
+  {
+   "pt": "salvar",
+   "gloss": "Save",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Save - salvar\n"
+  },
+  {
+   "pt": "Faça",
+   "gloss": "do",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Faça - do\n"
+  },
+  {
+   "pt": "Conta",
+   "gloss": "count",
+   "gloss_lang": "en",
+   "note": "счет",
+   "raw": "Conta - count (счет)\n"
+  },
+  {
+   "pt": "espaço",
+   "gloss": "space",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "space - espaço\n"
+  },
+  {
+   "pt": "sentir",
+   "gloss": "Feel",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Feel - sentir \n"
+  },
+  {
+   "pt": "mais",
+   "gloss": "More",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "More - mais\n"
+  },
+  {
+   "pt": "bem",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "",
+   "raw": "bem -\n"
+  },
+  {
+   "pt": "confortavel",
+   "gloss": "Comfortable",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Comfortable - confortavel\n"
+  },
+  {
+   "pt": "Comprar",
+   "gloss": "buy",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Comprar - buy\n"
+  },
+  {
+   "pt": "Assim",
+   "gloss": "like that",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Assim - like that\n"
+  },
+  {
+   "pt": "Nao sei",
+   "gloss": "don't know",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Nao sei - don't know\n"
+  },
+  {
+   "pt": "ligo",
+   "gloss": "call",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "ligo - call\n"
+  },
+  {
+   "pt": "mandar",
+   "gloss": "to send",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "mandar - to send\n"
+  },
+  {
+   "pt": "mando",
+   "gloss": "control",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "mando - control\n"
+  },
+  {
+   "pt": "amo",
+   "gloss": "love",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "amo - love\n"
+  },
+  {
+   "pt": "Alugar",
+   "gloss": "to rent",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Alugar - to rent\n"
+  },
+  {
+   "pt": "Alugado",
+   "gloss": "rented",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Alugado - rented\n"
+  },
+  {
+   "pt": "Eu aluguei",
+   "gloss": "I've rented",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Eu aluguei - I've rented\n"
+  },
+  {
+   "pt": "Rio",
+   "gloss": "river",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Rio - river\n"
+  },
+  {
+   "pt": "Calma",
+   "gloss": "calm",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Calma - calm\n"
+  },
+  {
+   "pt": "Extra",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "estra",
+   "raw": "Extra - {estra}\n"
+  },
+  {
+   "pt": "Sobremesa",
+   "gloss": "десерт",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Sobremesa - десерт\n"
+  },
+  {
+   "pt": "Cabana",
+   "gloss": "хижина",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Cabana - хижина\n"
+  },
+  {
+   "pt": "complicado",
+   "gloss": "complicated",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "complicado - complicated\n"
+  },
+  {
+   "pt": "vida",
+   "gloss": "life",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "vida - life\n"
+  },
+  {
+   "pt": "estilo",
+   "gloss": "style",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "estilo - style\n"
+  },
+  {
+   "pt": "poder subir",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "",
+   "raw": "poder subir - \n"
+  },
+  {
+   "pt": "pAis",
+   "gloss": "parents",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "pAis - parents\n"
+  },
+  {
+   "pt": "paIs",
+   "gloss": "country",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "paIs - country\n"
+  },
+  {
+   "pt": "peru",
+   "gloss": "turkey",
+   "gloss_lang": "en",
+   "note": "индюк",
+   "raw": "turkey - peru (индюк)\n"
+  },
+  {
+   "pt": "cultura",
+   "gloss": "culture",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "culture = cultura\n"
+  },
+  {
+   "pt": "sei",
+   "gloss": "i know",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "sei - i know\n"
+  },
+  {
+   "pt": "acho",
+   "gloss": "i think",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "acho - i think\n"
+  },
+  {
+   "pt": "cha",
+   "gloss": "tea",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "cha - tea\n"
+  },
+  {
+   "pt": "pedra",
+   "gloss": "stone",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "pedra - stone\n"
+  },
+  {
+   "pt": "meio",
+   "gloss": "middle",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "meio - middle\n"
+  },
+  {
+   "pt": "começar",
+   "gloss": "start",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "começar = start\n"
+  },
+  {
+   "pt": "deitar",
+   "gloss": "to lie on",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "deitar - to lie on\n"
+  },
+  {
+   "pt": "Mentir",
+   "gloss": "to lie",
+   "gloss_lang": "en",
+   "note": "to someone",
+   "raw": "Mentir - to lie (to someone)\n"
+  },
+  {
+   "pt": "mentira",
+   "gloss": "lie",
+   "gloss_lang": "en",
+   "note": "noun",
+   "raw": "mentira - lie (noun)\n"
+  },
+  {
+   "pt": "quente",
+   "gloss": "hot",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "quente - hot\n"
+  },
+  {
+   "pt": "frio",
+   "gloss": "cold",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "frio - cold\n"
+  },
+  {
+   "pt": "pia",
+   "gloss": "раковина",
+   "gloss_lang": "ru",
+   "note": "basin",
+   "raw": "pia - раковина (basin)\n"
+  },
+  {
+   "pt": "saboroso",
+   "gloss": "tasty",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "saboroso - tasty\n"
+  },
+  {
+   "pt": "ali",
+   "gloss": "",
+   "gloss_lang": "",
+   "note": "",
+   "raw": "ali - \n"
+  },
+  {
+   "pt": "filme",
+   "gloss": "film",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "filme - film\n"
+  },
+  {
+   "pt": "experiência",
+   "gloss": "experience",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "experiência - experience\n"
+  },
+  {
+   "pt": "ator",
+   "gloss": "actor",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "ator = actor\n"
+  },
+  {
+   "pt": "existe",
+   "gloss": "exist",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "existe = exist\n"
+  },
+  {
+   "pt": "tal",
+   "gloss": "such",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "tal = such\n"
+  },
+  {
+   "pt": "algumas",
+   "gloss": "some",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "algumas = some\n"
+  },
+  {
+   "pt": "poucos",
+   "gloss": "few",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "poucos = few\n"
+  },
+  {
+   "pt": "meio",
+   "gloss": "half",
+   "gloss_lang": "en",
+   "note": "of month",
+   "raw": "meio = half (of month)\n"
+  },
+  {
+   "pt": "metade",
+   "gloss": "half",
+   "gloss_lang": "en",
+   "note": "of the pizza",
+   "raw": "metade = half (of the pizza)\n"
+  },
+  {
+   "pt": "meu",
+   "gloss": "mine",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "meu = mine\n"
+  },
+  {
+   "pt": "Garson",
+   "gloss": "официант",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "Garson - официант\n"
+  },
+  {
+   "pt": "Separar",
+   "gloss": "separate",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Separar - separate\n"
+  },
+  {
+   "pt": "Virá",
+   "gloss": "will come",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Virá - will come\n"
+  },
+  {
+   "pt": "Cardápio",
+   "gloss": "Menu",
+   "gloss_lang": "en",
+   "note": "в ресторане; «menu» в бразильском португальском — это скорее меню в приложении/на сайте",
+   "raw": "Cardápio — Menu (в ресторане; «menu» в бразильском португальском — это скорее меню в приложении/на сайте)\n"
+  },
+  {
+   "pt": "normalmente",
+   "gloss": "Usually",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "normalmente — Usually\n"
+  },
+  {
+   "pt": "Pronto",
+   "gloss": "Ready",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Pronto — Ready\n"
+  },
+  {
+   "pt": "Férias",
+   "gloss": "Vacation",
+   "gloss_lang": "en",
+   "note": "всегда во мн. ч.",
+   "raw": "Férias — Vacation (всегда во мн. ч.)\n"
+  },
+  {
+   "pt": "Peixe",
+   "gloss": "Fish ; pescar — ловить рыбу",
+   "gloss_lang": "ru",
+   "note": "рыба",
+   "raw": "Peixe — Fish (рыба); pescar — ловить рыбу\n"
+  },
+  {
+   "pt": "Tentar",
+   "gloss": "Try",
+   "gloss_lang": "en",
+   "note": "to do smthng",
+   "raw": "Tentar — Try (to do smthng)\n"
+  },
+  {
+   "pt": "provar",
+   "gloss": "try food",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "provar - try food\n"
+  },
+  {
+   "pt": "profundo",
+   "gloss": "Deep",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "profundo — Deep\n"
+  },
+  {
+   "pt": "Cliente",
+   "gloss": "Client",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Cliente — Client\n"
+  },
+  {
+   "pt": "Cozinhar",
+   "gloss": "to Cook",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Cozinhar — to Cook\n"
+  },
+  {
+   "pt": "Acontece",
+   "gloss": "Happens",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Acontece — Happens\n"
+  },
+  {
+   "pt": "Carregador",
+   "gloss": "charger",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Carregador — charger \n"
+  },
+  {
+   "pt": "Precisar",
+   "gloss": "Need",
+   "gloss_lang": "en",
+   "note": "de",
+   "raw": "Precisar (de) — Need\n"
+  },
+  {
+   "pt": "Terminar",
+   "gloss": "Finish",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Terminar— Finish\n"
+  },
+  {
+   "pt": "Bolsa / sacola / saco",
+   "gloss": "Bag",
+   "gloss_lang": "en",
+   "note": "_bolsa_ — сумка, _sacola_ — пакет из магазина, _saco_ — мешок",
+   "raw": "Bolsa / sacola / saco — Bag (_bolsa_ — сумка, _sacola_ — пакет из магазина, _saco_ — мешок)\n"
+  },
+  {
+   "pt": "Pegar",
+   "gloss": "Catch",
+   "gloss_lang": "en",
+   "note": "a disease",
+   "raw": "Pegar — Catch (a disease)\n"
+  },
+  {
+   "pt": "Anzol",
+   "gloss": "Hook",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Anzol — Hook\n"
+  },
+  {
+   "pt": "gancho",
+   "gloss": "крюк вообще",
+   "gloss_lang": "ru",
+   "note": "",
+   "raw": "gancho — крюк вообще\n"
+  },
+  {
+   "pt": "Vermelho",
+   "gloss": "Red",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Vermelho — Red\n"
+  },
+  {
+   "pt": "Verde",
+   "gloss": "Green",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Verde — Green\n"
+  },
+  {
+   "pt": "Amarelo",
+   "gloss": "Yellow",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Amarelo — Yellow\n"
+  },
+  {
+   "pt": "Loja",
+   "gloss": "store",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "Loja — store\n"
+  },
+  {
+   "pt": "poder",
+   "gloss": "can",
+   "gloss_lang": "en",
+   "note": "",
+   "raw": "can = poder"
+  }
+ ],
+ "unclear": [
+  {
+   "raw": "se chama = is called?\n",
+   "left": "se chama",
+   "right": "is called?"
+  },
+  {
+   "raw": "russo = russo {husso}\n",
+   "left": "russo",
+   "right": "russo"
+  },
+  {
+   "raw": "ano, anos = year, years\n",
+   "left": "ano, anos",
+   "right": "year, years"
+  },
+  {
+   "raw": "Casa = casa (home)\n",
+   "left": "Casa",
+   "right": "casa"
+  },
+  {
+   "raw": "nomi = nombre (name)\n",
+   "left": "nomi",
+   "right": "nombre"
+  },
+  {
+   "raw": "do que = than \n",
+   "left": "do que",
+   "right": "than"
+  },
+  {
+   "raw": "isso acontece = it happens\n",
+   "left": "isso acontece",
+   "right": "it happens"
+  },
+  {
+   "raw": "na area = area\n",
+   "left": "na area",
+   "right": "area"
+  },
+  {
+   "raw": "Nao sei - don't know\n",
+   "left": "Nao sei",
+   "right": "don't know"
+  },
+  {
+   "raw": "Eu aluguei - I've rented\n",
+   "left": "Eu aluguei",
+   "right": "I've rented"
+  }
+ ]
+}
