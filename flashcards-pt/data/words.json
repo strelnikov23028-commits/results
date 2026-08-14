@@ -2758,13 +2758,13 @@
   "ru": "бутылка",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "glass bottle",
-  "image": "https://live.staticflickr.com/4873/45818444811_ab5c6f9662_b.jpg",
+  "imgQuery": "glass bottle water drink",
+  "image": "https://live.staticflickr.com/8175/7985698964_91f1467242_b.jpg",
   "credit": {
-   "author": "SammCox",
-   "url": "https://www.flickr.com/photos/52755911@N03/45818444811",
+   "author": "Muffet",
+   "url": "https://www.flickr.com/photos/53133240@N00/7985698964",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC-ND 2.0"
+   "license": "CC BY 2.0"
   },
   "sources": [
    "personal"
@@ -2778,12 +2778,13 @@
   "ru": "моя рука (от плеча)",
   "pos": "phrases",
   "examples": [],
-  "imgQuery": "human arm",
-  "image": "https://live.staticflickr.com/7360/10410830726_e9b0255b7d_b.jpg",
+  "imgQuery": "bodybuilder flexing biceps arm",
+  "image": "https://live.staticflickr.com/1777/42257970190_e8f2a89657_b.jpg",
   "credit": {
-   "author": "MarkC333",
-   "url": "https://www.flickr.com/photos/49303401@N07/10410830726",
+   "author": "personaltrainertoronto",
+   "url": "https://www.flickr.com/photos/121183998@N08/42257970190",
    "source": "Openverse / Flickr",
+   "title": "Strength Band Curl",
    "license": "CC BY 2.0"
   },
   "sources": [
@@ -2999,13 +3000,13 @@
   "ru": "фрукты",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "fresh fruits",
-  "image": "https://live.staticflickr.com/6210/6116246717_82277c71e8_b.jpg",
+  "imgQuery": "fresh fruits basket colorful",
+  "image": "https://live.staticflickr.com/4073/4811999160_0014f52b52_b.jpg",
   "credit": {
-   "author": "Kirti Poddar",
-   "url": "https://www.flickr.com/photos/22598380@N07/6116246717",
+   "author": "Oh-Barcelona.com",
+   "url": "https://www.flickr.com/photos/33831399@N04/4811999160",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC-SA 2.0"
+   "license": "CC BY 2.0"
   },
   "sources": [
    "personal"
@@ -3167,17 +3168,13 @@
   "ru": "сегодня",
   "pos": "adverbs",
   "examples": [],
-  "imgQuery": "calendar today date",
-  "image": "https://live.staticflickr.com/6135/6036913933_a65b10763b_b.jpg",
-  "credit": {
-   "author": "666isMONEY ☮ ♥ & ☠",
-   "url": "https://www.flickr.com/photos/32645377@N06/6036913933",
-   "source": "Openverse / Flickr",
-   "license": "CC BY-SA 2.0"
-  },
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
   "sources": [
    "personal"
-  ]
+  ],
+  "icon": "calToday"
  },
  {
   "id": 132,
@@ -3239,14 +3236,9 @@
   "ru": "я помню",
   "pos": "verbs",
   "examples": [],
-  "imgQuery": "person remembering thinking",
-  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/US_Navy_031112-N-5862D-006_At_Officer_Candidate_School_%28OCS%29_onboard_NAS_Pensacola%2C_Chief_Aviation_Machinist_Mate_Jorge_Ouiroz_gives_Officer_Candidate_Jason_Roseberry_some_time_to_think_in_the_lean_and_rest_position.jpg/1280px-thumbnail.jpg",
-  "credit": {
-   "author": "U.S. Navy photo by Chief Photographer’s Mate Chris Desmond.",
-   "url": "https://commons.wikimedia.org/wiki/File:US_Navy_031112-N-5862D-006_At_Officer_Candidate_School_(OCS)_onboard_NAS_Pensacola,_Chief_Aviation_Machinist_Mate_Jorge_Ouiroz_gives_Officer_Candidate_Jason_Roseberry_some_time_to_think_in_the_lean_and_rest_position.jpg",
-   "source": "Wikimedia Commons",
-   "license": "Public domain"
-  },
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
   "sources": [
    "personal"
   ],
@@ -3430,18 +3422,14 @@
   "ru": "средний",
   "pos": "adjectives",
   "examples": [],
-  "imgQuery": "medium size comparison",
-  "image": "https://live.staticflickr.com/7014/6389018433_9cbc58f001_b.jpg",
-  "credit": {
-   "author": "Chi Bellami",
-   "url": "https://www.flickr.com/photos/46644449@N02/6389018433",
-   "source": "Openverse / Flickr",
-   "license": "CC BY-NC-SA 2.0"
-  },
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
   "sources": [
    "personal"
   ],
-  "fix": "нужен акут: «médio»"
+  "fix": "нужен акут: «médio»",
+  "icon": "medium"
  },
  {
   "id": 148,
@@ -3517,13 +3505,13 @@
   "ru": "самка; женский (о животных)",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "female animal",
-  "image": "https://live.staticflickr.com/4542/23986186197_fa20431cb2_b.jpg",
+  "imgQuery": "lioness female lion",
+  "image": "https://live.staticflickr.com/3821/11946876455_7fa9acbc9b_b.jpg",
   "credit": {
-   "author": "skersting66",
-   "url": "https://www.flickr.com/photos/26082152@N08/23986186197",
+   "author": "Tambako the Jaguar",
+   "url": "https://www.flickr.com/photos/8070463@N03/11946876455",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC-ND 2.0"
+   "license": "CC BY-ND 2.0"
   },
   "sources": [
    "personal"
@@ -3791,13 +3779,13 @@
   "ru": "мяч",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "ball sport",
-  "image": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Komazawa_olympic_park_indoor_ball_sports_field1.jpg",
+  "imgQuery": "soccer ball football",
+  "image": "https://live.staticflickr.com/5286/5685716203_50f09bbdf3_b.jpg",
   "credit": {
-   "author": "Chiba ryo",
-   "url": "https://commons.wikimedia.org/w/index.php?curid=19253549",
-   "source": "Openverse / Wikimedia",
-   "license": "CC BY-SA 3.0"
+   "author": "mags20_eb",
+   "url": "https://www.flickr.com/photos/16937950@N05/5685716203",
+   "source": "Openverse / Flickr",
+   "license": "CC BY-SA 2.0"
   },
   "sources": [
    "personal"
@@ -3848,13 +3836,13 @@
   "ru": "учитель, преподаватель",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "teacher classroom",
-  "image": "https://live.staticflickr.com/343/32197177986_6d409eb1b7_b.jpg",
+  "imgQuery": "albert einstein portrait",
+  "image": "https://live.staticflickr.com/3726/12657946083_fb10cdfe7c.jpg",
   "credit": {
-   "author": "denisbin",
-   "url": "https://www.flickr.com/photos/82134796@N03/32197177986",
+   "author": "DonkeyHotey",
+   "url": "https://www.flickr.com/photos/47422005@N04/12657946083",
    "source": "Openverse / Flickr",
-   "license": "CC BY-ND 2.0"
+   "license": "CC BY 2.0"
   },
   "sources": [
    "personal"
@@ -3909,17 +3897,13 @@
   "ru": "открытая",
   "pos": "adjectives",
   "examples": [],
-  "imgQuery": "open door",
-  "image": "https://live.staticflickr.com/2682/4090015274_d975b05539_b.jpg",
-  "credit": {
-   "author": "US Army Africa",
-   "url": "https://www.flickr.com/photos/36281822@N08/4090015274",
-   "source": "Openverse / Flickr",
-   "license": "CC BY 2.0"
-  },
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
   "sources": [
    "personal"
-  ]
+  ],
+  "icon": "doorOpen"
  },
  {
   "id": 177,
@@ -3947,12 +3931,13 @@
   "ru": "стакан",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "drinking glass water",
-  "image": "https://live.staticflickr.com/101/286131360_5140e16e1f_b.jpg",
+  "imgQuery": "glass of water on table drink",
+  "image": "https://live.staticflickr.com/3109/2754681293_9fe61db669_b.jpg",
   "credit": {
-   "author": "Darwin Bell",
-   "url": "https://www.flickr.com/photos/53611153@N00/286131360",
+   "author": "blmurch",
+   "url": "https://www.flickr.com/photos/82439748@N00/2754681293",
    "source": "Openverse / Flickr",
+   "title": "Water Glass Light Shadow",
    "license": "CC BY 2.0"
   },
   "sources": [
@@ -3985,13 +3970,14 @@
   "ru": "рассказывать; считать",
   "pos": "verbs",
   "examples": [],
-  "imgQuery": "person telling story",
-  "image": "https://live.staticflickr.com/4104/5107844438_d0d9675a2b_b.jpg",
+  "imgQuery": "grandmother telling story to child",
+  "image": "https://live.staticflickr.com/6121/5951855915_0f9e812f3e.jpg",
   "credit": {
-   "author": "Philerooski",
-   "url": "https://www.flickr.com/photos/37341680@N04/5107844438",
+   "author": "dpstyles™",
+   "url": "https://www.flickr.com/photos/77725780@N00/5951855915",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC-SA 2.0"
+   "title": "Pic of @Gam (my grandmother!) telling 'The Rabbit Story' to my brand new niece (@maddiecro",
+   "license": "CC BY 2.0"
   },
   "sources": [
    "personal"
@@ -4061,13 +4047,13 @@
   "ru": "разговор, беседа",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "people conversation talking",
-  "image": "https://live.staticflickr.com/342/19366201175_64143682cf_b.jpg",
+  "imgQuery": "two people talking conversation cafe",
+  "image": "https://live.staticflickr.com/8180/29215058274_e7cab6cb63_b.jpg",
   "credit": {
-   "author": "Ed Yourdon",
-   "url": "https://www.flickr.com/photos/72098626@N00/19366201175",
+   "author": "Neil. Moralee",
+   "url": "https://www.flickr.com/photos/62586117@N05/29215058274",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC-SA 2.0"
+   "license": "CC BY-NC-ND 2.0"
   },
   "sources": [
    "personal"
@@ -4275,13 +4261,13 @@
   "ru": "ужин; ужинать",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "dinner table evening",
-  "image": "https://live.staticflickr.com/156/348071332_1fd78cbad3.jpg",
+  "imgQuery": "dinner table family feast food",
+  "image": "https://live.staticflickr.com/2665/4164021385_6ea24d5748_b.jpg",
   "credit": {
-   "author": "Milica Sekulic",
-   "url": "https://www.flickr.com/photos/84059604@N00/348071332",
+   "author": "Bill Selak",
+   "url": "https://www.flickr.com/photos/98274023@N00/4164021385",
    "source": "Openverse / Flickr",
-   "license": "CC BY 2.0"
+   "license": "CC BY-ND 2.0"
   },
   "sources": [
    "personal"
@@ -4521,13 +4507,13 @@
   "ru": "урок, занятие",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "classroom lesson",
-  "image": "https://live.staticflickr.com/1560/24425751421_f462c77f4a_b.jpg",
+  "imgQuery": "students classroom desks school lesson",
+  "image": "https://live.staticflickr.com/2687/4248397761_0b8ff088dc_b.jpg",
   "credit": {
-   "author": "City of Albuquerque",
-   "url": "https://www.flickr.com/photos/7342241@N05/24425751421",
+   "author": "World Bank Photo Collection",
+   "url": "https://www.flickr.com/photos/10816734@N03/4248397761",
    "source": "Openverse / Flickr",
-   "license": "CC PDM 1.0"
+   "license": "CC BY-NC-ND 2.0"
   },
   "sources": [
    "personal"
@@ -4805,11 +4791,11 @@
   "ru": "чувствовать",
   "pos": "verbs",
   "examples": [],
-  "imgQuery": "hand touching feeling",
-  "image": "https://live.staticflickr.com/1395/1262006374_16a158965f.jpg",
+  "imgQuery": "hand touching another hand",
+  "image": "https://live.staticflickr.com/4020/4304679964_3c1d133d2f_b.jpg",
   "credit": {
-   "author": ".:[ Melissa ]:.",
-   "url": "https://www.flickr.com/photos/93743458@N00/1262006374",
+   "author": "katerha",
+   "url": "https://www.flickr.com/photos/8489692@N03/4304679964",
    "source": "Openverse / Flickr",
    "license": "CC BY 2.0"
   },
@@ -5152,13 +5138,13 @@
   "ru": "родители",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "parents family",
-  "image": "https://live.staticflickr.com/5607/15460202767_0d4ceec879_b.jpg",
+  "imgQuery": "family mother father children together",
+  "image": "https://live.staticflickr.com/7435/11166009805_5828af4f0a_b.jpg",
   "credit": {
-   "author": "University of San Francisco",
-   "url": "https://www.flickr.com/photos/41853537@N08/15460202767",
+   "author": "OakleyOriginals",
+   "url": "https://www.flickr.com/photos/47264866@N00/11166009805",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC-SA 2.0"
+   "license": "CC BY 2.0"
   },
   "sources": [
    "personal"
@@ -5296,13 +5282,13 @@
   "ru": "начинать",
   "pos": "verbs",
   "examples": [],
-  "imgQuery": "start button beginning",
-  "image": "https://live.staticflickr.com/3545/3379046643_4d891731d6_b.jpg",
+  "imgQuery": "runners starting line race start",
+  "image": "https://live.staticflickr.com/4110/4976494944_29f8defb4a_b.jpg",
   "credit": {
-   "author": "and[w]",
-   "url": "https://www.flickr.com/photos/39804614@N00/3379046643",
+   "author": "tableatny",
+   "url": "https://www.flickr.com/photos/53370644@N06/4976494944",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC-ND 2.0"
+   "license": "CC BY 2.0"
   },
   "sources": [
    "personal"
@@ -5400,11 +5386,11 @@
   "ru": "раковина",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "kitchen sink",
-  "image": "https://live.staticflickr.com/5107/5729015292_5041150021_b.jpg",
+  "imgQuery": "bathroom sink faucet basin",
+  "image": "https://live.staticflickr.com/3575/3456523852_91296e8b34_b.jpg",
   "credit": {
-   "author": "espensorvik",
-   "url": "https://www.flickr.com/photos/28478778@N05/5729015292",
+   "author": "www.trek.today",
+   "url": "https://www.flickr.com/photos/34107995@N00/3456523852",
    "source": "Openverse / Flickr",
    "license": "CC BY 2.0"
   },

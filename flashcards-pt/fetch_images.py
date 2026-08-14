@@ -115,6 +115,7 @@ def from_openverse(query, token):
             "credit": {"author": (p.get("creator") or "")[:80],
                        "url": p.get("foreign_landing_url") or "",
                        "source": "Openverse / " + (p.get("provider") or "").title(),
+                       "title": (p.get("title") or "")[:90],
                        "license": f"CC {(p.get('license') or '').upper()} {p.get('license_version') or ''}".strip()}}
 
 
