@@ -1,0 +1,50 @@
+[
+ {"pt":"ligação","ru":"звонок; связь","en":"call, connection","pos":"nouns",
+  "imgQuery":"person talking on phone call"},
+
+ {"pt":"colega","ru":"коллега","en":"colleague","pos":"nouns",
+  "imgQuery":"colleagues working together office"},
+
+ {"pt":"usar","ru":"использовать; носить (одежду)","en":"to use; to wear","pos":"verbs",
+  "imgQuery":"hands using tool","fix":"в списке было «use» — это форма; карточка на инфинитив «usar»"},
+
+ {"pt":"sério","ru":"серьёзный; серьёзно","en":"serious, seriously","pos":"adjectives",
+  "imgQuery":"serious face expression man","fix":"нужен акут: «sério»"},
+
+ {"pt":"caraca","ru":"ого!, ничего себе!","en":"wow, damn","pos":"phrases",
+  "imgQuery":"surprised face amazed expression",
+  "note":"разговорное восклицание удивления, мягкий вариант «caramba»"},
+
+ {"pt":"caralho","ru":"грубое ругательство (≈ «блин», «х-й»)","en":"fuck (vulgar)","pos":"phrases",
+  "imgQuery":null,
+  "note":"обсценное. Может выражать и злость, и восторг («que caralho!» — «какого чёрта!», «pra caralho» — «очень, дофига»). В приличном обществе не употреблять"},
+
+ {"pt":"vai pra casa do caralho","ru":"иди на хер (грубо)","en":"go fuck yourself","pos":"phrases",
+  "imgQuery":null,
+  "note":"обсценное, сильное оскорбление","fix":"в списке слитно «vaipra» и «de caralho» — устойчивая форма «vai pra casa do caralho»"},
+
+ {"pt":"por causa de","ru":"из-за, по причине","en":"because of","pos":"phrases",
+  "imgQuery":null,"fix":"в списке «por cause» (по-английски) — по-португальски «por causa de»"},
+
+ {"pt":"muito antes","ru":"задолго до","en":"long before","pos":"phrases","imgQuery":null},
+
+ {"pt":"propaganda","ru":"реклама","en":"advertising, ads","pos":"nouns",
+  "imgQuery":"billboard advertising street",
+  "note":"в бразильском это именно реклама, а не «пропаганда»"},
+
+ {"pt":"agentes","ru":"агенты","en":"agents","pos":"nouns",
+  "imgQuery":"security agents suits sunglasses"},
+
+ {"pt":"alteração","ru":"изменение, правка","en":"change, alteration","pos":"nouns",
+  "imgQuery":"editing document changes pen"},
+
+ {"pt":"só","ru":"только, лишь","en":"only, just","pos":"adverbs","imgQuery":null,
+  "note":"самый частый и неформальный из трёх: só / apenas / somente","fix":"в списке «sO» — правильно «só»"},
+
+ {"pt":"valor","ru":"стоимость; ценность","en":"value, amount","pos":"nouns",
+  "imgQuery":"price tag money value"},
+
+ {"pt":"linda","ru":"красивая, прекрасная","en":"beautiful","pos":"adjectives",
+  "imgQuery":"beautiful woman smiling portrait",
+  "note":"женский род; мужской — «lindo»"}
+]

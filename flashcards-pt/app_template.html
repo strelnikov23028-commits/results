@@ -6,6 +6,7 @@
 <title>Cartões — португальский по карточкам</title>
 <meta name="description" content="Карточки для изучения бразильского португальского: картинка, три языка, подсказки, озвучка и статистика прогресса.">
 <meta name="theme-color" content="#F5F5F7">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230071E3'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='system-ui,sans-serif' font-weight='700' fill='white'>PT</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -243,6 +244,14 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
 .tr{display:flex;gap:12px;align-items:flex-start}
 .tr .lang{font-size:10.5px;font-weight:700;color:var(--text-3);letter-spacing:.07em;padding-top:4px;width:26px;flex-shrink:0}
 .tr .val{font-size:17.5px;font-weight:500;line-height:1.4}
+/* пометка об употреблении: род, оттенок значения, предупреждение о грубости */
+.card-note{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.45;
+  color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);
+  border-radius:var(--r-sm);padding:11px 13px}
+.card-note svg{flex-shrink:0;margin-top:1px;color:var(--text-3)}
+.card-note.vulgar{background:var(--red-soft);border-color:var(--red);color:var(--text)}
+.card-note.vulgar svg{color:var(--red)}
+
 .ex{border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;gap:13px}
 .ex-i .p{font-size:14.5px;font-weight:500;line-height:1.45}
 .ex-i .e{font-size:13px;color:var(--text-2);margin-top:3px;line-height:1.4}
@@ -570,7 +579,7 @@ const inProgress = c => { const x = st(c.id); return x.seen > 0 && !learned(c); 
 const hardCards = () => CARDS.filter(c => { const x = st(c.id); return x.miss >= 2 && x.miss >= x.ok; });
 
 const POS_RU = { 'nouns':'существительные','adjectives':'прилагательные','verbs':'глаголы',
-                 'adverbs':'наречия','function words':'служебные' };
+                 'adverbs':'наречия','function words':'служебные','phrases':'выражения' };
 const POS_COLOR = { 'nouns':'var(--blue)','adjectives':'var(--purple)','verbs':'var(--green)',
                     'adverbs':'var(--orange)','function words':'var(--gray)','phrases':'var(--red)' };
 /* мягкие фоны заданы переменными, а не color-mix: его не понимает Safari до 16.2 */
@@ -823,6 +832,19 @@ function frontHTML(c){
     <div class="ask" style="font-size:12px;color:var(--text-3)">как это по-русски?</div>
   </div>` + foot;
 }
+/* пометка об употреблении слова; у обсценных — отдельным предупреждением */
+function noteHTML(c){
+  if(!c.note) return '';
+  const vulgar = /обсценн|грубо|оскорблени/i.test(c.note);
+  const icon = vulgar
+    ? '<path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>'
+    : '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>';
+  return `<div class="card-note${vulgar ? ' vulgar' : ''}">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icon}</svg>
+    <span>${esc(c.note)}</span></div>`;
+}
+
 function backHTML(c){
   const ex = (c.examples||[]).map(e =>
     `<div class="ex-i"><div class="p">${esc(e.pt)}</div><div class="e">${esc(e.en)}</div></div>`).join('');
@@ -832,6 +854,7 @@ function backHTML(c){
       <div class="tr"><span class="lang">RU</span><span class="val">${esc(c.ru)}</span></div>
       <div class="tr"><span class="lang">EN</span><span class="val">${esc(c.en)}</span></div>
     </div>
+    ${noteHTML(c)}
     ${ex ? `<div class="ex">${ex}</div>` : ''}
   </div><div class="foot">${posTag(c)}<span class="tap-hint">знал слово? отметь ✓ или ✗</span></div>`;
 }

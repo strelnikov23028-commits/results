@@ -808,13 +808,13 @@
     "en": "I bought a new bag."
    }
   ],
-  "imgQuery": "new smartphone unboxing box",
-  "image": "https://live.staticflickr.com/4005/4575213651_5823cd652b_b.jpg",
+  "imgQuery": "new sneakers shoes box",
+  "image": "https://live.staticflickr.com/7039/6776666006_3f1f2dc775_b.jpg",
   "credit": {
-   "author": "RafeB",
-   "url": "https://www.flickr.com/photos/98071572@N00/4575213651",
+   "author": "Robert Stinnett",
+   "url": "https://www.flickr.com/photos/93732749@N00/6776666006",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC-SA 2.0"
+   "license": "CC BY 2.0"
   },
   "sources": [
    "site"
@@ -921,11 +921,11 @@
     "en": "The weather is bad today."
    }
   ],
-  "imgQuery": "garbage dump landfill waste",
-  "image": "https://live.staticflickr.com/97/245819419_b3054a2257.jpg",
+  "imgQuery": "landfill garbage waste pile",
+  "image": "https://live.staticflickr.com/53/143991101_1f4f59f7b8_b.jpg",
   "credit": {
-   "author": "Tiger Girl",
-   "url": "https://www.flickr.com/photos/47869328@N00/245819419",
+   "author": "zappowbang",
+   "url": "https://www.flickr.com/photos/72794895@N00/143991101",
    "source": "Openverse / Flickr",
    "license": "CC BY 2.0"
   },
@@ -977,13 +977,13 @@
     "en": "I don’t like weak coffee."
    }
   ],
-  "imgQuery": "wilted dying houseplant",
-  "image": "https://upload.wikimedia.org/wikipedia/commons/9/96/PINK_GLORY_%283522564709%29.jpg",
+  "imgQuery": "wilted dried plant pot",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/6/60/Catalogue_of_first_quality_plants_-_at_unheard_of_low_prices_%281895%29_%2819959001303%29.jpg",
   "credit": {
-   "author": "KNOW MALTA by Peter Grima",
-   "url": "https://commons.wikimedia.org/wiki/File:PINK_GLORY_(3522564709).jpg",
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:Catalogue_of_first_quality_plants_-_at_unheard_of_low_prices_(1895)_(19959001303).jpg",
    "source": "Wikimedia Commons",
-   "license": "CC BY-SA 2.0"
+   "license": "No restrictions"
   },
   "sources": [
    "site"
@@ -1279,13 +1279,13 @@
     "en": "She can’t drink because she’s underage."
    }
   ],
-  "imgQuery": "strong arm flexing muscle",
-  "image": "https://live.staticflickr.com/5582/15258725421_60b4836504.jpg",
+  "imgQuery": "weightlifter lifting heavy barbell",
+  "image": "https://live.staticflickr.com/8472/8364765619_d33f765d0f_b.jpg",
   "credit": {
-   "author": "eltpics",
-   "url": "https://www.flickr.com/photos/54942754@N02/15258725421",
+   "author": "Gregor Winter",
+   "url": "https://www.flickr.com/photos/9280922@N04/8364765619",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC 2.0"
+   "license": "CC BY-NC-SA 2.0"
   },
   "sources": [
    "site",
@@ -1393,13 +1393,13 @@
     "en": "My students want to travel to Brazil."
    }
   ],
-  "imgQuery": "child wanting toy shop window",
-  "image": "https://live.staticflickr.com/3171/2392982415_c338cc87c2_b.jpg",
+  "imgQuery": "child wanting reaching desire",
+  "image": "https://live.staticflickr.com/5070/5724252408_a4966ab171_b.jpg",
   "credit": {
-   "author": "CARLOS62",
-   "url": "https://www.flickr.com/photos/82887550@N00/2392982415",
+   "author": "Alejandro Ballesta",
+   "url": "https://www.flickr.com/photos/55127628@N06/5724252408",
    "source": "Openverse / Flickr",
-   "license": "CC BY-NC 2.0"
+   "license": "CC BY-NC-ND 2.0"
   },
   "sources": [
    "site"
@@ -2758,7 +2758,7 @@
   "ru": "бутылка",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "glass bottle water drink",
+  "imgQuery": "glass bottle",
   "image": "https://live.staticflickr.com/8175/7985698964_91f1467242_b.jpg",
   "credit": {
    "author": "Muffet",
@@ -2778,7 +2778,7 @@
   "ru": "моя рука (от плеча)",
   "pos": "phrases",
   "examples": [],
-  "imgQuery": "bodybuilder flexing biceps arm",
+  "imgQuery": "human arm",
   "image": "https://live.staticflickr.com/1777/42257970190_e8f2a89657_b.jpg",
   "credit": {
    "author": "personaltrainertoronto",
@@ -3000,7 +3000,7 @@
   "ru": "фрукты",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "fresh fruits basket colorful",
+  "imgQuery": "fresh fruits",
   "image": "https://live.staticflickr.com/4073/4811999160_0014f52b52_b.jpg",
   "credit": {
    "author": "Oh-Barcelona.com",
@@ -3236,9 +3236,14 @@
   "ru": "я помню",
   "pos": "verbs",
   "examples": [],
-  "imgQuery": null,
-  "image": null,
-  "credit": null,
+  "imgQuery": "person remembering thinking",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/US_Navy_031112-N-5862D-006_At_Officer_Candidate_School_%28OCS%29_onboard_NAS_Pensacola%2C_Chief_Aviation_Machinist_Mate_Jorge_Ouiroz_gives_Officer_Candidate_Jason_Roseberry_some_time_to_think_in_the_lean_and_rest_position.jpg/1280px-thumbnail.jpg",
+  "credit": {
+   "author": "U.S. Navy photo by Chief Photographer’s Mate Chris Desmond.",
+   "url": "https://commons.wikimedia.org/wiki/File:US_Navy_031112-N-5862D-006_At_Officer_Candidate_School_(OCS)_onboard_NAS_Pensacola,_Chief_Aviation_Machinist_Mate_Jorge_Ouiroz_gives_Officer_Candidate_Jason_Roseberry_some_time_to_think_in_the_lean_and_rest_position.jpg",
+   "source": "Wikimedia Commons",
+   "license": "Public domain"
+  },
   "sources": [
    "personal"
   ],
@@ -3505,7 +3510,7 @@
   "ru": "самка; женский (о животных)",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "lioness female lion",
+  "imgQuery": "female animal",
   "image": "https://live.staticflickr.com/3821/11946876455_7fa9acbc9b_b.jpg",
   "credit": {
    "author": "Tambako the Jaguar",
@@ -3779,7 +3784,7 @@
   "ru": "мяч",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "soccer ball football",
+  "imgQuery": "ball sport",
   "image": "https://live.staticflickr.com/5286/5685716203_50f09bbdf3_b.jpg",
   "credit": {
    "author": "mags20_eb",
@@ -3836,7 +3841,7 @@
   "ru": "учитель, преподаватель",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "albert einstein portrait",
+  "imgQuery": "teacher classroom",
   "image": "https://live.staticflickr.com/3726/12657946083_fb10cdfe7c.jpg",
   "credit": {
    "author": "DonkeyHotey",
@@ -3931,7 +3936,7 @@
   "ru": "стакан",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "glass of water on table drink",
+  "imgQuery": "drinking glass water",
   "image": "https://live.staticflickr.com/3109/2754681293_9fe61db669_b.jpg",
   "credit": {
    "author": "blmurch",
@@ -3970,7 +3975,7 @@
   "ru": "рассказывать; считать",
   "pos": "verbs",
   "examples": [],
-  "imgQuery": "grandmother telling story to child",
+  "imgQuery": "person telling story",
   "image": "https://live.staticflickr.com/6121/5951855915_0f9e812f3e.jpg",
   "credit": {
    "author": "dpstyles™",
@@ -4047,7 +4052,7 @@
   "ru": "разговор, беседа",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "two people talking conversation cafe",
+  "imgQuery": "people conversation talking",
   "image": "https://live.staticflickr.com/8180/29215058274_e7cab6cb63_b.jpg",
   "credit": {
    "author": "Neil. Moralee",
@@ -4261,7 +4266,7 @@
   "ru": "ужин; ужинать",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "dinner table family feast food",
+  "imgQuery": "dinner table evening",
   "image": "https://live.staticflickr.com/2665/4164021385_6ea24d5748_b.jpg",
   "credit": {
    "author": "Bill Selak",
@@ -4507,7 +4512,7 @@
   "ru": "урок, занятие",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "students classroom desks school lesson",
+  "imgQuery": "classroom lesson",
   "image": "https://live.staticflickr.com/2687/4248397761_0b8ff088dc_b.jpg",
   "credit": {
    "author": "World Bank Photo Collection",
@@ -4791,7 +4796,7 @@
   "ru": "чувствовать",
   "pos": "verbs",
   "examples": [],
-  "imgQuery": "hand touching another hand",
+  "imgQuery": "hand touching feeling",
   "image": "https://live.staticflickr.com/4020/4304679964_3c1d133d2f_b.jpg",
   "credit": {
    "author": "katerha",
@@ -5138,7 +5143,7 @@
   "ru": "родители",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "family mother father children together",
+  "imgQuery": "parents family",
   "image": "https://live.staticflickr.com/7435/11166009805_5828af4f0a_b.jpg",
   "credit": {
    "author": "OakleyOriginals",
@@ -5282,7 +5287,7 @@
   "ru": "начинать",
   "pos": "verbs",
   "examples": [],
-  "imgQuery": "runners starting line race start",
+  "imgQuery": "start button beginning",
   "image": "https://live.staticflickr.com/4110/4976494944_29f8defb4a_b.jpg",
   "credit": {
    "author": "tableatny",
@@ -5386,7 +5391,7 @@
   "ru": "раковина",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "bathroom sink faucet basin",
+  "imgQuery": "kitchen sink",
   "image": "https://live.staticflickr.com/3575/3456523852_91296e8b34_b.jpg",
   "credit": {
    "author": "www.trek.today",
@@ -6019,5 +6024,285 @@
   "sources": [
    "personal"
   ]
+ },
+ {
+  "id": 297,
+  "pt": "ligação",
+  "en": "call, connection",
+  "ru": "звонок; связь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "person talking on phone call",
+  "image": "https://live.staticflickr.com/2579/4155664186_418fddfff2_b.jpg",
+  "credit": {
+   "author": "IronRodArt - Royce Bair ('Star Shooter')",
+   "url": "https://www.flickr.com/photos/38745062@N02/4155664186",
+   "source": "Openverse / Flickr",
+   "title": "Telephone Switchboard Operators - a vintage circa 1914 photo",
+   "license": "CC BY-NC-ND 2.0"
+  },
+  "sources": [
+   "extra"
+  ]
+ },
+ {
+  "id": 298,
+  "pt": "colega",
+  "en": "colleague",
+  "ru": "коллега",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "colleagues working together office",
+  "image": "https://live.staticflickr.com/6123/6004620857_dc27a18c15.jpg",
+  "credit": {
+   "author": "pttgogofish",
+   "url": "https://www.flickr.com/photos/9709742@N04/6004620857",
+   "source": "Openverse / Flickr",
+   "title": "97199917",
+   "license": "CC BY-NC-SA 2.0"
+  },
+  "sources": [
+   "extra"
+  ]
+ },
+ {
+  "id": 299,
+  "pt": "usar",
+  "en": "to use; to wear",
+  "ru": "использовать; носить (одежду)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "hands using tool",
+  "image": "https://live.staticflickr.com/2894/9641948651_f9353b5cde_b.jpg",
+  "credit": {
+   "author": "http://globalquiz.org",
+   "url": "https://www.flickr.com/photos/101106489@N06/9641948651",
+   "source": "Openverse / Flickr",
+   "title": "Plumbing",
+   "license": "CC BY 2.0"
+  },
+  "sources": [
+   "extra"
+  ],
+  "fix": "в списке было «use» — это форма; карточка на инфинитив «usar»"
+ },
+ {
+  "id": 300,
+  "pt": "sério",
+  "en": "serious, seriously",
+  "ru": "серьёзный; серьёзно",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "serious face expression man",
+  "image": "https://live.staticflickr.com/2401/2204677106_a8f0a3befc_b.jpg",
+  "credit": {
+   "author": "ben pollard",
+   "url": "https://www.flickr.com/photos/13023474@N06/2204677106",
+   "source": "Openverse / Flickr",
+   "title": "He doubted her seriousness",
+   "license": "CC BY-SA 2.0"
+  },
+  "sources": [
+   "extra"
+  ],
+  "fix": "нужен акут: «sério»"
+ },
+ {
+  "id": 301,
+  "pt": "caraca",
+  "en": "wow, damn",
+  "ru": "ого!, ничего себе!",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "surprised face amazed expression",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Some_eminent_Victorians-_personal_recollections_in_the_world_of_art_and_letters%3B_%281908%29_%2814779047751%29.jpg/1280px-Some_eminent_Victorians-_personal_recollections_in_the_world_of_art_and_letters%3B_%281908%29_%2814779047751%29.jpg",
+  "credit": {
+   "author": "Internet Archive Book Images",
+   "url": "https://commons.wikimedia.org/wiki/File:Some_eminent_Victorians-_personal_recollections_in_the_world_of_art_and_letters;_(1908)_(14779047751).jpg",
+   "source": "Wikimedia Commons",
+   "license": "No restrictions"
+  },
+  "sources": [
+   "extra"
+  ],
+  "note": "разговорное восклицание удивления, мягкий вариант «caramba»"
+ },
+ {
+  "id": 302,
+  "pt": "caralho",
+  "en": "fuck (vulgar)",
+  "ru": "грубое ругательство (≈ «блин», «х-й»)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
+  "sources": [
+   "extra"
+  ],
+  "note": "обсценное. Может выражать и злость, и восторг («que caralho!» — «какого чёрта!», «pra caralho» — «очень, дофига»). В приличном обществе не употреблять"
+ },
+ {
+  "id": 303,
+  "pt": "vai pra casa do caralho",
+  "en": "go fuck yourself",
+  "ru": "иди на хер (грубо)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
+  "sources": [
+   "extra"
+  ],
+  "note": "обсценное, сильное оскорбление",
+  "fix": "в списке слитно «vaipra» и «de caralho» — устойчивая форма «vai pra casa do caralho»"
+ },
+ {
+  "id": 304,
+  "pt": "por causa de",
+  "en": "because of",
+  "ru": "из-за, по причине",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
+  "sources": [
+   "extra"
+  ],
+  "fix": "в списке «por cause» (по-английски) — по-португальски «por causa de»"
+ },
+ {
+  "id": 305,
+  "pt": "muito antes",
+  "en": "long before",
+  "ru": "задолго до",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
+  "sources": [
+   "extra"
+  ]
+ },
+ {
+  "id": 306,
+  "pt": "propaganda",
+  "en": "advertising, ads",
+  "ru": "реклама",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "billboard advertising street",
+  "image": "https://live.staticflickr.com/8227/8496770124_42afb2f329_b.jpg",
+  "credit": {
+   "author": "Justin in SD",
+   "url": "https://www.flickr.com/photos/40708728@N04/8496770124",
+   "source": "Openverse / Flickr",
+   "title": "Billboards fit for New York",
+   "license": "CC BY-NC-SA 2.0"
+  },
+  "sources": [
+   "extra"
+  ],
+  "note": "в бразильском это именно реклама, а не «пропаганда»"
+ },
+ {
+  "id": 307,
+  "pt": "agentes",
+  "en": "agents",
+  "ru": "агенты",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "security agents suits sunglasses",
+  "image": "https://live.staticflickr.com/65535/48789245437_a34745469b_b.jpg",
+  "credit": {
+   "author": "Diplomatic Security Service",
+   "url": "https://www.flickr.com/photos/149152339@N04/48789245437",
+   "source": "Openverse / Flickr",
+   "title": "A DSS special agent escorts French Foreign Minister Jean-Yves Le Drian from the UN followi",
+   "license": "CC PDM 1.0"
+  },
+  "sources": [
+   "extra"
+  ]
+ },
+ {
+  "id": 308,
+  "pt": "alteração",
+  "en": "change, alteration",
+  "ru": "изменение, правка",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "editing document changes pen",
+  "image": "https://live.staticflickr.com/2072/2238851942_3f4a1ab3d7_b.jpg",
+  "credit": {
+   "author": "AlaskaTeacher",
+   "url": "https://www.flickr.com/photos/60329741@N00/2238851942",
+   "source": "Openverse / Flickr",
+   "title": "Instruments of Torture Cropped",
+   "license": "CC BY-NC-ND 2.0"
+  },
+  "sources": [
+   "extra"
+  ]
+ },
+ {
+  "id": 309,
+  "pt": "só",
+  "en": "only, just",
+  "ru": "только, лишь",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": null,
+  "image": null,
+  "credit": null,
+  "sources": [
+   "extra"
+  ],
+  "note": "самый частый и неформальный из трёх: só / apenas / somente",
+  "fix": "в списке «sO» — правильно «só»"
+ },
+ {
+  "id": 310,
+  "pt": "valor",
+  "en": "value, amount",
+  "ru": "стоимость; ценность",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "price tag money value",
+  "image": "https://live.staticflickr.com/5124/5351346272_1722774bf3_b.jpg",
+  "credit": {
+   "author": "Gurucruise",
+   "url": "https://www.flickr.com/photos/29648273@N07/5351346272",
+   "source": "Openverse / Flickr",
+   "title": "Self Made Wealth-Bonus-Review-eben-pagan",
+   "license": "CC BY 2.0"
+  },
+  "sources": [
+   "extra"
+  ]
+ },
+ {
+  "id": 311,
+  "pt": "linda",
+  "en": "beautiful",
+  "ru": "красивая, прекрасная",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "beautiful woman smiling portrait",
+  "image": "https://live.staticflickr.com/5469/7064995839_a970aebb79_b.jpg",
+  "credit": {
+   "author": "Gareth1953 All Right Now",
+   "url": "https://www.flickr.com/photos/40837632@N05/7064995839",
+   "source": "Openverse / Flickr",
+   "title": "This Is Not My Picture - Feb 2012 - Me & Sue Smiling Beneath the Jelly Babies",
+   "license": "CC BY 2.0"
+  },
+  "sources": [
+   "extra"
+  ],
+  "note": "женский род; мужской — «lindo»"
  }
 ]
