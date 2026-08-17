@@ -646,11 +646,11 @@ function renderHome(){
     streak() > 0 ? `подряд ${plural(streak(),'день','дня','дней')}` : '';
 
   document.getElementById('modes').innerHTML = `
-    ${mode('review','Повторение','Слова, у которых подошёл срок. С них лучше начинать.', due,'var(--orange)',
+    ${mode('review','Повторение','Слова, у которых подошёл срок. По 20 за подход.', Math.min(due,20),'var(--orange)',
       `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>`)}
     ${mode('new','Новые слова','Знакомство с теми, которых ещё не было. По 20 за подход.', Math.min(nw,20),'var(--blue)',
       `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`)}
-    ${mode('all','Все подряд','Вся колода вперемешку. За подход слово встретится один раз.', CARDS.length,'var(--purple)',
+    ${mode('all','Все подряд','Случайные слова из всей колоды. По 20 за подход.', Math.min(CARDS.length,20),'var(--purple)',
       `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg>`)}
     ${mode('hard','Трудные','Слова, которые чаще всего отмечал как незнакомые.', hardCards().length,'var(--red)',
       `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2l-5-4.9 6.9-1z"/></svg>`)}`;
@@ -702,9 +702,9 @@ document.addEventListener('click', e => {
 });
 function start(mode, ids){
   const pool = ids ? ids.map(id => BY_ID[id]).filter(Boolean) : {
-    review: () => shuffle(CARDS.filter(isDue)),
+    review: () => shuffle(CARDS.filter(isDue)).slice(0,20),
     new:    () => CARDS.filter(isNew).slice(0,20),
-    all:    () => shuffle(CARDS),
+    all:    () => shuffle(CARDS).slice(0,20),
     hard:   () => shuffle(hardCards())
   }[mode]();
   if(!pool.length) return;
