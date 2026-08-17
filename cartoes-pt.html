@@ -652,7 +652,7 @@ function renderHome(){
       `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`)}
     ${mode('all','Все подряд','Случайные слова из всей колоды. По 20 за подход.', Math.min(CARDS.length,20),'var(--purple)',
       `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg>`)}
-    ${mode('hard','Трудные','Слова, которые чаще всего отмечал как незнакомые.', hardCards().length,'var(--red)',
+    ${mode('hard','Трудные','Слова, которые чаще всего отмечал как незнакомые. По 20 за подход.', Math.min(hardCards().length,20),'var(--red)',
       `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2l-5-4.9 6.9-1z"/></svg>`)}`;
 
   const L = CARDS.filter(learned).length, P = CARDS.filter(inProgress).length, N = CARDS.filter(isNew).length;
@@ -705,7 +705,7 @@ function start(mode, ids){
     review: () => shuffle(CARDS.filter(isDue)).slice(0,20),
     new:    () => CARDS.filter(isNew).slice(0,20),
     all:    () => shuffle(CARDS).slice(0,20),
-    hard:   () => shuffle(hardCards())
+    hard:   () => shuffle(hardCards()).slice(0,20)
   }[mode]();
   if(!pool.length) return;
   S.session = { queue: pool.map(c => c.id), i:0, know:[], dont:[], mode, undo:[] };
