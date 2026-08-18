@@ -1,0 +1,23 @@
+# --- Секреты: НИКОГДА не коммитить ---
+secrets/
+*.json.key
+*-service-account*.json
+*service_account*.json
+google-*.json
+credentials*.json
+*.pem
+.env
+.env.*
+
+# Системное
+.DS_Store
+
+# Ключи Openverse: скрипт получает их сам при первом запуске
+flashcards-pt/data/openverse_creds.json
+
+# Исходники картинок Grok (PNG по ~1.4 МБ) — в репозиторий идут только сжатые webp
+flashcards-pt/img/
+flashcards-pt/jobs/
+flashcards-pt/_sheet.png
+flashcards-pt/gen_log.txt
+gallery.html

@@ -623,6 +623,13 @@ const POS_COLOR = { 'nouns':'var(--blue)','adjectives':'var(--purple)','verbs':'
 /* мягкие фоны заданы переменными, а не color-mix: его не понимает Safari до 16.2 */
 const POS_SOFT  = { 'nouns':'var(--blue-soft)','adjectives':'var(--purple-soft)','verbs':'var(--green-soft)',
                     'adverbs':'var(--orange-soft)','function words':'var(--gray-soft)','phrases':'var(--red-soft)' };
+/* Имена файлов картинок — на русском и с пробелами («дом — casa.webp»),
+   поэтому путь кодируем; encodeURI не трогает уже закодированные адреса. */
+function imgSrc(p){
+  if(!p) return '';
+  if(/^(https?:|data:)/.test(p)) return p;
+  return p.split('/').map(encodeURIComponent).join('/');
+}
 const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const escRe = s => String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const shuffle = a => { const x=[...a]; for(let i=x.length-1;i>0;i--){ const j=(Math.random()*(i+1))|0; [x[i],x[j]]=[x[j],x[i]]; } return x; };
@@ -848,8 +855,8 @@ function frontHTML(c){
   if(c.image){
     const cr = c.credit ? `<div class="credit">${esc(c.credit.author||'')} · ${esc(c.credit.source||'')}${c.credit.license?' · '+esc(c.credit.license):''}</div>` : '';
     return topBar(c,true) + `<div class="pic">
-      <img class="bg" src="${esc(c.image)}" alt="" aria-hidden="true" loading="lazy">
-      <img class="fg" src="${esc(c.image)}" alt="Иллюстрация к слову ${esc(c.pt)}" loading="lazy"
+      <img class="bg" src="${esc(imgSrc(c.image))}" alt="" aria-hidden="true" loading="lazy">
+      <img class="fg" src="${esc(imgSrc(c.image))}" alt="Иллюстрация к слову ${esc(c.pt)}" loading="lazy"
            onerror="this.parentNode.querySelectorAll('img').forEach(i=>i.style.display='none');this.parentNode.querySelector('.ph').hidden=false">
       <div class="ph" hidden>Картинка не загрузилась</div>${cr}</div>` + wordFront(c) + foot;
   }
@@ -1185,8 +1192,8 @@ function renderWords(){
       : learned(c) ? ['выучено','var(--green)'] : ['в работе','var(--blue)'];
     const th = c.icon ? iconHTML(c.icon)
       : c.image
-      ? `<img class="bg" src="${esc(c.image)}" alt="" aria-hidden="true" loading="lazy">
-         <img class="fg" src="${esc(c.image)}" alt="" loading="lazy"
+      ? `<img class="bg" src="${esc(imgSrc(c.image))}" alt="" aria-hidden="true" loading="lazy">
+         <img class="fg" src="${esc(imgSrc(c.image))}" alt="" loading="lazy"
               onerror="this.parentNode.innerHTML='<div class=\\'noimg\\'>фото не загрузилось</div>'">`
       : `<div class="noimg">без картинки —<br>слово и перевод</div>`;
     return `<article class="wcard"><div class="th">${th}</div><div class="bd">
@@ -1206,8 +1213,8 @@ document.getElementById('w-filters').addEventListener('click', e => {
 document.getElementById('foot-src').innerHTML = META.sources
   ? 'Источники слов: ' + META.sources.map(s => s.url
       ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name)).join(', ') : '';
-const imgSrc = [...new Set(CARDS.filter(c => c.credit).map(c => c.credit.source))];
-document.getElementById('foot-img').textContent = imgSrc.length ? imgSrc.join(', ') : 'не загружены';
+const imgSources = [...new Set(CARDS.filter(c => c.credit).map(c => c.credit.source))];
+document.getElementById('foot-img').textContent = imgSources.length ? imgSources.join(', ') : 'не загружены';
 
 renderHome();
 
