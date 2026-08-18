@@ -853,7 +853,12 @@ function frontHTML(c){
     return topBar(c,true) + iconHTML(c.icon) + wordFront(c) + foot;
   }
   if(c.image){
-    const cr = c.credit ? `<div class="credit">${esc(c.credit.author||'')} · ${esc(c.credit.source||'')}${c.credit.license?' · '+esc(c.credit.license):''}</div>` : '';
+    // подпись показываем только у заимствованных фото — там она обязательна
+    // по лицензии. У своих сгенерированных она лишняя, о них сказано в подвале.
+    const borrowed = c.credit && c.credit.source && c.credit.source !== 'Grok Build';
+    const cr = borrowed
+      ? `<div class="credit">${esc(c.credit.author||'')} · ${esc(c.credit.source)}${c.credit.license?' · '+esc(c.credit.license):''}</div>`
+      : '';
     return topBar(c,true) + `<div class="pic">
       <img class="bg" src="${esc(imgSrc(c.image))}" alt="" aria-hidden="true" loading="lazy">
       <img class="fg" src="${esc(imgSrc(c.image))}" alt="Иллюстрация к слову ${esc(c.pt)}" loading="lazy"
