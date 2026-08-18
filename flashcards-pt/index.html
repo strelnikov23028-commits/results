@@ -222,7 +222,8 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
   cursor:pointer;vertical-align:middle;-webkit-tap-highlight-color:transparent}
 .spoiler .sp-text{display:block;filter:blur(11px);opacity:.45;transition:filter .28s ease,opacity .28s ease;
   user-select:none;pointer-events:none}
-.spoiler.open .sp-text{filter:none;opacity:1;user-select:text}
+/* именно blur(0px), а не none: переход none ↔ blur браузер не интерполирует */
+.spoiler.open .sp-text{filter:blur(0px);opacity:1;user-select:text}
 .spoiler .sp-cover{position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   background-color:var(--surface-2);
   background-image:
