@@ -911,7 +911,9 @@ function doFlip(){
   document.getElementById('flip').classList.add('is-back');
 }
 document.getElementById('flip').addEventListener('click', e => {
-  if(e.target.closest('[data-say]') || e.target.closest('[data-hint]')) return;
+  // кнопки внутри карточки (звук, подсказка, спойлер) не переворачивают её
+  if(e.target.closest('[data-say]') || e.target.closest('[data-hint]')
+     || e.target.closest('[data-spoiler]')) return;
   doFlip();
 });
 document.getElementById('flip').addEventListener('keydown', e => {
