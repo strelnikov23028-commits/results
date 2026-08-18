@@ -235,9 +235,10 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
   background-size:11px 11px, 13px 13px, 7px 7px;
   background-position:0 0, 5px 6px, 3px 2px;
   color:var(--text-3);opacity:.85;
-  animation:sp-drift 2.4s linear infinite;
-  transition:opacity .28s ease}
-.spoiler.open .sp-cover{opacity:0}
+  animation:sp-drift 2.4s linear infinite}
+/* !important нужен: на элементе крутится бесконечная анимация, и без него
+   правило открытого состояния до слоя точек не доходит */
+.spoiler.open .sp-cover{opacity:0 !important;animation:none}
 @keyframes sp-drift{
   0%   {background-position:0 0,      5px 6px,  3px 2px}
   100% {background-position:11px -11px, -8px 19px, 7px -9px}
