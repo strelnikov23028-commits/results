@@ -215,6 +215,40 @@ h2{font-size:20px;font-weight:600;letter-spacing:-.015em}
   display:block;word-break:break-word}
 .word-front .ask{font-size:12px;color:var(--text-3);margin-top:6px}
 
+/* ─── Спойлер как в Telegram ───
+   Слово закрыто рябью из точек; по нажатию открывается и через 5 секунд
+   закрывается обратно. Точки рисуем градиентами и двигаем фон — дёшево для GPU. */
+.spoiler{position:relative;display:inline-block;max-width:100%;padding:2px 10px;border-radius:10px;
+  cursor:pointer;vertical-align:middle;-webkit-tap-highlight-color:transparent}
+.spoiler .sp-text{display:block;filter:blur(11px);opacity:.45;transition:filter .28s ease,opacity .28s ease;
+  user-select:none;pointer-events:none}
+.spoiler.open .sp-text{filter:none;opacity:1;user-select:text}
+.spoiler .sp-cover{position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background-color:var(--surface-2);
+  background-image:
+    radial-gradient(currentColor .9px, transparent 1px),
+    radial-gradient(currentColor .9px, transparent 1px),
+    radial-gradient(currentColor .7px, transparent .9px);
+  background-size:11px 11px, 13px 13px, 7px 7px;
+  background-position:0 0, 5px 6px, 3px 2px;
+  color:var(--text-3);opacity:.85;
+  animation:sp-drift 2.4s linear infinite;
+  transition:opacity .28s ease}
+.spoiler.open .sp-cover{opacity:0}
+@keyframes sp-drift{
+  0%   {background-position:0 0,      5px 6px,  3px 2px}
+  100% {background-position:11px -11px, -8px 19px, 7px -9px}
+}
+/* тонкая полоска обратного отсчёта — видно, сколько слово ещё открыто */
+.spoiler .sp-timer{position:absolute;left:8px;right:8px;bottom:2px;height:2px;border-radius:2px;
+  background:var(--blue);transform-origin:left center;transform:scaleX(0);opacity:0}
+.spoiler.open .sp-timer{opacity:.5;animation:sp-count var(--sp-time,5s) linear forwards}
+@keyframes sp-count{from{transform:scaleX(1)} to{transform:scaleX(0)}}
+@media (prefers-reduced-motion: reduce){
+  .spoiler .sp-cover{animation:none}
+  .spoiler.open .sp-timer{animation:none;opacity:0}
+}
+
 /* символ вместо фото — для слов, которые фотографией не передать */
 .icon-face{flex:1;display:grid;place-items:center;padding:34px 24px 18px;min-height:0;
   background:linear-gradient(160deg, var(--ic-soft, var(--surface-2)), var(--surface))}
@@ -722,6 +756,7 @@ function showCard(){
   const ss = S.session;
   if(!ss || ss.i >= ss.queue.length) return finish();
   flipped = false; hinted = false; busy = false;
+  if(typeof closeSpoiler === 'function') closeSpoiler();   // новое слово — снова под спойлером
   const flip = document.getElementById('flip');
   flip.classList.remove('is-back','swipe-ok','swipe-no');
   const c = BY_ID[ss.queue[ss.i]];
@@ -804,9 +839,7 @@ function frontHTML(c){
   const foot = `<div class="foot">${posTag(c)}<span class="tap-hint">
       <span class="kbd-only"><span class="kbd">Пробел</span> или</span> нажми карточку, чтобы перевернуть</span></div>`;
   if(c.icon){
-    return topBar(c,true) + iconHTML(c.icon) +
-      `<div class="word-front"><span class="w">${esc(c.pt)}</span>
-         <div class="ask">как это по-русски?</div></div>` + foot;
+    return topBar(c,true) + iconHTML(c.icon) + wordFront(c) + foot;
   }
   if(c.image){
     const cr = c.credit ? `<div class="credit">${esc(c.credit.author||'')} · ${esc(c.credit.source||'')}${c.credit.license?' · '+esc(c.credit.license):''}</div>` : '';
@@ -814,9 +847,7 @@ function frontHTML(c){
       <img class="bg" src="${esc(c.image)}" alt="" aria-hidden="true" loading="lazy">
       <img class="fg" src="${esc(c.image)}" alt="Иллюстрация к слову ${esc(c.pt)}" loading="lazy"
            onerror="this.parentNode.querySelectorAll('img').forEach(i=>i.style.display='none');this.parentNode.querySelector('.ph').hidden=false">
-      <div class="ph" hidden>Картинка не загрузилась</div>${cr}</div>
-      <div class="word-front"><span class="w">${esc(c.pt)}</span>
-        <div class="ask">как это по-русски?</div></div>` + foot;
+      <div class="ph" hidden>Картинка не загрузилась</div>${cr}</div>` + wordFront(c) + foot;
   }
   // служебное слово: фото нет — показываем слово крупно и пример фразы с ним
   const ex = c.examples?.[0];
@@ -827,10 +858,24 @@ function frontHTML(c){
     phrase = re.test(ex.pt) ? esc(ex.pt).replace(re, (_,a,m,b) => a + '<b>' + m + '</b>' + b) : esc(ex.pt);
   }
   return topBar(c,true) + `<div class="noimg-front">
-    <div class="big">${esc(c.pt)}</div>
+    <button class="spoiler big-sp" data-spoiler type="button" aria-label="Показать слово">
+      <span class="sp-text big">${esc(c.pt)}</span>
+      <span class="sp-cover" aria-hidden="true"></span><span class="sp-timer" aria-hidden="true"></span>
+    </button>
     ${phrase ? `<div class="ex-q">${phrase}</div>` : ''}
-    <div class="ask" style="font-size:12px;color:var(--text-3)">как это по-русски?</div>
+    <div class="ask" style="font-size:12px;color:var(--text-3)">нажми на слово, чтобы открыть</div>
   </div>` + foot;
+}
+
+/* Слово на лицевой стороне — под спойлером: сначала вспоминаешь сам,
+   потом открываешь и проверяешь. Закроется само через 5 секунд. */
+function wordFront(c){
+  return `<div class="word-front">
+    <button class="spoiler" data-spoiler type="button" aria-label="Показать слово на португальском">
+      <span class="sp-text w">${esc(c.pt)}</span>
+      <span class="sp-cover" aria-hidden="true"></span><span class="sp-timer" aria-hidden="true"></span>
+    </button>
+    <div class="ask">нажми на слово, чтобы открыть</div></div>`;
 }
 /* пометка об употреблении слова; у обсценных — отдельным предупреждением */
 function noteHTML(c){
@@ -882,6 +927,25 @@ document.addEventListener('click', e => {
   b.querySelector('[data-hint-slot]').innerHTML =
     `<span class="hint-text">${esc(hintOf(c.ru))}</span>`;
   hinted = true;
+});
+
+/* ─── Спойлер: открыть слово на 5 секунд ───
+   Повторное нажатие закрывает сразу. При смене карточки закрывается вместе с ней. */
+const SPOILER_MS = 5000;
+let spoilerTimer = null;
+function closeSpoiler(){
+  clearTimeout(spoilerTimer); spoilerTimer = null;
+  document.querySelectorAll('.spoiler.open').forEach(s => s.classList.remove('open'));
+}
+document.addEventListener('click', e => {
+  const sp = e.target.closest('[data-spoiler]');
+  if(!sp) return;
+  e.stopPropagation();                       // не переворачиваем карточку
+  if(sp.classList.contains('open')){ closeSpoiler(); return; }
+  closeSpoiler();
+  sp.style.setProperty('--sp-time', SPOILER_MS + 'ms');
+  sp.classList.add('open');
+  spoilerTimer = setTimeout(() => sp.classList.remove('open'), SPOILER_MS);
 });
 
 /* озвучка */
