@@ -1,12 +1,16 @@
 {
-  "ts": "2026-08-18T06:46:26.506858+00:00",
+  "ts": "2026-08-19T06:49:47.524483+00:00",
   "findings": {},
   "errors": {
+    "Saysail (catamarans)": "request_error: ConnectionError: HTTPSConnectionPool(host='saysail.com', port=443): Max retries exceeded with url: /en/yacht-rental?country=100181&boat_type=51&regions=559906&marinas=1317289 (Caused by NewConnectionError(\"HTTPSConnection(host='saysail.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+    "Saysail (full fleet)": "request_error: ConnectionError: HTTPSConnectionPool(host='saysail.com', port=443): Max retries exceeded with url: /en/yacht-rental (Caused by NewConnectionError(\"HTTPSConnection(host='saysail.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
     "Navigare Yachting Turkey": "http_403",
+    "Irmak Yachting (home)": "http_522",
+    "Irmak Yachting (fleet)": "http_522",
     "Rotaneta Gocek catamaran": "http_503",
     "Rotaneta home": "http_503",
     "Yacht-Rent Turkey": "http_403",
-    "Gulet Bookers (home, Bodrum-based)": "request_error: ConnectTimeout: HTTPSConnectionPool(host='www.guletbookers.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.guletbookers.com', port=443) at 0x7fd672cce810>, 'Connection to www.guletbookers.com timed out. (connect timeout=30)'))",
+    "GuletCharter.org fleet": "request_error: ConnectTimeout: HTTPSConnectionPool(host='guletcharter.org', port=443): Max retries exceeded with url: /gulet-fleet/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='guletcharter.org', port=443) at 0x7fb17efe55d0>, 'Connection to guletcharter.org timed out. (connect timeout=30)'))",
     "Gulet Escapes (UK)": "http_403",
     "GuletYacht.net": "http_403",
     "Wondergulets": "request_error: SSLError: HTTPSConnectionPool(host='www.wondergulets.com', port=443): Max retries exceeded with url: /en (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))"
