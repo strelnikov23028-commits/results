@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Виджет обратной связи neoved → amoCRM</title>
+<meta name="description" content="Тестовая страница виджета обратной связи: форма на сайте создаёт сделку в amoCRM, менеджер отвечает примечанием прямо из карточки.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#EE0000;
+    --ink:#110000;
+    --muted:#767676;
+    --line:#EEEEEE;
+    --soft:#F7F7F7;
+    --ok:#3FA063;
+    --radius:32px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:#fff;color:var(--ink);
+    font-family:Onest,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
+    font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{margin:0;font-weight:500;letter-spacing:-.02em;line-height:1.08}
+  h1{font-size:clamp(40px,7vw,84px)}
+  h2{font-size:clamp(30px,4.4vw,54px)}
+  h3{font-size:20px;line-height:1.25;letter-spacing:-.01em}
+  p{margin:0}
+  a{color:var(--accent)}
+  section{padding:clamp(56px,9vw,110px) 0}
+  .lead{font-size:clamp(17px,2.1vw,21px);color:var(--muted);max-width:56ch}
+
+  /* шапка */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;gap:16px;height:68px}
+  .logo{font-size:22px;font-weight:600;letter-spacing:-.03em}
+  .logo span{color:var(--accent)}
+  .tagline{color:var(--muted);font-size:14px}
+  .bar .cta{margin-left:auto}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    min-height:52px;padding:0 28px;border:0;border-radius:100px;cursor:pointer;
+    background:var(--accent);color:#fff;font:inherit;font-size:16px;font-weight:500;
+    text-decoration:none;transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(238,0,0,.28)}
+  .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .btn.ghost{background:var(--soft);color:var(--ink)}
+  .btn.ghost:hover{box-shadow:0 12px 30px rgba(17,0,0,.1)}
+  .btn.sm{min-height:44px;padding:0 20px;font-size:15px}
+
+  /* герой */
+  .hero{padding-top:clamp(48px,7vw,92px)}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;padding:8px 16px;
+    border-radius:100px;background:var(--soft);color:var(--muted);font-size:13.5px;
+  }
+  .eyebrow i{width:8px;height:8px;border-radius:100px;background:var(--ok);display:block}
+  .hero p.lead{margin-top:26px}
+  .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .hint{margin-top:18px;font-size:14px;color:var(--muted)}
+
+  /* сетки */
+  .grid{display:grid;gap:16px}
+  .grid.three{grid-template-columns:repeat(3,1fr)}
+  .grid.two{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--soft);border-radius:var(--radius);padding:32px}
+  .card .num{
+    display:flex;align-items:center;justify-content:center;width:40px;height:40px;margin-bottom:20px;
+    border-radius:100px;background:var(--accent);color:#fff;font-size:16px;font-weight:600;
+  }
+  .card p{margin-top:10px;color:var(--muted);font-size:15.5px}
+  .card.dark{background:var(--ink);color:#fff}
+  .card.dark p{color:rgba(255,255,255,.66)}
+
+  .section-head{margin-bottom:44px;max-width:62ch}
+  .section-head p{margin-top:16px;color:var(--muted);font-size:17px}
+
+  /* карточка сделки */
+  .lead-card{background:#fff;border:1px solid var(--line);border-radius:28px;overflow:hidden}
+  .lead-card .top{padding:22px 26px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .lead-card .top strong{font-weight:500;font-size:17px}
+  .chip{padding:5px 12px;border-radius:100px;background:#FDECEC;color:#C40000;font-size:12.5px;font-weight:500}
+  .chip.stage{background:var(--soft);color:var(--muted)}
+  .feed{padding:22px 26px;display:flex;flex-direction:column;gap:14px}
+  .note{background:var(--soft);border-radius:20px;padding:16px 18px;font-size:14.5px;line-height:1.55;white-space:pre-line}
+  .note .meta{display:block;margin-bottom:6px;font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+  .note.out{background:#FDECEC}
+  .note.out .meta{color:#C40000}
+
+  /* таблица полей */
+  table{width:100%;border-collapse:collapse;font-size:15.5px}
+  th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:500;color:var(--muted);font-size:13.5px;letter-spacing:.02em;text-transform:uppercase}
+  td code{background:var(--soft);padding:2px 7px;border-radius:6px;font-size:13.5px}
+  .tablewrap{overflow-x:auto;border-radius:24px;border:1px solid var(--line)}
+
+  /* код */
+  pre{
+    margin:0;padding:22px 24px;border-radius:24px;background:var(--ink);color:#F2F2F2;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.6;
+    overflow-x:auto;
+  }
+  pre .tag{color:#FF8A80}
+  pre .attr{color:#9BD1FF}
+  pre .str{color:#B8E986}
+
+  footer{padding:56px 0 72px;border-top:1px solid var(--line);color:var(--muted);font-size:14.5px}
+  footer a{color:var(--muted)}
+
+  .reveal{opacity:1;transform:none}
+  .js .reveal{opacity:0;transform:translateY(18px)}
+  .js .reveal.shown{opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+
+  @media (max-width:860px){
+    .grid.three,.grid.two{grid-template-columns:1fr}
+    .tagline{display:none}
+    .card{padding:26px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .js .reveal{opacity:1;transform:none}
+    .btn:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <span class="logo">neo<span>ved</span></span>
+    <span class="tagline">тестовая страница виджета</span>
+    <button class="btn sm cta" type="button" onclick="window.neovedChat &amp;&amp; window.neovedChat.open()">Написать нам</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow reveal"><i></i> Виджет подключён к боевому amoCRM</span>
+      <h1 class="reveal">Обратная связь,<br>которая живёт в CRM</h1>
+      <p class="lead reveal">Посетитель оставляет имя, почту, телефон и ник в Telegram, пишет вопрос — и в amoCRM появляется сделка на этапе «Новая заявка». Менеджер отвечает примечанием прямо в карточке, ответ приходит человеку в тот же чат на сайте.</p>
+      <div class="actions reveal">
+        <button class="btn" type="button" onclick="window.neovedChat &amp;&amp; window.neovedChat.open()">Открыть виджет</button>
+        <a class="btn ghost" href="#tilda">Как поставить на Tilda</a>
+      </div>
+      <p class="hint reveal">Виджет — красная кнопка в правом нижнем углу. Это рабочий контур: заявка действительно создаст сделку в воронке «Продажи клиентам».</p>
+    </div>
+  </section>
+
+  <section style="background:var(--soft);border-radius:var(--radius)">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Что происходит после «Связаться»</h2>
+        <p>Три шага, между которыми нет ручной работы: ни копирования контактов, ни пересылки писем.</p>
+      </div>
+      <div class="grid three">
+        <article class="card reveal" style="background:#fff">
+          <span class="num">1</span>
+          <h3>Ищем человека в базе</h3>
+          <p>Сначала по почте, потом по телефону (сравниваем цифры, а не формат записи), потом по нику Telegram — во всех четырёх «телеграмных» полях карточки.</p>
+        </article>
+        <article class="card reveal" style="background:#fff">
+          <span class="num">2</span>
+          <h3>Сделка на «Новую заявку»</h3>
+          <p>Нашли открытую сделку — двигаем её на «Новую заявку» внутри её же воронки и вешаем тег <code>site_chat</code>. Не нашли — заводим сделку с новым контактом.</p>
+        </article>
+        <article class="card reveal" style="background:#fff">
+          <span class="num">3</span>
+          <h3>Ответ — из карточки</h3>
+          <p>Менеджер пишет обычное примечание в ленте сделки. Оно тут же появляется в чате на сайте — отдельный интерфейс для переписки не нужен.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Как выглядит в amoCRM</h2>
+        <p>Первое примечание — сводка с контактами и вопросом. Ответ менеджера — обычный текст в той же ленте.</p>
+      </div>
+      <div class="lead-card reveal">
+        <div class="top">
+          <strong>Заявка с сайта — Марина Ковалёва</strong>
+          <span class="chip">site_chat</span>
+          <span class="chip stage">Продажи клиентам · Новая заявка</span>
+        </div>
+        <div class="feed">
+          <div class="note">
+            <span class="meta">Примечание · автоматически</span>
+Заявка с сайта (виджет)
+Имя: Марина Ковалёва
+Почта: m.kovaleva@example.com
+Телефон: +7 926 000-11-22
+Telegram: @kovaleva
+Страница: https://neoved.io/
+
+Сообщение:
+Нужно оплатить контракт поставщику в Китае, сумма 45 000 USD. Какие сроки и комиссия?</div>
+          <div class="note out">
+            <span class="meta">Менеджер · ушло клиенту в виджет</span>
+Марина, добрый день! По Китаю проводим за 1–2 рабочих дня, комиссия зависит от банка получателя. Пришлите, пожалуйста, инвойс — посчитаем точно.</div>
+          <div class="note">
+            <span class="meta">Примечание · ответ клиента из виджета</span>
+Отправила на почту, спасибо!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--soft);border-radius:var(--radius)">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Что уходит в CRM</h2>
+        <p>Поля формы и то, во что они превращаются в карточке контакта.</p>
+      </div>
+      <div class="tablewrap reveal" style="background:#fff">
+        <table>
+          <thead>
+            <tr><th>Поле формы</th><th>Куда попадает</th><th>Зачем</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Имя</td><td>Имя контакта, название сделки</td><td>Понятная карточка без ручного переименования</td></tr>
+            <tr><td>Почта</td><td>Поле <code>EMAIL</code> (629257)</td><td>Первый ключ поиска — по нему находим клиента в базе</td></tr>
+            <tr><td>Телефон</td><td>Поле <code>PHONE</code> (629255)</td><td>Второй ключ: сравниваем последние 10 цифр, формат записи не важен</td></tr>
+            <tr><td>Telegram</td><td>Поле «Telegram username» (996481)</td><td>Третий ключ и канал связи, если клиент пропал с сайта</td></tr>
+            <tr><td>Вопрос</td><td>Примечание в ленте сделки</td><td>Менеджер отвечает на него прямо из карточки</td></tr>
+            <tr><td>Страница</td><td>Строка в том же примечании</td><td>Видно, с какого раздела сайта пришёл человек</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid two" style="margin-top:16px">
+        <article class="card reveal" style="background:#fff">
+          <h3>Дубли не плодятся</h3>
+          <p>Контакт ищется тремя способами до создания нового, а сделка заводится через <code>/leads/complex</code> — с контролем дублей на стороне amoCRM. Пустые поля карточки дозаполняются, заполненные не перезаписываются.</p>
+        </article>
+        <article class="card reveal" style="background:#fff">
+          <h3>Переписка не теряется</h3>
+          <p>Диалог привязан к сделке и живёт месяц: человек может закрыть вкладку, вернуться завтра — история и ответы менеджера будут на месте.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tilda">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Как поставить на Tilda</h2>
+        <p>Одна строка в футер — виджет рисуется в shadow DOM, поэтому стили Tilda его не задевают, а он не ломает вёрстку страницы.</p>
+      </div>
+      <div class="grid two">
+        <div class="reveal">
+          <pre><code>&lt;<span class="tag">script</span> <span class="attr">src</span>=<span class="str">"https://neoved-chat.strelnikov2302.workers.dev/widget.js"</span> <span class="attr">defer</span>&gt;&lt;/<span class="tag">script</span>&gt;</code></pre>
+          <p style="margin-top:16px;color:var(--muted);font-size:15.5px">Настройки блока <strong>T123</strong> → HTML-код, вставить в футер сайта. Виджет появится на всех страницах.</p>
+        </div>
+        <article class="card dark reveal">
+          <h3>Что можно поменять атрибутами</h3>
+          <p><code>data-title</code> — заголовок панели.<br>
+          <code>data-subtitle</code> — строка под ним.<br>
+          <code>data-accent</code> — фирменный цвет кнопки.<br>
+          <code>data-policy</code> — ссылка на политику обработки данных.</p>
+          <p style="margin-top:14px">Открыть виджет с любой своей кнопки: <code>neovedChat.open()</code></p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Тестовая страница виджета обратной связи для <a href="https://neoved.io" target="_blank" rel="noopener">neoved.io</a>.
+    Бэкенд — Cloudflare Worker, CRM — amoCRM (воронка «Продажи клиентам»).
+  </div>
+</footer>
+
+<!-- сам виджет -->
+<script src="https://neoved-chat.strelnikov2302.workers.dev/widget.js" defer></script>
+
+<script type="module">
+  // Прятать контент можно только после того, как модуль реально выполнился:
+  // не загрузился CDN — страница остаётся видимой без анимации.
+  document.documentElement.classList.add('js');
+  const items = document.querySelectorAll('.reveal');
+  const show = (el) => el.classList.add('shown');
+  // Страховка: даже если наблюдатель не сработает, через 1.2 с всё видно.
+  const failsafe = setTimeout(() => items.forEach(show), 1200);
+
+  try {
+    const { inView, animate, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+    clearTimeout(failsafe);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      items.forEach(show);
+    } else {
+      items.forEach((el) => el.classList.add('shown'));
+      document.querySelectorAll('section').forEach((section) => {
+        inView(section, () => {
+          const targets = section.querySelectorAll('.reveal');
+          if (!targets.length) return;
+          animate(targets, { opacity: [0, 1], transform: ['translateY(18px)', 'translateY(0)'] },
+            { duration: 0.55, delay: stagger(0.07), easing: [0.22, 1, 0.36, 1] });
+        }, { amount: 0.15 });
+      });
+    }
+  } catch (e) {
+    clearTimeout(failsafe);
+    items.forEach(show);
+  }
+</script>
+</body>
+</html>
