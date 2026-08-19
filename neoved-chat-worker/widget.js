@@ -370,6 +370,87 @@
     });
   });
 
+  // ── маска телефона ──
+  // Российские номера собираются в «+7 999 123-45-67», остальные — просто «+»
+  // и цифры группами: у клиентов ВЭД номер бывает какой угодно, и жёсткая
+  // российская маска отрезала бы их на входе.
+  function formatPhone(value) {
+    // Номер, начатый с «+», считаем международным и код страны не трогаем;
+    // без «+» — российским, поэтому «8…» и «9…» превращаются в +7.
+    // Турецкий или китайский номер человек наберёт с «+90…», «+86…».
+    var international = /^\s*\+/.test(value);
+    var d = String(value).replace(/\D/g, '');
+    if (!d) return international ? '+' : '';
+
+    if (!international) {
+      if (d.charAt(0) === '8') d = '7' + d.slice(1);
+      else if (d.charAt(0) === '9') d = '7' + d;
+    }
+
+    if (d.charAt(0) === '7' && d.length <= 11) {
+      d = d.slice(0, 11);
+      var out = '+7';
+      if (d.length > 1) out += ' ' + d.slice(1, 4);
+      if (d.length > 4) out += ' ' + d.slice(4, 7);
+      if (d.length > 7) out += '-' + d.slice(7, 9);
+      if (d.length > 9) out += '-' + d.slice(9, 11);
+      return out;
+    }
+    return '+' + d.slice(0, 15).replace(/(\d{3})(?=\d)/g, '$1 ');
+  }
+
+  // ── ник Telegram ──
+  // Telegram допускает только латиницу, цифры и подчёркивание, поэтому
+  // кириллица и пробелы отсекаются прямо при вводе, а ссылка t.me
+  // сворачивается в @ник.
+  function formatNick(value) {
+    var s = String(value)
+      .replace(/^\s*https?:\/\/(t\.me|telegram\.me)\//i, '@')
+      .replace(/[^A-Za-z0-9_@]/g, '')
+      .replace(/(?!^)@/g, '');
+    if (s && s.charAt(0) !== '@') s = '@' + s;
+    return s.slice(0, 33);   // @ плюс 32 символа — предел Telegram
+  }
+
+  /**
+   * Переформатирует поле, сохраняя место курсора: считаем, сколько значащих
+   * символов было слева от него, и после подстановки ставим курсор за тем же
+   * по счёту символом. Иначе при правке середины номера курсор прыгал бы в конец.
+   * `isFiller` отвечает, является ли символ разделителем (скобка, дефис, @).
+   */
+  function maskField(el, format, isFiller) {
+    el.addEventListener('input', function () {
+      var before = el.value;
+      var caret = el.selectionStart;
+      var after = format(before);
+      if (after === before) return;
+
+      var left = 0;
+      for (var i = 0; i < caret; i++) if (!isFiller(before.charAt(i))) left++;
+
+      el.value = after;
+      var pos = 0, seen = 0;
+      while (pos < after.length && seen < left) {
+        if (!isFiller(after.charAt(pos))) seen++;
+        pos++;
+      }
+      try { el.setSelectionRange(pos, pos); } catch (e) { /* поле не текстовое */ }
+    });
+  }
+
+  var phoneInput = form.querySelector('[name="phone"]');
+  var tgInput = form.querySelector('[name="tg"]');
+  maskField(phoneInput, formatPhone, function (ch) { return !/\d/.test(ch); });
+  maskField(tgInput, formatNick, function (ch) { return !/[A-Za-z0-9_]/.test(ch); });
+
+  // Кириллицу молча выкидывать нельзя — человек не поймёт, куда делись буквы.
+  tgInput.addEventListener('input', function (e) {
+    if (/[а-яё]/i.test(e.data || '')) {
+      markBad('tg', true);
+      tgInput.parentNode.querySelector('.err').textContent = 'Ник в Telegram — латиницей, без пробелов';
+    }
+  });
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (sending) return;

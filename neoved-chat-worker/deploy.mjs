@@ -144,13 +144,29 @@ console.log(`
   <script src="${base}/widget.js" defer></script>`);
 
 async function cfApi(path, opts) {
-  const res = await fetch(CF + path, opts);
+  const res = await retry(() => fetch(CF + path, opts));
   const data = await res.json().catch(() => ({}));
   if (!res.ok || data.success === false) {
     const errors = (data.errors || []).map((e) => `${e.code}: ${e.message}`).join('; ');
     fail(`Cloudflare ${res.status} ${path}\n  ${errors || JSON.stringify(data).slice(0, 400)}`);
   }
   return data;
+}
+
+/**
+ * Связь с api.cloudflare.com с этой машины рвётся на ровном месте — то TLS,
+ * то таймаут коннекта. Сетевой сбой не повод считать деплой неудачным.
+ */
+async function retry(call, attempts = 4) {
+  for (let i = 1; ; i++) {
+    try {
+      return await call();
+    } catch (e) {
+      if (i >= attempts) throw e;
+      console.log(`  сеть подвела (${e.cause?.code || e.message}), попытка ${i + 1} из ${attempts}…`);
+      await new Promise((r) => setTimeout(r, 2000 * i));
+    }
+  }
 }
 
 function fail(message) {

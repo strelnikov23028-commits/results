@@ -40,7 +40,8 @@ const DEFAULTS = {
   // воронки — между воронками сделка не переезжает.
   NEW_STATUS_NAME: 'Новая заявка',
   TAG_NAME: 'site_chat',
-  LEAD_NAME_PREFIX: 'Заявка с сайта',
+  // Начало названия сделки: «site chat — Иван Петров».
+  LEAD_NAME_PREFIX: 'site chat',
 
   // Поля контакта в этом аккаунте.
   EMAIL_FIELD: '629257',   // EMAIL, multitext
@@ -170,6 +171,11 @@ async function apiStart(request, env, cfg) {
   };
   const text = str(body.message, 4000);
 
+  // Ник Telegram бывает только из латиницы, цифр и подчёркивания. Всё прочее
+  // (кириллица, пробелы, эмодзи) — опечатка, и в карточку её пускать незачем:
+  // искать по такому нику всё равно бессмысленно.
+  if (!/^[a-z0-9_]{4,32}$/.test(person.tg)) person.tg = '';
+
   if (person.name.length < 2) throw new HttpError('Укажите имя');
   if (!/^[^\s@]+@[^\s@]+\.[a-zа-я]{2,}$/i.test(person.email)) throw new HttpError('Проверьте адрес почты');
   if (digits(person.phone).length < 10) throw new HttpError('Проверьте номер телефона');
@@ -227,7 +233,7 @@ async function getSession(env, sid) {
 
 async function syncToAmo(person, text, env, cfg) {
   const found = await findContact(person, env, cfg);
-  const summary = firstNote(person, text, cfg);
+  const summary = firstNote(person, text);
 
   if (!found) {
     const created = await createLeadWithContact(person, env, cfg);
@@ -422,9 +428,9 @@ async function addNote(leadId, text, env) {
 }
 
 /** Первое примечание: контакты рядом с вопросом, чтобы менеджер видел всё сразу. */
-function firstNote(person, text, cfg) {
+function firstNote(person, text) {
   const lines = [
-    `${cfg.LEAD_NAME_PREFIX} (виджет)`,
+    'Заявка с сайта (виджет)',
     `Имя: ${person.name}`,
     `Почта: ${person.email}`,
     `Телефон: ${person.phone}`,
