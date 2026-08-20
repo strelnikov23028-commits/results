@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KaBuM! и Roborock: линейки от 10 000 Па</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --surface:#FFFFFF; --text:#1D1D1F; --text-2:#6E6E73; --text-3:#86868B;
+    --blue:#0071E3; --green:#00875A; --amber:#B25E00; --red:#D70015;
+    --border:#E5E5EA; --radius:20px;
+    --shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+    --shadow-h:0 4px 12px rgba(0,0,0,.07), 0 16px 40px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;font-size:17px;
+    -webkit-font-smoothing:antialiased;padding:0 20px 100px}
+  .wrap{max-width:1180px;margin:0 auto}
+  header{padding:76px 0 44px;text-align:center}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--blue);margin-bottom:20px}
+  h1{font-size:clamp(31px,5vw,52px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:20px}
+  .sub{font-size:clamp(17px,2.2vw,21px);color:var(--text-2);max-width:760px;margin:0 auto 28px}
+  .meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--text-3)}
+  .meta span{background:var(--surface);border:1px solid var(--border);padding:7px 15px;border-radius:100px;font-weight:500}
+
+  .key{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:34px 32px;margin-bottom:52px;box-shadow:var(--shadow);border-left:4px solid var(--blue)}
+  .key h2{font-size:22px;font-weight:600;margin-bottom:13px}
+  .key p{color:var(--text-2);margin-bottom:13px;font-size:16px}
+  .key p:last-child{margin-bottom:0}
+  .key strong{color:var(--text);font-weight:600}
+
+  .mops{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:20px}
+  .mop{background:#FAFAFC;border:1px solid var(--border);border-radius:14px;padding:18px 20px}
+  .mop .mt{font-size:15px;font-weight:600;margin-bottom:6px}
+  .mop .md{font-size:14px;color:var(--text-2)}
+  .mop.best{background:#F0FAF5;border-color:#CDE9DC}
+  .mop.worst{background:#FFF5F5;border-color:#F5D9D9}
+
+  section{margin-bottom:64px}
+  .sec-head{margin-bottom:24px}
+  h2.sec{font-size:clamp(25px,3.3vw,33px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  .sec-sub{color:var(--text-2);font-size:16px;max-width:820px}
+
+  .table-scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:980px;font-size:14.5px}
+  th,td{padding:13px 14px;text-align:left;border-bottom:1px solid #F0F0F2;vertical-align:middle}
+  th{font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--text-3);background:#FAFAFC;white-space:nowrap}
+  td:first-child{font-weight:600;color:var(--text)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.hl{background:rgba(0,135,90,.05)}
+  tbody tr.bad{background:rgba(215,0,21,.03)}
+  tbody tr:hover{background:#FAFAFC}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .yes{color:var(--green);font-weight:600}
+  .no{color:var(--red);font-weight:600}
+  .mid{color:var(--amber);font-weight:600}
+
+  .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;
+    transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1)}
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
+  .card.top{border-top:4px solid var(--green)}
+  .shot{background:#FAFAFC;border:1px solid var(--border);border-radius:16px;aspect-ratio:4/3;
+    display:flex;align-items:center;justify-content:center;padding:18px;overflow:hidden;margin-bottom:20px}
+  .shot img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+    padding:5px 12px;border-radius:100px;margin-bottom:12px}
+  .b-blue{background:rgba(0,113,227,.09);color:var(--blue)}
+  .b-green{background:rgba(0,135,90,.1);color:var(--green)}
+  .b-amber{background:rgba(178,94,0,.1);color:var(--amber)}
+  .card h3{font-size:21px;font-weight:600;letter-spacing:-.015em;margin-bottom:6px;line-height:1.25}
+  .brand{font-size:13px;color:var(--text-3);font-weight:500;margin-bottom:15px}
+  .price-row{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:15px}
+  .price{font-size:27px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .price-usd{font-size:14px;color:var(--text-3);font-weight:500;font-variant-numeric:tabular-nums}
+  .specs{list-style:none;margin-bottom:18px}
+  .specs li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;
+    border-bottom:1px solid #F0F0F2;font-size:14.5px;color:var(--text-2)}
+  .specs li:last-child{border-bottom:none}
+  .specs li svg{flex-shrink:0;margin-top:4px}
+  .specs b{color:var(--text);font-weight:600}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);
+    color:#fff;text-decoration:none;padding:12px 24px;border-radius:100px;font-size:15px;font-weight:600;
+    transition:background .2s,transform .2s;cursor:pointer;min-height:44px;margin-top:auto}
+  .btn:hover{background:#0077ED;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid rgba(0,113,227,.4);outline-offset:2px}
+  .btn-green{background:var(--green)}
+  .btn-green:hover{background:#009B66}
+  .btn-ghost{background:transparent;color:var(--blue);border:1px solid var(--border)}
+  .btn-ghost:hover{background:#F0F7FF;border-color:var(--blue)}
+  .note{font-size:13.5px;color:var(--text-3);margin-top:13px;padding-top:13px;
+    border-top:1px solid #F0F0F2;line-height:1.5}
+
+  .quotes{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .quote{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 24px}
+  .quote p{font-size:15px;color:var(--text-2);font-style:italic;margin-bottom:10px}
+  .quote .src{font-size:13px;color:var(--text-3);font-weight:500;font-style:normal}
+  .quote.pos{border-left:3px solid var(--green)}
+  .quote.neg{border-left:3px solid var(--red)}
+
+  .facts{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:32px 30px;box-shadow:var(--shadow)}
+  .facts ol{list-style:none;counter-reset:c}
+  .facts li{counter-increment:c;position:relative;padding-left:44px;margin-bottom:20px;
+    font-size:15.5px;color:var(--text-2)}
+  .facts li:last-child{margin-bottom:0}
+  .facts li::before{content:counter(c);position:absolute;left:0;top:-1px;width:28px;height:28px;
+    border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;
+    justify-content:center;font-size:13px;font-weight:600}
+  .facts b{color:var(--text);font-weight:600}
+
+  footer{text-align:center;padding-top:42px;border-top:1px solid var(--border);
+    font-size:13.5px;color:var(--text-3);line-height:1.7}
+  footer a{color:var(--blue);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  a.inline{color:var(--blue);text-decoration:none;font-weight:500}
+  a.inline:hover{text-decoration:underline}
+
+  .js-motion .reveal{opacity:0}
+  @media (prefers-reduced-motion:reduce){
+    .js-motion .reveal{opacity:1!important;transform:none!important}
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Линейки целиком · Рио-де-Жанейро · 20 августа 2026</div>
+  <h1>KaBuM! и Roborock<br>от 10 000 Па</h1>
+  <p class="sub">Все модели двух линеек с мощностью от 10 000 Па: тип мопа, сила всасывания, шум, температура мойки и высота порога. С отзывами владельцев со всего мира, а не только из Бразилии.</p>
+  <div class="meta">
+    <span>Порог отсечки — 10 000 Па</span>
+    <span>Цены на 20.08.2026</span>
+    <span>Курс R$ 5,10 / $1</span>
+  </div>
+</header>
+
+<div class="key reveal">
+  <h2>Главное про мойку: тип мопа решает больше, чем паскали</h2>
+  <p>В независимых тестах <strong>вращающиеся мопы убирают 85% засохших пятен — это на 35% лучше вибрационных</strong>. Разница принципиальная, и именно она делит линейку Roborock надвое: Q-серия вибрирует, Qrevo — трёт.</p>
+  <div class="mops">
+    <div class="mop worst">
+      <div class="mt">Вибрационный (VibraRise)</div>
+      <div class="md">Пластина дрожит 3 000 раз в секунду. Пыль соберёт, засохшее пятно — нет. Это Q10 VF+</div>
+    </div>
+    <div class="mop">
+      <div class="mt">Два вращающихся диска</div>
+      <div class="md">Крутятся 200 об/мин с прижимом, поднимаются на 10 мм над коврами. Вся линейка Qrevo и KaBuM K1100 / K4000</div>
+    </div>
+    <div class="mop best">
+      <div class="mt">Роликовый (Curv 2 Flow)</div>
+      <div class="md">Валик промывается прямо на ходу — не возит одну грязную тряпку по всей квартире. Первый такой у Roborock</div>
+    </div>
+  </div>
+  <p style="margin-top:20px">Второе, что стоит знать: <strong>паскали важны в основном для ковров</strong>. На плитке и ламинате, которые преобладают в Рио, разница между 13 000 и 20 000 Па почти не чувствуется — а вот тип мопа и температура воды в станции чувствуются сразу.</p>
+</div>
+
+<!-- ============ ROBOROCK ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Roborock от 10 000 Па</h2>
+    <p class="sec-sub">Всё, что продаётся в Бразилии. Модели Qrevo Pro, Qrevo S и QR598 в таблицу не попали — у них 7 000–8 000 Па.</p>
+  </div>
+  <div class="table-scroll reveal">
+    <table>
+      <thead>
+        <tr><th>Модель</th><th>Цена</th><th>Тяга</th><th>Тип мопа</th><th>Мойка мопов</th><th>Порог</th><th>Шум</th><th>Поставка</th></tr>
+      </thead>
+      <tbody>
+        <tr class="bad">
+          <td>Q10 VF+</td><td class="num">R$ 3 134</td><td class="num">10 000 Па</td>
+          <td class="no">вибрационный</td><td class="no">нет</td><td class="num">20 мм</td><td class="mid">н/д</td><td class="yes">Бразилия</td>
+        </tr>
+        <tr>
+          <td>Qrevo Slim</td><td class="num">R$ 7 455</td><td class="num">11 000 Па</td>
+          <td>2 вращающихся</td><td class="yes">да</td><td class="mid">н/д</td><td class="mid">н/д</td><td class="no">импорт</td>
+        </tr>
+        <tr>
+          <td>Qrevo S5V</td><td class="num">R$ 4 837</td><td class="num">12 000 Па</td>
+          <td>2 вращ. + FlexiArm</td><td class="yes">да</td><td class="mid">н/д</td><td class="mid">н/д</td><td class="no">импорт</td>
+        </tr>
+        <tr class="hl">
+          <td>Qrevo Edge S5A</td><td class="num">R$ 4 380</td><td class="num">17 000 Па</td>
+          <td>2 вращающихся</td><td class="yes">горячая</td><td class="num">20 мм</td><td class="yes">~55 дБ*</td><td class="no">импорт</td>
+        </tr>
+        <tr>
+          <td>Qrevo Curv</td><td class="num">R$ 7 258 / 7 490</td><td class="num">18 500 Па</td>
+          <td>2 вращающихся</td><td class="yes">75 °C</td><td class="yes">30 мм</td><td class="yes">55 дБ* / 59–65</td><td class="mid">импорт / BR</td>
+        </tr>
+        <tr>
+          <td>Qrevo CurvX</td><td class="num">R$ 6 353</td><td class="num">22 000 Па</td>
+          <td>2 вращающихся</td><td class="yes">80 °C</td><td class="yes">40 мм</td><td class="yes">53 дБ*</td><td class="no">импорт</td>
+        </tr>
+        <tr>
+          <td>Qrevo Curv 2 Flow</td><td class="num">R$ 7 000 / 9 623</td><td class="num">20 000 Па</td>
+          <td class="yes">роликовый</td><td class="yes">да</td><td class="yes">AdaptiLift</td><td class="mid">н/д</td><td class="no">импорт</td>
+        </tr>
+        <tr>
+          <td>Qrevo Curv S5X</td><td class="num">R$ 9 718 / 10 900</td><td class="num">17 000–18 500 Па</td>
+          <td>2 вращающихся</td><td class="yes">75 °C</td><td class="yes">30 мм</td><td class="yes">55 дБ*</td><td class="mid">импорт / BR</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="border-top:none;padding-top:12px">* Цифры шума Roborock измеряет <b>в полуанэхоической камере и в режиме «только мойка»</b>, где всасывание почти не работает. Реальный рабочий диапазон Qrevo Curv — <b>59–65 дБ</b>, и это единственная модель, для которой такая цифра опубликована. Для остальных считайте 55 дБ маркетинговым минимумом, а не тем, что услышите.</p>
+</section>
+
+<!-- ============ ROBOROCK: КАРТОЧКИ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Что из Roborock брать</h2>
+    <p class="sec-sub">Две модели с осмысленным соотношением цены и результата — и одна, которую брать не стоит.</p>
+  </div>
+  <div class="grid">
+
+    <div class="card top reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_Q_NP_2X_720599-CBT109310847342_042026-E.webp" alt="Робот-пылесос Roborock Qrevo Edge S5A" loading="lazy">
+      </div>
+      <span class="badge b-green">Лучший баланс в линейке</span>
+      <h3>Qrevo Edge S5A</h3>
+      <div class="brand">17 000 Па · 2 вращающихся мопа · горячая мойка</div>
+      <div class="price-row">
+        <span class="price">R$ 4 380</span>
+        <span class="price-usd">≈ $859 · импорт</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>17 000 Па и <b>мойка мопов горячей водой</b> — за вдвое меньшие деньги, чем Curv</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Тоньше обычного Edge на 5 мм — лучше пролезает под мебель</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>AdaptiLift у версии S5A нет</b> — порог 20 мм, а не 40 мм как у обычного Edge. Легко перепутать по названию</span></li>
+      </ul>
+      <a class="btn btn-green" href="https://www.mercadolivre.com.br/roborock-qrevo-edge-s5a-robot-aspirador-y-trapeador-18500/p/MLB2097451932" target="_blank" rel="noopener">Смотреть · R$ 4 380</a>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_710381-MLB113993498628_072026-O-aspirador-rob-roborock-qrevo-curv-original-novo.webp" alt="Робот-пылесос Roborock Qrevo Curv" loading="lazy">
+      </div>
+      <span class="badge b-blue">Единственный с запасом по порогу</span>
+      <h3>Qrevo Curv</h3>
+      <div class="brand">18 500 Па · AdaptiLift 30 мм · мойка 75 °C</div>
+      <div class="price-row">
+        <span class="price">R$ 7 490</span>
+        <span class="price-usd">≈ $1 469 · есть по Бразилии</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Подъёмное шасси <b>AdaptiLift</b>: одиночный порог 30 мм. В тесте Galaxus уверенно проходит 2–2,5 см</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мойка мопов при <b>75 °C</b>, единственная модель с опубликованным рабочим шумом: 59–65 дБ</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Есть <b>локальная карточка</b> — то есть под гарантию Roborock попадает</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://produto.mercadolivre.com.br/MLB-4966595451-aspirador-rob-roborock-qrevo-curv-original-novo-_JM" target="_blank" rel="noopener">Смотреть · R$ 7 490</a>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://m.media-amazon.com/images/I/5177weAHzsL._AC_SX679_.jpg" alt="Робот-пылесос Roborock Q10 VF+" loading="lazy">
+      </div>
+      <span class="badge b-amber">Не берите ради мойки</span>
+      <h3>Q10 VF+</h3>
+      <div class="brand">10 000 Па · вибрационный моп · станция без воды</div>
+      <div class="price-row">
+        <span class="price">R$ 3 134</span>
+        <span class="price-usd">≈ $615 · по Бразилии</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Моп <b>вибрационный</b>, а не вращающийся: в тестах такие снимают на 35% меньше засохших пятен</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Владельцы прямо пишут, что <b>«мop не работает толком»</b>, в отличие от Qrevo</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Как <b>чистый пылесос</b> — нормален: лидар, мешок 2,7 л, порог 20 мм. Цена выросла с R$ 2 359</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.amazon.com.br/dp/B0FHK1FY8X" target="_blank" rel="noopener">Смотреть · R$ 3 134</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ОТЗЫВЫ МИР ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Что пишут владельцы Roborock по миру</h2>
+    <p class="sec-sub">Сводка с Reddit и англоязычных обзоров — там статистика в разы больше бразильской.</p>
+  </div>
+  <div class="quotes reveal">
+    <div class="quote pos">
+      <p>«Первый робот, у которого мне ни разу не пришлось распутывать волосы на щётках»</p>
+      <div class="src">Владельцы с домашними животными и длинными волосами</div>
+    </div>
+    <div class="quote pos">
+      <p>«Roborock просто стабильно хорош, теперь это мой бренд по умолчанию»</p>
+      <div class="src">Reddit · сравнение с Eufy, которые часто выходят из строя за 2 года</div>
+    </div>
+    <div class="quote pos">
+      <p>«Qrevo Curv моет и пылесосит каждую ночь больше года»</p>
+      <div class="src">Reddit · долгосрочная эксплуатация</div>
+    </div>
+    <div class="quote neg">
+      <p>«Плохо объезжает провода» — повторяющаяся жалоба почти во всех обзорах линейки</p>
+      <div class="src">Reddit · самая частая претензия к Qrevo</div>
+    </div>
+    <div class="quote neg">
+      <p>«CurvX начал плохо: потребовался сброс и две перекартографии, прежде чем он заработал нормально»</p>
+      <div class="src">Reddit · первичная настройка</div>
+    </div>
+    <div class="quote neg">
+      <p>Ошибка лазерного датчика LDS, течь воды из дока у Qrevo Pro, «бак пуст» при полном баке</p>
+      <div class="src">Сводка типовых поломок из сервисных обращений</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KABUM ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">KaBuM! smart от 10 000 Па</h2>
+    <p class="sec-sub">Три модели проходят порог мощности. Ни для одной производитель не публикует уровень шума и высоту преодолеваемого порога.</p>
+  </div>
+  <div class="table-scroll reveal">
+    <table style="min-width:900px">
+      <thead>
+        <tr><th>Модель</th><th>Цена PIX</th><th>Тяга</th><th>Тип мопа</th><th>Станция</th><th>Батарея</th><th>Шум</th><th>Оценка</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hl">
+          <td>K800 Pro</td><td class="num">R$ 1 500</td><td class="num">13 000 Па</td>
+          <td class="mid">плоская накладка</td><td class="mid">только пыль, 60 дней</td><td class="mid">н/д</td><td class="mid">н/д</td><td class="yes">4,6</td>
+        </tr>
+        <tr>
+          <td>K1100</td><td class="num">R$ 2 050</td><td class="num">10 000 Па</td>
+          <td class="yes">2 вращающихся</td><td class="mid">только пыль</td><td class="num">5200 мАч · 190 мин</td><td class="mid">н/д</td><td class="mid">нет</td>
+        </tr>
+        <tr>
+          <td>K4000</td><td class="num">R$ 3 800</td><td class="num">20 000 Па</td>
+          <td class="yes">2 вращ. выдвижных</td><td class="yes">вода 4 л + 3,5 л, мойка и сушка</td><td class="num">5200 мАч · 180 мин</td><td class="mid">н/д</td><td class="no">нет</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="border-top:none;padding-top:12px">Отдельно стоит заметить: у <b>K800 Pro самая высокая оценка в линейке (4,6)</b> при самой низкой цене, но станция у него только вытряхивает пыль, а моп — плоская накладка. Мощность 13 000 Па выше, чем у K1100, — то есть более дорогая модель слабее по тяге, но лучше по мойке.</p>
+</section>
+
+<section>
+  <div class="grid">
+    <div class="card top reveal">
+      <div class="shot">
+        <img src="https://images6.kabum.com.br/produtos/fotos/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000p-110v-branco-ksar400010br_1783338049_gg.jpg" alt="Робот-пылесос KaBuM! smart K4000" loading="lazy">
+      </div>
+      <span class="badge b-blue">Единственный KaBuM с водяной станцией</span>
+      <h3>KaBuM! smart K4000</h3>
+      <div class="brand">20 000 Па · 127 В · полная станция</div>
+      <div class="price-row">
+        <span class="price">R$ 3 800</span>
+        <span class="price-usd">≈ $745 в PIX</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Самая высокая тяга в обеих линейках</b> — 20 000 Па, больше даже чем у Qrevo Curv</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Мопы с <b>имитацией силы ручного нажима</b>, выдвигаются к плинтусам</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Локальная гарантия и версия 127 В из коробки — ни того, ни другого нет у импортных Roborock</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Ни одного отзыва</b>, высота порога и шум не указаны нигде</span></li>
+      </ul>
+      <a class="btn" href="https://www.kabum.com.br/produto/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000pa-127v-branco-ksar400010br" target="_blank" rel="noopener">Смотреть на KaBuM</a>
+      <p class="note">Мойка мопов есть, но <b>температура воды не заявлена</b> — скорее всего холодная. У Roborock Edge и Curv на этом месте 75 °C.</p>
+    </div>
+
+    <div class="card reveal">
+      <div class="shot">
+        <img src="https://images.kabum.com.br/produtos/fotos/1007407/robo-aspirador-e-passa-pano-kabum-smart-k800-pro-mapeia-a-laser-autolimpante-recarga-automatica-13000pa-app-127v-branco-ksar81010br_1786991261_gg.jpg" alt="Робот-пылесос KaBuM! smart K800 Pro" loading="lazy">
+      </div>
+      <span class="badge b-green">Лучшая оценка в линейке</span>
+      <h3>KaBuM! smart K800 Pro</h3>
+      <div class="brand">13 000 Па · 127 В · станция без воды</div>
+      <div class="price-row">
+        <span class="price">R$ 1 500</span>
+        <span class="price-usd">≈ $294 в PIX</span>
+      </div>
+      <ul class="specs">
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Оценка <b>4,6 из 5</b> — лучшая в линейке, и это при самой низкой цене</span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>13 000 Па, лазерная навигация, автоопорожнение на <b>60 дней</b></span></li>
+        <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Моп — <b>плоская накладка</b>, станция его не моет. Это протирание, а не мойка</span></li>
+      </ul>
+      <a class="btn btn-ghost" href="https://www.kabum.com.br/produto/1007407/robo-aspirador-e-passa-pano-kabum-smart-k800-pro-mapeia-a-laser-autolimpante-recarga-automatica-13000pa-app-127v-branco-ksar81010br" target="_blank" rel="noopener">Смотреть на KaBuM</a>
+      <p class="note">Разумный выбор, если мойка не нужна: за R$ 1 500 вы получаете больше тяги, чем у K1100 за R$ 2 050.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ИТОГ ============ -->
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Кто кого</h2>
+  </div>
+  <div class="facts reveal">
+    <ol>
+      <li><b>По мойке Roborock впереди.</b> Qrevo Edge и Curv моют мопы водой 75 °C, CurvX — 80 °C. У KaBuM K4000 мойка есть, но температура нигде не заявлена, то есть почти наверняка холодная.</li>
+      <li><b>По тяге впереди KaBuM.</b> K4000 с его 20 000 Па мощнее всей линейки Roborock, кроме CurvX. Но помните: на плитке паскали решают мало.</li>
+      <li><b>По цене разрыв огромный.</b> KaBuM K4000 стоит R$ 3 800 с локальной гарантией и версией 127 В. Ближайший Roborock с горячей мойкой — Edge S5A за R$ 4 380, и это импорт без гарантии бренда.</li>
+      <li><b>По прозрачности данных выигрывает Roborock.</b> Они публикуют шум, температуру воды и высоту порога. KaBuM не публикует ни шум, ни порог ни для одной модели — вы покупаете вслепую.</li>
+      <li><b>По отзывам тоже Roborock.</b> По их моделям есть годы отзывов со всего мира и понятный список слабых мест. У K4000 и K1100 отзывов нет вовсе.</li>
+      <li><b>Общая слабость обеих линеек — провода.</b> И у Qrevo, и у KaBuM это повторяющаяся жалоба: кабели наматываются на щётки. Пол перед уборкой придётся расчищать в любом случае.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>Цены с Mercado Livre, Amazon.com.br и KaBuM! на 20 августа 2026 года. Курс — R$ 5,10 за $1.<br>Отметка «н/д» означает, что производитель не публикует эту характеристику — приблизительные значения вместо неё не подставлялись.</p>
+  <p style="margin-top:10px">Источники: <a href="https://vacuumwars.com/roborock-buyer-guide/" target="_blank" rel="noopener">Vacuum Wars: гид по линейке Roborock</a>, <a href="https://us.roborock.com/products/roborock-qrevo-curv-x" target="_blank" rel="noopener">Roborock CurvX</a>, <a href="https://redditrecs.com/robot-vacuum/series/roborock-qrevo-curv-series/" target="_blank" rel="noopener">отзывы владельцев Qrevo Curv на Reddit</a>, <a href="https://canaltech.com.br/eletro/kabum-smart-lanca-robos-aspiradores-k1000-e-k1100-para-desafiar-mercado-premium/" target="_blank" rel="noopener">Canaltech о KaBuM K1000/K1100</a>.</p>
+  <p style="margin-top:14px"><a href="robo-marcas-riscos-rio.html">← Риски брендов: сервис и гарантия</a> · <a href="robo-aspirador-sem-importacao-rio.html">Подборка без импорта →</a></p>
+</footer>
+
+</div>
+
+<script type="module">
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const showAll = () => document.documentElement.classList.remove('js-motion');
+  if (!reduced && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-motion');
+    const fallback = setTimeout(showAll, 2500);
+    try {
+      const { animate, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      clearTimeout(fallback);
+      const reveal = (el) => {
+        const kids = el.matches('.grid') || el.matches('.quotes')
+          ? el.querySelectorAll('.card, .quote') : null;
+        const many = kids && kids.length > 1;
+        animate(many ? kids : el,
+          { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
+          { duration: 0.55, delay: many ? stagger(0.06) : 0, easing: [0.22, 0.61, 0.36, 1] });
+      };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          io.unobserve(entry.target);
+          entry.target.style.opacity = '1';
+          reveal(entry.target);
+        });
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach((el) => {
+          if (getComputedStyle(el).opacity === '0') el.style.opacity = '1';
+        });
+      }, 6000);
+    } catch (e) { clearTimeout(fallback); showAll(); }
+  }
+</script>
+</body>
+</html>
