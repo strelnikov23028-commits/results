@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Роботы-пылесосы в Рио: модели и их косяки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --surface:#FFFFFF; --ink:#1D1D1F; --ink-2:#424245; --muted:#6E6E73;
+    --line:#E3E3E6; --blue:#0071E3; --red:#D6323B; --amber:#B4690E; --green:#0E7A4B;
+    --r:20px; --shadow:0 1px 3px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.04);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px; margin:0 auto; padding:0 22px}
+  a{color:var(--blue); text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ---------- header ---------- */
+  .top{padding:56px 0 12px}
+  .kicker{font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+  h1{font-size:clamp(34px,5.2vw,54px); line-height:1.08; letter-spacing:-.025em; font-weight:700; margin:16px 0 14px}
+  .lede{font-size:clamp(18px,2.2vw,21px); color:var(--ink-2); max-width:74ch; margin:0}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 0}
+  .chip{background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:7px 15px; font-size:13.5px; color:var(--ink-2); font-weight:500}
+
+  /* ---------- sections ---------- */
+  section{padding:52px 0 0}
+  h2{font-size:clamp(26px,3.4vw,36px); letter-spacing:-.02em; font-weight:700; margin:0 0 10px}
+  h3{font-size:21px; font-weight:600; letter-spacing:-.01em; margin:0 0 6px}
+  .sub{color:var(--muted); font-size:16.5px; margin:0 0 26px; max-width:78ch}
+
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease}
+  .card:hover{transform:translateY(-2px); box-shadow:0 2px 6px rgba(0,0,0,.06), 0 14px 34px rgba(0,0,0,.07)}
+
+  /* ---------- product grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:18px}
+  .prod{display:flex; flex-direction:column; overflow:hidden}
+  .shot{background:#fff; height:210px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--line); padding:16px}
+  .shot img{max-width:100%; max-height:100%; object-fit:contain}
+  .prod .body{padding:20px 22px 22px; display:flex; flex-direction:column; flex:1}
+  .tagline{font-size:12.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:8px}
+  .meta{color:var(--muted); font-size:14.5px; margin:2px 0 14px}
+  .price{font-size:26px; font-weight:700; letter-spacing:-.02em}
+  .price small{display:block; font-size:13.5px; font-weight:500; color:var(--muted); letter-spacing:0; margin-top:3px}
+  .bad{margin:16px 0 0; padding:14px 16px; background:#FDF3F3; border:1px solid #F3DADA; border-radius:14px}
+  .bad .t{font-size:12.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--red); margin-bottom:8px}
+  .bad ul{margin:0; padding-left:18px}
+  .bad li{font-size:14.5px; color:var(--ink-2); margin:5px 0}
+  .good{margin:14px 0 0; padding:14px 16px; background:#F1F8F4; border:1px solid #D8EBE1; border-radius:14px}
+  .good .t{font-size:12.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--green); margin-bottom:8px}
+  .good ul{margin:0; padding-left:18px}
+  .good li{font-size:14.5px; color:var(--ink-2); margin:5px 0}
+  .buy{margin-top:auto; padding-top:18px}
+  .btn{display:inline-block; background:var(--blue); color:#fff; padding:11px 20px; border-radius:12px; font-size:15px; font-weight:600}
+  .btn:hover{background:#0062c4; text-decoration:none}
+  .where{font-size:13px; color:var(--muted); margin-top:9px}
+
+  /* ---------- callout ---------- */
+  .callout{padding:28px 30px; border-radius:var(--r); background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow)}
+  .callout.warn{background:#FFF9EE; border-color:#F0E2C6}
+  .calc{display:grid; grid-template-columns:1fr auto; gap:2px 20px; margin:20px 0 0; font-variant-numeric:tabular-nums}
+  .calc div{padding:11px 0; border-bottom:1px solid var(--line)}
+  .calc .r{text-align:right; font-weight:600}
+  .calc .total{border-bottom:none; font-size:19px; font-weight:700; padding-top:14px}
+
+  /* ---------- table ---------- */
+  .tablewrap{overflow-x:auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+  table{border-collapse:collapse; width:100%; min-width:820px; font-size:14.5px; font-variant-numeric:tabular-nums}
+  th,td{text-align:left; padding:13px 16px; border-bottom:1px solid var(--line)}
+  th{font-size:12.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#FAFAFC}
+  td.name{font-weight:600}
+  .pill{display:inline-block; font-size:12px; font-weight:600; padding:3px 9px; border-radius:999px; white-space:nowrap}
+  .pill.br{background:#E9F4EE; color:var(--green)}
+  .pill.imp{background:#FBEBEB; color:var(--red)}
+  .pill.warn{background:#FBF2E2; color:var(--amber)}
+
+  /* ---------- brand risk ---------- */
+  .brands{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px}
+  .brand{padding:24px 26px}
+  .brand h3{margin-bottom:4px}
+  .brand .verdict{font-size:14.5px; color:var(--muted); margin-bottom:14px}
+  .brand ul{margin:0; padding-left:18px}
+  .brand li{font-size:15px; color:var(--ink-2); margin:7px 0}
+
+  /* ---------- checklist ---------- */
+  .checks{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px}
+  .check{padding:22px 24px}
+  .check .n{width:28px; height:28px; border-radius:50%; background:var(--ink); color:#fff; font-size:14px; font-weight:600; display:flex; align-items:center; justify-content:center; margin-bottom:12px}
+  .check p{margin:0; font-size:15.5px; color:var(--ink-2)}
+  .check strong{color:var(--ink)}
+
+  footer{margin:70px 0 60px; padding-top:26px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
+  footer p{margin:0 0 10px; max-width:90ch}
+
+  .reveal{opacity:1; transform:none}
+  @media (prefers-reduced-motion:no-preference){
+    .js .reveal{opacity:0; transform:translateY(20px)}
+  }
+  @media (max-width:640px){
+    body{font-size:16px}
+    .top{padding:38px 0 8px}
+    .shot{height:180px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kicker">Всё в одном месте · Рио-де-Жанейро · 20 августа 2026</div>
+    <h1>Роботы-пылесосы: модели и их косяки</h1>
+    <p class="lede">Одна страница вместо четырёх: что реально продаётся в Бразилии со складов внутри страны, сколько стоит на сегодня и что у каждой модели ломается, глючит или не работает так, как обещает карточка. Импортных позиций здесь нет — почему, объясняю сразу ниже.</p>
+    <div class="chips">
+      <span class="chip">Только местная доставка</span>
+      <span class="chip">Сеть 127 В</span>
+      <span class="chip">Цены на 20.08.2026</span>
+      <span class="chip">Курс R$ 5,10 / $1</span>
+      <span class="chip">Косяки — из жалоб и тестов</span>
+    </div>
+  </header>
+
+  <!-- ================= ПРАВИЛО №1 ================= -->
+  <section id="import">
+    <h2 class="reveal">Правило №1: никаких «Internacional»</h2>
+    <p class="sub reveal">Импортная карточка на Mercado Livre выглядит дешевле ровно до момента растаможки. В цене не учтён налог, и по факту вещь выходит почти вдвое дороже.</p>
+
+    <div class="callout warn reveal">
+      <h3>Как это считается</h3>
+      <p style="margin:8px 0 0; color:var(--ink-2)">С мая 2026 при ввозе посылки дороже $50 действует импортная пошлина <strong>60%</strong> (со скидкой $20 от суммы налога) плюс <strong>ICMS 17–20%</strong>, который считается «изнутри» — то есть на сумму товара вместе с пошлиной. Вот что происходит с Roborock Qrevo Edge S5A, который на ML стоит R$ 4 380 и выглядит самым выгодным Roborock с горячей мойкой:</p>
+      <div class="calc">
+        <div>Цена в карточке</div><div class="r">R$ 4 380</div>
+        <div>Импортная пошлина 60% минус скидка $20</div><div class="r">+ R$ 2 526</div>
+        <div>ICMS 20% «изнутри»</div><div class="r">+ R$ 1 727</div>
+        <div class="total">Итого при полном обложении</div><div class="r total">≈ R$ 8 633</div>
+      </div>
+      <p style="margin:18px 0 0; color:var(--ink-2)">Вместо «дешёвого Roborock за 4 380» получается аппарат за 8 600 — дороже локального Qrevo Curv. Плюс 1–3 недели ожидания, гарантия «через площадку» и риск застрять на таможне. Площадки в программе Remessa Conforme иногда включают налог в цену на этапе оплаты, но проверить это можно только в корзине после ввода CEP.</p>
+      <p style="margin:14px 0 0; color:var(--ink-2)"><strong>Поэтому ссылок на импортные карточки на этой странице нет вообще.</strong> Всё, что ниже, лежит на складе в Бразилии и едет за дни.</p>
+    </div>
+  </section>
+
+  <!-- ================= С МОЙКОЙ ================= -->
+  <section id="omni">
+    <h2 class="reveal">С мойкой мопов: полная станция</h2>
+    <p class="sub reveal">Станция моет мопы, сушит их, сама доливает воду в робота и вытряхивает пыль в мешок. Всё — с местных складов.</p>
+
+    <div class="grid">
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://images6.kabum.com.br/produtos/fotos/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000p-110v-branco-ksar400010br_1783338049_gg.jpg" alt="Робот-пылесос KaBuM! smart K4000 с базой самоочистки"></div>
+        <div class="body">
+          <div class="tagline">Максимум тяги · гарантия магазина</div>
+          <h3>KaBuM! smart K4000</h3>
+          <p class="meta">20 000 Па · 127 В из коробки · баки 4 л + 3,5 л · мешок 3,5 л · мопы выдвигаются к плинтусам на 10 мм</p>
+          <div class="price">R$ 3 799,99<small>≈ $745 в PIX · без PIX — R$ 4 777,77</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Самая высокая тяга на рынке Бразилии — больше, чем у всей линейки Roborock, кроме CurvX</li>
+              <li>Гарантия и сервис через сам магазин, а не через маркетплейс</li>
+              <li>KaBuM! (юрлицо Husky Gaming) реально отвечает: <a href="https://www.reclameaqui.com.br/empresa/husky-gaming/" target="_blank" rel="noopener">рейтинг 8,4 из 10</a>, ответы на 98,4% жалоб, решено 90,8%</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li><strong>Ни одного отзыва</strong> — вы обкатываете модель первым</li>
+              <li>Высота порога <strong>не указана нигде</strong> — на ваших 2 см это лотерея</li>
+              <li>Температура воды в станции не заявлена — почти наверняка холодная (у Roborock на этом месте 75 °C)</li>
+              <li>Уровень шума не публикуется ни для одной модели KaBuM</li>
+              <li>Сервис фактически один, в Кампинасе, канал — WhatsApp. Из Рио это посылка через полстраны</li>
+              <li>У прошлых моделей линейки повторяющийся сюжет: отказы <a href="https://www.reclameaqui.com.br/kabum/aspirador-robo-kabum-com-defeito-e-dificuldade-de-contato-com-assistencia-tecnica_dBM41kJSoionnmni/" target="_blank" rel="noopener">через 3 месяца</a> и <a href="https://www.reclameaqui.com.br/husky-gaming/robo-aspirador-kabum-smart-700-nao-funciona-com-apenas-5-meses-de-uso_x8GQhI4ROgteTHXx/" target="_blank" rel="noopener">через 5 месяцев</a></li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.kabum.com.br/produto/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000pa-127v-branco-ksar400010br" target="_blank" rel="noopener">Смотреть на KaBuM!</a>
+            <div class="where">Цена проверена 20.08.2026 на kabum.com.br</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://http2.mlstatic.com/D_NQ_NP_783853-MLA112254926893_052026-O.webp" alt="Робот-пылесос Xiaomi H50 Pro"></div>
+        <div class="body">
+          <div class="tagline">Горячая мойка · углы</div>
+          <h3>Xiaomi H50 Pro</h3>
+          <p class="meta">15 000 Па · 127 В · порог 20 мм · мойка мопов горячей водой и сушка горячим воздухом · две выдвижные «руки» для углов</p>
+          <div class="price">R$ 3 999<small>≈ $784 · цена с Mercado Livre</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Единственная локальная модель с горячей мойкой мопов — меньше шансов на запах</li>
+              <li>Щётка и моп выезжают за габарит корпуса: углы и плинтусы</li>
+              <li>Широкоугольный лазер лучше видит провода и мелочь на полу</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li><strong>Xiaomi Brasil обслуживает только покупки в своём официальном магазине.</strong> Купили на ML, Amazon или Shopee — <a href="https://www.reclameaqui.com.br/xiaomi-brasil/nao-ha-assistencia-tecnica-para-robo-aspirador-xiaomi_K3O9zVFJr1n3lkc_/" target="_blank" rel="noopener">откажут даже за деньги</a></li>
+              <li><a href="https://www.reclameaqui.com.br/xiaomi-brasil/robo-aspirador-xiaomi-sem-assistencia-tecnica-no-brasil_opg2wio0nnJOoJXN/" target="_blank" rel="noopener">Запчастей для роботов в Бразилии нет</a> — неавторизованные мастерские тоже отказываются</li>
+              <li>Порог 20 мм — на 2 см впритык, без запаса</li>
+              <li>Заявленные 57 дБ относятся к режиму мойки с выключенным всасыванием. Шум в режиме уборки Xiaomi не публикует</li>
+              <li>Только 127 В — легко случайно взять карточку на 220 В</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.mercadolivre.com.br/robo-aspirador-xiaomi-vacuum-h50-pro-branco-127v/p/MLB70270895" target="_blank" rel="noopener">Смотреть на Mercado Livre</a>
+            <div class="where">Локальная карточка. Цена — с проверки 12.08.2026, сегодня ML не отдаёт цены без входа в аккаунт</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/610gG5FXmeL._AC_SX679_.jpg" alt="Робот-пылесос MOVA E40 Ultra"></div>
+        <div class="body">
+          <div class="tagline">Бивольт · лучший порог</div>
+          <h3>MOVA E40 Ultra</h3>
+          <p class="meta">19 000 Па · 100–240 В · порог 22 мм · баки 4,5 л и 4 л · мешок на 75 дней · моп выдвигается на 40 мм</p>
+          <div class="price">R$ 4 360<small>≈ $855 · цена с Mercado Livre</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Бивольт 100–240 В — вопрос вольтажа снимается совсем</li>
+              <li>Порог 22 мм — максимум среди местных вариантов, ваши 2 см с запасом</li>
+              <li>Единственный бренд, который публикует шум со ссылкой на номер лабораторного отчёта: 76 дБ на мойке, 62 дБ на сушке</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Мойка мопов <strong>холодной водой</strong>, сушка тёплая — горячей мойки нет</li>
+              <li>По MOVA в Бразилии <strong>нет ни статистики жалоб, ни отзывов владельцев</strong>. Это не «хорошо», это «неизвестно»</li>
+              <li><a href="https://www.pigeonsi.com.br/" target="_blank" rel="noopener">PigeonX</a> — независимая сеть ремонта — MOVA в списке обслуживаемых брендов не упоминает</li>
+              <li>Карточка на ML заполнена небрежно: «Wi-Fi: нет», «датчик препятствий: нет» — вопреки спецификации производителя. Уточняйте комплектацию до оплаты</li>
+              <li>На Amazon этой модели больше нет: прежняя карточка теперь ведёт на E20s Pro Plus. Остался только ML</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.mercadolivre.com.br/aspirador-e-esfregao-mova-e40-ultra-robot-succao-de-19-cor-branco/p/MLB63438157" target="_blank" rel="noopener">Смотреть на Mercado Livre</a>
+            <div class="where">Локальная карточка. Цена — с проверки 12.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://http2.mlstatic.com/D_NQ_NP_779219-MLA110348183166_052026-O-robo-aspirador-xiaomi-h50-10000pa-110v.webp" alt="Робот-пылесос Xiaomi H50 в версии 127 В"></div>
+        <div class="body">
+          <div class="tagline">Дешевле Pro на R$ 854</div>
+          <h3>Xiaomi H50 (127 В)</h3>
+          <p class="meta">10 000 Па · порог 20 мм · баки 4 л + 4 л · мешок на 75 дней · два мопа 180 об/мин · до 240 м² за раз</p>
+          <div class="price">R$ 3 145<small>≈ $617 · версия 220 В стоит R$ 2 699</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Едет по Бразилии, полноценная omni-станция с мойкой мопов</li>
+              <li>Сертификат ANATEL, приложение Xiaomi Home</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Тяга 10 000 Па — слабое место на фоне 15 000–20 000 у соседей по цене</li>
+              <li>В карточке 127 В продавец указал «5000 Pa» вместо 10 000 — ошибка, но лучше уточнить</li>
+              <li>Версия 220 В дешевле на R$ 446, но потребует трансформатор от 1000 ВА (ещё R$ 400–600)</li>
+              <li>Тот же сервисный тупик Xiaomi: ремонт только для покупок в официальном магазине</li>
+              <li>Из независимого теста H50: мойка поверхностная — засохшие пятна бросает после пары попыток; наматывает провода; не видит тёмную мебель; шум около 65 дБ; контакты зарядки пылятся</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.mercadolivre.com.br/robo-aspirador-xiaomi-h50-10000pa-110v/up/MLBU4028838205" target="_blank" rel="noopener">Смотреть версию 127 В</a>
+            <div class="where">Локальная карточка. Цена — с проверки 12.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://http2.mlstatic.com/D_NQ_NP_710381-MLB113993498628_072026-O-aspirador-rob-roborock-qrevo-curv-original-novo.webp" alt="Робот-пылесос Roborock Qrevo Curv"></div>
+        <div class="body">
+          <div class="tagline">Единственный с запасом по порогу</div>
+          <h3>Roborock Qrevo Curv</h3>
+          <p class="meta">18 500 Па · подъёмное шасси AdaptiLift, порог 30 мм · мойка мопов 75 °C · рабочий шум 59–65 дБ</p>
+          <div class="price">R$ 7 490<small>≈ $1 469 · локальная карточка, а не импорт</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Единственная модель, которая берёт порог 25 мм сама — в <a href="https://www.galaxus.at/en/page/robot-vacuum-review-how-high-can-the-roborock-qrevo-curv-really-climb-35850" target="_blank" rel="noopener">тесте Galaxus</a> проходит 2–2,5 см уверенно</li>
+              <li>Локальная карточка попадает под <a href="https://br.roborock.com/policy/article/service-warranty" target="_blank" rel="noopener">гарантию Roborock Brasil</a>, в отличие от импортных</li>
+              <li>Единственная модель линейки с опубликованным рабочим шумом, а не маркетинговым минимумом</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Цена: вдвое дороже большинства локальных вариантов</li>
+              <li><strong>Ошибка лазерного датчика LDS</strong> — самая частая поломка линейки. Робот перестаёт видеть комнату</li>
+              <li>Течь воды из док-станции (у Qrevo Pro — с первого использования), «бак пуст» при полном баке, мопы перестают крутиться</li>
+              <li>«Плохо объезжает провода» — повторяющаяся претензия почти во всех обзорах Qrevo</li>
+              <li>Запчасти дорогие: фильтры, батарея, щётки и мопы заранее в бюджет</li>
+              <li>Гарантия действует только от авторизованных дистрибьюторов, и «за послепродажное обслуживание отвечает фактический продавец» — владельцы описывают <a href="https://www.reclameaqui.com.br/kess/robo-aspirador-roborock-com-defeito-e-falta-de-suporte-para-garantia_Os6LiR8wO_pioOxD/" target="_blank" rel="noopener">игру в перекидывание</a></li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://produto.mercadolivre.com.br/MLB-4966595451-aspirador-rob-roborock-qrevo-curv-original-novo-_JM" target="_blank" rel="noopener">Смотреть локальную карточку</a>
+            <div class="where">Цена — с проверки 20.08.2026 на Mercado Livre</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/71L9NltLIxL._AC_SX679_.jpg" alt="Робот-пылесос eufy C20 Omni"></div>
+        <div class="body">
+          <div class="tagline">Только для полноты картины</div>
+          <h3>eufy C20 Omni</h3>
+          <p class="meta">7 000 Па · <strong>только 220 В</strong> · порог 18 мм · мопы с прижимом 6 Н · корпус 8,5 см · продавец AnkerDirect BR</p>
+          <div class="price">R$ 3 749,00<small>≈ $735 плюс трансформатор</small></div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li><strong>Строго 220 В</strong> — в вашей сети 127 В нужен трансформатор от 1000 ВА, это ещё R$ 400–600</li>
+              <li>Порог всего 18 мм — на 2 см уже впритык, владельцы пишут «наполовину заехал и выдал ошибку»</li>
+              <li>Самая слабая тяга среди omni-моделей при высокой цене</li>
+              <li>На Reddit регулярно жалуются, что eufy выходят из строя за пару лет</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0G6Z6PTJG" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026, продавец AnkerDirect BR</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= БЕЗ МОЙКИ ================= -->
+  <section id="nomop">
+    <h2 class="reveal">Без мойки мопов: только автоопорожнение</h2>
+    <p class="sub reveal">Станция вытряхивает пыль в мешок — никакой возни с водой. Важно: надпись «base autolimpante» в бразильских карточках почти ничего не значит, у всех этих моделей мопы моются руками в раковине.</p>
+
+    <div class="grid">
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/61N-ZmR2MxL._AC_SX679_.jpg" alt="Робот-пылесос Dreame D15 Plus"></div>
+        <div class="body">
+          <div class="tagline">Лучшее соотношение в классе</div>
+          <h3>Dreame D15 Plus</h3>
+          <p class="meta">13 000 Па Vormax · 127 В · мешок 4 л на 90 дней · лидар, карты этажей · 300 минут работы, до 270 м²</p>
+          <div class="price">R$ 2 374,05<small>≈ $466 · продавец DREAME LTDA, то есть сам производитель</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Потолок мощности среди моделей без мойки на бразильском рынке</li>
+              <li>Гарантия напрямую от производителя, а не от перекупщика</li>
+              <li>Мешок на 90 дней — станцию трогаете раз в квартал</li>
+              <li>Цена с 12 августа упала: было R$ 2 564</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Высота порога в спецификации не указана. У родственных моделей Dreame это 20 мм, но точной цифры именно для D15 Plus производитель не даёт</li>
+              <li>Уровень шума Dreame не публикует ни в карточке, ни на сайте</li>
+              <li>Моп в комплекте есть, но станция его не моет — это протирание, а не мойка</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0GXFFSVYM" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://images.kabum.com.br/produtos/fotos/1007407/robo-aspirador-e-passa-pano-kabum-smart-k800-pro-mapeia-a-laser-autolimpante-recarga-automatica-13000pa-app-127v-branco-ksar81010br_1786991261_gg.jpg" alt="Робот-пылесос KaBuM! smart K800 Pro"></div>
+        <div class="body">
+          <div class="tagline">Лучшая оценка в линейке KaBuM</div>
+          <h3>KaBuM! smart K800 Pro</h3>
+          <p class="meta">13 000 Па · 127 В · лазерная навигация · автоопорожнение на 60 дней · оценка 4,6 из 5</p>
+          <div class="price">R$ 1 499,99<small>≈ $294 в PIX · без PIX — R$ 2 111,10</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Самая высокая оценка в линейке при самой низкой цене</li>
+              <li>13 000 Па — больше, чем у более дорогого K1100 за R$ 2 050</li>
+              <li>Гарантия через магазин, версия 127 В из коробки</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Моп — плоская накладка, станция его не моет</li>
+              <li>Ни шум, ни высота порога не опубликованы — как и по всей линейке KaBuM</li>
+              <li>Общие болячки марки из жалоб: не находит базу, не стыкуется и не заряжается; перестаёт всасывать и уезжает на базу с «слабой батареей»; у модели 900 глючит датчик антипадения</li>
+              <li>SAC <a href="https://www.reclameaqui.com.br/deal-4-b/assistencia-tecnica-do-robo-aspirador-kabum-smart-muito-ruim_9MceHfrwvoF436BT/" target="_blank" rel="noopener">перекидывает между отделами</a>; бывает, что аппарат «восстановили», а дефект остался</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.kabum.com.br/produto/1007407/robo-aspirador-e-passa-pano-kabum-smart-k800-pro-mapeia-a-laser-autolimpante-recarga-automatica-13000pa-app-127v-branco-ksar81010br" target="_blank" rel="noopener">Смотреть на KaBuM!</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/61JleLDj4mL._AC_SX679_.jpg" alt="Робот-пылесос Velds V50 PRO"></div>
+        <div class="body">
+          <div class="tagline">Самый дешёвый с вращающимися мопами</div>
+          <h3>Velds V50 PRO</h3>
+          <p class="meta">10 000 Па · 127 В · порог 20 мм заявлен прямо · мешок 3 л · лидар · рейтинг 4,4 из 5</p>
+          <div class="price">R$ 2 374,99<small>≈ $466 · продавец VeldsBR</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Высота порога прямо указана в характеристиках — редкость в этом классе</li>
+              <li>Мопы вращающиеся, а не плоская накладка</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Станция только опорожняет пыль. Воду в бачок 300 мл заливаете сами, мопы стираете руками</li>
+              <li>Малоизвестный бренд: вопрос с поддержкой и запчастями через пару лет</li>
+              <li>10 000 Па — заметно ниже Dreame D15 Plus при той же цене</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0GWK793DQ" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/5177weAHzsL._AC_SX679_.jpg" alt="Робот-пылесос Roborock Q10 VF+"></div>
+        <div class="body">
+          <div class="tagline">Не берите ради мойки</div>
+          <h3>Roborock Q10 VF+</h3>
+          <p class="meta">10 000 Па · 127 В · порог 20 мм · вибрационный моп VibraRise · мешок 2,7 л на 7 недель · лидар PreciSense</p>
+          <div class="price">R$ 3 249,00<small>≈ $637 · в начале августа стоил R$ 2 359</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Двойное антизапутывание волос — сильная сторона Roborock: «первый робот, у которого не пришлось распутывать волосы на щётках»</li>
+              <li>Локальная поставка и приложение с картами</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Моп <strong>вибрационный</strong>: в независимых тестах такие снимают на 35% меньше засохших пятен, чем вращающиеся диски</li>
+              <li>Владельцы прямо пишут, что «моп не работает толком», в отличие от линейки Qrevo</li>
+              <li><strong>Цена растёт на глазах</strong>: R$ 2 359 в начале августа → R$ 3 134 на 12-е → R$ 3 249 сегодня</li>
+              <li>За те же деньги Dreame D15 Plus даёт 13 000 Па против 10 000</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0FHK1FY8X" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/51jD2sxgd7L._AC_SX679_.jpg" alt="Робот-пылесос MOVA E20s Pro Plus"></div>
+        <div class="body">
+          <div class="tagline">Бивольт, но переплата</div>
+          <h3>MOVA E20s Pro Plus</h3>
+          <p class="meta">13 000 Па · 100–240 В · порог 18 мм · мешок 4 л · лидар LDS</p>
+          <div class="price">R$ 3 791,35<small>≈ $743 · осталось 3 штуки, продавец LCS Utilidades</small></div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>В карточке написано «lava, seca», а по <a href="https://au.mova.tech/products/mova-e20s-pro-plus-auto-empty-robot-vacuum-and-mop" target="_blank" rel="noopener">спецификации производителя</a> — только автоопорожнение и плоская накладка вместо мопа</li>
+              <li>Та же мощность, что у Dreame D15 Plus, но дороже на R$ 1 417</li>
+              <li>Порог 18 мм — ниже, чем нужно на 2 см</li>
+              <li>Продавец — перекупщик, а не производитель</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0H5FLWD7X" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/51UOeydXmlL._AC_SX679_.jpg" alt="Робот-пылесос WAP ROBOT W4000"></div>
+        <div class="body">
+          <div class="tagline">Бразильский бренд, сервис рядом</div>
+          <h3>WAP ROBOT W4000</h3>
+          <p class="meta">127 В · станция автоочистки · картография LDS 360° · вращающийся моп · заявленный шум 65 дБ</p>
+          <div class="price">R$ 2 457,25<small>≈ $482 · остался 1 экземпляр</small></div>
+          <div class="good">
+            <div class="t">За что брать</div>
+            <ul>
+              <li>Бразильский бренд с сервисом внутри страны — редкий случай в этом списке</li>
+              <li>Одна из двух моделей на рынке, для которых шум вообще опубликован</li>
+              <li>PigeonX обслуживает WAP</li>
+            </ul>
+          </div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>65 дБ — заметно громче конкурентов</li>
+              <li>Станция моет только пыль, мопы — руками</li>
+              <li>Мощность всасывания производитель не публикует</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0DJWFD2RH" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/41-KYRtgtWL._AC_SX679_.jpg" alt="Робот-пылесос Xiaomi H40"></div>
+        <div class="body">
+          <div class="tagline">Самый дешёвый Xiaomi со станцией</div>
+          <h3>Xiaomi H40</h3>
+          <p class="meta">127 В · база с автоочисткой · плоская накладка вместо мопа · продавец J R C STORE</p>
+          <div class="price">R$ 2 000,00<small>≈ $392 · было R$ 2 070 на 12.08</small></div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Док протирает тряпку, но воду в него доливаете вручную</li>
+              <li>Моп — плоская накладка, засохшие пятна не берёт</li>
+              <li>Всё тот же сервисный тупик Xiaomi: покупка не в официальном магазине = отказ в ремонте</li>
+              <li>В Mi Store в BarraShopping этот же H40 стоит R$ 3 496 — на R$ 1 496 дороже</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0GMK98MFQ" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/61KtvwNs59L._AC_SX679_.jpg" alt="Робот-пылесос Liectroux T9"></div>
+        <div class="body">
+          <div class="tagline">Осторожно с описанием</div>
+          <h3>Liectroux T9</h3>
+          <p class="meta">110 В · мешок 3 л · LiDAR · Wi-Fi 2,4/5 ГГц · продавец Liectroux Brasil Oficial</p>
+          <div class="price">R$ 2 609,10<small>≈ $512</small></div>
+          <div class="bad">
+            <div class="t">Косяки</div>
+            <ul>
+              <li>Заявлено «4 в 1 с автоочисткой», по факту — мешок на 3 л и всё. Мойки мопов в станции нет</li>
+              <li>Мощность всасывания в характеристиках не указана</li>
+              <li>Дороже Dreame D15 Plus на R$ 235 при заметно более скромной начинке</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0H8HLN71W" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= ИМПОРТ ================= -->
+  <section id="skip">
+    <h2 class="reveal">Что осталось за бортом и почему</h2>
+    <p class="sub reveal">Эти модели выглядят привлекательно по цене в карточке, но все они идут импортом. Ссылок не даю намеренно — вот их настоящая стоимость с налогом.</p>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead>
+          <tr><th>Модель</th><th>Цена в карточке</th><th>С налогом</th><th>Чем хороша</th><th>Почему мимо</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">Ecovacs T50 Pro Omni</td><td>R$ 2 742</td><td>≈ R$ 5 500</td><td>63 дБ, 15 000 Па, мойка 70 °C, порог 22 мм</td><td>Импорт, 1–3 недели, гарантия через площадку</td></tr>
+          <tr><td class="name">Ecovacs X9 Pro Omni</td><td>R$ 3 385</td><td>≈ R$ 6 750</td><td>Роликовый моп с промывкой на ходу, 75 °C</td><td>Импорт. Вольтаж в карточке не указан</td></tr>
+          <tr><td class="name">Roborock Qrevo QV 35A</td><td>R$ 3 661</td><td>≈ R$ 7 280</td><td>Щётки с сертификатом 0% запутывания</td><td>Импорт, к тому же всего 8 000 Па</td></tr>
+          <tr><td class="name">Roborock Qrevo Edge S5A</td><td>R$ 4 380</td><td>≈ R$ 8 630</td><td>17 000 Па и горячая мойка</td><td>Импорт. И AdaptiLift у S5A нет — порог 20 мм, а не 40</td></tr>
+          <tr><td class="name">Roborock Qrevo S5V</td><td>R$ 4 837</td><td>≈ R$ 9 500</td><td>12 000 Па, FlexiArm для углов</td><td>Импорт</td></tr>
+          <tr><td class="name">Roborock Qrevo CurvX</td><td>R$ 6 353</td><td>≈ R$ 12 400</td><td>22 000 Па, мойка 80 °C, порог 40 мм</td><td>Импорт</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub reveal" style="margin-top:16px">Расчёт «с налогом» — по правилам Remessa Conforme: пошлина 60% на посылки дороже $50 со скидкой $20 от суммы налога, плюс ICMS 20%, считаемый «изнутри». Если площадка включила налог в цену на этапе оплаты, переплаты не будет — но проверить это можно только в корзине после ввода CEP.</p>
+  </section>
+
+  <!-- ================= БРЕНДЫ ================= -->
+  <section id="brands">
+    <h2 class="reveal">Бренды: что будет, когда сломается</h2>
+    <p class="sub reveal">Собрано из жалоб на Reclame Aqui и официальных условий гарантии. Сначала хорошая новость: <a href="https://www.pigeonsi.com.br/" target="_blank" rel="noopener">PigeonX</a> — независимая сеть, которая чинит роботов Roborock, Xiaomi, iRobot, Eufy, Liectroux, WAP, Midea и Samsung с базами во всех столицах штатов. Даже если производитель откажет, аппарат не превращается в кирпич — ремонт будет платным, но он возможен.</p>
+
+    <div class="brands">
+      <article class="card brand reveal">
+        <h3>Xiaomi</h3>
+        <p class="verdict">Приличное железо, самая жёсткая политика обслуживания</p>
+        <ul>
+          <li>Обслуживает <strong>только</strong> покупки в своём официальном магазине. ML, Amazon, Shopee — отказ даже за деньги</li>
+          <li>Запчастей для роботов в Бразилии нет, неавторизованные мастерские тоже отказываются</li>
+          <li>Жалобы на отказы через 2–3 месяца: S40C, X20 Max, X10 с ошибкой бампера</li>
+          <li>Спасает только платный PigeonX</li>
+        </ul>
+      </article>
+
+      <article class="card brand reveal">
+        <h3>KaBuM! smart</h3>
+        <p class="verdict">Единственный, кто реально отвечает. Но железо — слабое звено</p>
+        <ul>
+          <li><a href="https://www.reclameaqui.com.br/empresa/husky-gaming/" target="_blank" rel="noopener">Рейтинг 8,4 из 10</a> (за 6 месяцев 8,5), из 985 жалоб отвечают на 98,4% и решают 90,8%</li>
+          <li>Гарантия 1 год: 3 месяца по закону плюс 9 от производителя. Версии 127 В в наличии</li>
+          <li>Но: отказы на 3–5 месяце у прошлых моделей, сервис один — в Кампинасе, канал WhatsApp</li>
+          <li>Ни для одной модели не публикуются шум и высота порога</li>
+          <li>На Reclame Aqui марка числится за юрлицом <strong>Husky Gaming</strong> — искать жалобы надо там</li>
+        </ul>
+      </article>
+
+      <article class="card brand reveal">
+        <h3>Roborock</h3>
+        <p class="verdict">Лучшая техника и официальное присутствие. Гарантия — не на всё</p>
+        <ul>
+          <li>Есть <a href="https://br.roborock.com/" target="_blank" rel="noopener">br.roborock.com</a> и <a href="https://br.roborock.com/policy/article/service-warranty" target="_blank" rel="noopener">гарантия на 1 год</a>, но только для товаров от авторизованных дистрибьюторов</li>
+          <li>Карточки «Internacional» под гарантию не попадают — а это большинство Qrevo на ML</li>
+          <li>Типовые поломки: ошибка LDS, течь воды из дока, «бак пуст» при полном баке, мопы не крутятся, потеря всасывания, заклинивание колёс волосами</li>
+          <li>Зато по их моделям есть годы отзывов со всего мира: «Roborock просто стабильно хорош», «Qrevo Curv моет каждую ночь больше года»</li>
+        </ul>
+      </article>
+
+      <article class="card brand reveal">
+        <h3>MOVA / Dreame</h3>
+        <p class="verdict">Хорошее железо и полное отсутствие истории на рынке</p>
+        <ul>
+          <li>MOVA — суббренд Dreame. По MOVA в Бразилии <strong>нет ни статистики жалоб, ни отзывов владельцев</strong></li>
+          <li>PigeonX MOVA не обслуживает</li>
+          <li>У Dreame ситуация лучше: D15 Plus продаёт само юрлицо DREAME LTDA, гарантия напрямую</li>
+          <li>Риск первопроходца тот же, что у KaBuM K4000</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= ОБЩИЕ БОЛЯЧКИ ================= -->
+  <section id="common">
+    <h2 class="reveal">Болячки, общие для всех</h2>
+    <p class="sub reveal">Это не про конкретную модель — так ведут себя роботы вообще, независимо от марки и цены.</p>
+
+    <div class="checks">
+      <article class="card check reveal">
+        <div class="n">1</div>
+        <p><strong>Провода.</strong> И у Qrevo, и у KaBuM, и у Xiaomi это повторяющаяся жалоба: кабели наматываются на щётки. Пол перед уборкой придётся расчищать в любом случае.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">2</div>
+        <p><strong>Паскали решают мало.</strong> Разница между 13 000 и 20 000 Па заметна на коврах с длинным ворсом. На плитке и ламинате, которые преобладают в Рио, важнее тип мопа и температура воды.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">3</div>
+        <p><strong>Тип мопа важнее мощности.</strong> В независимых тестах вращающиеся мопы убирают 85% засохших пятен — на 35% лучше вибрационных. Плоская накладка не моет вовсе, она протирает.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">4</div>
+        <p><strong>Автоопорожнение — самый громкий момент.</strong> Даже у тихой модели док выдаёт 75–81 дБ, но всего 10–15 секунд. В приложении обычно есть «не беспокоить».</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">5</div>
+        <p><strong>Цифры шума в рекламе — минимум, а не факт.</strong> Roborock меряет в полуанэхоической камере в режиме «только мойка», где всасывание почти выключено. Реальный рабочий диапазон Qrevo Curv — 59–65 дБ.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">6</div>
+        <p><strong>Контакты зарядки пылятся</strong> — отсюда «не находит базу» и сбои зарядки почти у всех марок. Протирать раз в пару недель.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">7</div>
+        <p><strong>Расходники.</strong> Мешки, мопы, щётки и фильтры — R$ 150–250 в год. У Roborock запчасти заметно дороже остальных.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">8</div>
+        <p><strong>Wi-Fi только 2,4 ГГц.</strong> Если роутер раздаёт общую сеть 2,4 + 5 ГГц, на время настройки 5 ГГц лучше отключить — иначе робот не подключится.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= ТАБЛИЦА ================= -->
+  <section id="table">
+    <h2 class="reveal">Всё в одной таблице</h2>
+    <p class="sub reveal">Только местная поставка. «н/д» означает, что производитель не публикует эту характеристику — приблизительные значения вместо неё не подставлялись.</p>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead>
+          <tr><th>Модель</th><th>Цена</th><th>Тяга</th><th>Мойка мопов</th><th>Порог</th><th>Сеть</th><th>Где</th><th>Главный косяк</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">KaBuM! K800 Pro</td><td>R$ 1 499,99</td><td>13 000 Па</td><td>Нет</td><td>н/д</td><td>127 В</td><td><span class="pill br">KaBuM</span></td><td>Плоская накладка вместо мопа</td></tr>
+          <tr><td class="name">Xiaomi H40</td><td>R$ 2 000</td><td>н/д</td><td>Нет</td><td>н/д</td><td>127 В</td><td><span class="pill br">Amazon</span></td><td>Воду в док доливать руками</td></tr>
+          <tr><td class="name">KaBuM! K1100</td><td>R$ 2 050</td><td>10 000 Па</td><td>Нет</td><td>н/д</td><td>127 В</td><td><span class="pill br">KaBuM</span></td><td>Слабее K800 Pro, но дороже</td></tr>
+          <tr><td class="name">Dreame D15 Plus</td><td>R$ 2 374,05</td><td>13 000 Па</td><td>Нет</td><td>~20 мм</td><td>127 В</td><td><span class="pill br">Amazon</span></td><td>Порог и шум не заявлены</td></tr>
+          <tr><td class="name">Velds V50 PRO</td><td>R$ 2 374,99</td><td>10 000 Па</td><td>Нет</td><td>20 мм</td><td>127 В</td><td><span class="pill br">Amazon</span></td><td>Малоизвестный бренд</td></tr>
+          <tr><td class="name">WAP ROBOT W4000</td><td>R$ 2 457,25</td><td>н/д</td><td>Нет</td><td>н/д</td><td>127 В</td><td><span class="pill br">Amazon</span></td><td>65 дБ — громкий</td></tr>
+          <tr><td class="name">Liectroux T9</td><td>R$ 2 609,10</td><td>н/д</td><td>Нет</td><td>н/д</td><td>110 В</td><td><span class="pill br">Amazon</span></td><td>«4 в 1» только на словах</td></tr>
+          <tr><td class="name">Xiaomi H50 (127 В)</td><td>R$ 3 145</td><td>10 000 Па</td><td>Да</td><td>20 мм</td><td>127 В</td><td><span class="pill warn">ML · 12.08</span></td><td>Слабая тяга, сервис Xiaomi</td></tr>
+          <tr><td class="name">Roborock Q10 VF+</td><td>R$ 3 249</td><td>10 000 Па</td><td>Нет</td><td>20 мм</td><td>127 В</td><td><span class="pill br">Amazon</span></td><td>Вибрационный моп, цена растёт</td></tr>
+          <tr><td class="name">eufy C20 Omni</td><td>R$ 3 749</td><td>7 000 Па</td><td>Да</td><td>18 мм</td><td>220 В</td><td><span class="pill br">Amazon</span></td><td>Нужен трансформатор</td></tr>
+          <tr><td class="name">MOVA E20s Pro Plus</td><td>R$ 3 791,35</td><td>13 000 Па</td><td>Нет</td><td>18 мм</td><td>Бивольт</td><td><span class="pill br">Amazon</span></td><td>Описание не совпадает со спекой</td></tr>
+          <tr><td class="name">KaBuM! K4000</td><td>R$ 3 799,99</td><td>20 000 Па</td><td>Да</td><td>н/д</td><td>127 В</td><td><span class="pill br">KaBuM</span></td><td>Ноль отзывов, порог неизвестен</td></tr>
+          <tr><td class="name">Xiaomi H50 Pro</td><td>R$ 3 999</td><td>15 000 Па</td><td>Да, горячая</td><td>20 мм</td><td>127 В</td><td><span class="pill warn">ML · 12.08</span></td><td>Сервис только для офиц. магазина</td></tr>
+          <tr><td class="name">MOVA E40 Ultra</td><td>R$ 4 360</td><td>19 000 Па</td><td>Да, холодная</td><td>22 мм</td><td>Бивольт</td><td><span class="pill warn">ML · 12.08</span></td><td>Ноль истории в Бразилии</td></tr>
+          <tr><td class="name">Roborock Qrevo Curv</td><td>R$ 7 490</td><td>18 500 Па</td><td>Да, 75 °C</td><td>30 мм</td><td>Уточнить</td><td><span class="pill br">ML · 20.08</span></td><td>Цена и ошибка LDS</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= ПОРОГ ================= -->
+  <section id="threshold">
+    <h2 class="reveal">Отдельно про пороги</h2>
+    <p class="sub reveal">Разница между 18, 20 и 22 мм важнее, чем кажется: робот подъезжает к порогу не всегда перпендикулярно, а мопы добавляют сопротивление. Запас в пару миллиметров — это разница между «проезжает всегда» и «застревает раз в неделю».</p>
+
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://http2.mlstatic.com/D_NQ_NP_819664-MLB113842209260_072026-O-rampa-universal-robo-aspirador-soleira-pronta-entrega-5cm.webp" alt="Универсальный пандус для робота-пылесоса"></div>
+        <div class="body">
+          <div class="tagline">Решение за 3% от цены робота</div>
+          <h3>Пандус BE NEXT</h3>
+          <p class="meta">Бразильский бренд · местный склад · версии под 3,5 см и 5 см · 7 дней на возврат</p>
+          <div class="price">R$ 105<small>≈ $21 за штуку · цена с проверки 12.08.2026</small></div>
+          <div class="bad">
+            <div class="t">Что учесть</div>
+            <ul>
+              <li>Нужен с обеих сторон порога — робот возвращается на базу тем же путём</li>
+              <li>Берите по ширине проёма и фиксируйте к полу, иначе робот сдвинет его колесом</li>
+              <li>Независимых тестов именно этих пандусов я не нашёл — оценка по механике. Возьмите один на самый проблемный порог и проверьте, прежде чем докупать остальные</li>
+            </ul>
+          </div>
+          <div class="buy">
+            <a class="btn" href="https://www.mercadolivre.com.br/rampa-universal-robo-aspirador-soleira-pronta-entrega-5cm/up/MLBU4381469038" target="_blank" rel="noopener">Смотреть пандусы</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card check reveal" style="padding:26px 28px">
+        <h3>Если порог 25 мм</h3>
+        <p style="margin-top:10px">Это выше предела любой модели из таблицы, кроме Qrevo Curv с подъёмным шасси. Варианты: доплатить R$ 3 700 за Curv, подложить пандус за R$ 105 под конкретный проём — или смириться, что робот в ту комнату не заедет.</p>
+        <p style="margin-top:14px">Если таких порогов один-два, пандус разумнее. Если их много и раскладывать резину по всей квартире не хочется — тогда Curv.</p>
+        <h3 style="margin-top:22px">Померьте линейкой</h3>
+        <p style="margin-top:10px">Каждый порог отдельно, по самой высокой точке. Разница между 20 и 25 мм решает всё, а на глаз она не видна.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= ЧЕК-ЛИСТ ================= -->
+  <section id="checklist">
+    <h2 class="reveal">Перед оплатой</h2>
+    <p class="sub reveal">Семь пунктов, каждый из которых уже кого-то спас от возврата.</p>
+
+    <div class="checks">
+      <article class="card check reveal">
+        <div class="n">1</div>
+        <p><strong>Проверьте, что в карточке нет слова «Internacional».</strong> Это главный маркер импорта. Если оно есть — закрывайте и ищите другого продавца, даже если цена соблазнительная.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">2</div>
+        <p><strong>Проверьте вольтаж.</strong> У вас 127 В. У eufy C20 Omni строго 220 В, у Qrevo Curv в карточке не указано — спрашивайте продавца. «220V» = трансформатор от 1000 ВА и ещё R$ 400–600 сверху.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">3</div>
+        <p><strong>Напишите продавцу и подтвердите комплектацию.</strong> В карточке MOVA E40 Ultra стоит «Wi-Fi: нет», хотя по спецификации он есть. Лучше уточнить до оплаты, чем спорить после.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">4</div>
+        <p><strong>Введите CEP до оплаты.</strong> Площадка покажет точный срок и стоимость доставки в Барру. Для местных товаров это обычно 2–5 дней.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">5</div>
+        <p><strong>Место под станцию.</strong> База — тумба примерно 45×35×50 см, ей нужна розетка и по 30 см свободного места с боков и спереди. Ставьте туда, куда робот попадает без порогов.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">6</div>
+        <p><strong>Спросите про порог и шум прямо у продавца.</strong> У половины моделей этих цифр нет ни в карточке, ни в спецификации. По закону продавец обязан ответить — и ответ останется в переписке.</p>
+      </article>
+      <article class="card check reveal">
+        <div class="n">7</div>
+        <p><strong>Держите в уме PigeonX.</strong> Платный ремонт вне гарантии есть почти для всех брендов, кроме MOVA. Это меняет расчёт рисков: отказ производителя больше не означает выброшенный аппарат.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <p>Цены проверены вручную 20 августа 2026 года: Amazon.com.br и KaBuM! — в этот день, позиции Mercado Livre помечены датой их проверки отдельно (12 или 20 августа). Сегодня Mercado Livre не отдаёт карточки и списки без входа в аккаунт, поэтому цены оттуда перепроверить не удалось — они помечены как есть, а не выданы за свежие.</p>
+    <p>Курс — R$ 5,10 за $1. Расчёт налогов приведён по правилам режима Remessa Conforme, действующим с мая 2026: пошлина 60% на посылки дороже $50 со скидкой $20, плюс ICMS 17–20%. Высота порогов взята из спецификаций производителей и независимых тестов, а не из описаний продавцов.</p>
+    <p>Источники: <a href="https://www.reclameaqui.com.br/empresa/husky-gaming/" target="_blank" rel="noopener">Reclame Aqui: KaBuM! smart (Husky Gaming)</a> · <a href="https://br.roborock.com/policy/article/service-warranty" target="_blank" rel="noopener">гарантия Roborock Brasil</a> · <a href="https://www.pigeonsi.com.br/" target="_blank" rel="noopener">PigeonX</a> · <a href="https://vacuumwars.com/roborock-buyer-guide/" target="_blank" rel="noopener">Vacuum Wars: гид по линейке Roborock</a> · <a href="https://www.galaxus.at/en/page/robot-vacuum-review-how-high-can-the-roborock-qrevo-curv-really-climb-35850" target="_blank" rel="noopener">Galaxus: тест Qrevo Curv</a> · <a href="https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/manuais/remessas-postal-e-expressa/programa-remessa-conforme-o-que-e-como-funciona" target="_blank" rel="noopener">Receita Federal о Remessa Conforme</a> · <a href="https://redditrecs.com/robot-vacuum/series/roborock-qrevo-curv-series/" target="_blank" rel="noopener">отзывы владельцев Qrevo на Reddit</a></p>
+    <p style="margin-top:18px"><a href="robo-marcas-riscos-rio.html">Разбор рисков брендов</a> · <a href="robo-kabum-roborock-linhas.html">Линейки KaBuM! и Roborock от 10 000 Па</a> · <a href="robo-aspirador-omni-rio.html">Подборка с omni-станцией</a></p>
+  </footer>
+
+</div>
+
+<script type="module">
+  document.documentElement.classList.add('js');
+  const reveals = Array.from(document.querySelectorAll('.reveal'));
+  const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+  const showAll = () => reveals.forEach(show);
+
+  // страховка №1: модуль не загрузился за 1,5 с — показываем всё
+  const failsafe = setTimeout(showAll, 1500);
+  let fired = false;
+
+  try {
+    const { animate, inView } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+    clearTimeout(failsafe);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { showAll(); }
+    else {
+      // motion передаёт в колбэк IntersectionObserverEntry, а не сам элемент
+      inView('.reveal', (entry) => {
+        const el = entry && entry.target ? entry.target : entry;
+        fired = true;
+        try {
+          animate(el, { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
+                      { duration: .5, easing: [0.16, 1, 0.3, 1] });
+        } catch (_) { /* игнорируем — покажем ниже */ }
+        // страховка №2: чем бы ни кончилась анимация, элемент остаётся видимым
+        setTimeout(() => show(el), 700);
+      }, { margin: '0px 0px -10% 0px' });
+
+      // страховка №3: inView не отработал вообще — показываем всё
+      setTimeout(() => { if (!fired) showAll(); }, 1500);
+    }
+  } catch (e) {
+    clearTimeout(failsafe);
+    showAll();
+  }
+</script>
+</body>
+</html>

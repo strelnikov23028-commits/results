@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Зарядник для AirGradient ONE — Рио, 127 В</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --surface:#FFFFFF; --ink:#1D1D1F; --ink-2:#424245; --muted:#6E6E73;
+    --line:#E3E3E6; --blue:#0071E3; --red:#D6323B; --green:#0E7A4B; --amber:#B4690E;
+    --r:20px; --shadow:0 1px 3px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.04);
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px; margin:0 auto; padding:0 22px}
+  a{color:var(--blue); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .top{padding:56px 0 10px}
+  .kicker{font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+  h1{font-size:clamp(32px,5vw,50px); line-height:1.09; letter-spacing:-.025em; font-weight:700; margin:16px 0 14px}
+  .lede{font-size:clamp(18px,2.2vw,21px); color:var(--ink-2); max-width:72ch; margin:0}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 0}
+  .chip{background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:7px 15px; font-size:13.5px; color:var(--ink-2); font-weight:500}
+  section{padding:48px 0 0}
+  h2{font-size:clamp(25px,3.2vw,34px); letter-spacing:-.02em; font-weight:700; margin:0 0 10px}
+  h3{font-size:20px; font-weight:600; letter-spacing:-.01em; margin:0 0 6px}
+  .sub{color:var(--muted); font-size:16.5px; margin:0 0 24px; max-width:76ch}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); transition:transform .2s ease, box-shadow .2s ease}
+  .card:hover{transform:translateY(-2px); box-shadow:0 2px 6px rgba(0,0,0,.06), 0 14px 34px rgba(0,0,0,.07)}
+  .answer{padding:28px 30px}
+  .answer .big{font-size:20px; font-weight:600; letter-spacing:-.01em; margin:0 0 12px}
+  .answer p{margin:0 0 12px; color:var(--ink-2)}
+  .answer p:last-child{margin-bottom:0}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px}
+  .prod{display:flex; flex-direction:column; overflow:hidden}
+  .shot{background:#fff; height:200px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--line); padding:18px}
+  .shot img{max-width:100%; max-height:100%; object-fit:contain}
+  .body{padding:20px 22px 22px; display:flex; flex-direction:column; flex:1}
+  .tagline{font-size:12.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:8px}
+  .tagline.best{color:var(--green)}
+  .meta{color:var(--muted); font-size:14.5px; margin:2px 0 14px}
+  .price{font-size:25px; font-weight:700; letter-spacing:-.02em}
+  .price small{display:block; font-size:13.5px; font-weight:500; color:var(--muted); letter-spacing:0; margin-top:3px}
+  ul.pros{margin:14px 0 0; padding-left:18px}
+  ul.pros li{font-size:14.5px; color:var(--ink-2); margin:6px 0}
+  .buy{margin-top:auto; padding-top:18px}
+  .btn{display:inline-block; background:var(--blue); color:#fff; padding:11px 20px; border-radius:12px; font-size:15px; font-weight:600}
+  .btn:hover{background:#0062c4; text-decoration:none}
+  .where{font-size:13px; color:var(--muted); margin-top:9px}
+  .warnbox{padding:24px 28px; border-radius:var(--r); background:#FDF3F3; border:1px solid #F3DADA}
+  .warnbox h3{color:var(--red)}
+  .warnbox ul{margin:12px 0 0; padding-left:20px}
+  .warnbox li{color:var(--ink-2); margin:8px 0}
+  .notebox{padding:24px 28px; border-radius:var(--r); background:#FFF9EE; border:1px solid #F0E2C6}
+  .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px}
+  .step{padding:22px 24px}
+  .step .n{width:28px; height:28px; border-radius:50%; background:var(--ink); color:#fff; font-size:14px; font-weight:600; display:flex; align-items:center; justify-content:center; margin-bottom:12px}
+  .step p{margin:0; font-size:15.5px; color:var(--ink-2)}
+  .step strong{color:var(--ink)}
+  footer{margin:64px 0 56px; padding-top:24px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
+  footer p{margin:0 0 10px; max-width:90ch}
+  .reveal{opacity:1; transform:none}
+  @media (prefers-reduced-motion:no-preference){ .js .reveal{opacity:0; transform:translateY(20px)} }
+  @media (max-width:640px){ body{font-size:16px} .top{padding:38px 0 8px} .shot{height:170px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kicker">Питание для датчика · Рио-де-Жанейро · 20 августа 2026</div>
+    <h1>Зарядник для AirGradient ONE</h1>
+    <p class="lede">Монитор качества воздуха питается 5 В по USB-C и сетевого напряжения не видит вообще — с бразильскими 127 В имеет дело только блок питания. В комплекте его нет: идут сам прибор, кабель USB-C → USB-A на 2 м и две подставки-клипсы.</p>
+    <div class="chips">
+      <span class="chip">Нужно 5 В / 2 А</span>
+      <span class="chip">Вход 100–240 В</span>
+      <span class="chip">Разъём USB-A</span>
+      <span class="chip">Цены на 20.08.2026</span>
+      <span class="chip">Только местная доставка</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="card answer reveal">
+      <p class="big">Короткий ответ: да, работать будет — трансформатор не нужен</p>
+      <p>Производитель просит «standard 5V, 2A power adapter». Любой блок с надписью <strong>INPUT: 100–240V ~ 50/60Hz</strong> одинаково работает и от 127 В в Рио, и от 220 В на северо-востоке. В Бразилии такие продаются с правильной вилкой (тип N) — покупать переходники не надо.</p>
+      <p>Единственное, за чем следить всерьёз, — <strong>ток</strong>. AirGradient прямо предупреждает: слабый блок питания даёт рябь на экране и отваливающиеся датчики. Дешёвые зарядники на 1 А (5 Вт) для этого прибора не годятся.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="reveal">Четыре варианта, которые подходят</h2>
+    <p class="sub reveal">Все с местной доставкой, все bivolt. Отсортированы по цене.</p>
+
+    <div class="grid">
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/41reT56mn0L._AC_SX679_.jpg" alt="Зарядное устройство Elgin с двумя USB-выходами 5 В 10 Вт"></div>
+        <div class="body">
+          <div class="tagline best">Ровно то, что просит производитель</div>
+          <h3>Elgin 2 USB · 5 В / 10 Вт</h3>
+          <p class="meta">Bivolt 100–240 В · выход 5 В, суммарно 2 А · два порта USB-A · рейтинг 4,6 из 5 (1 206 отзывов)</p>
+          <div class="price">R$ 40,02<small>≈ $7,85</small></div>
+          <ul class="pros">
+            <li>Выход ровно 5 В — никаких «умных» протоколов, которые могут сбить питание прибора</li>
+            <li>Порт USB-A: штатный кабель AirGradient подходит без переходников</li>
+            <li>Elgin — бразильский производитель, гарантия внутри страны</li>
+            <li>Второй порт остаётся свободным под телефон</li>
+          </ul>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B076PM65FS" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/51iu2xucARL._AC_SY300_SX300_QL70_ML2_.jpg" alt="Зарядное устройство Geonav Duo CH20PDQC с портами USB-C и USB-A"></div>
+        <div class="body">
+          <div class="tagline">Лучший запас на будущее</div>
+          <h3>Geonav Duo CH20PDQC</h3>
+          <p class="meta">Bivolt · USB-C Power Delivery 20 Вт + USB-A Quick Charge 18 Вт · рейтинг 4,7 из 5 (15 541 отзыв)</p>
+          <div class="price">R$ 51,90<small>≈ $10,18 · продавец TargetBrasil</small></div>
+          <ul class="pros">
+            <li>Порт USB-A с Quick Charge выдаёт 5 В и до 3 А — полуторный запас к требуемым 2 А</li>
+            <li>15 тысяч отзывов при 4,7 — самая проверенная позиция в подборке</li>
+            <li>Порт USB-C на 20 Вт останется под телефон или второй прибор</li>
+          </ul>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B08ZBK7Q8N" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/41EcwIA-oWL._AC_SX679_.jpg" alt="Зарядное устройство i2GO PRO с портами USB-C и USB-A"></div>
+        <div class="body">
+          <div class="tagline">Известный местный бренд</div>
+          <h3>i2GO PRO · 20 Вт + 18 Вт</h3>
+          <p class="meta">Bivolt · USB-C PD 20 Вт + USB-A 18 Вт · рейтинг 4,6 из 5 (4 440 отзывов)</p>
+          <div class="price">R$ 79,90<small>≈ $15,67</small></div>
+          <ul class="pros">
+            <li>То же сочетание портов, что у Geonav, но бренд шире представлен в рознице Рио</li>
+            <li>Есть в офлайне — если нужен сегодня, можно не ждать доставку</li>
+            <li>Вдвое дороже Elgin при том же результате для этого прибора</li>
+          </ul>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B09M8YW5V4" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card prod reveal">
+        <div class="shot"><img src="https://m.media-amazon.com/images/I/41GiC6qynZL._AC_.jpg" alt="Зарядное устройство ELG W35GAN на 30 Вт с портами USB-C и USB-A"></div>
+        <div class="body">
+          <div class="tagline">Если нужен один блок на всё</div>
+          <h3>ELG W35GAN · 30 Вт GaN</h3>
+          <p class="meta">Bivolt автоматический · USB-C PD + USB-A QC · GaN · рейтинг 4,6 из 5 (73 отзыва)</p>
+          <div class="price">R$ 83,00<small>≈ $16,27</small></div>
+          <ul class="pros">
+            <li>30 Вт хватит на ноутбук, телефон и датчик одновременно</li>
+            <li>GaN — компактнее обычных блоков той же мощности</li>
+            <li>Для самого AirGradient это избыточно: прибору нужно 10 Вт</li>
+          </ul>
+          <div class="buy">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0BKR3GZB3" target="_blank" rel="noopener">Смотреть на Amazon BR</a>
+            <div class="where">Цена проверена 20.08.2026</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="reveal">Чего брать не надо</h2>
+    <div class="warnbox reveal">
+      <h3>Блоки на 1 А (5 Вт)</h3>
+      <ul>
+        <li><strong>ELG WC1A / WC1APT / WC1AE</strong> — R$ 20–27, рейтинг хороший, но выход всего <strong>1 А</strong>. Это ровно половина от нужного, и именно такой случай AirGradient называет причиной ряби на экране и отвала датчиков.</li>
+        <li><strong>Блоки только с USB-C</strong> — их полно за R$ 16–30. Штатный кабель AirGradient — USB-C → USB-A, к такому блоку он не подойдёт: придётся докупать кабель C→C.</li>
+        <li><strong>Всё с надписью «INPUT: 220–240V»</strong> — попадается у дешёвых европейских блоков. В сети 127 В такой не заведётся нормально.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="reveal">Как проверить блок перед покупкой</h2>
+    <div class="steps">
+      <article class="card step reveal">
+        <div class="n">1</div>
+        <p><strong>Вход.</strong> На корпусе должно быть <code>INPUT: 100–240V ~ 50/60Hz</code>. Это и есть «bivolt» в бразильских карточках.</p>
+      </article>
+      <article class="card step reveal">
+        <div class="n">2</div>
+        <p><strong>Выход.</strong> Минимум <code>5V 2A</code> (10 Вт). Больше — можно: прибор возьмёт столько, сколько ему нужно, лишнего не потянет.</p>
+      </article>
+      <article class="card step reveal">
+        <div class="n">3</div>
+        <p><strong>Порт.</strong> Нужен USB-A, потому что кабель в комплекте USB-C → USB-A. Если берёте блок только с USB-C — сразу докупите кабель C→C.</p>
+      </article>
+      <article class="card step reveal">
+        <div class="n">4</div>
+        <p><strong>Вилка.</strong> В Бразилии розетки типа N. Европейская вилка типа C входит в них без переходника, американская плоская — нет. Блок, купленный в Бразилии, снимает вопрос совсем.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="notebox reveal">
+      <h3>Почему подборка с Amazon, а не с Mercado Livre</h3>
+      <p style="margin:10px 0 0; color:var(--ink-2)">Сегодня Mercado Livre не отдаёт ни списки, ни карточки товаров без входа в аккаунт: любой запрос перебрасывает на <code>account-verification</code>, а вход упирается в биометрическую проверку. Amazon.com.br открывается нормально, поэтому цены сняты там — все позиции с местной доставкой, никакого импорта и налога сверху.</p>
+      <p style="margin:12px 0 0; color:var(--ink-2)">На Mercado Livre подходящие блоки тоже есть — например, <strong>WEG 5V 2A 10W bivolt</strong> и <strong>i2GO с двумя USB и выходом 5V 2,4A</strong>. Их цены я перепроверить не смог, поэтому сюда не ставлю.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Требования к питанию — из <a href="https://www.airgradient.com/documentation/one-v9/" target="_blank" rel="noopener">официальной документации AirGradient ONE (PCB v9+)</a>: «Please use a standard 5V, 2A power adapter», блок питания в комплект не входит. Комплектация подтверждена <a href="https://docs.airgradient.net/books/airgradient-one" target="_blank" rel="noopener">базой знаний AirGradient</a> и <a href="https://lesterchan.net/blog/2025/10/20/airgradient-one-indoor-monitor-i-9psl-review/" target="_blank" rel="noopener">независимым обзором I-9PSL</a>.</p>
+    <p>Цены и наличие проверены вручную 20 августа 2026 года на Amazon.com.br. Курс — R$ 5,10 за $1.</p>
+  </footer>
+
+</div>
+
+<script type="module">
+  document.documentElement.classList.add('js');
+  const reveals = Array.from(document.querySelectorAll('.reveal'));
+  const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+  const showAll = () => reveals.forEach(show);
+  const failsafe = setTimeout(showAll, 1500);
+  let fired = false;
+  try {
+    const { animate, inView } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+    clearTimeout(failsafe);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { showAll(); }
+    else {
+      inView('.reveal', (entry) => {
+        const el = entry && entry.target ? entry.target : entry;
+        fired = true;
+        try {
+          animate(el, { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
+                      { duration: .5, easing: [0.16, 1, 0.3, 1] });
+        } catch (_) {}
+        setTimeout(() => show(el), 700);
+      }, { margin: '0px 0px -10% 0px' });
+      setTimeout(() => { if (!fired) showAll(); }, 1500);
+    }
+  } catch (e) {
+    clearTimeout(failsafe);
+    showAll();
+  }
+</script>
+</body>
+</html>
