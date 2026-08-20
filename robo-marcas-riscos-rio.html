@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Роботы-пылесосы: сервис, поломки и гарантия в Бразилии</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --surface:#FFFFFF; --text:#1D1D1F; --text-2:#6E6E73; --text-3:#86868B;
+    --blue:#0071E3; --green:#00875A; --amber:#B25E00; --red:#D70015;
+    --border:#E5E5EA; --radius:20px;
+    --shadow:0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+    --shadow-h:0 4px 12px rgba(0,0,0,.07), 0 16px 40px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;font-size:17px;
+    -webkit-font-smoothing:antialiased;padding:0 20px 100px}
+  .wrap{max-width:1120px;margin:0 auto}
+  header{padding:78px 0 46px;text-align:center}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--red);margin-bottom:20px}
+  h1{font-size:clamp(31px,5vw,52px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:20px}
+  .sub{font-size:clamp(17px,2.2vw,21px);color:var(--text-2);max-width:740px;margin:0 auto 28px}
+  .meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--text-3)}
+  .meta span{background:var(--surface);border:1px solid var(--border);padding:7px 15px;border-radius:100px;font-weight:500}
+  .fix{background:#F0FAF5;border:1px solid #CDE9DC;border-radius:var(--radius);
+    padding:30px;margin-bottom:54px;border-left:4px solid var(--green)}
+  .fix h2{font-size:21px;font-weight:600;margin-bottom:12px}
+  .fix p{color:var(--text-2);margin-bottom:12px;font-size:16px}
+  .fix p:last-child{margin-bottom:0}
+  .fix strong{color:var(--text);font-weight:600}
+  section{margin-bottom:64px}
+  .sec-head{margin-bottom:24px}
+  h2.sec{font-size:clamp(25px,3.3vw,33px);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  .sec-sub{color:var(--text-2);font-size:16px;max-width:800px}
+  .brand{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;margin-bottom:24px}
+  .brand-head{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:center;
+    padding:26px 28px;border-bottom:1px solid #F0F0F2}
+  @media(max-width:700px){.brand-head{grid-template-columns:1fr}}
+  .brand-shot{background:#FAFAFC;border:1px solid var(--border);border-radius:14px;aspect-ratio:1/1;
+    display:flex;align-items:center;justify-content:center;padding:12px}
+  .brand-shot img{max-width:100%;max-height:100%;object-fit:contain}
+  .brand-title{font-size:26px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+  .brand-tag{font-size:14.5px;color:var(--text-2)}
+  .score{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:7px 14px;
+    border-radius:100px;font-size:14px;font-weight:600}
+  .s-good{background:rgba(0,135,90,.1);color:var(--green)}
+  .s-bad{background:rgba(215,0,21,.08);color:var(--red)}
+  .s-mid{background:rgba(178,94,0,.1);color:var(--amber)}
+  .brand-body{padding:26px 28px}
+  .block{margin-bottom:26px}
+  .block:last-child{margin-bottom:0}
+  .block h4{font-size:16px;font-weight:600;margin-bottom:12px}
+  .list{list-style:none}
+  .list li{display:flex;gap:11px;align-items:flex-start;padding:8px 0;
+    border-bottom:1px solid #F4F4F6;font-size:15px;color:var(--text-2)}
+  .list li:last-child{border-bottom:none}
+  .list li svg{flex-shrink:0;margin-top:4px}
+  .list b{color:var(--text);font-weight:600}
+  .list a{color:var(--blue);text-decoration:none}
+  .list a:hover{text-decoration:underline}
+  .table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:14px;
+    -webkit-overflow-scrolling:touch;margin-top:6px}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.5px;background:var(--surface)}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid #F0F0F2}
+  th{font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--text-3);background:#FAFAFC;white-space:nowrap}
+  td:first-child{font-weight:600;color:var(--text)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.hl{background:rgba(0,113,227,.04)}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .yes{color:var(--green);font-weight:600}
+  .no{color:var(--red);font-weight:600}
+  .mid{color:var(--amber);font-weight:600}
+  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:32px 30px;box-shadow:var(--shadow)}
+  .verdict h3{font-size:19px;font-weight:600;margin-bottom:14px}
+  .verdict p{color:var(--text-2);font-size:15.5px;margin-bottom:13px}
+  .verdict p:last-child{margin-bottom:0}
+  .verdict strong{color:var(--text);font-weight:600}
+  footer{text-align:center;padding-top:42px;border-top:1px solid var(--border);
+    font-size:13.5px;color:var(--text-3);line-height:1.7}
+  footer a{color:var(--blue);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  a.inline{color:var(--blue);text-decoration:none;font-weight:500}
+  a.inline:hover{text-decoration:underline}
+  .js-motion .reveal{opacity:0}
+  @media (prefers-reduced-motion:reduce){
+    .js-motion .reveal{opacity:1!important;transform:none!important}
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Разбор рисков · Рио-де-Жанейро · 20 августа 2026</div>
+  <h1>Что не пишут в карточках</h1>
+  <p class="sub">Сервис, реальные поломки и гарантия четырёх брендов в Бразилии. Собрано из жалоб на Reclame Aqui, независимых тестов и официальных условий гарантии.</p>
+  <div class="meta">
+    <span>Xiaomi</span><span>KaBuM! smart</span><span>Roborock</span><span>MOVA</span>
+  </div>
+</header>
+
+<div class="fix reveal">
+  <h2>Сначала хорошая новость</h2>
+  <p>Ремонт вне гарантии в Бразилии есть. <strong><a class="inline" href="https://www.pigeonsi.com.br/" target="_blank" rel="noopener">PigeonX</a></strong> — независимая сеть, которая чинит роботов <strong>Roborock, Xiaomi, iRobot, Eufy, Liectroux, WAP, Midea и Samsung</strong>, с базами во всех столицах штатов.</p>
+  <p>Это важная поправка ко всему, что ниже: даже если производитель откажет в обслуживании, аппарат не превращается в кирпич. Ремонт будет платным, но он возможен.</p>
+</div>
+
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Xiaomi</h2>
+    <p class="sec-sub">Приличное железо, но самая жёсткая политика обслуживания из всех четырёх.</p>
+  </div>
+  <div class="brand reveal">
+    <div class="brand-head">
+      <div class="brand-shot">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_783853-MLA112254926893_052026-O.webp" alt="Робот-пылесос Xiaomi H50 Pro" loading="lazy">
+      </div>
+      <div>
+        <div class="brand-title">Xiaomi</div>
+        <div class="brand-tag">H40 · H50 · H50 Pro · S40 · X20 · Robot Vacuum 5</div>
+        <span class="score s-bad">Сервис только для покупок в официальном магазине</span>
+      </div>
+    </div>
+    <div class="brand-body">
+      <div class="block">
+        <h4>Главный риск</h4>
+        <ul class="list">
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Xiaomi Brasil обслуживает <b>только то, что куплено в их официальном магазине</b>. Купили на ML, Amazon или Shopee — <a href="https://www.reclameaqui.com.br/xiaomi-brasil/nao-ha-assistencia-tecnica-para-robo-aspirador-xiaomi_K3O9zVFJr1n3lkc_/" target="_blank" rel="noopener">откажут даже за деньги</a></span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><a href="https://www.reclameaqui.com.br/xiaomi-brasil/robo-aspirador-xiaomi-sem-assistencia-tecnica-no-brasil_opg2wio0nnJOoJXN/" target="_blank" rel="noopener">Запчастей для роботов в Бразилии нет</a> — неавторизованные мастерские тоже отказываются</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Жалобы на отказы <b>через 2–3 месяца</b>: S40C, X20 Max, X10 с ошибкой бампера</span></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h4>Косяки H50 из тестов и отзывов</h4>
+        <ul class="list">
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span><b>Мойка поверхностная</b> — засохшие пятна бросает после пары попыток</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Станция громоздкая, нужна стена и зазоры по бокам</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Приложение путаное, иногда показывает <b>офлайн при работающем роботе</b></span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span><b>Наматывает провода</b>, не видит тёмную мебель и низкие предметы — только лидар и бампер, без камеры</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Контакты зарядки пылятся, отсюда сбои зарядки. Шум около 65 дБ, порог 20 мм без запаса</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">KaBuM! smart</h2>
+    <p class="sec-sub">Единственный бренд, который реально отвечает на претензии. Но железо — слабое звено.</p>
+  </div>
+  <div class="brand reveal">
+    <div class="brand-head">
+      <div class="brand-shot">
+        <img src="https://images6.kabum.com.br/produtos/fotos/947266/robo-aspirador-e-passa-pano-kabum-smart-k4000-base-autolimpante-mop-duplo-extensivel-ia-20000p-110v-branco-ksar400010br_1783338049_gg.jpg" alt="Робот-пылесос KaBuM! smart K4000" loading="lazy">
+      </div>
+      <div>
+        <div class="brand-title">KaBuM! smart</div>
+        <div class="brand-tag">Собственная марка магазина. На Reclame Aqui числится за юрлицом <b>Husky Gaming</b> — искать жалобы надо там</div>
+        <span class="score s-good">Reclame Aqui 8,4 из 10 · решено 90,8%</span>
+      </div>
+    </div>
+    <div class="brand-body">
+      <div class="block">
+        <h4>Чем хорош</h4>
+        <ul class="list">
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><a href="https://www.reclameaqui.com.br/empresa/husky-gaming/" target="_blank" rel="noopener">Рейтинг 8,4</a> (за 6 месяцев 8,5), из 985 жалоб отвечают на <b>98,4%</b> и решают <b>90,8%</b></span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Это заметно лучше Xiaomi: там основная претензия — компания просто отказывается разговаривать</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Гарантия 1 год: 3 месяца по закону + 9 месяцев от производителя. Версии 127 В в наличии</span></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h4>Линейка и цены в PIX</h4>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Модель</th><th>Цена</th><th>Что внутри</th><th>Оценка</th></tr></thead>
+            <tbody>
+              <tr><td>KBSF005 / 007</td><td class="num">R$ 500</td><td>бивольт, без станции</td><td class="mid">—</td></tr>
+              <tr><td>smart 900</td><td class="num">R$ 1 250</td><td>127 В, база 2-в-1, 3D-карты</td><td class="num">4,2</td></tr>
+              <tr class="hl"><td>K800 Pro</td><td class="num">R$ 1 500</td><td>127 В, лазер, 13 000 Па</td><td class="yes">4,6</td></tr>
+              <tr><td>K1000</td><td class="num">R$ 1 600</td><td>бивольт, вращающийся моп, 7 000 Па</td><td class="mid">—</td></tr>
+              <tr><td>K1100</td><td class="num">R$ 2 050</td><td>127 В, вращающийся моп, 10 000 Па</td><td class="mid">—</td></tr>
+              <tr><td>K4000</td><td class="num">R$ 3 800</td><td>127 В, полная станция, 20 000 Па</td><td class="no">отзывов нет</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="block">
+        <h4>Косяки из жалоб</h4>
+        <ul class="list">
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Не находит базу</b> — не стыкуется, не заряжается и не выгружает мусор</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Перестаёт всасывать</b> и сразу уезжает на базу с сообщением «слабая батарея»</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Глючит датчик антипадения (модель 900)</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Повторяющийся сюжет: отказы <a href="https://www.reclameaqui.com.br/kabum/aspirador-robo-kabum-com-defeito-e-dificuldade-de-contato-com-assistencia-tecnica_dBM41kJSoionnmni/" target="_blank" rel="noopener">через 3 месяца</a> и <a href="https://www.reclameaqui.com.br/husky-gaming/robo-aspirador-kabum-smart-700-nao-funciona-com-apenas-5-meses-de-uso_x8GQhI4ROgteTHXx/" target="_blank" rel="noopener">через 5 месяцев</a></span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span><b>Сервис фактически один, в Кампинасе.</b> На странице K4000 единственный канал — WhatsApp (19) 99848-3859, пн–пт. Из Рио это посылка через полстраны</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>SAC <a href="https://www.reclameaqui.com.br/deal-4-b/assistencia-tecnica-do-robo-aspirador-kabum-smart-muito-ruim_9MceHfrwvoF436BT/" target="_blank" rel="noopener">перекидывает между отделами</a>; бывает, что аппарат «восстановили», а дефект остался</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>У <b>K4000 ни одного отзыва</b> — вы будете обкатывать модель первым</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Roborock</h2>
+    <p class="sec-sub">Лучшая техника и официальное присутствие. Но гарантия не действует на импортные карточки — а именно они дешёвые.</p>
+  </div>
+  <div class="brand reveal">
+    <div class="brand-head">
+      <div class="brand-shot">
+        <img src="https://m.media-amazon.com/images/I/5177weAHzsL._AC_SX679_.jpg" alt="Робот-пылесос Roborock Q10 VF+" loading="lazy">
+      </div>
+      <div>
+        <div class="brand-title">Roborock</div>
+        <div class="brand-tag">Q7 · Q10 · Qrevo QV 35A · Qrevo Edge · Qrevo Curv · Qrevo S / Plus / Pro · Slim</div>
+        <span class="score s-mid">Гарантия 1 год — только от авторизованных дистрибьюторов</span>
+      </div>
+    </div>
+    <div class="brand-body">
+      <div class="block">
+        <h4>Как устроена гарантия</h4>
+        <ul class="list">
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Бренд зашёл официально: есть <a href="https://br.roborock.com/" target="_blank" rel="noopener">br.roborock.com</a> и <a href="https://br.roborock.com/policy/article/service-warranty" target="_blank" rel="noopener">политика гарантии</a> на 1 год</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Но она действует <b>только для товаров от авторизованных дистрибьюторов</b>, и «за послепродажное обслуживание отвечает фактический продавец»</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Карточки с пометкой <b>«Internacional»</b> под гарантию не попадают — а это большинство Qrevo на Mercado Livre</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Владельцы описывают <a href="https://www.reclameaqui.com.br/kess/robo-aspirador-roborock-com-defeito-e-falta-de-suporte-para-garantia_Os6LiR8wO_pioOxD/" target="_blank" rel="noopener">«игру в перекидывание»</a>: бренд отправляет к продавцу, продавец не отвечает</span></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h4>Модели и цены на Mercado Livre</h4>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Модель</th><th>Цена</th><th>Поставка</th></tr></thead>
+            <tbody>
+              <tr class="hl"><td>Q7 L5+</td><td class="num">R$ 2 599</td><td class="yes">Бразилия</td></tr>
+              <tr class="hl"><td>Q10 VF+</td><td class="num">R$ 3 134</td><td class="yes">Бразилия</td></tr>
+              <tr><td>Qrevo QV 35A</td><td class="num">R$ 3 661</td><td class="no">импорт</td></tr>
+              <tr><td>Qrevo Edge S5A</td><td class="num">R$ 4 380</td><td class="no">импорт</td></tr>
+              <tr><td>Qrevo S5v / S Pro</td><td class="num">R$ 4 837</td><td class="no">импорт</td></tr>
+              <tr><td>CurvX</td><td class="num">R$ 6 353</td><td class="no">импорт</td></tr>
+              <tr class="hl"><td>QR598</td><td class="num">R$ 6 049</td><td class="yes">Бразилия</td></tr>
+              <tr class="hl"><td>Qrevo Plus / Pro</td><td class="num">R$ 6 997</td><td class="yes">Бразилия</td></tr>
+              <tr><td>Qrevo Curv</td><td class="num">R$ 7 258 / 7 490</td><td class="mid">импорт / Бразилия</td></tr>
+              <tr><td>Qrevo Slim</td><td class="num">R$ 7 455</td><td class="no">импорт</td></tr>
+              <tr class="hl"><td>Qrevo S</td><td class="num">R$ 7 990</td><td class="yes">Бразилия</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="block">
+        <h4>Типовые поломки</h4>
+        <ul class="list">
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Ошибка лазерного датчика LDS</b> — её называют очень частой. Робот перестаёт видеть комнату, в приложении «LASER SENSOR ERROR»</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Течёт вода из док-станции</b> — у Qrevo Pro с первого же использования, мойка при этом не работает</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Станция <b>не моет моп</b> при возврате робота</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span>Ошибка <b>«бак пуст» при полном баке</b> — засор клапана или выхода воды</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="#D70015" stroke-width="2.2" stroke-linecap="round"/></svg><span><b>Мопы не крутятся</b> — отдельная болячка линейки Qrevo</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Потеря всасывания: щётка крутится, но грязь копится на входе</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Заклинивание колёс и щётки намотанными волосами; не находит базу при запылённых датчиках</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Запчасти дорогие — советуют заранее закладывать бюджет на фильтры, батарею, щётки и мопы</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">MOVA</h2>
+    <p class="sec-sub">Суббренд Dreame. Хорошее железо — и полное отсутствие истории на бразильском рынке.</p>
+  </div>
+  <div class="brand reveal">
+    <div class="brand-head">
+      <div class="brand-shot">
+        <img src="https://m.media-amazon.com/images/I/610gG5FXmeL._AC_SX679_.jpg" alt="Робот-пылесос MOVA E40 Ultra" loading="lazy">
+      </div>
+      <div>
+        <div class="brand-title">MOVA</div>
+        <div class="brand-tag">E20s Pro Plus · E40 Ultra · Z60 Ultra · P10 / P50 Ultra</div>
+        <span class="score s-mid">Данных о жалобах и отзывах в Бразилии нет</span>
+      </div>
+    </div>
+    <div class="brand-body">
+      <div class="block">
+        <h4>Что известно</h4>
+        <ul class="list">
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>E40 Ultra: бивольт 100–240 В, порог 22 мм, 19 000 Па, баки 4,5 л и 4 л, мешок на 75 дней</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#00875A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Единственный бренд здесь, который публикует шум со ссылкой на номер лабораторного отчёта: <b>76 дБ на мойке, 62 дБ на сушке</b></span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Мойка мопов <b>холодной водой</b>, сушка тёплая — горячей мойки нет</span></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h4>Главный риск</h4>
+        <ul class="list">
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>По MOVA в Бразилии <b>нет ни статистики жалоб, ни отзывов владельцев</b> — бренд слишком новый. Это не «хорошо», это «неизвестно»</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Риск первопроходца тот же, что у KaBuM K4000. PigeonX в списке обслуживаемых брендов MOVA <b>не упоминает</b></span></li>
+          <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#B25E00" stroke-width="2"/><path d="M10 6v5M10 14h.01" stroke="#B25E00" stroke-width="2" stroke-linecap="round"/></svg><span>Карточка на ML заполнена небрежно: «Wi-Fi: нет», «датчик препятствий: нет» — вопреки спецификации производителя</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head reveal">
+    <h2 class="sec">Сводка</h2>
+    <p class="sec-sub">Одна строка на бренд: что получаете и чем рискуете.</p>
+  </div>
+  <div class="table-scroll reveal">
+    <table style="min-width:780px">
+      <thead><tr><th>Бренд</th><th>Сервис</th><th>Репутация</th><th>Сильная сторона</th><th>Чем рискуете</th></tr></thead>
+      <tbody>
+        <tr><td>Xiaomi</td><td class="no">Только офиц. магазин</td><td class="no">Плохая</td><td>Железо за свои деньги</td><td>Откажут в ремонте, запчастей нет</td></tr>
+        <tr class="hl"><td>KaBuM! smart</td><td class="mid">Один центр, Кампинас</td><td class="yes">8,4 из 10</td><td>Реально отвечают и решают</td><td>Отказы на 3–5 месяце, K4000 без отзывов</td></tr>
+        <tr><td>Roborock</td><td class="mid">Через продавца</td><td class="mid">Смешанная</td><td>Лучшая техника, офиц. присутствие</td><td>Импорт без гарантии, частая ошибка LDS</td></tr>
+        <tr><td>MOVA</td><td class="mid">Неизвестен</td><td class="mid">Нет данных</td><td>Бивольт, порог 22 мм, честный шум</td><td>Ноль истории на рынке, PigeonX не чинит</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="verdict reveal">
+    <h3>Как это ложится на выбор</h3>
+    <p><strong>Xiaomi</strong> — приличное железо, но бренд отказывается обслуживать всё, что куплено не в его магазине. Спасает только платный PigeonX.</p>
+    <p><strong>KaBuM! smart</strong> — единственный, кто реально отвечает на претензии. Но железо слабое звено: повторяющиеся отказы на 3–5 месяце у прошлых моделей, а K4000 вообще без отзывов. Сервис один, в Кампинасе — из Рио это посылка через полстраны.</p>
+    <p><strong>Roborock</strong> — лучшая техника и официальное присутствие, но гарантия не распространяется на импортные карточки, а именно они дешёвые. Плюс живой список типовых поломок, где лидирует лазерный датчик.</p>
+    <p><strong>MOVA</strong> — спокойный вариант по железу: локальный склад, бивольт, порог 22 мм с запасом. Но по надёжности это чистый лист: ни отзывов, ни статистики, и PigeonX его не обслуживает.</p>
+    <p>Если приоритет — чтобы в случае поломки было кому позвонить, самый предсказуемый путь: взять <strong>локальную</strong> (не импортную) карточку Roborock и держать в уме PigeonX как платный запасной аэродром.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Собрано 20 августа 2026 года из жалоб на Reclame Aqui, независимых тестов и официальных условий гарантии брендов. Цены — с Mercado Livre и KaBuM! на ту же дату.</p>
+  <p style="margin-top:10px">Источники: <a href="https://www.reclameaqui.com.br/empresa/husky-gaming/" target="_blank" rel="noopener">Reclame Aqui: KaBuM! smart</a>, <a href="https://br.roborock.com/policy/article/service-warranty" target="_blank" rel="noopener">гарантия Roborock Brasil</a>, <a href="https://www.pigeonsi.com.br/" target="_blank" rel="noopener">PigeonX</a>.</p>
+  <p style="margin-top:14px"><a href="robo-aspirador-sem-importacao-rio.html">← Подборка без импорта</a> · <a href="robo-aspirador-sem-mop-rio.html">Роботы без мойки пола →</a></p>
+</footer>
+
+</div>
+
+<script type="module">
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const showAll = () => document.documentElement.classList.remove('js-motion');
+  if (!reduced && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-motion');
+    const fallback = setTimeout(showAll, 2500);
+    try {
+      const { animate } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      clearTimeout(fallback);
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          io.unobserve(entry.target);
+          entry.target.style.opacity = '1';
+          animate(entry.target,
+            { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
+            { duration: 0.55, easing: [0.22, 0.61, 0.36, 1] });
+        });
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach((el) => {
+          if (getComputedStyle(el).opacity === '0') el.style.opacity = '1';
+        });
+      }, 6000);
+    } catch (e) { clearTimeout(fallback); showAll(); }
+  }
+</script>
+</body>
+</html>
