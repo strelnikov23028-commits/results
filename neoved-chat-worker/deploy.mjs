@@ -53,11 +53,13 @@ if (!cfg.KV_ID) {
 
 // ─────────────────── заливка ───────────────────
 const SECRETS = ['AMO_SUBDOMAIN', 'AMO_TOKEN', 'HOOK_SECRET'];
-// Ключ капчи необязателен: пока его нет, проверка «я не робот» выключена.
-const OPTIONAL_SECRETS = ['CAPTCHA_KEY'];
+// Ключ капчи и ключ кнопки в карточке необязательны: пока их нет, проверка
+// «я не робот» выключена, а /api/ask отвечает 503.
+const OPTIONAL_SECRETS = ['CAPTCHA_KEY', 'WIDGET_KEY'];
 const PLAIN = ['PIPELINE_ID', 'STATUS_ID', 'NEW_STATUS_NAME', 'TAG_NAME', 'LEAD_NAME_PREFIX',
   'SITE_HOST', 'EMAIL_FIELD', 'PHONE_FIELD', 'COMPANY_INN_FIELD', 'LEAD_URL_FIELD',
-  'ALLOW_ORIGINS', 'REPLY_PREFIX', 'STRIP_PREFIXES', 'START_LIMIT', 'MSG_LIMIT'];
+  'ALLOW_ORIGINS', 'REPLY_PREFIX', 'STRIP_PREFIXES', 'PHONE_DUP_MODE', 'PHONE_DUP_TAG',
+  'INN_COMMANDS', 'PHONE_COMMANDS', 'START_LIMIT', 'MSG_LIMIT'];
 
 const bindings = [];
 for (const key of SECRETS) {

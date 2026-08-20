@@ -25,6 +25,7 @@
  *   AMO_TOKEN     — долгосрочный токен интеграции amoCRM
  *   HOOK_SECRET   — произвольная строка: часть URL вебхука и адреса /debug
  *   CAPTCHA_KEY   — серверный ключ Яндекс SmartCaptcha (пусто — проверка выключена)
+ *   WIDGET_KEY    — ключ кнопки в карточке amoCRM (см. amo-widget/)
  * Переменные — см. DEFAULTS ниже.
  * KV binding: S (сессии, очередь ответов, отладочный лог).
  *
@@ -62,6 +63,23 @@ const DEFAULTS = {
   // Пометки, которыми соседние интеграции начинают исходящие сообщения, —
   // в чате клиенту они не нужны.
   STRIP_PREFIXES: 'Ответ:',
+
+  // Что делать, если оставленный телефон уже числится за другим контактом
+  // (человек написал с новой почты, а номер у него прежний):
+  //   notify — примечание со ссылкой на старую карточку и тег на сделке;
+  //   attach — то же плюс старый контакт прикрепляется к сделке вторым;
+  //   off    — не проверять.
+  // Объединять карточки автоматически нельзя: в API v4 метода слияния нет,
+  // а перепривязка сделки оставила бы висеть контакт-дубль.
+  PHONE_DUP_MODE: 'notify',
+  PHONE_DUP_TAG: 'phone_dup',
+
+  // Команды менеджера. Написанные в ленте сделки, они не уходят клиенту
+  // сообщением, а открывают у него в чате нужное окно ввода: человек мог
+  // отказаться указывать ИНН сразу, а после разговора согласиться.
+  // Текст после команды доедет до клиента обычной репликой.
+  INN_COMMANDS: '/инн,/inn',
+  PHONE_COMMANDS: '/телефон,/тел,/phone',
 
   // Антиспам: сколько заявок принимаем с одного адреса в час и сколько
   // сообщений — в рамках одной сессии.
@@ -139,6 +157,9 @@ export default {
         if (url.pathname === '/api/phone' && request.method === 'POST') {
           return json(await apiPhone(request, env, cfg), origin, cfg);
         }
+        if (url.pathname === '/api/ask' && request.method === 'POST') {
+          return json(await apiAsk(request, env, cfg), origin, cfg);
+        }
         if (url.pathname === '/api/poll' && request.method === 'GET') {
           return json(await apiPoll(url, env), origin, cfg);
         }
@@ -190,6 +211,11 @@ async function apiStart(request, env, cfg) {
 
   const result = await syncToAmo(person, text, env, cfg);
 
+  // Организация уже была в базе — покажем менеджеру её историю.
+  if (result.company?.existed) {
+    await reportCompanyTwin(result.company, { leadId: result.leadId }, env);
+  }
+
   const sid = crypto.randomUUID();
   await env.S.put(`sid:${sid}`, JSON.stringify({
     leadId: result.leadId,
@@ -235,6 +261,7 @@ async function apiInn(request, env, cfg) {
   const company = await ensureCompany({ inn, email: session.email }, env, cfg);
   await linkCompany(company.id, session, env);
   await addNote(session.leadId, `Клиент указал ИНН: ${inn}`, env);
+  if (company.existed) await reportCompanyTwin(company, session, env);
 
   session.companyId = company.id;
   await env.S.put(`sid:${sid}`, JSON.stringify(session), { expirationTtl: SESSION_TTL });
@@ -258,15 +285,148 @@ async function apiPhone(request, env, cfg) {
   const session = await getSession(env, sid);
   const pretty = formatRuPhone(phone);
 
+  // Ищем прежнего владельца номера ДО записи: иначе найдём сами себя.
+  const twin = cfg.PHONE_DUP_MODE === 'off' ? null : await findContactByPhone(pretty, session, env, cfg);
+
   if (session.contactId) await addPhone('contacts', session.contactId, pretty, env, cfg);
   if (session.companyId) await addPhone('companies', session.companyId, pretty, env, cfg);
   await addNote(session.leadId, `Клиент оставил телефон: ${pretty}`, env);
 
+  if (twin) await reportPhoneTwin(twin, pretty, session, env, cfg);
+
   await writeLog(env, {
-    verdict: `телефон из чата → контакт ${session.contactId} (сделка ${session.leadId})`,
+    verdict: twin
+      ? `телефон из чата → контакт ${session.contactId}; номер уже был у контакта ${twin.contact.id}`
+      : `телефон из чата → контакт ${session.contactId} (сделка ${session.leadId})`,
     lead_id: session.leadId, contact_id: session.contactId, phone: pretty,
+    twin_contact_id: twin?.contact?.id,
   });
-  return { ok: true };
+  return { ok: true, duplicate: Boolean(twin) };
+}
+
+/**
+ * Контакт, за которым этот номер уже числится. Человек мог прийти с личной
+ * почты, но телефон оставить рабочий — по нему и находится его прошлая
+ * карточка. Себя самого в результат не берём.
+ */
+async function findContactByPhone(phone, session, env, cfg) {
+  const tail = digits(phone).slice(-10);
+  if (tail.length !== 10) return null;
+
+  const found = await query('contacts', tail, env, 'with=leads');
+  const contact = found.find((c) => String(c.id) !== String(session.contactId)
+    && fieldValues(c, cfg.PHONE_FIELD).some((v) => digits(v).endsWith(tail)));
+  if (!contact) return null;
+
+  return { contact, leads: await openLeadsOf(contact, session.leadId, env) };
+}
+
+/** Незакрытые сделки найденного контакта, кроме текущей. */
+async function openLeadsOf(contact, exceptId, env) {
+  const ids = (contact._embedded?.leads || []).map((l) => l.id)
+    .filter((id) => id && String(id) !== String(exceptId));
+  if (!ids.length) return [];
+
+  const q = ids.slice(-50).map((id) => `filter[id][]=${id}`).join('&');
+  const res = await amo(`/api/v4/leads?limit=50&${q}`, env);
+  return (res?._embedded?.leads || []).filter((l) => !CLOSED_STATUS_IDS.has(Number(l.status_id)));
+}
+
+/**
+ * ИНН привёл к карточке, которая в базе уже была: показываем менеджеру, что у
+ * этой организации есть своя история — возможно, клиента уже ведёт коллега.
+ */
+async function reportCompanyTwin(company, session, env) {
+  const leads = await openLeadsOf(company, session.leadId, env);
+  if (!leads.length) return;
+
+  const base = `https://${env.AMO_SUBDOMAIN}.amocrm.ru`;
+  const lines = [
+    `Компания с этим ИНН уже была в базе: «${company.name || 'без имени'}»`,
+    `${base}/companies/detail/${company.id}`,
+    '',
+    'Её открытые сделки:',
+  ];
+  for (const lead of leads.slice(0, 5)) {
+    lines.push(`• ${lead.name || 'без названия'} — ${base}/leads/detail/${lead.id}`);
+  }
+  await addNote(session.leadId, lines.join('\n'), env);
+}
+
+/**
+ * Сообщаем менеджеру про совпадение: примечание со ссылкой на старую карточку,
+ * тег на сделке и — если включён режим attach — прежний контакт прикрепляется
+ * к сделке вторым. Решение объединять карточки остаётся за человеком.
+ */
+async function reportPhoneTwin(twin, phone, session, env, cfg) {
+  const base = `https://${env.AMO_SUBDOMAIN}.amocrm.ru`;
+  const lines = [
+    'Внимание: этот телефон уже есть в базе',
+    '',
+    `${phone} — контакт «${twin.contact.name || 'без имени'}»`,
+    `${base}/contacts/detail/${twin.contact.id}`,
+  ];
+
+  if (twin.leads.length) {
+    lines.push('', 'Его открытые сделки:');
+    for (const lead of twin.leads.slice(0, 5)) {
+      lines.push(`• ${lead.name || 'без названия'} — ${base}/leads/detail/${lead.id}`);
+    }
+  } else {
+    lines.push('', 'Открытых сделок у этого контакта нет.');
+  }
+
+  lines.push('', `Сейчас человек пишет с почты ${session.email || '—'}. Похоже на того же клиента: возможно, карточки стоит объединить.`);
+
+  await addNote(session.leadId, lines.join('\n'), env);
+  await amo(`/api/v4/leads/${session.leadId}`, env, {
+    method: 'PATCH',
+    body: {
+      tags_to_add: [{ name: cfg.PHONE_DUP_TAG }],
+      // Сделка в amoCRM держит несколько контактов: старая карточка окажется
+      // рядом с новой, и вся история клиента будет на виду.
+      ...(cfg.PHONE_DUP_MODE === 'attach'
+        ? { _embedded: { contacts: [{ id: session.contactId }, { id: twin.contact.id }] } }
+        : {}),
+    },
+  });
+}
+
+/**
+ * Кнопка менеджера из карточки amoCRM: открыть у клиента окно ввода.
+ *
+ * Сюда стучится виджет `amo-widget/`, установленный в аккаунт. Ключ лежит в
+ * настройках виджета, а не в его коде, и даёт право ровно на одно действие —
+ * показать человеку поле ввода. Само событие цепляется к примечанию: его id
+ * растёт вместе с остальной лентой, поэтому порядок сообщений в чате не
+ * ломается (виджет забирает всё, что новее последнего показанного id).
+ */
+async function apiAsk(request, env, cfg) {
+  const body = await readJson(request);
+  if (!env.WIDGET_KEY) throw new HttpError('Кнопка не настроена: воркеру не задан WIDGET_KEY', 503);
+  if (str(body.key, 200) !== env.WIDGET_KEY) throw new HttpError('Неверный ключ доступа', 403);
+
+  const leadId = digits(str(body.lead_id, 20));
+  if (!leadId) throw new HttpError('Не указана сделка');
+  const ask = str(body.ask, 10) === 'phone' ? 'phone' : 'inn';
+  const text = str(body.text, 1000);
+
+  const what = ask === 'inn' ? 'ИНН' : 'телефон';
+  const noteId = await addNote(leadId, text
+    ? `Менеджер запросил у клиента ${what}: «${text}»`
+    : `Менеджер запросил у клиента ${what}`, env);
+  if (!noteId) throw new HttpError('amoCRM не принял примечание — проверьте номер сделки', 502);
+
+  await env.S.put(msgKey(leadId, noteId), text, {
+    expirationTtl: SESSION_TTL,
+    metadata: { at: Date.now(), ask },
+  });
+
+  await writeLog(env, {
+    verdict: `кнопка в карточке: у клиента открыто окно ввода (${what})`,
+    lead_id: leadId, note_id: noteId, text: text.slice(0, 200),
+  });
+  return { ok: true, note_id: noteId };
 }
 
 async function apiPoll(url, env) {
@@ -300,7 +460,7 @@ async function syncToAmo(person, text, env, cfg) {
   if (!contact) {
     const created = await createLeadWithContact(person, company, env, cfg);
     await addNote(created.leadId, summary, env);
-    return { ...created, companyId: company?.id || null, verdict: 'создана сделка с новым контактом' };
+    return { ...created, company, companyId: company?.id || null, verdict: 'создана сделка с новым контактом' };
   }
 
   await fillEmptyFields(contact, person, env, cfg);
@@ -312,7 +472,7 @@ async function syncToAmo(person, text, env, cfg) {
     const leadId = await createLead(person, contact.id, company, env, cfg);
     await addNote(leadId, summary, env);
     return {
-      leadId, contactId: contact.id, companyId: company?.id || null,
+      leadId, contactId: contact.id, company, companyId: company?.id || null,
       verdict: 'контакт был, открытой сделки в воронке чата не было — создана новая',
     };
   }
@@ -329,7 +489,7 @@ async function syncToAmo(person, text, env, cfg) {
   await addNote(lead.id, summary, env);
 
   return {
-    leadId: lead.id, contactId: contact.id, companyId: company?.id || null,
+    leadId: lead.id, contactId: contact.id, company, companyId: company?.id || null,
     verdict: `сделка ${lead.id} → «${cfg.NEW_STATUS_NAME}» + тег`,
   };
 }
@@ -351,7 +511,7 @@ async function findContact(person, env, cfg) {
 
 /** Компания по ИНН: нашли — берём, нет — заводим с названием по ИНН. */
 async function ensureCompany(person, env, cfg) {
-  const found = await query('companies', person.inn, env);
+  const found = await query('companies', person.inn, env, 'with=leads');
   const hit = found.find((c) => fieldValues(c, cfg.COMPANY_INN_FIELD).some((v) => digits(v) === person.inn));
   if (hit) {
     if (person.email && !fieldValues(hit, cfg.EMAIL_FIELD).length) {
@@ -360,6 +520,7 @@ async function ensureCompany(person, env, cfg) {
         body: { custom_fields_values: [multitext(cfg.EMAIL_FIELD, person.email)] },
       });
     }
+    hit.existed = true;
     return hit;
   }
 
@@ -614,7 +775,17 @@ async function onAmoNote(note, env, cfg) {
   for (const p of list(cfg.STRIP_PREFIXES)) {
     if (p && text.startsWith(p)) { text = text.slice(p.length).trim(); break; }
   }
-  if (!text) return;
+
+  // Команда менеджера вместо реплики: «/инн» открывает у клиента окно ввода
+  // ИНН, «/телефон» — окно телефона. Всё, что написано после команды, доедет
+  // клиенту обычным сообщением, так что можно объяснить, зачем это нужно.
+  let ask = null;
+  const firstWord = text.split(/\s+/)[0].toLowerCase();
+  if (list(cfg.INN_COMMANDS).some((c) => c.toLowerCase() === firstWord)) ask = 'inn';
+  else if (list(cfg.PHONE_COMMANDS).some((c) => c.toLowerCase() === firstWord)) ask = 'phone';
+  if (ask) text = text.slice(firstWord.length).trim();
+
+  if (!text && !ask) return;
 
   // Каждый ответ — отдельный ключ, а не элемент общего списка: два примечания
   // подряд иначе могли бы прочитать одну и ту же версию списка и затереть друг
@@ -622,11 +793,13 @@ async function onAmoNote(note, env, cfg) {
   // нулями — так list отдаёт их в хронологическом порядке.
   await env.S.put(msgKey(leadId, noteId), text, {
     expirationTtl: SESSION_TTL,
-    metadata: { at: Date.now() },
+    metadata: ask ? { at: Date.now(), ask } : { at: Date.now() },
   });
 
   await writeLog(env, {
-    verdict: `ответ менеджера → виджет (сделка ${leadId})`,
+    verdict: ask
+      ? `менеджер просит у клиента ${ask === 'inn' ? 'ИНН' : 'телефон'} (сделка ${leadId})`
+      : `ответ менеджера → виджет (сделка ${leadId})`,
     lead_id: leadId, note_id: noteId, user_id: note.created_by, text: text.slice(0, 200),
   });
 }
@@ -648,13 +821,20 @@ async function taggedByWidget(leadId, env, cfg) {
 async function readQueue(env, leadId, after, since) {
   const listed = await env.S.list({ prefix: `m:${leadId}:`, limit: MAX_QUEUE });
   const fresh = listed.keys
-    .map((k) => ({ key: k.name, id: Number(k.name.split(':').pop()), at: Number(k.metadata?.at) || 0 }))
+    .map((k) => ({
+      key: k.name,
+      id: Number(k.name.split(':').pop()),
+      at: Number(k.metadata?.at) || 0,
+      ask: k.metadata?.ask || null,
+    }))
     .filter((k) => k.id > after && k.at >= since);
 
   const out = [];
   for (const k of fresh) {
     const text = await env.S.get(k.key);
-    if (text) out.push({ id: k.id, text, at: k.at });
+    // У команды менеджера («/инн») текста может не быть вовсе — она сама
+    // по себе событие для виджета.
+    if (text || k.ask) out.push({ id: k.id, text: text || '', at: k.at, ask: k.ask });
   }
   return out;
 }

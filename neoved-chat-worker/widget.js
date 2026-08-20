@@ -660,16 +660,18 @@
    * с ним менеджер проверит возможность операции, не дожидаясь разговора.
    * Телефон предлагаем позже, когда видно, что беседа идёт; если ИНН уже
    * назвали в форме, спрашивать нечего — предлагаем телефон сразу.
+   *
+   * Отдельно — просьба менеджера: он нажимает у себя в карточке команду, и
+   * окно ввода открывается заново, даже если человек уже отказался.
    */
   function renderAsks() {
     var sent = state.userMessages || 0;
-    if (!sent) return;
 
-    if (!state.hasInn && !state.innAsked) {
-      return feed.appendChild(askInn());
+    if (state.forceInn || (sent && !state.hasInn && !state.innAsked)) {
+      feed.appendChild(askInn());
     }
     var phoneAfter = state.hasInn ? 1 : PHONE_AFTER;
-    if (!state.hasPhone && !state.phoneAsked && sent >= phoneAfter) {
+    if (state.forcePhone || (sent && !state.hasPhone && !state.phoneAsked && sent >= phoneAfter)) {
       feed.appendChild(askPhone());
     }
   }
@@ -723,6 +725,7 @@
 
     ui.skip.addEventListener('click', function () {
       state.innAsked = true;
+      state.forceInn = false;
       save();
       render();
     });
@@ -739,6 +742,7 @@
       api('/api/inn', { sid: state.sid, inn: inn }).then(function () {
         state.hasInn = true;
         state.innAsked = true;
+        state.forceInn = false;
         push({ sys: true, text: 'ИНН ' + inn + ' передан менеджеру' });
         save();
         render();
@@ -760,6 +764,7 @@
 
     ui.skip.addEventListener('click', function () {
       state.phoneAsked = true;
+      state.forcePhone = false;
       save();
       render();
     });
@@ -776,6 +781,7 @@
       api('/api/phone', { sid: state.sid, phone: phone }).then(function () {
         state.hasPhone = true;
         state.phoneAsked = true;
+        state.forcePhone = false;
         push({ sys: true, text: 'Телефон ' + phone + ' передан менеджеру' });
         save();
         render();
@@ -799,7 +805,17 @@
         if (!list.length) return;
         list.forEach(function (m) {
           lastId = Math.max(lastId, Number(m.id) || 0);
-          push({ id: m.id, me: false, text: m.text });
+          // Менеджер попросил открыть окно ввода: показываем его заново, даже
+          // если человек раньше отказался или уже что-то указывал.
+          if (m.ask === 'inn') {
+            state.forceInn = true;
+            if (!m.text) push({ sys: true, text: 'Менеджер просит указать ИНН' });
+          }
+          if (m.ask === 'phone') {
+            state.forcePhone = true;
+            if (!m.text) push({ sys: true, text: 'Менеджер просит оставить номер телефона' });
+          }
+          if (m.text) push({ id: m.id, me: false, text: m.text });
         });
         state.lastId = lastId;
         save();

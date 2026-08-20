@@ -1,0 +1,29 @@
+{
+  "widget": {
+    "name": "widget.name",
+    "description": "widget.description",
+    "short_description": "widget.short_description",
+    "version": "1.0.0",
+    "interface_version": 2,
+    "init_once": false,
+    "locale": ["ru", "en"],
+    "installation": true,
+    "support": {
+      "link": "https://neoved.io",
+      "email": "sales@neoved.io"
+    }
+  },
+  "locations": ["lcard-1"],
+  "settings": {
+    "api": {
+      "name": "settings.api",
+      "type": "text",
+      "required": true
+    },
+    "key": {
+      "name": "settings.key",
+      "type": "pass",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "widget": {
+    "name": "Website chat",
+    "description": "Buttons for the neoved.io website chat: a manager can ask the visitor for a tax ID or a phone number straight from the lead card — the input field opens in the visitor's chat.",
+    "short_description": "Ask the visitor for a tax ID or a phone number"
+  },
+  "settings": {
+    "api": "Service URL (e.g. https://neoved-chat.strelnikov2302.workers.dev)",
+    "key": "Access key"
+  },
+  "panel": {
+    "hint": "Opens an input field in the visitor's chat — even if they declined earlier.",
+    "comment": "Message to the visitor (optional)",
+    "ask_inn": "Ask for tax ID",
+    "ask_phone": "Ask for phone"
+  },
+  "status": {
+    "sending": "Sending…",
+    "sent_inn": "Tax ID field opened for the visitor",
+    "sent_phone": "Phone field opened for the visitor"
+  },
+  "errors": {
+    "no_settings": "Fill in the service URL and the access key in widget settings",
+    "no_lead": "Open a lead card",
+    "failed": "Request failed"
+  }
+}
