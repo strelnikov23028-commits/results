@@ -6,6 +6,13 @@
  * Рисуется внутри shadow DOM: стили Tilda (или любого другого сайта) до него
  * не дотягиваются, а его стили не ломают страницу.
  *
+ * Порядок разговора:
+ *   1. Короткая форма — имя, рабочая почта, по желанию ИНН и два согласия.
+ *   2. Чат. Если ИНН не назвали сразу, после первого сообщения виджет
+ *      предлагает его указать — одним полем, не блокируя переписку.
+ *   3. Ещё через несколько реплик (или сразу после первой, если ИНН уже есть)
+ *      предлагает оставить телефон для звонка. Оба предложения можно закрыть.
+ *
  * Шаблонных строк тут нет намеренно: файл заливается в Cloudflare текстовым
  * модулем и при необходимости инлайнится в worker.js — обратные кавычки в
  * такой сборке пришлось бы экранировать.
@@ -21,15 +28,18 @@
   var API = (script && script.dataset.api) ||
     (script && script.src ? script.src.replace(/\/widget\.js.*$/, '') : '');
 
-  var STORE = 'neoved_chat_v1';
+  var STORE = 'neoved_chat_v2';
   var POLL_OPEN = 5000;      // виджет раскрыт — ждём ответ менеджера
   var POLL_IDLE = 30000;     // свёрнут — только чтобы зажечь счётчик непрочитанных
+  var PHONE_AFTER = 3;       // столько реплик клиента до предложения оставить телефон
 
   var T = {
     title: (script && script.dataset.title) || 'Напишите нам',
     subtitle: (script && script.dataset.subtitle) || 'Отвечаем в рабочее время, обычно в течение 15 минут',
     accent: (script && script.dataset.accent) || '#EE0000',
-    policy: (script && script.dataset.policy) || 'https://neoved.io/policy',
+    policy: (script && script.dataset.policy) || 'https://neoved.io/personal',
+    adsPolicy: (script && script.dataset.adsPolicy) || '',
+    captcha: (script && script.dataset.captcha) || '',
   };
 
   // ─────────────────────────── состояние ───────────────────────────
@@ -41,6 +51,7 @@
   var unread = 0;
   var timer = null;
   var motion = null;               // Framer Motion, если CDN доступен
+  var captchaId = null;            // виджет Яндекс SmartCaptcha
 
   function load() {
     try { return JSON.parse(localStorage.getItem(STORE) || '{}') || {}; }
@@ -104,20 +115,39 @@
     '.field{margin-bottom:14px}',
     '.field label{display:block;font-size:13px;font-weight:500;margin-bottom:6px;color:#110000}',
     '.field .opt{color:#999;font-weight:400}',
-    '.field input,.field textarea{',
+    'input[type=text],input[type=email],input[type=tel],textarea{',
     '  width:100%;min-height:48px;padding:13px 16px;border:1.5px solid #EEE;border-radius:16px;',
     '  background:#F7F7F7;font:inherit;font-size:15px;color:#110000;transition:border-color .18s ease,background .18s ease;',
     '}',
-    '.field textarea{min-height:96px;resize:vertical;line-height:1.5}',
-    '.field input:hover,.field textarea:hover{border-color:#DDD}',
-    '.field input:focus,.field textarea:focus{outline:0;border-color:var(--accent);background:#fff}',
-    '.field input::placeholder,.field textarea::placeholder{color:#AAA}',
+    'textarea{min-height:96px;resize:vertical;line-height:1.5}',
+    'input:hover,textarea:hover{border-color:#DDD}',
+    'input:focus,textarea:focus{outline:0;border-color:var(--accent);background:#fff}',
+    'input::placeholder,textarea::placeholder{color:#AAA}',
     '.field.bad input,.field.bad textarea{border-color:var(--accent);background:#fff}',
     '.err{display:none;margin:6px 0 0;font-size:12.5px;color:var(--accent)}',
     '.field.bad .err{display:block}',
 
+    /* согласия */
+    '.agree{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;cursor:pointer}',
+    '.agree input{',
+    '  appearance:none;-webkit-appearance:none;flex:0 0 auto;width:22px;height:22px;margin:1px 0 0;',
+    '  min-height:0;padding:0;border:1.5px solid #DDD;border-radius:7px;background:#fff;cursor:pointer;',
+    '  transition:background .16s ease,border-color .16s ease;',
+    '}',
+    '.agree input:checked{background:var(--accent);border-color:var(--accent)}',
+    '.agree input:checked::after{',
+    '  content:"";display:block;width:6px;height:11px;margin:2px auto 0;',
+    '  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);',
+    '}',
+    '.agree input:focus-visible{outline:3px solid #110000;outline-offset:2px}',
+    '.agree span{font-size:13px;line-height:1.45;color:#666}',
+    '.agree a{color:#666;text-decoration:underline}',
+    '.agree a:hover{color:var(--accent)}',
+    '.agree.bad input{border-color:var(--accent)}',
+    '.agree.bad span{color:var(--accent)}',
+
     '.submit{',
-    '  width:100%;min-height:52px;margin-top:4px;border:0;border-radius:100px;cursor:pointer;',
+    '  width:100%;min-height:52px;margin-top:6px;border:0;border-radius:100px;cursor:pointer;',
     '  background:var(--accent);color:#fff;font:inherit;font-size:16px;font-weight:500;',
     '  display:flex;align-items:center;justify-content:center;gap:10px;',
     '  transition:transform .18s ease,opacity .18s ease;',
@@ -125,13 +155,12 @@
     '.submit:hover:not(:disabled){transform:translateY(-2px)}',
     '.submit:disabled{opacity:.6;cursor:default}',
     '.submit:focus-visible{outline:3px solid #110000;outline-offset:2px}',
-    '.note{margin:12px 0 0;font-size:11.5px;line-height:1.5;color:#999;text-align:center}',
-    '.note a{color:#999;text-decoration:underline}',
     '.fail{',
     '  display:none;margin:0 0 14px;padding:12px 14px;border-radius:14px;',
     '  background:#FDECEC;color:#C40000;font-size:13.5px;line-height:1.45;',
     '}',
     '.fail.on{display:block}',
+    '.captcha{margin:0 0 12px}',
 
     /* чат */
     '.chat{display:none;flex-direction:column;flex:1;min-height:0}',
@@ -142,6 +171,29 @@
     '.msg.them{align-self:flex-start;background:#F0F0F0;color:#110000;border-bottom-left-radius:8px}',
     '.msg .who{display:block;font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;opacity:.6;margin-bottom:3px}',
     '.sys{align-self:center;max-width:90%;text-align:center;font-size:12px;line-height:1.5;color:#999}',
+
+    /* предложения указать ИНН и телефон */
+    '.ask{align-self:stretch;background:#F7F7F7;border-radius:20px;padding:16px 18px}',
+    '.ask p{margin:0 0 12px;font-size:13.5px;line-height:1.5;color:#555}',
+    '.ask label{display:block;font-size:12px;font-weight:500;margin-bottom:6px;color:#110000}',
+    '.ask .row{display:flex;gap:8px;margin-top:10px}',
+    '.ask .go{',
+    '  flex:1;min-height:44px;border:0;border-radius:100px;cursor:pointer;',
+    '  background:var(--accent);color:#fff;font:inherit;font-size:14.5px;font-weight:500;',
+    '  transition:transform .18s ease,opacity .18s ease;',
+    '}',
+    '.ask .go:hover:not(:disabled){transform:translateY(-2px)}',
+    '.ask .go:disabled{opacity:.5;cursor:default}',
+    '.ask .skip{',
+    '  min-height:44px;padding:0 16px;border:0;border-radius:100px;cursor:pointer;',
+    '  background:#EAEAEA;color:#555;font:inherit;font-size:14.5px;',
+    '}',
+    '.ask .skip:hover{background:#E0E0E0}',
+    '.ask .go:focus-visible,.ask .skip:focus-visible{outline:3px solid #110000;outline-offset:2px}',
+    '.ask .err{margin-top:8px}',
+    '.ask.bad input{border-color:var(--accent);background:#fff}',
+    '.ask.bad .err{display:block}',
+
     '.compose{display:flex;gap:8px;padding:14px 16px;border-top:1px solid #EEE;background:#fff}',
     '.compose textarea{',
     '  flex:1;min-height:48px;max-height:120px;padding:13px 16px;border:1.5px solid #EEE;border-radius:20px;',
@@ -168,8 +220,8 @@
     '  .bubble{width:58px;height:58px}',
     '}',
     '@media (prefers-reduced-motion:reduce){',
-    '  .bubble,.submit,.send{transition:none}',
-    '  .bubble:hover,.submit:hover,.send:hover{transform:none}',
+    '  .bubble,.submit,.send,.ask .go{transition:none}',
+    '  .bubble:hover,.submit:hover,.send:hover,.ask .go:hover{transform:none}',
     '  .spin{animation-duration:2s}',
     '}',
   ].join('\n');
@@ -194,31 +246,29 @@
     '      <p class="fail" role="alert"></p>',
     '      <div class="field" data-for="name">',
     '        <label for="nv-name">Имя</label>',
-    '        <input id="nv-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться">',
+    '        <input id="nv-name" name="name" type="text" autocomplete="name" placeholder="Иван">',
     '        <p class="err">Напишите, как к вам обращаться</p>',
     '      </div>',
     '      <div class="field" data-for="email">',
-    '        <label for="nv-email">Почта</label>',
-    '        <input id="nv-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com">',
+    '        <label for="nv-email">Рабочая почта</label>',
+    '        <input id="nv-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="ivan@company.ru">',
     '        <p class="err">Проверьте адрес почты</p>',
     '      </div>',
-    '      <div class="field" data-for="phone">',
-    '        <label for="nv-phone">Телефон</label>',
-    '        <input id="nv-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 999 123-45-67">',
-    '        <p class="err">Проверьте номер телефона</p>',
+    '      <div class="field" data-for="inn">',
+    '        <label for="nv-inn">ИНН компании / ИП</label>',
+    '        <input id="nv-inn" name="inn" type="text" inputmode="numeric" autocomplete="off" placeholder="Необязательно">',
+    '        <p class="err">ИНН — 10 цифр у компании или 12 у ИП</p>',
     '      </div>',
-    '      <div class="field" data-for="tg">',
-    '        <label for="nv-tg">Telegram <span class="opt">— если удобнее там</span></label>',
-    '        <input id="nv-tg" name="tg" type="text" autocomplete="off" placeholder="@username">',
-    '        <p class="err">Ник в формате @username</p>',
-    '      </div>',
-    '      <div class="field" data-for="message">',
-    '        <label for="nv-msg">Вопрос</label>',
-    '        <textarea id="nv-msg" name="message" placeholder="Опишите задачу — ответим здесь же"></textarea>',
-    '        <p class="err">Напишите хотя бы пару слов о задаче</p>',
-    '      </div>',
-    '      <button class="submit" type="submit"><span class="label">Связаться</span></button>',
-    '      <p class="note">Нажимая «Связаться», вы соглашаетесь с <a href="#" target="_blank" rel="noopener" id="nv-policy">политикой обработки персональных данных</a></p>',
+    '      <div class="captcha"></div>',
+    '      <label class="agree" data-for="consent">',
+    '        <input type="checkbox" name="consent">',
+    '        <span>Даю <a id="nv-policy" target="_blank" rel="noopener">согласие на обработку персональных данных</a></span>',
+    '      </label>',
+    '      <label class="agree" data-for="ads">',
+    '        <input type="checkbox" name="ads">',
+    '        <span id="nv-ads-text">Даю согласие на получение рекламных сообщений</span>',
+    '      </label>',
+    '      <button class="submit" type="submit"><span class="label">Начать чат</span></button>',
     '    </form>',
 
     '    <div class="chat">',
@@ -266,6 +316,12 @@
   $('#nv-sub').textContent = T.subtitle;
   $('#nv-policy').href = T.policy;
 
+  // Документа про рекламные рассылки может не быть — тогда текст без ссылки.
+  if (T.adsPolicy) {
+    var adsText = $('#nv-ads-text');
+    adsText.innerHTML = 'Даю <a href="' + T.adsPolicy + '" target="_blank" rel="noopener">согласие на получение рекламных сообщений</a>';
+  }
+
   // Onest — фирменный шрифт neoved.io. На самом сайте он уже подключён,
   // на сторонней странице подтягиваем сами; не загрузится — сработает
   // системный шрифт из font-family.
@@ -280,6 +336,7 @@
     document.body.appendChild(host);
     if (state.sid) { showChat(); render(); poll(); }
     schedule();
+    setupCaptcha();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', mount);
@@ -299,6 +356,30 @@
     if (!motion || reduced) return;
     motion.animate(el, { opacity: [0, 1], y: [12, 0], scale: [0.98, 1] },
       { duration: 0.26, easing: [0.22, 1, 0.36, 1] });
+  }
+
+  // ─────────────────────────── капча ───────────────────────────
+
+  /**
+   * Яндекс SmartCaptcha в невидимом режиме: подключается только если задан
+   * клиентский ключ (data-captcha). Без ключа форма отправляется как раньше.
+   * https://yandex.cloud/ru/docs/smartcaptcha/concepts/invisible-captcha
+   */
+  function setupCaptcha() {
+    if (!T.captcha) return;
+    window.__neovedCaptchaReady = function () {
+      if (!window.smartCaptcha) return;
+      captchaId = window.smartCaptcha.render($('.captcha'), {
+        sitekey: T.captcha,
+        invisible: true,
+        hideShield: true,
+        callback: function (token) { submitForm(token); },
+      });
+    };
+    var s = document.createElement('script');
+    s.src = 'https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=__neovedCaptchaReady';
+    s.defer = true;
+    document.head.appendChild(s);
   }
 
   // ─────────────────────────── открытие/закрытие ───────────────────────────
@@ -324,101 +405,34 @@
     if (e.key === 'Escape' && open) { setOpen(false); bubble.focus(); }
   });
 
-  // ─────────────────────────── форма ───────────────────────────
+  // ─────────────────────────── ввод: маски ───────────────────────────
 
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zа-я]{2,}$/i;
-
-  function value(name) {
-    var el = form.querySelector('[name="' + name + '"]');
-    return (el.value || '').trim();
-  }
-  function markBad(name, bad) {
-    var box = form.querySelector('.field[data-for="' + name + '"]');
-    if (box) box.classList.toggle('bad', !!bad);
-  }
-
-  function validate() {
-    var v = {
-      name: value('name'),
-      email: value('email'),
-      phone: value('phone'),
-      tg: value('tg'),
-      message: value('message'),
-    };
-    var bad = [];
-    if (v.name.length < 2) bad.push('name');
-    if (!EMAIL_RE.test(v.email)) bad.push('email');
-    if (v.phone.replace(/\D/g, '').length < 10) bad.push('phone');
-    if (v.tg && !/^@?[a-z0-9_]{4,32}$/i.test(v.tg.replace(/^https?:\/\/(t\.me|telegram\.me)\//i, ''))) bad.push('tg');
-    if (v.message.length < 5) bad.push('message');
-
-    ['name', 'email', 'phone', 'tg', 'message'].forEach(function (k) {
-      markBad(k, bad.indexOf(k) >= 0);
-    });
-    if (bad.length) {
-      var first = form.querySelector('.field[data-for="' + bad[0] + '"] input, .field[data-for="' + bad[0] + '"] textarea');
-      if (first) first.focus();
-      return null;
-    }
-    return v;
-  }
-
-  ['name', 'email', 'phone', 'tg', 'message'].forEach(function (k) {
-    var el = form.querySelector('[name="' + k + '"]');
-    el.addEventListener('blur', function () {
-      if (el.value.trim()) markBad(k, false);
-    });
-  });
-
-  // ── маска телефона ──
-  // Российские номера собираются в «+7 999 123-45-67», остальные — просто «+»
-  // и цифры группами: у клиентов ВЭД номер бывает какой угодно, и жёсткая
-  // российская маска отрезала бы их на входе.
-  function formatPhone(value) {
-    // Номер, начатый с «+», считаем международным и код страны не трогаем;
-    // без «+» — российским, поэтому «8…» и «9…» превращаются в +7.
-    // Турецкий или китайский номер человек наберёт с «+90…», «+86…».
-    var international = /^\s*\+/.test(value);
+  // Российский номер: «+7 999 123-45-67». Виджет спрашивает телефон только у
+  // тех, кому удобнее говорить голосом, и звонит менеджер из России.
+  function formatRuPhone(value) {
     var d = String(value).replace(/\D/g, '');
-    if (!d) return international ? '+' : '';
+    if (!d) return '';
+    if (d.charAt(0) === '8') d = '7' + d.slice(1);
+    if (d.charAt(0) !== '7') d = '7' + d;
+    d = d.slice(0, 11);
 
-    if (!international) {
-      if (d.charAt(0) === '8') d = '7' + d.slice(1);
-      else if (d.charAt(0) === '9') d = '7' + d;
-    }
-
-    if (d.charAt(0) === '7' && d.length <= 11) {
-      d = d.slice(0, 11);
-      var out = '+7';
-      if (d.length > 1) out += ' ' + d.slice(1, 4);
-      if (d.length > 4) out += ' ' + d.slice(4, 7);
-      if (d.length > 7) out += '-' + d.slice(7, 9);
-      if (d.length > 9) out += '-' + d.slice(9, 11);
-      return out;
-    }
-    return '+' + d.slice(0, 15).replace(/(\d{3})(?=\d)/g, '$1 ');
+    var out = '+7';
+    if (d.length > 1) out += ' ' + d.slice(1, 4);
+    if (d.length > 4) out += ' ' + d.slice(4, 7);
+    if (d.length > 7) out += '-' + d.slice(7, 9);
+    if (d.length > 9) out += '-' + d.slice(9, 11);
+    return out;
   }
 
-  // ── ник Telegram ──
-  // Telegram допускает только латиницу, цифры и подчёркивание, поэтому
-  // кириллица и пробелы отсекаются прямо при вводе, а ссылка t.me
-  // сворачивается в @ник.
-  function formatNick(value) {
-    var s = String(value)
-      .replace(/^\s*https?:\/\/(t\.me|telegram\.me)\//i, '@')
-      .replace(/[^A-Za-z0-9_@]/g, '')
-      .replace(/(?!^)@/g, '');
-    if (s && s.charAt(0) !== '@') s = '@' + s;
-    return s.slice(0, 33);   // @ плюс 32 символа — предел Telegram
-  }
+  var onlyDigits = function (value) { return String(value).replace(/\D/g, '').slice(0, 12); };
 
   /**
    * Переформатирует поле, сохраняя место курсора: считаем, сколько значащих
    * символов было слева от него, и после подстановки ставим курсор за тем же
    * по счёту символом. Иначе при правке середины номера курсор прыгал бы в конец.
-   * `isFiller` отвечает, является ли символ разделителем (скобка, дефис, @).
    */
-  function maskField(el, format, isFiller) {
+  function maskField(el, format) {
+    var isFiller = function (ch) { return !/\d/.test(ch); };
     el.addEventListener('input', function () {
       var before = el.value;
       var caret = el.selectionStart;
@@ -438,35 +452,98 @@
     });
   }
 
-  var phoneInput = form.querySelector('[name="phone"]');
-  var tgInput = form.querySelector('[name="tg"]');
-  maskField(phoneInput, formatPhone, function (ch) { return !/\d/.test(ch); });
-  maskField(tgInput, formatNick, function (ch) { return !/[A-Za-z0-9_]/.test(ch); });
+  maskField(form.querySelector('[name="inn"]'), onlyDigits);
 
-  // Кириллицу молча выкидывать нельзя — человек не поймёт, куда делись буквы.
-  tgInput.addEventListener('input', function (e) {
-    if (/[а-яё]/i.test(e.data || '')) {
-      markBad('tg', true);
-      tgInput.parentNode.querySelector('.err').textContent = 'Ник в Telegram — латиницей, без пробелов';
+  // ─────────────────────────── форма ───────────────────────────
+
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zа-я]{2,}$/i;
+  var INN_RE = /^(\d{10}|\d{12})$/;
+
+  function value(name) {
+    var el = form.querySelector('[name="' + name + '"]');
+    return (el.value || '').trim();
+  }
+  function markBad(name, bad) {
+    var box = form.querySelector('[data-for="' + name + '"]');
+    if (box) box.classList.toggle('bad', !!bad);
+  }
+
+  function validate() {
+    var v = {
+      name: value('name'),
+      email: value('email'),
+      inn: value('inn'),
+      consent: form.querySelector('[name="consent"]').checked,
+      ads: form.querySelector('[name="ads"]').checked,
+    };
+    var bad = [];
+    if (v.name.length < 2) bad.push('name');
+    if (!EMAIL_RE.test(v.email)) bad.push('email');
+    if (v.inn && !INN_RE.test(v.inn)) bad.push('inn');
+    if (!v.consent) bad.push('consent');
+
+    ['name', 'email', 'inn', 'consent'].forEach(function (k) {
+      markBad(k, bad.indexOf(k) >= 0);
+    });
+    if (bad.length) {
+      if (bad[0] === 'consent') {
+        fail.textContent = 'Отметьте согласие на обработку персональных данных';
+        fail.classList.add('on');
+      } else {
+        var first = form.querySelector('[data-for="' + bad[0] + '"] input');
+        if (first) first.focus();
+      }
+      return null;
     }
+    return v;
+  }
+
+  ['name', 'email', 'inn'].forEach(function (k) {
+    var el = form.querySelector('[name="' + k + '"]');
+    el.addEventListener('blur', function () {
+      if (el.value.trim()) markBad(k, false);
+    });
+  });
+  form.querySelector('[name="consent"]').addEventListener('change', function (e) {
+    if (e.target.checked) { markBad('consent', false); fail.classList.remove('on'); }
   });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (sending) return;
+    fail.classList.remove('on');
+    if (!validate()) return;
+
+    // С капчей сначала получаем токен: колбэк вызовет submitForm сам.
+    if (captchaId !== null && window.smartCaptcha) {
+      busy(submitBtn, true, 'Проверяем…');
+      window.smartCaptcha.execute(captchaId);
+      return;
+    }
+    submitForm('');
+  });
+
+  function submitForm(captchaToken) {
     var v = validate();
-    if (!v) return;
+    if (!v) { busy(submitBtn, false, 'Начать чат'); return; }
 
     busy(submitBtn, true, 'Отправляем…');
     fail.classList.remove('on');
 
+    // Первое сообщение человек пишет уже в чате, поэтому в заявку уходит
+    // короткая строка: менеджер видит обращение сразу, не дожидаясь текста.
     api('/api/start', {
-      name: v.name, email: v.email, phone: v.phone, tg: v.tg,
-      message: v.message, page: location.href,
+      name: v.name, email: v.email, inn: v.inn,
+      consent: v.consent, ads: v.ads,
+      message: 'Клиент открыл чат на сайте',
+      page: location.href,
+      captcha: captchaToken || '',
     }).then(function (res) {
       state.sid = res.sid;
       state.name = v.name;
-      state.messages = [{ id: 'me-' + Date.now(), me: true, text: v.message }];
+      state.hasInn = Boolean(res.has_inn);
+      state.messages = [];
+      state.userMessages = 0;
       lastId = 0;
       save();
       showChat();
@@ -474,22 +551,22 @@
       poll();
       // До этого момента опрашивать было нечего, и таймер не заводился.
       schedule();
+      setTimeout(function () { try { composeText.focus(); } catch (e) {} }, 80);
     }).catch(function (err) {
       fail.textContent = err.message || 'Не удалось отправить. Попробуйте ещё раз или напишите на sales@neoved.io';
       fail.classList.add('on');
+      if (captchaId !== null && window.smartCaptcha) window.smartCaptcha.reset(captchaId);
     }).then(function () {
-      busy(submitBtn, false, 'Связаться');
+      busy(submitBtn, false, 'Начать чат');
     });
-  });
+  }
 
   function busy(btn, on, label) {
     sending = on;
     btn.disabled = on;
-    if (btn === submitBtn) {
-      btn.innerHTML = on
-        ? '<span class="spin"></span><span class="label">' + label + '</span>'
-        : '<span class="label">' + label + '</span>';
-    }
+    btn.innerHTML = on
+      ? '<span class="spin"></span><span class="label">' + label + '</span>'
+      : '<span class="label">' + label + '</span>';
   }
 
   // ─────────────────────────── чат ───────────────────────────
@@ -502,12 +579,20 @@
   function render() {
     var items = state.messages || [];
     feed.innerHTML = '';
+
     var intro = document.createElement('p');
     intro.className = 'sys';
-    intro.textContent = 'Заявка ушла в отдел продаж. Ответ придёт сюда — страницу можно не держать открытой, переписка сохранится.';
+    intro.textContent = 'Здравствуйте, ' + (state.name || '') + '! Опишите задачу — менеджер ответит здесь же. Страницу можно не держать открытой, переписка сохранится.';
     feed.appendChild(intro);
 
     items.forEach(function (m) {
+      if (m.sys) {
+        var sys = document.createElement('p');
+        sys.className = 'sys';
+        sys.textContent = m.text;
+        feed.appendChild(sys);
+        return;
+      }
       var el = document.createElement('div');
       el.className = 'msg ' + (m.me ? 'me' : 'them');
       if (!m.me) {
@@ -519,6 +604,8 @@
       el.appendChild(document.createTextNode(m.text));
       feed.appendChild(el);
     });
+
+    renderAsks();
     scrollDown();
   }
 
@@ -538,13 +625,16 @@
     if (!text || sending || !state.sid) return;
 
     composeText.value = '';
+    composeText.style.height = 'auto';
     push({ id: 'me-' + Date.now(), me: true, text: text });
+    state.userMessages = (state.userMessages || 0) + 1;
+    save();
     render();
 
     sending = true;
     sendBtn.disabled = true;
     api('/api/send', { sid: state.sid, text: text }).catch(function (err) {
-      push({ id: 'sys-' + Date.now(), me: false, text: 'Сообщение не доставлено: ' + (err.message || 'ошибка сети') });
+      push({ sys: true, text: 'Сообщение не доставлено: ' + (err.message || 'ошибка сети') });
       render();
     }).then(function () {
       sending = false;
@@ -562,6 +652,142 @@
     composeText.style.height = 'auto';
     composeText.style.height = Math.min(composeText.scrollHeight, 120) + 'px';
   });
+
+  // ────────────── предложения указать ИНН и телефон ──────────────
+
+  /**
+   * Что показать под перепиской. ИНН спрашиваем сразу после первой реплики —
+   * с ним менеджер проверит возможность операции, не дожидаясь разговора.
+   * Телефон предлагаем позже, когда видно, что беседа идёт; если ИНН уже
+   * назвали в форме, спрашивать нечего — предлагаем телефон сразу.
+   */
+  function renderAsks() {
+    var sent = state.userMessages || 0;
+    if (!sent) return;
+
+    if (!state.hasInn && !state.innAsked) {
+      return feed.appendChild(askInn());
+    }
+    var phoneAfter = state.hasInn ? 1 : PHONE_AFTER;
+    if (!state.hasPhone && !state.phoneAsked && sent >= phoneAfter) {
+      feed.appendChild(askPhone());
+    }
+  }
+
+  function askBox(text, label, placeholder, buttonText, inputMode) {
+    var box = document.createElement('div');
+    box.className = 'ask';
+
+    var p = document.createElement('p');
+    p.textContent = text;
+    box.appendChild(p);
+
+    var lab = document.createElement('label');
+    lab.textContent = label;
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.inputMode = inputMode;
+    input.placeholder = placeholder;
+    var id = 'nv-ask-' + Math.random().toString(36).slice(2, 8);
+    input.id = id;
+    lab.htmlFor = id;
+    box.appendChild(lab);
+    box.appendChild(input);
+
+    var err = document.createElement('p');
+    err.className = 'err';
+    box.appendChild(err);
+
+    var row = document.createElement('div');
+    row.className = 'row';
+    var go = document.createElement('button');
+    go.type = 'button';
+    go.className = 'go';
+    go.textContent = buttonText;
+    var skip = document.createElement('button');
+    skip.type = 'button';
+    skip.className = 'skip';
+    skip.textContent = 'Не сейчас';
+    row.appendChild(go);
+    row.appendChild(skip);
+    box.appendChild(row);
+
+    return { box: box, input: input, err: err, go: go, skip: skip };
+  }
+
+  function askInn() {
+    var ui = askBox(
+      'Чтобы менеджер сразу проверил возможность проведения операции, можете указать ИНН компании. Это необязательно.',
+      'ИНН компании / ИП', 'Введите ИНН', 'Указать ИНН', 'numeric');
+    maskField(ui.input, onlyDigits);
+
+    ui.skip.addEventListener('click', function () {
+      state.innAsked = true;
+      save();
+      render();
+    });
+
+    ui.go.addEventListener('click', function () {
+      var inn = ui.input.value.trim();
+      if (!INN_RE.test(inn)) {
+        ui.box.classList.add('bad');
+        ui.err.textContent = 'ИНН — 10 цифр у компании или 12 у ИП';
+        ui.input.focus();
+        return;
+      }
+      ui.go.disabled = true;
+      api('/api/inn', { sid: state.sid, inn: inn }).then(function () {
+        state.hasInn = true;
+        state.innAsked = true;
+        push({ sys: true, text: 'ИНН ' + inn + ' передан менеджеру' });
+        save();
+        render();
+      }).catch(function (err) {
+        ui.box.classList.add('bad');
+        ui.err.textContent = err.message || 'Не удалось отправить, попробуйте ещё раз';
+        ui.go.disabled = false;
+      });
+    });
+
+    return ui.box;
+  }
+
+  function askPhone() {
+    var ui = askBox(
+      'Если удобнее обсудить задачу голосом, оставьте номер телефона. Менеджер сможет связаться с вами.',
+      'Номер телефона', '+7 999 123-45-67', 'Оставить номер', 'tel');
+    maskField(ui.input, formatRuPhone);
+
+    ui.skip.addEventListener('click', function () {
+      state.phoneAsked = true;
+      save();
+      render();
+    });
+
+    ui.go.addEventListener('click', function () {
+      var phone = ui.input.value.trim();
+      if (phone.replace(/\D/g, '').length !== 11) {
+        ui.box.classList.add('bad');
+        ui.err.textContent = 'Нужен российский номер: +7 999 123-45-67';
+        ui.input.focus();
+        return;
+      }
+      ui.go.disabled = true;
+      api('/api/phone', { sid: state.sid, phone: phone }).then(function () {
+        state.hasPhone = true;
+        state.phoneAsked = true;
+        push({ sys: true, text: 'Телефон ' + phone + ' передан менеджеру' });
+        save();
+        render();
+      }).catch(function (err) {
+        ui.box.classList.add('bad');
+        ui.err.textContent = err.message || 'Не удалось отправить, попробуйте ещё раз';
+        ui.go.disabled = false;
+      });
+    });
+
+    return ui.box;
+  }
 
   // ─────────────────────────── ответы менеджера ───────────────────────────
 

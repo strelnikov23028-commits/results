@@ -53,14 +53,19 @@ if (!cfg.KV_ID) {
 
 // ─────────────────── заливка ───────────────────
 const SECRETS = ['AMO_SUBDOMAIN', 'AMO_TOKEN', 'HOOK_SECRET'];
+// Ключ капчи необязателен: пока его нет, проверка «я не робот» выключена.
+const OPTIONAL_SECRETS = ['CAPTCHA_KEY'];
 const PLAIN = ['PIPELINE_ID', 'STATUS_ID', 'NEW_STATUS_NAME', 'TAG_NAME', 'LEAD_NAME_PREFIX',
-  'EMAIL_FIELD', 'PHONE_FIELD', 'TG_FIELD', 'TG_LOOKUP',
+  'SITE_HOST', 'EMAIL_FIELD', 'PHONE_FIELD', 'COMPANY_INN_FIELD', 'LEAD_URL_FIELD',
   'ALLOW_ORIGINS', 'REPLY_PREFIX', 'STRIP_PREFIXES', 'START_LIMIT', 'MSG_LIMIT'];
 
 const bindings = [];
 for (const key of SECRETS) {
   if (!cfg[key]) fail(`В .env не заполнен ${key}`);
   bindings.push({ type: 'secret_text', name: key, text: cfg[key] });
+}
+for (const key of OPTIONAL_SECRETS) {
+  if (cfg[key]) bindings.push({ type: 'secret_text', name: key, text: cfg[key] });
 }
 for (const key of PLAIN) {
   if (cfg[key] !== undefined) bindings.push({ type: 'plain_text', name: key, text: cfg[key] });

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Виджет обратной связи neoved → amoCRM</title>
-<meta name="description" content="Тестовая страница виджета обратной связи: форма на сайте создаёт сделку в amoCRM, менеджер отвечает примечанием прямо из карточки.">
+<meta name="description" content="Тестовая страница виджета обратной связи: форма на сайте создаёт сделку в воронке «Чат на сайте», менеджер отвечает примечанием прямо из карточки.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,9 +79,23 @@
   .card p{margin-top:10px;color:var(--muted);font-size:15.5px}
   .card.dark{background:var(--ink);color:#fff}
   .card.dark p{color:rgba(255,255,255,.66)}
+  .card code,td code,.card.dark code{background:rgba(0,0,0,.06);padding:2px 7px;border-radius:6px;font-size:13.5px}
+  .card.dark code{background:rgba(255,255,255,.12)}
 
   .section-head{margin-bottom:44px;max-width:62ch}
   .section-head p{margin-top:16px;color:var(--muted);font-size:17px}
+
+  /* сценарии */
+  .flow{background:#fff;border:1px solid var(--line);border-radius:28px;padding:30px}
+  .flow h3{margin-bottom:18px}
+  .step{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+  .step:first-of-type{border-top:0;padding-top:0}
+  .step .dot{
+    flex:0 0 auto;width:26px;height:26px;border-radius:100px;background:var(--soft);
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--muted);
+  }
+  .step p{font-size:15px;line-height:1.5}
+  .step .who{display:block;font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
 
   /* карточка сделки */
   .lead-card{background:#fff;border:1px solid var(--line);border-radius:28px;overflow:hidden}
@@ -99,7 +113,6 @@
   table{width:100%;border-collapse:collapse;font-size:15.5px}
   th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
   th{font-weight:500;color:var(--muted);font-size:13.5px;letter-spacing:.02em;text-transform:uppercase}
-  td code{background:var(--soft);padding:2px 7px;border-radius:6px;font-size:13.5px}
   .tablewrap{overflow-x:auto;border-radius:24px;border:1px solid var(--line)}
 
   /* код */
@@ -122,7 +135,7 @@
   @media (max-width:860px){
     .grid.three,.grid.two{grid-template-columns:1fr}
     .tagline{display:none}
-    .card{padding:26px}
+    .card,.flow{padding:26px}
   }
   @media (prefers-reduced-motion:reduce){
     .js .reveal{opacity:1;transform:none}
@@ -145,36 +158,33 @@
     <div class="wrap">
       <span class="eyebrow reveal"><i></i> Виджет подключён к боевому amoCRM</span>
       <h1 class="reveal">Обратная связь,<br>которая живёт в CRM</h1>
-      <p class="lead reveal">Посетитель оставляет имя, почту, телефон и ник в Telegram, пишет вопрос — и в amoCRM появляется сделка на этапе «Новая заявка». Менеджер отвечает примечанием прямо в карточке, ответ приходит человеку в тот же чат на сайте.</p>
+      <p class="lead reveal">Посетитель оставляет имя и рабочую почту, при желании — ИНН, и сразу пишет в чат. В amoCRM появляется сделка в воронке «Чат на сайте», а менеджер отвечает примечанием прямо в карточке — ответ приходит человеку в тот же чат.</p>
       <div class="actions reveal">
         <button class="btn" type="button" onclick="window.neovedChat &amp;&amp; window.neovedChat.open()">Открыть виджет</button>
         <a class="btn ghost" href="#tilda">Как поставить на Tilda</a>
       </div>
-      <p class="hint reveal">Виджет — красная кнопка в правом нижнем углу. Это рабочий контур: заявка действительно создаст сделку в воронке «Продажи клиентам».</p>
+      <p class="hint reveal">Виджет — красная кнопка в правом нижнем углу. Это рабочий контур: обращение действительно создаст сделку в воронке «Чат на сайте».</p>
     </div>
   </section>
 
   <section style="background:var(--soft);border-radius:var(--radius)">
     <div class="wrap">
       <div class="section-head reveal">
-        <h2>Что происходит после «Связаться»</h2>
-        <p>Три шага, между которыми нет ручной работы: ни копирования контактов, ни пересылки писем.</p>
+        <h2>Разговор ведёт к данным,<br>а не наоборот</h2>
+        <p>Виджет спрашивает по одному полю за раз и только тогда, когда это уместно. Отказаться можно на любом шаге — переписка продолжится.</p>
       </div>
-      <div class="grid three">
-        <article class="card reveal" style="background:#fff">
-          <span class="num">1</span>
-          <h3>Ищем человека в базе</h3>
-          <p>Сначала по почте, потом по телефону (сравниваем цифры, а не формат записи), потом по нику Telegram — во всех четырёх «телеграмных» полях карточки.</p>
+      <div class="grid two">
+        <article class="flow reveal">
+          <h3>Сценарий 1 — ИНН не указали</h3>
+          <div class="step"><span class="dot">1</span><p><span class="who">Форма</span>Имя, рабочая почта, согласие на обработку данных. ИНН оставили пустым.</p></div>
+          <div class="step"><span class="dot">2</span><p><span class="who">После первого сообщения</span>«Чтобы менеджер сразу проверил возможность проведения операции, можете указать ИНН компании. Это необязательно» — с полем и кнопкой «Указать ИНН».</p></div>
+          <div class="step"><span class="dot">3</span><p><span class="who">После третьей реплики</span>Предложение оставить телефон для звонка. Тоже можно закрыть.</p></div>
         </article>
-        <article class="card reveal" style="background:#fff">
-          <span class="num">2</span>
-          <h3>Сделка на «Новую заявку»</h3>
-          <p>Нашли открытую сделку — двигаем её на «Новую заявку» внутри её же воронки и вешаем тег <code>site_chat</code>. Не нашли — заводим сделку с новым контактом.</p>
-        </article>
-        <article class="card reveal" style="background:#fff">
-          <span class="num">3</span>
-          <h3>Ответ — из карточки</h3>
-          <p>Менеджер пишет обычное примечание в ленте сделки. Оно тут же появляется в чате на сайте — отдельный интерфейс для переписки не нужен.</p>
+        <article class="flow reveal">
+          <h3>Сценарий 2 — ИНН указали сразу</h3>
+          <div class="step"><span class="dot">1</span><p><span class="who">Форма</span>Имя, рабочая почта, ИНН, согласие. Компания заводится сразу вместе со сделкой.</p></div>
+          <div class="step"><span class="dot">2</span><p><span class="who">После первого сообщения</span>ИНН повторно не спрашивают — сразу предложение оставить телефон.</p></div>
+          <div class="step"><span class="dot">3</span><p><span class="who">Дальше</span>Обычная переписка. Всё, что человек уже дал, виджет больше не запрашивает.</p></div>
         </article>
       </div>
     </div>
@@ -184,32 +194,35 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Как выглядит в amoCRM</h2>
-        <p>Первое примечание — сводка с контактами и вопросом. Ответ менеджера — обычный текст в той же ленте.</p>
+        <p>Сделка называется так, что видно и человека, и страницу входа. Первое примечание — сводка, дальше обычная переписка.</p>
       </div>
       <div class="lead-card reveal">
         <div class="top">
-          <strong>site chat — Марина Ковалёва</strong>
+          <strong>site chat: Марина Ковалёва | uslugi/ved</strong>
           <span class="chip">site_chat</span>
-          <span class="chip stage">Продажи клиентам · Новая заявка</span>
+          <span class="chip stage">Чат на сайте · Первичный контакт</span>
         </div>
         <div class="feed">
           <div class="note">
             <span class="meta">Примечание · автоматически</span>
-Заявка с сайта (виджет)
+Чат на сайте (виджет)
 Имя: Марина Ковалёва
-Почта: m.kovaleva@example.com
-Телефон: +7 926 000-11-22
-Telegram: @kovaleva
-Страница: https://neoved.io/
+Рабочая почта: m.kovaleva@company.ru
+ИНН: 7736207543
+Согласие на рекламные сообщения: да
+Страница: https://neoved.io/uslugi/ved
 
 Сообщение:
+Клиент открыл чат на сайте</div>
+          <div class="note">
+            <span class="meta">Примечание · сообщение клиента</span>
 Нужно оплатить контракт поставщику в Китае, сумма 45 000 USD. Какие сроки и комиссия?</div>
           <div class="note out">
             <span class="meta">Менеджер · ушло клиенту в виджет</span>
 Марина, добрый день! По Китаю проводим за 1–2 рабочих дня, комиссия зависит от банка получателя. Пришлите, пожалуйста, инвойс — посчитаем точно.</div>
           <div class="note">
-            <span class="meta">Примечание · ответ клиента из виджета</span>
-Отправила на почту, спасибо!</div>
+            <span class="meta">Примечание · автоматически</span>
+Клиент оставил телефон: +7 916 000-11-22</div>
         </div>
       </div>
     </div>
@@ -219,27 +232,29 @@ Telegram: @kovaleva
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Что уходит в CRM</h2>
-        <p>Поля формы и то, во что они превращаются в карточке контакта.</p>
+        <p>Каждое поле попадает в конкретную карточку и конкретное поле — без ручного переноса.</p>
       </div>
       <div class="tablewrap reveal" style="background:#fff">
         <table>
           <thead>
-            <tr><th>Поле формы</th><th>Куда попадает</th><th>Зачем</th></tr>
+            <tr><th>Данные</th><th>Куда попадает</th><th>Когда спрашиваем</th></tr>
           </thead>
           <tbody>
-            <tr><td>Имя</td><td>Имя контакта, название сделки <code>site chat — Имя</code></td><td>Понятная карточка без ручного переименования</td></tr>
-            <tr><td>Почта</td><td>Поле <code>EMAIL</code> (629257)</td><td>Первый ключ поиска — по нему находим клиента в базе</td></tr>
-            <tr><td>Телефон</td><td>Поле <code>PHONE</code> (629255)</td><td>Второй ключ: сравниваем последние 10 цифр, формат записи не важен</td></tr>
-            <tr><td>Telegram</td><td>Поле «Telegram username» (996481)</td><td>Третий ключ и канал связи, если клиент пропал с сайта</td></tr>
-            <tr><td>Вопрос</td><td>Примечание в ленте сделки</td><td>Менеджер отвечает на него прямо из карточки</td></tr>
-            <tr><td>Страница</td><td>Строка в том же примечании</td><td>Видно, с какого раздела сайта пришёл человек</td></tr>
+            <tr><td>Имя</td><td>Контакт и название сделки <code>site chat: Имя | страница</code></td><td>В форме, обязательно</td></tr>
+            <tr><td>Рабочая почта</td><td>Контакт → «Email раб.», плюс копия в карточку компании</td><td>В форме, обязательно</td></tr>
+            <tr><td>Согласие на обработку данных</td><td>Без него чат не начать; отметка в примечании</td><td>В форме, обязательно</td></tr>
+            <tr><td>Согласие на рекламу</td><td>Строка в примечании сделки</td><td>В форме, по желанию</td></tr>
+            <tr><td>ИНН</td><td>Компания: название и поле «ИНН». Компания с таким ИНН уже есть — берём её</td><td>В форме или после первого сообщения</td></tr>
+            <tr><td>Телефон</td><td>Контакт и компания → «Раб. тел.»</td><td>По ходу разговора, по желанию</td></tr>
+            <tr><td>Страница входа</td><td>Поле сделки «Источник» — полный адрес со всеми параметрами</td><td>Автоматически</td></tr>
+            <tr><td>Переписка</td><td>Примечания в ленте сделки</td><td>Автоматически</td></tr>
           </tbody>
         </table>
       </div>
       <div class="grid two" style="margin-top:16px">
         <article class="card reveal" style="background:#fff">
           <h3>Дубли не плодятся</h3>
-          <p>Контакт ищется тремя способами до создания нового, а сделка заводится через <code>/leads/complex</code> — с контролем дублей на стороне amoCRM. Пустые поля карточки дозаполняются, заполненные не перезаписываются.</p>
+          <p>Контакт ищется по рабочей почте, компания — по ИНН. Если человек написал повторно, продолжаем его живую сделку в воронке «Чат на сайте», а не заводим новую. Пустые поля дозаполняются, заполненные не перезаписываются.</p>
         </article>
         <article class="card reveal" style="background:#fff">
           <h3>Переписка не теряется</h3>
@@ -265,8 +280,10 @@ Telegram: @kovaleva
           <p><code>data-title</code> — заголовок панели.<br>
           <code>data-subtitle</code> — строка под ним.<br>
           <code>data-accent</code> — фирменный цвет кнопки.<br>
-          <code>data-policy</code> — ссылка на политику обработки данных.</p>
-          <p style="margin-top:14px">Открыть виджет с любой своей кнопки: <code>neovedChat.open()</code></p>
+          <code>data-policy</code> — ссылка на согласие об обработке данных.<br>
+          <code>data-ads-policy</code> — ссылка на документ о рекламных рассылках.<br>
+          <code>data-captcha</code> — клиентский ключ Яндекс SmartCaptcha.</p>
+          <p style="margin-top:14px">Открыть виджет со своей кнопки: <code>neovedChat.open()</code></p>
         </article>
       </div>
     </div>
@@ -276,7 +293,7 @@ Telegram: @kovaleva
 <footer>
   <div class="wrap">
     Тестовая страница виджета обратной связи для <a href="https://neoved.io" target="_blank" rel="noopener">neoved.io</a>.
-    Бэкенд — Cloudflare Worker, CRM — amoCRM (воронка «Продажи клиентам»).
+    Бэкенд — Cloudflare Worker, CRM — amoCRM (воронка «Чат на сайте»).
   </div>
 </footer>
 
