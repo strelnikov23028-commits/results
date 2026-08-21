@@ -16,6 +16,16 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = join(dirname(HERE), 'amo-widget.zip');
 
+// Версию поднимаем при каждой сборке: amoCRM раздаёт файлы виджета с оглядкой
+// на неё, и архив с прежним номером в аккаунте продолжает отдаваться из кеша —
+// правки скрипта и картинок просто не доезжают до карточки.
+const manifestPath = join(HERE, 'manifest.json');
+const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+const [major, minor, patch] = String(manifest.widget.version).split('.').map(Number);
+manifest.widget.version = `${major}.${minor}.${(patch || 0) + 1}`;
+await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+console.log(`версия виджета: ${manifest.widget.version}`);
+
 // Только то, что нужно самому виджету: генераторы картинок, этот сборщик и
 // обложка интеграции (её загружают отдельно, прямо в форме) в архив не идут.
 //
