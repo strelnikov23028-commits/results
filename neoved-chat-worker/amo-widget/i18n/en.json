@@ -1,6 +1,6 @@
 {
   "widget": {
-    "name": "Website chat",
+    "name": "neoved widget",
     "description": "Two buttons in the lead card: ask the visitor for a tax ID or a phone number — the input field opens in their website chat, even if they declined earlier.",
     "short_description": "Ask the visitor for a tax ID or a phone number"
   },

@@ -1,6 +1,30 @@
-/* Стили панели виджета. Разметку script.js отдаёт с инлайновыми стилями,
-   поэтому здесь только то, что удобнее задать классом. */
+/* Строка виджета в панели карточки — красная плашка с белым названием.
+   Так же сделан Zoom: он задаёт своему заголовку height и background в CSS
+   (.amo-zoomus__caption { height: 52px; background: #2D8CFF }), а не
+   подкладывает картинку.
 
+   Класс заголовка amoCRM собирает из кода виджета, который присваивает сама
+   при загрузке архива, — поэтому здесь правило от нашего span, а точечная
+   покраска родителя остаётся за script.js. */
+
+.card-widgets__widget_caption:has(#neoved-widget-caption) {
+  height: 52px;
+  background: #EE0000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+#neoved-widget-caption {
+  color: #fff;
+  font-family: Onest, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+/* Панель под заголовком */
 .neoved-chat-panel {
   padding: 12px 14px 14px;
 }

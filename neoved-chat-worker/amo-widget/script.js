@@ -75,24 +75,37 @@ define(['jquery'], function ($) {
     }
 
     /**
-     * Заголовок блока в панели виджетов. Без него amoCRM рисует пустую строку
-     * без названия и значка: имя из manifest туда не подставляется, его нужно
-     * отдать самому. Иконка — инлайновый SVG, чтобы не зависеть от того, по
-     * какому пути аккаунт раздаёт картинки виджета.
+     * Заголовок блока в панели виджетов — просто название на красном фоне.
+     * Так же сделан Zoom: он задаёт своей строке height и background прямо
+     * в CSS, а не подкладывает картинку.
      */
     function caption() {
-      return [
-        '<div style="display:flex;align-items:center;gap:8px">',
-        '  <span style="flex:0 0 auto;width:20px;height:20px;border-radius:100px;background:#ee0000;',
-        '    display:inline-flex;align-items:center;justify-content:center">',
-        '    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.5"',
-        '      stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8',
-        '      8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5',
-        '      0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
-        '  </span>',
-        '  <span>' + self.i18n('widget').name + '</span>',
-        '</div>',
-      ].join('');
+      return '<span id="neoved-widget-caption">' + self.i18n('widget').name + '</span>';
+    }
+
+    /**
+     * Красит строку виджета. Класс, который amoCRM вешает на заголовок,
+     * собирается из кода виджета — а его аккаунт присваивает сам при загрузке
+     * архива, заранее он неизвестен. Поэтому находим заголовок от своего же
+     * span и красим его родителя.
+     */
+    function paintCaption() {
+      var $caption = $('#neoved-widget-caption').closest('.card-widgets__widget_caption');
+      if (!$caption.length) return;
+
+      $caption.css({
+        height: '52px',
+        background: '#EE0000',
+        color: '#fff',
+        display: 'flex',
+        'align-items': 'center',
+        padding: '0 16px',
+        'font-size': '16px',
+        'font-weight': '600',
+        'letter-spacing': '-.01em',
+      });
+      // Стрелку сворачивания amoCRM рисует своим цветом — на красном её видно плохо.
+      $caption.find('.js-widget-caption-arrow, .card-widgets__widget_caption_arrow').css('color', '#fff');
     }
 
     this.callbacks = {
@@ -112,6 +125,11 @@ define(['jquery'], function ($) {
       },
 
       init: function () {
+        if (self.system().area !== 'lcard') return true;
+        // Заголовок появляется в DOM чуть позже render, отсюда небольшая пауза.
+        paintCaption();
+        setTimeout(paintCaption, 300);
+        setTimeout(paintCaption, 1500);
         return true;
       },
 
