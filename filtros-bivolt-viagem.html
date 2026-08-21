@@ -228,7 +228,7 @@ footer a:hover{color:var(--blue);text-decoration:underline}
 <header class="hero wrap">
   <span class="eyebrow reveal">Электрика · Бразилия · Путешествия</span>
   <h1 class="reveal">Бивольтные удлинители<br>и сетевые фильтры</h1>
-  <p class="lede reveal">Слово «bivolt» на удлинителе, на фильтре и на зарядке означает три разные вещи. Разбираем, что из этого реально работает и в Рио, и в Европе, и в США — с ценами по Бразилии на 21 августа 2026&nbsp;года.</p>
+  <p class="lede reveal">Слово «bivolt» на удлинителе, на фильтре и на зарядке означает три разные вещи. Разбираем, что из этого реально работает и в Рио, и в Европе, и в США — с ценами по Бразилии на 21 августа 2026&nbsp;года. <a href="#trafo" style="color:var(--blue);text-decoration:none;font-weight:500">Нужен фен на 220 В в розетке 127 В? →</a></p>
 </header>
 
 <section class="wrap" style="padding-top:0">
@@ -619,6 +619,138 @@ footer a:hover{color:var(--blue);text-decoration:underline}
   </div>
 </section>
 
+<section class="wrap" id="trafo">
+  <h2 class="h2 reveal">Фен на 220 В в бразильской розетке 127 В</h2>
+  <p class="sub reveal">Отдельная задача, и удлинителем она не решается. Нужен <b>автотрансформатор</b> — коробка с вилкой на вход и розетками на выход, которая поднимает 127&nbsp;В до 220&nbsp;В. По сути тот самый «удлинитель-преобразователь»: воткнули в стену, фен воткнули в него.</p>
+
+  <div class="answer reveal" style="margin-bottom:36px">
+    <h2>Главное ограничение — не трансформатор, а розетка</h2>
+    <ol>
+      <li><b>Мощность не берётся из воздуха.</b> Фен на 2000&nbsp;Вт останется феном на 2000&nbsp;Вт. Но при 127&nbsp;В эти ватты приходится тянуть вдвое большим током, чем при 220&nbsp;В.</li>
+      <li><b>Считается так:</b> ток = мощность фена ÷ (127&nbsp;В × 0,9). Девять десятых — КПД трансформатора, остальное уходит в нагрев.</li>
+      <li><b>Почти любому фену нужна розетка на 20&nbsp;А.</b> В обычную бразильскую розетку 10&nbsp;А такой ток включать нельзя — это перегрев проводки, а не сработавший автомат.</li>
+    </ol>
+  </div>
+
+  <div class="tbl-wrap reveal" style="margin-bottom:36px">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Мощность фена</th>
+          <th scope="col">Ток от розетки 127 В</th>
+          <th scope="col">Какая розетка нужна</th>
+          <th scope="col">Трансформатор</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="country">1200 Вт</td>
+          <td>≈ 10,5 А</td>
+          <td><span class="badge b-warn">20 А</span><small>Розетка 10 А уже перегружена.</small></td>
+          <td>2000 VA</td>
+        </tr>
+        <tr>
+          <td class="country">1600 Вт</td>
+          <td>≈ 14,0 А</td>
+          <td><span class="badge b-warn">20 А</span></td>
+          <td>3000 VA</td>
+        </tr>
+        <tr>
+          <td class="country">1900 Вт</td>
+          <td>≈ 16,6 А</td>
+          <td><span class="badge b-warn">20 А</span></td>
+          <td>5000 VA</td>
+        </tr>
+        <tr>
+          <td class="country">2200 Вт</td>
+          <td>≈ 19,2 А</td>
+          <td><span class="badge b-bad">20 А, на пределе</span><small>Ближе к потолку линии — держать только сам фен, больше ничего.</small></td>
+          <td>5000 VA</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn reveal" style="margin-bottom:44px">
+    <h3>Почему «2000 VA» — это не 2000 ватт</h3>
+    <ul>
+      <li><b>VA и ватты — разные величины.</b> Бытовые автотрансформаторы отдают примерно 55–70&nbsp;% от заявленных VA. Производители пишут это прямо в названии: «2000VA — 1100W&nbsp;Reais», «3000VA — 1650W&nbsp;Reais». Fiolux для своей модели 5000&nbsp;VA указывает 3000&nbsp;Вт.</li>
+      <li><b>Берите с запасом минимум 30&nbsp;%</b> сверх реальных ватт, а не сверх VA. Фен — резистивная нагрузка, работает на полной мощности всё время, без пауз.</li>
+      <li><b>Не включайте трансформатор в удлинитель или сетевой фильтр.</b> Только напрямую в стену. Тонкий провод обычного удлинителя расплавится раньше, чем сработает термозащита трансформатора. Если розетка далеко — удлинитель с сечением жил от 2,5&nbsp;мм².</li>
+      <li><b>Вилка 20&nbsp;А в розетку 10&nbsp;А не войдёт</b> — штыри толще, 4,8&nbsp;мм против 4,0&nbsp;мм. Это не дефект, а защита: так вас не пускают перегрузить слабую линию.</li>
+      <li><b>Ванная — влажное помещение.</b> Берите модель с тремя контактами (tripolar, с заземлением) и не ставьте трансформатор на пол рядом с душем.</li>
+    </ul>
+  </div>
+
+  <div class="cat" id="cat5" style="margin-top:0">
+    <div class="cat-head">
+      <h3>Автотрансформаторы 127 → 220 В</h3>
+      <span class="cat-tag">Розетки прямо на корпусе</span>
+    </div>
+    <p class="cat-desc">У всех моделей ниже розетки на выходе — это и есть готовый «удлинитель-преобразователь». Работают в обе стороны: 127→220 и 220→127. Цены Amazon Brasil на 21 августа 2026&nbsp;года.</p>
+    <div class="grid">
+
+      <article class="card reveal">
+        <span class="pick">Под фен</span>
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/616v5S9NBzL._AC_UL320_.jpg" alt="Автотрансформатор V&amp;M 5000VA с тремя контактами" loading="lazy"></div>
+        <div class="body">
+          <h4>V&amp;M 5000 VA Tripolar</h4>
+          <ul class="specs">
+            <li>≈ 3000 Вт реальных — фен до 2500 Вт</li>
+            <li>Три контакта, с заземлением</li>
+            <li>127→220 и 220→127</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 199,49</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,6 · 460</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Transformador-5000VA-Tripolar-Bivolt-5000/dp/B08L6PDZJ4" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/51bh4akAnUL._AC_UL320_.jpg" alt="Автотрансформатор V&amp;M 5000VA" loading="lazy"></div>
+        <div class="body">
+          <h4>V&amp;M 5000 VA</h4>
+          <ul class="specs">
+            <li>≈ 3000 Вт реальных</li>
+            <li>Два контакта, без заземления</li>
+            <li>Тысяча отзывов</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 189,99</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,6 · 1 тыс.</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Transformador-5000VA-Bivolt-110-220/dp/B07D822BNV" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/8114xuz3QhL._AC_UL320_.jpg" alt="Автотрансформатор Fiolux Premium 3000VA с тремя контактами" loading="lazy"></div>
+        <div class="body">
+          <h4>Fiolux Premium 3000 VA Tripolar</h4>
+          <ul class="specs">
+            <li>≈ 1650–2100 Вт — фен до 1500 Вт</li>
+            <li>Термозащита, гарантия 2 года</li>
+            <li>Три контакта</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 194,74</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,6 · 255</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Transformador-Voltagem-Autom%C3%A1tico-Fiolux-Premium/dp/B077J3QPM4" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/61Y2EIh9qML._AC_UL320_.jpg" alt="Автотрансформатор на 7000VA" loading="lazy"></div>
+        <div class="body">
+          <h4>7000 VA Tripolar</h4>
+          <ul class="specs">
+            <li>≈ 4000–4900 Вт — запас на всё</li>
+            <li>Если фен мощный или нужен ещё прибор</li>
+            <li>Тяжёлый, ставится стационарно</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 284,99</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,4 · 600</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Transformador-7000VA-Bivolt-Tripolar-110/dp/B08P53PRVF" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <section class="wrap">
   <div class="warn reveal">
     <h3>О чём важно помнить</h3>
@@ -649,6 +781,8 @@ footer a:hover{color:var(--blue);text-decoration:underline}
     <li><a href="https://clamper.com.br/dpsnoticias/preferencia-pelo-dps-275v/" target="_blank" rel="noopener">Clamper — DPS 275 В в сети 127 В</a></li>
     <li><a href="https://en.wikipedia.org/wiki/AC_power_plugs_and_sockets" target="_blank" rel="noopener">Wikipedia — NBR 14136, размеры штырей 4,0 и 4,8 мм</a></li>
     <li><a href="https://www.telhanorte.com.br/filtro-de-linha-10-tomadas-bivolt-preto-force-line-1339460/p" target="_blank" rel="noopener">Telhanorte — Force Line, мощность 1270/2200 Вт</a></li>
+    <li><a href="https://loja.fiolux.com.br/auto-transformador-fiolux-premium/auto-transformador-fiolux-premium-5000t-va-bivolt" target="_blank" rel="noopener">Fiolux — 5000 VA, вес 8 кг, фен до 2500 Вт</a></li>
+    <li><a href="https://www.eletricistasantos.com/blog/troca-de-voltagem/melhor-conversor-de-voltagem" target="_blank" rel="noopener">Подбор трансформатора под фен и запрет на удлинители</a></li>
     <li><a href="https://lista.mercadolivre.com.br/filtro-de-linha-bivolt" target="_blank" rel="noopener">Mercado Livre — выборка фильтров bivolt</a></li>
   </ul>
   <p class="stamp">Собрано 21 августа 2026 года. Цены на маркетплейсах меняются ежедневно — перед покупкой сверяйтесь со страницей товара. Позиции с международной доставкой в подборку не включались.</p>
