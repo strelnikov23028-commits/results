@@ -30,6 +30,7 @@ const FILES = [
   'script.js',
   ...await dir('i18n'),
   'images/logo.png',
+  'images/logo_small.png',
   { src: 'images/cover.png', name: 'images/logo_main.png' },
   { src: 'images/logo.png', name: 'logo.png' },
 ];
