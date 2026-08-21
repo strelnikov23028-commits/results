@@ -66,12 +66,12 @@ const DEFAULTS = {
 
   // Что делать, если оставленный телефон уже числится за другим контактом
   // (человек написал с новой почты, а номер у него прежний):
-  //   notify — примечание со ссылкой на старую карточку и тег на сделке;
-  //   attach — то же плюс старый контакт прикрепляется к сделке вторым;
+  //   attach — прежний контакт прикрепляется к сделке, плюс примечание и тег;
+  //   notify — только примечание со ссылкой на старую карточку и тег;
   //   off    — не проверять.
   // Объединять карточки автоматически нельзя: в API v4 метода слияния нет,
   // а перепривязка сделки оставила бы висеть контакт-дубль.
-  PHONE_DUP_MODE: 'notify',
+  PHONE_DUP_MODE: 'attach',
   PHONE_DUP_TAG: 'phone_dup',
 
   // Команды менеджера. Написанные в ленте сделки, они не уходят клиенту
@@ -200,6 +200,9 @@ async function apiStart(request, env, cfg) {
     name: str(body.name, 128),
     email: str(body.email, 128).toLowerCase(),
     inn: digits(str(body.inn, 20)),
+    // Формой телефон не спрашивается — он приходит позже, через /api/phone.
+    // Но если однажды придёт сразу, поиск клиента им воспользуется.
+    phone: digits(str(body.phone, 32)).length === 11 ? formatRuPhone(str(body.phone, 32)) : '',
     ads: Boolean(body.ads),                 // согласие на рекламные сообщения
     page: str(body.page, 300),
   };
@@ -296,6 +299,7 @@ async function apiPhone(request, env, cfg) {
 
   if (session.contactId) await addPhone('contacts', session.contactId, pretty, env, cfg);
   if (session.companyId) await addPhone('companies', session.companyId, pretty, env, cfg);
+  await rememberPhone(pretty, session.contactId, env);
   await addNote(session.leadId, `Клиент оставил телефон: ${pretty}`, env);
 
   if (twin) await reportPhoneTwin(twin, pretty, session, env, cfg);
@@ -366,6 +370,7 @@ async function reportCompanyTwin(company, session, env) {
  */
 async function reportPhoneTwin(twin, phone, session, env, cfg) {
   const base = `https://${env.AMO_SUBDOMAIN}.amocrm.ru`;
+  const attach = cfg.PHONE_DUP_MODE === 'attach';
   const lines = [
     'Внимание: этот телефон уже есть в базе',
     '',
@@ -383,19 +388,17 @@ async function reportPhoneTwin(twin, phone, session, env, cfg) {
   }
 
   lines.push('', `Сейчас человек пишет с почты ${session.email || '—'}. Похоже на того же клиента: возможно, карточки стоит объединить.`);
+  if (attach) lines.push('Прежний контакт прикреплён к этой сделке — вся история рядом.');
 
   await addNote(session.leadId, lines.join('\n'), env);
   await amo(`/api/v4/leads/${session.leadId}`, env, {
     method: 'PATCH',
-    body: {
-      tags_to_add: [{ name: cfg.PHONE_DUP_TAG }],
-      // Сделка в amoCRM держит несколько контактов: старая карточка окажется
-      // рядом с новой, и вся история клиента будет на виду.
-      ...(cfg.PHONE_DUP_MODE === 'attach'
-        ? { _embedded: { contacts: [{ id: session.contactId }, { id: twin.contact.id }] } }
-        : {}),
-    },
+    body: { tags_to_add: [{ name: cfg.PHONE_DUP_TAG }] },
   });
+
+  // Сделка в amoCRM держит несколько контактов: старая карточка встаёт рядом
+  // с новой. Связи ставятся только методом link — PATCH их не меняет.
+  if (attach) await link('leads', session.leadId, 'contacts', twin.contact.id, env);
 }
 
 /**
@@ -603,13 +606,35 @@ async function ensureContact(person, company, env, cfg) {
     return { id: found.id, created: false };
   }
 
+  const fields = [multitext(cfg.EMAIL_FIELD, person.email)];
+  if (person.phone) fields.push(multitext(cfg.PHONE_FIELD, person.phone));
+
   const body = [{
     name: person.name,
-    custom_fields_values: [multitext(cfg.EMAIL_FIELD, person.email)],
+    custom_fields_values: fields,
     ...(company ? { _embedded: { companies: [{ id: company.id }] } } : {}),
   }];
   const res = await amo('/api/v4/contacts', env, { method: 'POST', body });
-  return { id: res?._embedded?.contacts?.[0]?.id, created: true };
+  const id = res?._embedded?.contacts?.[0]?.id;
+  if (person.phone) await rememberPhone(person.phone, id, env);
+  return { id, created: true };
+}
+
+/**
+ * Запоминает, за каким контактом закреплён номер. Нужно только чтобы пережить
+ * отставание поиска amoCRM: клиент оставил телефон и через минуту вернулся с
+ * другой почтой — по индексу его ещё не найти, а по этой записи найдётся.
+ */
+async function rememberPhone(phone, contactId, env) {
+  const tail = digits(phone).slice(-10);
+  if (tail.length !== 10 || !contactId) return;
+  await env.S.put(`phone:${tail}`, String(contactId), { expirationTtl: SESSION_TTL });
+}
+
+async function recallPhone(phone, env) {
+  const tail = digits(phone).slice(-10);
+  if (tail.length !== 10) return null;
+  return env.S.get(`phone:${tail}`);
 }
 
 /** Привязывает контакт к компании, если он ещё не её. */
@@ -638,18 +663,43 @@ async function link(entity, id, toType, toId, env) {
 }
 
 /**
- * Контакт ищем по рабочей почте — единственное, что человек оставляет на входе.
+ * Контакт ищем по рабочей почте, а если не нашли — по телефону: человек мог
+ * завести новый ящик, но номер обычно остаётся прежним.
  *
  * Ищем через ?query=, а не через filter[custom_fields_values][...]: этот
  * аккаунт фильтр по дополнительным полям не принимает — проверено на соседнем
  * tg-amo-worker, обе формы записи отдают 400 «Invalid filter for current
  * account». query ищет подстроку по всем заполненным полям, поэтому совпадение
  * обязательно перепроверяется по нужному полю.
+ *
+ * Телефон ищем цифрами: «+7 (926) 571-72-19» amoCRM не находит, а
+ * «79265717219» и «9265717219» — находят один и тот же контакт.
  */
 async function findContact(person, env, cfg) {
-  if (!person.email) return null;
-  const found = await query('contacts', person.email, env, 'with=leads,companies');
-  return found.find((c) => fieldValues(c, cfg.EMAIL_FIELD).some((v) => v.toLowerCase() === person.email)) || null;
+  // Телефон, записанный минуту назад, поиск amoCRM ещё не видит: индекс
+  // догоняет за пару минут (проверено 20.08.2026 — сразу после записи query
+  // отдавал пусто, через две минуты находил). Поэтому свои же номера воркер
+  // помнит сам.
+  const remembered = await recallPhone(person.phone, env);
+  if (remembered) {
+    const contact = await amo(`/api/v4/contacts/${remembered}?with=leads,companies`, env);
+    if (contact?.id) return contact;
+  }
+
+  if (person.email) {
+    const byEmail = (await query('contacts', person.email, env, 'with=leads,companies'))
+      .find((c) => fieldValues(c, cfg.EMAIL_FIELD).some((v) => v.toLowerCase() === person.email));
+    if (byEmail) return byEmail;
+  }
+
+  const tail = digits(person.phone).slice(-10);
+  if (tail.length === 10) {
+    const byPhone = (await query('contacts', tail, env, 'with=leads,companies'))
+      .find((c) => fieldValues(c, cfg.PHONE_FIELD).some((v) => digits(v).endsWith(tail)));
+    if (byPhone) return byPhone;
+  }
+
+  return null;
 }
 
 /** Компания по ИНН: нашли — берём, нет — заводим с названием по ИНН. */
@@ -811,6 +861,7 @@ function firstNote(person, text) {
     `Имя: ${person.name}`,
     `Рабочая почта: ${person.email}`,
   ];
+  if (person.phone) lines.push(`Телефон: ${person.phone}`);
   if (person.inn) lines.push(`ИНН: ${person.inn}`);
   lines.push(`Согласие на рекламные сообщения: ${person.ads ? 'да' : 'нет'}`);
   if (person.page) lines.push(`Страница: ${person.page}`);
