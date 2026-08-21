@@ -1,5 +1,8 @@
 /**
- * Рисует images/logo.png — 84×84, как требует amoCRM от виджета.
+ * Рисует images/logo.png — 130×100. Размер жёсткий: amoCRM отклоняет архив с
+ * сообщением «Logo file for logo must have resolution 130x100px» (проверено
+ * 20.08.2026 при загрузке через «Создать интеграцию»).
+ *
  * Никаких зависимостей: PNG собирается вручную из IHDR/IDAT/IEND, сжатие
  * берётся из встроенного zlib.
  *
@@ -10,23 +13,27 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const SIZE = 84;
+const W = 130;
+const H = 100;
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 // Фирменные цвета neoved: красный круг, внутри белый пузырь чата.
 const RED = [238, 0, 0];
 const WHITE = [255, 255, 255];
 
-const px = Buffer.alloc(SIZE * SIZE * 4);
-const center = (SIZE - 1) / 2;
+const R = 46;                 // круг вписан по высоте с небольшим полем
+const CX = (W - 1) / 2;
+const CY = (H - 1) / 2;
 
-for (let y = 0; y < SIZE; y++) {
-  for (let x = 0; x < SIZE; x++) {
-    const i = (y * SIZE + x) * 4;
-    const dist = Math.hypot(x - center, y - center);
+const px = Buffer.alloc(W * H * 4);
+
+for (let y = 0; y < H; y++) {
+  for (let x = 0; x < W; x++) {
+    const i = (y * W + x) * 4;
+    const dist = Math.hypot(x - CX, y - CY);
 
     // Круг с мягким краем — иначе на светлом фоне видна «лесенка».
-    const alpha = clamp((center - dist) * 1.4 + 0.5);
+    const alpha = clamp((R - dist) * 1.4 + 0.5);
     if (alpha <= 0) continue;
 
     const color = inBubble(x, y) ? WHITE : RED;
@@ -39,11 +46,11 @@ for (let y = 0; y < SIZE; y++) {
 
 /** Скруглённый прямоугольник с хвостиком — узнаваемый значок сообщения. */
 function inBubble(x, y) {
-  const left = 22, right = 62, top = 26, bottom = 52, radius = 9;
+  const left = CX - 25, right = CX + 25, top = CY - 18, bottom = CY + 10, radius = 10;
   const inBody = x >= left && x <= right && y >= top && y <= bottom
     && cornerOk(x, y, left, right, top, bottom, radius);
   // Хвостик: треугольник под левой частью пузыря.
-  const inTail = y > bottom && y <= bottom + 8 && x >= 30 && x <= 30 + (bottom + 8 - y) * 1.6;
+  const inTail = y > bottom && y <= bottom + 11 && x >= CX - 16 && x <= CX - 16 + (bottom + 11 - y) * 1.5;
   return inBody || inTail;
 }
 
@@ -58,10 +65,10 @@ function clamp(v) {
 }
 
 // ── сборка PNG ──
-const raw = Buffer.alloc((SIZE * 4 + 1) * SIZE);
-for (let y = 0; y < SIZE; y++) {
-  raw[y * (SIZE * 4 + 1)] = 0;   // фильтр строки: none
-  px.copy(raw, y * (SIZE * 4 + 1) + 1, y * SIZE * 4, (y + 1) * SIZE * 4);
+const raw = Buffer.alloc((W * 4 + 1) * H);
+for (let y = 0; y < H; y++) {
+  raw[y * (W * 4 + 1)] = 0;   // фильтр строки: none
+  px.copy(raw, y * (W * 4 + 1) + 1, y * W * 4, (y + 1) * W * 4);
 }
 
 const CRC_TABLE = (() => {
@@ -75,8 +82,8 @@ const CRC_TABLE = (() => {
 })();
 
 const ihdr = Buffer.alloc(13);
-ihdr.writeUInt32BE(SIZE, 0);
-ihdr.writeUInt32BE(SIZE, 4);
+ihdr.writeUInt32BE(W, 0);
+ihdr.writeUInt32BE(H, 4);
 ihdr[8] = 8;    // бит на канал
 ihdr[9] = 6;    // RGBA
 ihdr[10] = 0;   // сжатие
@@ -92,7 +99,7 @@ const png = Buffer.concat([
 
 await mkdir(join(HERE, 'images'), { recursive: true });
 await writeFile(join(HERE, 'images', 'logo.png'), png);
-console.log(`images/logo.png — ${SIZE}×${SIZE}, ${png.length} байт`);
+console.log(`images/logo.png — ${W}×${H}, ${png.length} байт`);
 
 function chunk(type, data) {
   const head = Buffer.alloc(4);
