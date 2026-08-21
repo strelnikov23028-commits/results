@@ -1,0 +1,19 @@
+/* Стили панели виджета. Разметку script.js отдаёт с инлайновыми стилями,
+   поэтому здесь только то, что удобнее задать классом. */
+
+.neoved-chat-panel {
+  padding: 12px 14px 14px;
+}
+
+.neoved-chat-button {
+  transition: opacity .15s ease;
+}
+
+.neoved-chat-button:hover:not(:disabled) {
+  opacity: .85;
+}
+
+.neoved-chat-button:disabled {
+  opacity: .5;
+  cursor: default;
+}

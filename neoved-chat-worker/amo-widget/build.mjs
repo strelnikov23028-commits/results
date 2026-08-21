@@ -19,20 +19,21 @@ const OUT = join(dirname(HERE), 'amo-widget.zip');
 // Только то, что нужно самому виджету: генераторы картинок, этот сборщик и
 // обложка интеграции (её загружают отдельно, прямо в форме) в архив не идут.
 //
-// Требования к картинкам amoCRM сообщает по одной при загрузке архива, в
-// документации их нет. Проверено на аккаунте 20.08.2026:
-//   images/logo.png       — 130×100 («Logo file for logo must have resolution 130x100px»)
-//   images/logo_main.png  — 400×272 («…for logo_main must have resolution 400x272px»),
-//                           обязателен для виджета widget_main
-// Копия logo.png в корне архива — на случай, если файл ищется и там.
+// Виджету нужен полный комплект из пяти логотипов — иначе amoCRM рисует в
+// панели пустую строку без названия и значка. Размеры она сообщает по одному
+// при загрузке архива, поэтому проверены вживую 20.08.2026:
+//   logo.png 130×100 · logo_small.png 108×108 · logo_min.png 84×84
+//   logo_medium.png 240×84 · logo_main.png 400×272
 const FILES = [
   'manifest.json',
   'script.js',
+  'style.css',
   ...await dir('i18n'),
   'images/logo.png',
   'images/logo_small.png',
+  'images/logo_min.png',
+  'images/logo_medium.png',
   { src: 'images/cover.png', name: 'images/logo_main.png' },
-  { src: 'images/logo.png', name: 'logo.png' },
 ];
 
 async function dir(name) {
