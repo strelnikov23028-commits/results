@@ -145,7 +145,7 @@
   "id": 6,
   "pt": "vez",
   "en": "time/instance",
-  "ru": "раз (случай)",
+  "ru": "раз (случай); очередь",
   "pos": "nouns",
   "examples": [
    {
@@ -6877,5 +6877,566 @@
    "extra"
   ],
   "note": "женский род; мужской — «lindo»"
+ },
+ {
+  "id": 312,
+  "pt": "chegou",
+  "en": "arrived",
+  "ru": "приехал, прибыл",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a taxi pulling up at the kerb with its passenger door opening",
+  "image": "cartoes-img/приехал, прибыл — chegou.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "fix": "в списке было «ride» — но chegou это «приехал/прибыл» (форма от chegar); «поездка» будет carona или corrida"
+ },
+ {
+  "id": 313,
+  "pt": "esse",
+  "en": "that one",
+  "ru": "этот, тот (у собеседника)",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a person pointing at a book held by someone else across the table",
+  "image": "cartoes-img/этот, тот — esse.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "note": "este — ближе к говорящему, esse — ближе к собеседнику"
+ },
+ {
+  "id": 314,
+  "pt": "bairro",
+  "en": "neighbourhood",
+  "ru": "район, квартал",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an aerial view of a residential neighbourhood with rows of low houses and streets",
+  "image": "cartoes-img/район, квартал — bairro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 315,
+  "pt": "quarta-feira",
+  "en": "Wednesday",
+  "ru": "среда",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a desk calendar page for Wednesday, the weekday name QUARTA clearly printed",
+  "image": "cartoes-img/среда — quarta-feira.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "fix": "в списке было «Corta» — на слух; среда по-португальски quarta-feira, а corta значит «режет»"
+ },
+ {
+  "id": 316,
+  "pt": "sexta-feira",
+  "en": "Friday",
+  "ru": "пятница",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a desk calendar page for Friday with the weekday name SEXTA printed, office workers celebrating behind",
+  "image": "cartoes-img/пятница — sexta-feira.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 317,
+  "pt": "em breve",
+  "en": "soon",
+  "ru": "скоро, вскоре",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a tight flower bud just about to open, petals barely parting",
+  "image": "cartoes-img/скоро, вскоре — em breve.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 318,
+  "pt": "divertido",
+  "en": "fun",
+  "ru": "весёлый, забавный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "people screaming with laughter on a roller coaster ride",
+  "image": "cartoes-img/весёлый, забавный — divertido.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 319,
+  "pt": "senha",
+  "en": "password",
+  "ru": "пароль",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a phone screen showing a row of masked password dots being entered",
+  "image": "cartoes-img/пароль — senha.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 320,
+  "pt": "cada",
+  "en": "each, every",
+  "ru": "каждый",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a long wall of identical numbered post boxes, every one the same",
+  "image": "cartoes-img/каждый — cada.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 321,
+  "pt": "pelo",
+  "en": "body hair, fur",
+  "ru": "волос, шерсть (на теле)",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an extreme macro close-up of fine hairs on skin",
+  "image": "cartoes-img/волос, шерсть — pelo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "note": "волосы на голове — cabelo; pelo это волосок на теле или шерсть животного"
+ },
+ {
+  "id": 322,
+  "pt": "funciona",
+  "en": "it works",
+  "ru": "работает (о механизме)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "interlocking metal gears turning inside a working mechanism, close-up",
+  "image": "cartoes-img/работает — funciona.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 323,
+  "pt": "a propósito",
+  "en": "by the way",
+  "ru": "кстати, между прочим",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a person turning back in a doorway as if suddenly remembering something to add",
+  "image": "cartoes-img/кстати, между прочим — a propósito.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "fix": "в списке было «Proposito» — само propósito значит «цель»; «кстати» это оборот a propósito"
+ },
+ {
+  "id": 324,
+  "pt": "possível",
+  "en": "possible",
+  "ru": "возможный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a pedestrian traffic light showing the green walking figure, crossing now allowed",
+  "image": "cartoes-img/возможный — possível.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "fix": "нужен акут: possível"
+ },
+ {
+  "id": 325,
+  "pt": "contato",
+  "en": "contact",
+  "ru": "контакт (связь, человек)",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a phone contact list open on screen with rows of entries and avatars",
+  "image": "cartoes-img/контакт — contato.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 326,
+  "pt": "marcar",
+  "en": "to arrange, to mark",
+  "ru": "назначать (встречу); отмечать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hand writing an appointment into a paper diary with a pen",
+  "image": "cartoes-img/назначать — marcar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 327,
+  "pt": "treina",
+  "en": "trains, practises",
+  "ru": "тренируется (от treinar)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a boxer working out on a punching bag in a gym",
+  "image": "cartoes-img/тренируется — treina.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "note": "treino — существительное «тренировка», treina — форма глагола"
+ },
+ {
+  "id": 328,
+  "pt": "canta",
+  "en": "sings",
+  "ru": "поёт (от cantar)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a singer performing into a microphone on stage, mouth open mid-note",
+  "image": "cartoes-img/поёт — canta.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 329,
+  "pt": "né?",
+  "en": "right?",
+  "ru": "верно?, да?",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a person with raised eyebrows and an open palm asking for agreement",
+  "image": "cartoes-img/верно, да — né.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "note": "разговорное сокращение от «não é?», добавляется в конце фразы"
+ },
+ {
+  "id": 330,
+  "pt": "livre",
+  "en": "free, available",
+  "ru": "свободный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "broken open handcuffs lying with the chain snapped, nobody restrained",
+  "image": "cartoes-img/свободный — livre.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 331,
+  "pt": "vencer",
+  "en": "to win",
+  "ru": "побеждать, выигрывать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a referee raising the winning boxer's arm in the ring",
+  "image": "cartoes-img/побеждать, выигрывать — vencer.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 332,
+  "pt": "balada",
+  "en": "club, night out",
+  "ru": "клуб, тусовка",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a packed night club dance floor with coloured lights and a DJ booth",
+  "image": "cartoes-img/клуб, тусовка — balada.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 333,
+  "pt": "escutar",
+  "en": "to listen",
+  "ru": "слушать (вслушиваться)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person cupping a hand behind the ear, straining to catch a sound",
+  "image": "cartoes-img/слушать — escutar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "note": "ouvir — слышать вообще, escutar — вслушиваться намеренно"
+ },
+ {
+  "id": 334,
+  "pt": "vocês",
+  "en": "you (plural)",
+  "ru": "вы (несколько человек)",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a person gesturing with both hands toward a group of people facing the camera",
+  "image": "cartoes-img/вы — vocês.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ],
+  "fix": "в списке было «do you…?» — vocês это местоимение «вы» во множественном числе"
+ },
+ {
+  "id": 335,
+  "pt": "tosse",
+  "en": "cough",
+  "ru": "кашель",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a person coughing into a closed fist, eyes squeezed shut",
+  "image": "cartoes-img/кашель — tosse.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 336,
+  "pt": "se",
+  "en": "if",
+  "ru": "если",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a coin spinning in mid-air after being flipped, outcome still unknown",
+  "image": "cartoes-img/если — se.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 337,
+  "pt": "doença",
+  "en": "illness, disease",
+  "ru": "болезнь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a sick person lying in bed under a blanket with a thermometer in the mouth",
+  "image": "cartoes-img/болезнь — doença.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 338,
+  "pt": "esquerda",
+  "en": "left",
+  "ru": "левая сторона, налево",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a white turn arrow painted on asphalt curving clearly to the left",
+  "image": "cartoes-img/левая сторона, налево — esquerda.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 339,
+  "pt": "direita",
+  "en": "right",
+  "ru": "правая сторона, направо",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a white turn arrow painted on asphalt curving clearly to the right",
+  "image": "cartoes-img/правая сторона, направо — direita.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
+ },
+ {
+  "id": 340,
+  "pt": "à frente",
+  "en": "ahead, forward",
+  "ru": "вперёд, впереди",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "a white straight-ahead arrow painted on asphalt pointing directly forward",
+  "image": "cartoes-img/вперёд, впереди — à frente.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra2"
+  ]
  }
 ]

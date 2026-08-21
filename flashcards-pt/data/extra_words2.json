@@ -1,0 +1,98 @@
+[
+ {"pt":"chegou","ru":"приехал, прибыл","en":"arrived","pos":"verbs",
+  "imgQuery":"a taxi pulling up at the kerb with its passenger door opening",
+  "fix":"в списке было «ride» — но chegou это «приехал/прибыл» (форма от chegar); «поездка» будет carona или corrida"},
+
+ {"pt":"esse","ru":"этот, тот (у собеседника)","en":"that one","pos":"function words",
+  "imgQuery":"a person pointing at a book held by someone else across the table",
+  "note":"este — ближе к говорящему, esse — ближе к собеседнику"},
+
+ {"pt":"bairro","ru":"район, квартал","en":"neighbourhood","pos":"nouns",
+  "imgQuery":"an aerial view of a residential neighbourhood with rows of low houses and streets"},
+
+ {"pt":"quarta-feira","ru":"среда","en":"Wednesday","pos":"nouns",
+  "imgQuery":"a desk calendar page for Wednesday, the weekday name QUARTA clearly printed",
+  "fix":"в списке было «Corta» — на слух; среда по-португальски quarta-feira, а corta значит «режет»"},
+
+ {"pt":"sexta-feira","ru":"пятница","en":"Friday","pos":"nouns",
+  "imgQuery":"a desk calendar page for Friday with the weekday name SEXTA printed, office workers celebrating behind"},
+
+ {"pt":"em breve","ru":"скоро, вскоре","en":"soon","pos":"phrases",
+  "imgQuery":"a tight flower bud just about to open, petals barely parting"},
+
+ {"pt":"divertido","ru":"весёлый, забавный","en":"fun","pos":"adjectives",
+  "imgQuery":"people screaming with laughter on a roller coaster ride"},
+
+ {"pt":"senha","ru":"пароль","en":"password","pos":"nouns",
+  "imgQuery":"a phone screen showing a row of masked password dots being entered"},
+
+ {"pt":"cada","ru":"каждый","en":"each, every","pos":"function words",
+  "imgQuery":"a long wall of identical numbered post boxes, every one the same"},
+
+ {"pt":"pelo","ru":"волос, шерсть (на теле)","en":"body hair, fur","pos":"nouns",
+  "imgQuery":"an extreme macro close-up of fine hairs on skin",
+  "note":"волосы на голове — cabelo; pelo это волосок на теле или шерсть животного"},
+
+ {"pt":"funciona","ru":"работает (о механизме)","en":"it works","pos":"verbs",
+  "imgQuery":"interlocking metal gears turning inside a working mechanism, close-up"},
+
+ {"pt":"a propósito","ru":"кстати, между прочим","en":"by the way","pos":"phrases",
+  "imgQuery":"a person turning back in a doorway as if suddenly remembering something to add",
+  "fix":"в списке было «Proposito» — само propósito значит «цель»; «кстати» это оборот a propósito"},
+
+ {"pt":"possível","ru":"возможный","en":"possible","pos":"adjectives",
+  "imgQuery":"a pedestrian traffic light showing the green walking figure, crossing now allowed",
+  "fix":"нужен акут: possível"},
+
+ {"pt":"contato","ru":"контакт (связь, человек)","en":"contact","pos":"nouns",
+  "imgQuery":"a phone contact list open on screen with rows of entries and avatars"},
+
+ {"pt":"marcar","ru":"назначать (встречу); отмечать","en":"to arrange, to mark","pos":"verbs",
+  "imgQuery":"a hand writing an appointment into a paper diary with a pen"},
+
+ {"pt":"treina","ru":"тренируется (от treinar)","en":"trains, practises","pos":"verbs",
+  "imgQuery":"a boxer working out on a punching bag in a gym",
+  "note":"treino — существительное «тренировка», treina — форма глагола"},
+
+ {"pt":"canta","ru":"поёт (от cantar)","en":"sings","pos":"verbs",
+  "imgQuery":"a singer performing into a microphone on stage, mouth open mid-note"},
+
+ {"pt":"né?","ru":"верно?, да?","en":"right?","pos":"phrases",
+  "imgQuery":"a person with raised eyebrows and an open palm asking for agreement",
+  "note":"разговорное сокращение от «não é?», добавляется в конце фразы"},
+
+ {"pt":"livre","ru":"свободный","en":"free, available","pos":"adjectives",
+  "imgQuery":"broken open handcuffs lying with the chain snapped, nobody restrained"},
+
+ {"pt":"vencer","ru":"побеждать, выигрывать","en":"to win","pos":"verbs",
+  "imgQuery":"a referee raising the winning boxer's arm in the ring"},
+
+ {"pt":"balada","ru":"клуб, тусовка","en":"club, night out","pos":"nouns",
+  "imgQuery":"a packed night club dance floor with coloured lights and a DJ booth"},
+
+ {"pt":"escutar","ru":"слушать (вслушиваться)","en":"to listen","pos":"verbs",
+  "imgQuery":"a person cupping a hand behind the ear, straining to catch a sound",
+  "note":"ouvir — слышать вообще, escutar — вслушиваться намеренно"},
+
+ {"pt":"vocês","ru":"вы (несколько человек)","en":"you (plural)","pos":"function words",
+  "imgQuery":"a person gesturing with both hands toward a group of people facing the camera",
+  "fix":"в списке было «do you…?» — vocês это местоимение «вы» во множественном числе"},
+
+ {"pt":"tosse","ru":"кашель","en":"cough","pos":"nouns",
+  "imgQuery":"a person coughing into a closed fist, eyes squeezed shut"},
+
+ {"pt":"se","ru":"если","en":"if","pos":"function words",
+  "imgQuery":"a coin spinning in mid-air after being flipped, outcome still unknown"},
+
+ {"pt":"doença","ru":"болезнь","en":"illness, disease","pos":"nouns",
+  "imgQuery":"a sick person lying in bed under a blanket with a thermometer in the mouth"},
+
+ {"pt":"esquerda","ru":"левая сторона, налево","en":"left","pos":"nouns",
+  "imgQuery":"a white turn arrow painted on asphalt curving clearly to the left"},
+
+ {"pt":"direita","ru":"правая сторона, направо","en":"right","pos":"nouns",
+  "imgQuery":"a white turn arrow painted on asphalt curving clearly to the right"},
+
+ {"pt":"à frente","ru":"вперёд, впереди","en":"ahead, forward","pos":"adverbs",
+  "imgQuery":"a white straight-ahead arrow painted on asphalt pointing directly forward"}
+]
