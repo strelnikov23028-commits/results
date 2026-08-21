@@ -18,7 +18,16 @@ const OUT = join(dirname(HERE), 'amo-widget.zip');
 
 // Только то, что нужно самому виджету: генераторы картинок, этот сборщик и
 // обложка интеграции (её загружают отдельно, прямо в форме) в архив не идут.
-const FILES = ['manifest.json', 'script.js', ...await dir('i18n'), 'images/logo.png'];
+//
+// Логотип кладём и в images/, и в корень: разные сборки amoCRM ищут его по
+// разным путям, а лишние 800 байт ничему не мешают.
+const FILES = [
+  'manifest.json',
+  'script.js',
+  ...await dir('i18n'),
+  'images/logo.png',
+  { src: 'images/logo.png', name: 'logo.png' },
+];
 
 async function dir(name) {
   const entries = await readdir(join(HERE, name));
@@ -44,8 +53,9 @@ const locals = [];
 const central = [];
 let offset = 0;
 
-for (const name of FILES) {
-  const data = await readFile(join(HERE, name));
+for (const entry of FILES) {
+  const name = typeof entry === 'string' ? entry : entry.name;
+  const data = await readFile(join(HERE, typeof entry === 'string' ? entry : entry.src));
   const packed = deflateRawSync(data, { level: 9 });
   const crc = crc32(data);
   const nameBuf = Buffer.from(name, 'utf8');
