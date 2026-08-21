@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бивольтные удлинители и фильтры — Бразилия и весь мир</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --surface-2:#FAFAFC;
+  --text:#1D1D1F; --text-2:#6E6E73; --text-3:#86868B;
+  --blue:#0071E3; --blue-dark:#0058B0;
+  --green:#248A3D; --amber:#B25000; --red:#C7261B;
+  --line:#E3E3E6;
+  --r-lg:20px; --r-md:14px; --r-sm:10px;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
+  --shadow-h:0 2px 6px rgba(0,0,0,.06),0 16px 40px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:72px 0}
+@media (max-width:700px){section{padding:52px 0}}
+
+/* ---------- HERO ---------- */
+.hero{padding:96px 0 64px;text-align:center}
+.eyebrow{
+  display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:18px;
+}
+h1{
+  font-size:clamp(34px,5.4vw,58px);line-height:1.08;font-weight:700;
+  letter-spacing:-.025em;margin-bottom:22px;
+}
+.lede{
+  font-size:clamp(17px,2vw,21px);color:var(--text-2);
+  max-width:720px;margin:0 auto;line-height:1.55;
+}
+
+/* ---------- ANSWER BOX ---------- */
+.answer{
+  background:var(--surface);border-radius:var(--r-lg);padding:36px 38px;
+  box-shadow:var(--shadow);border:1px solid var(--line);
+}
+.answer h2{font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:20px}
+.answer ol{list-style:none;counter-reset:a}
+.answer li{
+  counter-increment:a;position:relative;padding-left:44px;margin-bottom:18px;
+  color:var(--text-2);line-height:1.6;
+}
+.answer li:last-child{margin-bottom:0}
+.answer li::before{
+  content:counter(a);position:absolute;left:0;top:1px;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--blue);color:#fff;font-size:14px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+}
+.answer li b{color:var(--text);font-weight:600}
+
+/* ---------- HEADINGS ---------- */
+.h2{font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-.02em;margin-bottom:12px}
+.sub{color:var(--text-2);font-size:17px;max-width:660px;margin-bottom:36px}
+
+/* ---------- BENTO ---------- */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.bento{grid-template-columns:1fr}}
+.tile{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:30px;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease;
+}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
+.tile .ic{width:40px;height:40px;margin-bottom:18px;color:var(--blue)}
+.tile h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px}
+.tile p{color:var(--text-2);font-size:15.5px;line-height:1.58}
+.tile .verdict{
+  display:inline-block;margin-top:16px;font-size:13px;font-weight:600;
+  padding:5px 12px;border-radius:999px;
+}
+.v-ok{background:rgba(36,138,61,.1);color:var(--green)}
+.v-warn{background:rgba(178,80,0,.1);color:var(--amber)}
+.v-bad{background:rgba(199,38,27,.1);color:var(--red)}
+
+/* ---------- TABLE ---------- */
+.tbl-wrap{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--shadow);overflow-x:auto;
+}
+table{width:100%;border-collapse:collapse;min-width:660px}
+thead th{
+  text-align:left;font-size:13px;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--text-3);
+  padding:18px 22px;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+tbody td{padding:16px 22px;border-bottom:1px solid var(--line);font-size:15.5px;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--surface-2)}
+td.country{font-weight:600;white-space:nowrap}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;
+  padding:4px 11px;border-radius:999px;white-space:nowrap;
+}
+.b-ok{background:rgba(36,138,61,.1);color:var(--green)}
+.b-warn{background:rgba(178,80,0,.1);color:var(--amber)}
+.b-bad{background:rgba(199,38,27,.1);color:var(--red)}
+td small{display:block;color:var(--text-3);font-size:13.5px;margin-top:5px;line-height:1.45}
+
+/* ---------- SCENARIO NAV ---------- */
+.scen{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:8px}
+@media (max-width:900px){.scen{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:540px){.scen{grid-template-columns:1fr}}
+.scen a{
+  display:block;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:20px;text-decoration:none;color:inherit;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.scen a:hover{transform:translateY(-2px);box-shadow:var(--shadow-h);border-color:#D0D0D4}
+.scen .n{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--blue);text-transform:uppercase}
+.scen .t{font-size:16px;font-weight:600;margin-top:8px;letter-spacing:-.01em}
+.scen .d{font-size:14px;color:var(--text-2);margin-top:5px;line-height:1.45}
+
+/* ---------- CATEGORY ---------- */
+.cat{margin-top:64px;scroll-margin-top:24px}
+.cat-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.cat-head h3{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.cat-tag{
+  font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px;
+  background:rgba(0,113,227,.1);color:var(--blue);
+}
+.cat-desc{color:var(--text-2);font-size:16px;max-width:700px;margin-bottom:28px}
+
+/* ---------- PRODUCT CARDS ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease;
+}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-h)}
+.card .ph{
+  background:#fff;height:180px;display:flex;align-items:center;justify-content:center;
+  padding:18px;border-bottom:1px solid var(--line);
+}
+.card .ph img{max-width:100%;max-height:100%;object-fit:contain}
+.card .body{padding:20px;display:flex;flex-direction:column;flex:1}
+.card h4{font-size:15.5px;font-weight:600;line-height:1.38;letter-spacing:-.005em;margin-bottom:10px}
+.specs{list-style:none;margin-bottom:16px}
+.specs li{
+  font-size:14px;color:var(--text-2);line-height:1.5;padding-left:16px;
+  position:relative;margin-bottom:4px;
+}
+.specs li::before{
+  content:"";position:absolute;left:0;top:8px;width:5px;height:5px;
+  border-radius:50%;background:#C7C7CC;
+}
+.meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;margin-top:auto}
+.price{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.rate{font-size:13.5px;color:var(--text-3);display:flex;align-items:center;gap:4px}
+.rate svg{width:14px;height:14px;color:#F5A623}
+.btn{
+  display:block;text-align:center;background:var(--blue);color:#fff;text-decoration:none;
+  font-size:15px;font-weight:600;padding:12px 16px;border-radius:999px;
+  transition:background .2s ease;
+}
+.btn:hover{background:var(--blue-dark)}
+.btn:focus-visible,a:focus-visible{outline:3px solid rgba(0,113,227,.5);outline-offset:2px}
+.pick{
+  position:absolute;top:14px;left:14px;background:var(--text);color:#fff;
+  font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  padding:5px 11px;border-radius:999px;z-index:2;
+}
+.card{position:relative}
+
+/* ---------- WARNINGS ---------- */
+.warn{
+  background:#FFF8F3;border:1px solid #F2D9C4;border-radius:var(--r-lg);
+  padding:36px 38px;
+}
+.warn h3{font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:20px;color:var(--amber)}
+.warn ul{list-style:none}
+.warn li{position:relative;padding-left:30px;margin-bottom:16px;color:var(--text-2);line-height:1.58}
+.warn li:last-child{margin-bottom:0}
+.warn li::before{
+  content:"";position:absolute;left:0;top:7px;width:16px;height:16px;
+  background:var(--amber);-webkit-mask:var(--warn-ic) center/contain no-repeat;
+  mask:var(--warn-ic) center/contain no-repeat;
+}
+:root{--warn-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z'/%3E%3C/svg%3E")}
+.warn li b{color:var(--text);font-weight:600}
+
+/* ---------- NOTE ---------- */
+.note{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:30px 34px;box-shadow:var(--shadow);
+}
+.note h3{font-size:19px;font-weight:600;margin-bottom:12px;letter-spacing:-.01em}
+.note p{color:var(--text-2);font-size:15.5px;line-height:1.6;margin-bottom:12px}
+.note p:last-child{margin-bottom:0}
+.note a{color:var(--blue);text-decoration:none;font-weight:500}
+.note a:hover{text-decoration:underline}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line);padding:44px 0 60px;margin-top:24px}
+footer h4{font-size:14px;font-weight:600;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+footer ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:8px 28px}
+@media (max-width:700px){footer ul{grid-template-columns:1fr}}
+footer li{font-size:14.5px}
+footer a{color:var(--text-2);text-decoration:none}
+footer a:hover{color:var(--blue);text-decoration:underline}
+.stamp{margin-top:26px;font-size:13.5px;color:var(--text-3);line-height:1.55}
+
+.reveal{opacity:1}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <span class="eyebrow reveal">Электрика · Бразилия · Путешествия</span>
+  <h1 class="reveal">Бивольтные удлинители<br>и сетевые фильтры</h1>
+  <p class="lede reveal">Слово «bivolt» на удлинителе, на фильтре и на зарядке означает три разные вещи. Разбираем, что из этого реально работает и в Рио, и в Европе, и в США — с ценами по Бразилии на 21 августа 2026&nbsp;года.</p>
+</header>
+
+<section class="wrap" style="padding-top:0">
+  <div class="answer reveal">
+    <h2>Короткий ответ</h2>
+    <ol>
+      <li><b>Да, такие есть — и это норма для Бразилии.</b> Практически любой местный «filtro de linha» маркирован bivolt 127/220&nbsp;В: страна живёт на двух напряжениях сразу, поэтому производители по умолчанию делают технику под оба.</li>
+      <li><b>Проблема не в вольтаже, а в форме вилки.</b> Бразильская вилка физически совпадает с европейским Europlug, но в розетки США, Британии, Австралии и Японии не входит. Решается одним переходником на входе удлинителя.</li>
+      <li><b>Бивольт — это не преобразователь.</b> Удлинитель просто передаёт то напряжение, что в розетке. Прибор на 127&nbsp;В, воткнутый через него в европейские 220&nbsp;В, сгорит.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2 class="h2 reveal">Три разные вещи под одним словом</h2>
+  <p class="sub reveal">От того, что именно внутри корпуса, зависит, переживёт ли устройство переезд из сети 127&nbsp;В в сеть 230&nbsp;В.</p>
+  <div class="bento">
+
+    <article class="tile reveal">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h4l3-8 4 16 3-8h2"/></svg>
+      <h3>Простой удлинитель</h3>
+      <p>Только провод, розетки и выключатель. Напряжение ему безразлично: значение имеет маркировка изоляции (обычно 250&nbsp;В) и предельный ток. Работает в любой стране мира.</p>
+      <span class="verdict v-ok">Универсален всегда</span>
+    </article>
+
+    <article class="tile reveal">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      <h3>Фильтр с защитой (DPS)</h3>
+      <p>Внутри варистор, который гасит скачки. Вот здесь «bivolt» критично: модель, рассчитанная только на 127&nbsp;В, при включении в 220&nbsp;В выходит из строя. Настоящий бивольтный держит до 275&nbsp;В.</p>
+      <span class="verdict v-warn">Смотреть маркировку</span>
+    </article>
+
+    <article class="tile reveal">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 6h4"/><path d="M12 14v4"/><circle cx="12" cy="11" r="1.5"/></svg>
+      <h3>Блок USB внутри</h3>
+      <p>Импульсный блок питания почти всегда рассчитан на 100–240&nbsp;В — он сам подстраивается. Это самая надёжная часть такого удлинителя с точки зрения путешествий.</p>
+      <span class="verdict v-ok">Обычно 100–240 В</span>
+    </article>
+
+  </div>
+</section>
+
+<section class="wrap">
+  <h2 class="h2 reveal">Куда бразильская вилка войдёт без переходника</h2>
+  <p class="sub reveal">Бразильский стандарт NBR&nbsp;14136 (тип&nbsp;N): два круглых штыря 4,0&nbsp;мм на расстоянии 19&nbsp;мм плюс центральный заземляющий. Версия на 20&nbsp;А использует штыри 4,8&nbsp;мм.</p>
+  <div class="tbl-wrap reveal">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Регион</th>
+          <th scope="col">Тип розетки</th>
+          <th scope="col">Войдёт ли вилка</th>
+          <th scope="col">Заземление</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="country">Бразилия</td>
+          <td>N</td>
+          <td><span class="badge b-ok">Да</span></td>
+          <td>Работает<small>Родной стандарт. Вилка 10 А входит и в розетку на 20 А.</small></td>
+        </tr>
+        <tr>
+          <td class="country">ЮАР (новый стандарт)</td>
+          <td>N / SANS 164-2</td>
+          <td><span class="badge b-ok">Да</span></td>
+          <td>Работает<small>Та же геометрия, что у бразильской.</small></td>
+        </tr>
+        <tr>
+          <td class="country">Европа, Турция, Россия</td>
+          <td>C / E / F</td>
+          <td><span class="badge b-warn">Штыри войдут</span></td>
+          <td>Не соединится<small>Размеры совпадают с Europlug, но земля у Schuko — боковые пластины, а не центральный штырь. Для техники с заземлением нужен переходник.</small></td>
+        </tr>
+        <tr>
+          <td class="country">США, Канада, Мексика, Япония</td>
+          <td>A / B</td>
+          <td><span class="badge b-bad">Нет</span></td>
+          <td>Нужен переходник<small>Плоские контакты вместо круглых.</small></td>
+        </tr>
+        <tr>
+          <td class="country">Великобритания, Ирландия</td>
+          <td>G</td>
+          <td><span class="badge b-bad">Нет</span></td>
+          <td>Нужен переходник<small>Три прямоугольных штыря со шторками.</small></td>
+        </tr>
+        <tr>
+          <td class="country">Австралия, Китай, Аргентина</td>
+          <td>I</td>
+          <td><span class="badge b-bad">Нет</span></td>
+          <td>Нужен переходник<small>Плоские штыри под углом.</small></td>
+        </tr>
+        <tr>
+          <td class="country">Италия, Швейцария, Дания</td>
+          <td>L / J / K</td>
+          <td><span class="badge b-bad">Нет</span></td>
+          <td>Нужен переходник<small>Другое расположение заземляющего контакта.</small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2 class="h2 reveal">Что покупать под вашу задачу</h2>
+  <p class="sub reveal">Четыре сценария. Цены — Amazon Brasil, снято 21 августа 2026&nbsp;года, доставка внутри страны.</p>
+
+  <nav class="scen reveal" aria-label="Сценарии">
+    <a href="#cat1"><span class="n">Сценарий 1</span><span class="t">Дом в Рио</span><span class="d">Максимальная защита техники, переживёт переезд</span></a>
+    <a href="#cat2"><span class="n">Сценарий 2</span><span class="t">Розетки под любые вилки</span><span class="d">Принимает американские и европейские вилки как есть</span></a>
+    <a href="#cat3"><span class="n">Сценарий 3</span><span class="t">Бюджетный бивольт</span><span class="d">Просто чтобы работало на обоих напряжениях</span></a>
+    <a href="#cat4"><span class="n">Сценарий 4</span><span class="t">В чемодан</span><span class="d">Переходник плюс зарядка 100–240 В</span></a>
+  </nav>
+
+  <!-- CATEGORY 1 -->
+  <div class="cat" id="cat1">
+    <div class="cat-head">
+      <h3>1. Настоящая защита от скачков</h3>
+      <span class="cat-tag">Clamper · DPS 275 В</span>
+    </div>
+    <p class="cat-desc">Clamper — бразильский производитель, специализирующийся именно на защите от импульсных перенапряжений. Все модели ниже честно бивольтные: максимальное рабочее напряжение 275&nbsp;В, разрядный ток 4,5&nbsp;кА. Такой фильтр не сгорит ни в 127&nbsp;В, ни в 230&nbsp;В.</p>
+    <div class="grid">
+
+      <article class="card reveal">
+        <span class="pick">Выбор</span>
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/31RxeF1lUUL._AC_UL320_.jpg" alt="Сетевой фильтр iCLAMPER Energia 6 на шесть розеток" loading="lazy"></div>
+        <div class="body">
+          <h4>iCLAMPER Energia 6</h4>
+          <ul class="specs">
+            <li>6 розеток, 3 контакта, 10 А</li>
+            <li>Bivolt 127/220 В, кабель 1,5 м</li>
+            <li>Разнесённые гнёзда под блоки питания</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 87,99</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>5,0 · 20</span></div>
+          <a class="btn" href="https://www.amazon.com.br/iCLAMPER-Prote%C3%A7%C3%A3o-El%C3%A9tricos-6Tomadas-Impressora/dp/B0F19GP375" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/61TxzAyBRwL._AC_UL320_.jpg" alt="Сетевой фильтр iCLAMPER Energia 8 на восемь розеток, белый" loading="lazy"></div>
+        <div class="body">
+          <h4>iCLAMPER Energia 8</h4>
+          <ul class="specs">
+            <li>8 розеток, 3 контакта, 10 А</li>
+            <li>Bivolt 127/220 В, кабель 1 м</li>
+            <li>Под рабочее место целиком</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 142,99</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>5,0 · 31</span></div>
+          <a class="btn" href="https://www.amazon.com.br/iCLAMPER-Prote%C3%A7%C3%A3o-El%C3%A9tricos-Notebook-Impressora/dp/B0F5X3F7VB" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/415fO1aYsuL._AC_UL320_.jpg" alt="Сетевой фильтр iCLAMPER Energia 3 на три розетки, чёрный" loading="lazy"></div>
+        <div class="body">
+          <h4>iCLAMPER Energia 3</h4>
+          <ul class="specs">
+            <li>3 розетки, 3 контакта, 10 А</li>
+            <li>Bivolt 127/220 В</li>
+            <li>Компактный, для ТВ или роутера</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 64,21</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,8 · 522</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Protetor-contra-surtos-DPS-iCLAMPER/dp/B0DC89P7ZG" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/31C2opR8q1L._AC_UL320_.jpg" alt="Защита от скачков iCLAMPER Pocket Fit, вставляется в розетку" loading="lazy"></div>
+        <div class="body">
+          <h4>iCLAMPER Pocket Fit 3P 10A</h4>
+          <ul class="specs">
+            <li>Не удлинитель — вставка в розетку</li>
+            <li>Bivolt 127/220 В, 10 А</li>
+            <li>Ставится перед любым удлинителем</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 39,99</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,8 · 2,7 тыс.</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Protetor-El%C3%A9tricos-CLAMPER-Smartphone-Impressora/dp/B0D3CSZKKJ" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 2 -->
+  <div class="cat" id="cat2">
+    <div class="cat-head">
+      <h3>2. С универсальными розетками</h3>
+      <span class="cat-tag">Принимают чужие вилки</span>
+    </div>
+    <p class="cat-desc">В Бразилии «tomada universal» — это гнездо, которое принимает и круглые, и американские плоские вилки. Именно то, что нужно, если вы возите технику из разных стран: американский блок питания воткнётся напрямую, без переходника. Плата за это — у таких гнёзд нет защитных шторок, и контакт слабее, чем у гнезда под один стандарт.</p>
+    <div class="grid">
+
+      <article class="card reveal">
+        <span class="pick">Выбор</span>
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/617MjxBV9AL._AC_UL320_.jpg" alt="Сетевой фильтр на пять розеток плюс две универсальные, с USB-C PD" loading="lazy"></div>
+        <div class="body">
+          <h4>5 розеток + 2 универсальные, USB-C PD</h4>
+          <ul class="specs">
+            <li>2 универсальных гнезда 10/20 А</li>
+            <li>2 USB-A + 1 USB-C с Power Delivery</li>
+            <li>110–220 В, кабель 2 м, выключатель</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 59,90</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Tomadas-Universais-110-220V-Interruptor-Alimenta%C3%A7%C3%A3o/dp/B0HDRVVPML" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/614ZyQZyI0L._AC_UL320_.jpg" alt="Удлинитель на пять розеток с двумя универсальными гнёздами и USB" loading="lazy"></div>
+        <div class="body">
+          <h4>5 розеток + 2 универсальные, USB-C</h4>
+          <ul class="specs">
+            <li>2 универсальных гнезда, 2 USB-A, 1 USB-C</li>
+            <li>110–220 В, кабель 1,9 м</li>
+            <li>2,4 тысячи отзывов — проверенная модель</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 56,98</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,8 · 2,4 тыс.</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Extens%C3%A3o-Energia-Interfaces-Universal-Alimenta%C3%A7%C3%A3o/dp/B0CM8TQ3WV" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/61ZOFrVFULL._AC_UL320_.jpg" alt="Удлинитель на шесть розеток с четырьмя USB и универсальным гнездом" loading="lazy"></div>
+        <div class="body">
+          <h4>6 розеток + 1 универсальная, 4 USB</h4>
+          <ul class="specs">
+            <li>1 универсальное гнездо, 4 порта USB</li>
+            <li>110–220 В, 2500 Вт, кабель 1,9 м</li>
+            <li>3,5 тысячи отзывов</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 44,99</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,8 · 3,5 тыс.</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Extens%C3%A3o-Interfaces-Universal-Alimenta%C3%A7%C3%A3o-110-220V/dp/B0DCBPGLVZ" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/51Yh4VMGrCL._AC_UL320_.jpg" alt="Сетевой фильтр на шесть универсальных розеток под плоские вилки" loading="lazy"></div>
+        <div class="body">
+          <h4>6 универсальных розеток</h4>
+          <ul class="specs">
+            <li>Все шесть гнёзд универсальные</li>
+            <li>Старый бразильский, американский, круглый</li>
+            <li>Вариант, когда вся техника — импортная</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 65,90</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Filtro-Universal-Tomadas-Tomada-Americana/dp/B0H5DH52GJ" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 3 -->
+  <div class="cat" id="cat3">
+    <div class="cat-head">
+      <h3>3. Бюджетный бивольт</h3>
+      <span class="cat-tag">R$ 30–75</span>
+    </div>
+    <p class="cat-desc">Обычные бразильские фильтры с маркировкой 127/220&nbsp;В. Защита здесь — предохранитель и базовое подавление помех, а не полноценный DPS. Зато переезд между напряжениями переживут, и стоят копейки. Мощность зависит от сети: 10&nbsp;А дают 1270&nbsp;Вт при 127&nbsp;В и 2200&nbsp;Вт при 220&nbsp;В.</p>
+    <div class="grid">
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/51xUL9j5MXL._AC_UL320_.jpg" alt="Сетевой фильтр Fiolux Powerlink на шесть розеток, чёрный" loading="lazy"></div>
+        <div class="body">
+          <h4>Fiolux Powerlink, 6 розеток</h4>
+          <ul class="specs">
+            <li>127/220 В, кабель 2 м</li>
+            <li>Защита от перегрузки</li>
+            <li>329 отзывов — рабочая лошадка</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 34,99</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,3 · 329</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Extens%C3%A3o-Protetor-El%C3%A9trica-Fiolux-Powerlink/dp/B0FHGJLWDM" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/51iEj-nYLDL._AC_UL320_.jpg" alt="Сетевой фильтр Fiolux на десять розеток в металлическом корпусе" loading="lazy"></div>
+        <div class="body">
+          <h4>Fiolux, 10 розеток, металл</h4>
+          <ul class="specs">
+            <li>Металлический корпус, 1,5 м</li>
+            <li>Bivolt 127/220 В, предохранитель 10 А</li>
+            <li>Разнесённые гнёзда, индикатор</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 75,67</span></div>
+          <a class="btn" href="https://www.amazon.com.br/FIOLUX-Filtro-Linha-Espa%C3%A7adas-Antichamas/dp/B0GWND4QQ1" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/511rql-peNL._AC_UL320_.jpg" alt="Сетевой фильтр на пять розеток с четырьмя USB и двумя USB-C" loading="lazy"></div>
+        <div class="body">
+          <h4>5 розеток, 4 USB + 2 USB-C</h4>
+          <ul class="specs">
+            <li>Bivolt 127/220 В, кабель 3 м</li>
+            <li>Шесть портов зарядки сразу</li>
+            <li>Самый длинный кабель в подборке</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 44,90</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Tomadas-Desliga-Extens%C3%A3o-Escrit%C3%B3rio-Notebook/dp/B0GWKB9MZY" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/61wadpIM3vL._AC_UL320_.jpg" alt="Сетевой фильтр на пять розеток с тремя портами USB" loading="lazy"></div>
+        <div class="body">
+          <h4>5 розеток + 3 USB</h4>
+          <ul class="specs">
+            <li>110–220 В, 10 А, 2500 Вт</li>
+            <li>Кабель 2 м, выключатель</li>
+            <li>Самый дешёвый вменяемый вариант</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 29,90</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,6 · 54</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Tomadas-Extens%C3%A3o-El%C3%A9trica-Notebook-Videogame/dp/B0H5XBMY6X" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 4 -->
+  <div class="cat" id="cat4">
+    <div class="cat-head">
+      <h3>4. В чемодан</h3>
+      <span class="cat-tag">100–240 В</span>
+    </div>
+    <p class="cat-desc">Рабочая схема для поездок: маленький бразильский удлинитель плюс один переходник вилки на его входе. Тогда от одной иностранной розетки питается всё сразу, а вся ваша техника остаётся на привычных бразильских гнёздах. Сами переходники ниже — с блоками питания на 100–240&nbsp;В.</p>
+    <div class="grid">
+
+      <article class="card reveal">
+        <span class="pick">Выбор</span>
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/51oIfIXPhjL._AC_UL320_.jpg" alt="Универсальный дорожный переходник Gshield с USB-C Power Delivery" loading="lazy"></div>
+        <div class="body">
+          <h4>Gshield, переходник + USB-C PD 20 Вт</h4>
+          <ul class="specs">
+            <li>Вилки под США, Европу, Британию, Азию</li>
+            <li>USB-C Power Delivery 20 Вт + USB-A</li>
+            <li>Bivolt, 172 отзыва</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 88,90</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,6 · 172</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Gshield-Adaptador-Internacional-Carregador-Carregamento/dp/B0DCP88ZLQ" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/61WgEYfX73L._AC_UL320_.jpg" alt="Универсальный переходник с двумя USB-C и двумя USB-A на 35 Вт" loading="lazy"></div>
+        <div class="body">
+          <h4>Переходник 35 Вт, 2×USB-C + 2×USB-A</h4>
+          <ul class="specs">
+            <li>США, ЕС, Британия, Австралия</li>
+            <li>35 Вт — хватит на ноутбук начального уровня</li>
+            <li>Четыре порта одновременно</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 104,40</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Adaptador-Universal-USB-C-USB-Tomada/dp/B0H6JCX1WK" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/61hDMD5ndBL._AC_UL320_.jpg" alt="Универсальный дорожный переходник с зарядкой GaN на 30 Вт" loading="lazy"></div>
+        <div class="body">
+          <h4>Переходник GaN 30 Вт, 4 порта</h4>
+          <ul class="specs">
+            <li>GaN — компактнее обычного блока</li>
+            <li>USB-C и USB-A, 4 порта</li>
+            <li>Универсальные вилки</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 113,90</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Adaptador-Universal-Viagem-Portas-USB-C/dp/B0HB7JVPK9" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><img src="https://m.media-amazon.com/images/I/51j+QGgflnL._AC_UL320_.jpg" alt="Комплект из двух универсальных дорожных переходников TKLA" loading="lazy"></div>
+        <div class="body">
+          <h4>TKLA, комплект из двух переходников</h4>
+          <ul class="specs">
+            <li>Без USB — только переходник вилки</li>
+            <li>Заявлено более 150 стран</li>
+            <li>359 отзывов, дешевле всего за штуку</li>
+          </ul>
+          <div class="meta"><span class="price">R$ 38,90</span><span class="rate"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4,7 · 359</span></div>
+          <a class="btn" href="https://www.amazon.com.br/Adaptadores-Tomada-Universal-Internacional-Adaptador/dp/B0CKBZ4WH2" target="_blank" rel="noopener">Открыть на Amazon</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="warn reveal">
+    <h3>О чём важно помнить</h3>
+    <ul>
+      <li><b>Бивольт не преобразует напряжение.</b> Удлинитель и фильтр передают ровно то, что в розетке. Фен или зарядка, рассчитанные только на 127&nbsp;В, в европейской сети сгорят — здесь нужен трансформатор, а не удлинитель.</li>
+      <li><b>В сети 127 В бивольтная защита срабатывает позже.</b> Порог у бивольтных устройств — 275&nbsp;В, потому что они должны выдерживать 220&nbsp;В. Специализированный DPS на 175&nbsp;В защищает 127-вольтовую сеть чувствительнее. Сам Clamper пишет, что 275&nbsp;В в сети 127&nbsp;В использовать можно, но это компромисс.</li>
+      <li><b>Универсальные гнёзда — без шторок.</b> Стандарт NBR&nbsp;14136 их не требует, а «tomada universal» с широким зевом тем более. Если рядом дети, лучше взять фильтр с обычными бразильскими гнёздами и отдельный переходник.</li>
+      <li><b>Считайте ток, а не ватты.</b> Один и тот же удлинитель на 10&nbsp;А даёт 1270&nbsp;Вт при 127&nbsp;В и 2200&nbsp;Вт при 220&nbsp;В. Вилка на 10&nbsp;А (штыри 4&nbsp;мм) входит в розетку на 20&nbsp;А, обратное — нет.</li>
+      <li><b>Заземление в Европе не подключится.</b> Штыри бразильской вилки войдут в розетку Schuko, но земля останется висеть. Для ноутбука с двухпроводным блоком питания это не проблема, для техники с металлическим корпусом — проблема.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="note reveal">
+    <h3>Про Mercado Livre</h3>
+    <p>Цены на этой странице сняты с Amazon Brasil. Mercado Livre с текущего IP отдаёт только страницу входа в аккаунт вместо каталога, поэтому подтвердить его цены я не смог и выдумывать их не стал.</p>
+    <p>С вашего браузера, где вы залогинены, каталог откроется нормально — вот прямые ссылки на нужные выборки: <a href="https://lista.mercadolivre.com.br/filtro-de-linha-bivolt" target="_blank" rel="noopener">фильтры bivolt</a>, <a href="https://lista.mercadolivre.com.br/iclamper-energia" target="_blank" rel="noopener">линейка iClamper Energia</a>, <a href="https://lista.mercadolivre.com.br/filtro-de-linha-tomada-universal" target="_blank" rel="noopener">фильтры с универсальными розетками</a>.</p>
+    <p>По опыту разброс между площадками невелик: на Mercado Livre похожие фильтры bivolt на 4–6 розеток идут примерно в том же диапазоне R$&nbsp;30–90, а Clamper — по цене производителя.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <h4>Источники</h4>
+  <ul>
+    <li><a href="https://www.amazon.com.br/" target="_blank" rel="noopener">Amazon Brasil — цены и характеристики, 21.08.2026</a></li>
+    <li><a href="https://www.clamper.com.br/iclamper-energia-5" target="_blank" rel="noopener">Clamper — спецификация iClamper Energia (275 В, 4,5 кА)</a></li>
+    <li><a href="https://clamper.com.br/dpsnoticias/preferencia-pelo-dps-275v/" target="_blank" rel="noopener">Clamper — DPS 275 В в сети 127 В</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/AC_power_plugs_and_sockets" target="_blank" rel="noopener">Wikipedia — NBR 14136, размеры штырей 4,0 и 4,8 мм</a></li>
+    <li><a href="https://www.telhanorte.com.br/filtro-de-linha-10-tomadas-bivolt-preto-force-line-1339460/p" target="_blank" rel="noopener">Telhanorte — Force Line, мощность 1270/2200 Вт</a></li>
+    <li><a href="https://lista.mercadolivre.com.br/filtro-de-linha-bivolt" target="_blank" rel="noopener">Mercado Livre — выборка фильтров bivolt</a></li>
+  </ul>
+  <p class="stamp">Собрано 21 августа 2026 года. Цены на маркетплейсах меняются ежедневно — перед покупкой сверяйтесь со страницей товара. Позиции с международной доставкой в подборку не включались.</p>
+</footer>
+
+<script type="module">
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    try {
+      const { animate, inView, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+
+      document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+        animate(el, { opacity: [0, 1], transform: ['translateY(20px)', 'translateY(0px)'] },
+          { duration: 0.6, delay: i * 0.08, easing: [0.22, 1, 0.36, 1] });
+      });
+
+      inView('section .reveal', (el) => {
+        animate(el, { opacity: [0, 1], transform: ['translateY(22px)', 'translateY(0px)'] },
+          { duration: 0.55, easing: [0.22, 1, 0.36, 1] });
+      }, { margin: '-60px' });
+
+      inView('.grid', (el) => {
+        animate(el.querySelectorAll('.card'),
+          { opacity: [0, 1], transform: ['translateY(18px)', 'translateY(0px)'] },
+          { duration: 0.5, delay: stagger(0.06), easing: [0.22, 1, 0.36, 1] });
+      }, { margin: '-40px' });
+
+      inView('.bento', (el) => {
+        animate(el.querySelectorAll('.tile'),
+          { opacity: [0, 1], transform: ['translateY(18px)', 'translateY(0px)'] },
+          { duration: 0.5, delay: stagger(0.08), easing: [0.22, 1, 0.36, 1] });
+      }, { margin: '-40px' });
+
+      document.querySelectorAll('tbody tr').forEach((row) => {
+        row.addEventListener('pointerenter', () => animate(row, { opacity: [0.85, 1] }, { duration: 0.15 }));
+      });
+    } catch (e) {
+      document.querySelectorAll('.reveal, .card, .tile').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+    }
+  }
+</script>
+
+</body>
+</html>
