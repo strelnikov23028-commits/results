@@ -1,11 +1,11 @@
 /**
  * Рисует логотипы виджета: images/logo.png (130×100) и images/logo_small.png
- * (84×84). Размеры amoCRM сообщает по одному при загрузке архива, в
- * документации их нет — проверено на аккаунте 20.08.2026:
+ * (108×108). Размеры amoCRM сообщает по одному при загрузке архива, в
+ * документации их нет — собраны на аккаунте 20.08.2026:
  *
- *   logo.png       — «Logo file for logo must have resolution 130x100px»
- *   logo_main.png  — «…for logo_main must have resolution 400x272px» (рисует make-cover.mjs)
- *   logo_small.png — «Logo file "images/logo_small.png" is required for widget_small»
+ *   logo.png       — 130×100 («Logo file for logo must have resolution 130x100px»)
+ *   logo_main.png  — 400×272 (рисует make-cover.mjs)
+ *   logo_small.png — 108×108, обязателен для widget_small
  *
  * Никаких зависимостей: PNG собирается вручную из IHDR/IDAT/IEND, сжатие
  * берётся из встроенного zlib.
@@ -38,7 +38,7 @@ const CRC_TABLE = (() => {
 
 await mkdir(join(HERE, 'images'), { recursive: true });
 await draw(130, 100, 'logo.png');
-await draw(84, 84, 'logo_small.png');
+await draw(108, 108, 'logo_small.png');
 
 async function draw(W, H, file) {
   const R = Math.min(W, H) / 2 - 4;
