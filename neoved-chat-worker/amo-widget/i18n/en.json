@@ -1,35 +1,25 @@
 {
   "widget": {
     "name": "Website chat",
-    "description": "The whole conversation with the visitor right inside the lead card: the manager sees the thread, replies in one field and can ask for a tax ID or a phone number — the input opens in the visitor's chat. Works both for website chat leads and for Telegram channel leads.",
-    "short_description": "Chat with the visitor and ask for a tax ID or phone from the lead card"
+    "description": "Two buttons in the lead card: ask the visitor for a tax ID or a phone number — the input field opens in their website chat, even if they declined earlier.",
+    "short_description": "Ask the visitor for a tax ID or a phone number"
   },
   "settings": {
     "api": "Service URL (e.g. https://neoved-chat.strelnikov2302.workers.dev)",
     "key": "Access key"
   },
   "panel": {
-    "empty": "No messages yet.",
-    "client": "Visitor",
-    "manager": "Manager",
-    "reply": "Reply to the visitor…",
-    "send": "Send",
-    "refresh": "Refresh the thread",
     "ask_inn": "Ask for tax ID",
     "ask_phone": "Ask for phone"
   },
   "status": {
-    "loading": "Loading the thread…",
     "sending": "Sending…",
-    "sent": "Sent to the visitor",
     "sent_inn": "Tax ID field opened for the visitor",
     "sent_phone": "Phone field opened for the visitor"
   },
   "errors": {
     "no_settings": "Fill in the service URL and the access key in widget settings",
     "no_lead": "Open a lead card",
-    "no_user": "Cannot detect the current manager — reload the page",
-    "thread": "Failed to load the thread",
     "failed": "Failed to send"
   }
 }
