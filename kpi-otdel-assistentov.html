@@ -1,0 +1,998 @@
+<title>KPI отдела ассистентов</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --surface-2:#FAFAFC;
+  --fg:#1D1D1F; --fg-2:#4B4B50; --fg-3:#86868B;
+  --accent:#0071E3; --accent-soft:#E8F1FD;
+  --green:#0B8A4B; --green-soft:#E6F5ED;
+  --amber:#B26A00; --amber-soft:#FFF3E0;
+  --red:#C4302B; --red-soft:#FDECEA;
+  --border:#E3E3E7; --border-2:#EDEDF0;
+  --radius:20px; --radius-sm:12px;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.05),0 16px 40px rgba(0,0,0,.08);
+  --maxw:1080px;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --surface:#1C1C1E; --surface-2:#141416;
+    --fg:#F5F5F7; --fg-2:#C7C7CC; --fg-3:#8E8E93;
+    --accent:#2E9BFF; --accent-soft:#122437;
+    --green:#4ADE80; --green-soft:#10241A;
+    --amber:#FBBF24; --amber-soft:#2A2010;
+    --red:#FF6B63; --red-soft:#2E1614;
+    --border:#2C2C2E; --border-2:#242426;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.5),0 16px 40px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --surface:#1C1C1E; --surface-2:#141416;
+  --fg:#F5F5F7; --fg-2:#C7C7CC; --fg-3:#8E8E93;
+  --accent:#2E9BFF; --accent-soft:#122437;
+  --green:#4ADE80; --green-soft:#10241A;
+  --amber:#FBBF24; --amber-soft:#2A2010;
+  --red:#FF6B63; --red-soft:#2E1614;
+  --border:#2C2C2E; --border-2:#242426;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.5),0 16px 40px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+h1,h2,h3,h4{letter-spacing:-.022em; line-height:1.15; margin:0}
+h1{font-size:clamp(34px,6vw,56px); font-weight:800}
+h2{font-size:clamp(26px,4vw,36px); font-weight:700; margin-bottom:10px}
+h3{font-size:21px; font-weight:650; margin-bottom:8px}
+h4{font-size:17px; font-weight:650; margin-bottom:6px}
+p{margin:0 0 14px}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--accent); outline-offset:3px; border-radius:6px}
+
+/* nav */
+.nav{
+  position:sticky; top:0; z-index:100; background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--border-2);
+}
+.nav-in{max-width:var(--maxw); margin:0 auto; padding:11px 24px; display:flex; gap:6px; align-items:center; overflow-x:auto; scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{
+  font-size:13.5px; font-weight:550; color:var(--fg-2); padding:7px 12px; border-radius:100px;
+  white-space:nowrap; transition:background .2s ease,color .2s ease; cursor:pointer;
+}
+.nav a:hover{background:var(--surface); color:var(--fg); text-decoration:none}
+.nav .brand{font-weight:700; color:var(--fg); padding-left:0; padding-right:14px; font-size:14px}
+.nav .brand:hover{background:transparent}
+
+/* hero */
+.hero{padding:76px 0 44px; text-align:center}
+.hero .eyebrow{
+  display:inline-block; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-soft); padding:6px 14px; border-radius:100px; margin-bottom:22px;
+}
+.hero p.lead{font-size:19px; color:var(--fg-2); max-width:680px; margin:20px auto 0}
+
+section{padding:52px 0; scroll-margin-top:64px}
+.sec-head{margin-bottom:28px; max-width:760px}
+.sec-head p{color:var(--fg-2); font-size:17.5px; margin:0}
+.kicker{font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--fg-3); margin-bottom:8px}
+
+.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:26px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;
+}
+.card.hoverable:hover{transform:translateY(-2px); box-shadow:var(--shadow-lg)}
+.grid{display:grid; gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+.layer-num{
+  width:32px;height:32px;border-radius:9px;background:var(--accent-soft);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin-bottom:14px;
+}
+.big{font-size:30px; font-weight:750; letter-spacing:-.03em; line-height:1.1}
+.muted{color:var(--fg-3); font-size:14.5px; line-height:1.5}
+.fg2{color:var(--fg-2)}
+
+.tag{display:inline-block;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:100px;letter-spacing:.01em}
+.t-blue{background:var(--accent-soft);color:var(--accent)}
+.t-green{background:var(--green-soft);color:var(--green)}
+.t-amber{background:var(--amber-soft);color:var(--amber)}
+.t-red{background:var(--red-soft);color:var(--red)}
+
+/* tables */
+.tbl-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius); border:1px solid var(--border); background:var(--surface); box-shadow:var(--shadow)}
+table{width:100%; border-collapse:collapse; font-size:15px; min-width:560px}
+th{
+  text-align:left; font-weight:600; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--fg-3); padding:14px 16px; border-bottom:1px solid var(--border); background:var(--surface-2);
+}
+td{padding:14px 16px; border-bottom:1px solid var(--border-2); vertical-align:top; color:var(--fg-2)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .15s ease}
+tbody tr:hover{background:var(--surface-2)}
+td strong,th strong{color:var(--fg); font-weight:600}
+.num{text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums}
+
+/* formula */
+.formula{
+  background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:18px 20px; font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+  font-size:15px; line-height:1.9; color:var(--fg); overflow-x:auto; white-space:nowrap;
+}
+.formula .op{color:var(--fg-3)}
+.formula .w{color:var(--accent); font-weight:600}
+
+/* calculator */
+.calc{display:grid; grid-template-columns:1.15fr .85fr; gap:16px; align-items:start}
+@media(max-width:860px){.calc{grid-template-columns:1fr}}
+.slider-row{margin-bottom:20px}
+.slider-row:last-child{margin-bottom:0}
+.slider-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:9px; gap:12px}
+.slider-top label{font-size:15px; font-weight:550; color:var(--fg)}
+.slider-top .val{font-size:15px; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums}
+.slider-top .wt{font-size:12.5px; color:var(--fg-3); font-weight:500}
+input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:100px;
+  background:var(--border); outline:none; cursor:pointer; margin:0;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none; width:24px; height:24px; border-radius:50%;
+  background:var(--surface); border:1px solid var(--border); box-shadow:0 1px 4px rgba(0,0,0,.18);
+  cursor:pointer; transition:transform .15s ease;
+}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.08)}
+input[type=range]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;background:var(--surface);
+  border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.18);cursor:pointer;
+}
+.field{margin-bottom:16px}
+.field label{display:block; font-size:14.5px; font-weight:550; margin-bottom:7px; color:var(--fg)}
+.field .hint{font-size:13px; color:var(--fg-3); font-weight:400; margin-top:5px; line-height:1.45}
+input[type=number],select{
+  width:100%; padding:11px 13px; font-size:16px; font-family:inherit; font-variant-numeric:tabular-nums;
+  border:1px solid var(--border); border-radius:10px; background:var(--surface); color:var(--fg);
+  transition:border-color .2s ease, box-shadow .2s ease; min-height:44px;
+}
+input[type=number]:focus,select:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); outline:none}
+
+.result{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); position:sticky; top:76px}
+@media(max-width:860px){.result{position:static}}
+.res-line{display:flex; justify-content:space-between; align-items:baseline; padding:11px 0; border-bottom:1px solid var(--border-2); gap:12px}
+.res-line:last-of-type{border-bottom:none}
+.res-line .k{font-size:14.5px; color:var(--fg-2)}
+.res-line .v{font-size:16px; font-weight:650; color:var(--fg); font-variant-numeric:tabular-nums; white-space:nowrap}
+.res-total{margin-top:14px; padding-top:18px; border-top:2px solid var(--fg); display:flex; justify-content:space-between; align-items:baseline; gap:12px}
+.res-total .k{font-size:15px; font-weight:600}
+.res-total .v{font-size:27px; font-weight:800; letter-spacing:-.03em; color:var(--accent)}
+.score-badge{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  background:var(--accent-soft); border-radius:var(--radius-sm); padding:14px 18px; margin-bottom:18px;
+}
+.score-badge .lbl{font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--accent)}
+.score-badge .sc{font-size:32px; font-weight:800; letter-spacing:-.03em; color:var(--accent); line-height:1}
+.warn{
+  background:var(--amber-soft); color:var(--amber); border-radius:10px; padding:11px 14px;
+  font-size:13.5px; line-height:1.5; margin-top:14px; font-weight:500;
+}
+.warn[hidden]{display:none}
+
+.note{border-left:3px solid var(--accent); background:var(--surface); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:16px 20px; margin:18px 0; box-shadow:var(--shadow)}
+.note.amber{border-left-color:var(--amber)}
+.note.red{border-left-color:var(--red)}
+.note.green{border-left-color:var(--green)}
+.note p:last-child{margin-bottom:0}
+.note .title{font-weight:650; color:var(--fg); margin-bottom:5px; font-size:15.5px}
+
+ul.clean{list-style:none; padding:0; margin:0}
+ul.clean li{padding-left:26px; position:relative; margin-bottom:11px; color:var(--fg-2); font-size:15.5px; line-height:1.55}
+ul.clean li:last-child{margin-bottom:0}
+ul.clean li::before{
+  content:''; position:absolute; left:6px; top:10px; width:6px; height:6px; border-radius:50%; background:var(--accent);
+}
+ul.clean.check li::before{
+  content:''; left:2px; top:5px; width:16px; height:16px; border-radius:0; background:var(--green);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z' clip-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z' clip-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+ul.clean.cross li::before{background:var(--red)}
+
+.divider{height:1px; background:var(--border-2); margin:0}
+footer{padding:46px 0 60px; color:var(--fg-3); font-size:14px; text-align:center}
+footer p{margin-bottom:6px}
+
+.reveal{opacity:1; transform:none}
+.js-anim .reveal{opacity:0; transform:translateY(20px)}
+@media (prefers-reduced-motion:reduce){
+  .js-anim .reveal{opacity:1 !important; transform:none !important}
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">KPI ассистентов</a>
+    <a href="#struktura">Структура</a>
+    <a href="#matrica">Матрица</a>
+    <a href="#calc">Калькулятор</a>
+    <a href="#ekonomiya">Экономия</a>
+    <a href="#zaeby">Реестр заёбов</a>
+    <a href="#modeli">Модели</a>
+    <a href="#dopolnitelno">Ещё варианты</a>
+    <a href="#gaming">Анти-гейминг</a>
+    <a href="#primer">Пример</a>
+    <a href="#vnedrenie">Внедрение</a>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Система мотивации</span>
+    <h1>KPI отдела ассистентов</h1>
+    <p class="lead">Четыре слоя дохода: оклад за надёжность, бонус до 50 000 ₽ за качество работы, комиссия с реальной экономии и призы за закрытые раздражители руководителя. Плюс четыре альтернативные модели и защита от накрутки каждой метрики.</p>
+  </div>
+</header>
+
+<section id="struktura">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Слой 1 — 4</div>
+      <h2>Из чего складывается доход</h2>
+      <p>Слои независимы: провал в одном не обнуляет остальные. Это принципиально — ассистент должен видеть, что даже в плохой месяц у него остаётся смысл стараться в другой плоскости.</p>
+    </div>
+
+    <div class="grid g4">
+      <div class="card hoverable reveal">
+        <div class="layer-num">1</div>
+        <h4>Оклад</h4>
+        <div class="big">Фикс</div>
+        <p class="muted" style="margin-top:8px">За доступность в SLA-окне и дисциплину связи. <strong style="color:var(--fg-2)">Не режется коэффициентами</strong> — иначе это не KPI, а штраф, и ассистент начнёт искать другую работу.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="layer-num">2</div>
+        <h4>KPI-бонус</h4>
+        <div class="big">до 50 000 ₽</div>
+        <p class="muted" style="margin-top:8px">Матрица из 4 метрик, оценка 0–10. Кэф 10 → вся сумма. Слабую метрику вытягивают сильные, но не полностью бесплатно.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="layer-num">3</div>
+        <h4>Комиссия с экономии</h4>
+        <div class="big">30 %</div>
+        <p class="muted" style="margin-top:8px">С каждого сэкономленного рубля — при доказанной базе отсчёта. Единственный слой без потолка по своей природе, поэтому к нему нужны правила.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <div class="layer-num">4</div>
+        <h4>Призы за заёбы</h4>
+        <div class="big">3–15 000 ₽</div>
+        <p class="muted" style="margin-top:8px">За каждый закрытый пункт из реестра раздражителей. Закрыт = не возвращался 30 дней, а не «предложил решение».</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <div class="title">Здоровая пропорция</div>
+      <p class="fg2" style="margin:0">Переменная часть должна составлять <strong>25–40 % дохода</strong>. Меньше — не мотивирует. Больше — человек живёт в тревоге и начинает оптимизировать метрику вместо работы. При окладе 120 000 ₽ и переменной ~70 000 ₽ получается 37 % — рабочая зона.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="matrica">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Модель А — рекомендуемая</div>
+      <h2>Матрица: как считается кэф</h2>
+      <p>Четыре метрики, каждая оценивается от 0 до 10. Итоговый Score — их взвешенная сумма. Кэф = Score ÷ 10.</p>
+    </div>
+
+    <div class="formula reveal" style="margin-bottom:20px">
+      Score <span class="op">=</span> <span class="w">0.35</span>·Качество <span class="op">+</span> <span class="w">0.25</span>·Скорость <span class="op">+</span> <span class="w">0.20</span>·Автономность <span class="op">+</span> <span class="w">0.20</span>·Проактивность<br>
+      Бонус <span class="op">=</span> 50 000 <span class="op">×</span> (Score <span class="op">/</span> 10) <span class="op">×</span> Множитель<sub>NPS</sub> <span class="op">×</span> Отсечка
+    </div>
+
+    <div class="tbl-scroll reveal" style="margin-bottom:22px">
+      <table>
+        <thead><tr><th>Метрика</th><th class="num">Вес</th><th>Что реально меряет</th><th>Как считается</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Качество</strong></td><td class="num"><strong>35 %</strong></td>
+            <td>Насколько результат совпал с тем, что было нужно</td>
+            <td>Средневзвешенная оценка задач по сложности: <em>Σ(оценка × вес) ÷ Σвесов</em></td>
+          </tr>
+          <tr>
+            <td><strong>Скорость</strong></td><td class="num"><strong>25 %</strong></td>
+            <td>Реакция снимает тревогу, срок закрывает задачу</td>
+            <td><em>0.4 × Реакция + 0.6 × SLA.</em> Реакция — % подтверждений «принял» за 15 мин. SLA — % задач в срок</td>
+          </tr>
+          <tr>
+            <td><strong>Автономность</strong></td><td class="num"><strong>20 %</strong></td>
+            <td>Сколько раз ассистент <em>не</em> отвлёк руководителя</td>
+            <td>% задач без лишних уточнений и без возврата на доработку, отнесённый к норме грейда</td>
+          </tr>
+          <tr>
+            <td><strong>Проактивность</strong></td><td class="num"><strong>20 %</strong></td>
+            <td>Что ассистент придумал и закрыл сам, до просьбы</td>
+            <td><em>min(10, факт ÷ норма × 10).</em> Норма — 4–6 полезных инициатив в месяц</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3>Шкала оценки задачи</h3>
+        <p class="muted" style="margin-bottom:16px">Оценка ставится <strong style="color:var(--fg-2)">в момент закрытия задачи</strong>, одним тапом. Если копить до конца месяца — поставите по последнему впечатлению, и система развалится.</p>
+        <div class="tbl-scroll" style="box-shadow:none">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td class="num" style="width:44px"><span class="tag t-green">10</span></td><td>Сделал лучше, чем просил: закрыл смежное, я вообще не думал об этой задаче</td></tr>
+              <tr><td class="num"><span class="tag t-green">8</span></td><td>Сделал как просил, в срок, без правок</td></tr>
+              <tr><td class="num"><span class="tag t-blue">6</span></td><td>Сделал, но один раз вернул или переспрашивал</td></tr>
+              <tr><td class="num"><span class="tag t-amber">4</span></td><td>Косяки: две и более итерации, или часть доделывал сам</td></tr>
+              <tr><td class="num"><span class="tag t-red">2</span></td><td>Переделывал заново</td></tr>
+              <tr><td class="num"><span class="tag t-red">0</span></td><td>Не сделал или сорвал молча</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Вес задачи и отсечки</h3>
+        <h4 style="margin-top:14px">Вес по сложности</h4>
+        <ul class="clean">
+          <li><strong>×1</strong> — мелочь до 15 минут</li>
+          <li><strong>×2</strong> — обычная задача до 2 часов</li>
+          <li><strong>×3</strong> — проект на день и больше</li>
+          <li><strong>×1.5</strong> дополнительно — ночь, выходной, форс-мажор</li>
+        </ul>
+        <p class="muted" style="margin-top:10px">Без весов ассистент наберёт десяток на мелочах и обойдёт того, кто вёз переезд.</p>
+
+        <h4 style="margin-top:20px">Отсечка за провал</h4>
+        <p class="muted">Любая метрика ниже 5 → весь итог × 0.85. Вытянуть можно, но не бесплатно — иначе качество приносят в жертву скорости.</p>
+
+        <h4 style="margin-top:20px">Множитель NPS</h4>
+        <p class="muted">Раз в месяц одна цифра от вас: «насколько мне стало легче жить», 0–10. Покрывает всё, что не формализуется.</p>
+        <p class="muted"><strong style="color:var(--green)">9–10 → ×1.1</strong> · 7–8 → ×1.0 · 5–6 → ×0.9 · <strong style="color:var(--red)">≤4 → ×0.75</strong></p>
+      </div>
+    </div>
+
+    <div class="note red reveal">
+      <div class="title">Стоп-факторы: бонус за месяц = 0</div>
+      <p class="fg2" style="margin:0">Срыв критичной задачи без предупреждения · пропажа со связи дольше 12 часов в рабочее окно · утечка доступов или личных данных · приписка в отчётности (заявленная экономия, которой не было). Список короткий и закрытый — расширять его задним числом нельзя, иначе доверие к системе исчезнет за один месяц.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="calc">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Интерактивно</div>
+      <h2>Калькулятор месяца</h2>
+      <p>Подвигайте ползунки — увидите, как метрики вытягивают друг друга и где система начинает резать.</p>
+    </div>
+
+    <div class="calc">
+      <div class="card reveal">
+        <div class="slider-row">
+          <div class="slider-top"><label for="q">Качество <span class="wt">вес 35 %</span></label><span class="val" id="qv">8.40</span></div>
+          <input type="range" id="q" min="0" max="10" step="0.01" value="8.40" aria-label="Качество, от 0 до 10">
+        </div>
+        <div class="slider-row">
+          <div class="slider-top"><label for="s">Скорость <span class="wt">вес 25 %</span></label><span class="val" id="sv">9.22</span></div>
+          <input type="range" id="s" min="0" max="10" step="0.01" value="9.22" aria-label="Скорость, от 0 до 10">
+        </div>
+        <div class="slider-row">
+          <div class="slider-top"><label for="a">Автономность <span class="wt">вес 20 %</span></label><span class="val" id="av">8.94</span></div>
+          <input type="range" id="a" min="0" max="10" step="0.01" value="8.94" aria-label="Автономность, от 0 до 10">
+        </div>
+        <div class="slider-row">
+          <div class="slider-top"><label for="p">Проактивность <span class="wt">вес 20 %</span></label><span class="val" id="pv">10.00</span></div>
+          <input type="range" id="p" min="0" max="10" step="0.01" value="10" aria-label="Проактивность, от 0 до 10">
+        </div>
+
+        <div class="divider" style="margin:24px 0 20px"></div>
+
+        <div class="field">
+          <label for="nps">Оценка руководителя за месяц (NPS)</label>
+          <select id="nps">
+            <option value="1.1">9–10 — стало заметно легче жить (×1.1)</option>
+            <option value="1" selected>7–8 — нормально, как договаривались (×1.0)</option>
+            <option value="0.9">5–6 — были ощутимые провалы (×0.9)</option>
+            <option value="0.75">0–4 — я почти не почувствовал помощи (×0.75)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="eco">Подтверждённая экономия за месяц, ₽</label>
+          <input type="number" id="eco" value="66600" min="0" step="1000">
+          <div class="hint">Считается по регрессивной шкале: 30 % с первых 50 000 ₽, 20 % с 50–150 тыс., 10 % свыше.</div>
+        </div>
+
+        <div class="field" style="margin-bottom:0">
+          <label for="zae">Призы за закрытые заёбы к выплате в этом месяце, ₽</label>
+          <input type="number" id="zae" value="6500" min="0" step="500">
+          <div class="hint">Половина при внедрении + половина через 30 дней стабильной работы.</div>
+        </div>
+      </div>
+
+      <div class="result reveal">
+        <div class="score-badge">
+          <div>
+            <div class="lbl">Score</div>
+            <div class="muted" style="font-size:12.5px;margin-top:2px">кэф <span id="kf">0.90</span></div>
+          </div>
+          <div class="sc" id="score">9.03</div>
+        </div>
+
+        <div class="res-line"><span class="k">KPI-бонус</span><span class="v" id="rBonus">45 165 ₽</span></div>
+        <div class="res-line"><span class="k">Комиссия с экономии</span><span class="v" id="rEco">18 320 ₽</span></div>
+        <div class="res-line"><span class="k">Призы за заёбы</span><span class="v" id="rZae">6 500 ₽</span></div>
+
+        <div class="res-total"><span class="k">Сверх оклада</span><span class="v" id="rTotal">69 985 ₽</span></div>
+
+        <div class="warn" id="warnCut" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="ekonomiya">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Слой 3</div>
+      <h2>Экономия: 30 % с каждого рубля</h2>
+      <p>Самый мотивирующий слой и самый уязвимый для накрутки. Всё держится на одном: <strong>база отсчёта должна быть доказана до начала переговоров</strong>.</p>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:22px">
+      <div class="card reveal">
+        <h3 style="color:var(--green)">Считается экономией</h3>
+        <ul class="clean check">
+          <li>Прямой торг: договорился с арендодателем на −30 % от заявленной цены</li>
+          <li>Альтернатива того же уровня: нашёл вариант дешевле, качество не ниже ТЗ</li>
+          <li>Возвраты, компенсации, чарджбэки, возмещения от авиакомпаний</li>
+          <li>Отмена неиспользуемых подписок — эффект за 3 месяца вперёд</li>
+          <li>Апгрейды, мили, бонусы — по денежному эквиваленту</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3 style="color:var(--red)">Не считается</h3>
+        <ul class="clean cross">
+          <li>Публичная акция или промокод, доступный всем без переговоров</li>
+          <li>Автоматическая скидка платформы за длительность</li>
+          <li>Экономия за счёт падения качества ниже ТЗ — тут право вето, экономия обнуляется</li>
+          <li>Экономия на том, что вообще не нужно было покупать</li>
+          <li>Любая сумма без скриншота базовой цены до начала переговоров</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note amber reveal">
+      <div class="title">Длинные контракты — по факту, а не авансом</div>
+      <p class="fg2" style="margin:0">Скидка на годовую аренду не выплачивается в первый месяц целиком. Экономия засчитывается по мере прожитых месяцев. Иначе ассистент получает комиссию за год, а вы съезжаете через шесть недель.</p>
+    </div>
+
+    <h3 class="reveal" style="margin:26px 0 14px">Три варианта ставки — выбрать один</h3>
+    <div class="tbl-scroll reveal">
+      <table>
+        <thead><tr><th>Вариант</th><th>Механика</th><th>Плюс</th><th>Минус</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>А. Плоская</strong><br><span class="tag t-blue" style="margin-top:6px">просто</span></td>
+            <td>30 % от любой экономии, потолок 30 000 ₽ в месяц</td>
+            <td>Считается в уме, понятно каждому с первого раза</td>
+            <td>Потолок гасит интерес к крупным сделкам — а именно они приносят больше всего</td>
+          </tr>
+          <tr>
+            <td><strong>Б. Регрессивная</strong><br><span class="tag t-green" style="margin-top:6px">рекомендую</span></td>
+            <td>30 % с первых 50 тыс., 20 % с 50–150 тыс., 10 % свыше. Потолка нет</td>
+            <td>Крупная сделка не разоряет бюджет, но и не обнуляет мотивацию</td>
+            <td>Нужен калькулятор, в уме не посчитать</td>
+          </tr>
+          <tr>
+            <td><strong>В. С отложенной половиной</strong></td>
+            <td>30 % без потолка, но на суммах свыше 100 тыс.: половина сразу, половина через 90 дней</td>
+            <td>Защита от экономии, которая «отвалилась»: съехали, вернули, качество подвело</td>
+            <td>Ассистент ждёт деньги квартал — работает только при высоком доверии</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted reveal" style="margin-top:14px">Рабочая комбинация — <strong style="color:var(--fg-2)">Б + В</strong>: регрессивная шкала как основа, отложенная половина включается на суммах свыше 100 000 ₽.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="zaeby">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Слой 4</div>
+      <h2>Реестр заёбов</h2>
+      <p>Отдельная доска, где каждая карточка — одна вещь, которая вас регулярно бесит. У карточки есть цена. Ассистент видит прайс-лист вашей жизни и охотится за ним.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:22px">
+      <div class="card hoverable reveal">
+        <h4>Как заводится карточка</h4>
+        <p class="muted">Описание · частота (раз в неделю) · что именно жрёт: время или нервы · критерий закрытия · тариф. Заводит руководитель. Ассистент может предложить карточку — если вы согласились её завести, ему идёт +1 к проактивности.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h4>Когда считается закрытой</h4>
+        <p class="muted">Проблема <strong style="color:var(--fg-2)">не возвращалась 30 дней</strong>. Не «предложил решение», не «купил стол», а «месяц не всплывало». Выплата 50 % при внедрении, 50 % через 30 дней.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h4>Лимит на месяц</h4>
+        <p class="muted">Не больше <strong style="color:var(--fg-2)">двух</strong> закрытых заёбов в зачёт. Остальные переносятся. Иначе ассистент бросит операционку и уйдёт в охоту за призами — а операционка и есть его работа.</p>
+      </div>
+    </div>
+
+    <div class="grid g4" style="margin-bottom:24px">
+      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-blue">S</span><div class="big" style="margin-top:10px">3 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит редко, решается один раз</p></div>
+      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-blue">M</span><div class="big" style="margin-top:10px">5 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит каждую неделю</p></div>
+      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-amber">L</span><div class="big" style="margin-top:10px">10 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит ежедневно или бьёт по работоспособности</p></div>
+      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-red">XL</span><div class="big" style="margin-top:10px">15 000 ₽</div><p class="muted" style="margin:6px 0 0">Бьёт по здоровью, нужен внедрённый процесс</p></div>
+    </div>
+
+    <h3 class="reveal" style="margin-bottom:14px">Стартовый реестр — 13 карточек</h3>
+    <div class="tbl-scroll reveal">
+      <table style="min-width:760px">
+        <thead><tr><th style="width:22%">Заёб</th><th style="width:34%">Что делает ассистент</th><th style="width:28%">Критерий закрытия</th><th class="num" style="width:16%">Тариф</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Работаю сидя — в съёмных хатах нет подъёмного стола</strong></td>
+            <td>Фильтр объявлений по наличию стола; если нет — договориться с хозяином или заложить в бюджет регулируемую надставку; «стоячий кит» в постоянном тревел-листе</td>
+            <td>Три заезда подряд: рабочее место стоя готово в день заселения</td>
+            <td class="num"><span class="tag t-amber">L</span><br><strong>10 000</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Долго засыпаю</strong></td>
+            <td>Ведёт по Military Sleep: вечерний чеклист, подготовка спальни (шторы, температура, тишина), ежедневный трекинг</td>
+            <td>21 день программы пройден, среднее время засыпания менее 15 минут в 80 % ночей по трекеру</td>
+            <td class="num"><span class="tag t-red">XL</span><br><strong>15 000</strong></td>
+          </tr>
+          <tr>
+            <td>Вечно ищу документ, страховку, справку</td>
+            <td>Единый сейф: доступы в менеджере паролей, сканы в структурированном хранилище, один индекс на всё</td>
+            <td>Любой документ находится за 60 секунд без участия ассистента</td>
+            <td class="num"><span class="tag t-blue">M</span><br><strong>5 000</strong></td>
+          </tr>
+          <tr>
+            <td>Ресёрч перед каждым переездом с нуля: виза, симка, банк, налоги</td>
+            <td>Пакет «Релокация»: шаблон-чеклист по стране, заполняется один раз и переиспользуется</td>
+            <td>Следующий переезд: ноль бытовых вопросов ко мне</td>
+            <td class="num"><span class="tag t-amber">L</span><br><strong>10 000</strong></td>
+          </tr>
+          <tr>
+            <td>Интернет в новой квартире оказывается непригодным для созвонов</td>
+            <td>Замер скорости до подписания — просить хозяина прислать спидтест; резервная симка и роутер в тревел-ките</td>
+            <td>Три заезда подряд без просадки связи на созвонах</td>
+            <td class="num"><span class="tag t-amber">L</span><br><strong>10 000</strong></td>
+          </tr>
+          <tr>
+            <td>Разбор входящих: сотни непрочитанных в мессенджерах и почте</td>
+            <td>Фильтрация, шаблоны ответов, ежедневный дайджест «что действительно требует тебя»</td>
+            <td>Две недели подряд: входящие разобраны к 19:00</td>
+            <td class="num"><span class="tag t-amber">L</span><br><strong>10 000</strong></td>
+          </tr>
+          <tr>
+            <td>Не дохожу до врача и чекапа</td>
+            <td>Организует чекап в текущей стране под ключ: клиника, запись, перевод, сопровождение</td>
+            <td>Чекап пройден, результаты в хранилище</td>
+            <td class="num"><span class="tag t-amber">L</span><br><strong>10 000</strong></td>
+          </tr>
+          <tr>
+            <td>Ем что попало, доставка каждый день выходит дорого</td>
+            <td>Меню на неделю и закупка в первые 48 часов после заселения</td>
+            <td>Четыре недели подряд: холодильник укомплектован, доставка не чаще оговорённого</td>
+            <td class="num"><span class="tag t-blue">M</span><br><strong>5 000</strong></td>
+          </tr>
+          <tr>
+            <td>Встречи впритык, путаница в часовых поясах</td>
+            <td>Правило буфера 15 минут между встречами, все слоты с явным поясом, автопроверка при смене страны</td>
+            <td>Месяц без накладок и опозданий из-за поясов</td>
+            <td class="num"><span class="tag t-blue">M</span><br><strong>5 000</strong></td>
+          </tr>
+          <tr>
+            <td>Долгая раскачка утром</td>
+            <td>Утренний протокол: одежда, завтрак и первая задача дня готовятся накануне вечером</td>
+            <td>Три недели: старт работы в заявленное время в 80 % дней</td>
+            <td class="num"><span class="tag t-blue">M</span><br><strong>5 000</strong></td>
+          </tr>
+          <tr>
+            <td>В новом городе неделю ищу спортзал, кофейню, барбера</td>
+            <td>«Стартовый пакет района»: 5 точек с адресами, ценами и часами работы</td>
+            <td>Заезд: пакет готов на второй день</td>
+            <td class="num"><span class="tag t-blue">M</span><br><strong>5 000</strong></td>
+          </tr>
+          <tr>
+            <td>Плачу за подписки, которыми не пользуюсь</td>
+            <td>Аудит всех списаний, отмена мёртвых, реестр с датами продления</td>
+            <td>Разовый аудит + ежеквартальный отчёт</td>
+            <td class="num"><span class="tag t-blue">S</span><br><strong>3 000</strong> + комиссия</td>
+          </tr>
+          <tr>
+            <td>При переездах теряются зарядки и переходники</td>
+            <td>Стандартный тревел-кит, чеклист сборки и разборки, проверка на выезде</td>
+            <td>Три переезда без потерь</td>
+            <td class="num"><span class="tag t-blue">S</span><br><strong>3 000</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note amber reveal">
+      <div class="title">Про личную территорию</div>
+      <p class="fg2" style="margin:0">Сон, питание, врачи — это личное. Такие карточки работают только по обоюдному согласию и с проговорёнными границами: что ассистенту можно знать, что нельзя, и в какой момент он обязан отступить. Без этого разговора реестр из инструмента превращается в источник напряжения.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="modeli">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Варианты Б — Д</div>
+      <h2>Четыре альтернативные модели</h2>
+      <p>Матрица (модель А) — компенсаторная: слабую метрику вытягивают сильные. Если это окажется слишком мягко или слишком сложно — вот чем её заменить.</p>
+    </div>
+
+    <div class="tbl-scroll reveal">
+      <table style="min-width:820px">
+        <thead><tr><th style="width:17%">Модель</th><th style="width:29%">Как считается</th><th style="width:18%">Кому подходит</th><th style="width:18%">Сильная сторона</th><th style="width:18%">Слабое место</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Б. Мультипликативная</strong><br><span class="tag t-red" style="margin-top:6px">жёсткая</span></td>
+            <td><code>50 000 × K<sub>кач</sub> × K<sub>скор</sub> × K<sub>авт</sub></code>, каждый в диапазоне 0.7–1.1. Провал одной метрики бьёт по всей сумме: 1.0 × 1.0 × 0.7 = 0.7 → 35 000 ₽</td>
+            <td>Опытным ассистентам, где косяк в качестве стоит дорого</td>
+            <td>Нельзя закрыть провал в качестве бурной активностью</td>
+            <td>Нет вытягивания вообще — при неудачном месяце руки опускаются</td>
+          </tr>
+          <tr>
+            <td><strong>В. Гибрид</strong><br><span class="tag t-green" style="margin-top:6px">запасной №1</span></td>
+            <td>50 000 ₽ делятся: <strong>35 000</strong> по матрице (вытягивание работает) + <strong>15 000</strong> «гейт» — платится целиком, только если все метрики ≥ 7 и нет стоп-факторов</td>
+            <td>Когда матрица А оказалась слишком мягкой</td>
+            <td>Есть и компенсация, и защита от заваленного направления</td>
+            <td>Гейт «всё или ничего» может демотивировать при 6.9 по одной метрике</td>
+          </tr>
+          <tr>
+            <td><strong>Г. Банк баллов</strong><br><span class="tag t-blue" style="margin-top:6px">прозрачная</span></td>
+            <td>Никаких процентов. У задачи цена в баллах: 1 / 3 / 8 / 20. Балл = 150 ₽. Оценка качества умножает баллы (×0 … ×1.2). Потолок 50 000 ₽</td>
+            <td>Потоку однотипных задач, нескольким ассистентам в общей очереди</td>
+            <td>Ассистент видит заработок в реальном времени, спорить не о чем</td>
+            <td>Провоцирует набирать мелочь — нужен контроль распределения задач</td>
+          </tr>
+          <tr>
+            <td><strong>Д. Доля от результата</strong><br><span class="tag t-amber" style="margin-top:6px">для сильных</span></td>
+            <td>Процент от денежного эффекта: экономия + выручка, к которой ассистент приложился. Матрица уходит на второй план</td>
+            <td>Ассистенту, который фактически ведёт проекты, а не операционку</td>
+            <td>Полное совпадение интересов, потолок дохода снимается</td>
+            <td>Расфокус: рутина, которая не оцифровывается в деньги, начинает проседать</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="dopolnitelno">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Дополнительные параметры</div>
+      <h2>Ещё десять рычагов</h2>
+      <p>Можно вводить по одному, а не сразу. Первые три — самые ценные именно для руководителя отдела, а не одного ассистента.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card hoverable reveal">
+        <span class="tag t-green">приоритет</span>
+        <h3 style="margin-top:10px">1. Возвращённое время</h3>
+        <p class="muted">При постановке задачи вы отмечаете: «сколько бы это заняло у меня». Сумма за месяц = высвобожденные часы. Норма 40 ч. Это главная метрика смысла ассистента: она показывает и ему, и вам, во сколько раз он себя отбивает. Можно не заводить в бонус, но обязательно показывать в отчёте.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <span class="tag t-green">приоритет</span>
+        <h3 style="margin-top:10px">2. Регламентизация</h3>
+        <p class="muted">Сколько процессов ассистент описал и передал. Для отдела это ключевое: личный опыт одного человека превращается в актив команды и снижает риск при его уходе. Отдельный приз <strong style="color:var(--fg-2)">3–5 000 ₽</strong> за регламент, которым реально воспользовался другой ассистент.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <span class="tag t-green">приоритет</span>
+        <h3 style="margin-top:10px">3. Командный коэффициент</h3>
+        <p class="muted">15–20 % бонуса завязано на результат отдела: подхват задач коллеги в отпуске и болезни, отсутствие провалов в команде. Без этого ассистенты не помогают друг другу — им невыгодно.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h3>4. Ноль повторов</h3>
+        <p class="muted">Вторая одинаковая ошибка — минус 1 балл из качества за каждый повтор. Обратная сторона: ассистент обязан вести личную базу знаний и пополнять её после каждого косяка. Ошибка допустима, повтор — нет.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h3>5. Грейды A1 / A2 / A3</h3>
+        <p class="muted">У каждого свой оклад, свой бонусный пул и своя норма автономности: 50 % / 70 % / 85 %. Рост — три месяца с кэфом ≥ 0.85, сданные регламенты и закрытые заёбы. Даёт карьеру там, где её обычно нет, и это сильно держит людей.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h3>6. Квартальный множитель</h3>
+        <p class="muted">Три месяца подряд с кэфом ≥ 0.9 → квартальная премия в размере одного KPI-бонуса сверху. Работает против текучки: уходить перед выплатой дорого.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h3>7. Проектные фиксы</h3>
+        <p class="muted">Переезд в страну, организация мероприятия, наём — фикса <strong style="color:var(--fg-2)">10–30 000 ₽</strong> отдельно от KPI. Крупный проект не должен растворяться в общей матрице наравне с бронью такси.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h3>8. Коэффициент неудобства</h3>
+        <p class="muted">Задача ночью, в выходной, в форс-мажоре — вес ×1.5. Компенсирует человеку испорченный вечер и делает так, что трубку берут. Без этого ассистент начнёт незаметно уходить в офлайн после шести.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h3>9. Мягкий вход</h3>
+        <p class="muted">Первые два месяца бонус считается, но не режется ниже 50 %. Человек ещё не знает контекста — наказывать за это нечестно, а посчитанные цифры за этот период дают вам калибровку норм.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h3>10. Право на стоп-задачу</h3>
+        <p class="muted">Раз в месяц ассистент может отказаться от одной задачи без влияния на KPI, назвав причину. Защита от выгорания и честный сигнал вам о том, что именно в потоке невыносимо.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="gaming">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Защита системы</div>
+      <h2>Как каждую метрику накрутят</h2>
+      <p>Любой KPI начинают обыгрывать со второго месяца. Это не про плохих людей — это нормальная реакция на цифру, от которой зависят деньги. Контрмеры нужно закладывать сразу, а не после первого случая.</p>
+    </div>
+
+    <div class="tbl-scroll reveal">
+      <table style="min-width:700px">
+        <thead><tr><th style="width:20%">Метрика</th><th style="width:40%">Как накрутят</th><th style="width:40%">Контрмера</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Скорость</strong></td><td>Брать только мелкие быстрые задачи</td><td>Вес задачи по сложности, средневзвешенный расчёт — десять мелочей не перевесят один проект</td></tr>
+          <tr><td><strong>Скорость</strong></td><td>Ответить «принял» и не делать</td><td>Реакция и выполнение — две разные подметрики, «принял» без результата даёт 0.4 от веса</td></tr>
+          <tr><td><strong>Качество</strong></td><td>Просить себе задачи полегче</td><td>Распределяет руководитель, а не ассистент. При очереди — по правилу, а не по выбору</td></tr>
+          <tr><td><strong>Экономия</strong></td><td>Завысить базовую цену задним числом</td><td>Скриншот базы до начала переговоров. Нет скрина — экономии нет, без исключений</td></tr>
+          <tr><td><strong>Экономия</strong></td><td>Сэкономить, сняв квартиру хуже</td><td>Право вето: результат ниже ТЗ — экономия обнуляется полностью</td></tr>
+          <tr><td><strong>Экономия</strong></td><td>Записать публичную акцию как свою скидку</td><td>Автоматические и общедоступные скидки в зачёт не идут по определению</td></tr>
+          <tr><td><strong>Заёбы</strong></td><td>Закрыть формально: купил стол, отчитался</td><td>Выплата 50 / 50, вторая половина через 30 дней без рецидива</td></tr>
+          <tr><td><strong>Проактивность</strong></td><td>Придумывать активность ради галочки</td><td>Засчитываете только вы и только то, что реально пригодилось</td></tr>
+          <tr><td><strong>Автономность</strong></td><td>Перестать задавать вопросы и налажать</td><td>Связка с качеством: молча сделанный не тот результат бьёт по метрике с весом 35 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note reveal">
+      <div class="title">Уточняющий вопрос — это не минус</div>
+      <p class="fg2" style="margin:0">Автономность падает только от вопросов, ответ на которые <strong>уже есть</strong> в регламенте, базе знаний или в вашей переписке. Вопрос по существу задачи — это плюс, а не минус. Если это не проговорить прямо, вы получите ассистента, который боится спросить и поэтому делает не то.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="primer">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Проверка на цифрах</div>
+      <h2>Пример расчёта за месяц</h2>
+      <p>Ассистент грейда A2, оклад условно 120 000 ₽. Все промежуточные значения показаны, чтобы формулу можно было проверить вручную.</p>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:18px">
+      <div class="card reveal">
+        <h3>Метрики</h3>
+        <div class="tbl-scroll" style="box-shadow:none;border:none">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td><strong>Качество</strong><br><span class="muted">46 задач, сумма весов 78, Σ(оценка×вес) = 655</span></td><td class="num"><strong>8.4</strong><br><span class="muted">× 0.35 = 2.940</span></td></tr>
+              <tr><td><strong>Скорость</strong><br><span class="muted">реакция 91 % → 9.1; SLA 93 % → 9.3</span></td><td class="num"><strong>9.22</strong><br><span class="muted">× 0.25 = 2.305</span></td></tr>
+              <tr><td><strong>Автономность</strong><br><span class="muted">76 % при норме грейда 70 %</span></td><td class="num"><strong>8.94</strong><br><span class="muted">× 0.20 = 1.788</span></td></tr>
+              <tr><td><strong>Проактивность</strong><br><span class="muted">5 инициатив при норме 4</span></td><td class="num"><strong>10.0</strong><br><span class="muted">× 0.20 = 2.000</span></td></tr>
+              <tr><td><strong>Score</strong><br><span class="muted">все метрики ≥ 5, отсечки нет · NPS 8 → ×1.0</span></td><td class="num"><strong style="font-size:20px;color:var(--accent)">9.03</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Деньги</h3>
+        <div class="res-line"><span class="k">KPI-бонус<br><span class="muted">50 000 × 0.9033</span></span><span class="v">45 165 ₽</span></div>
+        <div class="res-line"><span class="k">Экономия в зачёт<br><span class="muted">аренда 180 000 → 126 000 за первый прожитый месяц = 54 000; отмена двух подписок 4 200 × 3 мес = 12 600</span></span><span class="v">66 600 ₽</span></div>
+        <div class="res-line"><span class="k">Комиссия по шкале Б<br><span class="muted">50 000 × 30 % = 15 000 · 16 600 × 20 % = 3 320</span></span><span class="v">18 320 ₽</span></div>
+        <div class="res-line"><span class="k">Призы за заёбы<br><span class="muted">закрыт «подъёмный стол» (L) — первая половина 5 000 · вторая половина за тревел-кит (S) 1 500</span></span><span class="v">6 500 ₽</span></div>
+        <div class="res-total"><span class="k">Сверх оклада</span><span class="v">69 985 ₽</span></div>
+        <p class="muted" style="margin-top:14px">Итого доход за месяц <strong style="color:var(--fg-2)">189 985 ₽</strong>. Переменная часть — 36.8 % от дохода, ровно в здоровой зоне.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="vnedrenie">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">План</div>
+      <h2>Внедрение за две недели</h2>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:20px">
+      <div class="card reveal">
+        <h3>Неделя 1</h3>
+        <ul class="clean">
+          <li>Завести в трекере поля: оценка, вес задачи, срок, отметка о реакции</li>
+          <li>Написать положение на одну страницу — формула, шкала, стоп-факторы</li>
+          <li>Показать ассистентам и <strong style="color:var(--fg-2)">собрать возражения до запуска</strong>, а не после</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3>Неделя 2</h3>
+        <ul class="clean">
+          <li>Завести реестр заёбов: 10–15 карточек с проставленными тарифами</li>
+          <li>Настроить шаблон месячного отчёта — заполняется за 10 минут</li>
+          <li>Назначить фиксированный день подведения итогов, например 3-е число</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3>Месяцы 1–2: калибровка</h3>
+        <p class="muted">Считаем всё, но бонус не режем ниже 50 %. За два месяца станет видно, где нормы завышены: если у всех автономность 45 % при норме 70 % — проблема в норме, а не в людях.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Месяц 3: полный запуск</h3>
+        <p class="muted">Нормы скорректированы по факту, ассистенты уже понимают систему изнутри и не воспринимают её как внезапный штраф.</p>
+      </div>
+    </div>
+
+    <div class="note red reveal" style="margin-top:22px">
+      <div class="title">Главный риск: система умрёт от собственного веса</div>
+      <p class="fg2" style="margin:0">Если подведение итогов занимает у вас больше <strong>30 минут в месяц на человека</strong> — вы бросите это к четвёртому месяцу, и хуже станет всем: люди уже перестроились под цифры, а цифры исчезли. Поэтому оценка ставится одним тапом при закрытии задачи, а не собирается вручную в конце месяца. Если трекер не позволяет — сначала чините трекер, потом запускайте KPI.</p>
+    </div>
+
+    <div class="note amber reveal">
+      <div class="title">Юридическая часть — к юристу, не ко мне</div>
+      <p class="fg2" style="margin:0">Общий принцип: в зависимость от KPI ставят премиальную часть, а не оклад. Как именно это оформить — положением о премировании, приложением к трудовому договору или к договору с самозанятым — зависит от юрисдикции и формы найма ваших ассистентов. Конкретные формулировки должен проверить юрист: я не даю правовой оценки и не знаю, как оформлены ваши люди.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Все суммы и нормы — параметры, а не константы. Меняйте под свой бюджет: формула остаётся той же.</p>
+    <p style="color:var(--fg-3);font-size:13px">Собрано 21 августа 2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var fmt = function(n){ return Math.round(n).toLocaleString('ru-RU') + ' ₽'; };
+
+  var ids = ['q','s','a','p'];
+  var weights = {q:0.35, s:0.25, a:0.20, p:0.20};
+  var el = {};
+  ids.forEach(function(i){ el[i] = document.getElementById(i); el[i+'v'] = document.getElementById(i+'v'); });
+  var nps = document.getElementById('nps');
+  var eco = document.getElementById('eco');
+  var zae = document.getElementById('zae');
+
+  var out = {
+    score: document.getElementById('score'),
+    kf: document.getElementById('kf'),
+    bonus: document.getElementById('rBonus'),
+    eco: document.getElementById('rEco'),
+    zae: document.getElementById('rZae'),
+    total: document.getElementById('rTotal'),
+    warn: document.getElementById('warnCut')
+  };
+
+  function commission(sum){
+    if (!(sum > 0)) return 0;
+    var c = 0;
+    c += Math.min(sum, 50000) * 0.30;
+    if (sum > 50000) c += Math.min(sum - 50000, 100000) * 0.20;
+    if (sum > 150000) c += (sum - 150000) * 0.10;
+    return c;
+  }
+
+  function calc(){
+    var v = {};
+    ids.forEach(function(i){
+      v[i] = parseFloat(el[i].value);
+      el[i+'v'].textContent = v[i].toFixed(2);
+    });
+
+    var score = v.q*weights.q + v.s*weights.s + v.a*weights.a + v.p*weights.p;
+    var low = ids.some(function(i){ return v[i] < 5; });
+    var cut = low ? 0.85 : 1;
+    var mult = parseFloat(nps.value);
+
+    var bonus = 50000 * (score/10) * mult * cut;
+    var ecoSum = Math.max(0, parseFloat(eco.value) || 0);
+    var ecoPay = commission(ecoSum);
+    var zaeSum = Math.max(0, parseFloat(zae.value) || 0);
+
+    out.score.textContent = score.toFixed(2);
+    out.kf.textContent = (score/10).toFixed(2);
+    out.bonus.textContent = fmt(bonus);
+    out.eco.textContent = fmt(ecoPay);
+    out.zae.textContent = fmt(zaeSum);
+    out.total.textContent = fmt(bonus + ecoPay + zaeSum);
+
+    var msgs = [];
+    if (low) msgs.push('Одна из метрик ниже 5 — сработала отсечка ×0.85.');
+    if (mult < 1) msgs.push('Оценка руководителя ниже 7 — множитель ' + mult + '.');
+    if (mult > 1) msgs.push('Оценка руководителя 9–10 — бонус может превысить 50 000 ₽, это осознанный овер-перформанс.');
+    if (msgs.length){ out.warn.textContent = msgs.join(' '); out.warn.hidden = false; }
+    else { out.warn.hidden = true; }
+  }
+
+  ids.forEach(function(i){ el[i].addEventListener('input', calc); });
+  [nps, eco, zae].forEach(function(n){ n.addEventListener('input', calc); n.addEventListener('change', calc); });
+  calc();
+
+  // плавная прокрутка по якорям
+  document.querySelectorAll('.nav a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var t = document.querySelector(a.getAttribute('href'));
+      if (t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+})();
+</script>
+
+<script type="module">
+  const root = document.documentElement;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    root.classList.add('js-anim');
+    // страховка: если модуль не загрузился за 1.2 с — показываем всё как есть
+    const failsafe = setTimeout(() => root.classList.remove('js-anim'), 1200);
+    try {
+      const { animate, inView, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      clearTimeout(failsafe);
+      inView('.reveal', (el) => {
+        animate(el, { opacity: [0, 1], y: [20, 0] }, { duration: 0.5, delay: 0.02, easing: [0.16, 1, 0.3, 1] });
+      }, { margin: '0px 0px -80px 0px' });
+      // подстраховка для элементов, уже находящихся во вьюпорте
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && getComputedStyle(el).opacity === '0') {
+            animate(el, { opacity: [0, 1], y: [20, 0] }, { duration: 0.5 });
+          }
+        });
+      }, 400);
+      document.querySelectorAll('.card.hoverable').forEach((c) => {
+        c.addEventListener('pointerenter', () => animate(c, { scale: 1.008 }, { duration: 0.2 }));
+        c.addEventListener('pointerleave', () => animate(c, { scale: 1 }, { duration: 0.2 }));
+      });
+    } catch (e) {
+      clearTimeout(failsafe);
+      root.classList.remove('js-anim');
+    }
+  }
+</script>
