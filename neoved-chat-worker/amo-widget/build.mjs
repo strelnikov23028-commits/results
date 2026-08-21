@@ -53,9 +53,9 @@ const locals = [];
 const central = [];
 let offset = 0;
 
-for (const entry of FILES) {
-  const name = typeof entry === 'string' ? entry : entry.name;
-  const data = await readFile(join(HERE, typeof entry === 'string' ? entry : entry.src));
+for (const item of FILES) {
+  const name = typeof item === 'string' ? item : item.name;
+  const data = await readFile(join(HERE, typeof item === 'string' ? item : item.src));
   const packed = deflateRawSync(data, { level: 9 });
   const crc = crc32(data);
   const nameBuf = Buffer.from(name, 'utf8');
