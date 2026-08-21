@@ -160,6 +160,12 @@ export default {
         if (url.pathname === '/api/ask' && request.method === 'POST') {
           return json(await apiAsk(request, env, cfg), origin, cfg);
         }
+        if (url.pathname === '/api/thread' && request.method === 'GET') {
+          return json(await apiThread(url, env, cfg), origin, cfg);
+        }
+        if (url.pathname === '/api/reply' && request.method === 'POST') {
+          return json(await apiReply(request, env, cfg), origin, cfg);
+        }
         if (url.pathname === '/api/poll' && request.method === 'GET') {
           return json(await apiPoll(url, env), origin, cfg);
         }
@@ -429,6 +435,77 @@ async function apiAsk(request, env, cfg) {
   return { ok: true, note_id: noteId };
 }
 
+/**
+ * Переписка сделки для чата в карточке amoCRM.
+ *
+ * Отдельного хранилища сообщений нет и не нужно: вся переписка и так лежит
+ * примечаниями в ленте сделки. Здесь она только раскладывается по сторонам —
+ * примечания, созданные по API (created_by = 0), написал клиент через виджет,
+ * остальные — менеджеры в интерфейсе. Служебные строки («Клиент указал ИНН»,
+ * сводка заявки) помечаются как системные, чтобы в чате они выглядели
+ * заметками, а не репликами.
+ */
+async function apiThread(url, env, cfg) {
+  if (!env.WIDGET_KEY) throw new HttpError('Чат не настроен: воркеру не задан WIDGET_KEY', 503);
+  if (str(url.searchParams.get('key'), 200) !== env.WIDGET_KEY) throw new HttpError('Неверный ключ доступа', 403);
+
+  const leadId = digits(str(url.searchParams.get('lead_id'), 20));
+  if (!leadId) throw new HttpError('Не указана сделка');
+
+  const res = await amo(`/api/v4/leads/${leadId}/notes?limit=250&order[id]=asc`, env);
+  const notes = (res?._embedded?.notes || []).filter((n) => String(n.note_type) === 'common');
+
+  const messages = [];
+  for (const note of notes) {
+    const text = String(note.params?.text || '').trim();
+    if (!text) continue;
+    const byManager = Boolean(Number(note.created_by || 0));
+    messages.push({
+      id: note.id,
+      at: note.created_at,
+      side: byManager ? 'manager' : (isServiceNote(text) ? 'system' : 'client'),
+      user_id: note.created_by || null,
+      text,
+    });
+  }
+  return { ok: true, lead_id: Number(leadId), messages };
+}
+
+/** Служебные строки, которые воркер пишет сам от лица интеграции. */
+const SERVICE_NOTE_RE = /^(Чат на сайте \(виджет\)|Клиент указал ИНН|Клиент оставил телефон|Менеджер запросил|Внимание: этот телефон|Компания с этим ИНН|К сделке добавлен новый контакт)/;
+const isServiceNote = (text) => SERVICE_NOTE_RE.test(text);
+
+/**
+ * Ответ менеджера, написанный в чате виджета. Примечание создаётся от имени
+ * самого менеджера (created_by), поэтому дальше всё идёт обычным путём: хук
+ * note_lead → очередь → чат на сайте. Метку «своё примечание» не ставим —
+ * иначе воркер сам же его и отфильтрует.
+ */
+async function apiReply(request, env, cfg) {
+  const body = await readJson(request);
+  if (!env.WIDGET_KEY) throw new HttpError('Чат не настроен: воркеру не задан WIDGET_KEY', 503);
+  if (str(body.key, 200) !== env.WIDGET_KEY) throw new HttpError('Неверный ключ доступа', 403);
+
+  const leadId = digits(str(body.lead_id, 20));
+  const userId = digits(str(body.user_id, 20));
+  const text = str(body.text, 4000);
+  if (!leadId) throw new HttpError('Не указана сделка');
+  if (!text) throw new HttpError('Пустое сообщение');
+  if (!userId) throw new HttpError('Не удалось определить менеджера');
+
+  const res = await amo(`/api/v4/leads/${leadId}/notes`, env, {
+    method: 'POST',
+    body: [{ note_type: 'common', created_by: Number(userId), params: { text } }],
+  });
+  const noteId = res?._embedded?.notes?.[0]?.id;
+
+  await writeLog(env, {
+    verdict: `ответ менеджера из карточки → клиенту (сделка ${leadId})`,
+    lead_id: leadId, note_id: noteId, user_id: userId, text: text.slice(0, 200),
+  });
+  return { ok: true, note_id: noteId };
+}
+
 async function apiPoll(url, env) {
   const sid = str(url.searchParams.get('sid'), 64);
   const after = Number(url.searchParams.get('after')) || 0;
@@ -451,29 +528,36 @@ async function getSession(env, sid) {
 
 // ─────────────────────────── amoCRM ───────────────────────────
 
+/**
+ * Порядок склейки повторяет логику самой amoCRM: всё сходится на организации.
+ *
+ *   ИНН → компания → её открытая сделка в воронке чата.
+ *   Нет ИНН (или у компании нет живой сделки) → сделка по контакту.
+ *
+ * Поэтому коллега, написавший с другой почты, попадает не в новую сделку, а в
+ * ту, где уже идёт разговор с его компанией: заводится второй контакт и
+ * подшивается и к сделке, и к карточке организации.
+ */
 async function syncToAmo(person, text, env, cfg) {
-  const contact = await findContact(person, env, cfg);
   const company = person.inn ? await ensureCompany(person, env, cfg) : null;
+  const contact = await ensureContact(person, company, env, cfg);
   const summary = firstNote(person, text);
 
-  // Контакта в базе нет — сделка, контакт и компания одним запросом.
-  if (!contact) {
-    const created = await createLeadWithContact(person, company, env, cfg);
-    await addNote(created.leadId, summary, env);
-    return { ...created, company, companyId: company?.id || null, verdict: 'создана сделка с новым контактом' };
+  let lead = company ? await openLeadOf('companies', company.id, env, cfg) : null;
+  let via = lead ? 'по компании' : null;
+  if (!lead) {
+    lead = await openLeadOf('contacts', contact.id, env, cfg);
+    via = lead ? 'по контакту' : null;
   }
 
-  await fillEmptyFields(contact, person, env, cfg);
-
-  // Повторное обращение: если сделка в воронке чата ещё живая, продолжаем в
-  // ней, а не плодим новую. Сделки других воронок не трогаем — у них своя жизнь.
-  const lead = await findOpenChatLead(contact, env, cfg);
   if (!lead) {
     const leadId = await createLead(person, contact.id, company, env, cfg);
     await addNote(leadId, summary, env);
     return {
       leadId, contactId: contact.id, company, companyId: company?.id || null,
-      verdict: 'контакт был, открытой сделки в воронке чата не было — создана новая',
+      verdict: contact.created
+        ? 'создана сделка с новым контактом'
+        : 'контакт был, открытой сделки в воронке чата не было — создана новая',
     };
   }
 
@@ -484,14 +568,73 @@ async function syncToAmo(person, text, env, cfg) {
     patch.pipeline_id = lead.pipeline_id;
   }
   if (person.page) patch.custom_fields_values = [field(cfg.LEAD_URL_FIELD, person.page)];
-  if (company) patch._embedded = { companies: [{ id: company.id }] };
   await amo(`/api/v4/leads/${lead.id}`, env, { method: 'PATCH', body: patch });
+
+  // Связи между сущностями PATCH не меняет — для них отдельный метод link.
+  const linked = (lead._embedded?.contacts || []).map((c) => String(c.id));
+  if (!linked.includes(String(contact.id))) {
+    await link('leads', lead.id, 'contacts', contact.id, env);
+  }
+  if (company) await link('leads', lead.id, 'companies', company.id, env);
+
+  // Новый человек в старой сделке — менеджеру стоит об этом сказать явно.
+  if (contact.created) {
+    await addNote(lead.id, `К сделке добавлен новый контакт: ${person.name}, ${person.email}`, env);
+  }
   await addNote(lead.id, summary, env);
 
   return {
     leadId: lead.id, contactId: contact.id, company, companyId: company?.id || null,
-    verdict: `сделка ${lead.id} → «${cfg.NEW_STATUS_NAME}» + тег`,
+    verdict: `сделка ${lead.id} найдена ${via} → «${cfg.NEW_STATUS_NAME}» + тег`
+      + (contact.created ? ', добавлен новый контакт' : ''),
   };
+}
+
+/**
+ * Контакт по рабочей почте: нашли — дозаполняем и подшиваем к компании,
+ * не нашли — заводим новый. Новая почта у знакомой организации даёт именно
+ * новый контакт внутри неё, а не отдельную «параллельную» карточку клиента.
+ */
+async function ensureContact(person, company, env, cfg) {
+  const found = await findContact(person, env, cfg);
+  if (found) {
+    await fillEmptyFields(found, person, env, cfg);
+    if (company) await attachToCompany(found, company.id, env);
+    return { id: found.id, created: false };
+  }
+
+  const body = [{
+    name: person.name,
+    custom_fields_values: [multitext(cfg.EMAIL_FIELD, person.email)],
+    ...(company ? { _embedded: { companies: [{ id: company.id }] } } : {}),
+  }];
+  const res = await amo('/api/v4/contacts', env, { method: 'POST', body });
+  return { id: res?._embedded?.contacts?.[0]?.id, created: true };
+}
+
+/** Привязывает контакт к компании, если он ещё не её. */
+async function attachToCompany(contact, companyId, env) {
+  const current = contact._embedded?.companies || [];
+  if (current.some((c) => String(c.id) === String(companyId))) return;
+  await link('contacts', contact.id, 'companies', companyId, env);
+}
+
+/**
+ * Связывает две сущности (сделку с контактом, контакт с компанией и т. д.).
+ * В API v4 связи живут отдельно от полей: PATCH их не меняет, нужен /link.
+ * Повторная привязка уже связанных сущностей возвращает ошибку — она
+ * безобидна, поэтому глушится.
+ */
+async function link(entity, id, toType, toId, env) {
+  if (!id || !toId) return;
+  try {
+    await amo(`/api/v4/${entity}/${id}/link`, env, {
+      method: 'POST',
+      body: [{ to_entity_id: Number(toId), to_entity_type: toType }],
+    });
+  } catch (e) {
+    console.error(`link ${entity}/${id} → ${toType}/${toId}`, e);
+  }
 }
 
 /**
@@ -505,7 +648,7 @@ async function syncToAmo(person, text, env, cfg) {
  */
 async function findContact(person, env, cfg) {
   if (!person.email) return null;
-  const found = await query('contacts', person.email, env, 'with=leads');
+  const found = await query('contacts', person.email, env, 'with=leads,companies');
   return found.find((c) => fieldValues(c, cfg.EMAIL_FIELD).some((v) => v.toLowerCase() === person.email)) || null;
 }
 
@@ -538,16 +681,8 @@ async function ensureCompany(person, env, cfg) {
 /** Компанию видно и в сделке, и в карточке контакта. */
 async function linkCompany(companyId, session, env) {
   if (!companyId) return;
-  await amo(`/api/v4/leads/${session.leadId}`, env, {
-    method: 'PATCH',
-    body: { _embedded: { companies: [{ id: companyId }] } },
-  });
-  if (session.contactId) {
-    await amo(`/api/v4/contacts/${session.contactId}`, env, {
-      method: 'PATCH',
-      body: { _embedded: { companies: [{ id: companyId }] } },
-    });
-  }
+  await link('leads', session.leadId, 'companies', companyId, env);
+  if (session.contactId) await link('contacts', session.contactId, 'companies', companyId, env);
 }
 
 /** Дописывает телефон, не затирая уже записанные номера. */
@@ -589,13 +724,19 @@ async function fillEmptyFields(contact, person, env, cfg) {
   });
 }
 
-/** Последняя незакрытая сделка контакта в воронке чата. */
-async function findOpenChatLead(contact, env, cfg) {
-  const ids = (contact._embedded?.leads || []).map((l) => l.id).filter(Boolean);
+/**
+ * Последняя незакрытая сделка контакта или компании в воронке чата.
+ * Возвращает её вместе со списком уже привязанных контактов — при PATCH связи
+ * перезаписываются целиком, и потерять коллег по сделке нельзя.
+ */
+async function openLeadOf(entity, id, env, cfg) {
+  if (!id) return null;
+  const card = await amo(`/api/v4/${entity}/${id}?with=leads`, env);
+  const ids = (card?._embedded?.leads || []).map((l) => l.id).filter(Boolean);
   if (!ids.length) return null;
 
-  const q = ids.slice(-50).map((id) => `filter[id][]=${id}`).join('&');
-  const res = await amo(`/api/v4/leads?limit=50&${q}`, env);
+  const q = ids.slice(-50).map((leadId) => `filter[id][]=${leadId}`).join('&');
+  const res = await amo(`/api/v4/leads?limit=50&with=contacts&${q}`, env);
   const open = (res?._embedded?.leads || [])
     .filter((l) => String(l.pipeline_id) === String(cfg.PIPELINE_ID))
     .filter((l) => !CLOSED_STATUS_IDS.has(Number(l.status_id)));
@@ -623,23 +764,6 @@ async function resolveStatus(pipelineId, env, cfg) {
     pipelinesCache = { at: Date.now(), map };
   }
   return pipelinesCache.map?.[pipelineId]?.[norm(cfg.NEW_STATUS_NAME)] || null;
-}
-
-async function createLeadWithContact(person, company, env, cfg) {
-  const body = [{
-    ...leadBody(person, company, cfg),
-    _embedded: {
-      contacts: [{
-        name: person.name,
-        custom_fields_values: [multitext(cfg.EMAIL_FIELD, person.email)],
-      }],
-      ...(company ? { companies: [{ id: company.id }] } : {}),
-    },
-  }];
-  // complex прогоняет контакт через контроль дублей и возвращает id сделки
-  // и id контакта прямо в объекте ответа: [{ id, contact_id, company_id, … }].
-  const res = await amo('/api/v4/leads/complex', env, { method: 'POST', body });
-  return { leadId: res?.[0]?.id, contactId: res?.[0]?.contact_id || null };
 }
 
 async function createLead(person, contactId, company, env, cfg) {
