@@ -33,7 +33,7 @@ const FILES = [
   'images/logo_small.png',
   'images/logo_min.png',
   'images/logo_medium.png',
-  { src: 'images/cover.png', name: 'images/logo_main.png' },
+  'images/logo_main.png',
 ];
 
 async function dir(name) {

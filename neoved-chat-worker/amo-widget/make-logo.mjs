@@ -1,14 +1,15 @@
 /**
- * Рисует логотипы виджета. Виджету нужен полный комплект из пяти картинок —
- * без него amoCRM показывает в панели пустую строку без названия и значка
- * (документация Kommo «Develop a simple widget», проверено на аккаунте
- * 20.08.2026):
+ * Рисует квадратные значки виджета — красный круг с белым пузырём чата.
  *
- *   logo.png        — 130×100
- *   logo_small.png  — 108×108
- *   logo_min.png    — 84×84
- *   logo_medium.png — 240×84
- *   logo_main.png   — 400×272 (рисует make-cover.mjs)
+ * Виджету нужен полный комплект из пяти картинок, иначе amoCRM показывает в
+ * панели пустую строку без названия и значка (документация Kommo «Develop a
+ * simple widget», проверено на аккаунте 20.08.2026). Здесь — только мелкие:
+ *
+ *   logo_small.png  — 108×108   ← этот файл
+ *   logo_min.png    — 84×84     ← и этот
+ *   logo.png        — 130×100   ⎫ плашки с надписью «neoved чат»,
+ *   logo_medium.png — 240×84    ⎬ их рисует make-plates.ps1: именно они
+ *   logo_main.png   — 400×272   ⎭ показываются строкой в панели виджетов
  *
  * Никаких зависимостей: PNG собирается вручную из IHDR/IDAT/IEND, сжатие
  * берётся из встроенного zlib.
@@ -40,10 +41,8 @@ const CRC_TABLE = (() => {
 })();
 
 await mkdir(join(HERE, 'images'), { recursive: true });
-await draw(130, 100, 'logo.png');
 await draw(108, 108, 'logo_small.png');
 await draw(84, 84, 'logo_min.png');
-await draw(240, 84, 'logo_medium.png');
 
 async function draw(W, H, file) {
   const R = Math.min(W, H) / 2 - 4;
