@@ -19,13 +19,16 @@ const OUT = join(dirname(HERE), 'amo-widget.zip');
 // Только то, что нужно самому виджету: генераторы картинок, этот сборщик и
 // обложка интеграции (её загружают отдельно, прямо в форме) в архив не идут.
 //
-// Логотип кладём и в images/, и в корень: разные сборки amoCRM ищут его по
-// разным путям, а лишние 800 байт ничему не мешают.
+// Логотип раскладываем по всем путям, где его ищет amoCRM. Аккаунт по очереди
+// потребовал images/logo.png в разрешении 130×100, а затем images/logo_main.png
+// («Файл логотипа "images/logo_main.png" обязателен для виджета widget_main»).
+// Лишние копии весят по 800 байт и ничему не мешают.
 const FILES = [
   'manifest.json',
   'script.js',
   ...await dir('i18n'),
   'images/logo.png',
+  { src: 'images/logo.png', name: 'images/logo_main.png' },
   { src: 'images/logo.png', name: 'logo.png' },
 ];
 
