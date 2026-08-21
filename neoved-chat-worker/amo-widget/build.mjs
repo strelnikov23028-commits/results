@@ -16,9 +16,9 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = join(dirname(HERE), 'amo-widget.zip');
 
-// Только то, что нужно самому виджету: генератор логотипа и этот сборщик
-// в архив не попадают.
-const FILES = ['manifest.json', 'script.js', ...await dir('i18n'), ...await dir('images')];
+// Только то, что нужно самому виджету: генераторы картинок, этот сборщик и
+// обложка интеграции (её загружают отдельно, прямо в форме) в архив не идут.
+const FILES = ['manifest.json', 'script.js', ...await dir('i18n'), 'images/logo.png'];
 
 async function dir(name) {
   const entries = await readdir(join(HERE, name));
