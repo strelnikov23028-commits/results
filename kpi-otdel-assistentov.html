@@ -140,10 +140,80 @@ td strong,th strong{color:var(--fg); font-weight:600}
 .formula{
   background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm);
   padding:18px 20px; font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
-  font-size:15px; line-height:1.9; color:var(--fg); overflow-x:auto; white-space:nowrap;
+  font-size:14.5px; line-height:1.8; color:var(--fg); overflow-x:auto; white-space:pre;
 }
 .formula .op{color:var(--fg-3)}
 .formula .w{color:var(--accent); font-weight:600}
+
+/* кошельки */
+.wallet{position:relative; overflow:hidden}
+.wallet .sum{font-size:27px; font-weight:800; letter-spacing:-.03em; line-height:1.1; margin-top:4px}
+.wallet .bar{height:6px; border-radius:100px; background:var(--border); margin-top:14px; overflow:hidden}
+.wallet .bar i{display:block; height:100%; border-radius:100px; background:var(--accent)}
+
+/* шаги */
+.steps{counter-reset:st; display:grid; gap:12px}
+.step{display:flex; gap:16px; align-items:flex-start}
+.step .n{
+  flex:0 0 30px; width:30px; height:30px; border-radius:50%; background:var(--accent); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; margin-top:2px;
+}
+.step .txt{flex:1}
+.step .txt b{color:var(--fg)}
+
+/* кнопки */
+.btn{
+  display:inline-flex; align-items:center; gap:7px; min-height:44px; padding:0 18px;
+  font-family:inherit; font-size:15px; font-weight:600; color:#fff; background:var(--accent);
+  border:none; border-radius:100px; cursor:pointer; transition:opacity .2s ease, transform .15s ease;
+}
+.btn:hover{opacity:.88}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent; color:var(--accent); border:1px solid var(--border)}
+.btn.ghost:hover{background:var(--accent-soft); opacity:1}
+.btn-x{
+  width:32px; height:32px; min-height:32px; padding:0; border-radius:8px; background:transparent;
+  color:var(--fg-3); border:1px solid var(--border); font-size:17px; line-height:1; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:color .2s ease, border-color .2s ease;
+}
+.btn-x:hover{color:var(--red); border-color:var(--red)}
+
+/* таблица задач */
+#taskRows td{padding:8px 10px}
+#taskRows select,#taskRows input{padding:8px 10px; font-size:15px; min-height:40px; border-radius:9px}
+#taskRows select{min-width:96px}
+#taskRows input{width:92px; text-align:right}
+.task-sum{
+  display:flex; flex-wrap:wrap; gap:10px 26px; align-items:baseline; margin-top:16px;
+  background:var(--accent-soft); border-radius:var(--radius-sm); padding:14px 18px;
+}
+.task-sum .item{font-size:14px; color:var(--fg-2)}
+.task-sum .item b{font-size:19px; color:var(--accent); font-weight:800; margin-left:6px}
+
+/* чеклист приёмки */
+.gates{display:grid; gap:10px}
+.gate{
+  display:flex; gap:14px; align-items:flex-start; padding:14px 16px;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm);
+}
+.gate .ic{
+  flex:0 0 26px; width:26px; height:26px; border-radius:7px; background:var(--green-soft); color:var(--green);
+  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px;
+}
+.gate.bonus .ic{background:var(--accent-soft); color:var(--accent)}
+.gate .q{font-weight:650; color:var(--fg); font-size:15.5px}
+.gate .d{font-size:14px; color:var(--fg-3); margin-top:2px; line-height:1.5}
+
+code{
+  font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace; font-size:13.5px;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:6px; padding:2px 6px; color:var(--fg);
+}
+.code-block{
+  background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:14px 16px; margin:10px 0 0; overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+  font-size:13.5px; line-height:1.7; color:var(--fg); white-space:pre;
+}
 
 /* calculator */
 .calc{display:grid; grid-template-columns:1.15fr .85fr; gap:16px; align-items:start}
@@ -236,7 +306,8 @@ footer p{margin-bottom:6px}
   <div class="nav-in">
     <a class="brand" href="#top">KPI ассистентов</a>
     <a href="#struktura">Структура</a>
-    <a href="#matrica">Матрица</a>
+    <a href="#matrica">Как считается кэф</a>
+    <a href="#ocenka">Оценка задачи</a>
     <a href="#calc">Калькулятор</a>
     <a href="#ekonomiya">Экономия</a>
     <a href="#zaeby">Реестр заёбов</a>
@@ -244,6 +315,7 @@ footer p{margin-bottom:6px}
     <a href="#dopolnitelno">Ещё варианты</a>
     <a href="#gaming">Анти-гейминг</a>
     <a href="#primer">Пример</a>
+    <a href="#avtomatika">Автоматизация</a>
     <a href="#vnedrenie">Внедрение</a>
   </div>
 </nav>
@@ -271,7 +343,7 @@ footer p{margin-bottom:6px}
         <div class="layer-num">1</div>
         <h4>Оклад</h4>
         <div class="big">Фикс</div>
-        <p class="muted" style="margin-top:8px">За доступность в SLA-окне и дисциплину связи. <strong style="color:var(--fg-2)">Не режется коэффициентами</strong> — иначе это не KPI, а штраф, и ассистент начнёт искать другую работу.</p>
+        <p class="muted" style="margin-top:8px">За доступность в оговорённые часы и дисциплину связи. <strong style="color:var(--fg-2)">Не режется коэффициентами</strong> — иначе это не KPI, а штраф, и ассистент начнёт искать другую работу.</p>
       </div>
       <div class="card hoverable reveal">
         <div class="layer-num">2</div>
@@ -306,78 +378,119 @@ footer p{margin-bottom:6px}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">Модель А — рекомендуемая</div>
-      <h2>Матрица: как считается кэф</h2>
-      <p>Четыре метрики, каждая оценивается от 0 до 10. Итоговый Score — их взвешенная сумма. Кэф = Score ÷ 10.</p>
+      <h2>Как считается кэф</h2>
+      <p>Никаких формул. Бонус в 50 000 ₽ заранее разложен на четыре кошелька. У каждого своя сумма. Ассистент получает оценку от 0 до 10 по каждому направлению и забирает из кошелька такую же долю: оценка 10 — весь кошелёк, оценка 5 — половину, оценка 0 — ничего.</p>
     </div>
 
-    <div class="formula reveal" style="margin-bottom:20px">
-      Score <span class="op">=</span> <span class="w">0.35</span>·Качество <span class="op">+</span> <span class="w">0.25</span>·Скорость <span class="op">+</span> <span class="w">0.20</span>·Автономность <span class="op">+</span> <span class="w">0.20</span>·Проактивность<br>
-      Бонус <span class="op">=</span> 50 000 <span class="op">×</span> (Score <span class="op">/</span> 10) <span class="op">×</span> Множитель<sub>NPS</sub> <span class="op">×</span> Отсечка
+    <div class="grid g4" style="margin-bottom:24px">
+      <div class="card hoverable reveal wallet">
+        <h4>Качество</h4>
+        <div class="sum">17 500 ₽</div>
+        <div class="bar"><i style="width:84%"></i></div>
+        <p class="muted" style="margin-top:12px">Самый большой кошелёк. Если результат приходится переделывать, всё остальное не имеет значения.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Скорость</h4>
+        <div class="sum">12 500 ₽</div>
+        <div class="bar"><i style="width:92%"></i></div>
+        <p class="muted" style="margin-top:12px">Ответ «принял» и попадание в срок. Второй по величине — от него зависит, можно ли на человека положиться.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Автономность</h4>
+        <div class="sum">10 000 ₽</div>
+        <div class="bar"><i style="width:89%"></i></div>
+        <p class="muted" style="margin-top:12px">Сколько задач закрыто без вопросов к вам. Это и есть разница между помощником и ещё одной заботой.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Проактивность</h4>
+        <div class="sum">10 000 ₽</div>
+        <div class="bar"><i style="width:100%"></i></div>
+        <p class="muted" style="margin-top:12px">Что ассистент придумал и сделал сам, пока вы об этом не попросили.</p>
+      </div>
     </div>
 
-    <div class="tbl-scroll reveal" style="margin-bottom:22px">
-      <table>
-        <thead><tr><th>Метрика</th><th class="num">Вес</th><th>Что реально меряет</th><th>Как считается</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong>Качество</strong></td><td class="num"><strong>35 %</strong></td>
-            <td>Насколько результат совпал с тем, что было нужно</td>
-            <td>Средневзвешенная оценка задач по сложности: <em>Σ(оценка × вес) ÷ Σвесов</em></td>
-          </tr>
-          <tr>
-            <td><strong>Скорость</strong></td><td class="num"><strong>25 %</strong></td>
-            <td>Реакция снимает тревогу, срок закрывает задачу</td>
-            <td><em>0.4 × Реакция + 0.6 × SLA.</em> Реакция — % подтверждений «принял» за 15 мин. SLA — % задач в срок</td>
-          </tr>
-          <tr>
-            <td><strong>Автономность</strong></td><td class="num"><strong>20 %</strong></td>
-            <td>Сколько раз ассистент <em>не</em> отвлёк руководителя</td>
-            <td>% задач без лишних уточнений и без возврата на доработку, отнесённый к норме грейда</td>
-          </tr>
-          <tr>
-            <td><strong>Проактивность</strong></td><td class="num"><strong>20 %</strong></td>
-            <td>Что ассистент придумал и закрыл сам, до просьбы</td>
-            <td><em>min(10, факт ÷ норма × 10).</em> Норма — 4–6 полезных инициатив в месяц</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card reveal" style="margin-bottom:22px">
+      <h3>Как это выглядит в конце месяца</h3>
+      <p class="muted" style="margin-bottom:16px">Полоски на карточках выше — это оценки из примера. Считаем, сколько ассистент забирает из каждого кошелька.</p>
+      <div class="tbl-scroll" style="box-shadow:none; border:1px solid var(--border)">
+        <table style="min-width:520px">
+          <thead><tr><th>Кошелёк</th><th class="num">В кошельке</th><th class="num">Оценка</th><th class="num">Забрал</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Качество</strong></td><td class="num">17 500 ₽</td><td class="num">8.4 из 10</td><td class="num"><strong>14 700 ₽</strong></td></tr>
+            <tr><td><strong>Скорость</strong></td><td class="num">12 500 ₽</td><td class="num">9.2 из 10</td><td class="num"><strong>11 525 ₽</strong></td></tr>
+            <tr><td><strong>Автономность</strong></td><td class="num">10 000 ₽</td><td class="num">8.9 из 10</td><td class="num"><strong>8 940 ₽</strong></td></tr>
+            <tr><td><strong>Проактивность</strong></td><td class="num">10 000 ₽</td><td class="num">10 из 10</td><td class="num"><strong>10 000 ₽</strong></td></tr>
+            <tr style="background:var(--accent-soft)"><td><strong>Итого бонус</strong></td><td class="num">50 000 ₽</td><td class="num"><strong>кэф 9.0</strong></td><td class="num"><strong style="color:var(--accent);font-size:17px">45 165 ₽</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:14px"><strong style="color:var(--fg-2)">Кэф — это просто общая оценка месяца от 0 до 10.</strong> Забрал 45 165 из 50 000, то есть 90 % — значит кэф 9.0. Кэф 10 означает, что все четыре кошелька опустошены полностью и человек получил всю сумму.</p>
     </div>
 
+    <h3 class="reveal" style="margin:30px 0 14px">Откуда берётся каждая из четырёх оценок</h3>
     <div class="grid g2">
       <div class="card reveal">
-        <h3>Шкала оценки задачи</h3>
-        <p class="muted" style="margin-bottom:16px">Оценка ставится <strong style="color:var(--fg-2)">в момент закрытия задачи</strong>, одним тапом. Если копить до конца месяца — поставите по последнему впечатлению, и система развалится.</p>
-        <div class="tbl-scroll" style="box-shadow:none">
-          <table style="min-width:0">
-            <tbody>
-              <tr><td class="num" style="width:44px"><span class="tag t-green">10</span></td><td>Сделал лучше, чем просил: закрыл смежное, я вообще не думал об этой задаче</td></tr>
-              <tr><td class="num"><span class="tag t-green">8</span></td><td>Сделал как просил, в срок, без правок</td></tr>
-              <tr><td class="num"><span class="tag t-blue">6</span></td><td>Сделал, но один раз вернул или переспрашивал</td></tr>
-              <tr><td class="num"><span class="tag t-amber">4</span></td><td>Косяки: две и более итерации, или часть доделывал сам</td></tr>
-              <tr><td class="num"><span class="tag t-red">2</span></td><td>Переделывал заново</td></tr>
-              <tr><td class="num"><span class="tag t-red">0</span></td><td>Не сделал или сорвал молча</td></tr>
-            </tbody>
-          </table>
+        <h4>Качество — средняя оценка задач</h4>
+        <p class="muted">У каждой закрытой задачи есть оценка (как её ставить — в следующем разделе) и размер: мелочь, обычная, проект. В конце месяца считается средняя оценка <em>с учётом размера</em>, чтобы десять мелочей не перевесили один переезд.</p>
+        <div class="steps" style="margin-top:14px">
+          <div class="step"><div class="n">1</div><div class="txt">Умножь оценку задачи на её размер — получишь <b>баллы за задачу</b></div></div>
+          <div class="step"><div class="n">2</div><div class="txt">Сложи баллы всех задач за месяц</div></div>
+          <div class="step"><div class="n">3</div><div class="txt">Сложи размеры всех задач</div></div>
+          <div class="step"><div class="n">4</div><div class="txt">Раздели баллы на размеры — это и есть <b>оценка качества</b></div></div>
         </div>
       </div>
 
       <div class="card reveal">
-        <h3>Вес задачи и отсечки</h3>
-        <h4 style="margin-top:14px">Вес по сложности</h4>
+        <h4>Пример на пяти задачах</h4>
+        <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
+          <table style="min-width:0">
+            <thead><tr><th>Задача</th><th class="num">Оценка</th><th class="num">Размер</th><th class="num">Баллы</th></tr></thead>
+            <tbody>
+              <tr><td>Снять квартиру в Лиссабоне</td><td class="num">10</td><td class="num">3</td><td class="num">30</td></tr>
+              <tr><td>Перенести встречи на неделю</td><td class="num">8</td><td class="num">1</td><td class="num">8</td></tr>
+              <tr><td>Найти подрядчика на ремонт</td><td class="num">6</td><td class="num">2</td><td class="num">12</td></tr>
+              <tr><td>Заказать такси в аэропорт</td><td class="num">8</td><td class="num">1</td><td class="num">8</td></tr>
+              <tr><td>Собрать документы на визу</td><td class="num">4</td><td class="num">3</td><td class="num">12</td></tr>
+              <tr style="background:var(--surface-2)"><td><strong>Итого</strong></td><td class="num">—</td><td class="num"><strong>10</strong></td><td class="num"><strong>70</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:12px">70 баллов делим на 10 размеров → <strong style="color:var(--accent);font-size:17px">оценка качества 7.0</strong>. Больше ничего считать не нужно.</p>
+      </div>
+
+      <div class="card reveal">
+        <h4>Скорость — 4 балла за реакцию, 6 за срок</h4>
+        <p class="muted">Из десяти баллов скорости четыре отданы тому, как быстро ассистент ответил «принял, делаю», и шесть — тому, уложился ли он в срок. Ответ важен отдельно: он снимает тревогу ещё до результата.</p>
+        <div class="steps" style="margin-top:14px">
+          <div class="step"><div class="n">1</div><div class="txt">Ответил вовремя в <b>91 %</b> случаев → из 4 баллов забрал <b>3.64</b></div></div>
+          <div class="step"><div class="n">2</div><div class="txt">Уложился в срок в <b>93 %</b> задач → из 6 баллов забрал <b>5.58</b></div></div>
+          <div class="step"><div class="n">3</div><div class="txt">Вместе — <b>9.2 из 10</b></div></div>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h4>Автономность и проактивность — от нормы</h4>
+        <p class="muted"><strong style="color:var(--fg-2)">Автономность.</strong> Считается доля задач, закрытых без вопросов к вам. Полные 10 баллов — при 85 %. Закрыл без вопросов 76 % задач: делим 76 на 85 — получаем <strong>8.9 из 10</strong>.</p>
+        <p class="muted" style="margin-top:12px"><strong style="color:var(--fg-2)">Проактивность.</strong> Норма — 4 полезные инициативы в месяц, это 10 баллов. Сделал 2 из 4 — половина нормы, оценка 5. Сделал 5 при норме 4 — всё равно 10, выше потолка не уходит.</p>
+        <p class="muted" style="margin-top:12px">Нормы у грейдов разные: у новичка автономность 50 %, у опытного 85 %. Иначе новичок гарантированно в минусе за то, что ещё не знает контекста.</p>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card reveal">
+        <h4>Размер задачи</h4>
         <ul class="clean">
-          <li><strong>×1</strong> — мелочь до 15 минут</li>
-          <li><strong>×2</strong> — обычная задача до 2 часов</li>
-          <li><strong>×3</strong> — проект на день и больше</li>
-          <li><strong>×1.5</strong> дополнительно — ночь, выходной, форс-мажор</li>
+          <li><strong>1</strong> — мелочь до 15 минут: заказать такси, перенести встречу</li>
+          <li><strong>2</strong> — обычная задача до 2 часов: найти подрядчика, собрать варианты</li>
+          <li><strong>3</strong> — проект на день и больше: переезд, виза, мероприятие</li>
+          <li><strong>Полтора размера вместо одного</strong> — если задача пришлась на ночь, выходной или форс-мажор</li>
         </ul>
-        <p class="muted" style="margin-top:10px">Без весов ассистент наберёт десяток на мелочах и обойдёт того, кто вёз переезд.</p>
-
-        <h4 style="margin-top:20px">Отсечка за провал</h4>
-        <p class="muted">Любая метрика ниже 5 → весь итог × 0.85. Вытянуть можно, но не бесплатно — иначе качество приносят в жертву скорости.</p>
-
-        <h4 style="margin-top:20px">Множитель NPS</h4>
-        <p class="muted">Раз в месяц одна цифра от вас: «насколько мне стало легче жить», 0–10. Покрывает всё, что не формализуется.</p>
-        <p class="muted"><strong style="color:var(--green)">9–10 → ×1.1</strong> · 7–8 → ×1.0 · 5–6 → ×0.9 · <strong style="color:var(--red)">≤4 → ×0.75</strong></p>
+      </div>
+      <div class="card reveal">
+        <h4>Две поправки к итогу</h4>
+        <p class="muted"><strong style="color:var(--fg-2)">Отсечка.</strong> Если хотя бы одна из четырёх оценок ниже 5, итоговый бонус умножается на 0.85. Вытянуть провал остальными направлениями можно, но не бесплатно.</p>
+        <p class="muted" style="margin-top:12px"><strong style="color:var(--fg-2)">Ваша оценка месяца.</strong> Раз в месяц вы ставите одну цифру: «насколько мне стало легче жить», от 0 до 10. Она покрывает всё, что не поместилось в метрики.</p>
+        <p class="muted" style="margin-top:10px"><span class="tag t-green">9–10 → ×1.1</span> <span class="tag t-blue">7–8 → ×1.0</span> <span class="tag t-amber">5–6 → ×0.9</span> <span class="tag t-red">0–4 → ×0.75</span></p>
       </div>
     </div>
 
@@ -390,37 +503,145 @@ footer p{margin-bottom:6px}
 
 <div class="divider"></div>
 
+<section id="ocenka">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Основа всей системы</div>
+      <h2>Как понять, что задача сделана хорошо</h2>
+      <p>Ставить задаче цифру «на глаз» нельзя: вы сами не объясните, почему сегодня 7, а вчера за то же самое было 8. Поэтому цифра не ставится — она получается из трёх вопросов, на которые есть однозначный ответ «да» или «нет».</p>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:22px">
+      <div class="card reveal">
+        <h3>Три вопроса при закрытии задачи</h3>
+        <p class="muted" style="margin-bottom:16px">Три тапа, пять секунд. Ставятся в момент закрытия задачи, а не в конце месяца.</p>
+        <div class="gates">
+          <div class="gate">
+            <div class="ic">1</div>
+            <div><div class="q">Успел в срок?</div><div class="d">Это «быстро». Срок назван при постановке, а не придуман задним числом</div></div>
+          </div>
+          <div class="gate">
+            <div class="ic">2</div>
+            <div><div class="q">Принял с первого раза, без правок?</div><div class="d">Это «качественно». Вернул на доработку хотя бы раз — ответ «нет»</div></div>
+          </div>
+          <div class="gate">
+            <div class="ic">3</div>
+            <div><div class="q">Обошёлся без вопросов ко мне?</div><div class="d">Это «самостоятельно». Считаются только вопросы, ответ на которые уже был в переписке или регламенте</div></div>
+          </div>
+          <div class="gate bonus">
+            <div class="ic">+</div>
+            <div><div class="q">Сделал больше, чем просили?</div><div class="d">Бонусный вопрос. Закрыл смежное, предупредил о проблеме заранее, избавил вас от следующего шага</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Что получается за задачу</h3>
+        <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
+          <table style="min-width:0">
+            <thead><tr><th>Ответы</th><th class="num">Оценка</th></tr></thead>
+            <tbody>
+              <tr><td>Все три «да» <strong>и</strong> сделал больше</td><td class="num"><span class="tag t-green">10</span></td></tr>
+              <tr><td>Все три «да»</td><td class="num"><span class="tag t-green">8</span></td></tr>
+              <tr><td>Два «да»</td><td class="num"><span class="tag t-blue">6</span></td></tr>
+              <tr><td>Одно «да»</td><td class="num"><span class="tag t-amber">4</span></td></tr>
+              <tr><td>Ни одного «да»</td><td class="num"><span class="tag t-red">2</span></td></tr>
+              <tr><td>Не сделал или сорвал молча</td><td class="num"><span class="tag t-red">0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:14px"><strong style="color:var(--fg-2)">Восемь — это норма, а не «хорошо, но не отлично».</strong> Восьмёрка означает: сделал ровно то, о чём договорились, вовремя и не дёргая вас. Десятка — только за то, что вы не просили. Если у всех выходит по десять, значит вопрос про «больше, чем просили» задаётся слишком мягко.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:20px">
+      <h3>Без этих трёх полей задача не ставится</h3>
+      <p class="muted" style="margin-bottom:16px">Половина конфликтов вокруг KPI растёт не из оценок, а из постановки. Оценивать честно можно только ту задачу, где заранее сказано, чего вы ждёте.</p>
+      <div class="grid g3">
+        <div>
+          <span class="tag t-blue">Поле 1</span>
+          <h4 style="margin-top:10px">Срок</h4>
+          <p class="muted">Конкретная дата и время. «Как получится» и «когда сможешь» превращают метрику скорости в лотерею.</p>
+        </div>
+        <div>
+          <span class="tag t-blue">Поле 2</span>
+          <h4 style="margin-top:10px">Размер</h4>
+          <p class="muted">1, 2 или 3. Ставите вы, при постановке. Спорить о размере после закрытия задачи поздно.</p>
+        </div>
+        <div>
+          <span class="tag t-blue">Поле 3</span>
+          <h4 style="margin-top:10px">Критерий готовности</h4>
+          <p class="muted">Одна строка: по чему поймём, что готово. «Квартира снята» — это не критерий. «Договор подписан, ключи получены, интернет проверен» — критерий.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note green reveal">
+      <div class="title">Почему это работает лучше субъективной цифры</div>
+      <p class="fg2" style="margin:0">Три галочки нельзя оспорить: срок либо соблюдён, либо нет; правки либо были, либо нет. Оценка перестаёт быть вашим настроением и становится фактом, который ассистент видит сам ещё до конца месяца. И ровно эти три поля дальше считает за вас таблица или трекер — субъективную цифру автоматизировать невозможно, а три чекбокса можно.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section id="calc">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">Интерактивно</div>
       <h2>Калькулятор месяца</h2>
-      <p>Подвигайте ползунки — увидите, как метрики вытягивают друг друга и где система начинает резать.</p>
+      <p>Сначала вносим оценки задач и получаем качество, потом остальные три оценки — и сразу видим сумму к выплате.</p>
     </div>
 
+    <div class="card reveal" style="margin-bottom:16px">
+      <h3>Шаг 1. Задачи за месяц</h3>
+      <p class="muted" style="margin-bottom:16px">Вбивать каждую задачу не нужно. Одна строка — это группа одинаковых: «шестнадцать задач получили восьмёрку и были размера 2». Обычный месяц описывается пятью-шестью строками за минуту.</p>
+
+      <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
+        <table style="min-width:0">
+          <thead><tr><th>Оценка задачи</th><th>Размер</th><th class="num">Сколько таких задач</th><th class="num">Баллы</th><th></th></tr></thead>
+          <tbody id="taskRows"></tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+        <button type="button" class="btn" id="addRow">Добавить строку</button>
+        <button type="button" class="btn ghost" id="resetRows">Сбросить к примеру</button>
+      </div>
+
+      <div class="task-sum">
+        <span class="item">Задач за месяц: <b id="tCount">0</b></span>
+        <span class="item">Сумма размеров: <b id="tWeight">0</b></span>
+        <span class="item">Сумма баллов: <b id="tPoints">0</b></span>
+        <span class="item">Оценка качества: <b id="tAvg">0.00</b></span>
+      </div>
+      <p class="muted" style="margin-top:12px">Баллы делятся на сумму размеров — получается оценка качества, которая ниже автоматически подставляется в первый ползунок.</p>
+    </div>
+
+    <h3 class="reveal" style="margin:26px 0 14px">Шаг 2. Остальные оценки и выплата</h3>
     <div class="calc">
       <div class="card reveal">
         <div class="slider-row">
-          <div class="slider-top"><label for="q">Качество <span class="wt">вес 35 %</span></label><span class="val" id="qv">8.40</span></div>
+          <div class="slider-top"><label for="q">Качество <span class="wt">кошелёк 17 500 ₽ · из таблицы выше</span></label><span class="val" id="qv">8.40</span></div>
           <input type="range" id="q" min="0" max="10" step="0.01" value="8.40" aria-label="Качество, от 0 до 10">
         </div>
         <div class="slider-row">
-          <div class="slider-top"><label for="s">Скорость <span class="wt">вес 25 %</span></label><span class="val" id="sv">9.22</span></div>
+          <div class="slider-top"><label for="s">Скорость <span class="wt">кошелёк 12 500 ₽</span></label><span class="val" id="sv">9.22</span></div>
           <input type="range" id="s" min="0" max="10" step="0.01" value="9.22" aria-label="Скорость, от 0 до 10">
         </div>
         <div class="slider-row">
-          <div class="slider-top"><label for="a">Автономность <span class="wt">вес 20 %</span></label><span class="val" id="av">8.94</span></div>
+          <div class="slider-top"><label for="a">Автономность <span class="wt">кошелёк 10 000 ₽</span></label><span class="val" id="av">8.94</span></div>
           <input type="range" id="a" min="0" max="10" step="0.01" value="8.94" aria-label="Автономность, от 0 до 10">
         </div>
         <div class="slider-row">
-          <div class="slider-top"><label for="p">Проактивность <span class="wt">вес 20 %</span></label><span class="val" id="pv">10.00</span></div>
+          <div class="slider-top"><label for="p">Проактивность <span class="wt">кошелёк 10 000 ₽</span></label><span class="val" id="pv">10.00</span></div>
           <input type="range" id="p" min="0" max="10" step="0.01" value="10" aria-label="Проактивность, от 0 до 10">
         </div>
 
         <div class="divider" style="margin:24px 0 20px"></div>
 
         <div class="field">
-          <label for="nps">Оценка руководителя за месяц (NPS)</label>
+          <label for="nps">Ваша оценка месяца: насколько стало легче жить</label>
           <select id="nps">
             <option value="1.1">9–10 — стало заметно легче жить (×1.1)</option>
             <option value="1" selected>7–8 — нормально, как договаривались (×1.0)</option>
@@ -451,7 +672,11 @@ footer p{margin-bottom:6px}
           <div class="sc" id="score">9.03</div>
         </div>
 
-        <div class="res-line"><span class="k">KPI-бонус</span><span class="v" id="rBonus">45 165 ₽</span></div>
+        <div class="res-line"><span class="k">Из кошелька «Качество»<br><span class="muted">17 500 ₽</span></span><span class="v" id="rW1">14 700 ₽</span></div>
+        <div class="res-line"><span class="k">Из кошелька «Скорость»<br><span class="muted">12 500 ₽</span></span><span class="v" id="rW2">11 525 ₽</span></div>
+        <div class="res-line"><span class="k">Из кошелька «Автономность»<br><span class="muted">10 000 ₽</span></span><span class="v" id="rW3">8 940 ₽</span></div>
+        <div class="res-line"><span class="k">Из кошелька «Проактивность»<br><span class="muted">10 000 ₽</span></span><span class="v" id="rW4">10 000 ₽</span></div>
+        <div class="res-line" style="border-top:1px solid var(--border)"><span class="k"><strong>KPI-бонус</strong></span><span class="v" id="rBonus">45 165 ₽</span></div>
         <div class="res-line"><span class="k">Комиссия с экономии</span><span class="v" id="rEco">18 320 ₽</span></div>
         <div class="res-line"><span class="k">Призы за заёбы</span><span class="v" id="rZae">6 500 ₽</span></div>
 
@@ -819,11 +1044,11 @@ footer p{margin-bottom:6px}
         <div class="tbl-scroll" style="box-shadow:none;border:none">
           <table style="min-width:0">
             <tbody>
-              <tr><td><strong>Качество</strong><br><span class="muted">46 задач, сумма весов 78, Σ(оценка×вес) = 655</span></td><td class="num"><strong>8.4</strong><br><span class="muted">× 0.35 = 2.940</span></td></tr>
-              <tr><td><strong>Скорость</strong><br><span class="muted">реакция 91 % → 9.1; SLA 93 % → 9.3</span></td><td class="num"><strong>9.22</strong><br><span class="muted">× 0.25 = 2.305</span></td></tr>
-              <tr><td><strong>Автономность</strong><br><span class="muted">76 % при норме грейда 70 %</span></td><td class="num"><strong>8.94</strong><br><span class="muted">× 0.20 = 1.788</span></td></tr>
-              <tr><td><strong>Проактивность</strong><br><span class="muted">5 инициатив при норме 4</span></td><td class="num"><strong>10.0</strong><br><span class="muted">× 0.20 = 2.000</span></td></tr>
-              <tr><td><strong>Score</strong><br><span class="muted">все метрики ≥ 5, отсечки нет · NPS 8 → ×1.0</span></td><td class="num"><strong style="font-size:20px;color:var(--accent)">9.03</strong></td></tr>
+              <tr><td><strong>Качество</strong><br><span class="muted">44 задачи, сумма размеров 80, баллов 672 → 672 ÷ 80</span></td><td class="num"><strong>8.40</strong><br><span class="muted">из 17 500 ₽ → 14 700 ₽</span></td></tr>
+              <tr><td><strong>Скорость</strong><br><span class="muted">принял вовремя 91 %, уложился в срок 93 %</span></td><td class="num"><strong>9.22</strong><br><span class="muted">из 12 500 ₽ → 11 525 ₽</span></td></tr>
+              <tr><td><strong>Автономность</strong><br><span class="muted">76 % без вопросов, полные баллы при 85 %</span></td><td class="num"><strong>8.94</strong><br><span class="muted">из 10 000 ₽ → 8 940 ₽</span></td></tr>
+              <tr><td><strong>Проактивность</strong><br><span class="muted">5 инициатив при норме 4 — потолок</span></td><td class="num"><strong>10.00</strong><br><span class="muted">из 10 000 ₽ → 10 000 ₽</span></td></tr>
+              <tr><td><strong>Кэф месяца</strong><br><span class="muted">все оценки ≥ 5, отсечки нет · ваша оценка месяца 8 → ×1.0</span></td><td class="num"><strong style="font-size:20px;color:var(--accent)">9.03</strong></td></tr>
             </tbody>
           </table>
         </div>
@@ -831,13 +1056,145 @@ footer p{margin-bottom:6px}
 
       <div class="card reveal">
         <h3>Деньги</h3>
-        <div class="res-line"><span class="k">KPI-бонус<br><span class="muted">50 000 × 0.9033</span></span><span class="v">45 165 ₽</span></div>
+        <div class="res-line"><span class="k">KPI-бонус<br><span class="muted">14 700 + 11 525 + 8 940 + 10 000 — сумма забранного из четырёх кошельков</span></span><span class="v">45 165 ₽</span></div>
         <div class="res-line"><span class="k">Экономия в зачёт<br><span class="muted">аренда 180 000 → 126 000 за первый прожитый месяц = 54 000; отмена двух подписок 4 200 × 3 мес = 12 600</span></span><span class="v">66 600 ₽</span></div>
         <div class="res-line"><span class="k">Комиссия по шкале Б<br><span class="muted">50 000 × 30 % = 15 000 · 16 600 × 20 % = 3 320</span></span><span class="v">18 320 ₽</span></div>
         <div class="res-line"><span class="k">Призы за заёбы<br><span class="muted">закрыт «подъёмный стол» (L) — первая половина 5 000 · вторая половина за тревел-кит (S) 1 500</span></span><span class="v">6 500 ₽</span></div>
         <div class="res-total"><span class="k">Сверх оклада</span><span class="v">69 985 ₽</span></div>
         <p class="muted" style="margin-top:14px">Итого доход за месяц <strong style="color:var(--fg-2)">189 985 ₽</strong>. Переменная часть — 36.8 % от дохода, ровно в здоровой зоне.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="avtomatika">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Задачи ведутся в YouGile</div>
+      <h2>Как смотреть метрику, не считая руками</h2>
+      <p>Три уровня — от «посмотреть глазами за десять секунд» до «бот присылает готовые цифры». Начинать нужно с первого: без правильных стикеров на задачах не заработает ни один из следующих.</p>
+    </div>
+
+    <h3 class="reveal" style="margin-bottom:14px">Шаг 0. Пять стикеров на доске</h3>
+    <p class="fg2 reveal" style="margin-bottom:16px">В <a href="https://ru.yougile.com/" target="_blank" rel="noopener">YouGile</a> есть <a href="https://help.yougile.com/books/baza-znanii-yougile/page/stikery-s-sostoyaniyami" target="_blank" rel="noopener">стикеры с текстовыми состояниями</a> — свои поля с фиксированным набором значений, цветами и иконкой. Создаются на доске и переиспользуются на других досках. Это и есть носитель всей системы: по стикерам работают фильтры, сводки и отчёты.</p>
+
+    <div class="tbl-scroll reveal">
+      <table style="min-width:680px">
+        <thead><tr><th style="width:22%">Стикер</th><th style="width:22%">Состояния</th><th style="width:28%">Когда ставится</th><th style="width:28%">Какую оценку питает</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Размер</strong></td><td>1 · 2 · 3</td><td>При постановке задачи, вами</td><td>Вес задачи в оценке качества</td></tr>
+          <tr><td><strong>В срок</strong></td><td>да · нет</td><td>При закрытии</td><td>Скорость (6 баллов из 10)</td></tr>
+          <tr><td><strong>Принял ≤ 15 мин</strong></td><td>да · нет</td><td>При закрытии</td><td>Скорость (4 балла из 10)</td></tr>
+          <tr><td><strong>Без правок</strong></td><td>да · нет</td><td>При закрытии</td><td>Качество</td></tr>
+          <tr><td><strong>Без вопросов</strong></td><td>да · нет</td><td>При закрытии</td><td>Автономность и качество</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-hint">Таблица прокручивается вбок →</p>
+    <p class="muted reveal" style="margin-top:12px">Шестой признак — «сделал больше, чем просили» — удобно вешать отдельным стикером с одним состоянием: он либо есть на задаче, либо нет. Плюс встроенные стикеры <strong style="color:var(--fg-2)">Дедлайн</strong> и <strong style="color:var(--fg-2)">Исполнитель</strong>, которые в YouGile уже есть.</p>
+
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card hoverable reveal">
+        <span class="tag t-green">10 секунд</span>
+        <h3 style="margin-top:12px">Уровень 1. Сводка на доске</h3>
+        <p class="muted"><a href="https://help.yougile.com/books/baza-znanii-yougile/page/otcety-i-svodki" target="_blank" rel="noopener">Сводка</a> — это колонка, которая сама собирает задачи из всех проектов по фильтру. Заводите три штуки и держите на отдельной доске «KPI»:</p>
+        <ul class="clean" style="margin-top:12px">
+          <li>«Просрочено в этом месяце» — фильтр: стикер «В срок» = нет</li>
+          <li>«Вернул на доработку» — стикер «Без правок» = нет</li>
+          <li>«Дёргал по мелочам» — стикер «Без вопросов» = нет</li>
+        </ul>
+        <p class="muted" style="margin-top:12px">Открыли доску — увидели три числа. Это не средняя оценка, но 80 % понимания: где именно ассистент проседает, видно сразу и без конца месяца.</p>
+      </div>
+
+      <div class="card hoverable reveal">
+        <span class="tag t-blue">5 минут в месяц</span>
+        <h3 style="margin-top:12px">Уровень 2. Отчёт → Excel → шаблон</h3>
+        <p class="muted">Раздел «Отчёты» → «Таблицы» → «Добавить отчёт», настраиваете столбцы под свои стикеры. Готовую таблицу YouGile выгружает в Excel, а сам отчёт умеет регулярно приходить на почту.</p>
+        <ul class="clean" style="margin-top:12px">
+          <li>Выгрузили за месяц</li>
+          <li>Вставили на лист «Задачи» в заранее сделанный шаблон</li>
+          <li>Все четыре оценки и сумма к выплате посчитались формулами</li>
+        </ul>
+        <p class="muted" style="margin-top:12px">Формулы для шаблона — ниже, их можно скопировать как есть.</p>
+      </div>
+
+      <div class="card hoverable reveal">
+        <span class="tag t-amber">2 секунды</span>
+        <h3 style="margin-top:12px">Уровень 3. Бот считает сам</h3>
+        <p class="muted">У YouGile есть <a href="https://ru.yougile.com/api-v2" target="_blank" rel="noopener">REST API</a> и вебхуки. Бот забирает закрытые задачи со стикерами, считает четыре оценки и присылает в Telegram готовый расчёт по каждому ассистенту.</p>
+        <ul class="clean" style="margin-top:12px">
+          <li>Признак «в срок» бот вычисляет сам — из дедлайна и времени закрытия, руками ставить не нужно</li>
+          <li>Раз в месяц третьего числа — сводка по отделу</li>
+          <li>По запросу — текущий кэф в любой момент месяца</li>
+        </ul>
+        <p class="muted" style="margin-top:12px">Это верхний уровень, и браться за него имеет смысл, когда первые два уже месяц отработали и стикеры проставляются без напоминаний.</p>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin:34px 0 14px">Шаблон таблицы: что куда вписать</h3>
+    <div class="grid g2">
+      <div class="card reveal">
+        <h4>Лист «Задачи» — сюда вставляется выгрузка</h4>
+        <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td><code>A</code></td><td>Дата закрытия</td></tr>
+              <tr><td><code>B</code></td><td>Название задачи</td></tr>
+              <tr><td><code>C</code></td><td>Ассистент</td></tr>
+              <tr><td><code>D</code></td><td>Размер: 1, 2 или 3</td></tr>
+              <tr><td><code>E</code></td><td>В срок: 1 или 0</td></tr>
+              <tr><td><code>F</code></td><td>Без правок: 1 или 0</td></tr>
+              <tr><td><code>G</code></td><td>Без вопросов: 1 или 0</td></tr>
+              <tr><td><code>H</code></td><td>Сверх ожиданий: 1 или 0</td></tr>
+              <tr><td><code>I</code></td><td>Принял ≤ 15 мин: 1 или 0</td></tr>
+              <tr><td><code>J</code></td><td><strong>Оценка задачи — формула</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:12px">Стикеры «да/нет» превращаются в единицы и нули заменой по столбцу — одно действие на всю выгрузку.</p>
+      </div>
+
+      <div class="card reveal">
+        <h4>Формулы — скопировать как есть</h4>
+        <p class="muted" style="margin-bottom:4px">Оценка задачи, ячейка <code>J2</code> и вниз:</p>
+        <div class="code-block">=ЕСЛИ(СУММ(E2:G2)=3; ЕСЛИ(H2=1;10;8);
+ ЕСЛИ(СУММ(E2:G2)=2;6;
+ ЕСЛИ(СУММ(E2:G2)=1;4;2)))</div>
+
+        <p class="muted" style="margin:16px 0 4px">Оценка качества за месяц, где <code>B1</code> — имя ассистента:</p>
+        <div class="code-block">=СУММПРОИЗВ((Задачи!C2:C500=B1)*Задачи!J2:J500*Задачи!D2:D500)
+ /СУММПРОИЗВ((Задачи!C2:C500=B1)*Задачи!D2:D500)</div>
+
+        <p class="muted" style="margin:16px 0 4px">Скорость — 4 балла за реакцию, 6 за срок:</p>
+        <div class="code-block">=4*СРЗНАЧЕСЛИ(Задачи!C2:C500;B1;Задачи!I2:I500)
+ +6*СРЗНАЧЕСЛИ(Задачи!C2:C500;B1;Задачи!E2:E500)</div>
+
+        <p class="muted" style="margin:16px 0 4px">Автономность, где 0,85 — норма грейда:</p>
+        <div class="code-block">=МИН(10; СРЗНАЧЕСЛИ(Задачи!C2:C500;B1;Задачи!G2:G500)/0,85*10)</div>
+
+        <p class="muted" style="margin:16px 0 4px">Бонус, где <code>B5:B8</code> — четыре оценки, <code>B9</code> — ваш множитель:</p>
+        <div class="code-block">=(17500*B5 + 12500*B6 + 10000*B7 + 10000*B8)/10
+ *B9*ЕСЛИ(МИН(B5:B8)&lt;5; 0,85; 1)</div>
+
+        <p class="muted" style="margin:16px 0 4px">Комиссия с экономии по регрессивной шкале, где <code>B10</code> — сумма экономии:</p>
+        <div class="code-block">=МИН(B10;50000)*0,3
+ +МАКС(0;МИН(B10-50000;100000))*0,2
+ +МАКС(0;B10-150000)*0,1</div>
+
+        <p class="muted" style="margin-top:14px">Формулы даны для русской локали. Если таблица на английском — замените названия функций и разделитель «;» на «,».</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <div class="title">Чего YouGile не сделает сам</div>
+      <p class="fg2" style="margin:0">Отчёты и сводки показывают <strong>списки и количества</strong> задач по фильтрам, а выгрузку отдают в Excel. Считать средневзвешенную оценку и сумму к выплате внутри YouGile нельзя — эта часть живёт либо в таблице, либо в боте. Поэтому уровень 1 отвечает на вопрос «где проседает», а точную цифру бонуса даёт уровень 2 или 3.</p>
+    </div>
+
+    <div class="note amber reveal">
+      <div class="title">Правило, без которого рассыпается всё</div>
+      <p class="fg2" style="margin:0">Стикеры проставляются <strong>в момент закрытия задачи</strong>. Если в конце месяца придётся открывать полсотни карточек и вспоминать, была ли правка, — вы этого не сделаете ни в первый месяц, ни в третий. Проще всего вшить это в колонку: задача уезжает в «Готово» только со всеми стикерами, без них — висит в «На проверке».</p>
     </div>
   </div>
 </section>
@@ -855,8 +1212,8 @@ footer p{margin-bottom:6px}
       <div class="card reveal">
         <h3>Неделя 1</h3>
         <ul class="clean">
-          <li>Завести в трекере поля: оценка, вес задачи, срок, отметка о реакции</li>
-          <li>Написать положение на одну страницу — формула, шкала, стоп-факторы</li>
+          <li>Завести в YouGile пять стикеров и правило «в „Готово“ только со стикерами»</li>
+          <li>Написать положение на одну страницу: четыре кошелька, три вопроса приёмки, стоп-факторы</li>
           <li>Показать ассистентам и <strong style="color:var(--fg-2)">собрать возражения до запуска</strong>, а не после</li>
         </ul>
       </div>
@@ -864,7 +1221,7 @@ footer p{margin-bottom:6px}
         <h3>Неделя 2</h3>
         <ul class="clean">
           <li>Завести реестр заёбов: 10–15 карточек с проставленными тарифами</li>
-          <li>Настроить шаблон месячного отчёта — заполняется за 10 минут</li>
+          <li>Собрать три сводки на доске «KPI» и шаблон таблицы с формулами</li>
           <li>Назначить фиксированный день подведения итогов, например 3-е число</li>
         </ul>
       </div>
@@ -883,7 +1240,7 @@ footer p{margin-bottom:6px}
 
     <div class="note red reveal" style="margin-top:22px">
       <div class="title">Главный риск: система умрёт от собственного веса</div>
-      <p class="fg2" style="margin:0">Если подведение итогов занимает у вас больше <strong>30 минут в месяц на человека</strong> — вы бросите это к четвёртому месяцу, и хуже станет всем: люди уже перестроились под цифры, а цифры исчезли. Поэтому оценка ставится одним тапом при закрытии задачи, а не собирается вручную в конце месяца. Если трекер не позволяет — сначала чините трекер, потом запускайте KPI.</p>
+      <p class="fg2" style="margin:0">Если подведение итогов занимает у вас больше <strong>30 минут в месяц на человека</strong> — вы бросите это к четвёртому месяцу, и хуже станет всем: люди уже перестроились под цифры, а цифры исчезли. Поэтому оценка не собирается в конце месяца, а складывается сама из стикеров, которые проставляются при закрытии каждой задачи. Три клика в момент приёмки — единственное регулярное действие, которое система требует лично от вас.</p>
     </div>
 
     <div class="note amber reveal">
@@ -905,7 +1262,8 @@ footer p{margin-bottom:6px}
   var fmt = function(n){ return Math.round(n).toLocaleString('ru-RU') + ' ₽'; };
 
   var ids = ['q','s','a','p'];
-  var weights = {q:0.35, s:0.25, a:0.20, p:0.20};
+  // кошельки: из чего складываются 50 000 ₽
+  var purse = {q:17500, s:12500, a:10000, p:10000};
   var el = {};
   ids.forEach(function(i){ el[i] = document.getElementById(i); el[i+'v'] = document.getElementById(i+'v'); });
   var nps = document.getElementById('nps');
@@ -919,8 +1277,115 @@ footer p{margin-bottom:6px}
     eco: document.getElementById('rEco'),
     zae: document.getElementById('rZae'),
     total: document.getElementById('rTotal'),
-    warn: document.getElementById('warnCut')
+    warn: document.getElementById('warnCut'),
+    w: {q:document.getElementById('rW1'), s:document.getElementById('rW2'),
+        a:document.getElementById('rW3'), p:document.getElementById('rW4')}
   };
+
+  // ---------- Шаг 1: таблица задач за месяц ----------
+  var GRADES = [10,8,6,4,2,0];
+  var SIZES  = [1,2,3];
+  var DEFAULT_ROWS = [
+    {g:10,w:3,n:8},{g:10,w:1,n:6},{g:8,w:2,n:16},
+    {g:8,w:1,n:7},{g:6,w:2,n:4},{g:4,w:1,n:3}
+  ];
+  var rowsBody = document.getElementById('taskRows');
+  var tCount = document.getElementById('tCount');
+  var tWeight = document.getElementById('tWeight');
+  var tPoints = document.getElementById('tPoints');
+  var tAvg = document.getElementById('tAvg');
+
+  function makeSelect(values, val, suffix){
+    var sel = document.createElement('select');
+    values.forEach(function(v){
+      var o = document.createElement('option');
+      o.value = v; o.textContent = v + (suffix || '');
+      if (v === val) o.selected = true;
+      sel.appendChild(o);
+    });
+    return sel;
+  }
+
+  function addRow(data){
+    var tr = document.createElement('tr');
+
+    var td1 = document.createElement('td');
+    var selG = makeSelect(GRADES, data.g, '');
+    selG.setAttribute('aria-label','Оценка задачи');
+    td1.appendChild(selG);
+
+    var td2 = document.createElement('td');
+    var selW = makeSelect(SIZES, data.w, '');
+    selW.setAttribute('aria-label','Размер задачи');
+    td2.appendChild(selW);
+
+    var td3 = document.createElement('td');
+    td3.className = 'num';
+    var inpN = document.createElement('input');
+    inpN.type = 'number'; inpN.min = '0'; inpN.step = '1'; inpN.value = data.n;
+    inpN.setAttribute('aria-label','Сколько таких задач');
+    td3.appendChild(inpN);
+
+    var td4 = document.createElement('td');
+    td4.className = 'num';
+    var pts = document.createElement('strong');
+    td4.appendChild(pts);
+
+    var td5 = document.createElement('td');
+    td5.className = 'num';
+    var del = document.createElement('button');
+    del.type = 'button'; del.className = 'btn-x'; del.textContent = '×';
+    del.setAttribute('aria-label','Удалить строку');
+    del.addEventListener('click', function(){ tr.remove(); recount(); });
+    td5.appendChild(del);
+
+    [selG, selW, inpN].forEach(function(f){
+      f.addEventListener('input', recount);
+      f.addEventListener('change', recount);
+    });
+
+    tr._read = function(){
+      var g = parseFloat(selG.value), w = parseFloat(selW.value);
+      var n = Math.max(0, parseInt(inpN.value, 10) || 0);
+      var p = g * w * n;
+      pts.textContent = p.toLocaleString('ru-RU');
+      return {g:g, w:w, n:n, points:p, weight:w*n};
+    };
+
+    tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
+    tr.appendChild(td4); tr.appendChild(td5);
+    rowsBody.appendChild(tr);
+  }
+
+  function recount(){
+    var count = 0, weight = 0, points = 0;
+    Array.prototype.forEach.call(rowsBody.children, function(tr){
+      if (!tr._read) return;
+      var r = tr._read();
+      count += r.n; weight += r.weight; points += r.points;
+    });
+    var avg = weight > 0 ? points / weight : 0;
+
+    tCount.textContent = count.toLocaleString('ru-RU');
+    tWeight.textContent = weight.toLocaleString('ru-RU');
+    tPoints.textContent = points.toLocaleString('ru-RU');
+    tAvg.textContent = avg.toFixed(2);
+
+    // качество подставляется в первый ползунок
+    el.q.value = avg.toFixed(2);
+    calc();
+  }
+
+  function resetRows(){
+    rowsBody.innerHTML = '';
+    DEFAULT_ROWS.forEach(addRow);
+    recount();
+  }
+
+  document.getElementById('addRow').addEventListener('click', function(){
+    addRow({g:8, w:1, n:1}); recount();
+  });
+  document.getElementById('resetRows').addEventListener('click', resetRows);
 
   function commission(sum){
     if (!(sum > 0)) return 0;
@@ -938,12 +1403,20 @@ footer p{margin-bottom:6px}
       el[i+'v'].textContent = v[i].toFixed(2);
     });
 
-    var score = v.q*weights.q + v.s*weights.s + v.a*weights.a + v.p*weights.p;
     var low = ids.some(function(i){ return v[i] < 5; });
     var cut = low ? 0.85 : 1;
     var mult = parseFloat(nps.value);
 
-    var bonus = 50000 * (score/10) * mult * cut;
+    // сколько забрано из каждого кошелька
+    var bonus = 0;
+    ids.forEach(function(i){
+      var got = purse[i] * (v[i] / 10) * mult * cut;
+      bonus += got;
+      if (out.w[i]) out.w[i].textContent = fmt(got);
+    });
+    // кэф — та же сумма, выраженная оценкой от 0 до 10 (50 000 ₽ = 10 баллов)
+    var score = (bonus / mult / cut) / 5000;
+
     var ecoSum = Math.max(0, parseFloat(eco.value) || 0);
     var ecoPay = commission(ecoSum);
     var zaeSum = Math.max(0, parseFloat(zae.value) || 0);
@@ -967,7 +1440,7 @@ footer p{margin-bottom:6px}
 
   ids.forEach(function(i){ el[i].addEventListener('input', calc); });
   [nps, eco, zae].forEach(function(n){ n.addEventListener('input', calc); n.addEventListener('change', calc); });
-  calc();
+  resetRows();
 
   // плавная прокрутка по якорям
   document.querySelectorAll('.nav a[href^="#"]').forEach(function(a){
