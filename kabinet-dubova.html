@@ -135,8 +135,10 @@
     background:var(--paper-light);border:1px solid var(--line);border-radius:var(--radius);
     padding:22px;
   }
-  .scroll-x{overflow-x:auto}
-  .scroll-x svg{min-width:700px;width:100%;height:auto;display:block}
+  .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .scroll-x svg{min-width:560px;width:100%;height:auto;display:block}
+  .scroll-hint{display:none;font-size:13px;color:var(--muted);margin:10px 0 0}
+  @media(max-width:640px){.scroll-hint{display:block}}
   .plan-note{margin:16px 0 0;font-size:14.5px;color:var(--muted)}
   .plan-note b{color:var(--ink)}
   .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
@@ -303,6 +305,7 @@
     </div>
 
     <div class="plan-box reveal">
+      <p class="scroll-hint">План шире экрана — его можно прокрутить пальцем вбок.</p>
       <!-- ПЛАН: СЕЙЧАС -->
       <div id="plan-now" role="tabpanel" aria-labelledby="tab-now" hidden>
         <div class="scroll-x">
@@ -581,9 +584,14 @@
     </div>
 
     <div id="renders" class="reveal" style="margin-top:30px">
-      <h3 style="font-size:22px;margin-bottom:6px">Фотореалистичные визуализации</h3>
-      <p class="sub" style="margin-bottom:20px">Место под рендеры интерьера: те же пропорции комнаты, окно в торце и палитра проекта. Добавляются после генерации.</p>
-      <div class="shots" id="shots"></div>
+      <h3 style="font-size:22px;margin-bottom:6px">Четыре ракурса для визуализации</h3>
+      <p class="sub" style="margin-bottom:20px">Задание на рендеры: те же пропорции комнаты, окно в торце, палитра проекта. Пока их нет — ракурсы описаны словами, чтобы по ним можно было работать и без картинок.</p>
+      <div class="grid g4" id="shots">
+        <div class="card"><p class="num">Ракурс 1</p><h3>От двери вглубь</h3><p>Библиотека вдоль левой стены, зелёная стена и стол в глубине, окно в торце. Проверяет главное впечатление от кабинета.</p></div>
+        <div class="card"><p class="num">Ракурс 2</p><h3>Рабочее место</h3><p>Стол 1600×800 у зелёной стены, дипломы в ряд, латунная лампа, дневной свет справа. Проверяет фон для видеовстреч.</p></div>
+        <div class="card"><p class="num">Ракурс 3</p><h3>Входной узел</h3><p>Гардероб с зелёными фасадами и латунными ручками, фамилия на стене, консоль с графином. Первые секунды визита.</p></div>
+        <div class="card"><p class="num">Ракурс 4</p><h3>Зона ожидания</h3><p>Два терракотовых кресла, круглый столик, ковёр, тёплый свет 3000 K. Проверяет, что ждать здесь не тягостно.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -743,45 +751,44 @@
   </div>
 </footer>
 
-<script type="module">
-  import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
+<!-- Переключение планов работает без внешних зависимостей -->
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          var panel = document.getElementById(t.getAttribute('aria-controls'));
+          var active = t === tab;
+          t.setAttribute('aria-selected', String(active));
+          if (panel) panel.hidden = !active;
+        });
+      });
+    });
+  })();
+</script>
 
+<!-- Анимации: полностью необязательный слой поверх готовой страницы -->
+<script type="module">
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!reduced) {
-    document.documentElement.classList.add("js-motion");
-    // страховка: если анимация не запустилась, контент всё равно показывается
-    setTimeout(() => {
-      document.querySelectorAll(".reveal").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && getComputedStyle(el).opacity === "0") {
-          el.style.opacity = "1";
-          el.style.transform = "none";
-        }
+    const root = document.documentElement;
+    root.classList.add("js-motion");
+    // безусловная страховка: через 2,5 с контент виден в любом случае
+    setTimeout(() => root.classList.remove("js-motion"), 2500);
+
+    try {
+      const { animate, inView, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+      inView(".reveal", (el) => {
+        animate(el, { opacity: [0, 1], y: [20, 0] }, { duration: .55 });
+      }, { margin: "0px 0px -10% 0px" });
+      inView("#zones .grid", () => {
+        animate("#zones .card", { opacity: [0, 1], y: [18, 0] }, { duration: .5, delay: stagger(.08) });
       });
-    }, 1600);
-
-    inView(".reveal", (el) => {
-      animate(el, { opacity: [0, 1], y: [20, 0] }, { duration: .55 });
-    }, { margin: "0px 0px -10% 0px" });
-
-    inView("#zones .grid", () => {
-      animate("#zones .card", { opacity: [0, 1], y: [18, 0] }, { duration: .5, delay: stagger(.08) });
-    });
+    } catch (e) {
+      root.classList.remove("js-motion");
+    }
   }
-
-  // вкладки планов
-  const tabs = [...document.querySelectorAll('.tab')];
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach((t) => {
-        const panel = document.getElementById(t.getAttribute('aria-controls'));
-        const active = t === tab;
-        t.setAttribute('aria-selected', String(active));
-        panel.hidden = !active;
-        if (active && !reduced) animate(panel, { opacity: [0, 1] }, { duration: .3 });
-      });
-    });
-  });
 </script>
 </body>
 </html>
