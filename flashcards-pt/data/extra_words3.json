@@ -1,0 +1,79 @@
+[
+ {"pt":"blindado","ru":"бронированный","en":"armoured","pos":"adjectives",
+  "imgQuery":"an armoured security van with thick reinforced plating parked on a street"},
+
+ {"pt":"atropela","ru":"сбивает (наездом)","en":"runs over","pos":"verbs",
+  "imgQuery":"a yellow warning road sign showing the pictogram of a car and a pedestrian, danger of being hit"},
+
+ {"pt":"lembrar-se","ru":"помнить, вспоминать","en":"to remember","pos":"verbs",
+  "imgQuery":"a sticky reminder note stuck on a bathroom mirror",
+  "note":"lembrar-se de = помнить о чём-то; lembrar alguém = напомнить кому-то"},
+
+ {"pt":"resolvido","ru":"решено, улажено","en":"solved, done","pos":"adjectives",
+  "imgQuery":"a Rubik's cube fully solved, every face a single colour"},
+
+ {"pt":"conhecer","ru":"знать (быть знакомым), познакомиться","en":"to know, to get to know","pos":"verbs",
+  "imgQuery":"a tourist with a camera looking up at a famous landmark, discovering the place",
+  "note":"saber — знать факт; conhecer — быть знакомым с человеком или местом"},
+
+ {"pt":"há","ru":"есть, имеется; тому назад","en":"there is; ago","pos":"verbs",
+  "imgQuery":"a cut tree stump with clearly visible annual growth rings",
+  "note":"форма от haver: «há pão» — есть хлеб, «há dois anos» — два года назад"},
+
+ {"pt":"já","ru":"уже","en":"already","pos":"adverbs",
+  "imgQuery":"an empty dinner plate with only crumbs left, the meal already finished"},
+
+ {"pt":"quatrocentos","ru":"четыреста","en":"four hundred","pos":"nouns",
+  "imgQuery":"the number 400 written large and clearly in chalk on a blackboard"},
+
+ {"pt":"hino","ru":"гимн","en":"anthem","pos":"nouns",
+  "imgQuery":"a crowd standing with hands over hearts before a raised national flag"},
+
+ {"pt":"assistir","ru":"смотреть (фильм, ТВ)","en":"to watch","pos":"verbs",
+  "imgQuery":"a family sitting on a sofa watching television in a living room"},
+
+ {"pt":"assustar","ru":"пугать, напугать","en":"to scare","pos":"verbs",
+  "imgQuery":"a startled cat with fur standing on end and arched back"},
+
+ {"pt":"ainda não","ru":"ещё нет","en":"not yet","pos":"phrases",
+  "imgQuery":"a wall half painted, one side finished and the other still bare, work unfinished"},
+
+ {"pt":"semelhante","ru":"похожий, подобный","en":"similar","pos":"adjectives",
+  "imgQuery":"two similar but not identical flowers of slightly different shades side by side"},
+
+ {"pt":"álcool","ru":"алкоголь, спирт","en":"alcohol","pos":"nouns",
+  "imgQuery":"a row of spirit bottles lined up on a backlit bar shelf"},
+
+ {"pt":"energético","ru":"энергетик (напиток)","en":"energy drink","pos":"nouns",
+  "imgQuery":"a chilled energy drink can covered in condensation, close-up",
+  "fix":"нужен акут: energético"},
+
+ {"pt":"ao","ru":"к, в (a + o)","en":"to the","pos":"function words",
+  "imgQuery":"an arrow marker pointing at one specific door among several identical doors in a corridor",
+  "note":"слияние предлога a с артиклем o; a + a = à, a + os = aos"},
+
+ {"pt":"foi","ru":"пошёл; был","en":"went; was","pos":"verbs",
+  "imgQuery":"a line of footprints leading away across wet sand, the person already gone",
+  "note":"общая форма для ir и ser: «foi ao mercado» — пошёл на рынок, «foi difícil» — было трудно"},
+
+ {"pt":"céu","ru":"небо","en":"sky","pos":"nouns",
+  "imgQuery":"nothing but sky filling the whole frame with white cumulus clouds, no ground visible"},
+
+ {"pt":"ar","ru":"воздух","en":"air","pos":"nouns",
+  "imgQuery":"a light curtain billowing inward at an open window as air moves through"},
+
+ {"pt":"voar","ru":"летать","en":"to fly","pos":"verbs",
+  "imgQuery":"an eagle soaring high with wings fully spread against open sky",
+  "fix":"в списке было «Voandar» — такого слова нет: инфинитив voar, «летящий» — voando"},
+
+ {"pt":"além disso","ru":"кроме того, к тому же","en":"besides, moreover","pos":"phrases",
+  "imgQuery":"a waiter placing yet another dish onto an already full table",
+  "fix":"нужен акут: além disso"},
+
+ {"pt":"mililitros","ru":"миллилитры","en":"millilitres","pos":"nouns",
+  "imgQuery":"a glass measuring jug with millilitre graduation marks, liquid filled to a line",
+  "fix":"в списке было «{eme eles}» — это произношение сокращения ml по-португальски"},
+
+ {"pt":"vazio","ru":"пустой","en":"empty","pos":"adjectives",
+  "imgQuery":"an empty trouser pocket pulled inside out, nothing in it"}
+]

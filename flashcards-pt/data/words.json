@@ -7438,5 +7438,451 @@
   "sources": [
    "extra2"
   ]
+ },
+ {
+  "id": 341,
+  "pt": "blindado",
+  "en": "armoured",
+  "ru": "бронированный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "an armoured security van with thick reinforced plating parked on a street",
+  "image": "cartoes-img/бронированный — blindado.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 342,
+  "pt": "atropela",
+  "en": "runs over",
+  "ru": "сбивает (наездом)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a yellow warning road sign showing the pictogram of a car and a pedestrian, danger of being hit",
+  "image": "cartoes-img/сбивает — atropela.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 343,
+  "pt": "lembrar-se",
+  "en": "to remember",
+  "ru": "помнить, вспоминать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a sticky reminder note stuck on a bathroom mirror",
+  "image": "cartoes-img/помнить, вспоминать — lembrar-se.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "note": "lembrar-se de = помнить о чём-то; lembrar alguém = напомнить кому-то"
+ },
+ {
+  "id": 344,
+  "pt": "resolvido",
+  "en": "solved, done",
+  "ru": "решено, улажено",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a Rubik's cube fully solved, every face a single colour",
+  "image": "cartoes-img/решено, улажено — resolvido.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 345,
+  "pt": "conhecer",
+  "en": "to know, to get to know",
+  "ru": "знать (быть знакомым), познакомиться",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a tourist with a camera looking up at a famous landmark, discovering the place",
+  "image": "cartoes-img/знать — conhecer.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "note": "saber — знать факт; conhecer — быть знакомым с человеком или местом"
+ },
+ {
+  "id": 346,
+  "pt": "há",
+  "en": "there is; ago",
+  "ru": "есть, имеется; тому назад",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a cut tree stump with clearly visible annual growth rings",
+  "image": "cartoes-img/есть, имеется, тому назад — há.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "note": "форма от haver: «há pão» — есть хлеб, «há dois anos» — два года назад"
+ },
+ {
+  "id": 347,
+  "pt": "já",
+  "en": "already",
+  "ru": "уже",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "an empty dinner plate with only crumbs left, the meal already finished",
+  "image": "cartoes-img/уже — já.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 348,
+  "pt": "quatrocentos",
+  "en": "four hundred",
+  "ru": "четыреста",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "the number 400 written large and clearly in chalk on a blackboard",
+  "image": "cartoes-img/четыреста — quatrocentos.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 349,
+  "pt": "hino",
+  "en": "anthem",
+  "ru": "гимн",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a crowd standing with hands over hearts before a raised national flag",
+  "image": "cartoes-img/гимн — hino.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 350,
+  "pt": "assistir",
+  "en": "to watch",
+  "ru": "смотреть (фильм, ТВ)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a family sitting on a sofa watching television in a living room",
+  "image": "cartoes-img/смотреть — assistir.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 351,
+  "pt": "assustar",
+  "en": "to scare",
+  "ru": "пугать, напугать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a startled cat with fur standing on end and arched back",
+  "image": "cartoes-img/пугать, напугать — assustar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 352,
+  "pt": "ainda não",
+  "en": "not yet",
+  "ru": "ещё нет",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a wall half painted, one side finished and the other still bare, work unfinished",
+  "image": "cartoes-img/ещё нет — ainda não.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 353,
+  "pt": "semelhante",
+  "en": "similar",
+  "ru": "похожий, подобный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "two similar but not identical flowers of slightly different shades side by side",
+  "image": "cartoes-img/похожий, подобный — semelhante.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 354,
+  "pt": "álcool",
+  "en": "alcohol",
+  "ru": "алкоголь, спирт",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a row of spirit bottles lined up on a backlit bar shelf",
+  "image": "cartoes-img/алкоголь, спирт — álcool.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 355,
+  "pt": "energético",
+  "en": "energy drink",
+  "ru": "энергетик (напиток)",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a chilled energy drink can covered in condensation, close-up",
+  "image": "cartoes-img/энергетик — energético.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "fix": "нужен акут: energético"
+ },
+ {
+  "id": 356,
+  "pt": "ao",
+  "en": "to the",
+  "ru": "к, в (a + o)",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "an arrow marker pointing at one specific door among several identical doors in a corridor",
+  "image": "cartoes-img/к, в — ao.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "note": "слияние предлога a с артиклем o; a + a = à, a + os = aos"
+ },
+ {
+  "id": 357,
+  "pt": "foi",
+  "en": "went; was",
+  "ru": "пошёл; был",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a line of footprints leading away across wet sand, the person already gone",
+  "image": "cartoes-img/пошёл, был — foi.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "note": "общая форма для ir и ser: «foi ao mercado» — пошёл на рынок, «foi difícil» — было трудно"
+ },
+ {
+  "id": 358,
+  "pt": "céu",
+  "en": "sky",
+  "ru": "небо",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "nothing but sky filling the whole frame with white cumulus clouds, no ground visible",
+  "image": "cartoes-img/небо — céu.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 359,
+  "pt": "ar",
+  "en": "air",
+  "ru": "воздух",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a light curtain billowing inward at an open window as air moves through",
+  "image": "cartoes-img/воздух — ar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
+ },
+ {
+  "id": 360,
+  "pt": "voar",
+  "en": "to fly",
+  "ru": "летать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "an eagle soaring high with wings fully spread against open sky",
+  "image": "cartoes-img/летать — voar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "fix": "в списке было «Voandar» — такого слова нет: инфинитив voar, «летящий» — voando"
+ },
+ {
+  "id": 361,
+  "pt": "além disso",
+  "en": "besides, moreover",
+  "ru": "кроме того, к тому же",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a waiter placing yet another dish onto an already full table",
+  "image": "cartoes-img/кроме того, к тому же — além disso.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "fix": "нужен акут: além disso"
+ },
+ {
+  "id": 362,
+  "pt": "mililitros",
+  "en": "millilitres",
+  "ru": "миллилитры",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a glass measuring jug with millilitre graduation marks, liquid filled to a line",
+  "image": "cartoes-img/миллилитры — mililitros.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ],
+  "fix": "в списке было «{eme eles}» — это произношение сокращения ml по-португальски"
+ },
+ {
+  "id": 363,
+  "pt": "vazio",
+  "en": "empty",
+  "ru": "пустой",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "an empty trouser pocket pulled inside out, nothing in it",
+  "image": "cartoes-img/пустой — vazio.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra3"
+  ]
  }
 ]
