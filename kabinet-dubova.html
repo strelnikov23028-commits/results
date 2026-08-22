@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#16251f" />
+<title>Кабинет юриста Дубовой — дизайн-проект офиса</title>
+<meta name="description" content="Дизайн-проект офиса юриста Анастасии Дубовой в Саранске: планировка, зонирование, отделка и смета в фирменных цветах сайта law-dubova.tw1.ru." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* палитра снята из CSS сайта law-dubova.tw1.ru */
+    --forest:#1c3027;
+    --forest-deep:#111f19;
+    --paper:#f5f1ea;
+    --paper-light:#fffdf8;
+    --paper-soft:#e9e2d8;
+    --paper-deep:#d7c9b8;
+    --ink:#20231f;
+    --muted:#6b6d66;
+    --bark:#8d5b48;
+    --bark-deep:#694234;
+    --brass:#b5905e;
+    --line:#20231f22;
+    --radius:18px;
+    --container:1180px;
+    --sans:"Onest","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--forest)}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 24px}
+
+  /* ——— HERO ——— */
+  .hero{
+    background:linear-gradient(160deg,var(--forest-deep),var(--forest) 60%,#22392e);
+    color:var(--paper-light);
+    padding:88px 0 72px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero:after{
+    content:"";position:absolute;inset:auto -10% -40% 55%;
+    height:60vh;background:radial-gradient(circle at 50% 50%,#b5905e33,transparent 62%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:600;
+    color:var(--brass);margin:0 0 18px;
+  }
+  h1{
+    font-size:clamp(34px,5.2vw,58px);line-height:1.06;font-weight:600;margin:0 0 20px;
+    letter-spacing:-.02em;max-width:16ch;
+  }
+  .lead{font-size:clamp(17px,2vw,20px);color:#fffdf8cc;max-width:62ch;margin:0 0 34px}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:12px}
+  .fact{
+    border:1px solid #fffdf82e;border-radius:999px;padding:9px 16px;font-size:14px;
+    color:#fffdf8d6;background:#fffdf80d;
+  }
+
+  /* ——— SECTIONS ——— */
+  section{padding:76px 0}
+  .sec-head{max-width:70ch;margin:0 0 40px}
+  h2{
+    font-size:clamp(26px,3.4vw,38px);line-height:1.15;font-weight:600;margin:0 0 14px;
+    letter-spacing:-.015em;
+  }
+  h3{font-size:19px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:16px;margin:0}
+  .kicker{
+    text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;font-weight:600;
+    color:var(--bark);margin:0 0 12px;
+  }
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px}
+
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+  .card{
+    background:var(--paper-light);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 14px 30px #20231f14}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .num{
+    font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--brass);
+    text-transform:uppercase;margin:0 0 10px;
+  }
+
+  .dark{background:var(--forest);color:var(--paper-light)}
+  .dark .sub,.dark .card p{color:#fffdf8b8}
+  .dark .card{background:#ffffff0f;border-color:#fffdf82e}
+  .dark h2,.dark h3{color:var(--paper-light)}
+  .dark .kicker{color:var(--brass)}
+
+  /* ——— ПАЛИТРА ——— */
+  .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  @media(max-width:820px){.swatches{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:480px){.swatches{grid-template-columns:repeat(2,1fr)}}
+  .sw{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--paper-light)}
+  .sw .chip{height:92px}
+  .sw .meta{padding:12px 14px}
+  .sw b{display:block;font-size:14px;font-weight:600}
+  .sw span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .sw small{display:block;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}
+
+  /* ——— ПЛАНЫ ——— */
+  .plan-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .tab{
+    font:inherit;font-size:14.5px;font-weight:500;cursor:pointer;
+    border:1px solid var(--line);background:var(--paper-light);color:var(--ink);
+    padding:11px 18px;border-radius:999px;transition:background .2s ease,color .2s ease,border-color .2s ease;
+    min-height:44px;
+  }
+  .tab:hover{border-color:var(--brass)}
+  .tab[aria-selected="true"]{background:var(--forest);color:var(--paper-light);border-color:var(--forest)}
+  .tab:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+  .plan-box{
+    background:var(--paper-light);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;
+  }
+  .scroll-x{overflow-x:auto}
+  .scroll-x svg{min-width:700px;width:100%;height:auto;display:block}
+  .plan-note{margin:16px 0 0;font-size:14.5px;color:var(--muted)}
+  .plan-note b{color:var(--ink)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+  .legend i{width:14px;height:14px;border-radius:4px;display:inline-block;margin-right:8px;vertical-align:-2px}
+  .legend span{font-size:13.5px;color:var(--muted)}
+  .svg-label{font-family:"Onest",Arial,sans-serif}
+
+  /* ——— ТАБЛИЦЫ ——— */
+  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-light)}
+  table{border-collapse:collapse;width:100%;min-width:660px;font-size:15px}
+  th,td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--paper-soft)}
+  tr:last-child td{border-bottom:none}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  tfoot td{font-weight:600;background:var(--paper-soft)}
+
+  /* ——— СПИСКИ ——— */
+  ul.clean{list-style:none;padding:0;margin:0}
+  ul.clean li{position:relative;padding-left:26px;margin-bottom:12px;color:var(--muted);font-size:15.5px}
+  ul.clean li:before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px;background:var(--brass)}
+  ul.clean li b{color:var(--ink);font-weight:600}
+  .dark ul.clean li{color:#fffdf8b8}
+  .dark ul.clean li b{color:var(--paper-light)}
+
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+  @media(max-width:860px){.split{grid-template-columns:1fr}}
+
+  /* ——— ГАЛЕРЕЯ ——— */
+  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:720px){.shots{grid-template-columns:1fr}}
+  figure{margin:0;background:var(--paper-light);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  figure img{aspect-ratio:4/3;object-fit:cover;width:100%}
+  figcaption{padding:14px 18px;font-size:14.5px;color:var(--muted)}
+
+  .callout{
+    border-left:3px solid var(--bark);background:#8d5b480f;border-radius:0 14px 14px 0;
+    padding:18px 22px;color:var(--ink);font-size:15px;
+  }
+  .dark .callout{background:#b5905e1f;border-left-color:var(--brass);color:#fffdf8de}
+  .callout b{font-weight:600}
+
+  footer{background:var(--forest-deep);color:#fffdf8a8;padding:48px 0;font-size:14px}
+  footer a{color:var(--brass)}
+
+  .reveal{opacity:1;transform:none}
+  .js-motion .reveal{opacity:0;transform:translateY(20px)}
+  @media (prefers-reduced-motion:reduce){
+    .js-motion .reveal{opacity:1!important;transform:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow reveal">Дизайн-проект · Саранск</p>
+    <h1 class="reveal">Кабинет юриста Дубовой: планировка в цветах сайта</h1>
+    <p class="lead reveal">Помещение уже пригодно для работы — но выглядит как арендованный кабинет «как есть»: жёлтые обои, белый глянец, чёрные стулья из конференц-зала. Задача проекта — не ремонт ради ремонта, а перенос фирменного стиля с сайта <a href="https://law-dubova.tw1.ru/" style="color:var(--brass)">law-dubova.tw1.ru</a> в физическое пространство: тот же тёмно-зелёный, бумажный и латунь.</p>
+    <div class="hero-facts reveal">
+      <span class="fact">Кабинет ≈ 18–19 м²</span>
+      <span class="fact">Одно окно, в торце</span>
+      <span class="fact">Приём клиентов + 1–2 рабочих места</span>
+      <span class="fact">Палитра снята из CSS сайта</span>
+    </div>
+  </div>
+</header>
+
+<!-- ПАЛИТРА -->
+<section id="palette">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 1 · Откуда берутся цвета</p>
+      <h2>Палитра не придумана — она снята с сайта</h2>
+      <p class="sub">Значения ниже — реальные CSS-переменные из таблицы стилей <span class="mono">law-dubova.tw1.ru/assets/index-Du1tqRBa.css</span>. Тот же набор переносится на стены, текстиль и фурнитуру, поэтому визитка, сайт и кабинет читаются как одно целое.</p>
+    </div>
+
+    <div class="swatches reveal">
+      <div class="sw"><div class="chip" style="background:#1c3027"></div><div class="meta"><b>Forest</b><span>#1c3027</span><small>Акцентная стена за спиной, фасады шкафа, вывеска</small></div></div>
+      <div class="sw"><div class="chip" style="background:#111f19"></div><div class="meta"><b>Forest deep</b><span>#111f19</span><small>Опоры мебели, рамы паспарту, корешки папок</small></div></div>
+      <div class="sw"><div class="chip" style="background:#f5f1ea"></div><div class="meta"><b>Paper</b><span>#f5f1ea</span><small>Основной цвет стен вместо нынешнего жёлтого</small></div></div>
+      <div class="sw"><div class="chip" style="background:#e9e2d8"></div><div class="meta"><b>Paper soft</b><span>#e9e2d8</span><small>Штора, обивка кресла ожидания, ковёр</small></div></div>
+      <div class="sw"><div class="chip" style="background:#b5905e"></div><div class="meta"><b>Brass</b><span>#b5905e</span><small>Ручки, светильники, буквы на стене, табличка</small></div></div>
+      <div class="sw"><div class="chip" style="background:#8d5b48"></div><div class="meta"><b>Bark</b><span>#8d5b48</span><small>Клиентские кресла, кожаные детали, подушки</small></div></div>
+    </div>
+
+    <div class="grid g3 reveal" style="margin-top:26px">
+      <div class="card">
+        <p class="num">Шрифт</p>
+        <h3>Onest</h3>
+        <p>Сайт набран гарнитурой Onest. Та же гарнитура — на табличке двери, в навигации и на печатных бланках. Один шрифт вместо трёх случайных сразу поднимает уровень.</p>
+      </div>
+      <div class="card">
+        <p class="num">Пропорция</p>
+        <h3>70 / 20 / 10</h3>
+        <p>70% площади — бумажный фон, 20% — тёмно-зелёный на одной стене и фасадах, 10% — латунь и терракота точечно. Больше зелёного в узкой комнате даст эффект коробки.</p>
+      </div>
+      <div class="card">
+        <p class="num">Что уже совпало</p>
+        <h3>Тёмный пол</h3>
+        <p>Существующий тёмный ламинат попадает в тон <span class="mono">#20231f</span>. Менять его не нужно — он держит всю схему снизу.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ЧТО СЕЙЧАС -->
+<section class="dark" id="now">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 2 · Аудит по фотографиям</p>
+      <h2>Что мешает прямо сейчас</h2>
+      <p class="sub">Оценка сделана по восьми фотографиям кабинета и выкопировке из договора аренды. Ни одна из проблем не требует сноса стен — всё решается отделкой и расстановкой.</p>
+    </div>
+    <div class="grid g2 reveal">
+      <div class="card">
+        <p class="num">01 · Цвет</p>
+        <h3>Жёлто-бежевые стены спорят с брендом</h3>
+        <p>Тёплый жёлтый искажает цвет документов и кожи на видеосвязи, а с сайтом не пересекается вообще. Это первое, что видит клиент, и первое, что нужно перекрасить.</p>
+      </div>
+      <div class="card">
+        <p class="num">02 · Мебель</p>
+        <h3>Белый глянец и чёрные стулья ISO</h3>
+        <p>Глянцевый шкаф и штампованные стулья на чёрных ножках читаются как временная обстановка. Каркасы можно оставить — меняются фасады, обивка и фурнитура.</p>
+      </div>
+      <div class="card">
+        <p class="num">03 · Сценарий</p>
+        <h3>Клиент садится сбоку от стола</h3>
+        <p>Сейчас кресла для посетителей стоят вдоль стены, у кулера. Разговор начинается с того, что человек ищет, куда сесть, и садится вполоборота — это сбивает первую минуту встречи.</p>
+      </div>
+      <div class="card">
+        <p class="num">04 · Хранение</p>
+        <h3>Бумаги, МФУ и вода на виду</h3>
+        <p>Папки на подоконнике, принтер на краю стола, бутыль кулера в кадре. Юридический кабинет продаёт аккуратность — открытое хранение работает против этого.</p>
+      </div>
+      <div class="card">
+        <p class="num">05 · Свет</p>
+        <h3>Растровые светильники в Армстронге</h3>
+        <p>Потолочный свет в один слой даёт «поликлинику» и жёсткие тени на лице. Нужны второй и третий слои: рабочая лампа и мягкая подсветка зоны ожидания.</p>
+      </div>
+      <div class="card">
+        <p class="num">06 · Бренд</p>
+        <h3>В кабинете нет ни имени, ни знака</h3>
+        <p>Ни таблички на двери, ни логотипа на стене, ни фона для фото и видеозвонков. Помещение никак не подтверждает то, что обещает сайт.</p>
+      </div>
+    </div>
+    <div class="callout reveal" style="margin-top:26px"><b>Про размеры.</b> Габариты оценены по потолочной плите Армстронг 600×600 мм на фотографиях: приблизительно 3,1 × 6,0 м. Перед закупкой мебели нужен замер рулеткой — от него зависят ширина стола и глубина ниши.</div>
+  </div>
+</section>
+
+<!-- ПЛАНЫ -->
+<section id="plans">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 3 · Планировка</p>
+      <h2>Три схемы расстановки</h2>
+      <p class="sub">Комната вытянутая, с одним окном в торце и входом напротив — значит, зоны нанизываются вдоль оси «дверь → окно». Клиент проходит их по порядку: гардероб, ожидание, стол. Все планы в одном масштабе, 1 метр = 100 пикселей.</p>
+    </div>
+
+    <div class="plan-tabs reveal" role="tablist" aria-label="Варианты планировки">
+      <button class="tab" role="tab" aria-selected="false" aria-controls="plan-now" id="tab-now">Как сейчас</button>
+      <button class="tab" role="tab" aria-selected="true" aria-controls="plan-a" id="tab-a">Вариант А · кабинет приёма</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="plan-b" id="tab-b">Вариант Б · два места</button>
+    </div>
+
+    <div class="plan-box reveal">
+      <!-- ПЛАН: СЕЙЧАС -->
+      <div id="plan-now" role="tabpanel" aria-labelledby="tab-now" hidden>
+        <div class="scroll-x">
+        <svg viewBox="0 0 780 430" class="svg-label" role="img" aria-label="План кабинета в текущем состоянии: два стола у окна, шкаф в нише, стулья и кулер вдоль стены">
+          <defs>
+            <pattern id="hatchNow" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="8" stroke="#20231f26" stroke-width="3"/>
+            </pattern>
+          </defs>
+          <rect width="780" height="430" fill="#fffdf8"/>
+          <!-- комната 6.0 x 3.1 м -->
+          <rect x="80" y="55" width="600" height="310" fill="#f5f1ea" stroke="#20231f" stroke-width="5"/>
+          <!-- ниша -->
+          <rect x="110" y="55" width="150" height="60" fill="url(#hatchNow)"/>
+          <!-- окно -->
+          <rect x="674" y="115" width="12" height="130" fill="#9ec5da" stroke="#20231f" stroke-width="2"/>
+          <text x="706" y="180" font-size="12" fill="#6b6d66" transform="rotate(90 706 180)">окно 1,3 м</text>
+          <!-- дверь -->
+          <rect x="74" y="245" width="12" height="80" fill="#fffdf8"/>
+          <path d="M80 325 A80 80 0 0 0 160 245" fill="none" stroke="#6b6d66" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="120" y="395" font-size="12.5" text-anchor="middle" fill="#6b6d66">вход</text>
+          <!-- шкаф -->
+          <rect x="112" y="57" width="146" height="56" fill="#ffffff" stroke="#20231f" stroke-width="2"/>
+          <text x="185" y="90" font-size="11.5" text-anchor="middle" fill="#20231f">шкаф, белый глянец</text>
+          <!-- пилон -->
+          <rect x="452" y="55" width="58" height="58" fill="#d7c9b8" stroke="#20231f" stroke-width="2"/>
+          <text x="481" y="89" font-size="10.5" text-anchor="middle" fill="#20231f">короб</text>
+          <!-- стол-склад -->
+          <rect x="290" y="57" width="140" height="75" fill="#ffffff" stroke="#20231f" stroke-width="2"/>
+          <text x="360" y="100" font-size="11.5" text-anchor="middle" fill="#20231f">стол 1 — склад папок</text>
+          <!-- рабочий стол -->
+          <rect x="530" y="57" width="140" height="75" fill="#ffffff" stroke="#20231f" stroke-width="2"/>
+          <text x="600" y="100" font-size="11.5" text-anchor="middle" fill="#20231f">стол 2 + МФУ</text>
+          <circle cx="600" cy="175" r="26" fill="#e9e2d8" stroke="#20231f" stroke-width="2"/>
+          <text x="600" y="179" font-size="10" text-anchor="middle" fill="#20231f">юрист</text>
+          <!-- стулья вдоль стены -->
+          <rect x="180" y="303" width="58" height="58" fill="#3c3c3c" stroke="#20231f" stroke-width="1.5"/>
+          <rect x="246" y="303" width="58" height="58" fill="#3c3c3c" stroke="#20231f" stroke-width="1.5"/>
+          <rect x="312" y="303" width="58" height="58" fill="#ffffff" stroke="#20231f" stroke-width="1.5"/>
+          <text x="272" y="292" font-size="11.5" text-anchor="middle" fill="#6b6d66">стулья вдоль стены</text>
+          <!-- кулер -->
+          <circle cx="404" cy="332" r="24" fill="#cfe3ee" stroke="#20231f" stroke-width="1.5"/>
+          <text x="404" y="336" font-size="10" text-anchor="middle" fill="#20231f">кулер</text>
+          <!-- стеллаж -->
+          <rect x="614" y="300" width="60" height="62" fill="#e9e2d8" stroke="#20231f" stroke-width="1.5"/>
+          <text x="644" y="336" font-size="10" text-anchor="middle" fill="#20231f">стеллаж</text>
+          <!-- маршрут -->
+          <path d="M100 300 L300 285 L470 240 L560 195" fill="none" stroke="#8d5b48" stroke-width="3" stroke-dasharray="9 7" stroke-linecap="round"/>
+          <text x="330" y="240" font-size="11.5" fill="#8d5b48">клиент идёт мимо всего кабинета</text>
+          <!-- размеры -->
+          <line x1="80" y1="34" x2="680" y2="34" stroke="#6b6d66" stroke-width="1"/>
+          <line x1="80" y1="28" x2="80" y2="40" stroke="#6b6d66" stroke-width="1"/>
+          <line x1="680" y1="28" x2="680" y2="40" stroke="#6b6d66" stroke-width="1"/>
+          <text x="380" y="26" font-size="12" text-anchor="middle" fill="#6b6d66">≈ 6,0 м</text>
+          <line x1="52" y1="55" x2="52" y2="365" stroke="#6b6d66" stroke-width="1"/>
+          <text x="42" y="210" font-size="12" text-anchor="middle" fill="#6b6d66" transform="rotate(-90 42 210)">≈ 3,1 м</text>
+        </svg>
+        </div>
+        <p class="plan-note"><b>Проблема схемы:</b> стулья и кулер занимают проход, клиент идёт вдоль всей комнаты мимо чужого стола и садится сбоку. Первый стол фактически превратился в склад папок, лучший свет у окна занят техникой.</p>
+      </div>
+
+      <!-- ПЛАН А -->
+      <div id="plan-a" role="tabpanel" aria-labelledby="tab-a">
+        <div class="scroll-x">
+        <svg viewBox="0 0 780 430" class="svg-label" role="img" aria-label="Вариант А: гардероб у входа, зона ожидания, встроенная библиотека, рабочий стол поперёк комнаты, юрист спиной к тёмно-зелёной стене, два клиентских кресла напротив">
+          <rect width="780" height="430" fill="#fffdf8"/>
+          <rect x="80" y="55" width="600" height="310" fill="#f5f1ea" stroke="#20231f" stroke-width="5"/>
+          <!-- акцентная стена -->
+          <rect x="440" y="46" width="240" height="9" fill="#1c3027"/>
+          <text x="560" y="38" font-size="11.5" text-anchor="middle" fill="#1c3027">акцентная стена #1c3027 · фон для встреч и видеосвязи</text>
+          <!-- окно -->
+          <rect x="674" y="115" width="12" height="130" fill="#9ec5da" stroke="#20231f" stroke-width="2"/>
+          <text x="706" y="180" font-size="12" fill="#6b6d66" transform="rotate(90 706 180)">окно · свет сбоку</text>
+          <!-- дверь -->
+          <rect x="74" y="245" width="12" height="80" fill="#fffdf8"/>
+          <path d="M80 325 A80 80 0 0 0 160 245" fill="none" stroke="#6b6d66" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="120" y="395" font-size="12.5" text-anchor="middle" fill="#6b6d66">вход</text>
+          <!-- гардероб -->
+          <rect x="110" y="55" width="150" height="60" fill="#1c3027" stroke="#111f19" stroke-width="2"/>
+          <text x="185" y="90" font-size="11.5" text-anchor="middle" fill="#f5f1ea">гардероб + хранение</text>
+          <!-- библиотека -->
+          <rect x="285" y="55" width="145" height="35" fill="#1c3027" stroke="#111f19" stroke-width="2"/>
+          <text x="357" y="78" font-size="11" text-anchor="middle" fill="#f5f1ea">библиотека, глубина 350</text>
+          <!-- консоль со знаком -->
+          <rect x="110" y="337" width="110" height="26" fill="#b5905e" stroke="#694234" stroke-width="1.5"/>
+          <text x="165" y="330" font-size="10.5" text-anchor="middle" fill="#6b6d66">консоль · знак на стене</text>
+          <!-- зона ожидания -->
+          <rect x="250" y="300" width="62" height="62" rx="12" fill="#8d5b48" stroke="#694234" stroke-width="1.5"/>
+          <rect x="322" y="300" width="62" height="62" rx="12" fill="#8d5b48" stroke="#694234" stroke-width="1.5"/>
+          <circle cx="410" cy="333" r="22" fill="#d7c9b8" stroke="#20231f" stroke-width="1.5"/>
+          <text x="317" y="290" font-size="11.5" text-anchor="middle" fill="#6b6d66">ожидание · 2 кресла + столик</text>
+          <!-- рабочий стол 1.6 x 0.8 -->
+          <rect x="430" y="175" width="160" height="80" rx="5" fill="#d7c9b8" stroke="#20231f" stroke-width="2"/>
+          <text x="510" y="220" font-size="11.5" text-anchor="middle" fill="#20231f">стол 1600 × 800</text>
+          <!-- кресло юриста -->
+          <circle cx="510" cy="135" r="28" fill="#1c3027" stroke="#111f19" stroke-width="2"/>
+          <text x="510" y="139" font-size="10" text-anchor="middle" fill="#f5f1ea">юрист</text>
+          <!-- клиенты -->
+          <circle cx="468" cy="300" r="26" fill="#8d5b48" stroke="#694234" stroke-width="2"/>
+          <circle cx="552" cy="300" r="26" fill="#8d5b48" stroke="#694234" stroke-width="2"/>
+          <text x="510" y="349" font-size="11.5" text-anchor="middle" fill="#6b6d66">клиенты — напротив, через стол</text>
+          <!-- тумба + мфу -->
+          <rect x="608" y="292" width="66" height="70" fill="#e9e2d8" stroke="#20231f" stroke-width="1.5"/>
+          <text x="641" y="332" font-size="10" text-anchor="middle" fill="#20231f">МФУ, архив</text>
+          <!-- маршрут -->
+          <path d="M100 290 L240 275 L400 265 L462 272" fill="none" stroke="#b5905e" stroke-width="3" stroke-dasharray="9 7" stroke-linecap="round"/>
+          <text x="215" y="258" font-size="11.5" fill="#b5905e">маршрут клиента</text>
+          <!-- проходы -->
+          <line x1="590" y1="215" x2="672" y2="215" stroke="#6b6d66" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="631" y="207" font-size="10.5" text-anchor="middle" fill="#6b6d66">900</text>
+          <line x1="510" y1="107" x2="510" y2="60" stroke="#6b6d66" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="533" y="86" font-size="10.5" text-anchor="middle" fill="#6b6d66">520</text>
+          <!-- размеры -->
+          <line x1="80" y1="34" x2="680" y2="34" stroke="#6b6d66" stroke-width="1"/>
+          <line x1="80" y1="28" x2="80" y2="40" stroke="#6b6d66" stroke-width="1"/>
+          <line x1="680" y1="28" x2="680" y2="40" stroke="#6b6d66" stroke-width="1"/>
+          <text x="240" y="26" font-size="12" text-anchor="middle" fill="#6b6d66">≈ 6,0 м</text>
+          <line x1="52" y1="55" x2="52" y2="365" stroke="#6b6d66" stroke-width="1"/>
+          <text x="42" y="210" font-size="12" text-anchor="middle" fill="#6b6d66" transform="rotate(-90 42 210)">≈ 3,1 м</text>
+        </svg>
+        </div>
+        <p class="plan-note"><b>Логика:</b> стол стоит поперёк комнаты, юрист сидит спиной к тёмно-зелёной стене, окно — сбоку. Свет падает на стол, а не в объектив камеры, и за спиной оказывается готовый фирменный фон. Клиент садится напротив, через стол — переговорная позиция вместо «сбоку у стены». Проход к окну шириной 900 мм остаётся свободным.</p>
+      </div>
+
+      <!-- ПЛАН Б -->
+      <div id="plan-b" role="tabpanel" aria-labelledby="tab-b" hidden>
+        <div class="scroll-x">
+        <svg viewBox="0 0 780 430" class="svg-label" role="img" aria-label="Вариант Б: рабочее место помощника у входа, стеллаж-разделитель, зона приёма у окна">
+          <rect width="780" height="430" fill="#fffdf8"/>
+          <rect x="80" y="55" width="600" height="310" fill="#f5f1ea" stroke="#20231f" stroke-width="5"/>
+          <rect x="440" y="46" width="240" height="9" fill="#1c3027"/>
+          <text x="560" y="38" font-size="11.5" text-anchor="middle" fill="#1c3027">акцентная стена #1c3027</text>
+          <rect x="674" y="115" width="12" height="130" fill="#9ec5da" stroke="#20231f" stroke-width="2"/>
+          <text x="706" y="180" font-size="12" fill="#6b6d66" transform="rotate(90 706 180)">окно</text>
+          <rect x="74" y="245" width="12" height="80" fill="#fffdf8"/>
+          <path d="M80 325 A80 80 0 0 0 160 245" fill="none" stroke="#6b6d66" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="120" y="395" font-size="12.5" text-anchor="middle" fill="#6b6d66">вход</text>
+          <!-- гардероб -->
+          <rect x="110" y="55" width="150" height="60" fill="#1c3027" stroke="#111f19" stroke-width="2"/>
+          <text x="185" y="90" font-size="11.5" text-anchor="middle" fill="#f5f1ea">гардероб</text>
+          <!-- рабочее место помощника -->
+          <rect x="110" y="265" width="140" height="75" fill="#d7c9b8" stroke="#20231f" stroke-width="2"/>
+          <text x="180" y="308" font-size="11.5" text-anchor="middle" fill="#20231f">помощник</text>
+          <circle cx="180" cy="205" r="26" fill="#1c3027" stroke="#111f19" stroke-width="2"/>
+          <!-- одно кресло ожидания -->
+          <rect x="278" y="300" width="62" height="62" rx="12" fill="#8d5b48" stroke="#694234" stroke-width="1.5"/>
+          <text x="309" y="290" font-size="11" text-anchor="middle" fill="#6b6d66">ожидание</text>
+          <!-- стеллаж-разделитель -->
+          <rect x="350" y="55" width="42" height="195" fill="#1c3027" stroke="#111f19" stroke-width="2"/>
+          <text x="371" y="150" font-size="11" text-anchor="middle" fill="#f5f1ea" transform="rotate(-90 371 150)">стеллаж-разделитель 1,8 м</text>
+          <!-- рабочий стол юриста -->
+          <rect x="430" y="175" width="160" height="80" rx="5" fill="#d7c9b8" stroke="#20231f" stroke-width="2"/>
+          <text x="510" y="220" font-size="11.5" text-anchor="middle" fill="#20231f">стол юриста</text>
+          <circle cx="510" cy="135" r="28" fill="#1c3027" stroke="#111f19" stroke-width="2"/>
+          <text x="510" y="139" font-size="10" text-anchor="middle" fill="#f5f1ea">юрист</text>
+          <circle cx="468" cy="300" r="26" fill="#8d5b48" stroke="#694234" stroke-width="2"/>
+          <circle cx="552" cy="300" r="26" fill="#8d5b48" stroke="#694234" stroke-width="2"/>
+          <text x="510" y="349" font-size="11.5" text-anchor="middle" fill="#6b6d66">клиенты</text>
+          <rect x="608" y="292" width="66" height="70" fill="#e9e2d8" stroke="#20231f" stroke-width="1.5"/>
+          <text x="641" y="332" font-size="10" text-anchor="middle" fill="#20231f">МФУ, архив</text>
+          <path d="M100 290 L260 285 L380 280 L462 275" fill="none" stroke="#b5905e" stroke-width="3" stroke-dasharray="9 7" stroke-linecap="round"/>
+          <line x1="80" y1="34" x2="680" y2="34" stroke="#6b6d66" stroke-width="1"/>
+          <line x1="80" y1="28" x2="80" y2="40" stroke="#6b6d66" stroke-width="1"/>
+          <line x1="680" y1="28" x2="680" y2="40" stroke="#6b6d66" stroke-width="1"/>
+          <text x="240" y="26" font-size="12" text-anchor="middle" fill="#6b6d66">≈ 6,0 м</text>
+          <line x1="52" y1="55" x2="52" y2="365" stroke="#6b6d66" stroke-width="1"/>
+          <text x="42" y="210" font-size="12" text-anchor="middle" fill="#6b6d66" transform="rotate(-90 42 210)">≈ 3,1 м</text>
+        </svg>
+        </div>
+        <p class="plan-note"><b>Когда выбирать:</b> если в кабинете постоянно работают двое. Стеллаж высотой 1,8 м делит комнату на «тыл» и «приём»: помощник не попадает в кадр переговоров, но остаётся в шаге. Плата за это — зона ожидания сжимается до одного кресла, а проход у стеллажа сужается до 1,1 м.</p>
+      </div>
+
+      <div class="legend">
+        <span><i style="background:#1c3027"></i>Тёмно-зелёный: стена, фасады, стеллажи</span>
+        <span><i style="background:#8d5b48"></i>Терракота: кресла клиентов</span>
+        <span><i style="background:#d7c9b8"></i>Столешницы, дуб</span>
+        <span><i style="background:#b5905e"></i>Латунь и маршрут клиента</span>
+      </div>
+    </div>
+
+    <div class="grid g3 reveal" style="margin-top:26px">
+      <div class="card"><p class="num">Эргономика</p><h3>900 мм — проход к окну</h3><p>Между торцом стола и подоконником остаётся коридор 900 мм: человек в пальто проходит, не задевая кресла. Минимум, ниже которого опускаться нельзя, — 700 мм.</p></div>
+      <div class="card"><p class="num">Эргономика</p><h3>1200 мм — за спиной</h3><p>От края стола до стены за креслом юриста. Кресло отъезжает свободно, и остаётся место, чтобы встать навстречу вошедшему клиенту.</p></div>
+      <div class="card"><p class="num">Эргономика</p><h3>600 мм — на кресло</h3><p>Клиентские кресла ставятся с шагом 600–700 мм по фронту стола. Два кресла обязательны: люди приходят парой чаще, чем поодиночке.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- РАЗВЁРТКИ -->
+<section id="elevations">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 4 · Развёртки стен</p>
+      <h2>Как это выглядит в высоту</h2>
+      <p class="sub">План показывает расстановку, но не показывает, что человек видит на уровне глаз. Ниже — две ключевые стены варианта А, вид спереди, тот же масштаб 1 м = 100 пикселей.</p>
+    </div>
+
+    <div class="grid g2 reveal">
+      <div class="plan-box">
+        <div class="scroll-x">
+        <svg viewBox="0 0 480 360" class="svg-label" role="img" aria-label="Развёртка стены за рабочим местом: тёмно-зелёная стена, три диплома в тонких рамах, стол, настольная лампа, бра">
+          <rect width="480" height="360" fill="#fffdf8"/>
+          <!-- стена 3.6 x 2.7 -->
+          <rect x="50" y="30" width="360" height="270" fill="#1c3027"/>
+          <!-- потолок -->
+          <rect x="50" y="18" width="360" height="12" fill="#fffdf8" stroke="#20231f" stroke-width="1.5"/>
+          <text x="230" y="12" font-size="11" text-anchor="middle" fill="#6b6d66">потолок 2,7 м</text>
+          <!-- пол -->
+          <rect x="50" y="300" width="360" height="14" fill="#3b2e26"/>
+          <!-- плинтус -->
+          <rect x="50" y="292" width="360" height="8" fill="#111f19"/>
+          <!-- дипломы -->
+          <rect x="110" y="80" width="62" height="80" fill="#f5f1ea" stroke="#111f19" stroke-width="3"/>
+          <rect x="188" y="80" width="62" height="80" fill="#f5f1ea" stroke="#111f19" stroke-width="3"/>
+          <rect x="266" y="80" width="62" height="80" fill="#f5f1ea" stroke="#111f19" stroke-width="3"/>
+          <line x1="100" y1="80" x2="338" y2="80" stroke="#b5905e" stroke-width="1" stroke-dasharray="4 4"/>
+          <text x="352" y="84" font-size="10" fill="#b5905e">одна линия по верху</text>
+          <!-- бра -->
+          <circle cx="366" cy="120" r="10" fill="#b5905e"/>
+          <path d="M366 130 L340 190 L392 190 Z" fill="#b5905e" opacity=".18"/>
+          <!-- стол -->
+          <rect x="120" y="222" width="230" height="10" fill="#d7c9b8" stroke="#20231f" stroke-width="1.5"/>
+          <rect x="132" y="232" width="8" height="60" fill="#111f19"/>
+          <rect x="330" y="232" width="8" height="60" fill="#111f19"/>
+          <!-- тумба -->
+          <rect x="150" y="236" width="90" height="56" fill="#e9e2d8" stroke="#20231f" stroke-width="1.5"/>
+          <!-- лампа -->
+          <rect x="290" y="196" width="4" height="26" fill="#b5905e"/>
+          <rect x="278" y="188" width="28" height="8" rx="3" fill="#b5905e"/>
+          <!-- монитор -->
+          <rect x="196" y="182" width="72" height="40" rx="3" fill="#20231f" stroke="#0d0d0d" stroke-width="1.5"/>
+          <!-- подписи -->
+          <text x="230" y="330" font-size="11.5" text-anchor="middle" fill="#6b6d66">высота стола 750 · дипломы по верхней линии 1,95 м от пола</text>
+        </svg>
+        </div>
+        <p class="plan-note"><b>Стена за спиной.</b> Три диплома в одинаковых узких рамах <span class="mono">#111f19</span>, выровненные по верхнему краю, латунное бра справа. На зелёном фоне бумага читается как документ, а не как «дипломы на обоях».</p>
+      </div>
+
+      <div class="plan-box">
+        <div class="scroll-x">
+        <svg viewBox="0 0 480 360" class="svg-label" role="img" aria-label="Развёртка входного узла: шкаф-гардероб с зелёными фасадами и латунными ручками, знак с фамилией на стене">
+          <rect width="480" height="360" fill="#fffdf8"/>
+          <rect x="50" y="30" width="360" height="270" fill="#f5f1ea"/>
+          <rect x="50" y="18" width="360" height="12" fill="#fffdf8" stroke="#20231f" stroke-width="1.5"/>
+          <rect x="50" y="300" width="360" height="14" fill="#3b2e26"/>
+          <rect x="50" y="292" width="360" height="8" fill="#111f19"/>
+          <!-- шкаф 2.4 x 2.2 -->
+          <rect x="70" y="80" width="240" height="212" fill="#1c3027" stroke="#111f19" stroke-width="2"/>
+          <line x1="130" y1="80" x2="130" y2="292" stroke="#111f19" stroke-width="1.5"/>
+          <line x1="190" y1="80" x2="190" y2="292" stroke="#111f19" stroke-width="1.5"/>
+          <line x1="250" y1="80" x2="250" y2="292" stroke="#111f19" stroke-width="1.5"/>
+          <!-- ручки -->
+          <rect x="122" y="170" width="5" height="34" rx="2" fill="#b5905e"/>
+          <rect x="133" y="170" width="5" height="34" rx="2" fill="#b5905e"/>
+          <rect x="242" y="170" width="5" height="34" rx="2" fill="#b5905e"/>
+          <rect x="253" y="170" width="5" height="34" rx="2" fill="#b5905e"/>
+          <!-- антресоль -->
+          <line x1="70" y1="130" x2="310" y2="130" stroke="#111f19" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="190" y="122" font-size="10.5" text-anchor="middle" fill="#e9e2d8">антресоль: архив, запасы</text>
+          <!-- знак на стене -->
+          <text x="340" y="150" font-size="17" font-weight="600" fill="#b5905e">ДУБОВА</text>
+          <text x="340" y="170" font-size="10.5" fill="#6b6d66">юрист частной практики</text>
+          <!-- подсветка -->
+          <rect x="336" y="110" width="60" height="5" rx="2" fill="#b5905e"/>
+          <path d="M336 115 L318 200 L410 200 Z" fill="#b5905e" opacity=".14"/>
+          <!-- консоль -->
+          <rect x="330" y="232" width="90" height="8" fill="#d7c9b8" stroke="#20231f" stroke-width="1.5"/>
+          <rect x="338" y="240" width="5" height="52" fill="#111f19"/>
+          <rect x="408" y="240" width="5" height="52" fill="#111f19"/>
+          <rect x="352" y="214" width="14" height="18" rx="3" fill="#9ec5da" stroke="#20231f" stroke-width="1"/>
+          <text x="230" y="336" font-size="11.5" text-anchor="middle" fill="#6b6d66">шкаф 2400 × 2200 · знак на высоте глаз 1,55 м</text>
+        </svg>
+        </div>
+        <p class="plan-note"><b>Первое, что видит клиент.</b> Существующий шкаф остаётся на месте: меняются фасады (перекраска или новые), ручки — латунь. Напротив — фамилия объёмными буквами с подсветкой и узкая консоль с графином вместо кулера.</p>
+      </div>
+    </div>
+
+    <div id="renders" class="reveal" style="margin-top:30px">
+      <h3 style="font-size:22px;margin-bottom:6px">Фотореалистичные визуализации</h3>
+      <p class="sub" style="margin-bottom:20px">Место под рендеры интерьера: те же пропорции комнаты, окно в торце и палитра проекта. Добавляются после генерации.</p>
+      <div class="shots" id="shots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ЗОНЫ -->
+<section class="dark" id="zones">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 5 · Три зоны</p>
+      <h2>Что происходит в каждой части кабинета</h2>
+      <p class="sub">Узкая комната работает только тогда, когда у каждого метра есть назначение. Разбивка — по ходу движения клиента.</p>
+    </div>
+    <div class="grid g3 reveal">
+      <div class="card">
+        <p class="num">0–1,8 м от двери</p>
+        <h3>Входной узел</h3>
+        <ul class="clean" style="margin-top:12px">
+          <li><b>Гардероб</b> — существующий шкаф в нише, фасады перекрашиваются в <span class="mono">#1c3027</span>, ручки меняются на латунь.</li>
+          <li><b>Кулер</b> убирается внутрь шкафа или заменяется графином и стаканами на консоли.</li>
+          <li><b>Знак на стене</b> — фамилия гарнитурой Onest, латунные буквы, подсветка сверху.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="num">1,8–3,6 м</p>
+        <h3>Ожидание и библиотека</h3>
+        <ul class="clean" style="margin-top:12px">
+          <li><b>Два кресла</b> терракотового цвета и низкий столик — клиент ждёт сидя, а не стоя в дверях.</li>
+          <li><b>Встроенная библиотека</b> глубиной 350 мм на месте нынешнего стеллажа: кодексы, папки в единых корешках.</li>
+          <li><b>Короб-выступ</b> обыгрывается как торец библиотеки, а не торчит посреди стены.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="num">3,6–6,0 м</p>
+        <h3>Рабочая зона у окна</h3>
+        <ul class="clean" style="margin-top:12px">
+          <li><b>Стол 1600×800</b> — столешница дуб, опоры чёрные, кабель-канал снизу.</li>
+          <li><b>Тёмно-зелёная стена</b> за спиной — фон для встреч, видеозвонков и фотографий.</li>
+          <li><b>МФУ и архив</b> уезжают в закрытую тумбу; на столе остаются лампа, монитор и папка текущего дела.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ОТДЕЛКА -->
+<section id="finish">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 6 · Отделка</p>
+      <h2>Решения по поверхностям</h2>
+      <p class="sub">Ни одна позиция не требует согласования перепланировки: стены не двигаются, проёмы не трогаются, инженерия остаётся на месте.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Поверхность</th><th>Сейчас</th><th>Решение</th><th>Почему так</th></tr></thead>
+        <tbody>
+          <tr><td>Стены, основной объём</td><td>Обои под покраску, жёлто-бежевые</td><td>Перекраска в <span class="mono">#f5f1ea</span>, матовая моющаяся краска</td><td>Обои перекрашиваются поверх — демонтаж не нужен, экономия времени и сметы</td></tr>
+          <tr><td>Стена за рабочим местом</td><td>Тот же жёлтый</td><td>Тёмно-зелёный <span class="mono">#1c3027</span>, матовая краска</td><td>Фон для видеосвязи и фото, визуально «останавливает» вытянутую комнату</td></tr>
+          <tr><td>Потолок</td><td>Армстронг, плита с фактурой</td><td>Замена плит на белые матовые, ревизия перекошенных</td><td>Дешевле подвесного потолка и убирает эффект казённого помещения</td></tr>
+          <tr><td>Освещение</td><td>Растровые светильники</td><td>LED-панели 3500–4000 K + настольная лампа + бра в зоне ожидания</td><td>Три слоя света вместо одного: общий, рабочий, мягкий</td></tr>
+          <tr><td>Пол</td><td>Тёмный ламинат</td><td>Оставить. Добавить ковёр <span class="mono">#e9e2d8</span> под зону ожидания</td><td>Пол уже в тон палитре; ковёр гасит эхо в комнате с твёрдыми поверхностями</td></tr>
+          <tr><td>Окно</td><td>Без штор, папки на подоконнике</td><td>Рулонная штора день-ночь + льняная портьера тона paper soft</td><td>Контроль бликов на мониторе и приватность во время встреч</td></tr>
+          <tr><td>Дверь</td><td>Белая, без обозначений</td><td>Латунная табличка с фамилией и часами приёма, гарнитура Onest</td><td>Первая точка контакта в коридоре — сейчас её нет вообще</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout reveal" style="margin-top:22px"><b>Проверить до закупки:</b> согласие арендодателя на перекраску и монтаж таблички. Такие работы обычно требуют письменного согласования по договору аренды — вопрос решается одним письмом, но лучше до, чем после.</div>
+  </div>
+</section>
+
+<!-- СВЕТ -->
+<section class="dark" id="light">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 7 · Свет</p>
+      <h2>Три слоя вместо одного потолка</h2>
+      <p class="sub">Работа с документами — это чтение мелкого шрифта по восемь часов. Свет здесь не декорация, а условие работоспособности.</p>
+    </div>
+    <div class="grid g3 reveal">
+      <div class="card"><p class="num">Слой 1 · Общий</p><h3>Потолок, 4000 K</h3><p>LED-панели вместо растровых светильников. Ориентир для офисной работы с документами — порядка 300–500 лк на рабочей плоскости; для комнаты около 18,5 м² это примерно 9 000–12 000 лм суммарного светового потока. Точный расчёт делает поставщик по своим светильникам.</p></div>
+      <div class="card"><p class="num">Слой 2 · Рабочий</p><h3>Лампа на столе</h3><p>Настольная лампа с регулировкой, на латунной ножке, слева от рабочей руки. Закрывает вечернюю работу и тёмные зимние утра, когда одного потолка мало.</p></div>
+      <div class="card"><p class="num">Слой 3 · Мягкий</p><h3>Зона ожидания, 3000 K</h3><p>Бра или торшер тёплого света рядом с креслами. Клиент ждёт в человеческом свете, а не под общим потолком — это заметно снижает напряжение перед разговором.</p></div>
+    </div>
+    <div class="callout reveal" style="margin-top:24px">Значения освещённости приведены как ориентир для проектирования. Нормативные требования к искусственному освещению помещений установлены СанПиН 1.2.3685-21 — итоговые цифры стоит подтвердить у поставщика светильников.</div>
+  </div>
+</section>
+
+<!-- БРЕНД -->
+<section id="brand">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <p class="kicker">Шаг 8 · Бренд в интерьере</p>
+        <h2>Пять деталей, которые связывают кабинет с сайтом</h2>
+        <ul class="clean" style="margin-top:20px">
+          <li><b>Табличка на двери.</b> Латунь, гравировка Onest: «Дубова Анастасия Алексеевна · юрист». Часы приёма — второй строкой, мельче.</li>
+          <li><b>Знак на стене у входа.</b> Объёмные буквы или монограмма на бумажном фоне, подсветка сверху. Работает и как фон для сторис.</li>
+          <li><b>Паспарту с дипломами.</b> Одинаковые тонкие рамы <span class="mono">#111f19</span>, одинаковые поля, одна линия по высоте. Разнокалиберные рамки убивают эффект.</li>
+          <li><b>Единые корешки папок.</b> Бумажный фон, зелёная плашка, номер дела. Стеллаж перестаёт быть визуальным шумом.</li>
+          <li><b>Бланки и визитки.</b> Та же пара «бумага + лес» и та же гарнитура, что на сайте: документ, который клиент уносит домой, продолжает кабинет.</li>
+        </ul>
+      </div>
+      <div class="card reveal" style="background:var(--forest);color:var(--paper-light);border-color:transparent">
+        <p class="num">Проверка на месте</p>
+        <h3 style="color:var(--paper-light)">Тест первых десяти секунд</h3>
+        <p style="color:#fffdf8c4;margin-top:10px">Откройте дверь и посмотрите на кабинет глазами человека, который пришёл с проблемой. За первые десять секунд он должен понять: куда повесить пальто, куда сесть, кто здесь работает и что этот человек занимается документами всерьёз.</p>
+        <p style="color:#fffdf8c4;margin-top:14px">Если ответа нет хотя бы на один вопрос — дорабатывайте зону, а не докупайте декор.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СМЕТА -->
+<section id="budget">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 9 · Бюджет</p>
+      <h2>Смета по этапам</h2>
+      <p class="sub">Диапазоны ориентировочные, для планирования порядка затрат: розничные цены меняются, точные суммы даст запрос конкретных позиций у поставщиков. Проект намеренно разбит так, чтобы первый этап уже менял впечатление от кабинета.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Этап</th><th>Что входит</th><th>Ориентир, ₽</th><th>Что меняется</th></tr></thead>
+        <tbody>
+          <tr><td><b>1. Цвет и свет</b><br><span style="color:var(--muted);font-size:13.5px">выходные плюс два дня</span></td><td>Краска на стены (бумажный фон и зелёная стена), замена плит Армстронг, LED-панели, настольная лампа</td><td class="num">40 000 – 70 000</td><td>Комната перестаёт быть жёлтой и «поликлиничной» — самый заметный сдвиг за наименьшие деньги</td></tr>
+          <tr><td><b>2. Мебель и текстиль</b><br><span style="color:var(--muted);font-size:13.5px">1–2 недели с доставкой</span></td><td>Стол 1600×800, кресло юриста, два клиентских кресла, рулонная штора, портьера, ковёр</td><td class="num">90 000 – 160 000</td><td>Появляется сценарий приёма: клиенту есть куда сесть напротив</td></tr>
+          <tr><td><b>3. Хранение</b><br><span style="color:var(--muted);font-size:13.5px">по замерам</span></td><td>Перекраска фасадов шкафа, латунная фурнитура, встроенная библиотека 350 мм, закрытая тумба под МФУ</td><td class="num">50 000 – 110 000</td><td>Бумаги, техника и вода уходят с глаз</td></tr>
+          <tr><td><b>4. Брендинг</b><br><span style="color:var(--muted);font-size:13.5px">3–5 дней</span></td><td>Табличка на дверь, буквы на стену, рамы для дипломов, единые корешки папок, бланки</td><td class="num">15 000 – 40 000</td><td>Кабинет начинает подтверждать то, что обещает сайт</td></tr>
+        </tbody>
+        <tfoot><tr><td>Итого</td><td>Полный проект, без замены пола и окон</td><td class="num">195 000 – 380 000</td><td>Разброс зависит от того, делается ли мебель на заказ</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="callout reveal" style="margin-top:22px"><b>Минимальный вариант — 55 000–90 000 ₽:</b> только первый этап плюс два клиентских кресла и табличка на дверь. Это уже закрывает четыре проблемы из шести, найденных при аудите.</div>
+  </div>
+</section>
+
+<!-- ПОРЯДОК -->
+<section class="dark" id="order">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="kicker">Шаг 10 · Порядок работ</p>
+      <h2>С чего начать в понедельник</h2>
+    </div>
+    <div class="grid g4 reveal">
+      <div class="card"><p class="num">Шаг 1</p><h3>Замер</h3><p>Рулетка, двадцать минут: длина, ширина, высота, ниша, короб, окно, розетки. Все дальнейшие решения зависят от этих цифр.</p></div>
+      <div class="card"><p class="num">Шаг 2</p><h3>Письмо арендодателю</h3><p>Согласие на перекраску и табличку. Заодно уточнить, что можно сверлить, а что нельзя.</p></div>
+      <div class="card"><p class="num">Шаг 3</p><h3>Выкраска</h3><p>Взять пробники двух цветов, покрасить по листу А3 и посмотреть на них днём и вечером — экранный цвет и стена всегда отличаются.</p></div>
+      <div class="card"><p class="num">Шаг 4</p><h3>Расчистка</h3><p>До покраски вынести всё, что не нужно ежедневно. Часть проблем из аудита закрывается бесплатно, ещё до первого мазка кистью.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 8px">Дизайн-проект кабинета · ИП Дубова А. А., Саранск · палитра и гарнитура взяты с сайта <a href="https://law-dubova.tw1.ru/">law-dubova.tw1.ru</a></p>
+    <p style="margin:0;color:#fffdf877">Размеры помещения оценены по фотографиям и требуют контрольного замера. Стоимость работ и материалов указана ориентировочно и подлежит уточнению по коммерческим предложениям.</p>
+  </div>
+</footer>
+
+<script type="module">
+  import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@11/+esm";
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduced) {
+    document.documentElement.classList.add("js-motion");
+    // страховка: если анимация не запустилась, контент всё равно показывается
+    setTimeout(() => {
+      document.querySelectorAll(".reveal").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && getComputedStyle(el).opacity === "0") {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+        }
+      });
+    }, 1600);
+
+    inView(".reveal", (el) => {
+      animate(el, { opacity: [0, 1], y: [20, 0] }, { duration: .55 });
+    }, { margin: "0px 0px -10% 0px" });
+
+    inView("#zones .grid", () => {
+      animate("#zones .card", { opacity: [0, 1], y: [18, 0] }, { duration: .5, delay: stagger(.08) });
+    });
+  }
+
+  // вкладки планов
+  const tabs = [...document.querySelectorAll('.tab')];
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        const panel = document.getElementById(t.getAttribute('aria-controls'));
+        const active = t === tab;
+        t.setAttribute('aria-selected', String(active));
+        panel.hidden = !active;
+        if (active && !reduced) animate(panel, { opacity: [0, 1] }, { duration: .3 });
+      });
+    });
+  });
+</script>
+</body>
+</html>
