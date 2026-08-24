@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>KPI отдела ассистентов</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#fff; --surface-2:#FAFAFC;
+  --fg:#1D1D1F; --fg-2:#4B4B50; --fg-3:#86868B;
+  --accent:#0071E3; --accent-soft:#E8F1FD;
+  --green:#0B8A4B; --green-soft:#E6F5ED;
+  --amber:#B26A00; --amber-soft:#FFF3E0;
+  --red:#C4302B; --red-soft:#FDECEA;
+  --border:#E3E3E7; --border-2:#EDEDF0;
+  --radius:18px; --radius-sm:11px;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#000; --surface:#1C1C1E; --surface-2:#141416;
+    --fg:#F5F5F7; --fg-2:#C7C7CC; --fg-3:#8E8E93;
+    --accent:#2E9BFF; --accent-soft:#122437;
+    --green:#4ADE80; --green-soft:#10241A;
+    --amber:#FBBF24; --amber-soft:#2A2010;
+    --red:#FF6B63; --red-soft:#2E1614;
+    --border:#2C2C2E; --border-2:#242426;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;
+}
+h1,h2,h3,h4{letter-spacing:-.02em;line-height:1.2;margin:0}
+h1{font-size:26px;font-weight:750}h2{font-size:21px;font-weight:700}
+h3{font-size:17px;font-weight:650}h4{font-size:15px;font-weight:650}
+a{color:var(--accent);text-decoration:none}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+header.top{
+  position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);
+  backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--border-2);
+}
+.top-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-weight:750;font-size:16px;margin-right:auto}
+.who{font-size:13.5px;color:var(--fg-3)}
+.who b{color:var(--fg)}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 0 0;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  padding:8px 14px;border-radius:100px;font-size:14px;font-weight:550;color:var(--fg-2);
+  background:transparent;border:none;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s;
+}
+.tab:hover{background:var(--surface)}
+.tab.on{background:var(--accent);color:#fff}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:960px){.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.g2,.g4{grid-template-columns:1fr}}
+section.page{padding:22px 0 60px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.spacer{flex:1}
+
+.metric .lbl{font-size:13px;color:var(--fg-3);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.metric .val{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-top:4px}
+.metric .sub{font-size:13px;color:var(--fg-3);margin-top:4px}
+.bar{height:6px;border-radius:100px;background:var(--border);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:100px;transition:width .5s cubic-bezier(.16,1,.3,1)}
+
+.kef{display:flex;align-items:baseline;gap:12px}
+.kef .big{font-size:46px;font-weight:850;letter-spacing:-.04em;color:var(--accent);line-height:1}
+.money{font-size:26px;font-weight:800;letter-spacing:-.03em}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:720px}
+.tbl{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+th{
+  text-align:left;font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--fg-3);padding:12px 14px;border-bottom:1px solid var(--border);background:var(--surface-2);
+  position:sticky;top:0;
+}
+td{padding:12px 14px;border-bottom:1px solid var(--border-2);color:var(--fg-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr.clickable{cursor:pointer;transition:background .15s}
+tbody tr.clickable:hover{background:var(--surface-2)}
+td strong{color:var(--fg)}
+.num{text-align:right;white-space:nowrap}
+
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:100px;white-space:nowrap}
+.t-green{background:var(--green-soft);color:var(--green)}
+.t-blue{background:var(--accent-soft);color:var(--accent)}
+.t-amber{background:var(--amber-soft);color:var(--amber)}
+.t-red{background:var(--red-soft);color:var(--red)}
+.t-grey{background:var(--surface-2);color:var(--fg-3);border:1px solid var(--border)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 16px;font-family:inherit;
+  font-size:14.5px;font-weight:600;color:#fff;background:var(--accent);border:none;border-radius:100px;
+  cursor:pointer;transition:opacity .2s,transform .12s;
+}
+.btn:hover{opacity:.88}.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--border)}
+.btn.ghost:hover{background:var(--accent-soft)}
+.btn.danger{background:var(--red)}
+.btn.sm{min-height:34px;padding:0 12px;font-size:13.5px}
+
+input,select{
+  padding:10px 12px;font-size:15px;font-family:inherit;border:1px solid var(--border);
+  border-radius:10px;background:var(--surface);color:var(--fg);min-height:42px;width:100%;
+}
+input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+label{display:block;font-size:13.5px;font-weight:550;margin-bottom:6px}
+.field{margin-bottom:14px}
+
+.muted{color:var(--fg-3);font-size:13.5px;line-height:1.5}
+.why{
+  margin-top:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;
+  font-size:13px;color:var(--fg-2);line-height:1.6;border:1px solid var(--border-2);
+}
+.why b{color:var(--fg)}
+details>summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:550;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary:hover{text-decoration:underline}
+
+.login{max-width:400px;margin:12vh auto;text-align:center}
+.login .card{text-align:left}
+.err{background:var(--red-soft);color:var(--red);padding:10px 12px;border-radius:10px;font-size:13.5px;margin-top:12px}
+.ok{background:var(--green-soft);color:var(--green);padding:10px 12px;border-radius:10px;font-size:13.5px;margin-top:12px}
+.hide{display:none}
+
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;
+  padding:20px;z-index:100;
+}
+.modal{background:var(--surface);border-radius:var(--radius);padding:22px;max-width:680px;width:100%;max-height:86vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.timeline{list-style:none;padding:0;margin:14px 0 0}
+.timeline li{padding:8px 0 8px 20px;border-left:2px solid var(--border);position:relative;font-size:14px}
+.timeline li::before{content:'';position:absolute;left:-5px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.timeline .t{color:var(--fg-3);font-size:12.5px}
+.key-box{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:var(--surface-2);
+  border:1px solid var(--border);border-radius:10px;padding:12px;word-break:break-all;margin-top:8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ЭКРАН ВХОДА -->
+<div id="login" class="login">
+  <h1 style="margin-bottom:8px">KPI отдела</h1>
+  <p class="muted" style="margin-bottom:22px">Введите свой ключ доступа</p>
+  <div class="card">
+    <div class="field">
+      <label for="keyInput">Ключ доступа</label>
+      <input id="keyInput" type="password" autocomplete="current-password" placeholder="например 7f3a…">
+    </div>
+    <button class="btn" id="loginBtn" style="width:100%;justify-content:center">Войти</button>
+    <div id="loginErr" class="err hide"></div>
+    <p class="muted" style="margin-top:14px">Ключ выдаёт руководитель отдела. Он хранится только в вашем браузере — на сервере лежит лишь его отпечаток.</p>
+  </div>
+</div>
+
+<!-- ПРИЛОЖЕНИЕ -->
+<div id="app" class="hide">
+  <header class="top">
+    <div class="top-in">
+      <span class="brand">KPI отдела</span>
+      <span class="who">Вход: <b id="whoName">—</b> · <span id="whoRole"></span></span>
+      <select id="periodSel" style="width:auto;min-width:150px"></select>
+      <button class="btn ghost sm" id="logoutBtn">Выйти</button>
+    </div>
+    <div class="wrap"><div class="tabs" id="tabs"></div></div>
+  </header>
+
+  <section class="page"><div class="wrap" id="view"></div></section>
+</div>
+
+<script>
+const API = '/api';
+let KEY = localStorage.getItem('kpi_key') || '';
+let ME = null;
+let PERIOD = '';
+let TAB = 'me';
+
+// ── вспомогательное ─────────────────────────────────────────────────────────
+const $ = (id) => document.getElementById(id);
+const money = (n) => (n === null || n === undefined ? '—' : Math.round(n).toLocaleString('ru-RU') + ' ₽');
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function fmtDate(iso){
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return d.toLocaleString('ru-RU', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
+}
+function fmtSeconds(s){
+  if (s === null || s === undefined) return '—';
+  if (s < 60) return s + ' сек';
+  const m = Math.round(s/60);
+  if (m < 60) return m + ' мин';
+  const h = Math.floor(m/60);
+  return h + ' ч ' + (m%60) + ' мин';
+}
+
+async function api(path, opts = {}) {
+  const res = await fetch(API + path, {
+    ...opts,
+    headers: { 'x-access-key': KEY, 'content-type': 'application/json', ...(opts.headers||{}) },
+  });
+  if (res.status === 401) { logout(); throw new Error('ключ не подошёл'); }
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'ошибка запроса');
+  return data;
+}
+
+function logout(){
+  localStorage.removeItem('kpi_key');
+  KEY = ''; ME = null;
+  $('app').classList.add('hide');
+  $('login').classList.remove('hide');
+}
+
+// ── вход ────────────────────────────────────────────────────────────────────
+$('loginBtn').addEventListener('click', doLogin);
+$('keyInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+
+async function doLogin(){
+  const key = $('keyInput').value.trim();
+  if (!key) return;
+  try {
+    const res = await fetch(API + '/login', {
+      method:'POST', headers:{'content-type':'application/json'},
+      body: JSON.stringify({ key }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'ключ не подошёл');
+    KEY = key;
+    localStorage.setItem('kpi_key', key);
+    ME = data.user;
+    start();
+  } catch (e) {
+    $('loginErr').textContent = e.message;
+    $('loginErr').classList.remove('hide');
+  }
+}
+
+$('logoutBtn').addEventListener('click', logout);
+
+// ── старт ───────────────────────────────────────────────────────────────────
+async function boot(){
+  if (!KEY) return;
+  try {
+    const res = await fetch(API + '/login', {
+      method:'POST', headers:{'content-type':'application/json'},
+      body: JSON.stringify({ key: KEY }),
+    });
+    if (!res.ok) return logout();
+    ME = (await res.json()).user;
+    start();
+  } catch { logout(); }
+}
+
+function start(){
+  $('login').classList.add('hide');
+  $('app').classList.remove('hide');
+  $('whoName').textContent = ME.name;
+  $('whoRole').textContent = ({assistant:'ассистент', lead:'руководитель отдела', chief:'руководитель'})[ME.role];
+
+  // периоды: текущий и 11 предыдущих месяцев
+  const sel = $('periodSel');
+  sel.innerHTML = '';
+  const now = new Date();
+  for (let i = 0; i < 12; i++){
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const v = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    const o = document.createElement('option');
+    o.value = v;
+    o.textContent = d.toLocaleString('ru-RU', {month:'long', year:'numeric'});
+    sel.appendChild(o);
+  }
+  PERIOD = sel.value;
+  sel.onchange = () => { PERIOD = sel.value; render(); };
+
+  const tabs = [{id:'me', name:'Мои результаты'}];
+  if (ME.role === 'lead' || ME.role === 'chief'){
+    tabs.unshift({id:'team', name:'Отдел'});
+    tabs.push({id:'inbox', name:'Приёмка'});
+  }
+  if (ME.role === 'lead') tabs.push({id:'admin', name:'Люди и настройки'});
+  TAB = tabs[0].id;
+
+  $('tabs').innerHTML = '';
+  tabs.forEach((t) => {
+    const b = document.createElement('button');
+    b.className = 'tab' + (t.id === TAB ? ' on' : '');
+    b.textContent = t.name;
+    b.onclick = () => {
+      TAB = t.id;
+      [...$('tabs').children].forEach((c) => c.classList.toggle('on', c === b));
+      render();
+    };
+    $('tabs').appendChild(b);
+  });
+
+  render();
+}
+
+// ── рендер ──────────────────────────────────────────────────────────────────
+async function render(){
+  const v = $('view');
+  v.innerHTML = '<p class="muted">Загружаю…</p>';
+  try {
+    if (TAB === 'me')    return renderProfile(await api(`/me?period=${PERIOD}`), v);
+    if (TAB === 'team')  return renderTeam(await api(`/team?period=${PERIOD}`), v);
+    if (TAB === 'inbox') return renderInbox(await api('/inbox'), v);
+    if (TAB === 'admin') return renderAdmin(v);
+  } catch (e) {
+    v.innerHTML = `<div class="card"><p class="err">${esc(e.message)}</p></div>`;
+  }
+}
+
+const METRIC_META = {
+  quality:     { name:'Качество',      purse:'quality' },
+  speed:       { name:'Скорость',      purse:'speed' },
+  autonomy:    { name:'Автономность',  purse:'autonomy' },
+  proactivity: { name:'Проактивность', purse:'proactivity' },
+};
+
+function renderProfile(p, v){
+  const m = p.metrics, w = p.money.wallets, b = m.breakdown;
+
+  const cards = Object.keys(METRIC_META).map((k) => {
+    const meta = METRIC_META[k];
+    const val = m[k];
+    const wal = w[meta.purse];
+    let why = '';
+    if (k === 'quality') why = `<b>${b.quality.points}</b> баллов ÷ <b>${b.quality.weight}</b> размеров по <b>${b.quality.tasks}</b> задачам`;
+    if (k === 'speed')   why = `реакция: <b>${b.speed.repliesFast}</b> из <b>${b.speed.repliesCounted}</b> быстрее нормы (${b.speed.replyRate}), медиана <b>${fmtSeconds(b.speed.medianReply)}</b><br>срок: <b>${b.speed.inTime}</b> из <b>${b.speed.withDeadline}</b> (${b.speed.slaRate})`;
+    if (k === 'autonomy') why = `<b>${b.autonomy.solo}</b> из <b>${b.autonomy.of}</b> задач без руководителя (${b.autonomy.rate}) при норме ${b.autonomy.norm}`;
+    if (k === 'proactivity') why = `<b>${b.proactivity.useful}</b> инициатив пригодилось из <b>${b.proactivity.proposed}</b> предложенных, норма ${b.proactivity.norm}`;
+
+    return `<div class="card metric">
+      <div class="lbl">${meta.name}</div>
+      <div class="val">${val.toFixed(2)}<span style="font-size:16px;color:var(--fg-3);font-weight:600"> / 10</span></div>
+      <div class="sub">${money(wal.got)} из ${money(wal.pool)}</div>
+      <div class="bar"><i style="width:${Math.min(100, val*10)}%"></i></div>
+      <details style="margin-top:10px"><summary>Откуда цифра</summary><div class="why">${why}<br><span class="muted">${esc(b[k].formula)}</span></div></details>
+    </div>`;
+  }).join('');
+
+  v.innerHTML = `
+    <div class="row" style="margin-bottom:16px">
+      <div><h1>${esc(p.user.name)}</h1><p class="muted">Грейд ${esc(p.user.grade)} · ${p.tasks.length} закрытых задач, ${p.openTasks.length} в работе</p></div>
+      <div class="spacer"></div>
+      <div class="card" style="padding:14px 20px">
+        <div class="kef"><span class="big">${p.money.kef.toFixed(2)}</span><span class="muted">кэф месяца</span></div>
+      </div>
+      <div class="card" style="padding:14px 20px">
+        <div class="money">${money(p.money.total)}</div>
+        <div class="muted">сверх оклада${p.money.cutApplied ? ' · применена отсечка ×0.85' : ''}</div>
+      </div>
+    </div>
+
+    <div class="grid g4" style="margin-bottom:18px">${cards}</div>
+
+    <div class="grid g4" style="margin-bottom:22px">
+      <div class="card"><div class="lbl muted">KPI-бонус</div><div class="money">${money(p.money.bonus)}</div></div>
+      <div class="card"><div class="lbl muted">Комиссия с экономии</div><div class="money">${money(p.money.savingPay)}</div><div class="muted">с ${money(p.money.savingSum)}</div></div>
+      <div class="card"><div class="lbl muted">Призы за заёбы</div><div class="money">${money(p.money.zaeb)}</div></div>
+      <div class="card"><div class="lbl muted">Оклад</div><div class="money">${money(p.money.salary)}</div></div>
+    </div>
+
+    <h2 style="margin-bottom:12px">Задачи за период</h2>
+    ${taskTable(p.tasks.concat(p.openTasks))}
+  `;
+}
+
+function taskTable(tasks){
+  if (!tasks.length) return '<div class="card"><p class="muted">За этот период задач нет.</p></div>';
+  const rows = tasks.map((t) => {
+    const st = {
+      accepted:'<span class="tag t-green">принята</span>',
+      review:'<span class="tag t-amber">на проверке</span>',
+      in_progress:'<span class="tag t-blue">в работе</span>',
+      open:'<span class="tag t-grey">не взята</span>',
+      failed:'<span class="tag t-red">сорвана</span>',
+      returned:'<span class="tag t-red">возвращена</span>',
+    }[t.status] || t.status;
+
+    const flags = t.flags ? [
+      t.flags.inTime ? '' : '<span class="tag t-red">не в срок</span>',
+      t.flags.noReturns ? '' : `<span class="tag t-amber">возвратов: ${t.returns}</span>`,
+      t.flags.noChief ? '' : '<span class="tag t-amber">дёргал руководителя</span>',
+      t.isInitiative ? '<span class="tag t-blue">инициатива</span>' : '',
+    ].filter(Boolean).join(' ') : '';
+
+    return `<tr class="clickable" data-task="${esc(t.id)}">
+      <td><strong>${esc(t.title)}</strong><div style="margin-top:5px">${flags}</div></td>
+      <td>${st}</td>
+      <td class="num">${fmtDate(t.createdAt)}</td>
+      <td class="num">${t.timing.toTakeHuman}</td>
+      <td class="num">${t.timing.toDoHuman}</td>
+      <td class="num">${t.timing.overdueHuman ? '<span style="color:var(--red)">+'+t.timing.overdueHuman+'</span>' : '<span style="color:var(--green)">в срок</span>'}</td>
+      <td class="num">${t.size}${t.night ? '×1.5' : ''}</td>
+      <td class="num"><strong style="font-size:16px">${t.score ?? '—'}</strong></td>
+    </tr>`;
+  }).join('');
+
+  const html = `<div class="tbl"><table>
+    <thead><tr>
+      <th>Задача</th><th>Статус</th><th class="num">Поставлена</th>
+      <th class="num">Взята через</th><th class="num">Делалась</th>
+      <th class="num">Срок</th><th class="num">Размер</th><th class="num">Оценка</th>
+    </tr></thead><tbody>${rows}</tbody>
+  </table></div>`;
+
+  setTimeout(() => {
+    document.querySelectorAll('tr[data-task]').forEach((tr) => {
+      tr.onclick = () => openTask(tr.dataset.task);
+    });
+  }, 0);
+  return html;
+}
+
+async function openTask(id){
+  let data;
+  try { data = await api(`/events/${id}`); } catch (e) { return alert(e.message); }
+  const t = data.task, ev = data.events, sc = data.score;
+
+  const canAccept = ME.role === 'lead' || ME.role === 'chief';
+  const actions = canAccept && t.status === 'review'
+    ? `<div class="row" style="margin-top:16px">
+         <button class="btn" data-act="accept">Принято</button>
+         <button class="btn danger" data-act="return">Вернуть</button>
+       </div>`
+    : '';
+  const initiativeBtn = canAccept && t.isInitiative && t.initiativeUseful === null
+    ? `<div class="row" style="margin-top:12px">
+         <span class="muted">Инициатива пригодилась?</span>
+         <button class="btn sm" data-act="init-yes">Да</button>
+         <button class="btn ghost sm" data-act="init-no">Нет</button>
+       </div>`
+    : '';
+  const disputeBtn = ME.role === 'lead' && t.chiefTouched && !t.disputed
+    ? `<button class="btn ghost sm" data-act="dispute" style="margin-top:12px">Списать вовлечение: вопрос был по делу</button>`
+    : '';
+
+  const bg = document.createElement('div');
+  bg.className = 'modal-bg';
+  bg.innerHTML = `<div class="modal">
+    <div class="row"><h2>${esc(t.title)}</h2><div class="spacer"></div>
+      <button class="btn ghost sm" data-act="close">Закрыть</button></div>
+    ${t.url ? `<p class="muted"><a href="${esc(t.url)}" target="_blank" rel="noopener">Открыть в YouGile →</a></p>` : ''}
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="why">
+        <b>Тайминги</b><br>
+        Поставлена: ${fmtDate(t.createdAt)}<br>
+        Взята в работу: ${fmtDate(t.takenAt)} — через <b>${t.timing.toTakeHuman}</b><br>
+        Отправлена на проверку: ${fmtDate(t.submittedAt)} — делалась <b>${t.timing.toDoHuman}</b><br>
+        Принята: ${fmtDate(t.doneAt)}<br>
+        Дедлайн: ${fmtDate(t.deadline)}${t.timing.overdueHuman ? ` — <span style="color:var(--red)">просрочка ${t.timing.overdueHuman}</span>` : ''}
+      </div>
+      <div class="why">
+        <b>Оценка ${sc.score}</b> ${sc.reason ? `(${esc(sc.reason)})` : ''}<br>
+        В срок: <b>${sc.flags.inTime ? 'да' : 'нет'}</b><br>
+        Без правок: <b>${sc.flags.noReturns ? 'да' : 'нет'}</b> ${t.returns ? `(возвратов: ${t.returns})` : ''}<br>
+        Без вовлечения руководителя: <b>${sc.flags.noChief ? 'да' : 'нет'}</b> ${t.disputed ? '<span class="tag t-blue">списано лидом</span>' : ''}<br>
+        ${t.isInitiative ? `Инициатива: <b>${t.initiativeUseful === 1 ? 'пригодилась' : t.initiativeUseful === 0 ? 'не пригодилась' : 'ждёт ответа'}</b>` : ''}
+      </div>
+    </div>
+
+    ${actions}${initiativeBtn}${disputeBtn}
+
+    <h3 style="margin-top:20px">Что происходило</h3>
+    <ul class="timeline">
+      ${ev.length ? ev.map((e) => `<li><b>${esc(labelEvent(e.type))}</b>${e.note ? ' — ' + esc(e.note) : ''}
+        <div class="t">${fmtDate(e.at)}${e.actor ? ' · ' + esc(e.actor) : ''} · ${esc(e.source)}</div></li>`).join('')
+      : '<li class="muted">Событий пока нет</li>'}
+    </ul>
+  </div>`;
+
+  bg.onclick = async (e) => {
+    const act = e.target.dataset?.act;
+    if (!act) { if (e.target === bg) bg.remove(); return; }
+    if (act === 'close') return bg.remove();
+    try {
+      if (act === 'accept')   await api(`/task/${id}/accept`, {method:'POST', body:'{}'});
+      if (act === 'return')   await api(`/task/${id}/return`, {method:'POST', body: JSON.stringify({note: prompt('Что не так?') || ''})});
+      if (act === 'init-yes') await api(`/task/${id}/initiative`, {method:'POST', body: JSON.stringify({useful:true})});
+      if (act === 'init-no')  await api(`/task/${id}/initiative`, {method:'POST', body: JSON.stringify({useful:false})});
+      if (act === 'dispute')  await api(`/task/${id}/dispute`, {method:'POST', body: JSON.stringify({note: prompt('Почему вопрос был по делу?') || ''})});
+      bg.remove(); render();
+    } catch (err) { alert(err.message); }
+  };
+  document.body.appendChild(bg);
+}
+
+function labelEvent(type){
+  return ({
+    created:'Задача поставлена', taken:'Взята в работу', submitted:'Отправлена на проверку',
+    returned:'Возвращена на доработку', accepted:'Принята',
+    chief_message:'Руководитель написал в карточке',
+    initiative_answer:'Ответ по инициативе', manual:'Ручное действие',
+  })[type] || type;
+}
+
+function renderTeam(d, v){
+  const rows = d.people.map((p) => `
+    <tr class="clickable" data-person="${esc(p.id)}">
+      <td><strong>${esc(p.name)}</strong> <span class="tag t-grey">${esc(p.grade)}</span></td>
+      <td class="num"><strong style="font-size:17px;color:var(--accent)">${p.kef.toFixed(2)}</strong></td>
+      <td class="num">${p.metrics.quality.toFixed(1)}</td>
+      <td class="num">${p.metrics.speed.toFixed(1)}</td>
+      <td class="num">${p.metrics.autonomy.toFixed(1)}</td>
+      <td class="num">${p.metrics.proactivity.toFixed(1)}</td>
+      <td class="num">${p.tasksClosed} / ${p.tasksOpen}</td>
+      <td class="num">${fmtSeconds(p.medianReply)}</td>
+      <td class="num"><strong>${money(p.total)}</strong></td>
+    </tr>`).join('');
+
+  const L = d.lead;
+  v.innerHTML = `
+    <div class="row" style="margin-bottom:16px">
+      <div><h1>Отдел</h1><p class="muted">Средний кэф команды за период</p></div>
+      <div class="spacer"></div>
+      <div class="card" style="padding:14px 20px"><div class="kef"><span class="big">${d.avgKef.toFixed(2)}</span><span class="muted">средний кэф</span></div></div>
+    </div>
+
+    <div class="tbl" style="margin-bottom:26px"><table>
+      <thead><tr>
+        <th>Ассистент</th><th class="num">Кэф</th><th class="num">Кач.</th><th class="num">Скор.</th>
+        <th class="num">Авт.</th><th class="num">Проакт.</th><th class="num">Закрыто / в работе</th>
+        <th class="num">Медиана ответа</th><th class="num">К выплате</th>
+      </tr></thead><tbody>${rows || '<tr><td colspan="9" class="muted">Ассистентов пока нет</td></tr>'}</tbody>
+    </table></div>
+
+    <h2 style="margin-bottom:12px">Ваш собственный результат как руководителя отдела</h2>
+    <div class="grid g4">
+      <div class="card metric"><div class="lbl">Результат отдела</div><div class="val">${money(L.wallets.team)}</div><div class="sub">средний кэф ${L.avgKef.toFixed(2)}</div></div>
+      <div class="card metric"><div class="lbl">Фильтр</div><div class="val">${money(L.wallets.filter)}</div><div class="sub">принято с первого раза ${esc(L.filterRate)}</div></div>
+      <div class="card metric"><div class="lbl">Разгрузка</div><div class="val">${money(L.wallets.unload)}</div><div class="sub">без руководителя ${esc(L.unloadRate)}</div></div>
+      <div class="card metric"><div class="lbl">Доля с команды</div><div class="val">${money(L.shareZaeb + L.shareSaving)}</div><div class="sub">заёбы ${money(L.shareZaeb)} + экономия ${money(L.shareSaving)}</div></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="row"><h3>Итого ваш бонус за период</h3><div class="spacer"></div>
+        <div class="money">${money(L.bonus + L.shareZaeb + L.shareSaving)}</div></div>
+    </div>
+  `;
+
+  document.querySelectorAll('tr[data-person]').forEach((tr) => {
+    tr.onclick = async () => {
+      try {
+        const p = await api(`/person/${tr.dataset.person}?period=${PERIOD}`);
+        renderProfile(p, $('view'));
+        window.scrollTo({top:0, behavior:'smooth'});
+      } catch (e) { alert(e.message); }
+    };
+  });
+}
+
+function renderInbox(d, v){
+  if (!d.tasks.length){
+    v.innerHTML = '<div class="card"><h2>Приёмка пуста</h2><p class="muted">Ничего не ждёт решения.</p></div>';
+    return;
+  }
+  v.innerHTML = `<h1 style="margin-bottom:6px">Приёмка</h1>
+    <p class="muted" style="margin-bottom:16px">${d.tasks.length} задач ждут ответа. Кнопки «принято» и «вернуть» — единственное решение, которое требуется.</p>
+    ${taskTable(d.tasks)}`;
+}
+
+async function renderAdmin(v){
+  const [{users}, {settings}] = await Promise.all([api('/admin/users'), api('/admin/settings')]);
+
+  const rows = users.map((u) => `
+    <tr>
+      <td><strong>${esc(u.name)}</strong></td>
+      <td>${({assistant:'ассистент', lead:'рук. отдела', chief:'руководитель'})[u.role]}</td>
+      <td>${esc(u.grade)}</td>
+      <td class="num">${money(u.salary)}</td>
+      <td class="muted">${esc(u.yougile_id || '—')}</td>
+      <td class="muted">${esc(u.tg_user_id || '—')}</td>
+      <td class="num"><button class="btn ghost sm" data-rotate="${esc(u.id)}" data-name="${esc(u.name)}">Новый ключ</button></td>
+    </tr>`).join('');
+
+  const setFields = [
+    ['yougile_key', 'Ключ API YouGile'],
+    ['column_in_progress', 'ID колонки «В работе»'],
+    ['column_review', 'ID колонки «На проверке»'],
+    ['column_done', 'ID колонки «Готово»'],
+    ['tg_chat_id', 'ID общего чата в Telegram'],
+    ['reply_target_min', 'Норма ответа, минут'],
+    ['work_start', 'Начало рабочего окна'],
+    ['work_end', 'Конец рабочего окна'],
+    ['norm_proactivity', 'Норма инициатив в месяц'],
+  ].map(([k, label]) => `<div class="field"><label for="s_${k}">${label}</label>
+      <input id="s_${k}" value="${esc(settings[k] || '')}"></div>`).join('');
+
+  v.innerHTML = `
+    <h1 style="margin-bottom:14px">Люди</h1>
+    <div class="tbl" style="margin-bottom:16px"><table>
+      <thead><tr><th>Имя</th><th>Роль</th><th>Грейд</th><th class="num">Оклад</th><th>YouGile ID</th><th>Telegram ID</th><th></th></tr></thead>
+      <tbody>${rows}</tbody></table></div>
+
+    <div class="card" style="margin-bottom:26px">
+      <h3 style="margin-bottom:12px">Добавить человека</h3>
+      <div class="grid g4">
+        <div class="field"><label>Имя</label><input id="n_name"></div>
+        <div class="field"><label>Роль</label><select id="n_role">
+          <option value="assistant">ассистент</option><option value="lead">руководитель отдела</option>
+          <option value="chief">руководитель</option></select></div>
+        <div class="field"><label>Грейд</label><select id="n_grade">
+          <option>A1</option><option selected>A2</option><option>A3</option></select></div>
+        <div class="field"><label>Оклад</label><input id="n_salary" type="number" value="0"></div>
+        <div class="field"><label>ID в YouGile</label><input id="n_yg"></div>
+        <div class="field"><label>ID в Telegram</label><input id="n_tg"></div>
+      </div>
+      <button class="btn" id="addUser">Создать и выдать ключ</button>
+      <div id="newKeyBox"></div>
+    </div>
+
+    <h2 style="margin-bottom:12px">Настройки</h2>
+    <div class="card">
+      <div class="grid g2">${setFields}</div>
+      <div class="row">
+        <button class="btn" id="saveSettings">Сохранить</button>
+        <button class="btn ghost" id="syncNow">Синхронизировать с YouGile</button>
+        <span id="syncMsg" class="muted"></span>
+      </div>
+    </div>`;
+
+  $('addUser').onclick = async () => {
+    try {
+      const res = await api('/admin/users', {method:'POST', body: JSON.stringify({
+        name: $('n_name').value.trim(), role: $('n_role').value, grade: $('n_grade').value,
+        salary: +$('n_salary').value || 0, yougile_id: $('n_yg').value.trim(),
+        tg_user_id: $('n_tg').value.trim(),
+      })});
+      $('newKeyBox').innerHTML = `<div class="ok">Ключ создан. Показывается один раз — передайте его сотруднику:</div>
+        <div class="key-box">${esc(res.key)}</div>`;
+      $('n_name').value = '';
+    } catch (e) { alert(e.message); }
+  };
+
+  document.querySelectorAll('[data-rotate]').forEach((b) => {
+    b.onclick = async () => {
+      if (!confirm(`Выдать новый ключ для «${b.dataset.name}»? Старый перестанет работать.`)) return;
+      const u = users.find((x) => x.id === b.dataset.rotate);
+      const res = await api('/admin/users', {method:'POST', body: JSON.stringify({...u, rotateKey:true})});
+      alert('Новый ключ (сохраните, он больше не покажется):\n\n' + res.key);
+    };
+  });
+
+  $('saveSettings').onclick = async () => {
+    const patch = {};
+    v.querySelectorAll('[id^="s_"]').forEach((i) => { patch[i.id.slice(2)] = i.value; });
+    await api('/admin/settings', {method:'POST', body: JSON.stringify(patch)});
+    $('syncMsg').textContent = 'Сохранено';
+  };
+
+  $('syncNow').onclick = async () => {
+    $('syncMsg').textContent = 'Синхронизирую…';
+    try {
+      const r = await api('/admin/sync', {method:'POST', body:'{}'});
+      $('syncMsg').textContent = r.ok ? `Готово, задач обработано: ${r.synced}` : r.error;
+    } catch (e) { $('syncMsg').textContent = e.message; }
+  };
+}
+
+boot();
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<title>KPI отдела ассистентов</title>
+﻿<title>KPI отдела ассистентов</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -306,9 +306,11 @@ footer p{margin-bottom:6px}
   <div class="nav-in">
     <a class="brand" href="#top">KPI ассистентов</a>
     <a href="#struktura">Структура</a>
+    <a href="#roli">Роли и приёмка</a>
     <a href="#matrica">Как считается кэф</a>
     <a href="#ocenka">Оценка задачи</a>
     <a href="#calc">Калькулятор</a>
+    <a href="#lid">KPI руководителя</a>
     <a href="#ekonomiya">Экономия</a>
     <a href="#zaeby">Реестр заёбов</a>
     <a href="#modeli">Модели</a>
@@ -316,6 +318,8 @@ footer p{margin-bottom:6px}
     <a href="#gaming">Анти-гейминг</a>
     <a href="#primer">Пример</a>
     <a href="#avtomatika">Автоматизация</a>
+    <a href="#bot">Бот в чате</a>
+    <a href="#prozrachnost">Прозрачность</a>
     <a href="#vnedrenie">Внедрение</a>
   </div>
 </nav>
@@ -326,7 +330,7 @@ footer p{margin-bottom:6px}
   <div class="wrap">
     <span class="eyebrow">Система мотивации</span>
     <h1>KPI отдела ассистентов</h1>
-    <p class="lead">Четыре слоя дохода: оклад за надёжность, бонус до 50 000 ₽ за качество работы, комиссия с реальной экономии и призы за закрытые раздражители руководителя. Плюс четыре альтернативные модели и защита от накрутки каждой метрики.</p>
+    <p class="lead">Четыре слоя дохода, которые считаются автоматически из YouGile и Telegram. От руководителя требуется один ответ «да» или «нет» на задачу — всё остальное система выводит сама и по каждой цифре может показать, из каких задач она сложилась.</p>
   </div>
 </header>
 
@@ -368,6 +372,55 @@ footer p{margin-bottom:6px}
     <div class="note reveal">
       <div class="title">Здоровая пропорция</div>
       <p class="fg2" style="margin:0">Переменная часть должна составлять <strong>25–40 % дохода</strong>. Меньше — не мотивирует. Больше — человек живёт в тревоге и начинает оптимизировать метрику вместо работы. При окладе 120 000 ₽ и переменной ~70 000 ₽ получается 37 % — рабочая зона.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="roli">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Три роли</div>
+      <h2>Кто что решает</h2>
+      <p>Руководитель не должен вникать в оценки, веса и проценты. Его роль — один ответ на задачу. Разбор, проверка и спорные случаи остаются на руководителе отдела, а всё, что можно посчитать машиной, машина считает сама.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:24px">
+      <div class="card hoverable reveal">
+        <span class="tag t-blue">Роль 1</span>
+        <h3 style="margin-top:12px">Ассистент</h3>
+        <p class="muted">Берёт задачу, отвечает в чате, закрывает в срок. Видит свой текущий кэф в любой день месяца и знает, какая задача его просадила.</p>
+        <p class="muted" style="margin-top:10px"><strong style="color:var(--fg-2)">Действий в системе:</strong> перевести задачу в «На проверке». Больше ничего.</p>
+      </div>
+      <div class="card hoverable reveal" style="border-color:var(--accent)">
+        <span class="tag t-green">Роль 2 — вы</span>
+        <h3 style="margin-top:12px">Руководитель отдела</h3>
+        <p class="muted">Ставит размер задаче, принимает работу первым, разбирает спорные случаи, отвечает за результат всей команды. Фильтр между отделом и руководителем.</p>
+        <p class="muted" style="margin-top:10px"><strong style="color:var(--fg-2)">Действий в системе:</strong> размер при постановке, «принято» перед отправкой руководителю, разбор спорных позиций раз в месяц.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <span class="tag t-amber">Роль 3</span>
+        <h3 style="margin-top:12px">Руководитель</h3>
+        <p class="muted">Получает вечером список готового за день. По каждой позиции — две кнопки. Если день прошёл хорошо, есть кнопка «принять всё».</p>
+        <p class="muted" style="margin-top:10px"><strong style="color:var(--fg-2)">Действий в системе:</strong> один тап на задачу и одна оценка месяца. Всё.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:20px">
+      <h3>Путь одной задачи</h3>
+      <div class="steps" style="margin-top:16px">
+        <div class="step"><div class="n">1</div><div class="txt"><b>Постановка.</b> Задача заводится в YouGile: срок, размер, критерий готовности. Если задачу завёл сам ассистент — она автоматически помечается как инициатива</div></div>
+        <div class="step"><div class="n">2</div><div class="txt"><b>Работа.</b> Бот молча засекает: ответил ли ассистент в чате, укладывается ли в срок, писал ли Руководитель в карточку</div></div>
+        <div class="step"><div class="n">3</div><div class="txt"><b>Проверка лидом.</b> Задача уходит в «На проверке». Вы либо принимаете, либо возвращаете. Возврат гасит признак «без правок»</div></div>
+        <div class="step"><div class="n">4</div><div class="txt"><b>Приёмка руководителем.</b> Вечером в Telegram приходит дайджест: «Готово за сегодня — 5 задач». По каждой «Принято» или «Вернуть»</div></div>
+        <div class="step"><div class="n">5</div><div class="txt"><b>Оценка.</b> Считается сама из четырёх признаков. Никто её не выставляет вручную — её не с чем спорить</div></div>
+      </div>
+    </div>
+
+    <div class="note green reveal">
+      <div class="title">Возврат от руководителя — метрика руководителя, а не ассистента</div>
+      <p class="fg2" style="margin:0">Если Руководитель возвращает то, что вы уже приняли, — по ассистенту это обычный возврат, а по вам отдельный счётчик: значит фильтр не сработал. Это защищает систему от главного соблазна лида — принимать всё подряд, чтобы у команды был красивый кэф. Один ваш кошелёк растёт от результата отдела, другой падает от возвратов руководителя: они тянут в разные стороны, и приходится держать реальную планку.</p>
     </div>
   </div>
 </section>
@@ -508,29 +561,29 @@ footer p{margin-bottom:6px}
     <div class="sec-head reveal">
       <div class="kicker">Основа всей системы</div>
       <h2>Как понять, что задача сделана хорошо</h2>
-      <p>Ставить задаче цифру «на глаз» нельзя: вы сами не объясните, почему сегодня 7, а вчера за то же самое было 8. Поэтому цифра не ставится — она получается из трёх вопросов, на которые есть однозначный ответ «да» или «нет».</p>
+      <p>Оценку никто не выставляет. Она складывается из трёх признаков, которые система снимает сама, и одного ответа руководителя — «принято» или «вернуть». Спорить не с чем: каждый признак это факт со временем и ссылкой на карточку.</p>
     </div>
 
     <div class="grid g2" style="margin-bottom:22px">
       <div class="card reveal">
-        <h3>Три вопроса при закрытии задачи</h3>
-        <p class="muted" style="margin-bottom:16px">Три тапа, пять секунд. Ставятся в момент закрытия задачи, а не в конце месяца.</p>
+        <h3>Три признака, которые считаются сами</h3>
+        <p class="muted" style="margin-bottom:16px">Ни одного клика ни от вас, ни от руководителя.</p>
         <div class="gates">
           <div class="gate">
             <div class="ic">1</div>
-            <div><div class="q">Успел в срок?</div><div class="d">Это «быстро». Срок назван при постановке, а не придуман задним числом</div></div>
+            <div><div class="q">Успел в срок</div><div class="d">Это «быстро». Время закрытия сравнивается с дедлайном в карточке — YouGile знает оба</div></div>
           </div>
           <div class="gate">
             <div class="ic">2</div>
-            <div><div class="q">Принял с первого раза, без правок?</div><div class="d">Это «качественно». Вернул на доработку хотя бы раз — ответ «нет»</div></div>
+            <div><div class="q">Без правок</div><div class="d">Это «качественно». Признак гаснет, если задача хоть раз вернулась из «На проверке» обратно в работу</div></div>
           </div>
           <div class="gate">
             <div class="ic">3</div>
-            <div><div class="q">Обошёлся без вопросов ко мне?</div><div class="d">Это «самостоятельно». Считаются только вопросы, ответ на которые уже был в переписке или регламенте</div></div>
+            <div><div class="q">Без вовлечения руководителя</div><div class="d">Это «самостоятельно». Признак гаснет, если Руководитель писал в карточке до закрытия</div></div>
           </div>
           <div class="gate bonus">
             <div class="ic">+</div>
-            <div><div class="q">Сделал больше, чем просили?</div><div class="d">Бонусный вопрос. Закрыл смежное, предупредил о проблеме заранее, избавил вас от следующего шага</div></div>
+            <div><div class="q">Инициатива пригодилась</div><div class="d">Единственная кнопка сверх приёмки — и только на задачах, которые ассистент завёл сам. Таких пять-шесть в месяц</div></div>
           </div>
         </div>
       </div>
@@ -539,19 +592,42 @@ footer p{margin-bottom:6px}
         <h3>Что получается за задачу</h3>
         <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
           <table style="min-width:0">
-            <thead><tr><th>Ответы</th><th class="num">Оценка</th></tr></thead>
+            <thead><tr><th>Признаки</th><th class="num">Оценка</th></tr></thead>
             <tbody>
-              <tr><td>Все три «да» <strong>и</strong> сделал больше</td><td class="num"><span class="tag t-green">10</span></td></tr>
-              <tr><td>Все три «да»</td><td class="num"><span class="tag t-green">8</span></td></tr>
-              <tr><td>Два «да»</td><td class="num"><span class="tag t-blue">6</span></td></tr>
-              <tr><td>Одно «да»</td><td class="num"><span class="tag t-amber">4</span></td></tr>
-              <tr><td>Ни одного «да»</td><td class="num"><span class="tag t-red">2</span></td></tr>
-              <tr><td>Не сделал или сорвал молча</td><td class="num"><span class="tag t-red">0</span></td></tr>
+              <tr><td>Все три <strong>и</strong> инициатива пригодилась</td><td class="num"><span class="tag t-green">10</span></td></tr>
+              <tr><td>Все три</td><td class="num"><span class="tag t-green">8</span></td></tr>
+              <tr><td>Два из трёх</td><td class="num"><span class="tag t-blue">6</span></td></tr>
+              <tr><td>Один из трёх</td><td class="num"><span class="tag t-amber">4</span></td></tr>
+              <tr><td>Ни одного</td><td class="num"><span class="tag t-red">2</span></td></tr>
+              <tr><td>Руководитель вернул окончательно или задача сорвана</td><td class="num"><span class="tag t-red">0</span></td></tr>
             </tbody>
           </table>
         </div>
-        <p class="muted" style="margin-top:14px"><strong style="color:var(--fg-2)">Восемь — это норма, а не «хорошо, но не отлично».</strong> Восьмёрка означает: сделал ровно то, о чём договорились, вовремя и не дёргая вас. Десятка — только за то, что вы не просили. Если у всех выходит по десять, значит вопрос про «больше, чем просили» задаётся слишком мягко.</p>
+        <p class="muted" style="margin-top:14px"><strong style="color:var(--fg-2)">Восемь — это норма, а не «хорошо, но не отлично».</strong> Восьмёрка значит: сделал то, о чём договорились, вовремя, никого не дёргая. Десятка — только за то, чего не просили. Если десятки идут потоком, значит кнопку «инициатива пригодилась» жмут слишком легко.</p>
       </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:20px">
+      <h3>Сколько действий это стоит руководителю</h3>
+      <div class="grid g4" style="margin-top:16px">
+        <div>
+          <div class="big" style="color:var(--accent)">1 тап</div>
+          <p class="muted" style="margin-top:6px">на задачу — «принято» или «вернуть» в вечернем дайджесте</p>
+        </div>
+        <div>
+          <div class="big" style="color:var(--accent)">1 тап</div>
+          <p class="muted" style="margin-top:6px">на инициативу — «пригодилось» или «нет», пять-шесть раз в месяц</p>
+        </div>
+        <div>
+          <div class="big" style="color:var(--accent)">1 тап</div>
+          <p class="muted" style="margin-top:6px">на закрытый заёб — «да, больше не всплывает»</p>
+        </div>
+        <div>
+          <div class="big" style="color:var(--accent)">1 цифра</div>
+          <p class="muted" style="margin-top:6px">в конце месяца — насколько стало легче жить, от 0 до 10</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:18px">В вечернем дайджесте есть кнопка <strong style="color:var(--fg-2)">«Принять всё»</strong>: если день прошёл нормально, это один тап на пять задач. В обычном месяце Руководитель тратит на всю систему около двадцати нажатий — примерно минуту в день.</p>
     </div>
 
     <div class="card reveal" style="margin-bottom:20px">
@@ -578,7 +654,7 @@ footer p{margin-bottom:6px}
 
     <div class="note green reveal">
       <div class="title">Почему это работает лучше субъективной цифры</div>
-      <p class="fg2" style="margin:0">Три галочки нельзя оспорить: срок либо соблюдён, либо нет; правки либо были, либо нет. Оценка перестаёт быть вашим настроением и становится фактом, который ассистент видит сам ещё до конца месяца. И ровно эти три поля дальше считает за вас таблица или трекер — субъективную цифру автоматизировать невозможно, а три чекбокса можно.</p>
+      <p class="fg2" style="margin:0">Признак нельзя оспорить: срок либо соблюдён, либо нет; возврат из «На проверке» либо был, либо нет; Руководитель в карточке либо писал, либо не писал. У каждого признака есть отметка времени и ссылка на событие в YouGile. Оценка перестаёт быть чьим-то настроением и становится фактом, который ассистент видит в тот же день, а не узнаёт первого числа. И ровно поэтому её можно посчитать машиной: субъективную цифру автоматизировать невозможно, а три события в трекере — можно.</p>
     </div>
   </div>
 </section>
@@ -690,6 +766,79 @@ footer p{margin-bottom:6px}
 
 <div class="divider"></div>
 
+<section id="lid">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Отдельная схема</div>
+      <h2>KPI руководителя отдела</h2>
+      <p>У лида не может быть тех же метрик, что у ассистента: он не закрывает задачи, он отвечает за то, чтобы их закрывали другие. Поэтому свои четыре кошелька и своя доля во всём, что зарабатывает команда.</p>
+    </div>
+
+    <div class="grid g4" style="margin-bottom:24px">
+      <div class="card hoverable reveal wallet">
+        <h4>Результат отдела</h4>
+        <div class="sum">20 000 ₽</div>
+        <p class="muted" style="margin-top:12px">Средний кэф команды за месяц. Если у отдела в среднем 8.5 — забрали 17 000 ₽. Самый большой кошелёк: это и есть работа лида.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Фильтр</h4>
+        <div class="sum">15 000 ₽</div>
+        <p class="muted" style="margin-top:12px">Доля задач, принятых руководителем с первого раза после вашей проверки. Полные баллы при 95 %. Каждый возврат от руководителя — минус отсюда.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Разгрузка руководителя</h4>
+        <div class="sum">10 000 ₽</div>
+        <p class="muted" style="margin-top:12px">Доля задач, закрытых вообще без вовлечения руководителя. Считается тем же признаком, что у ассистентов, только по отделу целиком.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Рост команды</h4>
+        <div class="sum">5 000 ₽</div>
+        <p class="muted" style="margin-top:12px">Написанные регламенты, которыми пользуются другие, поднятые грейды, отсутствие провалов у новичков в первый месяц.</p>
+      </div>
+    </div>
+
+    <div class="note green reveal" style="margin-bottom:22px">
+      <div class="title">Два кошелька специально тянут в разные стороны</div>
+      <p class="fg2" style="margin:0">«Результат отдела» толкает лида принимать помягче — так у команды выше кэф. «Фильтр» наказывает ровно за это: слабую работу вернёт Руководитель, и вычет придёт вам. Единственная стратегия, которая выигрывает в обоих кошельках сразу, — реально поднимать планку команды, а не оценки. Так и задумано.</p>
+    </div>
+
+    <h3 class="reveal" style="margin:30px 0 14px">Доля с того, что зарабатывает команда</h3>
+    <p class="fg2 reveal" style="margin-bottom:16px">Лид не должен закрывать заёбы руками — он должен добиваться, чтобы их закрывали ассистенты. Поэтому с каждого приза команды ему идёт примерно шестая часть, сверх приза сотрудника, а не вместо него.</p>
+
+    <div class="tbl-scroll reveal">
+      <table style="min-width:620px">
+        <thead><tr><th>Тариф заёба</th><th class="num">Ассистенту</th><th class="num">Лиду сверху</th><th>Пример</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag t-blue">S</span> бесит редко</td><td class="num"><strong>3 000 ₽</strong></td><td class="num"><strong style="color:var(--green)">500 ₽</strong></td><td>Тревел-кит с чеклистом, чтобы не терялись зарядки</td></tr>
+          <tr><td><span class="tag t-blue">M</span> бесит еженедельно</td><td class="num"><strong>5 000 ₽</strong></td><td class="num"><strong style="color:var(--green)">800 ₽</strong></td><td>Единый сейф документов, стартовый пакет района</td></tr>
+          <tr><td><span class="tag t-amber">L</span> бесит ежедневно</td><td class="num"><strong>10 000 ₽</strong></td><td class="num"><strong style="color:var(--green)">1 500 ₽</strong></td><td>Подъёмный стол в каждой квартире, разбор входящих</td></tr>
+          <tr><td><span class="tag t-red">XL</span> бьёт по здоровью</td><td class="num"><strong>15 000 ₽</strong></td><td class="num"><strong style="color:var(--green)">2 500 ₽</strong></td><td>Программа сна, доведённая до результата за 21 день</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-hint">Таблица прокручивается вбок →</p>
+
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card reveal">
+        <h4>Доля с экономии команды</h4>
+        <p class="muted">Ассистент получает 30 % от сэкономленного, лид — <strong style="color:var(--fg-2)">5 % от той же суммы</strong>, сверху. За месяц из примера: команда сэкономила 66 600 ₽, ассистенту ушло 18 320 ₽, лиду — 3 330 ₽.</p>
+        <p class="muted" style="margin-top:10px">Смысл тот же: выгодно ставить задачи так, чтобы торговались ассистенты, а не вы лично.</p>
+      </div>
+      <div class="card reveal">
+        <h4>Свои заёбы и своя экономия</h4>
+        <p class="muted">Если лид закрыл заёб сам — получает полный приз по тарифу, как любой сотрудник, но доля сверху в этом случае не начисляется. Иначе выгоднее делать всё самому, а это ровно то, чего от руководителя отдела не нужно.</p>
+      </div>
+    </div>
+
+    <div class="note amber reveal">
+      <div class="title">Ограничение, чтобы реестр не раздувался</div>
+      <p class="fg2" style="margin:0">Раз лид получает долю с каждого приза, у него появляется соблазн заводить карточки пачками. Поэтому карточку в реестр утверждает Руководитель — одним «да», как и всё остальное, — а лимит в два закрытых заёба на человека в месяц остаётся в силе. Предлагать карточки лид может сколько угодно: это его работа, замечать, что мешает жить.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section id="ekonomiya">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -770,11 +919,11 @@ footer p{margin-bottom:6px}
     <div class="grid g3" style="margin-bottom:22px">
       <div class="card hoverable reveal">
         <h4>Как заводится карточка</h4>
-        <p class="muted">Описание · частота (раз в неделю) · что именно жрёт: время или нервы · критерий закрытия · тариф. Заводит руководитель. Ассистент может предложить карточку — если вы согласились её завести, ему идёт +1 к проактивности.</p>
+        <p class="muted">Описание · частота · что именно жрёт: время или нервы · критерий закрытия · тариф. Предлагает лид или ассистент, утверждает Руководитель одним «да». Если карточку предложил ассистент и её завели — ему идёт плюс к проактивности.</p>
       </div>
       <div class="card hoverable reveal">
         <h4>Когда считается закрытой</h4>
-        <p class="muted">Проблема <strong style="color:var(--fg-2)">не возвращалась 30 дней</strong>. Не «предложил решение», не «купил стол», а «месяц не всплывало». Выплата 50 % при внедрении, 50 % через 30 дней.</p>
+        <p class="muted">Проблема <strong style="color:var(--fg-2)">не возвращалась 30 дней</strong>. Не «предложил решение», не «купил стол», а «месяц не всплывало». Ровно через 30 дней бот сам спросит руководителя: «всплывало?» — и по ответу «нет» дошлёт вторую половину приза.</p>
       </div>
       <div class="card hoverable reveal">
         <h4>Лимит на месяц</h4>
@@ -783,10 +932,10 @@ footer p{margin-bottom:6px}
     </div>
 
     <div class="grid g4" style="margin-bottom:24px">
-      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-blue">S</span><div class="big" style="margin-top:10px">3 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит редко, решается один раз</p></div>
-      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-blue">M</span><div class="big" style="margin-top:10px">5 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит каждую неделю</p></div>
-      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-amber">L</span><div class="big" style="margin-top:10px">10 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит ежедневно или бьёт по работоспособности</p></div>
-      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-red">XL</span><div class="big" style="margin-top:10px">15 000 ₽</div><p class="muted" style="margin:6px 0 0">Бьёт по здоровью, нужен внедрённый процесс</p></div>
+      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-blue">S</span><div class="big" style="margin-top:10px">3 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит редко, решается один раз</p><p class="muted" style="margin:8px 0 0;color:var(--green)">+ 500 ₽ лиду</p></div>
+      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-blue">M</span><div class="big" style="margin-top:10px">5 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит каждую неделю</p><p class="muted" style="margin:8px 0 0;color:var(--green)">+ 800 ₽ лиду</p></div>
+      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-amber">L</span><div class="big" style="margin-top:10px">10 000 ₽</div><p class="muted" style="margin:6px 0 0">Бесит ежедневно или бьёт по работоспособности</p><p class="muted" style="margin:8px 0 0;color:var(--green)">+ 1 500 ₽ лиду</p></div>
+      <div class="card reveal" style="text-align:center;padding:18px"><span class="tag t-red">XL</span><div class="big" style="margin-top:10px">15 000 ₽</div><p class="muted" style="margin:6px 0 0">Бьёт по здоровью, нужен внедрённый процесс</p><p class="muted" style="margin:8px 0 0;color:var(--green)">+ 2 500 ₽ лиду</p></div>
     </div>
 
     <h3 class="reveal" style="margin-bottom:14px">Стартовый реестр — 13 карточек</h3>
@@ -1073,8 +1222,34 @@ footer p{margin-bottom:6px}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">Задачи ведутся в YouGile</div>
-      <h2>Как смотреть метрику, не считая руками</h2>
-      <p>Три уровня — от «посмотреть глазами за десять секунд» до «бот присылает готовые цифры». Начинать нужно с первого: без правильных стикеров на задачах не заработает ни один из следующих.</p>
+      <h2>Приложение считает всё само</h2>
+      <p>Отдельное веб-приложение забирает задачи из YouGile, замеряет скорость ответов в общем чате и считает четыре оценки по каждому человеку. Ассистент заходит по своему ключу и видит только себя, руководитель отдела — весь отдел.</p>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:24px">
+      <div class="row" style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <h3>Что видно в приложении</h3>
+          <ul class="clean" style="margin-top:12px">
+            <li><strong>По каждой задаче:</strong> когда поставлена, через сколько взята в работу, сколько делалась, была ли просрочка, сколько раз возвращалась, дёргали ли руководителя</li>
+            <li><strong>По каждому человеку:</strong> четыре оценки, кэф, деньги за период и полный список задач</li>
+            <li><strong>По отделу:</strong> таблица со всеми, медиана ответа в чате, сумма к выплате — и ваш собственный результат как лида</li>
+            <li><strong>По любой цифре:</strong> кнопка «откуда цифра» разворачивает её до задач и событий, из которых она сложилась</li>
+          </ul>
+        </div>
+        <div style="flex:0 0 260px;min-width:240px">
+          <div class="gate" style="display:block">
+            <div class="q" style="margin-bottom:8px">Роли и доступ</div>
+            <div class="d" style="line-height:1.7">
+              <strong style="color:var(--fg-2)">Ассистент</strong> — только свои результаты<br>
+              <strong style="color:var(--fg-2)">Руководитель отдела</strong> — весь отдел, ключи, настройки<br>
+              <strong style="color:var(--fg-2)">Руководитель</strong> — сводка и приёмка
+            </div>
+          </div>
+          <p class="muted" style="margin-top:12px">Вход по личному ключу. На сервере хранится только его отпечаток — сам ключ виден один раз, при выдаче.</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:16px">Код приложения лежит в папке <code>kpi-app</code>: Cloudflare Worker плюс база D1, разворачивается одной командой. Все суммы, нормы и ставки правятся прямо в интерфейсе, без правки кода.</p>
     </div>
 
     <h3 class="reveal" style="margin-bottom:14px">Шаг 0. Пять стикеров на доске</h3>
@@ -1097,40 +1272,44 @@ footer p{margin-bottom:6px}
 
     <div class="grid g3" style="margin-top:26px">
       <div class="card hoverable reveal">
-        <span class="tag t-green">10 секунд</span>
-        <h3 style="margin-top:12px">Уровень 1. Сводка на доске</h3>
-        <p class="muted"><a href="https://help.yougile.com/books/baza-znanii-yougile/page/otcety-i-svodki" target="_blank" rel="noopener">Сводка</a> — это колонка, которая сама собирает задачи из всех проектов по фильтру. Заводите три штуки и держите на отдельной доске «KPI»:</p>
+        <span class="tag t-green">автоматически</span>
+        <h3 style="margin-top:12px">Что берётся из YouGile</h3>
         <ul class="clean" style="margin-top:12px">
-          <li>«Просрочено в этом месяце» — фильтр: стикер «В срок» = нет</li>
-          <li>«Вернул на доработку» — стикер «Без правок» = нет</li>
-          <li>«Дёргал по мелочам» — стикер «Без вопросов» = нет</li>
+          <li>Время постановки, взятия в работу и отправки на проверку — по переходам между колонками</li>
+          <li>Просрочка — сравнением времени закрытия с дедлайном</li>
+          <li>Возвраты — по тому, сколько раз задача уезжала с проверки обратно</li>
+          <li>Инициатива — если задачу завёл сам ассистент, а не вы</li>
         </ul>
-        <p class="muted" style="margin-top:12px">Открыли доску — увидели три числа. Это не средняя оценка, но 80 % понимания: где именно ассистент проседает, видно сразу и без конца месяца.</p>
+        <p class="muted" style="margin-top:12px">Через вебхук это приходит мгновенно, плюс раз в час идёт синхронизация — на случай, если вебхук что-то потерял.</p>
       </div>
 
       <div class="card hoverable reveal">
-        <span class="tag t-blue">5 минут в месяц</span>
-        <h3 style="margin-top:12px">Уровень 2. Отчёт → Excel → шаблон</h3>
-        <p class="muted">Раздел «Отчёты» → «Таблицы» → «Добавить отчёт», настраиваете столбцы под свои стикеры. Готовую таблицу YouGile выгружает в Excel, а сам отчёт умеет регулярно приходить на почту.</p>
+        <span class="tag t-blue">автоматически</span>
+        <h3 style="margin-top:12px">Что берётся из Telegram</h3>
         <ul class="clean" style="margin-top:12px">
-          <li>Выгрузили за месяц</li>
-          <li>Вставили на лист «Задачи» в заранее сделанный шаблон</li>
-          <li>Все четыре оценки и сумма к выплате посчитались формулами</li>
+          <li>Кто ответил первым на сообщение в общем чате</li>
+          <li>Через сколько минут — и попало ли это в рабочее окно</li>
+          <li>Какие сообщения остались вообще без ответа</li>
+          <li>Медиана времени ответа за месяц по каждому</li>
         </ul>
-        <p class="muted" style="margin-top:12px">Формулы для шаблона — ниже, их можно скопировать как есть.</p>
+        <p class="muted" style="margin-top:12px">Подробности замера — в следующем разделе, вместе с ограничениями, о которых лучше знать заранее.</p>
       </div>
 
       <div class="card hoverable reveal">
-        <span class="tag t-amber">2 секунды</span>
-        <h3 style="margin-top:12px">Уровень 3. Бот считает сам</h3>
-        <p class="muted">У YouGile есть <a href="https://ru.yougile.com/api-v2" target="_blank" rel="noopener">REST API</a> и вебхуки. Бот забирает закрытые задачи со стикерами, считает четыре оценки и присылает в Telegram готовый расчёт по каждому ассистенту.</p>
+        <span class="tag t-amber">руками</span>
+        <h3 style="margin-top:12px">Что остаётся людям</h3>
         <ul class="clean" style="margin-top:12px">
-          <li>Признак «в срок» бот вычисляет сам — из дедлайна и времени закрытия, руками ставить не нужно</li>
-          <li>Раз в месяц третьего числа — сводка по отделу</li>
-          <li>По запросу — текущий кэф в любой момент месяца</li>
+          <li><strong>Руководитель:</strong> «принято» или «вернуть», ответ по инициативам, одна оценка месяца</li>
+          <li><strong>Вы:</strong> размер задачи при постановке, первичная приёмка, разбор спорных случаев</li>
+          <li><strong>Экономия и заёбы</strong> заводятся вручную: сумма до и после, ссылка на подтверждение</li>
         </ul>
-        <p class="muted" style="margin-top:12px">Это верхний уровень, и браться за него имеет смысл, когда первые два уже месяц отработали и стикеры проставляются без напоминаний.</p>
+        <p class="muted" style="margin-top:12px">Всё остальное система не спрашивает — она это уже знает.</p>
       </div>
+    </div>
+
+    <div class="note reveal" style="margin-top:22px">
+      <div class="title">Запасной путь, если приложение ещё не развёрнуто</div>
+      <p class="fg2" style="margin:0">Те же цифры можно получить вручную: в YouGile есть <a href="https://help.yougile.com/books/baza-znanii-yougile/page/otcety-i-svodki" target="_blank" rel="noopener">отчёты и сводки</a> с выгрузкой в Excel. Заводите три сводки — «просрочено», «вернули на доработку», «дёргал руководителя» — и раз в месяц выгружаете таблицу в шаблон с формулами ниже. Это 5 минут в месяц вместо нуля, но работает с первого дня, пока приложение настраивается.</p>
     </div>
 
     <h3 class="reveal" style="margin:34px 0 14px">Шаблон таблицы: что куда вписать</h3>
@@ -1195,6 +1374,110 @@ footer p{margin-bottom:6px}
     <div class="note amber reveal">
       <div class="title">Правило, без которого рассыпается всё</div>
       <p class="fg2" style="margin:0">Стикеры проставляются <strong>в момент закрытия задачи</strong>. Если в конце месяца придётся открывать полсотни карточек и вспоминать, была ли правка, — вы этого не сделаете ни в первый месяц, ни в третий. Проще всего вшить это в колонку: задача уезжает в «Готово» только со всеми стикерами, без них — висит в «На проверке».</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="bot">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Скорость ответа</div>
+      <h2>Бот в общем чате</h2>
+      <p>Он не читает переписку и не хранит текст сообщений. Всё, что он делает, — засекает время между вопросом и первым ответом. Из этого получается четыре балла кошелька «Скорость».</p>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:22px">
+      <h3>Как считается</h3>
+      <div class="steps" style="margin-top:16px">
+        <div class="step"><div class="n">1</div><div class="txt">Сообщение <b>руководителя или ваше</b> открывает таймер</div></div>
+        <div class="step"><div class="n">2</div><div class="txt">Первое сообщение ассистента закрывает его. Засчитывается <b>первому ответившему</b> — остальные не получают ни плюса, ни минуса</div></div>
+        <div class="step"><div class="n">3</div><div class="txt">Ответ через <b>reply</b> привязывается к конкретному вопросу. Без reply берётся последний открытый</div></div>
+        <div class="step"><div class="n">4</div><div class="txt">Если обратились к человеку <b>по имени</b> — ждём именно его, чужой ответ этот таймер не закрывает</div></div>
+        <div class="step"><div class="n">5</div><div class="txt">Норма ответа — <b>15 минут</b>, для сообщений со словом «срочно» — <b>5 минут</b></div></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:22px">
+      <div class="card reveal">
+        <h4>Рабочее окно</h4>
+        <p class="muted">Считается только <strong style="color:var(--fg-2)">будни с 9:00 до 22:00 по Москве</strong>. Всё, что приходит раньше, позже или в выходные, помечается отдельно и в оценку скорости не идёт.</p>
+        <p class="muted" style="margin-top:10px">Но такие обращения не пропадают: в сводке отдельной строкой видно «вне рабочего времени ответил 4 из 6». Это не штраф, а повод отметить того, кто реально выручает в субботу.</p>
+      </div>
+      <div class="card reveal" style="border-color:var(--red)">
+        <h4 style="color:var(--red)">Молчание дороже медленного ответа</h4>
+        <p class="muted">Доля быстрых ответов считается <strong style="color:var(--fg-2)">от всех вопросов</strong>, а не от тех, на которые ответили. Проигнорировать неудобный вопрос больше не выгоднее, чем ответить на него поздно.</p>
+        <p class="muted" style="margin-top:10px">Вопрос, провисевший в рабочее время больше часа, становится <strong style="color:var(--fg-2)">пропуском</strong> и дополнительно снимает полбалла. Ночной вопрос превращается в пропуск, если его не разгребли за 12 часов: отвечать ночью никто не обязан, а увидеть утром — обязан.</p>
+      </div>
+    </div>
+
+    <div class="note red reveal" style="margin-bottom:22px">
+      <div class="title">Главный рычаг: потолок при трёх пропусках</div>
+      <p class="fg2" style="margin:0">Три и более проигнорированных вопроса за месяц — и оценка скорости <strong>не может подняться выше 5</strong>, сколько бы быстрых ответов ни было. Это закрывает единственную реальную дыру метрики: набрать себе показатель мгновенными «принял» на лёгких сообщениях и молчать там, где вопрос неприятный. Из 12 500 ₽ кошелька в такой месяц можно забрать максимум половину, и никакие остальные метрики этого не вытянут.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:22px">
+      <div class="card hoverable reveal">
+        <h4>Напоминание вместо наказания</h4>
+        <p class="muted">Через 30 минут молчания бот сам пишет в чат: «вопрос висит без ответа 30 минут», ответом на само сообщение. Половина пропусков случается не от лени, а потому что вопрос уехал вверх за десятком других.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h4>Сводка первого числа</h4>
+        <p class="muted">Утром первого числа бот присылает вам в личку разбор за месяц: медиана ответа по каждому, сколько быстрее нормы, сколько пропусков, сколько отвечено вне рабочего времени. Что из этого показывать команде — решаете вы.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h4>Дежурство вместо «всегда на связи»</h4>
+        <p class="muted">Если ответы нужны и в выходные — назначается дежурный со <strong style="color:var(--fg-2)">доплатой за смену</strong>, и норма действует только для него. Размытая обязанность быть на связи круглосуточно не работает: люди либо выгорают, либо тихо перестают отвечать.</p>
+      </div>
+    </div>
+
+    <div class="note amber reveal">
+      <div class="title">Что нужно знать до включения</div>
+      <p class="fg2" style="margin-bottom:10px"><strong>Бот не видит переписку по умолчанию.</strong> В Telegram у ботов включён режим приватности: в группе они получают только команды и обращения к себе. Снимается в BotFather командой <code>/setprivacy</code> → Disable, после чего бота нужно удалить из чата и добавить заново. Либо сделать его администратором.</p>
+      <p class="fg2" style="margin-bottom:10px"><strong>Истории нет.</strong> Бот получает сообщения только с момента добавления — замер начинается с нуля в день подключения, прошлые месяцы восстановить нельзя.</p>
+      <p class="fg2" style="margin:0"><strong>Команде нужно сказать.</strong> В чате появляется счётчик времени ответа — это разговор, который проводят до включения, а не после. Аргумент простой и честный: бот хранит только время и автора ответа, текст сообщений не сохраняется нигде.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="prozrachnost">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Каждая цифра защищаема</div>
+      <h2>Прозрачность</h2>
+      <p>Система выживет только если на вопрос «почему у меня 8.9, а не 9.5» есть ответ за десять секунд. Поэтому в базе не хранится ни одной оценки — только события со временем, а все цифры выводятся из них заново при каждом открытии.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:22px">
+      <div class="card hoverable reveal">
+        <h4>Цифра разворачивается</h4>
+        <p class="muted">У каждой оценки в приложении есть «откуда цифра». Автономность 8.94 раскрывается в «33 задачи из 44 закрыты без руководителя, это 75 %, при норме грейда 85 %» — и дальше в список этих задач.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h4>У задачи есть лента</h4>
+        <p class="muted">Поставлена, взята в работу, отправлена на проверку, возвращена, принята — каждое событие со временем, автором и источником. Спор о том, была ли правка, закрывается открытием карточки.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h4>Решения видны</h4>
+        <p class="muted">Когда вы списываете вовлечение как «вопрос был по делу», это попадает в ленту с вашим именем и комментарием. Ассистент видит, что решение принято в его пользу, а руководитель видит, сколько раз вы так делали.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-bottom:20px">
+      <h3>Три правила, без которых прозрачность не работает</h3>
+      <div class="steps" style="margin-top:16px">
+        <div class="step"><div class="n">1</div><div class="txt"><b>Цифры видны сразу, а не первого числа.</b> Ассистент открывает приложение в любой день и видит текущий кэф. Узнать о провале в день выплаты — worst case, после которого системе перестают верить</div></div>
+        <div class="step"><div class="n">2</div><div class="txt"><b>Правила не меняются задним числом.</b> Нормы и ставки правятся с начала следующего месяца. Изменить коэффициент в последний день — самый быстрый способ убить доверие ко всей конструкции</div></div>
+        <div class="step"><div class="n">3</div><div class="txt"><b>Спорное решается до расчёта.</b> Раз в месяц вы проходите список спорных позиций вместе с ассистентом, а не защищаете итог, когда деньги уже посчитаны</div></div>
+      </div>
+    </div>
+
+    <div class="note green reveal">
+      <div class="title">Что показать наверх</div>
+      <p class="fg2" style="margin:0">Для утверждения KPI у руководителя достаточно трёх вещей: <strong>из чего складывается сумма</strong> (четыре кошелька и их размеры), <strong>откуда берутся оценки</strong> (три автоматических признака и один ответ «да/нет») и <strong>сколько это стоит его времени</strong> (около двадцати нажатий в месяц). Расчёт по каждому человеку выгружается из приложения со всеми задачами и таймингами — цифры не нужно защищать словами, их можно показать.</p>
     </div>
   </div>
 </section>
@@ -1494,3 +1777,4 @@ footer p{margin-bottom:6px}
     }
   }
 </script>
+

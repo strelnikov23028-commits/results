@@ -1,0 +1,26 @@
+name = "kpi-otdel"
+main = "src/worker.js"
+compatibility_date = "2024-11-01"
+workers_dev = true
+
+# Фронтенд отдаётся тем же воркером
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# База. database_id подставляется после `wrangler d1 create kpi`
+[[d1_databases]]
+binding = "DB"
+database_name = "kpi"
+database_id = "PUT_YOUR_D1_ID_HERE"
+
+# Каждые 15 минут — напоминание о висящих вопросах и почасовая синхронизация.
+# Первого числа в 06:00 UTC (09:00 МСК) — месячная сводка руководителю отдела.
+[triggers]
+crons = ["*/15 * * * *", "0 6 1 * *"]
+
+# Секреты задаются через `wrangler secret put`, а не здесь:
+#   BOOTSTRAP_SECRET — одноразовый, для создания первого пользователя
+#   HOOK_SECRET      — заголовок x-hook-secret для вебхука YouGile
+#   TG_SECRET        — часть пути вебхука Telegram: /api/tg/<TG_SECRET>
+#   TG_TOKEN         — токен бота от BotFather

@@ -1,0 +1,9 @@
+# Секреты. Токен бота, ключ YouGile и прочее живут здесь и в git не попадают.
+.dev.vars
+.env
+*.local
+
+# Служебное
+node_modules/
+.wrangler/
+dist/
