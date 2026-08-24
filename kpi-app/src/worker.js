@@ -95,8 +95,14 @@ function scoreTask(task) {
     return { score: 0, flags: { inTime: false, noReturns: false, noChief: false }, reason: 'сорвана' };
   }
 
-  const inTime = task.deadline && task.done_at
-    ? new Date(task.done_at) <= new Date(task.deadline)
+  // Время в блокере и ожидании не идёт против исполнителя: дедлайн
+  // сдвигается на столько же, сколько задача простояла не по его вине.
+  const effectiveDeadline = task.deadline
+    ? new Date(new Date(task.deadline).getTime() + (task.paused_min || 0) * 60000)
+    : null;
+
+  const inTime = effectiveDeadline && task.done_at
+    ? new Date(task.done_at) <= effectiveDeadline
     : !task.deadline; // без дедлайна признак не снимается — считается выполненным
   const noReturns = (task.returns || 0) === 0;
   const noChief = !task.chief_touched || task.disputed === 1;
@@ -117,6 +123,7 @@ const taskWeight = (t) => (t.size || 1) * (t.night ? 1.5 : 1);
  * важнее первой: без неё цифру нельзя аргументировать.
  */
 function computeMetrics({ tasks, replies, settings, grade }) {
+  // отменённые задачи в расчёт не идут: их не делали, а сняли
   const closed = tasks.filter((t) => ['accepted', 'failed'].includes(t.status));
 
   // Качество — средневзвешенная оценка задач
@@ -131,38 +138,18 @@ function computeMetrics({ tasks, replies, settings, grade }) {
   });
   const quality = weight > 0 ? points / weight : 0;
 
-  // Скорость — 4 балла за реакцию в чате, 6 за попадание в срок, минус молчание
-  const target = num(settings, 'reply_target_min', 15);
-  const urgentTarget = num(settings, 'urgent_target_min', 5);
-
-  const inHours = replies.filter((r) => r.in_hours === 1);
-  const answered = inHours.filter((r) => r.seconds !== null);
-  const fastReplies = answered.filter((r) => {
-    const limit = (r.urgent ? urgentTarget : target) * 60;
-    return r.seconds <= limit;
-  }).length;
-
-  // Знаменатель — все запросы рабочего времени, а не только отвеченные:
-  // промолчать теперь дороже, чем ответить медленно.
-  const replyRate = inHours.length ? fastReplies / inHours.length : 0;
-
-  const misses = replies.filter((r) => isMiss(r, settings));
-  const missCount = misses.length;
+  // Реакция в чате — балльная. Один пропуск стоит трёх быстрых ответов,
+  // поэтому провал начала месяца отыгрывается, а не ставит крест.
+  // Ответ в нерабочее время ценнее рабочего: отвечать было не обязательно.
+  const chat = scoreChat(replies, settings);
 
   const withDeadline = closed.filter((t) => t.deadline);
   const inTimeCount = withDeadline.filter((t) => scoreTask(t).flags.inTime).length;
   const slaRate = withDeadline.length ? inTimeCount / withDeadline.length : 0;
+  const slaScore = slaRate * 10;
 
-  const speedBase = 4 * replyRate + 6 * slaRate;
-  const penalty = missCount * num(settings, 'miss_penalty', 0.5);
-  let speed = Math.max(0, speedBase - penalty);
-
-  // Потолок: систематическое молчание нельзя закрыть быстрыми ответами
-  // на удобные сообщения — это и есть главный рычаг всей метрики.
-  const capCount = num(settings, 'miss_cap_count', 3);
-  const capScore = num(settings, 'miss_cap_score', 5);
-  const capped = missCount >= capCount && speed > capScore;
-  if (capped) speed = capScore;
+  // 4 балла из 10 — реакция, 6 — попадание в срок
+  const speed = Math.max(0, Math.min(10, 0.4 * chat.score + 0.6 * slaScore));
 
   // Автономность — доля задач без вовлечения руководителя, отнесённая к норме
   const normAut = num(settings, `norm_autonomy_${grade}`, 0.85);
@@ -188,23 +175,21 @@ function computeMetrics({ tasks, replies, settings, grade }) {
         formula: `${round2(points)} баллов ÷ ${round2(weight)} размеров`,
       },
       speed: {
-        requests: inHours.length,
-        repliesCounted: answered.length,
-        repliesFast: fastReplies,
-        replyRate: pct(replyRate),
-        medianReply: medianSeconds(answered),
-        unanswered: inHours.filter((r) => r.seconds === null).length,
-        misses: missCount,
-        penalty: round2(penalty),
-        capped,
-        offHours: replies.filter((r) => r.in_hours === 0).length,
-        offHoursAnswered: replies.filter((r) => r.in_hours === 0 && r.seconds !== null).length,
+        chatScore: chat.score,
+        chatPoints: chat.points,
+        requests: chat.reference,
+        repliesFast: chat.fast,
+        repliesSlow: chat.slow,
+        offHoursAnswered: chat.off,
+        misses: chat.miss,
+        medianReply: chat.median,
+        chatFormula: chat.formula,
+        detail: chat.detail,
         withDeadline: withDeadline.length,
         inTime: inTimeCount,
         slaRate: pct(slaRate),
-        formula: capped
-          ? `потолок ${capScore} из-за ${missCount} пропусков`
-          : `4 × ${pct(replyRate)} + 6 × ${pct(slaRate)}${penalty ? ` − ${round2(penalty)} за ${missCount} пропусков` : ''}`,
+        slaScore: round2(slaScore),
+        formula: `реакция ${chat.score} × 0.4 + срок ${round2(slaScore)} × 0.6`,
       },
       autonomy: {
         solo: soloCount,
@@ -226,6 +211,98 @@ function computeMetrics({ tasks, replies, settings, grade }) {
 
 const round2 = (n) => Math.round(n * 100) / 100;
 const pct = (n) => `${Math.round(n * 1000) / 10} %`;
+
+/**
+ * Реакция в чате в баллах.
+ *
+ * Один пропуск стоит ровно трёх быстрых ответов, поэтому провал в начале
+ * месяца отыгрывается — до десятки дойти можно всегда. Выше десятки нельзя.
+ * Ответ в нерабочее время ценнее рабочего: отвечать было не обязательно.
+ *
+ * Ориентир для нормировки — количество вопросов рабочего времени:
+ * ответить быстро на все и есть «десятка».
+ */
+function scoreChat(replies, settings) {
+  const target = num(settings, 'reply_target_min', 15);
+  const urgentTarget = num(settings, 'urgent_target_min', 5);
+  const ptFast = num(settings, 'pt_fast', 1);
+  const ptSlow = num(settings, 'pt_slow', 0);
+  const ptOff = num(settings, 'pt_offhours', 2);
+  const ptMiss = num(settings, 'pt_miss', -3);
+
+  // вопросы, помеченные как «отвечать было не нужно», из расчёта выпадают
+  const counted = replies.filter((r) => !r.no_reply_needed);
+
+  const detail = [];
+  let points = 0;
+  let fast = 0, slow = 0, off = 0, miss = 0;
+
+  for (const r of counted) {
+    const limit = (r.urgent ? urgentTarget : target) * 60;
+    const answered = r.seconds !== null && r.seconds !== undefined;
+
+    if (!answered) {
+      if (isMiss(r, settings)) {
+        miss += 1; points += ptMiss;
+        detail.push({ ...r, kind: 'miss', delta: ptMiss, why: 'остался без ответа' });
+      }
+      continue;
+    }
+    if (r.in_hours === 0) {
+      off += 1; points += ptOff;
+      detail.push({ ...r, kind: 'offhours', delta: ptOff, why: 'ответил в нерабочее время' });
+    } else if (r.seconds <= limit) {
+      fast += 1; points += ptFast;
+      detail.push({ ...r, kind: 'fast', delta: ptFast, why: `ответил за ${Math.round(r.seconds / 60)} мин` });
+    } else {
+      slow += 1; points += ptSlow;
+      detail.push({ ...r, kind: 'slow', delta: ptSlow, why: `ответил за ${Math.round(r.seconds / 60)} мин, норма ${r.urgent ? urgentTarget : target}` });
+    }
+  }
+
+  const reference = counted.filter((r) => r.in_hours === 1).length;
+  const score = reference === 0 ? 10 : Math.max(0, Math.min(10, (10 * points) / reference));
+
+  return {
+    score: round2(score),
+    points: round2(points),
+    reference,
+    fast, slow, off, miss,
+    median: medianSeconds(counted.filter((r) => r.seconds !== null && r.in_hours === 1)),
+    unanswered: counted.filter((r) => r.seconds === null && !isMiss(r, settings)).length,
+    detail,
+    formula: reference === 0
+      ? 'вопросов не было — метрика не снижается'
+      : `${round2(points)} балла ÷ ${reference} вопросов × 10`,
+  };
+}
+
+/**
+ * Не всякое сообщение требует ответа. «Понял, спасибо» таймер не открывает.
+ *
+ * Правила намеренно простые и проверяемые глазами: вопросительный знак,
+ * список коротких подтверждений и длина. Любую ошибку можно поправить
+ * вручную — в приложении вопрос помечается как не требовавший ответа.
+ */
+function needsReply(msg, settings) {
+  const text = (msg.text || msg.caption || '').trim();
+  if (!text) return false;                       // стикер, картинка, голосовое без подписи
+  if (text.includes('?')) return true;           // прямой вопрос — всегда
+
+  const lower = text.toLowerCase();
+  const stops = (settings.no_reply_words || '')
+    .split(',').map((w) => w.trim().toLowerCase()).filter(Boolean);
+
+  // сообщение целиком состоит из подтверждения: «спасибо», «понял», «ок»
+  const stripped = lower.replace(/[^\p{L}\p{N} ]/gu, '').trim();
+  const words = stripped.split(/\s+/).filter(Boolean);
+  if (words.length && words.every((w) => stops.includes(w))) return false;
+
+  // короткая реплика без вопроса — это реакция, а не задача
+  if (text.length < num(settings, 'min_request_len', 25)) return false;
+
+  return true;
+}
 
 /**
  * Пропуск — это молчание, а не медленный ответ.
@@ -302,14 +379,25 @@ function savingCommission(sum, settings) {
 
 // ── выборка данных ───────────────────────────────────────────────────────────
 
-async function fetchUserData(db, userId, period) {
+async function fetchUserData(db, userId, period, role = 'assistant') {
   const tasks = await db
     .prepare('SELECT * FROM tasks WHERE assignee_id = ? AND (period = ? OR period IS NULL) ORDER BY created_at DESC')
     .bind(userId, period)
     .all();
+
+  // Ответы этого человека, плюс адресованные лично ему вопросы (в том числе
+  // оставшиеся без ответа). Лиду вдобавок достаются «ничейные» пропуски:
+  // если вопрос руководителя не подобрал никто, отвечает руководитель отдела.
   const replies = await db
-    .prepare('SELECT * FROM chat_replies WHERE user_id = ? AND period = ?')
-    .bind(userId, period)
+    .prepare(
+      `SELECT * FROM chat_replies
+       WHERE period = ? AND (
+         user_id = ?
+         OR (mention_id = ? AND replied_at IS NULL)
+         OR (? = 'lead' AND mention_id IS NULL AND replied_at IS NULL AND asked_role = 'chief')
+       )`
+    )
+    .bind(period, userId, userId, role)
     .all();
   const awards = await db
     .prepare('SELECT * FROM awards WHERE user_id = ? AND period = ?')
@@ -320,7 +408,7 @@ async function fetchUserData(db, userId, period) {
 
 /** Полная карточка человека: метрики, деньги, задачи с таймингами. */
 async function buildProfile(db, user, period, settings) {
-  const { tasks, replies, awards } = await fetchUserData(db, user.id, period);
+  const { tasks, replies, awards } = await fetchUserData(db, user.id, period, user.role);
   const metrics = computeMetrics({ tasks, replies, settings, grade: user.grade });
   const money = computeMoney(metrics, settings);
 
@@ -346,8 +434,22 @@ async function buildProfile(db, user, period, settings) {
     },
     awards,
     tasks: metrics.scored.map(decorateTask),
-    openTasks: tasks.filter((t) => !['accepted', 'failed'].includes(t.status)).map(decorateTask),
+    openTasks: tasks
+      .filter((t) => !['accepted', 'failed', 'cancelled'].includes(t.status))
+      .map(decorateTask),
   };
+}
+
+/** Проставляет ссылки на сообщения в расшифровке баллов. */
+function withChatLinks(profile, settings) {
+  const chatId = settings.tg_chat_id;
+  const d = profile.metrics?.breakdown?.speed?.detail;
+  if (!chatId || !d) return profile;
+  const base = String(chatId).replace('-100', '');
+  for (const item of d) {
+    if (item.request_msg) item.link = `https://t.me/c/${base}/${item.request_msg}`;
+  }
+  return profile;
 }
 
 /** Тайминги задачи — то, ради чего лид сюда заходит. */
@@ -446,7 +548,7 @@ async function handleApi(request, env, url) {
   // свой профиль — доступен всем ролям
   if (path === '/me') {
     const full = await db.prepare('SELECT * FROM users WHERE id = ?').bind(me.id).first();
-    return json(await buildProfile(db, full, period, settings));
+    return json(withChatLinks(await buildProfile(db, full, period, settings), settings));
   }
 
   // сводка по отделу — только лид и руководитель
@@ -488,6 +590,19 @@ async function handleApi(request, env, url) {
       growth: 0, // проставляется руководителем вручную
     };
 
+    // Скорость лида: своя реакция на вопросы руководителя плюс скорость команды.
+    // Одной командной метрики мало — молчать самому тоже нельзя.
+    const meFull = await db.prepare('SELECT * FROM users WHERE id = ?').bind(me.id).first();
+    const leadOwn = me.role === 'lead' ? await buildProfile(db, meFull, period, settings) : null;
+    const teamSpeed = profiles.length
+      ? round2(profiles.reduce((a, p) => a + p.metrics.speed, 0) / profiles.length)
+      : 0;
+    const wPersonal = num(settings, 'lead_speed_personal', 0.4);
+    const wTeam = num(settings, 'lead_speed_team', 0.6);
+    const leadSpeed = leadOwn
+      ? round2(wPersonal * leadOwn.metrics.speed + wTeam * teamSpeed)
+      : teamSpeed;
+
     return json({
       period,
       avgKef,
@@ -513,8 +628,16 @@ async function handleApi(request, env, url) {
         filterRate: pct(filterRate),
         unloadRate: pct(unloadRate),
         wallets: leadWallets,
+        speed: {
+          total: leadSpeed,
+          personal: leadOwn ? leadOwn.metrics.speed : null,
+          team: teamSpeed,
+          weights: { personal: wPersonal, team: wTeam },
+          formula: `своя ${leadOwn ? leadOwn.metrics.speed : '—'} × ${wPersonal} + команда ${teamSpeed} × ${wTeam}`,
+          ownDetail: leadOwn ? leadOwn.metrics.breakdown.speed : null,
+        },
         shareZaeb: Math.round(teamZaeb * leadShareZaeb),
-        shareSaving: Math.round(savingCommission(teamSaving, settings) * 0 + teamSaving * leadShareSaving),
+        shareSaving: Math.round(teamSaving * leadShareSaving),
         bonus:
           leadWallets.team + leadWallets.filter + leadWallets.unload + leadWallets.growth,
       },
@@ -527,7 +650,7 @@ async function handleApi(request, env, url) {
     if (!['lead', 'chief'].includes(me.role) && me.id !== id) return bad('нет доступа', 403);
     const user = await db.prepare('SELECT * FROM users WHERE id = ?').bind(id).first();
     if (!user) return bad('не найден', 404);
-    return json(await buildProfile(db, user, period, settings));
+    return json(withChatLinks(await buildProfile(db, user, period, settings), settings));
   }
 
   // очередь приёмки для руководителя
@@ -735,94 +858,147 @@ async function handleYougileHook(request, env, settings) {
   return json({ ok: true, received: items.length });
 }
 
-/** Периодическая синхронизация: подстраховка, если вебхук что-то потерял. */
-async function syncYougile(env, settings) {
+/**
+ * Периодическая синхронизация: подстраховка, если вебхук что-то потерял.
+ *
+ * /task-list отдаёт задачи целиком, поэтому хватает одного обхода с пагинацией.
+ * Ключ берётся из секретов; настройка в базе оставлена как запасной путь.
+ */
+async function syncYougile(env, settings, { limit = 1000 } = {}) {
   const db = env.DB;
-  const key = settings.yougile_key;
-  if (!key) return { ok: false, error: 'не задан ключ YouGile в настройках' };
+  const key = env.YOUGILE_KEY || settings.yougile_key;
+  if (!key) return { ok: false, error: 'не задан ключ YouGile' };
 
-  const base = settings.yougile_base || 'https://ru.yougile.com/api-v2';
-  const res = await fetch(`${base}/tasks?limit=1000`, {
-    headers: { Authorization: `Bearer ${key}` },
-  });
-  if (!res.ok) return { ok: false, error: `YouGile ответил ${res.status}` };
-
-  const data = await res.json().catch(() => ({}));
-  const list = data.content || data.tasks || (Array.isArray(data) ? data : []);
+  const base = settings.yougile_base || 'https://yougile.com/api-v2';
+  let offset = 0;
   let touched = 0;
-  for (const t of list) {
-    await upsertTaskFromYougile(db, t, settings);
-    touched += 1;
+  let guard = 0;
+
+  while (guard++ < 50) {
+    const res = await fetch(`${base}/task-list?limit=100&offset=${offset}`, {
+      headers: { Authorization: `Bearer ${key}` },
+    });
+    if (!res.ok) return { ok: false, error: `YouGile ответил ${res.status}`, synced: touched };
+
+    const data = await res.json().catch(() => ({}));
+    const list = data.content || [];
+    for (const t of list) {
+      await upsertTaskFromYougile(db, t, settings);
+      touched += 1;
+      if (touched >= limit) return { ok: true, synced: touched, truncated: true };
+    }
+    if (!data.paging?.next) break;
+    offset += list.length || 100;
   }
   return { ok: true, synced: touched };
 }
 
+/** Настройка со списком id колонок: «a,b,c» → Set. */
+const colSet = (settings, key) =>
+  new Set((settings[key] || '').split(',').map((s) => s.trim()).filter(Boolean));
+
+/** В какой стадии находится задача, судя по её колонке. */
+function stageOfColumn(columnId, settings) {
+  if (!columnId) return null;
+  if (colSet(settings, 'column_in_progress').has(columnId)) return 'in_progress';
+  if (colSet(settings, 'column_review').has(columnId)) return 'review';
+  if (colSet(settings, 'column_done').has(columnId)) return 'accepted';
+  if (colSet(settings, 'column_paused').has(columnId)) return 'paused';
+  if (colSet(settings, 'column_cancelled').has(columnId)) return 'cancelled';
+  if (colSet(settings, 'column_backlog').has(columnId)) return 'open';
+  return null;
+}
+
 async function upsertTaskFromYougile(db, t, settings) {
   const existing = await db.prepare('SELECT * FROM tasks WHERE id = ?').bind(t.id).first();
+  const now = nowIso();
 
   const assignee = Array.isArray(t.assigned) ? t.assigned[0] : t.assigned || null;
   const user = assignee
     ? await db.prepare('SELECT id FROM users WHERE yougile_id = ?').bind(assignee).first()
     : null;
 
-  const colInProgress = settings.column_in_progress;
-  const colReview = settings.column_review;
-  const colDone = settings.column_done;
-
-  const patch = {
-    title: t.title || existing?.title || 'Без названия',
-    url: t.id ? `https://ru.yougile.com/team/#/task/${t.id}` : null,
-    assignee_id: user?.id || existing?.assignee_id || null,
-    deadline: t.deadline?.deadline
-      ? new Date(t.deadline.deadline).toISOString()
-      : existing?.deadline || null,
-    created_at: existing?.created_at || (t.timestamp ? new Date(t.timestamp).toISOString() : nowIso()),
-  };
+  const title = t.title || existing?.title || 'Без названия';
+  const createdAt = existing?.created_at
+    || (t.timestamp ? new Date(t.timestamp).toISOString() : now);
+  const deadline = t.deadline?.deadline
+    ? new Date(t.deadline.deadline).toISOString()
+    : existing?.deadline || null;
 
   let status = existing?.status || 'open';
   let taken = existing?.taken_at || null;
   let submitted = existing?.submitted_at || null;
+  let done = existing?.done_at || null;
   let returns = existing?.returns || 0;
+  let pausedMin = existing?.paused_min || 0;
+  let pausedSince = existing?.paused_since || null;
 
-  if (t.columnId && t.columnId === colInProgress) {
-    if (status === 'review') returns += 1; // вернулась с проверки
-    status = 'in_progress';
-    taken = taken || nowIso();
-  } else if (t.columnId && t.columnId === colReview) {
-    status = 'review';
-    submitted = nowIso();
-  } else if (t.columnId && t.columnId === colDone) {
-    status = 'accepted';
+  const stage = stageOfColumn(t.columnId, settings);
+
+  // выход из паузы — копим её длительность, чтобы вычесть из времени работы
+  if (pausedSince && stage !== 'paused') {
+    pausedMin += Math.max(0, Math.round((Date.now() - new Date(pausedSince)) / 60000));
+    pausedSince = null;
   }
+
+  if (stage === 'in_progress') {
+    if (status === 'review') returns += 1; // вернулась с проверки — признак «без правок» гаснет
+    status = 'in_progress';
+    taken = taken || now;
+  } else if (stage === 'review') {
+    status = 'review';
+    submitted = submitted || now;
+  } else if (stage === 'accepted') {
+    status = 'accepted';
+    done = done || now;
+  } else if (stage === 'paused') {
+    status = 'paused';
+    pausedSince = pausedSince || now;
+  } else if (stage === 'cancelled') {
+    status = 'cancelled';
+  }
+
+  // YouGile сам отмечает завершённость — это надёжнее, чем угадывать по колонке
+  if (t.completed && status !== 'accepted' && status !== 'cancelled') {
+    status = 'accepted';
+    done = done || now;
+  }
+  if (t.archived || t.deleted) status = 'cancelled';
+
+  const period = done ? done.slice(0, 7) : existing?.period || null;
 
   if (existing) {
     await db
       .prepare(
-        `UPDATE tasks SET title=?, url=?, assignee_id=?, deadline=?, status=?, taken_at=?,
-         submitted_at=?, returns=?, updated_at=? WHERE id=?`
+        `UPDATE tasks SET title=?, number=?, board_id=?, assignee_id=?, deadline=?, status=?,
+         taken_at=?, submitted_at=?, done_at=?, returns=?, paused_min=?, paused_since=?,
+         period=?, updated_at=? WHERE id=?`
       )
-      .bind(patch.title, patch.url, patch.assignee_id, patch.deadline, status,
-            taken, submitted, returns, nowIso(), t.id)
+      .bind(title, t.idTaskCommon || existing.number, t.boardId || existing.board_id,
+            user?.id || existing.assignee_id, deadline, status, taken, submitted, done,
+            returns, pausedMin, pausedSince, period, now, t.id)
       .run();
   } else {
-    const isInitiative = user && t.createdBy && t.createdBy === assignee ? 1 : 0;
+    // задачу завёл сам исполнитель — это инициатива
+    const isInitiative = assignee && t.createdBy && t.createdBy === assignee ? 1 : 0;
     await db
       .prepare(
-        `INSERT INTO tasks (id, title, url, assignee_id, author_id, created_at, deadline,
-         status, taken_at, submitted_at, returns, is_initiative)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`
+        `INSERT INTO tasks (id, title, number, board_id, assignee_id, author_id, created_at,
+         deadline, status, taken_at, submitted_at, done_at, returns, paused_min, paused_since,
+         is_initiative, period)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
       )
-      .bind(t.id, patch.title, patch.url, patch.assignee_id, t.createdBy || null,
-            patch.created_at, patch.deadline, status, taken, submitted, returns, isInitiative)
+      .bind(t.id, title, t.idTaskCommon || null, t.boardId || null, user?.id || null,
+            t.createdBy || null, createdAt, deadline, status, taken, submitted, done,
+            returns, pausedMin, pausedSince, isInitiative, period)
       .run();
-    await logEvent(db, { taskId: t.id, type: 'created', at: patch.created_at });
+    await logEvent(db, { taskId: t.id, type: 'created', at: createdAt });
   }
 
-  if (status === 'in_progress' && !existing?.taken_at) {
-    await logEvent(db, { taskId: t.id, type: 'taken' });
-  }
-  if (status === 'review' && existing?.status !== 'review') {
-    await logEvent(db, { taskId: t.id, type: 'submitted' });
+  if (stage === 'in_progress' && !existing?.taken_at) await logEvent(db, { taskId: t.id, type: 'taken' });
+  if (stage === 'review' && existing?.status !== 'review') await logEvent(db, { taskId: t.id, type: 'submitted' });
+  if (stage === 'paused' && existing?.status !== 'paused') {
+    await logEvent(db, { taskId: t.id, type: 'manual', note: 'ушла в ожидание или блокер' });
   }
 }
 
@@ -875,13 +1051,30 @@ async function handleTelegramUpdate(request, env, settings) {
   const msg = update?.message || update?.edited_message;
   if (!msg || !msg.from || msg.from.is_bot) return json({ ok: true });
 
+  // личка — панель управления составом
+  if (msg.chat.type === 'private') return handleBotCommand(msg, env, settings);
+
   const wanted = settings.tg_chat_id;
   if (wanted && String(msg.chat.id) !== String(wanted)) return json({ ok: true });
 
-  const user = await db
+  let user = await db
     .prepare('SELECT id, role, name FROM users WHERE tg_user_id = ? AND active = 1')
     .bind(String(msg.from.id))
     .first();
+
+  // Привязка по нику: лид заранее прислал «@ник», а id становится известен
+  // только когда человек напишет в чат — Telegram не отдаёт id по нику.
+  if (!user && msg.from.username) {
+    const pending = await db
+      .prepare('SELECT id, role, name FROM users WHERE lower(tg_username) = ? AND tg_user_id IS NULL AND active = 1')
+      .bind(msg.from.username.toLowerCase())
+      .first();
+    if (pending) {
+      await db.prepare('UPDATE users SET tg_user_id = ? WHERE id = ?')
+        .bind(String(msg.from.id), pending.id).run();
+      user = pending;
+    }
+  }
   if (!user) return json({ ok: true, skipped: 'неизвестный отправитель' });
 
   const at = new Date(msg.date * 1000).toISOString();
@@ -891,32 +1084,49 @@ async function handleTelegramUpdate(request, env, settings) {
 
   // запрос от руководителя или лида
   if (user.role === 'chief' || user.role === 'lead') {
+    // «понял, спасибо» таймер не открывает
+    if (!needsReply(msg, settings)) return json({ ok: true, skipped: 'ответ не требуется' });
+
     const text = (msg.text || msg.caption || '').toLowerCase();
     const words = (settings.urgent_words || '').split(',').map((w) => w.trim()).filter(Boolean);
     const urgent = words.some((w) => text.includes(w)) ? 1 : 0;
 
     // если обратились к конкретному человеку — ждём именно его
-    let mentionId = null;
-    const mention = (msg.entities || []).find((e) => e.type === 'text_mention');
-    if (mention?.user?.id) {
-      const target = await db
-        .prepare('SELECT id FROM users WHERE tg_user_id = ?')
-        .bind(String(mention.user.id))
+    const mentionId = await resolveMention(db, msg);
+
+    // Лид всегда тегает, когда ставит задачу. Значит сообщение лида без тега,
+    // когда висит вопрос руководителя, — это его собственный ответ, а не запрос.
+    if (user.role === 'lead' && !mentionId) {
+      const openForLead = await db
+        .prepare(
+          `SELECT * FROM chat_replies WHERE chat_id = ? AND replied_at IS NULL
+           AND asked_role = 'chief' AND (mention_id IS NULL OR mention_id = ?)
+           ORDER BY asked_at DESC LIMIT 1`
+        )
+        .bind(String(msg.chat.id), user.id)
         .first();
-      mentionId = target?.id || null;
+
+      if (openForLead) {
+        const seconds = Math.max(0, Math.round((new Date(at) - new Date(openForLead.asked_at)) / 1000));
+        await db
+          .prepare('UPDATE chat_replies SET user_id = ?, reply_msg = ?, replied_at = ?, seconds = ? WHERE id = ?')
+          .bind(user.id, String(msg.message_id), at, seconds, openForLead.id)
+          .run();
+        return json({ ok: true, tracked: 'reply', by: 'lead', seconds });
+      }
     }
 
     await db
       .prepare(
-        `INSERT INTO chat_replies (user_id, chat_id, request_msg, asked_by, asked_at, in_hours, urgent, mention_id, period)
-         VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)`
+        `INSERT INTO chat_replies (user_id, chat_id, request_msg, asked_by, asked_role, asked_at, in_hours, urgent, mention_id, period)
+         VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       )
-      .bind(String(msg.chat.id), String(msg.message_id), user.id, at, inHours, urgent, mentionId, period)
+      .bind(String(msg.chat.id), String(msg.message_id), user.id, user.role, at, inHours, urgent, mentionId, period)
       .run();
     return json({ ok: true, tracked: 'request', urgent: !!urgent });
   }
 
-  // ответ ассистента
+  // ответ ассистента или лида: вопрос руководителя может быть адресован и лиду
   let open = null;
   if (msg.reply_to_message) {
     open = await db
@@ -958,6 +1168,168 @@ async function handleTelegramUpdate(request, env, settings) {
     .run();
 
   return json({ ok: true, tracked: 'reply', seconds });
+}
+
+/**
+ * Панель управления в личке бота.
+ *
+ * Telegram не отдаёт id пользователя по нику, поэтому человек заводится
+ * по нику и «оживает», когда впервые напишет в общий чат. До этого момента
+ * он числится ожидающим — это видно в /team.
+ */
+async function handleBotCommand(msg, env, settings) {
+  const db = env.DB;
+  const from = String(msg.from.id);
+  const text = (msg.text || '').trim();
+  const [cmd, ...rest] = text.split(/\s+/);
+  const reply = (t) => sendTelegram(env, from, t).then(() => json({ ok: true }));
+
+  const me = await db
+    .prepare('SELECT id, name, role FROM users WHERE tg_user_id = ? AND active = 1')
+    .bind(from)
+    .first();
+
+  // первичная активация: назначает отправителя руководителем отдела
+  if (cmd === '/init') {
+    if (me) return reply(`Вы уже в системе: ${me.name}.`);
+    const secret = rest.join(' ').trim();
+    if (!env.BOOTSTRAP_SECRET || secret !== env.BOOTSTRAP_SECRET) {
+      return reply('Неверный секрет. Формат: /init <секрет>');
+    }
+    const key = newKey();
+    await db
+      .prepare(
+        `INSERT INTO users (id, name, role, grade, key_hash, tg_user_id, tg_username)
+         VALUES (?,?,'lead','A3',?,?,?)`
+      )
+      .bind(crypto.randomUUID(), msg.from.first_name || 'Руководитель отдела',
+            await sha256(key), from, (msg.from.username || '').toLowerCase() || null)
+      .run();
+    return reply(
+      `Готово, вы руководитель отдела.\n\nКлюч для входа в приложение (показывается один раз):\n<code>${key}</code>\n\n` +
+      `Дальше: /assist @ник Имя — добавить ассистента, /help — все команды.`
+    );
+  }
+
+  if (!me) return reply('Вас нет в системе. Обратитесь к руководителю отдела.');
+  if (me.role !== 'lead' && cmd !== '/help' && cmd !== '/me') {
+    return reply('Эта команда доступна только руководителю отдела.');
+  }
+
+  if (cmd === '/help' || cmd === '/start') {
+    return reply(
+      '<b>Команды</b>\n' +
+      '/assist @ник Имя — добавить ассистента\n' +
+      '/chief @ник Имя — добавить руководителя\n' +
+      '/team — состав отдела\n' +
+      '/key @ник — выдать новый ключ в приложение\n' +
+      '/off @ник — отключить человека\n' +
+      '/chat — привязать этот чат как рабочий\n' +
+      '/me — мои результаты за месяц'
+    );
+  }
+
+  if (cmd === '/assist' || cmd === '/chief') {
+    const nick = (rest[0] || '').replace('@', '').toLowerCase();
+    const name = rest.slice(1).join(' ').trim();
+    if (!nick || !name) return reply(`Формат: ${cmd} @ник Имя Фамилия`);
+
+    const role = cmd === '/assist' ? 'assistant' : 'chief';
+    const exists = await db.prepare('SELECT id FROM users WHERE lower(tg_username) = ?').bind(nick).first();
+    if (exists) {
+      await db.prepare('UPDATE users SET name = ?, role = ?, active = 1 WHERE id = ?')
+        .bind(name, role, exists.id).run();
+      return reply(`Обновил: ${name} — ${role === 'assistant' ? 'ассистент' : 'руководитель'}.`);
+    }
+
+    const key = newKey();
+    await db
+      .prepare(
+        `INSERT INTO users (id, name, role, grade, key_hash, tg_username)
+         VALUES (?,?,?,'A2',?,?)`
+      )
+      .bind(crypto.randomUUID(), name, role, await sha256(key), nick)
+      .run();
+    return reply(
+      `Добавлен: <b>${name}</b> (@${nick}) — ${role === 'assistant' ? 'ассистент' : 'руководитель'}.\n\n` +
+      `Ключ для входа в приложение:\n<code>${key}</code>\n\n` +
+      `Замер начнётся, как только он напишет в рабочем чате: Telegram не отдаёт id по нику.`
+    );
+  }
+
+  if (cmd === '/team') {
+    const { results } = await db
+      .prepare('SELECT name, role, grade, tg_username, tg_user_id, active FROM users ORDER BY role, name')
+      .all();
+    const label = { assistant: 'ассистент', lead: 'рук. отдела', chief: 'руководитель' };
+    const lines = results.map((u) =>
+      `${u.active ? '' : '⛔ '}<b>${u.name}</b> — ${label[u.role]}` +
+      `${u.tg_username ? ` @${u.tg_username}` : ''}` +
+      `${u.tg_user_id ? ' ✅' : ' ⏳ ждёт первого сообщения'}`
+    );
+    return reply(`<b>Состав отдела</b>\n\n${lines.join('\n') || 'пусто'}`);
+  }
+
+  if (cmd === '/key') {
+    const nick = (rest[0] || '').replace('@', '').toLowerCase();
+    const u = await db.prepare('SELECT id, name FROM users WHERE lower(tg_username) = ?').bind(nick).first();
+    if (!u) return reply('Не нашёл такого ника. /team — список.');
+    const key = newKey();
+    await db.prepare('UPDATE users SET key_hash = ? WHERE id = ?').bind(await sha256(key), u.id).run();
+    return reply(`Новый ключ для ${u.name} (старый больше не работает):\n<code>${key}</code>`);
+  }
+
+  if (cmd === '/off') {
+    const nick = (rest[0] || '').replace('@', '').toLowerCase();
+    const u = await db.prepare('SELECT id, name FROM users WHERE lower(tg_username) = ?').bind(nick).first();
+    if (!u) return reply('Не нашёл такого ника.');
+    await db.prepare('UPDATE users SET active = 0 WHERE id = ?').bind(u.id).run();
+    return reply(`${u.name} отключён. История сохранена.`);
+  }
+
+  if (cmd === '/chat') {
+    return reply('Перешлите сюда любое сообщение из рабочего чата или отправьте /chat <id>. ' +
+      'Проще всего: напишите что-нибудь в рабочем чате — бот привяжет его сам, если он там единственный.');
+  }
+
+  if (cmd === '/me') {
+    const period = currentPeriod(num(settings, 'tz_offset', 3));
+    const full = await db.prepare('SELECT * FROM users WHERE id = ?').bind(me.id).first();
+    const p = await buildProfile(db, full, period, settings);
+    return reply(
+      `<b>${p.user.name}</b>, ${period}\n\n` +
+      `Кэф: <b>${p.money.kef}</b>\n` +
+      `Качество ${p.metrics.quality} · Скорость ${p.metrics.speed}\n` +
+      `Автономность ${p.metrics.autonomy} · Проактивность ${p.metrics.proactivity}\n\n` +
+      `К выплате сверх оклада: <b>${p.money.total.toLocaleString('ru-RU')} ₽</b>`
+    );
+  }
+
+  return reply('Не понял команду. /help — список.');
+}
+
+/**
+ * Кому адресовано сообщение. Telegram даёт два вида упоминаний:
+ * text_mention с готовым id (для тех, у кого нет ника) и обычный @ник.
+ */
+async function resolveMention(db, msg) {
+  const entities = msg.entities || msg.caption_entities || [];
+  const text = msg.text || msg.caption || '';
+
+  for (const e of entities) {
+    if (e.type === 'text_mention' && e.user?.id) {
+      const u = await db.prepare('SELECT id FROM users WHERE tg_user_id = ?')
+        .bind(String(e.user.id)).first();
+      if (u) return u.id;
+    }
+    if (e.type === 'mention') {
+      const nick = text.substr(e.offset + 1, e.length - 1).toLowerCase();
+      const u = await db.prepare('SELECT id FROM users WHERE lower(tg_username) = ?')
+        .bind(nick).first();
+      if (u) return u.id;
+    }
+  }
+  return null;
 }
 
 /** Отправка сообщения в Telegram. Токен лежит в секретах, не в коде. */
@@ -1008,13 +1380,25 @@ async function runEscalation(env, settings) {
   return { ok: true, escalated: sent };
 }
 
-/** Месячная сводка руководителю отдела в личку. */
+/** Сегодня последний день месяца? Сводка уходит именно в этот день. */
+function isLastDayOfMonth(tzOffset = 3) {
+  const now = new Date(Date.now() + tzOffset * 3600e3);
+  const tomorrow = new Date(now.getTime() + 86400e3);
+  return tomorrow.getUTCDate() === 1;
+}
+
+/**
+ * Месячная сводка руководителю отдела в личку — в последний день месяца.
+ * Не «31 числа»: в коротких месяцах такого дня нет, а сводка нужна всегда.
+ *
+ * Показывает не только цифры, но и за что именно сняты и добавлены баллы,
+ * со ссылками на конкретные сообщения в чате.
+ */
 async function sendMonthlyDigest(env, settings) {
   const db = env.DB;
   const tz = num(settings, 'tz_offset', 3);
-  const prev = new Date(Date.now() + tz * 3600e3);
-  prev.setUTCDate(0); // последний день предыдущего месяца
-  const period = `${prev.getUTCFullYear()}-${String(prev.getUTCMonth() + 1).padStart(2, '0')}`;
+  const now = new Date(Date.now() + tz * 3600e3);
+  const period = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, '0')}`;
 
   const lead = await db
     .prepare("SELECT * FROM users WHERE role = 'lead' AND tg_user_id IS NOT NULL AND active = 1")
@@ -1025,26 +1409,50 @@ async function sendMonthlyDigest(env, settings) {
     .prepare("SELECT * FROM users WHERE role = 'assistant' AND active = 1 ORDER BY name")
     .all();
 
-  const lines = [`<b>Скорость ответов за ${period}</b>`, ''];
+  const chatId = settings.tg_chat_id;
+  const lines = [`<b>Итоги ${period}</b>`, ''];
+
   for (const p of people) {
-    const { tasks, replies } = await fetchUserData(db, p.id, period);
+    const { tasks, replies } = await fetchUserData(db, p.id, period, p.role);
     const m = computeMetrics({ tasks, replies, settings, grade: p.grade });
     const s = m.breakdown.speed;
+
     lines.push(
-      `<b>${p.name}</b>`,
+      `<b>${p.name}</b> — скорость <b>${m.speed}</b> из 10`,
+      `  реакция ${s.chatScore} (${s.chatFormula})`,
       `  медиана ответа: ${s.medianReply === null ? '—' : humanSeconds(s.medianReply)}`,
-      `  быстрее нормы: ${s.repliesFast} из ${s.requests}`,
-      `  без ответа: ${s.misses}${s.capped ? ' ⚠️ включён потолок' : ''}`,
-      `  вне рабочего времени ответил: ${s.offHoursAnswered} из ${s.offHours}`,
-      `  оценка скорости: <b>${m.speed}</b> из 10`,
-      ''
+      `  быстро: ${s.repliesFast} · медленно: ${s.repliesSlow} · вне часов: ${s.offHoursAnswered}`,
+      `  пропусков: ${s.misses}`
     );
+
+    // за что сняли баллы — со ссылками на сообщения
+    const bad = (s.detail || []).filter((d) => d.delta < 0).slice(0, 5);
+    for (const d of bad) {
+      lines.push(`    −${Math.abs(d.delta)} ${d.why} ${msgLink(chatId, d.request_msg)}`);
+    }
+    // и за что добавили сверх обычного
+    const great = (s.detail || []).filter((d) => d.kind === 'offhours').slice(0, 3);
+    for (const d of great) {
+      lines.push(`    +${d.delta} ${d.why} ${msgLink(chatId, d.request_msg)}`);
+    }
+    lines.push('');
   }
 
-  const total = people.length;
-  lines.push(`Всего ассистентов: ${total}`);
-  await sendTelegram(env, lead.tg_user_id, lines.join('\n'));
-  return { ok: true, period, people: total };
+  lines.push(`Полный разбор с задачами — в приложении, раздел «Отчёт».`);
+
+  // Telegram не принимает сообщения длиннее 4096 символов
+  const text = lines.join('\n');
+  for (let i = 0; i < text.length; i += 3900) {
+    await sendTelegram(env, lead.tg_user_id, text.slice(i, i + 3900));
+  }
+  return { ok: true, period, people: people.length };
+}
+
+/** Ссылка на сообщение в супергруппе: t.me/c/<id без -100>/<message_id>. */
+function msgLink(chatId, messageId) {
+  if (!chatId || !messageId) return '';
+  const id = String(chatId).replace('-100', '');
+  return `<a href="https://t.me/c/${id}/${messageId}">→</a>`;
 }
 
 const humanSeconds = (s) =>
@@ -1082,10 +1490,11 @@ export default {
 
   async scheduled(event, env) {
     const settings = await loadSettings(env.DB);
+    const tz = num(settings, 'tz_offset', 3);
 
-    // первого числа — сводка по скорости ответов за прошлый месяц
-    if (event.cron === '0 6 1 * *') {
-      await sendMonthlyDigest(env, settings);
+    // вечер последнего дня месяца — итоговая сводка
+    if (event.cron === '0 18 * * *') {
+      if (isLastDayOfMonth(tz)) await sendMonthlyDigest(env, settings);
       return;
     }
 
@@ -1093,7 +1502,7 @@ export default {
     await runEscalation(env, settings);
 
     // раз в час — подстраховочная синхронизация задач
-    if (new Date().getUTCMinutes() < 15 && settings.yougile_key) {
+    if (new Date().getUTCMinutes() < 15) {
       await syncYougile(env, settings);
     }
   },

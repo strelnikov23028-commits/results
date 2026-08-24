@@ -344,7 +344,7 @@ function renderProfile(p, v){
     const wal = w[meta.purse];
     let why = '';
     if (k === 'quality') why = `<b>${b.quality.points}</b> баллов ÷ <b>${b.quality.weight}</b> размеров по <b>${b.quality.tasks}</b> задачам`;
-    if (k === 'speed')   why = `реакция: <b>${b.speed.repliesFast}</b> из <b>${b.speed.repliesCounted}</b> быстрее нормы (${b.speed.replyRate}), медиана <b>${fmtSeconds(b.speed.medianReply)}</b><br>срок: <b>${b.speed.inTime}</b> из <b>${b.speed.withDeadline}</b> (${b.speed.slaRate})`;
+    if (k === 'speed')   why = `реакция <b>${b.speed.chatScore}</b>: быстро ${b.speed.repliesFast}, медленно ${b.speed.repliesSlow}, вне часов ${b.speed.offHoursAnswered}, пропусков <b>${b.speed.misses}</b><br>медиана <b>${fmtSeconds(b.speed.medianReply)}</b><br>срок: <b>${b.speed.inTime}</b> из <b>${b.speed.withDeadline}</b> (${b.speed.slaRate})`;
     if (k === 'autonomy') why = `<b>${b.autonomy.solo}</b> из <b>${b.autonomy.of}</b> задач без руководителя (${b.autonomy.rate}) при норме ${b.autonomy.norm}`;
     if (k === 'proactivity') why = `<b>${b.proactivity.useful}</b> инициатив пригодилось из <b>${b.proactivity.proposed}</b> предложенных, норма ${b.proactivity.norm}`;
 
@@ -379,9 +379,47 @@ function renderProfile(p, v){
       <div class="card"><div class="lbl muted">Оклад</div><div class="money">${money(p.money.salary)}</div></div>
     </div>
 
+    ${chatReport(p)}
+
     <h2 style="margin-bottom:12px">Задачи за период</h2>
     ${taskTable(p.tasks.concat(p.openTasks))}
   `;
+}
+
+/** Отчёт по баллам: за что сняли, за что добавили, со ссылками на сообщения. */
+function chatReport(p){
+  const d = p.metrics.breakdown.speed.detail || [];
+  if (!d.length) return '';
+
+  const LABEL = {
+    fast:    ['t-green', 'быстрый ответ'],
+    slow:    ['t-grey',  'ответ вне нормы'],
+    offhours:['t-blue',  'ответ в нерабочее время'],
+    miss:    ['t-red',   'остался без ответа'],
+  };
+
+  const rows = d.map((x) => {
+    const [cls, label] = LABEL[x.kind] || ['t-grey', x.kind];
+    const link = x.link ? `<a href="${esc(x.link)}" target="_blank" rel="noopener">открыть</a>` : '';
+    const sign = x.delta > 0 ? '+' : '';
+    return `<tr>
+      <td>${fmtDate(x.asked_at)}</td>
+      <td><span class="tag ${cls}">${label}</span>${x.urgent ? ' <span class="tag t-amber">срочно</span>' : ''}</td>
+      <td>${esc(x.why)}</td>
+      <td class="num"><strong style="color:${x.delta < 0 ? 'var(--red)' : x.delta > 0 ? 'var(--green)' : 'var(--fg-3)'}">${sign}${x.delta}</strong></td>
+      <td class="num">${link}</td>
+    </tr>`;
+  }).join('');
+
+  const s = p.metrics.breakdown.speed;
+  return `
+    <h2 style="margin-bottom:6px">Отчёт по баллам за ответы</h2>
+    <p class="muted" style="margin-bottom:12px">${esc(s.chatFormula)} — итог реакции <b>${s.chatScore}</b> из 10.
+      Пропуск стоит трёх быстрых ответов, ответ в нерабочее время даёт вдвое больше обычного.</p>
+    <div class="tbl" style="margin-bottom:26px"><table style="min-width:640px">
+      <thead><tr><th>Когда</th><th>Что засчитано</th><th>Почему</th><th class="num">Баллы</th><th class="num">Сообщение</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
 }
 
 function taskTable(tasks){

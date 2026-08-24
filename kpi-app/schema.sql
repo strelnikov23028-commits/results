@@ -17,6 +17,8 @@ CREATE TABLE users (
   key_hash     TEXT,                          -- sha256 ключа доступа
   yougile_id   TEXT,                          -- id пользователя в YouGile
   tg_user_id   TEXT,                          -- id в Telegram, для замера ответов
+  tg_username  TEXT,                          -- ник: по нему человека заводят
+                                              -- до первого сообщения, id придёт позже
   salary       INTEGER NOT NULL DEFAULT 0,    -- оклад, для итоговой сводки
   active       INTEGER NOT NULL DEFAULT 1,
   created_at   TEXT NOT NULL DEFAULT (datetime('now'))
@@ -24,6 +26,7 @@ CREATE TABLE users (
 CREATE INDEX idx_users_key ON users(key_hash);
 CREATE INDEX idx_users_yg  ON users(yougile_id);
 CREATE INDEX idx_users_tg  ON users(tg_user_id);
+CREATE INDEX idx_users_nick ON users(tg_username);
 
 -- ── Задачи ──────────────────────────────────────────────────────────────────
 -- Тайминги хранятся как ISO-строки UTC. Всё, что можно вывести, выводится
@@ -31,7 +34,9 @@ CREATE INDEX idx_users_tg  ON users(tg_user_id);
 CREATE TABLE tasks (
   id                TEXT PRIMARY KEY,          -- id задачи в YouGile
   title             TEXT NOT NULL,
+  number            TEXT,                      -- человекочитаемый номер, ID-236
   url               TEXT,
+  board_id          TEXT,
   assignee_id       TEXT REFERENCES users(id),
   author_id         TEXT,                      -- кто завёл: если ассистент — инициатива
   size              INTEGER NOT NULL DEFAULT 1 CHECK (size IN (1,2,3)),
@@ -42,6 +47,11 @@ CREATE TABLE tasks (
   submitted_at      TEXT,                      -- отправлена на проверку
   done_at           TEXT,                      -- принята окончательно
   deadline          TEXT,
+
+  -- Время в «Блокере» и «В ожидании» не идёт против ассистента:
+  -- он не виноват, что ждали ответа третьей стороны.
+  paused_min        INTEGER NOT NULL DEFAULT 0,
+  paused_since      TEXT,
 
   returns           INTEGER NOT NULL DEFAULT 0,-- сколько раз вернули из «На проверке»
   chief_touched     INTEGER NOT NULL DEFAULT 0,-- руководитель писал в карточке до закрытия
@@ -82,6 +92,7 @@ CREATE TABLE chat_replies (
   request_msg  TEXT,     -- id сообщения-запроса
   reply_msg    TEXT,
   asked_by     TEXT,     -- кто спросил: id руководителя или лида
+  asked_role   TEXT,     -- chief | lead — от этого зависит, кто может ответить
   asked_at     TEXT NOT NULL,
   replied_at   TEXT,
   seconds      INTEGER,  -- NULL — остался без ответа
@@ -89,6 +100,7 @@ CREATE TABLE chat_replies (
   urgent       INTEGER NOT NULL DEFAULT 0, -- помечено как срочное
   escalated    INTEGER NOT NULL DEFAULT 0, -- бот уже напоминал
   mention_id   TEXT,     -- если обращались к конкретному человеку
+  no_reply_needed INTEGER NOT NULL DEFAULT 0, -- «понял, спасибо» — таймер не в счёт
   period       TEXT NOT NULL
 );
 CREATE INDEX idx_chat_user ON chat_replies(user_id, period);
@@ -139,16 +151,25 @@ INSERT INTO settings (key, value) VALUES
   ('work_start',        '09:00'),
   ('work_end',          '22:00'),
   ('tz_offset',         '3'),
-  -- молчание
+  -- Баллы за ответы. Пропуск стоит ровно трёх быстрых ответов: три пропуска
+  -- отыгрываются девятью. Потолка нет — до 10 дойти можно всегда,
+  -- выше 10 подняться нельзя.
+  ('pt_fast',           '1'),    -- быстрый ответ в рабочее время
+  ('pt_slow',           '0'),    -- ответил, но медленнее нормы
+  ('pt_offhours',       '2'),    -- ответ в нерабочее время: не был обязан
+  ('pt_miss',           '-3'),   -- промолчал в рабочее время
   ('miss_after_min',    '60'),   -- запрос без ответа дольше этого = пропуск
-  ('miss_night_hours',  '12'),   -- ночной запрос без ответа дольше этого = пропуск
+  ('miss_night_hours',  '12'),   -- ночной запрос, не разгребённый к утру
   ('escalate_after_min','30'),   -- через сколько бот напомнит в чат
-  ('miss_penalty',      '0.5'),  -- сколько баллов снимает один пропуск
-  ('miss_cap_count',    '3'),    -- с этого числа пропусков включается потолок
-  ('miss_cap_score',    '5'),    -- выше этого скорость не поднимется
   ('streak_bonus',      '2000'), -- месяц без единого пропуска
   ('urgent_target_min', '5'),    -- норма ответа на срочное
-  ('urgent_words',      'срочно,сро́чно,asap,горит'),
+  ('urgent_words',      'срочно,asap,горит,срочное'),
+  -- Сообщения, на которые отвечать не нужно: таймер не открывается
+  ('no_reply_words',    'спасибо,спс,благодарю,понял,поняла,понятно,ясно,ок,окей,ok,хорошо,отлично,супер,класс,круто,принято,ага,угу,да,нет,плюс'),
+  ('min_request_len',   '25'),   -- короткая реплика без вопроса — не запрос
+  -- Скорость руководителя отдела: своя и командная
+  ('lead_speed_personal','0.4'),
+  ('lead_speed_team',    '0.6'),
   ('duty_user_id',      ''),     -- кто на дежурстве вне рабочего окна
   ('duty_shift_pay',    '1500'), -- доплата за смену выходного дня
   ('norm_autonomy_A1',  '0.60'),
@@ -157,9 +178,18 @@ INSERT INTO settings (key, value) VALUES
   ('norm_proactivity',  '4'),
   ('cut_threshold',     '5'),
   ('cut_factor',        '0.85'),
-  ('yougile_key',       ''),
-  ('yougile_base',      'https://ru.yougile.com/api-v2'),
-  ('column_in_progress',''),
-  ('column_review',     ''),
-  ('column_done',       ''),
+  ('yougile_key',       ''),     -- задаётся секретом, в базу не пишется
+  ('yougile_base',      'https://yougile.com/api-v2'),
+  -- Колонки обеих рабочих досок: «Задачи ассистентов» и «Задачи Дмитрия».
+  -- Списки через запятую — пайплайн у досок одинаковый.
+  ('column_backlog',    '3b698e71-7a66-4806-a376-92c9890d5d9b,d79b6ea6-4a90-4f4f-b13b-df6fa0407e5d'),
+  ('column_in_progress','2c8c024a-c0c5-4a6b-b092-7cb284e6427a,c45a6d3a-00e8-4a4b-8408-3fe0f90a5e0b'),
+  ('column_review',     '8f532219-77c1-46f1-9700-f00be782255d,1589ae19-d477-490b-be8d-02320753a45b'),
+  ('column_done',       '1e0a69b2-b008-419b-89dd-0b0a3ccb6730,f0c8d7f5-82bd-43bd-a570-d0b7d8ecae27,66b5d0b0-fa13-4026-8c30-0749a01fe3f5,958095f6-790b-49c8-9f35-a6368017b0af'),
+  -- Пауза: время в этих колонках не идёт против ассистента
+  ('column_paused',     '6402f460-bf23-4ed5-a0d9-ce618332af2e,906ca640-b92e-4458-864c-b1e2fc596b4f,0a9692b2-d12d-4923-9208-e2b044be5a88'),
+  -- Задача снята: из расчёта выпадает
+  ('column_cancelled',  '8462a7c2-4af8-4003-99be-113f0a4bf91a,a481b53b-fa5b-4596-b43b-0fd10a04c075'),
+  -- Реестр заёбов уже существует отдельной колонкой
+  ('column_zaeb',       'c6a58d41-8ef3-4146-bac8-0478c2c6a0ed'),
   ('tg_chat_id',        '');
