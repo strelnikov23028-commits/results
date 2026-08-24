@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI-саммари созвонов → карточка сделки amoCRM</title>
-<meta name="description" content="Три варианта автоматической выгрузки саммари звонков Zoom и Google Meet в сделку amoCRM: требования, цена, блокеры.">
+<title>Конспекты созвонов в amoCRM</title>
+<meta name="description" content="Принятая схема: Zoom отдаёт штатную расшифровку файлом в сделку, Google Meet записывается и расшифровывается своими силами.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
   --bg:#F5F5F7; --surface:#FFFFFF; --surface-2:#FAFAFC;
   --ink:#1D1D1F; --ink-2:#424245; --ink-3:#6E6E73; --ink-4:#86868B;
   --line:#E3E3E6; --line-strong:#D2D2D7;
-  --blue:#0071E3; --blue-ink:#0058B0;
+  --blue:#0071E3;
   --green:#1D8A46; --green-bg:#E9F6EE;
   --red:#C1121F; --red-bg:#FDECEE;
   --amber:#8A5A00; --amber-bg:#FDF3E2;
@@ -27,9 +27,7 @@ html{-webkit-text-size-adjust:100%}
 body{
   margin:0; background:var(--bg); color:var(--ink);
   font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  font-size:17px; line-height:1.6;
-  font-feature-settings:"tnum" 0;
-  -webkit-font-smoothing:antialiased;
+  font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
 h1,h2,h3,h4{line-height:1.2; letter-spacing:-.02em; margin:0}
@@ -40,14 +38,12 @@ h4{font-size:16px; font-weight:600}
 p{margin:0 0 14px}
 a{color:var(--blue); text-decoration:none}
 a:hover{text-decoration:underline}
-a:focus-visible,button:focus-visible{outline:3px solid var(--blue); outline-offset:3px; border-radius:6px}
+a:focus-visible{outline:3px solid var(--blue); outline-offset:3px; border-radius:6px}
 code{
   font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
   font-size:.86em; background:#EFEFF2; padding:.15em .42em; border-radius:6px;
   color:#31313A; word-break:break-word;
 }
-
-/* ---------- header ---------- */
 header{padding:76px 0 40px}
 .eyebrow{
   display:inline-flex; align-items:center; gap:8px;
@@ -57,8 +53,6 @@ header{padding:76px 0 40px}
 .eyebrow svg{width:16px;height:16px}
 .lede{font-size:clamp(18px,2.2vw,21px); color:var(--ink-2); max-width:66ch; margin-top:18px}
 .meta{margin-top:24px; font-size:14px; color:var(--ink-4)}
-
-/* ---------- sections ---------- */
 section{padding:44px 0}
 .section-head{margin-bottom:26px; max-width:74ch}
 .section-head p{color:var(--ink-2); margin-top:12px}
@@ -66,32 +60,20 @@ section{padding:44px 0}
   font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
   color:var(--ink-4); margin-bottom:10px;
 }
-
-/* ---------- cards ---------- */
 .card{
   background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
   padding:26px; box-shadow:var(--shadow);
   transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s cubic-bezier(.2,.7,.3,1);
 }
 .card:hover{transform:translateY(-2px); box-shadow:var(--shadow-hover)}
-.bento{display:grid; gap:16px; grid-template-columns:repeat(3,1fr)}
-.bento .span2{grid-column:span 2}
 .bento-2{display:grid; gap:16px; grid-template-columns:repeat(2,1fr)}
-@media(max-width:900px){
-  .bento,.bento-2{grid-template-columns:1fr}
-  .bento .span2{grid-column:auto}
-}
-
-/* verdict card */
+@media(max-width:900px){ .bento-2{grid-template-columns:1fr} }
 .verdict{
   background:linear-gradient(180deg,#FFFFFF 0%,#FBFBFD 100%);
   border:1px solid var(--line-strong); border-radius:var(--radius-lg);
   padding:32px; box-shadow:var(--shadow);
 }
-.lang-row{
-  display:flex; align-items:flex-start; gap:14px; padding:16px 0;
-  border-top:1px solid var(--line);
-}
+.lang-row{display:flex; align-items:flex-start; gap:14px; padding:16px 0; border-top:1px solid var(--line)}
 .lang-row:first-of-type{border-top:0; padding-top:4px}
 .badge{
   flex:0 0 auto; display:inline-flex; align-items:center; gap:6px;
@@ -100,95 +82,60 @@ section{padding:44px 0}
 .badge svg{width:14px;height:14px}
 .b-yes{background:var(--green-bg); color:var(--green)}
 .b-no{background:var(--red-bg); color:var(--red)}
-.b-warn{background:var(--amber-bg); color:var(--amber)}
 .b-neutral{background:#EFEFF2; color:var(--ink-3)}
 .lang-row div{min-width:0}
 .lang-row strong{display:block; font-weight:600}
 .lang-row span{font-size:15px; color:var(--ink-3)}
 
-/* ---------- option cards ---------- */
-.opt{position:relative; display:flex; flex-direction:column; gap:14px}
-.opt-top{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
-.opt-letter{
-  width:34px; height:34px; flex:0 0 auto; border-radius:10px;
-  display:grid; place-items:center; font-weight:700; font-size:16px;
+/* ветки */
+.branch{display:flex; flex-direction:column; gap:16px}
+.branch-top{display:flex; align-items:center; gap:12px}
+.branch-mark{
+  width:38px;height:38px;flex:0 0 auto;border-radius:11px;display:grid;place-items:center;
   background:var(--ink); color:#fff;
 }
-.opt.rec .opt-letter{background:var(--blue)}
-.opt.rec{border-color:#B7D9FA; box-shadow:0 0 0 3px rgba(0,113,227,.12),var(--shadow)}
-.opt ul{margin:0; padding-left:0; list-style:none; display:grid; gap:9px}
-.opt li{position:relative; padding-left:24px; font-size:15px; color:var(--ink-2)}
-.opt li svg{position:absolute; left:0; top:3px; width:16px; height:16px}
-.flow{
-  display:flex; flex-wrap:wrap; gap:6px; align-items:center;
-  font-size:13px; color:var(--ink-3); background:var(--surface-2);
-  border:1px solid var(--line); border-radius:12px; padding:12px 14px;
+.branch-mark svg{width:20px;height:20px}
+.branch.zoom .branch-mark{background:#0B5CFF}
+.branch.meet .branch-mark{background:#00832D}
+.branch ol{margin:0; padding-left:0; list-style:none; counter-reset:st; display:grid; gap:12px}
+.branch ol li{
+  position:relative; padding-left:34px; font-size:15px; color:var(--ink-2);
 }
-.flow b{color:var(--ink); font-weight:600}
-.flow .arw{color:var(--ink-4)}
-.price-tag{
-  margin-top:auto; padding-top:14px; border-top:1px solid var(--line);
-  font-size:14px; color:var(--ink-3);
+.branch ol li::before{
+  counter-increment:st; content:counter(st);
+  position:absolute; left:0; top:1px; width:22px;height:22px;border-radius:50%;
+  background:#EFEFF2; color:var(--ink-3); font-size:12px; font-weight:700;
+  display:grid;place-items:center;
 }
+.branch ol li b{color:var(--ink); font-weight:600}
+.price-tag{margin-top:auto; padding-top:14px; border-top:1px solid var(--line); font-size:14px; color:var(--ink-3)}
 .price-tag b{color:var(--ink); font-size:16px}
 
-/* ---------- table ---------- */
 .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius); border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow)}
-table{border-collapse:collapse; width:100%; min-width:660px; font-size:15px}
+table{border-collapse:collapse; width:100%; min-width:620px; font-size:15px}
 th,td{text-align:left; padding:14px 18px; border-bottom:1px solid var(--line); vertical-align:top}
-thead th{
-  font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-4);
-  font-weight:700; background:var(--surface-2); position:sticky; top:0;
-}
+thead th{font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-4); font-weight:700; background:var(--surface-2)}
 tbody tr:last-child td{border-bottom:0}
 td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
 th:first-child,td:first-child{font-weight:600; color:var(--ink)}
 
-/* ---------- callouts ---------- */
-.callout{
-  border-radius:var(--radius); padding:20px 22px; border:1px solid;
-  display:flex; gap:14px; align-items:flex-start;
-}
+.callout{border-radius:var(--radius); padding:20px 22px; border:1px solid; display:flex; gap:14px; align-items:flex-start}
 .callout svg{width:20px;height:20px;flex:0 0 auto;margin-top:2px}
 .callout p:last-child{margin-bottom:0}
 .c-red{background:var(--red-bg); border-color:#F5C9CE; color:#5C0A11}
 .c-red a{color:#8C0D18}
 .c-amber{background:var(--amber-bg); border-color:#F0DDBB; color:#5A3B00}
-.c-amber a{color:#7A5000}
-.c-green{background:var(--green-bg); border-color:#BEE5CE; color:#0E5B2C}
 .c-blue{background:#EAF4FE; border-color:#C3E0FB; color:#00417F}
 
-/* ---------- steps ---------- */
-.steps{display:grid; gap:14px; counter-reset:s}
-.step{
-  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
-  padding:22px 24px 22px 68px; position:relative; box-shadow:var(--shadow);
-}
-.step::before{
-  counter-increment:s; content:counter(s);
-  position:absolute; left:22px; top:22px;
-  width:30px; height:30px; border-radius:50%;
-  background:var(--blue); color:#fff; font-weight:700; font-size:15px;
-  display:grid; place-items:center;
-}
-.step p:last-child{margin-bottom:0}
-
-/* ---------- questions ---------- */
-.q{
-  background:var(--surface); border:1px solid var(--line); border-radius:14px;
-  padding:18px 20px; box-shadow:var(--shadow);
-}
+.q{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 20px; box-shadow:var(--shadow)}
 .q strong{display:block; margin-bottom:6px}
 .q span{font-size:15px; color:var(--ink-3)}
 
-/* ---------- sources ---------- */
 .sources{font-size:14.5px; color:var(--ink-3)}
 .sources ol{margin:0; padding-left:22px; display:grid; gap:9px}
 .sources li::marker{color:var(--ink-4)}
-
 footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px solid var(--line); margin-top:40px}
 
-/* ---------- motion: видимо по умолчанию ---------- */
 .js-motion .reveal{opacity:0}
 @media(prefers-reduced-motion:reduce){
   .js-motion .reveal{opacity:1 !important; transform:none !important}
@@ -198,8 +145,6 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
 </head>
 <body>
 <script>
-  // Прятать элементы только если JS реально работает. Если motion не загрузится
-  // за 2.5 с — снимаем маскировку, контент не должен пропадать.
   (function () {
     try {
       var r = document.documentElement;
@@ -215,233 +160,189 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
   <div class="wrap">
     <div class="eyebrow">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l4.55-2.28A1 1 0 0121 8.62v6.76a1 1 0 01-1.45.9L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg>
-      Разбор перед стартом
+      Решение принято
     </div>
-    <h1>AI-саммари созвонов →<br>карточка сделки amoCRM</h1>
-    <p class="lede">Задача: менеджер провёл звонок по ссылке Zoom или Meet, созданной из сделки, — и в ленте событий этой сделки сам появился конспект. Без ручной загрузки и без доступа менеджера к корпоративным Google и Zoom.</p>
-    <p class="meta">Проверено 24 августа 2026 · все утверждения со ссылками на источники внизу страницы</p>
+    <h1>Конспекты созвонов<br>в карточке сделки</h1>
+    <p class="lede">Менеджер провёл звонок по ссылке из сделки — расшифровка и конспект сами оказались в этой же карточке. Zoom отдаёт свою штатную расшифровку, Google Meet пишем и расшифровываем сами.</p>
+    <p class="meta">Обновлено 24 августа 2026 · все утверждения со ссылками на источники внизу страницы</p>
   </div>
 </header>
 
 <main>
 
-<!-- =============== ГЛАВНЫЙ ВЫВОД =============== -->
+<!-- =============== ПРИНЯТАЯ СХЕМА =============== -->
+<section>
+  <div class="wrap">
+    <div class="bento-2">
+
+      <article class="card branch zoom reveal">
+        <div class="branch-top">
+          <div class="branch-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l4.55-2.28A1 1 0 0121 8.62v6.76a1 1 0 01-1.45.9L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg>
+          </div>
+          <div>
+            <h3>Zoom</h3>
+            <div style="font-size:13px;color:var(--ink-4)">штатная расшифровка, файлом в сделку</div>
+          </div>
+        </div>
+        <ol>
+          <li>Воркер создаёт встречу под сделку и сразу ставит ей <b>автостарт конспекта</b> — <code>settings.auto_start_meeting_summary</code>. Присутствие хоста не нужно.</li>
+          <li>В KV ложится пара <b>id встречи → id сделки</b>. Без неё расшифровку некуда положить.</li>
+          <li>После звонка Zoom сам расшифровывает и пишет конспект. Русский поддержан, статус GA.</li>
+          <li>Воркер берёт <b>UUID прошедшего экземпляра</b> встречи и тянет расшифровку.</li>
+          <li>Расшифровка ложится <b>файлом .txt</b> во вложения сделки, конспект — примечанием в ленту.</li>
+        </ol>
+        <div class="price-tag"><b>0 ₽ за звонок</b> сверх лицензии Zoom. Своя модель не нужна</div>
+      </article>
+
+      <article class="card branch meet reveal">
+        <div class="branch-top">
+          <div class="branch-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div>
+            <h3>Google Meet</h3>
+            <div style="font-size:13px;color:var(--ink-4)">пишем встречу, расшифровываем сами</div>
+          </div>
+        </div>
+        <ol>
+          <li>Воркер ставит комнате <b>автозапись</b> — <code>artifactConfig.recordingConfig&nbsp;=&nbsp;ON</code>. Тем же запросом, которым сейчас снимается «стук».</li>
+          <li>В KV ложится пара <b>space → id сделки</b>.</li>
+          <li>Запись стартует сама при начале встречи и после неё <b>сразу сохраняется в Drive</b> служебного пользователя.</li>
+          <li>Cron раз в 10–15 минут находит новые записи в состоянии <code>FILE_GENERATED</code>.</li>
+          <li>Файл уходит в <b>Gemini</b> целиком: он же расшифровывает, он же делает конспект. Русский поддержан.</li>
+          <li>В сделку: конспект примечанием, расшифровка файлом, <b>ссылка на запись</b> в Drive.</li>
+        </ol>
+        <div class="price-tag"><b>≈ $0,07 за звонок</b> на 40 минут — около $7,5 в месяц на сотне звонков</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============== ЛОВУШКА ZOOM =============== -->
 <section>
   <div class="wrap">
     <div class="verdict reveal">
-      <div class="kicker">Главное, что меняет схему</div>
-      <h2>Русский язык разводит Zoom и Meet по разным дорогам</h2>
+      <div class="kicker">Внимание при настройке</div>
+      <h2>У Zoom две «штатные расшифровки», и работает только одна</h2>
       <p style="margin-top:14px; color:var(--ink-2); max-width:70ch">
-        Оба сервиса умеют делать конспекты сами — и это был бы самый дешёвый путь: ноль токенов, ноль своей инфраструктуры. Но поддержка русского у них разная, и это решает всю архитектуру.
+        Это легко перепутать в настройках аккаунта, а разница принципиальная — ровно та же языковая ловушка, из-за которой мы отказались от транскриптов Google Meet.
       </p>
 
       <div style="margin-top:22px">
         <div class="lang-row">
+          <span class="badge b-no">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Не подходит
+          </span>
+          <div>
+            <strong>Audio transcript облачной записи</strong>
+            <span>Тот самый VTT-файл, который приезжает вместе с записью. Поддерживается <b>только английский</b>. Для русских звонков бесполезен — включать его смысла нет.</span>
+          </div>
+        </div>
+
+        <div class="lang-row">
           <span class="badge b-yes">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            Русский есть
+            Берём эту
           </span>
           <div>
-            <strong>Zoom AI Companion — Meeting Summary</strong>
-            <span>Русский в списке поддерживаемых языков со статусом GA (общая доступность). Zoom сам расшифровывает, сам пишет конспект, сам выделяет next steps. Нам остаётся только забрать готовый текст.</span>
-          </div>
-        </div>
-
-        <div class="lang-row">
-          <span class="badge b-no">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            Русского нет
-          </span>
-          <div>
-            <strong>Google Meet — Transcripts</strong>
-            <span>Транскрипция работает на восьми языках: английский, французский, немецкий, итальянский, японский, корейский, португальский, испанский. Русского в списке нет — расшифровки русского звонка не будет вообще.</span>
-          </div>
-        </div>
-
-        <div class="lang-row">
-          <span class="badge b-no">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            Русского нет
-          </span>
-          <div>
-            <strong>Google Meet — «Take notes for me» (Gemini)</strong>
-            <span>Тот же короткий список языков. Автозаметки Gemini для русского звонка бесполезны, даже если тариф Workspace их включает.</span>
+            <strong>Транскрипт AI Companion</strong>
+            <span>Тот, что рождается вместе с конспектом. Русский поддержан. Требует включённой настройки «разрешить хостам сохранять и получать транскрипты встреч» — без неё расшифровка просто не сохранится.</span>
           </div>
         </div>
       </div>
 
-      <div class="callout c-blue" style="margin-top:24px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <p><b>Отсюда весь план.</b> Для Zoom «своего AI» вообще не нужно — конспект уже готов, мы его просто перекладываем в сделку. Для Google Meet встроенный AI не поможет: там придётся брать запись встречи и расшифровывать её самим. Это две разные по стоимости и сложности ветки, и решать по ним лучше отдельно.</p>
+      <div class="callout c-amber" style="margin-top:24px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div>
+          <p style="font-weight:600;margin-bottom:6px">Подвох в том, как её забрать</p>
+          <p style="margin-bottom:0">Запрос за расшифровкой принимает <b>не id встречи, а UUID конкретного прошедшего экземпляра</b> — его сначала надо получить отдельным запросом, а если в UUID попадёт слеш, закодировать дважды. Тех, кто подставляет обычный id, встречает «meeting not found». Это ответ сотрудника Zoom на форуме разработчиков, а не справка, — проверяем на первом же живом звонке.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- =============== СНЯТЫЕ ВОЗРАЖЕНИЯ =============== -->
+<!-- =============== ПОЧЕМУ ТАК =============== -->
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="kicker">Опасение из постановки задачи</div>
-      <h2>«Админа нет на встрече, комната открыта всегда»</h2>
-      <p>Это выглядело главным блокером — конспект обычно включает хост. На деле обе платформы умеют включать запись и конспект автоматически, без человека в комнате.</p>
+      <div class="kicker">Обоснование</div>
+      <h2>Почему Meet пишем, а не расшифровываем встроенным</h2>
+      <p>Логично было бы включить транскрипты и там, и там. Не выйдет: у Google короткий список языков.</p>
     </div>
 
     <div class="bento-2">
       <div class="card reveal">
-        <div class="opt-top" style="margin-bottom:12px">
-          <h3>Zoom</h3>
-          <span class="badge b-yes">хост не нужен</span>
-        </div>
-        <p style="color:var(--ink-2); font-size:15px">Настройка «включать конспект автоматически при старте встречи» не требует присутствия хоста: генерация стартует, как только встречу начал любой участник. Через API это поле встречи <code>settings.auto_start_meeting_summary</code> — выставляем его при создании встречи под сделку, и дальше всё идёт само.</p>
-        <div class="callout c-amber" style="margin-top:6px; padding:14px 16px; font-size:14.5px">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <p>Нюанс из практики: настройка применяется к <b>новым</b> встречам. Уже созданные (и старые повторяющиеся) её не подхватывают — их надо пересоздать или пропатчить отдельно.</p>
-        </div>
+        <h4 style="margin-bottom:10px">Транскрипты Google Meet</h4>
+        <p style="font-size:15px;color:var(--ink-2);margin-bottom:0">Восемь языков: английский, французский, немецкий, итальянский, японский, корейский, португальский, испанский. Русского нет — расшифровки русского звонка не будет вообще, на любом тарифе.</p>
       </div>
-
       <div class="card reveal">
-        <div class="opt-top" style="margin-bottom:12px">
-          <h3>Google Meet</h3>
-          <span class="badge b-yes">хост не нужен</span>
-        </div>
-        <p style="color:var(--ink-2); font-size:15px">У комнаты (space) в Meet REST API есть <code>config.artifactConfig</code> с тремя переключателями: <code>recordingConfig</code>, <code>transcriptionConfig</code>, <code>smartNotesConfig</code>. Значение <code>ON</code> означает «артефакт создаётся автоматически». Ставится тем же <code>PATCH</code>, которым наш воркер уже сейчас снимает «стук» у комнаты, — новый код почти не нужен.</p>
-        <p style="color:var(--ink-2); font-size:15px; margin-bottom:0">Плюс с 21 сентября 2026 у Workspace Business Standard и Business Plus автозаметки в Meet включаются по умолчанию для встреч от трёх участников. Но, повторюсь, для русской речи это ничего не даёт.</p>
+        <h4 style="margin-bottom:10px">Автозаметки Gemini в Meet</h4>
+        <p style="font-size:15px;color:var(--ink-2);margin-bottom:0">Тот же короткий список. При этом с 21 сентября 2026 у Business Standard и Business Plus они включаются по умолчанию для встреч от трёх участников — на русских звонках просто не сработают.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- =============== ВАРИАНТЫ =============== -->
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">Три пути</div>
-      <h2>Варианты реализации</h2>
-      <p>Сравниваю по тому, что реально стоит денег: лицензии платформ и минуты аудио. Токены LLM в этой задаче — статистическая погрешность, ниже покажу цифры.</p>
-    </div>
-
-    <div class="bento">
-      <!-- A -->
-      <article class="card opt rec reveal">
-        <div class="opt-top">
-          <div class="opt-letter">A</div>
-          <div>
-            <h3>Ноль токенов</h3>
-            <div style="font-size:13px;color:var(--ink-4)">только Zoom</div>
-          </div>
-        </div>
-        <div class="flow">
-          <b>Zoom сам делает конспект</b><span class="arw">→</span><span>вебхук</span><span class="arw">→</span><b>воркер</b><span class="arw">→</span><span>примечание в сделке</span>
-        </div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Своя модель не нужна вообще — расшифровку и конспект делает Zoom</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Русский поддержан официально, статус GA</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Рассылка участникам по почте — штатная функция Zoom, писать ничего не надо</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Воркер по образцу уже работающих — код записи примечания готов</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Нужен платный тариф Zoom Workplace Pro и выше</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Нужны права админа Zoom, чтобы завести Server-to-Server OAuth-приложение</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Формат конспекта — какой даёт Zoom, свои поля туда не добавить</li>
-        </ul>
-        <div class="price-tag"><b>0 ₽ за звонок</b> сверх лицензии Zoom</div>
-      </article>
-
-      <!-- B -->
-      <article class="card opt reveal">
-        <div class="opt-top">
-          <div class="opt-letter">B</div>
-          <div>
-            <h3>Своя расшифровка</h3>
-            <div style="font-size:13px;color:var(--ink-4)">Meet, при желании и Zoom</div>
-          </div>
-        </div>
-        <div class="flow">
-          <b>автозапись</b><span class="arw">→</span><span>аудио</span><span class="arw">→</span><b>Whisper</b><span class="arw">→</span><span>своя модель</span><span class="arw">→</span><span>примечание</span>
-        </div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Единственный путь для русских звонков в Google Meet</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Формат конспекта наш: структура под воронку, чек-лист скрипта, оценка звонка</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Отсюда же берётся аналитика: числовые поля прямо в сделку</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Запись Meet — это видео в Drive. Часовой файл в сотни мегабайт, а API расшифровки берёт 25 МБ</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Значит нужен ffmpeg — а он не живёт в Cloudflare Worker. Понадобится VPS</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Запись Meet требует Workspace Business Standard и выше (либо Workspace Individual / Google One от 2 ТБ)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Запись разговора клиента — это уже вопрос уведомления и согласия</li>
-        </ul>
-        <div class="price-tag"><b>≈ 11–22 ₽ за час звонка</b> — почти всё это расшифровка, не текстовая модель</div>
-      </article>
-
-      <!-- C -->
-      <article class="card opt reveal">
-        <div class="opt-top">
-          <div class="opt-letter">C</div>
-          <div>
-            <h3>Почтовый мост</h3>
-            <div style="font-size:13px;color:var(--ink-4)">запасной вариант</div>
-          </div>
-        </div>
-        <div class="flow">
-          <b>письмо с конспектом</b><span class="arw">→</span><span>ящик-приёмник</span><span class="arw">→</span><b>воркер</b><span class="arw">→</span><span>примечание</span>
-        </div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Не нужны админские права ни в Zoom, ни в Google — только почтовый ящик</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Разворачивается за день, годится как временная затычка</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Главная беда: в письме нет номера сделки. Связать конспект с карточкой можно только по теме встречи или по времени — обе привязки ненадёжны</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Ломается при любой смене вёрстки письма, страдает от спам-фильтров</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Конспект Zoom автоматически получают только те участники, кто вошёл в встречу под своим аккаунтом Zoom</li>
-        </ul>
-        <div class="price-tag"><b>0 ₽ за звонок</b>, но и надёжность соответствующая</div>
-      </article>
+    <div class="callout c-blue reveal" style="margin-top:16px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p>Поэтому в Meet мы не трогаем встроенную расшифровку вовсе, а включаем <b>запись</b> — она от языка не зависит. Расшифровку делает Gemini уже по файлу.</p>
     </div>
   </div>
 </section>
 
-<!-- =============== ПРИВЯЗКА К СДЕЛКЕ =============== -->
+<!-- =============== ЧТО НЕ СРАБОТАЛО =============== -->
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="kicker">Инженерный узел</div>
-      <h2>Как понять, к какой сделке относится звонок</h2>
-      <p>Это единственное место, где схема может тихо развалиться: конспект приходит от платформы, а номера сделки в нём нет. Решение одно — ссылку на встречу должен создавать наш воркер, тогда идентификатор встречи известен заранее.</p>
+      <div class="kicker">Проверено и отброшено</div>
+      <h2>Почему конвейер Meet не удалось оставить целиком на Cloudflare</h2>
+    </div>
+    <div class="card reveal">
+      <p style="color:var(--ink-2)">Запись Meet — это видео. Чтобы отдать её в расшифровку, из неё надо вытащить звук, и у Cloudflare для этого есть штатный механизм: Media Transformations с режимом <code>mode=audio</code> отдаёт готовый M4A, а с марта 2026 к нему есть биндинг прямо из Worker, так что файл даже не обязан лежать по публичной ссылке.</p>
+      <p style="color:var(--ink-2)">Не подошло по лимитам: <b>вход максимум 100 МБ и 10 минут</b>. Запись сорокаминутного звонка не проходит ни по одному из двух порогов.</p>
+      <p style="color:var(--ink-2);margin-bottom:0">Альтернатива с VPS и ffmpeg работала бы почти бесплатно — вытащить моно 16 кГц и отдать в Groq. Но это ещё один сервис в цепочке, ещё одно место, где ночью что-то отвалится. Отправка файла целиком в Gemini обходится примерно в семь долларов в месяц и делает расшифровку и конспект одним вызовом. Если объём вырастет и цена начнёт мешать — этот последний шаг меняется на связку ffmpeg + Groq, остальная схема не трогается.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== ДОСТУПЫ =============== -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Что нужно, чтобы начать</div>
+      <h2>Доступы — единственное, что блокирует</h2>
+      <p>Код по обеим веткам понятен и опирается на уже работающие воркеры. Упирается всё в права.</p>
     </div>
 
     <div class="bento-2">
       <div class="card reveal">
-        <h4 style="margin-bottom:10px">Google Meet — уже решено</h4>
-        <p style="font-size:15px;color:var(--ink-2);margin-bottom:0">Воркер сам создаёт комнату под сделку и знает её внутренний идентификатор <code>spaces/{id}</code>. В записи о конференции этот же space указан. Достаточно завести в KV пару «space → id сделки» в момент создания — и любой артефакт потом однозначно ложится в нужную карточку.</p>
+        <h4 style="margin-bottom:14px">Сторона Zoom</h4>
+        <ul style="margin:0;padding-left:20px;color:var(--ink-2);font-size:15px;display:grid;gap:8px">
+          <li>Тариф <b>Zoom Workplace Pro</b> или выше — без него конспекта не существует</li>
+          <li>Включить Meeting Summary в настройках аккаунта</li>
+          <li>Включить сохранение транскриптов для хостов</li>
+          <li>Завести <b>Server-to-Server OAuth</b>-приложение — только из-под владельца или админа</li>
+          <li>Ответить, откуда сейчас берётся ссылка Zoom в сделке: если менеджер вставляет её из личной постоянной комнаты, привязка к сделке невозможна и создание встречи надо забирать в воркер</li>
+        </ul>
       </div>
       <div class="card reveal">
-        <h4 style="margin-bottom:10px">Zoom — нужно доделать</h4>
-        <p style="font-size:15px;color:var(--ink-2)">Тут вопрос: как сейчас заполняется поле «Ссылка Zoom» в сделке. Если менеджер вставляет ссылку руками — почти наверняка это его личная постоянная комната, у всех звонков будет один и тот же идентификатор, и привязка невозможна в принципе.</p>
-        <p style="font-size:15px;color:var(--ink-2);margin-bottom:0">Правильный путь: воркер создаёт отдельную встречу Zoom на каждую сделку тем же триггером, что и комнату Meet. Тогда в KV ложится «meeting id → id сделки», и заодно на этой встрече сразу включается автостарт конспекта.</p>
+        <h4 style="margin-bottom:14px">Сторона Google</h4>
+        <ul style="margin:0;padding-left:20px;color:var(--ink-2);font-size:15px;display:grid;gap:8px">
+          <li>Редакция <b>Workspace Business Standard</b> или выше — иначе запись недоступна</li>
+          <li>Переезд воркера с личного gmail на корпоративный аккаунт</li>
+          <li>Новый проект в Google Cloud <b>внутри организации</b>, приложение типа Internal: снимает верификацию для чувствительных прав и семидневное истечение токена</li>
+          <li>Включить Calendar API и Meet API</li>
+          <li>Служебный пользователь, от чьего имени создаются комнаты и в чей Drive падают записи</li>
+          <li>Политика хранения записей — сколько месяцев держим</li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- =============== ЧТО ЛОЖИТСЯ В СДЕЛКУ =============== -->
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">Формат в CRM</div>
-      <h2>Заметкой или файлом — можно и то, и другое</h2>
-    </div>
-    <div class="bento-2">
-      <div class="card reveal">
-        <div class="opt-top" style="margin-bottom:12px">
-          <h4>Примечание в ленте событий</h4>
-          <span class="badge b-yes">рекомендую</span>
-        </div>
-        <p style="font-size:15px;color:var(--ink-2)">Обычное примечание сделки: <code>POST /api/v4/leads/{id}/notes</code>, тип <code>common</code>. Текст сразу виден в карточке, ищется поиском по amoCRM, попадает в уведомления.</p>
-        <p style="font-size:15px;color:var(--ink-2);margin-bottom:0">Код для этого уже написан и работает в трёх соседних воркерах — переиспользуется как есть.</p>
-      </div>
-      <div class="card reveal">
-        <div class="opt-top" style="margin-bottom:12px">
-          <h4>Файл .txt во вложениях</h4>
-          <span class="badge b-neutral">опционально</span>
-        </div>
-        <p style="font-size:15px;color:var(--ink-2)">Через файловый сервис amoCRM: получить адрес хранилища (<code>/api/v4/account?with=drive_url</code>), открыть сессию загрузки, залить файл чанками, затем привязать к сделке — <code>PUT /api/v4/leads/{id}/files</code> с полученным <code>file_uuid</code>. Нужно право «Доступ к файлам».</p>
-        <p style="font-size:15px;color:var(--ink-2);margin-bottom:0">Разумно так класть полную расшифровку, а короткий конспект оставлять примечанием: длинную стенограмму в ленте читать невозможно.</p>
-      </div>
+    <div class="callout c-blue reveal" style="margin-top:16px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p>Права на стороне Google почти собраны: <code>calendar.events</code> и <code>meetings.space.settings</code> у воркера уже есть, причём второй — ровно тот, что нужен для включения автозаписи. Добавляется один — <code>drive.meet.readonly</code>, чтобы скачать файл. Он относится к ограниченным, и для внешнего приложения потребовал бы проверки у Google; для Internal-приложения — нет.</p>
     </div>
   </div>
 </section>
@@ -451,51 +352,49 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
   <div class="wrap">
     <div class="section-head reveal">
       <div class="kicker">Смета</div>
-      <h2>Сколько это стоит на самом деле</h2>
-      <p>Расчёт на 100 часов разговоров в месяц. Главный вывод: экономить на токенах текстовой модели бессмысленно — они стоят копейки. Деньги съедает расшифровка аудио, и только в варианте B.</p>
+      <h2>Сколько это стоит</h2>
+      <p>Расчёт на сотню звонков по сорок минут в месяц, сверх уже оплаченных лицензий.</p>
     </div>
-
     <div class="table-scroll reveal">
       <table>
-        <caption class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Стоимость вариантов при 100 часах звонков в месяц</caption>
         <thead>
           <tr>
             <th scope="col">Статья</th>
-            <th scope="col">Вариант A (Zoom)</th>
-            <th scope="col">Вариант B (Meet)</th>
-            <th scope="col">Комментарий</th>
+            <th scope="col">Zoom</th>
+            <th scope="col">Google Meet</th>
+            <th scope="col">Пояснение</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Расшифровка аудио</td>
+            <td>Расшифровка</td>
             <td class="num">$0</td>
-            <td class="num">$18–36</td>
-            <td>В A — внутри лицензии Zoom. В B: <code>gpt-4o-mini-transcribe</code> $0,003/мин = $18 за 100 ч; <code>whisper-1</code> $0,006/мин = $36. Через Groq — заметно дешевле, у него есть бесплатный тариф с лимитами по скорости</td>
+            <td class="num">≈ $7</td>
+            <td>У Zoom внутри лицензии. У Meet — Gemini: сорок минут при пониженном разрешении кадра дают около 240 тыс. токенов, на Flash-Lite это ≈ $0,07 за звонок</td>
           </tr>
           <tr>
-            <td>Текстовая модель<br><span style="font-weight:400;color:var(--ink-3);font-size:14px">конспект + разбор звонка</span></td>
+            <td>Конспект</td>
             <td class="num">$0</td>
-            <td class="num">≈ $0,15</td>
-            <td>Час разговора ≈ 15–20 тыс. токенов расшифровки. У <code>gpt-5-nano</code> вход $0,05, выход $0,40 за миллион → примерно $0,0015 за звонок. Сто звонков — пятнадцать центов</td>
+            <td class="num">включён</td>
+            <td>У Zoom делает AI Companion. У Meet — тот же вызов Gemini, отдельная модель не нужна</td>
           </tr>
           <tr>
-            <td>Лицензии платформ</td>
-            <td class="num">Zoom Pro+</td>
-            <td class="num">Workspace<br>Business Standard+</td>
-            <td>Это основная статья расходов, и она, скорее всего, уже оплачена — надо только подтвердить тарифы</td>
+            <td>Хранение</td>
+            <td class="num">Zoom Cloud</td>
+            <td class="num">Drive</td>
+            <td>Обе платформы хранят у себя. У Meet записи едят квоту Workspace — нужна политика хранения</td>
           </tr>
           <tr>
             <td>Инфраструктура</td>
             <td class="num">$0</td>
             <td class="num">$0</td>
-            <td>A — Cloudflare Worker в бесплатном лимите. B — перекодирование видео на уже имеющемся VPS</td>
+            <td>Cloudflare Workers в бесплатном лимите, VPS не нужен</td>
           </tr>
           <tr>
-            <td><b>Итого сверх лицензий</b></td>
+            <td><b>Итого</b></td>
             <td class="num"><b>$0/мес</b></td>
-            <td class="num"><b>$18–36/мес</b></td>
-            <td>≈ 1 700–3 400 ₽ в месяц за ветку Meet</td>
+            <td class="num"><b>≈ $7,5/мес</b></td>
+            <td>Около 700 ₽ в месяц за всю ветку Meet</td>
           </tr>
         </tbody>
       </table>
@@ -504,54 +403,25 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
     <div class="callout c-red reveal" style="margin-top:20px">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       <div>
-        <p style="font-weight:600;margin-bottom:6px">Про «подрубить наш ChatGPT» — так не выйдет</p>
-        <p style="margin-bottom:0">Подписка ChatGPT (Plus или Business, бывший Team) <b>не даёт доступа к API</b>. Это отдельный продукт с отдельным счётом: понадобится аккаунт на platform.openai.com, свой ключ и своя оплата. Хорошая новость — по цифрам выше видно, что сумма выходит символическая: конспекты обойдутся дешевле доллара в месяц. Дорогая часть — расшифровка, и её можно закрыть Groq, который у нас уже используется в других ботах.</p>
+        <p style="font-weight:600;margin-bottom:6px">Подписка ChatGPT сюда не подключается</p>
+        <p style="margin-bottom:0">Подписка ChatGPT — Plus или Business — доступа к API не даёт, это отдельный продукт с отдельным счётом. В принятой схеме она и не нужна: у Zoom своя модель, у Meet — Gemini.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- =============== РЕКОМЕНДАЦИЯ =============== -->
+<!-- =============== ОСТАЛЬНОЕ =============== -->
 <section>
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="kicker">Что предлагаю</div>
-      <h2>План в три шага</h2>
-      <p>Смысл в том, чтобы сначала получить работающий результат там, где он почти бесплатный, и только потом лезть в дорогую ветку.</p>
-    </div>
-
-    <div class="steps">
-      <div class="step reveal">
-        <h3>Zoom по варианту A</h3>
-        <p style="color:var(--ink-2);margin-top:8px;margin-bottom:0">Воркер создаёт встречу Zoom под сделку с включённым автостартом конспекта, ловит вебхук о готовности и кладёт текст примечанием в карточку. Своей модели нет, расходов нет, русский поддержан. Это самая дешёвая и самая надёжная часть, и с неё стоит начать.</p>
-      </div>
-      <div class="step reveal">
-        <h3>Развилка по Google Meet</h3>
-        <p style="color:var(--ink-2);margin-top:8px;margin-bottom:0">Здесь выбор бизнеса, а не техники. Либо перевести продажные звонки на Zoom и закрыть тему одной веткой, либо строить вариант B: автозапись комнаты, перекодирование на VPS, расшифровка, свой конспект. Второе — примерно две-три тысячи рублей в месяц и заметно больше кода.</p>
-      </div>
-      <div class="step reveal">
-        <h3>Аналитика поверх готовых конспектов</h3>
-        <p style="color:var(--ink-2);margin-top:8px;margin-bottom:0">Когда конспекты уже копятся в сделках, вторым проходом дешёвая модель размечает их по нашему чек-листу: выявлена ли потребность, названа ли цена, есть ли договорённость о следующем шаге, какие возражения прозвучали. Результат — в отдельные поля сделки, откуда строятся отчёты amoCRM. Конспект короткий, поэтому этот проход почти ничего не стоит.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =============== ВОПРОСЫ =============== -->
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">Нужны ответы до старта</div>
-      <h2>Шесть вопросов, которые определяют объём работы</h2>
-      <p>Первые три — блокирующие: без них непонятно, какой вариант вообще возможен.</p>
+      <div class="kicker">Мелочи, которые стоит знать заранее</div>
+      <h2>Чего ждать в работе</h2>
     </div>
     <div class="bento-2">
-      <div class="q reveal"><strong>1. Какой тариф у корпоративного Zoom?</strong><span>Конспект AI Companion требует Zoom Workplace Pro, Business, Enterprise или выше. На бесплатном тарифе варианта A не существует.</span></div>
-      <div class="q reveal"><strong>2. Дадут ли права админа в Zoom?</strong><span>Нужно завести Server-to-Server OAuth-приложение — это делается только из-под владельца или админа аккаунта.</span></div>
-      <div class="q reveal"><strong>3. Какая редакция корпоративного Google?</strong><span>Для записи Meet нужен Business Standard и выше. Наш воркер сейчас работает на личном gmail — под запись его придётся переселять на корпоративный аккаунт.</span></div>
-      <div class="q reveal"><strong>4. Откуда берётся ссылка Zoom в сделке?</strong><span>Если менеджер вставляет её руками из своей постоянной комнаты — привязать конспект к сделке нельзя. Тогда создание встречи надо забирать в воркер.</span></div>
-      <div class="q reveal"><strong>5. Сколько звонков в месяц и какой длины?</strong><span>Смета выше построена на 100 часах. Реальные цифры сдвинут стоимость ветки Meet, на вариант A они не влияют.</span></div>
-      <div class="q reveal"><strong>6. Как уведомляем клиента о записи?</strong><span>Автозапись и расшифровка разговора — это согласие собеседника. Нужна фраза в начале звонка либо строчка в оферте.</span></div>
+      <div class="q reveal"><strong>Согласие на запись</strong><span>Meet сам показывает участникам, что идёт запись, и Zoom тоже предупреждает про конспект. Отдельных приписок в оферте не требуется, но менеджеров стоит предупредить, что теперь пишется всё.</span></div>
+      <div class="q reveal"><strong>Кто что говорил</strong><span>Zoom размечает реплики по говорящим сам. У Meet после нашей расшифровки разметка будет приблизительной — метрику «сколько времени говорил менеджер» по ней строить не стоит.</span></div>
+      <div class="q reveal"><strong>Привязка к сделке</strong><span>Единственное место, где схема может тихо развалиться. В расшифровке нет номера сделки, поэтому встречу обязательно создаёт воркер, а пару «встреча → сделка» он сразу кладёт в KV.</span></div>
+      <div class="q reveal"><strong>Формат в карточке</strong><span>Расшифровка — файлом во вложения, конспект — примечанием в ленту. Длинную стенограмму в ленте читать невозможно, а короткий конспект в файле никто не откроет.</span></div>
     </div>
   </div>
 </section>
@@ -562,25 +432,30 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
     <div class="section-head reveal">
       <div class="kicker">Проверяемость</div>
       <h2>Источники</h2>
-      <p>Всё, что выше, опирается на документацию платформ. Два утверждения помечены как требующие проверки на боевом аккаунте — они отмечены прямо в списке.</p>
+      <p>Два утверждения помечены как требующие проверки на боевом аккаунте — они опираются на ответы сотрудников Zoom на форуме, а не на справку.</p>
     </div>
     <div class="card sources reveal">
       <ol>
         <li><a href="https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0078144">Zoom — Supported languages for Zoom AI features</a>. Русский в списке языков Meeting Summary, статус GA.</li>
-        <li><a href="https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0058013">Zoom — Using Meeting Summary with AI</a>. Требуемые лицензии (Workplace Pro и выше), рассылка конспекта участникам по почте, условие про вход под своим аккаунтом.</li>
-        <li><a href="https://developers.zoom.us/docs/api/meetings/events/">Zoom — Meetings Webhooks</a>. События <code>meeting.summary_shared</code>, <code>meeting.summary_recovered</code>, <code>meeting.aic_transcript_completed</code>. <b>Требует проверки:</b> событие <code>meeting.summary_completed</code> с телом конспекта на этой странице не нашлось — подписку на него надо подтвердить в самом кабинете; запасной путь — забрать конспект запросом <code>GET /meetings/{meetingId}/meeting_summary</code>.</li>
-        <li><a href="https://community.zoom.com/t5/Zoom-AI-Companion/Automatically-start-Meeting-Summary-for-all-meetings-I-host-Not/m-p/166555">Zoom Community — автостарт конспекта</a>. Источник утверждения, что присутствие хоста не требуется, и что настройка применяется только к новым встречам. <b>Требует проверки</b> на боевом аккаунте: это ветка сообщества, а не справка.</li>
-        <li><a href="https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067670">Zoom — Cloud recording storage capacity</a>. Облачная запись включена в платные тарифы.</li>
-        <li><a href="https://support.google.com/meet/answer/12849897">Google — Use Transcripts with Google Meet</a>. Список редакций и список из восьми языков транскрипции, где русского нет.</li>
-        <li><a href="https://support.google.com/meet/answer/14754931">Google — Take notes for me in Google Meet</a>. Языки автозаметок Gemini, ограничение «один язык на встречу».</li>
+        <li><a href="https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0058013">Zoom — Using Meeting Summary with AI</a>. Требуемые лицензии Workplace Pro и выше, рассылка конспекта участникам, условие про вход под своим аккаунтом.</li>
+        <li><a href="https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064927">Zoom — Using audio transcription for cloud recordings</a>. Расшифровка облачной записи поддерживается только на английском.</li>
+        <li><a href="https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0076632">Zoom — Accessing meeting transcripts for Meeting Summary with AI Companion</a>. Где лежат транскрипты AI Companion и что для доступа нужна включённая настройка сохранения.</li>
+        <li><a href="https://devforum.zoom.us/t/api-to-get-an-ai-companion-generated-transcript/142661">Zoom Developer Forum — получение транскрипта AI Companion через API</a>. <b>Требует проверки:</b> ответ сотрудника Zoom о том, что нужен UUID прошедшего экземпляра встречи из <code>/past_meetings/{meetingId}/instances</code>, а не id встречи, и про двойное кодирование слеша.</li>
+        <li><a href="https://community.zoom.com/t5/Zoom-AI-Companion/Automatically-start-Meeting-Summary-for-all-meetings-I-host-Not/m-p/166555">Zoom Community — автостарт конспекта</a>. <b>Требует проверки:</b> присутствие хоста не требуется, настройка применяется только к новым встречам.</li>
+        <li><a href="https://developers.zoom.us/docs/api/meetings/events/">Zoom — Meetings Webhooks</a>. События вокруг конспектов и транскриптов.</li>
+        <li><a href="https://support.google.com/meet/answer/12849897">Google — Use Transcripts with Google Meet</a>. Список редакций и восемь языков транскрипции, среди которых нет русского.</li>
+        <li><a href="https://support.google.com/meet/answer/14754931">Google — Take notes for me in Google Meet</a>. Языки автозаметок Gemini и ограничение «один язык на встречу».</li>
         <li><a href="https://support.google.com/meet/answer/9308681">Google — Record a video meeting</a>. Редакции, где доступна запись: Business Standard и выше, Workspace Individual, Google One от 2 ТБ.</li>
-        <li><a href="https://developers.google.com/workspace/meet/api/reference/rest/v2/spaces">Google Meet REST API — SpaceConfig</a>. Поле <code>artifactConfig</code> с <code>recordingConfig</code>, <code>transcriptionConfig</code>, <code>smartNotesConfig</code> и значениями <code>ON</code> / <code>OFF</code>.</li>
-        <li><a href="https://developers.google.com/workspace/events/guides/events-meet">Google Workspace Events API — Subscribe to Google Meet events</a>. События <code>recording.v2.fileGenerated</code>, <code>transcript.v2.fileGenerated</code> и ограничения для участников без прав организатора.</li>
-        <li><a href="https://developers.google.com/workspace/meet/api/guides/artifacts">Google Meet API — Work with artifacts</a>. Эндпоинты записей, транскриптов и умных заметок.</li>
-        <li><a href="https://knowledge.workspace.google.com/admin/meet/upcoming-changes-to-automatic-note-taking">Google Workspace Admin — Manage automatic note-taking for Meet</a>. С 21 сентября 2026 автозаметки включены по умолчанию в Business Standard и Business Plus для встреч от трёх участников.</li>
+        <li><a href="https://developers.google.com/workspace/meet/api/guides/meeting-spaces-configuration">Google Meet API — Configure meeting spaces</a>. Автозапись настраивается при создании и обновлении space, требуется scope <code>meetings.space.settings</code>, настраивает только организатор.</li>
+        <li><a href="https://developers.google.com/workspace/meet/api/reference/rest/v2/conferenceRecords.recordings">Google Meet API — conferenceRecords.recordings</a>. Состояние <code>FILE_GENERATED</code> и <code>driveDestination.file</code> с идентификатором файла MP4.</li>
+        <li><a href="https://developers.google.com/workspace/drive/api/guides/api-specific-auth">Google Drive API — Choose scopes</a>. <code>drive.meet.readonly</code> — ограниченный scope для файлов, созданных Google Meet.</li>
+        <li><a href="https://developers.google.com/workspace/meet/api/guides/authenticate-authorize">Google Meet API — Authenticate and authorize</a>. Описание scopes и поддержка делегирования полномочий в домене.</li>
+        <li><a href="https://knowledge.workspace.google.com/admin/meet/upcoming-changes-to-automatic-note-taking">Google Workspace Admin — автоматические заметки в Meet</a>. С 21 сентября 2026 включены по умолчанию в Business Standard и Business Plus для встреч от трёх участников.</li>
+        <li><a href="https://developers.cloudflare.com/stream/transform-videos/">Cloudflare — Media Transformations</a>. Режим <code>mode=audio</code>, а также лимиты: вход не более 100 МБ и 10 минут.</li>
+        <li><a href="https://ai.google.dev/gemini-api/docs/video-understanding">Gemini API — Video understanding</a>. Токенизация: около 100 токенов на секунду видео при пониженном разрешении кадра, 32 токена на секунду звука.</li>
+        <li><a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API — Pricing</a>. Тарифы Flash и Flash-Lite, наличие бесплатного тарифа.</li>
         <li><a href="https://www.amocrm.ru/developers/content/files/files-api">amoCRM — Файлы</a>. Получение <code>drive_url</code>, сессия загрузки, привязка файла к сделке через <code>PUT /api/v4/leads/{id}/files</code>.</li>
-        <li><a href="https://developers.openai.com/api/docs/pricing">OpenAI — Pricing</a>. <code>gpt-5-nano</code> $0,05 / $0,40 за миллион токенов; <code>gpt-4o-mini-transcribe</code> $0,003 за минуту; <code>whisper-1</code> $0,006 за минуту.</li>
-        <li><a href="https://help.openai.com/en/articles/8156019-how-can-i-move-my-chatgpt-subscription-to-the-api">OpenAI Help — How can I move my ChatGPT subscription to the API</a>. Подписка ChatGPT и API оплачиваются отдельно, доступ к API в подписку не входит.</li>
+        <li><a href="https://help.openai.com/en/articles/8156019-how-can-i-move-my-chatgpt-subscription-to-the-api">OpenAI Help — ChatGPT subscription and the API</a>. Подписка и API оплачиваются отдельно, доступ к API в подписку не входит.</li>
       </ol>
     </div>
   </div>
@@ -590,7 +465,7 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
 
 <footer>
   <div class="wrap">
-    Разбор подготовлен 24 августа 2026. Цены OpenAI — на дату проверки, тарифы платформ меняются; перед закупкой стоит перепроверить по ссылкам выше.
+    Обновлено 24 августа 2026. Цены и тарифы платформ меняются — перед закупкой стоит перепроверить по ссылкам выше.
   </div>
 </footer>
 
@@ -603,7 +478,6 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
   if (reduced) {
     root.classList.remove('js-motion');
   } else {
-    // Маскировку снимаем только когда движок реально готов анимировать.
     root.classList.remove('js-motion');
     document.querySelectorAll('.reveal').forEach((el) => { el.style.opacity = '0'; });
 
@@ -613,8 +487,7 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
       return () => {};
     }, { margin: '0px 0px -12% 0px' });
 
-    // Карточки внутри bento появляются каскадом.
-    document.querySelectorAll('.bento, .bento-2, .steps').forEach((grid) => {
+    document.querySelectorAll('.bento-2').forEach((grid) => {
       inView(grid, () => {
         const kids = grid.querySelectorAll('.reveal');
         if (kids.length > 1) {
@@ -625,7 +498,6 @@ footer{padding:56px 0 72px; color:var(--ink-4); font-size:14px; border-top:1px s
       }, { margin: '0px 0px -10% 0px' });
     });
 
-    // Страховка: если что-то пошло не так — через 3 с всё видно.
     setTimeout(() => {
       document.querySelectorAll('.reveal').forEach((el) => {
         if (getComputedStyle(el).opacity === '0') el.style.opacity = '1';
