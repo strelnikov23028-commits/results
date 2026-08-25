@@ -127,6 +127,13 @@ label{display:block;font-size:13.5px;font-weight:550;margin-bottom:6px}
   margin-top:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;
   font-size:13px;color:var(--fg-2);line-height:1.6;border:1px solid var(--border-2);
 }
+/* Почему из кошелька пришло меньше, чем набрано по оценке */
+.cuts{margin-top:10px;font-size:12.5px;color:var(--fg-3);line-height:1.5}
+.cut{
+  margin-top:6px;padding:7px 10px;border-radius:8px;
+  background:var(--amber-soft);color:var(--amber);font-weight:600;
+}
+.cut .muted{color:inherit;opacity:.75;font-weight:400;font-size:12px}
 .why b{color:var(--fg)}
 details>summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:550;list-style:none}
 details>summary::-webkit-details-marker{display:none}
@@ -345,14 +352,22 @@ function renderProfile(p, v){
     let why = '';
     if (k === 'quality') why = `<b>${b.quality.points}</b> баллов ÷ <b>${b.quality.weight}</b> размеров по <b>${b.quality.tasks}</b> задачам`;
     if (k === 'speed')   why = `реакция <b>${b.speed.chatScore}</b>: быстро ${b.speed.repliesFast}, медленно ${b.speed.repliesSlow}, вне часов ${b.speed.offHoursAnswered}, пропусков <b>${b.speed.misses}</b><br>медиана <b>${fmtSeconds(b.speed.medianReply)}</b><br>срок: <b>${b.speed.inTime}</b> из <b>${b.speed.withDeadline}</b> (${b.speed.slaRate})`;
-    if (k === 'autonomy') why = `<b>${b.autonomy.solo}</b> из <b>${b.autonomy.of}</b> задач без руководителя (${b.autonomy.rate}) при норме ${b.autonomy.norm}`;
+    if (k === 'autonomy') why = `<b>${b.autonomy.solo}</b> из <b>${b.autonomy.of}</b> задач закрыто без вопросов в чат (${b.autonomy.rate}) при норме ${b.autonomy.norm}`;
     if (k === 'proactivity') why = `<b>${b.proactivity.useful}</b> инициатив пригодилось из <b>${b.proactivity.proposed}</b> предложенных, норма ${b.proactivity.norm}`;
+
+    // Оценка 10 при неполном кошельке — это не ошибка, а сработавшая
+    // поправка. Показываем её прямо в карточке, а не прячем в отчёт.
+    const cuts = (wal.reductions || []).map((r) =>
+      `<div class="cut">${r.factor < 1 ? '−' : '+'}${money(Math.abs(r.amount))} · ${esc(r.kind)} ×${r.factor}<br>
+       <span class="muted">${esc(r.why)}</span></div>`
+    ).join('');
 
     return `<div class="card metric">
       <div class="lbl">${meta.name}</div>
       <div class="val">${val.toFixed(2)}<span style="font-size:16px;color:var(--fg-3);font-weight:600"> / 10</span></div>
       <div class="sub">${money(wal.got)} из ${money(wal.pool)}</div>
       <div class="bar"><i style="width:${Math.min(100, val*10)}%"></i></div>
+      ${cuts ? `<div class="cuts">по оценке набрано ${money(wal.earned)}${cuts}</div>` : ''}
       <details style="margin-top:10px"><summary>Откуда цифра</summary><div class="why">${why}<br><span class="muted">${esc(b[k].formula)}</span></div></details>
     </div>`;
   }).join('');

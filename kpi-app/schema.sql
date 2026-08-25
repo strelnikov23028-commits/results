@@ -37,6 +37,7 @@ CREATE TABLE tasks (
   number            TEXT,                      -- человекочитаемый номер, ID-236
   url               TEXT,
   board_id          TEXT,
+  column_id         TEXT,
   keywords          TEXT,                      -- поисковый индекс: считается один раз
                                                -- при появлении задачи, дальше не трогается
   assignee_id       TEXT REFERENCES users(id),
@@ -58,6 +59,10 @@ CREATE TABLE tasks (
   returns           INTEGER NOT NULL DEFAULT 0,-- сколько раз вернули из «На проверке»
   chief_touched     INTEGER NOT NULL DEFAULT 0,-- руководитель писал в карточке до закрытия
   is_initiative     INTEGER NOT NULL DEFAULT 0,
+  -- Задача из колонки «Заёб». В KPI не участвует вообще: ни время,
+  -- ни качество, ни автономность. Приносит только приз тому, кто закрыл.
+  is_zaeb           INTEGER NOT NULL DEFAULT 0,
+  zaeb_awarded      INTEGER NOT NULL DEFAULT 0,
   initiative_useful INTEGER,                   -- NULL — не отвечено, 1/0 — ответ руководителя
 
   status            TEXT NOT NULL DEFAULT 'open',
@@ -153,7 +158,7 @@ INSERT INTO settings (key, value) VALUES
   ('lead_purse_filter', '15000'),
   ('lead_purse_unload', '10000'),
   ('lead_purse_growth', '5000'),
-  ('lead_share_zaeb',   '0.17'),
+  ('lead_share_zaeb',   '0.10'),
   ('lead_share_saving', '0.05'),
   ('saving_rate_1',     '0.30'),
   ('saving_rate_2',     '0.20'),
@@ -178,6 +183,9 @@ INSERT INTO settings (key, value) VALUES
   -- Сообщения, на которые отвечать не нужно: таймер не открывается
   ('no_reply_words',    'спасибо,спс,благодарю,понял,поняла,понятно,ясно,ок,окей,ok,хорошо,отлично,супер,класс,круто,принято,ага,угу,да,нет,плюс'),
   ('min_request_len',   '25'),   -- короткая реплика без вопроса — не запрос
+  -- Дата запуска. Всё, что закрыто раньше, в расчёт не идёт: по старым
+  -- задачам нет ни признаков приёмки, ни переписки. Проставляется один раз.
+  ('start_from',        ''),
   -- Живой диалог не должен превращаться в десяток «быстрых ответов»:
   -- пока переписка идёт, новый таймер не открывается
   ('dialog_window_min', '20'),
@@ -205,11 +213,16 @@ INSERT INTO settings (key, value) VALUES
   ('column_backlog',    '3b698e71-7a66-4806-a376-92c9890d5d9b,d79b6ea6-4a90-4f4f-b13b-df6fa0407e5d'),
   ('column_in_progress','2c8c024a-c0c5-4a6b-b092-7cb284e6427a,c45a6d3a-00e8-4a4b-8408-3fe0f90a5e0b'),
   ('column_review',     '8f532219-77c1-46f1-9700-f00be782255d,1589ae19-d477-490b-be8d-02320753a45b'),
-  ('column_done',       '1e0a69b2-b008-419b-89dd-0b0a3ccb6730,f0c8d7f5-82bd-43bd-a570-d0b7d8ecae27,66b5d0b0-fa13-4026-8c30-0749a01fe3f5,958095f6-790b-49c8-9f35-a6368017b0af'),
+  -- Закрыта по-настоящему: только «Завершена». Задача считается сделанной
+  -- лишь тогда, когда она решена, а не отложена.
+  ('column_done',       '1e0a69b2-b008-419b-89dd-0b0a3ccb6730,f0c8d7f5-82bd-43bd-a570-d0b7d8ecae27'),
   -- Пауза: время в этих колонках не идёт против ассистента
   ('column_paused',     '6402f460-bf23-4ed5-a0d9-ce618332af2e,906ca640-b92e-4458-864c-b1e2fc596b4f,0a9692b2-d12d-4923-9208-e2b044be5a88'),
-  -- Задача снята: из расчёта выпадает
-  ('column_cancelled',  '8462a7c2-4af8-4003-99be-113f0a4bf91a,a481b53b-fa5b-4596-b43b-0fd10a04c075'),
+  -- Отложена: «На контроле» и «На потом». Из расчёта выпадает целиком,
+  -- пока не будет решена и переведена в «Завершена».
+  ('column_shelved',    '66b5d0b0-fa13-4026-8c30-0749a01fe3f5,958095f6-790b-49c8-9f35-a6368017b0af,a481b53b-fa5b-4596-b43b-0fd10a04c075'),
+  -- Задача снята совсем
+  ('column_cancelled',  '8462a7c2-4af8-4003-99be-113f0a4bf91a'),
   -- Реестр заёбов уже существует отдельной колонкой
   ('column_zaeb',       'c6a58d41-8ef3-4146-bac8-0478c2c6a0ed'),
   ('tg_chat_id',        '');

@@ -129,7 +129,10 @@ function computeMetrics({ tasks, replies, settings, grade }) {
   // Месяц без единого закрытого дела и без единого ответа в чате — это не
   // «нет данных, начислим по умолчанию», а отсутствие работы. Иначе человек,
   // который весь месяц молчал, получал бы часть бонуса просто за тишину.
-  const idle = closed.length === 0 && replies.length === 0 && tasks.length === 0;
+  // Задачи «в работе» сами по себе не заслуга: пока ничего не закрыто
+  // и ни на один вопрос не отвечено, начислять нечего. Иначе в первый же
+  // месяц все получили бы часть бонуса просто за наличие задач в трекере.
+  const idle = closed.length === 0 && replies.length === 0;
 
   // Качество — средневзвешенная оценка задач
   let points = 0;
@@ -359,11 +362,43 @@ function computeMoney(metrics, settings, extra = {}) {
   const cut = low ? cutFactor : 1;
   const mult = extra.chiefMultiplier ?? 1;
 
+  // Какие метрики просели ниже порога — из-за них режется весь итог.
+  // Без этого пояснения оценка «10 из 10» рядом с неполной суммой
+  // выглядит ошибкой расчёта, хотя это сработавшая отсечка.
+  const NAMES = {
+    quality: 'качество', speed: 'скорость',
+    autonomy: 'автономность', proactivity: 'проактивность',
+  };
+  const lowNames = Object.keys(values)
+    .filter((k) => values[k] < threshold)
+    .map((k) => `${NAMES[k]} ${round2(values[k])}`);
+
   const wallets = {};
   let bonus = 0;
   for (const k of Object.keys(purses)) {
-    const got = purses[k] * (values[k] / 10) * mult * cut;
-    wallets[k] = { pool: purses[k], score: values[k], got: Math.round(got) };
+    const earned = purses[k] * (values[k] / 10); // до поправок
+    const got = earned * mult * cut;
+    wallets[k] = {
+      pool: purses[k],
+      score: values[k],
+      earned: Math.round(earned),
+      got: Math.round(got),
+      // почему из кошелька пришло меньше, чем набрано по оценке
+      reductions: [
+        cut !== 1 && {
+          kind: 'отсечка',
+          factor: cut,
+          amount: Math.round(earned * mult * (1 - cut)),
+          why: `есть метрика ниже ${threshold}: ${lowNames.join(', ')}`,
+        },
+        mult !== 1 && {
+          kind: mult > 1 ? 'надбавка за оценку месяца' : 'оценка месяца',
+          factor: mult,
+          amount: Math.round(earned * (mult - 1)),
+          why: 'множитель от руководителя',
+        },
+      ].filter(Boolean),
+    };
     bonus += got;
   }
 
@@ -373,6 +408,8 @@ function computeMoney(metrics, settings, extra = {}) {
     bonus: Math.round(bonus),
     kef: round2((bonus / mult / cut / pool) * 10),
     cutApplied: low,
+    cutFactor: cut,
+    cutReason: low ? `сработала отсечка ×${cut}: ${lowNames.join(', ')}` : null,
     multiplier: mult,
   };
 }
@@ -391,10 +428,21 @@ function savingCommission(sum, settings) {
 
 // ── выборка данных ───────────────────────────────────────────────────────────
 
-async function fetchUserData(db, userId, period, role = 'assistant') {
+async function fetchUserData(db, userId, period, role = 'assistant', startFrom = null) {
+  // Задачи, закрытые до запуска системы, в расчёт не идут: по ним нет
+  // ни признаков приёмки, ни истории переписки — считать по ним KPI
+  // означало бы оценивать людей по данным, которых никто не собирал.
   const tasks = await db
-    .prepare('SELECT * FROM tasks WHERE assignee_id = ? AND (period = ? OR period IS NULL) ORDER BY created_at DESC')
-    .bind(userId, period)
+    .prepare(
+      `SELECT * FROM tasks
+       WHERE assignee_id = ?
+         AND (period = ? OR period IS NULL)
+         AND (done_at IS NULL OR ? IS NULL OR done_at >= ?)
+         AND is_zaeb = 0
+         AND status NOT IN ('shelved','cancelled','paused','historical')
+       ORDER BY created_at DESC`
+    )
+    .bind(userId, period, startFrom, startFrom)
     .all();
 
   // Ответы этого человека, плюс адресованные лично ему вопросы (в том числе
@@ -420,7 +468,9 @@ async function fetchUserData(db, userId, period, role = 'assistant') {
 
 /** Полная карточка человека: метрики, деньги, задачи с таймингами. */
 async function buildProfile(db, user, period, settings) {
-  const { tasks, replies, awards } = await fetchUserData(db, user.id, period, user.role);
+  const { tasks, replies, awards } = await fetchUserData(
+    db, user.id, period, user.role, settings.start_from || null
+  );
   const metrics = computeMetrics({ tasks, replies, settings, grade: user.grade });
   const money = computeMoney(metrics, settings);
 
@@ -865,7 +915,7 @@ async function handleYougileHook(request, env, settings) {
     const task = ev.payload || ev.task || ev;
     const id = task.id || ev.id;
     if (!id) continue;
-    await upsertTaskFromYougile(db, task, settings);
+    await upsertTaskFromYougile(env, task, settings);
   }
   return json({ ok: true, received: items.length });
 }
@@ -895,7 +945,7 @@ async function syncYougile(env, settings, { limit = 1000 } = {}) {
     const data = await res.json().catch(() => ({}));
     const list = data.content || [];
     for (const t of list) {
-      await upsertTaskFromYougile(db, t, settings);
+      await upsertTaskFromYougile(env, t, settings);
       touched += 1;
       if (touched >= limit) return { ok: true, synced: touched, truncated: true };
     }
@@ -1117,13 +1167,17 @@ function stageOfColumn(columnId, settings) {
   if (colSet(settings, 'column_in_progress').has(columnId)) return 'in_progress';
   if (colSet(settings, 'column_review').has(columnId)) return 'review';
   if (colSet(settings, 'column_done').has(columnId)) return 'accepted';
+  // «Блокер» и «В ожидании» — работа стоит не по вине исполнителя
   if (colSet(settings, 'column_paused').has(columnId)) return 'paused';
+  // «На контроле» и «На потом» — задача ещё не решена, только отложена
+  if (colSet(settings, 'column_shelved').has(columnId)) return 'shelved';
   if (colSet(settings, 'column_cancelled').has(columnId)) return 'cancelled';
   if (colSet(settings, 'column_backlog').has(columnId)) return 'open';
   return null;
 }
 
-async function upsertTaskFromYougile(db, t, settings) {
+async function upsertTaskFromYougile(env, t, settings) {
+  const db = env.DB;
   const existing = await db.prepare('SELECT * FROM tasks WHERE id = ?').bind(t.id).first();
   const now = nowIso();
 
@@ -1166,8 +1220,13 @@ async function upsertTaskFromYougile(db, t, settings) {
     status = 'accepted';
     done = done || now;
   } else if (stage === 'paused') {
+    // Пока задача в блокере или ожидании, она не участвует в расчёте вовсе,
+    // а накопленная пауза потом сдвинет дедлайн.
     status = 'paused';
     pausedSince = pausedSince || now;
+  } else if (stage === 'shelved') {
+    // Отложена: в зачёт пойдёт только после того, как будет решена.
+    status = 'shelved';
   } else if (stage === 'cancelled') {
     status = 'cancelled';
   }
@@ -1176,6 +1235,14 @@ async function upsertTaskFromYougile(db, t, settings) {
   if (t.completed && status !== 'accepted' && status !== 'cancelled') {
     status = 'accepted';
     done = done || now;
+  }
+
+  // Задача, закрытая до запуска системы, остаётся исторической навсегда:
+  // иначе очередная синхронизация снова проставит ей сегодняшнюю дату
+  // закрытия и она вернётся в расчёт.
+  if (existing?.status === 'historical' && (status === 'accepted' || stage === null)) {
+    status = 'historical';
+    done = null;
   }
   if (t.archived || t.deleted) status = 'cancelled';
 
@@ -1189,29 +1256,66 @@ async function upsertTaskFromYougile(db, t, settings) {
 
     await db
       .prepare(
-        `UPDATE tasks SET title=?, number=?, board_id=?, keywords=?, assignee_id=?, deadline=?,
-         status=?, taken_at=?, submitted_at=?, done_at=?, returns=?, paused_min=?, paused_since=?,
-         period=?, updated_at=? WHERE id=?`
+        `UPDATE tasks SET title=?, number=?, board_id=?, column_id=?, keywords=?, assignee_id=?,
+         deadline=?, status=?, taken_at=?, submitted_at=?, done_at=?, returns=?, paused_min=?,
+         paused_since=?, period=?, updated_at=? WHERE id=?`
       )
-      .bind(title, t.idTaskCommon || existing.number, t.boardId || existing.board_id, keywords,
+      .bind(title, t.idTaskCommon || existing.number, t.boardId || existing.board_id,
+            t.columnId || existing.column_id, keywords,
             user?.id || existing.assignee_id, deadline, status, taken, submitted, done,
             returns, pausedMin, pausedSince, period, now, t.id)
       .run();
   } else {
     // задачу завёл сам исполнитель — это инициатива
     const isInitiative = assignee && t.createdBy && t.createdBy === assignee ? 1 : 0;
+
+    // Задача, которая попала в базу уже закрытой, закрыта до запуска системы.
+    // Реальной даты закрытия YouGile не отдаёт, а подставлять сегодняшнюю
+    // нечестно: человек получил бы оценку за работу, которой никто не мерил.
+    if (status === 'accepted') {
+      status = 'historical';
+      done = null;
+    }
     await db
       .prepare(
-        `INSERT INTO tasks (id, title, number, board_id, keywords, assignee_id, author_id,
-         created_at, deadline, status, taken_at, submitted_at, done_at, returns, paused_min,
-         paused_since, is_initiative, period)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+        `INSERT INTO tasks (id, title, number, board_id, column_id, keywords, assignee_id,
+         author_id, created_at, deadline, status, taken_at, submitted_at, done_at, returns,
+         paused_min, paused_since, is_initiative, is_zaeb, period)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
       )
-      .bind(t.id, title, t.idTaskCommon || null, t.boardId || null, taskKeywords({ ...t, title }),
+      .bind(t.id, title, t.idTaskCommon || null, t.boardId || null, t.columnId || null,
+            taskKeywords({ ...t, title }),
             user?.id || null, t.createdBy || null, createdAt, deadline, status, taken, submitted,
-            done, returns, pausedMin, pausedSince, isInitiative, period)
+            done, returns, pausedMin, pausedSince, isInitiative,
+            colSet(settings, 'column_zaeb').has(t.columnId || '') ? 1 : 0, period)
       .run();
     await logEvent(db, { taskId: t.id, type: 'created', at: createdAt });
+  }
+
+  // Заёб закрыт: приз получает тот, кто его закрыл, а не тот, на кого
+  // задача была назначена — в колонке «Заёб» она висит на всех сразу.
+  const wasZaeb = colSet(settings, 'column_zaeb').has(existing?.column_id || '')
+    || existing?.is_zaeb === 1;
+  const isZaebNow = colSet(settings, 'column_zaeb').has(t.columnId || '');
+  if ((wasZaeb || isZaebNow) && status === 'accepted' && !existing?.zaeb_awarded) {
+    await db.prepare('UPDATE tasks SET is_zaeb = 1, zaeb_awarded = 1 WHERE id = ?').bind(t.id).run();
+
+    // Кто передвинул карточку в «Завершена» — тот и закрыл заёб.
+    // Назначение здесь не подходит: задача висит сразу на всех.
+    const movedBy = await whoMovedTask(env, t.id, colSet(settings, 'column_done'), settings);
+    const closer = movedBy
+      ? await db.prepare('SELECT id, name, role FROM users WHERE yougile_id = ? AND active = 1')
+          .bind(movedBy).first()
+      : null;
+
+    if (closer) {
+      await askZaebTier(env, { id: t.id, title }, closer);
+    } else {
+      // автора действия определить не удалось — спрашиваем
+      await askWhoClosedZaeb(env, { id: t.id, title });
+    }
+  } else if (isZaebNow && !existing?.is_zaeb) {
+    await db.prepare('UPDATE tasks SET is_zaeb = 1 WHERE id = ?').bind(t.id).run();
   }
 
   if (stage === 'in_progress' && !existing?.taken_at) await logEvent(db, { taskId: t.id, type: 'taken' });
@@ -1271,6 +1375,7 @@ async function handleTelegramUpdate(request, env, settings) {
   // Реакция на сообщение — тоже ответ. Поставить смайлик под просьбой
   // означает «увидел, принял»; требовать сверх этого текст было бы придиркой.
   if (update?.message_reaction) return handleReaction(update.message_reaction, env, settings);
+  if (update?.callback_query) return handleCallback(update.callback_query, env, settings);
 
   const msg = update?.message || update?.edited_message;
   if (!msg || !msg.from || msg.from.is_bot) return json({ ok: true });
@@ -1414,7 +1519,9 @@ async function handleTelegramUpdate(request, env, settings) {
     return json({ ok: true, tracked: 'request', urgent: !!urgent, task: matchedTask?.title, how: matchHow });
   }
 
-  // ответ ассистента или лида: вопрос руководителя может быть адресован и лиду
+  // Ассистент пишет сам. Это либо ответ на висящий вопрос, либо его
+  // собственный вопрос — и тогда он бьёт по автономности: владелец
+  // в YouGile не пишет, поэтому вовлечённость меряется здесь, в чате.
   let open = null;
   if (msg.reply_to_message) {
     open = await db
@@ -1445,7 +1552,30 @@ async function handleTelegramUpdate(request, env, settings) {
       .bind(String(msg.chat.id), user.id)
       .first();
   }
-  if (!open) return json({ ok: true, skipped: 'нет открытого запроса' });
+  // Открытого вопроса нет — значит ассистент написал сам. Если это вопрос,
+  // он отнимает автономность: именно так меряется «сколько раз пришлось
+  // отвлечь руководителя», раз в YouGile тот не пишет.
+  if (!open) {
+    const text = msg.text || msg.caption || '';
+    if (!text.includes('?')) return json({ ok: true, skipped: 'не вопрос' });
+
+    const found = await detectTask(db, text, settings);
+    if (!found.task) return json({ ok: true, skipped: 'вопрос без привязки к задаче' });
+
+    await db
+      .prepare('UPDATE tasks SET chief_touched = 1 WHERE id = ?')
+      .bind(found.task.id)
+      .run();
+    await logEvent(db, {
+      taskId: found.task.id,
+      userId: user.id,
+      type: 'chief_message',
+      at,
+      note: `вопрос в чате: ${text.slice(0, 120)}`,
+      source: 'telegram',
+    });
+    return json({ ok: true, tracked: 'question', task: found.task.title, how: found.how });
+  }
 
   const seconds = Math.max(0, Math.round((new Date(at) - new Date(open.asked_at)) / 1000));
   await db
@@ -1456,6 +1586,178 @@ async function handleTelegramUpdate(request, env, settings) {
     .run();
 
   return json({ ok: true, tracked: 'reply', seconds });
+}
+
+/**
+ * Заёб закрыт — спрашиваем, кто именно его закрыл.
+ *
+ * Задача из колонки «Заёб» висит на всех сразу, поэтому исполнителя
+ * из назначения не вывести, а YouGile не сообщает, кто двигал карточку.
+ * Один тап руководителя отдела решает это однозначно и оставляет след.
+ */
+/**
+ * Кто передвинул карточку в нужную колонку.
+ *
+ * YouGile пишет это в чат задачи системными сообщениями: у них
+ * properties.move = true, а в properties.actionBy лежит автор действия.
+ * Обычные сообщения такие события не показывают — нужен includeSystem.
+ */
+async function whoMovedTask(env, taskId, toColumnIds, settings) {
+  const key = env.YOUGILE_KEY || settings.yougile_key;
+  if (!key) return null;
+  const base = settings.yougile_base || 'https://yougile.com/api-v2';
+
+  try {
+    const res = await fetch(
+      `${base}/chats/${taskId}/messages?limit=100&includeSystem=true`,
+      { headers: { Authorization: `Bearer ${key}` } }
+    );
+    if (!res.ok) return null;
+    const data = await res.json().catch(() => ({}));
+
+    // идём с конца: интересует последнее перемещение
+    const moves = (data.content || []).filter((m) => m.properties?.move && m.properties?.actionBy);
+    for (let i = moves.length - 1; i >= 0; i -= 1) {
+      const p = moves[i].properties;
+      if (!toColumnIds || toColumnIds.has(p.to)) return p.actionBy;
+    }
+    // задачу могли закрыть галочкой, не двигая карточку
+    const completed = (data.content || [])
+      .filter((m) => m.properties?.actionBy && m.properties?.after === 'done');
+    return completed.length ? completed[completed.length - 1].properties.actionBy : null;
+  } catch {
+    return null;
+  }
+}
+
+async function askWhoClosedZaeb(env, task) {
+  const db = env.DB;
+  const lead = await db
+    .prepare("SELECT tg_user_id FROM users WHERE role = 'lead' AND active = 1 AND tg_user_id IS NOT NULL")
+    .first();
+  if (!lead) return;
+
+  const { results: people } = await db
+    .prepare("SELECT id, name FROM users WHERE active = 1 AND role IN ('assistant','lead') ORDER BY role DESC, name")
+    .all();
+
+  const rows = people.map((u) => [{ text: u.name, callback_data: `zw:${task.id}:${u.id}` }]);
+  rows.push([{ text: 'Не начислять', callback_data: `zw:${task.id}:skip` }]);
+
+  await sendTelegram(
+    env,
+    lead.tg_user_id,
+    `<b>Заёб закрыт</b>\n${task.title.slice(0, 150)}\n\nКто закрыл? Определить по логу не вышло.`,
+    { keyboard: rows }
+  );
+}
+
+/**
+ * Закрывшего уже знаем — остаётся тариф. Размер заёба задаётся при
+ * заведении карточки, но в YouGile его негде хранить единообразно,
+ * поэтому подтверждается одним тапом.
+ */
+async function askZaebTier(env, task, closer) {
+  const db = env.DB;
+  const lead = await db
+    .prepare("SELECT tg_user_id FROM users WHERE role = 'lead' AND active = 1 AND tg_user_id IS NOT NULL")
+    .first();
+  if (!lead) return;
+
+  const tiers = [
+    ['S', 3000, 'бесит редко, решается один раз'],
+    ['M', 5000, 'бесит каждую неделю'],
+    ['L', 10000, 'бесит ежедневно или бьёт по работоспособности'],
+    ['XL', 15000, 'бьёт по здоровью, нужен внедрённый процесс'],
+  ];
+
+  await sendTelegram(
+    env,
+    lead.tg_user_id,
+    `<b>Заёб закрыт</b>\n${task.title.slice(0, 150)}\n\n` +
+      `Закрыл: <b>${closer.name}</b> — по логу YouGile.\n\nКакой размер?\n` +
+      tiers.map(([n, a, d]) => `${n} · ${a.toLocaleString('ru-RU')} ₽ — ${d}`).join('\n'),
+    {
+      keyboard: [tiers.map(([n, a]) =>
+        ({ text: `${n} · ${a.toLocaleString('ru-RU')} ₽`, callback_data: `zt:${task.id}:${closer.id}:${n}:${a}` }))],
+    }
+  );
+}
+
+/**
+ * Ответы на кнопки: кто закрыл заёб и по какому тарифу.
+ * Приз идёт закрывшему, руководителю отдела — доля сверху,
+ * но только если закрыл не он сам.
+ */
+async function handleCallback(cq, env, settings) {
+  const db = env.DB;
+  const data = String(cq.data || '');
+  const answer = (text) => tgApi(env, 'answerCallbackQuery', { callback_query_id: cq.id, text });
+
+  // выбор человека → спрашиваем тариф
+  if (data.startsWith('zw:')) {
+    const [, taskId, userId] = data.split(':');
+    if (userId === 'skip') {
+      await db.prepare('UPDATE tasks SET zaeb_awarded = 1 WHERE id = ?').bind(taskId).run();
+      await tgApi(env, 'editMessageText', {
+        chat_id: cq.message.chat.id, message_id: cq.message.message_id,
+        text: 'Приз за этот заёб не начисляем.',
+      });
+      return answer('Хорошо');
+    }
+    const tiers = [['S', 3000], ['M', 5000], ['L', 10000], ['XL', 15000]];
+    await tgApi(env, 'editMessageText', {
+      chat_id: cq.message.chat.id, message_id: cq.message.message_id,
+      text: `${cq.message.text}\n\nТариф?`,
+      reply_markup: {
+        inline_keyboard: [tiers.map(([n, a]) =>
+          ({ text: `${n} · ${a.toLocaleString('ru-RU')} ₽`, callback_data: `zt:${taskId}:${userId}:${n}:${a}` }))],
+      },
+    });
+    return answer('Выберите тариф');
+  }
+
+  // выбор тарифа → начисляем
+  if (data.startsWith('zt:')) {
+    const [, taskId, userId, tier, amountRaw] = data.split(':');
+    const amount = parseInt(amountRaw, 10) || 0;
+
+    const task = await db.prepare('SELECT title FROM tasks WHERE id = ?').bind(taskId).first();
+    const who = await db.prepare('SELECT name, role FROM users WHERE id = ?').bind(userId).first();
+    const lead = await db.prepare("SELECT id, name FROM users WHERE role='lead' AND active=1").first();
+
+    // доля руководителя отдела — только если закрыл кто-то из команды
+    const share = who?.role === 'lead' ? 0 : Math.round(amount * num(settings, 'lead_share_zaeb', 0.1));
+    const period = currentPeriod(num(settings, 'tz_offset', 3));
+
+    await db
+      .prepare(
+        `INSERT INTO awards (user_id, kind, title, tier, amount, lead_amount, status, period, confirm_due)
+         VALUES (?,'zaeb',?,?,?,?,'half_paid',?,?)`
+      )
+      .bind(userId, task?.title || 'Заёб', tier, amount, share, period,
+            new Date(Date.now() + 30 * 864e5).toISOString())
+      .run();
+
+    await db.prepare('UPDATE tasks SET zaeb_awarded = 1, is_zaeb = 1 WHERE id = ?').bind(taskId).run();
+    await logEvent(db, {
+      taskId, userId, type: 'manual', source: 'telegram',
+      note: `заёб закрыт, тариф ${tier}, приз ${amount} ₽${share ? `, доля лида ${share} ₽` : ''}`,
+    });
+
+    await tgApi(env, 'editMessageText', {
+      chat_id: cq.message.chat.id, message_id: cq.message.message_id,
+      text:
+        `<b>Заёб закрыт</b>\n${(task?.title || '').slice(0, 150)}\n\n` +
+        `Закрыл: <b>${who?.name}</b>\nТариф ${tier} — <b>${amount.toLocaleString('ru-RU')} ₽</b>\n` +
+        (share ? `Вам как руководителю: <b>${share.toLocaleString('ru-RU')} ₽</b>\n` : '') +
+        `\nПоловина выплачивается сейчас, вторая — через 30 дней, если не всплывёт снова.`,
+      parse_mode: 'HTML',
+    });
+    return answer('Начислено');
+  }
+
+  return answer('');
 }
 
 /**
@@ -1667,12 +1969,25 @@ async function resolveMention(db, msg) {
 /** Отправка сообщения в Telegram. Токен лежит в секретах, не в коде. */
 async function sendTelegram(env, chatId, text, extra = {}) {
   if (!env.TG_TOKEN || !chatId) return null;
-  const res = await fetch(`https://api.telegram.org/bot${env.TG_TOKEN}/sendMessage`, {
+  const { keyboard, reply_to, ...rest } = extra;
+  return tgApi(env, 'sendMessage', {
+    chat_id: chatId,
+    text,
+    parse_mode: 'HTML',
+    disable_web_page_preview: true,
+    ...(reply_to ? { reply_to_message_id: reply_to } : {}),
+    ...(keyboard ? { reply_markup: { inline_keyboard: keyboard } } : {}),
+    ...rest,
+  });
+}
+
+/** Любой метод Telegram Bot API. Токен живёт в секретах, не в коде. */
+async function tgApi(env, method, payload) {
+  if (!env.TG_TOKEN) return null;
+  const res = await fetch(`https://api.telegram.org/bot${env.TG_TOKEN}/${method}`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true, ...extra,
-    }),
+    body: JSON.stringify(payload),
   });
   return res.json().catch(() => null);
 }
