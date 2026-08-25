@@ -37,6 +37,8 @@ CREATE TABLE tasks (
   number            TEXT,                      -- человекочитаемый номер, ID-236
   url               TEXT,
   board_id          TEXT,
+  keywords          TEXT,                      -- поисковый индекс: считается один раз
+                                               -- при появлении задачи, дальше не трогается
   assignee_id       TEXT REFERENCES users(id),
   author_id         TEXT,                      -- кто завёл: если ассистент — инициатива
   size              INTEGER NOT NULL DEFAULT 1 CHECK (size IN (1,2,3)),
@@ -105,6 +107,15 @@ CREATE TABLE chat_replies (
 );
 CREATE INDEX idx_chat_user ON chat_replies(user_id, period);
 
+-- Состояние переписки: нужно, чтобы отличить новый вопрос от продолжения
+-- разговора. Пока диалог идёт, новые таймеры не открываются — иначе за одну
+-- живую беседу можно набрать десяток «быстрых ответов».
+CREATE TABLE chat_state (
+  chat_id     TEXT PRIMARY KEY,
+  last_msg_at TEXT,
+  last_from   TEXT
+);
+
 -- ── Призы за заёбы и экономия ───────────────────────────────────────────────
 CREATE TABLE awards (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -167,6 +178,15 @@ INSERT INTO settings (key, value) VALUES
   -- Сообщения, на которые отвечать не нужно: таймер не открывается
   ('no_reply_words',    'спасибо,спс,благодарю,понял,поняла,понятно,ясно,ок,окей,ok,хорошо,отлично,супер,класс,круто,принято,ага,угу,да,нет,плюс'),
   ('min_request_len',   '25'),   -- короткая реплика без вопроса — не запрос
+  -- Живой диалог не должен превращаться в десяток «быстрых ответов»:
+  -- пока переписка идёт, новый таймер не открывается
+  ('dialog_window_min', '20'),
+  -- Распознавание задачи по сообщению
+  ('llm_enabled',       '1'),
+  ('llm_url',           'http://127.0.0.1:11434/api/generate'),
+  ('llm_model',         'qwen3:8b'),
+  ('llm_timeout_ms',    '45000'),
+  ('llm_confidence',    '1.35'), -- отрыв лидера, при котором модель не нужна
   -- Скорость руководителя отдела: своя и командная
   ('lead_speed_personal','0.4'),
   ('lead_speed_team',    '0.6'),

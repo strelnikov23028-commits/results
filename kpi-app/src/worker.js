@@ -126,6 +126,11 @@ function computeMetrics({ tasks, replies, settings, grade }) {
   // отменённые задачи в расчёт не идут: их не делали, а сняли
   const closed = tasks.filter((t) => ['accepted', 'failed'].includes(t.status));
 
+  // Месяц без единого закрытого дела и без единого ответа в чате — это не
+  // «нет данных, начислим по умолчанию», а отсутствие работы. Иначе человек,
+  // который весь месяц молчал, получал бы часть бонуса просто за тишину.
+  const idle = closed.length === 0 && replies.length === 0 && tasks.length === 0;
+
   // Качество — средневзвешенная оценка задач
   let points = 0;
   let weight = 0;
@@ -163,11 +168,15 @@ function computeMetrics({ tasks, replies, settings, grade }) {
   const proactivity = Math.min(10, normPro > 0 ? (initiatives / normPro) * 10 : 0);
 
   return {
-    quality: round2(quality),
-    speed: round2(speed),
-    autonomy: round2(autonomy),
-    proactivity: round2(proactivity),
+    // Пустой месяц не приносит денег: без задач и без ответов метрика
+    // не «нет данных», а ноль. Иначе тишина оплачивалась бы наравне с работой.
+    quality: idle ? 0 : round2(quality),
+    speed: idle ? 0 : round2(speed),
+    autonomy: idle ? 0 : round2(autonomy),
+    proactivity: idle ? 0 : round2(proactivity),
+    idle,
     breakdown: {
+      idle: idle ? 'за период нет ни задач, ни ответов в чате — бонус не начисляется' : null,
       quality: {
         tasks: closed.length,
         weight: round2(weight),
@@ -260,6 +269,9 @@ function scoreChat(replies, settings) {
     }
   }
 
+  // Вопросов не было — отвечать было не на что, метрику не занижаем.
+  // Но и не считаем это заслугой: если человек вообще ничего не делал,
+  // это отсекается уровнем выше, в computeMetrics.
   const reference = counted.filter((r) => r.in_hours === 1).length;
   const score = reference === 0 ? 10 : Math.max(0, Math.min(10, (10 * points) / reference));
 
@@ -893,6 +905,208 @@ async function syncYougile(env, settings, { limit = 1000 } = {}) {
   return { ok: true, synced: touched };
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Поиск задачи по сообщению в чате
+//
+// Руководитель пишет «заказали ракетку?» и не указывает, кому. Бот должен сам
+// понять, о какой задаче речь, и спросить с её исполнителя.
+//
+// Чтобы не перебирать все задачи на каждое сообщение, у каждой задачи есть
+// поисковый индекс. Он считается один раз — когда задача появляется — и лежит
+// в базе рядом с ней. Дальше сравнение это пересечение двух коротких списков.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Служебные слова, которые совпадают у всех задач и только мешают. */
+const STOP_WORDS = new Set([
+  'и','в','во','не','что','он','на','я','с','со','как','а','то','все','она','так','его','но','да','ты',
+  'к','у','же','вы','за','бы','по','ее','мне','было','вот','от','меня','еще','нет','о','из','ему','теперь',
+  'для','мы','тебя','их','чем','была','сам','чтоб','без','будто','чего','раз','тоже','себе','под','будет',
+  'ж','тогда','кто','этот','того','потому','этого','какой','совсем','ним','здесь','этом','один','почти',
+  'мой','тем','чтобы','нее','были','куда','зачем','всех','никогда','можно','при','наконец','два','об',
+  'другой','хоть','после','над','больше','тот','через','эти','нас','про','всего','них','какая','много',
+  'разве','三','эту','моя','впрочем','хорошо','свою','этой','перед','иногда','лучше','чуть','том','нельзя',
+  'такой','им','более','всегда','конечно','всю','между','надо','нужно','сделать','сделай','пожалуйста',
+  'есть','быть','этих','либо','или','также','такие','когда','где','уже','ещё','его','который','которая',
+]);
+
+/**
+ * Слова сообщения или заголовка в сравнимом виде.
+ *
+ * Русские окончания режутся грубо — до основы в пять букв. «Ракетку», «ракетка»
+ * и «ракетки» превращаются в «ракет» и совпадают между собой. Это заметно проще
+ * настоящей морфологии и для коротких заголовков задач работает не хуже.
+ */
+function words(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/ё/g, 'е')
+    .split(/[^a-zа-я0-9]+/i)
+    .filter((w) => w.length >= 3 && !STOP_WORDS.has(w))
+    .map((w) => (w.length > 5 ? w.slice(0, 5) : w));
+}
+
+/**
+ * Индекс задачи. Слова заголовка и описания хранятся раздельно: совпадение
+ * в заголовке значит куда больше, чем случайное слово в теле описания.
+ */
+function taskKeywords(task) {
+  const plain = String(task.description || '').replace(/<[^>]*>/g, ' ');
+  const head = [...new Set(words(task.title))];
+  // описание берём целиком: детали вроде фирмы или модели живут именно там,
+  // и спрашивают в чате часто именно про них
+  const body = [...new Set(words(plain))].filter((w) => !head.includes(w));
+  return `${head.join(' ')}|${body.join(' ')}`;
+}
+
+const splitKeywords = (kw) => {
+  const [head = '', body = ''] = String(kw || '').split('|');
+  return { head: head.split(' ').filter(Boolean), body: body.split(' ').filter(Boolean) };
+};
+
+/**
+ * Кандидаты на вопрос из чата.
+ *
+ * Редкое слово весит больше частого: «ракет» встречается в двух задачах и почти
+ * наверняка указывает на нужную, а «заказ» есть в полусотне и не значит ничего.
+ * Без этой поправки вопрос «заказали ракетку?» уводит на первую попавшуюся
+ * задачу со словом «заказать» — проверено на реальных задачах.
+ */
+async function findTaskCandidates(db, text, { limit = 6 } = {}) {
+  const asked = [...new Set(words(text))];
+  if (!asked.length) return [];
+
+  // только живые задачи: про закрытые и снятые не спрашивают
+  const { results } = await db
+    .prepare(
+      `SELECT id, title, number, keywords, assignee_id, status, deadline
+       FROM tasks
+       WHERE status NOT IN ('accepted','cancelled','failed')
+       ORDER BY updated_at DESC LIMIT 400`
+    )
+    .all();
+
+  const parsed = results.map((t) => ({ t, ...splitKeywords(t.keywords) }));
+
+  // в скольких задачах встречается каждое слово вопроса
+  const df = new Map();
+  for (const w of asked) {
+    let n = 0;
+    for (const p of parsed) if (p.head.includes(w) || p.body.includes(w)) n += 1;
+    df.set(w, n);
+  }
+
+  const total = parsed.length || 1;
+  const scored = [];
+  for (const p of parsed) {
+    let score = 0;
+    let hits = 0;
+    const matched = [];
+    for (const w of asked) {
+      const inHead = p.head.includes(w);
+      const inBody = !inHead && p.body.includes(w);
+      if (!inHead && !inBody) continue;
+      // редкое слово — сильный сигнал, частое почти ничего не значит
+      const idf = Math.log((total + 1) / (df.get(w) + 1)) + 0.1;
+      score += idf * (inHead ? 2.5 : 1);
+      hits += 1;
+      matched.push(w);
+    }
+    if (hits) scored.push({ ...p.t, hits, score: round2(score), matched });
+  }
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, limit);
+}
+
+/**
+ * Уверенность в лидере: во сколько раз он оторвался от второго места.
+ * Если оторвался заметно — нейросеть звать незачем.
+ */
+function candidateConfidence(list) {
+  if (!list.length) return 0;
+  if (list.length === 1) return list[0].score >= 1.5 ? 1 : 0.5;
+  const [first, second] = list;
+  if (!second.score) return 1;
+  return first.score / second.score;
+}
+
+/**
+ * Выбор задачи нейросетью — только когда список слов не дал явного лидера.
+ *
+ * Модель получает не все задачи, а короткий список кандидатов от предфильтра:
+ * несколько строк вместо сотни. Поэтому даже на процессорном сервере ответ
+ * приходит за секунды, а не за минуты.
+ *
+ * Ответ ждём строго одним числом — так его нельзя перепутать с рассуждением.
+ */
+async function pickTaskWithModel(candidates, question, settings) {
+  const url = settings.llm_url || 'http://127.0.0.1:11434/api/generate';
+  const model = settings.llm_model || 'qwen3:8b';
+  const timeout = num(settings, 'llm_timeout_ms', 45000);
+  if (!candidates.length) return null;
+
+  const list = candidates
+    .map((c, i) => `${i + 1}. ${c.title.replace(/\s+/g, ' ').slice(0, 160)}`)
+    .join('\n');
+
+  const prompt =
+    `Есть список задач:\n${list}\n\n` +
+    `Руководитель спросил в чате: "${question}"\n\n` +
+    `О какой задаче он спрашивает? Ответь только номером из списка. ` +
+    `Если ни одна не подходит, ответь 0. Никаких пояснений, только цифра.`;
+
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeout);
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      signal: ctrl.signal,
+      body: JSON.stringify({
+        model,
+        prompt,
+        stream: false,
+        think: false,          // рассуждения вслух здесь только тратят время
+        options: { temperature: 0, num_predict: 8 },
+      }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json().catch(() => ({}));
+    const n = parseInt(String(data.response || '').replace(/[^0-9]/g, ''), 10);
+    if (!n || n < 1 || n > candidates.length) return null;
+    return candidates[n - 1];
+  } catch {
+    return null; // модель недоступна или думает слишком долго — работаем без неё
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * Кому адресован вопрос: сначала слова, при равных кандидатах — модель.
+ * Возвращает саму задачу и то, как она была выбрана: это попадает в отчёт,
+ * чтобы любое решение бота можно было объяснить.
+ */
+async function detectTask(db, text, settings) {
+  const candidates = await findTaskCandidates(db, text);
+  if (!candidates.length) return { task: null, how: 'ничего не нашлось' };
+
+  const confidence = candidateConfidence(candidates);
+  const threshold = num(settings, 'llm_confidence', 1.35);
+
+  if (confidence >= threshold) {
+    return { task: candidates[0], how: `по словам, отрыв ×${round2(confidence)}`, candidates };
+  }
+  if (settings.llm_enabled === '0') {
+    return { task: candidates[0], how: 'по словам, кандидаты равны', candidates };
+  }
+
+  const picked = await pickTaskWithModel(candidates, text, settings);
+  return picked
+    ? { task: picked, how: 'выбрала модель из равных кандидатов', candidates }
+    : { task: candidates[0], how: 'по словам, модель не ответила', candidates };
+}
+
 /** Настройка со списком id колонок: «a,b,c» → Set. */
 const colSet = (settings, key) =>
   new Set((settings[key] || '').split(',').map((s) => s.trim()).filter(Boolean));
@@ -968,13 +1182,18 @@ async function upsertTaskFromYougile(db, t, settings) {
   const period = done ? done.slice(0, 7) : existing?.period || null;
 
   if (existing) {
+    // индекс пересчитываем, только если поменялся заголовок — обычно он лежит нетронутым
+    const keywords = existing.keywords && title === existing.title
+      ? existing.keywords
+      : taskKeywords({ ...t, title });
+
     await db
       .prepare(
-        `UPDATE tasks SET title=?, number=?, board_id=?, assignee_id=?, deadline=?, status=?,
-         taken_at=?, submitted_at=?, done_at=?, returns=?, paused_min=?, paused_since=?,
+        `UPDATE tasks SET title=?, number=?, board_id=?, keywords=?, assignee_id=?, deadline=?,
+         status=?, taken_at=?, submitted_at=?, done_at=?, returns=?, paused_min=?, paused_since=?,
          period=?, updated_at=? WHERE id=?`
       )
-      .bind(title, t.idTaskCommon || existing.number, t.boardId || existing.board_id,
+      .bind(title, t.idTaskCommon || existing.number, t.boardId || existing.board_id, keywords,
             user?.id || existing.assignee_id, deadline, status, taken, submitted, done,
             returns, pausedMin, pausedSince, period, now, t.id)
       .run();
@@ -983,14 +1202,14 @@ async function upsertTaskFromYougile(db, t, settings) {
     const isInitiative = assignee && t.createdBy && t.createdBy === assignee ? 1 : 0;
     await db
       .prepare(
-        `INSERT INTO tasks (id, title, number, board_id, assignee_id, author_id, created_at,
-         deadline, status, taken_at, submitted_at, done_at, returns, paused_min, paused_since,
-         is_initiative, period)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+        `INSERT INTO tasks (id, title, number, board_id, keywords, assignee_id, author_id,
+         created_at, deadline, status, taken_at, submitted_at, done_at, returns, paused_min,
+         paused_since, is_initiative, period)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
       )
-      .bind(t.id, title, t.idTaskCommon || null, t.boardId || null, user?.id || null,
-            t.createdBy || null, createdAt, deadline, status, taken, submitted, done,
-            returns, pausedMin, pausedSince, isInitiative, period)
+      .bind(t.id, title, t.idTaskCommon || null, t.boardId || null, taskKeywords({ ...t, title }),
+            user?.id || null, t.createdBy || null, createdAt, deadline, status, taken, submitted,
+            done, returns, pausedMin, pausedSince, isInitiative, period)
       .run();
     await logEvent(db, { taskId: t.id, type: 'created', at: createdAt });
   }
@@ -1048,6 +1267,11 @@ async function handleTgHook(request, env, settings) {
 async function handleTelegramUpdate(request, env, settings) {
   const db = env.DB;
   const update = await request.json().catch(() => null);
+
+  // Реакция на сообщение — тоже ответ. Поставить смайлик под просьбой
+  // означает «увидел, принял»; требовать сверх этого текст было бы придиркой.
+  if (update?.message_reaction) return handleReaction(update.message_reaction, env, settings);
+
   const msg = update?.message || update?.edited_message;
   if (!msg || !msg.from || msg.from.is_bot) return json({ ok: true });
 
@@ -1082,17 +1306,54 @@ async function handleTelegramUpdate(request, env, settings) {
   const period = currentPeriod(tz);
   const inHours = isWorkTime(msg.date * 1000, settings) ? 1 : 0;
 
+  // отметка активности: по ней отличаем новый вопрос от продолжения разговора
+  const prevState = await db
+    .prepare('SELECT last_msg_at, last_from FROM chat_state WHERE chat_id = ?')
+    .bind(String(msg.chat.id))
+    .first();
+  await db
+    .prepare(
+      `INSERT INTO chat_state (chat_id, last_msg_at, last_from) VALUES (?,?,?)
+       ON CONFLICT(chat_id) DO UPDATE SET last_msg_at = excluded.last_msg_at,
+       last_from = excluded.last_from`
+    )
+    .bind(String(msg.chat.id), at, user.id)
+    .run();
+
   // запрос от руководителя или лида
   if (user.role === 'chief' || user.role === 'lead') {
     // «понял, спасибо» таймер не открывает
     if (!needsReply(msg, settings)) return json({ ok: true, skipped: 'ответ не требуется' });
 
+    // Идёт живая переписка — это продолжение разговора, а не новый вопрос.
+    // Иначе за одну беседу ассистент набрал бы десяток «быстрых ответов».
+    const windowMin = num(settings, 'dialog_window_min', 20);
+    const quiet = prevState?.last_msg_at
+      ? (new Date(at) - new Date(prevState.last_msg_at)) / 60000
+      : Infinity;
+    if (quiet < windowMin) {
+      return json({ ok: true, skipped: `продолжение разговора, тишины было ${Math.round(quiet)} мин` });
+    }
+
     const text = (msg.text || msg.caption || '').toLowerCase();
     const words = (settings.urgent_words || '').split(',').map((w) => w.trim()).filter(Boolean);
     const urgent = words.some((w) => text.includes(w)) ? 1 : 0;
 
-    // если обратились к конкретному человеку — ждём именно его
-    const mentionId = await resolveMention(db, msg);
+    // Кому адресовано. Явный тег — самый надёжный сигнал. Если тега нет,
+    // ищем задачу по смыслу сообщения и спрашиваем с её исполнителя:
+    // руководитель в YouGile не пишет и адресата не указывает.
+    let mentionId = await resolveMention(db, msg);
+    let matchedTask = null;
+    let matchHow = null;
+
+    if (!mentionId) {
+      const found = await detectTask(db, msg.text || msg.caption || '', settings);
+      matchHow = found.how;
+      if (found.task?.assignee_id) {
+        mentionId = found.task.assignee_id;
+        matchedTask = found.task;
+      }
+    }
 
     // Лид всегда тегает, когда ставит задачу. Значит сообщение лида без тега,
     // когда висит вопрос руководителя, — это его собственный ответ, а не запрос.
@@ -1123,7 +1384,34 @@ async function handleTelegramUpdate(request, env, settings) {
       )
       .bind(String(msg.chat.id), String(msg.message_id), user.id, user.role, at, inHours, urgent, mentionId, period)
       .run();
-    return json({ ok: true, tracked: 'request', urgent: !!urgent });
+
+    // Бот подсказывает в чат, кого ждут: сообщение руководителя без адресата
+    // иначе висит, пока каждый думает, что спросили не у него.
+    if (matchedTask && mentionId) {
+      const who = await db
+        .prepare('SELECT name, tg_username FROM users WHERE id = ?')
+        .bind(mentionId)
+        .first();
+      if (who) {
+        const nick = who.tg_username ? `@${who.tg_username}` : who.name;
+        await sendTelegram(
+          env,
+          msg.chat.id,
+          `${nick}, вопрос к вам — задача «${matchedTask.title.slice(0, 90)}»`,
+          { reply_to: msg.message_id }
+        );
+        await logEvent(db, {
+          taskId: matchedTask.id,
+          userId: mentionId,
+          type: 'manual',
+          at,
+          note: `бот связал вопрос с задачей: ${matchHow}`,
+          source: 'telegram',
+        });
+      }
+    }
+
+    return json({ ok: true, tracked: 'request', urgent: !!urgent, task: matchedTask?.title, how: matchHow });
   }
 
   // ответ ассистента или лида: вопрос руководителя может быть адресован и лиду
@@ -1168,6 +1456,50 @@ async function handleTelegramUpdate(request, env, settings) {
     .run();
 
   return json({ ok: true, tracked: 'reply', seconds });
+}
+
+/**
+ * Реакция на сообщение засчитывается как ответ.
+ *
+ * Telegram присылает такие события отдельным типом и только если он явно
+ * указан в allowed_updates при установке вебхука — по умолчанию их нет.
+ * Учитывается лишь появление реакции: снятие смайлика ответ не отменяет.
+ */
+async function handleReaction(reaction, env, settings) {
+  const db = env.DB;
+  const from = reaction.user;
+  if (!from || from.is_bot) return json({ ok: true });
+
+  const added = (reaction.new_reaction || []).length > (reaction.old_reaction || []).length;
+  if (!added) return json({ ok: true, skipped: 'реакцию сняли' });
+
+  const user = await db
+    .prepare('SELECT id, role FROM users WHERE tg_user_id = ? AND active = 1')
+    .bind(String(from.id))
+    .first();
+  if (!user || user.role === 'chief') return json({ ok: true });
+
+  // ищем открытый вопрос именно на это сообщение
+  const open = await db
+    .prepare(
+      `SELECT * FROM chat_replies
+       WHERE chat_id = ? AND request_msg = ? AND replied_at IS NULL
+       AND (mention_id IS NULL OR mention_id = ?)
+       LIMIT 1`
+    )
+    .bind(String(reaction.chat.id), String(reaction.message_id), user.id)
+    .first();
+  if (!open) return json({ ok: true, skipped: 'нет открытого вопроса на это сообщение' });
+
+  const at = new Date((reaction.date || Math.floor(Date.now() / 1000)) * 1000).toISOString();
+  const seconds = Math.max(0, Math.round((new Date(at) - new Date(open.asked_at)) / 1000));
+
+  await db
+    .prepare('UPDATE chat_replies SET user_id = ?, replied_at = ?, seconds = ? WHERE id = ?')
+    .bind(user.id, at, seconds, open.id)
+    .run();
+
+  return json({ ok: true, tracked: 'reaction', seconds });
 }
 
 /**
