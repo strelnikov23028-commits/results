@@ -102,21 +102,35 @@ function scoreTask(task) {
     return { score: 0, flags: { inTime: false, noReturns: false, noChief: false }, reason: 'сорвана' };
   }
 
-  // Время в блокере и ожидании не идёт против исполнителя: дедлайн
-  // сдвигается на столько же, сколько задача простояла не по его вине.
+  // Время в блокере и ожидании не идёт против исполнителя, но у поблажки
+  // есть потолок: иначе задачу можно было бы держать в паузе месяцами
+  // ради бесконечного сдвига срока.
+  const pauseCap = Math.max(
+    (task.priority || 7) * WORK_DAY_MIN,  // столько же рабочих минут, сколько дано на задачу
+    3 * WORK_DAY_MIN                      // но не меньше трёх рабочих дней
+  );
+  const pauseCredit = Math.min(task.paused_min || 0, pauseCap);
   const effectiveDeadline = task.deadline
-    ? new Date(new Date(task.deadline).getTime() + (task.paused_min || 0) * 60000)
+    ? new Date(pauseCredit > 0 ? addWorkMinutes(task.deadline, pauseCredit) : task.deadline)
     : null;
 
-  const inTime = effectiveDeadline && task.done_at
-    ? new Date(task.done_at) <= effectiveDeadline
+  // Срок меряется по моменту, когда ассистент сдал работу, а не когда
+  // карточка закрылась: заказ гаджета оценивается в день заказа,
+  // а не когда посылка доехала из США.
+  const finishedAt = task.work_done_at || task.done_at;
+
+  const inTime = effectiveDeadline && finishedAt
+    ? new Date(finishedAt) <= effectiveDeadline
     : !task.deadline; // без дедлайна признак не снимается — считается выполненным
   const noReturns = (task.returns || 0) === 0;
   const noChief = !task.chief_touched || task.disputed === 1;
 
-  const hits = [inTime, noReturns, noChief].filter(Boolean).length;
-  // 0 → 2, 1 → 4, 2 → 7, 3 → 10
-  const score = [2, 4, 7, 10][hits];
+  // Качество отвечает только за одно: пришлось ли переделывать.
+  // Срок целиком ушёл в «Скорость», вопросы к руководителю — целиком
+  // в «Самостоятельность». Раньше один и тот же промах бил дважды:
+  // просрочка резала и качество, и скорость.
+  const returns = task.returns || 0;
+  const score = returns === 0 ? 10 : returns === 1 ? 6 : 2;
 
   return { score, flags: { inTime, noReturns, noChief }, reason: null };
 }
@@ -130,8 +144,12 @@ const taskWeight = (t) => (t.size || 1) * (t.night ? 1.5 : 1);
  * важнее первой: без неё цифру нельзя аргументировать.
  */
 function computeMetrics({ tasks, replies, settings, grade }) {
-  // отменённые задачи в расчёт не идут: их не делали, а сняли
-  const closed = tasks.filter((t) => ['accepted', 'failed'].includes(t.status));
+  // В зачёт идут задачи, где ассистент закончил свою часть, — даже если
+  // карточка ещё открыта. Заказ гаджета оценивается в месяц заказа,
+  // а не когда посылка доехала.
+  const closed = tasks.filter(
+    (t) => ['accepted', 'failed'].includes(t.status) || (t.work_done_at && t.status === 'waiting')
+  );
 
   // Месяц без единого закрытого дела и без единого ответа в чате — это не
   // «нет данных, начислим по умолчанию», а отсутствие работы. Иначе человек,
@@ -444,7 +462,7 @@ async function fetchUserData(db, userId, period, role = 'assistant', startFrom =
          AND (period = ? OR period IS NULL)
          AND (done_at IS NULL OR ? IS NULL OR done_at >= ?)
          AND is_zaeb = 0
-         AND status NOT IN ('shelved','cancelled','paused','historical')
+         AND status NOT IN ('shelved','cancelled','historical')
        ORDER BY created_at DESC`
     )
     .bind(userId, period, startFrom, startFrom)
@@ -941,24 +959,31 @@ async function syncYougile(env, settings, { limit = 1000 } = {}) {
   let offset = 0;
   let touched = 0;
   let guard = 0;
+  const failed = [];
 
   while (guard++ < 50) {
     const res = await fetch(`${base}/task-list?limit=100&offset=${offset}`, {
       headers: { Authorization: `Bearer ${key}` },
     });
-    if (!res.ok) return { ok: false, error: `YouGile ответил ${res.status}`, synced: touched };
+    if (!res.ok) return { ok: false, error: `YouGile ответил ${res.status}`, synced: touched, failed };
 
     const data = await res.json().catch(() => ({}));
     const list = data.content || [];
     for (const t of list) {
-      await upsertTaskFromYougile(env, t, settings);
-      touched += 1;
-      if (touched >= limit) return { ok: true, synced: touched, truncated: true };
+      // Одна сбойная задача не должна обрывать синхронизацию на середине:
+      // остальные важнее, а причина уходит в лог.
+      try {
+        await upsertTaskFromYougile(env, t, settings);
+        touched += 1;
+      } catch (e) {
+        failed.push({ id: t.id, title: t.title, error: String(e).slice(0, 200) });
+      }
+      if (touched >= limit) return { ok: true, synced: touched, failed, truncated: true };
     }
     if (!data.paging?.next) break;
     offset += list.length || 100;
   }
-  return { ok: true, synced: touched };
+  return { ok: true, synced: touched, failed };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1191,18 +1216,98 @@ function stickerValue(task, stickerId, map, fallback) {
  * поэтому задача, поставленная в пятницу вечером, ждёт понедельника,
  * а не оказывается просроченной за выходные.
  */
-function addWorkdays(from, days) {
-  const d = new Date(from);
+function addWorkdays(from, days, tzOffset = 3) {
+  // Считаем в местном времени: иначе суббота 01:00 по Москве выглядит
+  // как пятница по UTC, и выходной день ошибочно засчитывается рабочим.
+  const shift = tzOffset * 3600000;
+  const d = new Date(new Date(from).getTime() + shift);
+  const isWeekend = (x) => x.getUTCDay() === 0 || x.getUTCDay() === 6;
+
   // задача, поставленная в выходной, считается поставленной в понедельник
-  while (d.getUTCDay() === 0 || d.getUTCDay() === 6) d.setUTCDate(d.getUTCDate() + 1);
-  let left = Math.max(0, Math.round(days));
+  while (isWeekend(d)) d.setUTCDate(d.getUTCDate() + 1);
+
+  // Приоритет 1 означает «сегодня до конца дня», а не «завтра»,
+  // поэтому прибавляем на день меньше.
+  let left = Math.max(0, Math.round(days) - 1);
   while (left > 0) {
     d.setUTCDate(d.getUTCDate() + 1);
-    if (d.getUTCDay() !== 0 && d.getUTCDay() !== 6) left -= 1;
+    if (!isWeekend(d)) left -= 1;
   }
-  // конец рабочего дня, а не полночь: срок «1 день» истекает вечером
-  d.setUTCHours(21, 0, 0, 0);
-  return d.toISOString();
+  d.setUTCHours(21, 0, 0, 0); // конец рабочего дня по местному времени
+  return new Date(d.getTime() - shift).toISOString();
+}
+
+// Рабочий день для расчёта сроков: с какого по какой час идут часы.
+const WORK_FROM_H = 10;
+const WORK_TO_H = 18;
+const WORK_DAY_MIN = (WORK_TO_H - WORK_FROM_H) * 60;
+
+const isWeekendLocal = (ms) => {
+  const d = new Date(ms).getUTCDay();
+  return d === 0 || d === 6;
+};
+/** Границы рабочего окна для дня, в котором лежит момент. */
+function dayWindow(ms) {
+  const d = new Date(ms);
+  const base = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+  return { start: base + WORK_FROM_H * 3600000, end: base + WORK_TO_H * 3600000, base };
+}
+
+/**
+ * Рабочие минуты между двумя моментами.
+ *
+ * Считается только время внутри рабочего окна будних дней. Иначе задача,
+ * пролежавшая в блокере с вечера пятницы до утра понедельника, получала бы
+ * пятнадцать часов поблажки, хотя работать в это время всё равно было нельзя.
+ */
+function workMinutesBetween(fromIso, toIso, settings = {}) {
+  const tz = num(settings, 'tz_offset', 3) * 3600000;
+  let cur = new Date(fromIso).getTime() + tz;
+  const to = new Date(toIso).getTime() + tz;
+  if (!(to > cur)) return 0;
+
+  let minutes = 0;
+  let guard = 0;
+  while (cur < to && guard++ < 4000) {
+    const w = dayWindow(cur);
+    if (!isWeekendLocal(cur)) {
+      const from = Math.max(cur, w.start);
+      const till = Math.min(to, w.end);
+      if (till > from) minutes += Math.round((till - from) / 60000);
+    }
+    cur = w.base + 86400000 + WORK_FROM_H * 3600000; // утро следующего дня
+  }
+  return minutes;
+}
+
+/**
+ * Прибавляет рабочие минуты к моменту, перешагивая вечера и выходные.
+ * Нужно для сдвига срока на время паузы: три рабочих дня ожидания
+ * должны сдвинуть дедлайн на три рабочих дня, а не на 24 часа подряд.
+ */
+function addWorkMinutes(fromIso, minutes, settings = {}) {
+  const tz = num(settings, 'tz_offset', 3) * 3600000;
+  let cur = new Date(fromIso).getTime() + tz;
+  let left = Math.max(0, Math.round(minutes));
+  let guard = 0;
+
+  while (left > 0 && guard++ < 4000) {
+    const w = dayWindow(cur);
+    if (isWeekendLocal(cur) || cur >= w.end) {
+      cur = w.base + 86400000 + WORK_FROM_H * 3600000;
+      continue;
+    }
+    const from = Math.max(cur, w.start);
+    const available = Math.round((w.end - from) / 60000);
+    if (available >= left) {
+      cur = from + left * 60000;
+      left = 0;
+    } else {
+      left -= available;
+      cur = w.base + 86400000 + WORK_FROM_H * 3600000;
+    }
+  }
+  return new Date(cur - tz).toISOString();
 }
 
 /** Настройка со списком id колонок: «a,b,c» → Set. */
@@ -1215,8 +1320,12 @@ function stageOfColumn(columnId, settings) {
   if (colSet(settings, 'column_in_progress').has(columnId)) return 'in_progress';
   if (colSet(settings, 'column_review').has(columnId)) return 'review';
   if (colSet(settings, 'column_done').has(columnId)) return 'accepted';
-  // «Блокер» и «В ожидании» — работа стоит не по вине исполнителя
-  if (colSet(settings, 'column_paused').has(columnId)) return 'paused';
+  // «Блокер» — работа стоит не по вине исполнителя, но и не сдана
+  if (colSet(settings, 'column_blocked').has(columnId)) return 'blocked';
+  // «В ожидании» и «Гаджеты» — работа сделана, ждём внешний результат
+  if (colSet(settings, 'column_waiting').has(columnId)) return 'waiting';
+  // общий список на случай неразмеченных настроек
+  if (colSet(settings, 'column_paused').has(columnId)) return 'blocked';
   // «На контроле» и «На потом» — задача ещё не решена, только отложена
   if (colSet(settings, 'column_shelved').has(columnId)) return 'shelved';
   if (colSet(settings, 'column_cancelled').has(columnId)) return 'cancelled';
@@ -1246,13 +1355,16 @@ async function upsertTaskFromYougile(env, t, settings) {
 
   // Срок вычисляется из стикера «Приоритет»: это рабочие дни от постановки.
   // Явная дата в карточке, если она есть, важнее — её ставили руками.
-  const priorityDays = Number(
+  // Приоритет фиксируется снимком при первой синхронизации: смена стикера
+  // задним числом не должна отматывать уже накопленную просрочку.
+  const priorityDays = existing?.priority || Number(
     stickerValue(t, settings.sticker_priority, stateMap(settings, 'priority_states'),
                  settings.priority_default || '7')
   );
+  const tz = num(settings, 'tz_offset', 3);
   const deadline = t.deadline?.deadline
     ? new Date(t.deadline.deadline).toISOString()
-    : (priorityDays ? addWorkdays(createdAt, priorityDays) : existing?.deadline || null);
+    : (priorityDays ? addWorkdays(createdAt, priorityDays, tz) : existing?.deadline || null);
 
   let status = existing?.status || 'open';
   let taken = existing?.taken_at || null;
@@ -1261,12 +1373,15 @@ async function upsertTaskFromYougile(env, t, settings) {
   let returns = existing?.returns || 0;
   let pausedMin = existing?.paused_min || 0;
   let pausedSince = existing?.paused_since || null;
+  let workDoneAt = existing?.work_done_at || null;
+  let workDoneKind = existing?.work_done_kind || null;
 
   const stage = stageOfColumn(t.columnId, settings);
 
-  // выход из паузы — копим её длительность, чтобы вычесть из времени работы
-  if (pausedSince && stage !== 'paused') {
-    pausedMin += Math.max(0, Math.round((Date.now() - new Date(pausedSince)) / 60000));
+  // Выход из паузы — копим её длительность. Считаем в рабочих минутах:
+  // календарные дарили бы сутки за каждые выходные, проведённые в блокере.
+  if (pausedSince && stage !== 'blocked' && stage !== 'waiting') {
+    pausedMin += workMinutesBetween(pausedSince, now, settings);
     pausedSince = null;
   }
 
@@ -1274,17 +1389,33 @@ async function upsertTaskFromYougile(env, t, settings) {
     if (status === 'review') returns += 1; // вернулась с проверки — признак «без правок» гаснет
     status = 'in_progress';
     taken = taken || now;
+    // Вернулись к работе — значит она не была закончена. Отметка сдачи
+    // аннулируется, часы идут дальше: иначе «сдал пустышку» останавливало бы срок.
+    workDoneAt = null;
+    workDoneKind = null;
   } else if (stage === 'review') {
     status = 'review';
     submitted = submitted || now;
+    // сдал на проверку — работа с его стороны закончена
+    if (!workDoneAt) { workDoneAt = now; workDoneKind = 'submitted'; }
   } else if (stage === 'accepted') {
     status = 'accepted';
     done = done || now;
-  } else if (stage === 'paused') {
-    // Пока задача в блокере или ожидании, она не участвует в расчёте вовсе,
-    // а накопленная пауза потом сдвинет дедлайн.
-    status = 'paused';
+    if (!workDoneAt) { workDoneAt = done; workDoneKind = 'accepted'; }
+  } else if (stage === 'blocked') {
+    // Часы на паузе, но работа не сдана: блокером нельзя остановить срок,
+    // ничего не сделав.
+    status = 'blocked';
     pausedSince = pausedSince || now;
+  } else if (stage === 'waiting') {
+    // Работа ассистента закончена, ждём внешний результат. Часы стоят,
+    // и задача засчитывается сданной — по этой дате и меряется срок.
+    status = 'waiting';
+    pausedSince = pausedSince || now;
+    if (!workDoneAt) {
+      workDoneAt = now;
+      workDoneKind = 'handed_off';
+    }
   } else if (stage === 'shelved') {
     // Отложена: в зачёт пойдёт только после того, как будет решена.
     status = 'shelved';
@@ -1318,12 +1449,14 @@ async function upsertTaskFromYougile(env, t, settings) {
     await db
       .prepare(
         `UPDATE tasks SET title=?, number=?, board_id=?, column_id=?, keywords=?, assignee_id=?,
-         size=?, deadline=?, status=?, taken_at=?, submitted_at=?, done_at=?, returns=?,
-         paused_min=?, paused_since=?, period=?, updated_at=? WHERE id=?`
+         size=?, priority=?, deadline=?, status=?, taken_at=?, submitted_at=?, done_at=?,
+         work_done_at=?, work_done_kind=?, returns=?, paused_min=?, paused_since=?,
+         period=?, updated_at=? WHERE id=?`
       )
       .bind(title, t.idTaskCommon || existing.number, t.boardId || existing.board_id,
             t.columnId || existing.column_id, keywords,
-            user?.id || existing.assignee_id, size, deadline, status, taken, submitted, done,
+            user?.id || existing.assignee_id, size, priorityDays, deadline, status, taken,
+            submitted, done, workDoneAt, workDoneKind,
             returns, pausedMin, pausedSince, period, now, t.id)
       .run();
   } else {
@@ -1340,14 +1473,16 @@ async function upsertTaskFromYougile(env, t, settings) {
     await db
       .prepare(
         `INSERT INTO tasks (id, title, number, board_id, column_id, keywords, assignee_id,
-         author_id, size, created_at, deadline, status, taken_at, submitted_at, done_at, returns,
-         paused_min, paused_since, is_initiative, is_zaeb, period)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+         author_id, size, priority, created_at, deadline, status, taken_at, submitted_at,
+         done_at, work_done_at, work_done_kind, returns, paused_min, paused_since,
+         is_initiative, is_zaeb, period)
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
       )
       .bind(t.id, title, t.idTaskCommon || null, t.boardId || null, t.columnId || null,
             taskKeywords({ ...t, title }),
-            user?.id || null, t.createdBy || null, size, createdAt, deadline, status, taken,
-            submitted, done, returns, pausedMin, pausedSince, isInitiative,
+            user?.id || null, t.createdBy || null, size, priorityDays, createdAt, deadline,
+            status, taken, submitted, done, workDoneAt, workDoneKind,
+            returns, pausedMin, pausedSince, isInitiative,
             colSet(settings, 'column_zaeb').has(t.columnId || '') ? 1 : 0, period)
       .run();
     await logEvent(db, { taskId: t.id, type: 'created', at: createdAt });
