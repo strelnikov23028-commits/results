@@ -112,6 +112,11 @@ td strong{color:var(--fg)}
 .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--border)}
 .btn.ghost:hover{background:var(--accent-soft)}
 .btn.danger{background:var(--red)}
+.btn.ghost.danger{background:transparent;color:var(--red);border-color:var(--red)}
+/* отключённый сотрудник виден, но приглушён */
+tr.off{opacity:.45}
+/* поля прямо в таблице: компактнее обычных */
+td .e{padding:6px 8px;font-size:14px;min-height:34px;border-radius:8px}
 .btn.sm{min-height:34px;padding:0 12px;font-size:13.5px}
 
 input,select{
@@ -634,15 +639,27 @@ function renderInbox(d, v){
 async function renderAdmin(v){
   const [{users}, {settings}] = await Promise.all([api('/admin/users'), api('/admin/settings')]);
 
+  // Все поля правятся прямо в строке: людей заводит и бот, и трекер,
+  // поэтому дубли и пустые id — обычное дело, и чинить их надо здесь.
+  const roleOpts = (cur) => [
+    ['assistant', 'ассистент'], ['lead', 'рук. отдела'], ['chief', 'руководитель'],
+  ].map(([v2, t]) => `<option value="${v2}"${v2 === cur ? ' selected' : ''}>${t}</option>`).join('');
+
   const rows = users.map((u) => `
-    <tr>
-      <td><strong>${esc(u.name)}</strong></td>
-      <td>${({assistant:'ассистент', lead:'рук. отдела', chief:'руководитель'})[u.role]}</td>
-      <td>${esc(u.grade)}</td>
-      <td class="num">${money(u.salary)}</td>
-      <td class="muted">${esc(u.yougile_id || '—')}</td>
-      <td class="muted">${esc(u.tg_user_id || '—')}</td>
-      <td class="num"><button class="btn ghost sm" data-rotate="${esc(u.id)}" data-name="${esc(u.name)}">Новый ключ</button></td>
+    <tr data-id="${esc(u.id)}"${u.active ? '' : ' class="off"'}>
+      <td><input class="e" data-f="name" value="${esc(u.name)}" style="min-width:150px"></td>
+      <td><select class="e" data-f="role">${roleOpts(u.role)}</select></td>
+      <td><select class="e" data-f="grade">${['A1','A2','A3'].map((g) =>
+            `<option${g === u.grade ? ' selected' : ''}>${g}</option>`).join('')}</select></td>
+      <td><input class="e" data-f="salary" type="number" value="${u.salary | 0}" style="width:96px"></td>
+      <td><input class="e" data-f="yougile_id" value="${esc(u.yougile_id || '')}" placeholder="не задан" style="min-width:200px"></td>
+      <td><input class="e" data-f="tg_user_id" value="${esc(u.tg_user_id || '')}" placeholder="не задан" style="width:120px"></td>
+      <td><input class="e" data-f="tg_username" value="${esc(u.tg_username || '')}" placeholder="ник" style="width:110px"></td>
+      <td class="num" style="white-space:nowrap">
+        <button class="btn sm" data-save="${esc(u.id)}">Сохранить</button>
+        <button class="btn ghost sm" data-rotate="${esc(u.id)}" data-name="${esc(u.name)}">Ключ</button>
+        <button class="btn ghost sm danger" data-del="${esc(u.id)}" data-name="${esc(u.name)}">Удалить</button>
+      </td>
     </tr>`).join('');
 
   const setFields = [
@@ -659,10 +676,13 @@ async function renderAdmin(v){
       <input id="s_${k}" value="${esc(settings[k] || '')}"></div>`).join('');
 
   v.innerHTML = `
-    <h1 style="margin-bottom:14px">Люди</h1>
+    <h1 style="margin-bottom:6px">Люди</h1>
+    <p class="muted" style="margin-bottom:14px">Любое поле правится прямо здесь. Telegram ID и ID в YouGile
+      можно вписать вручную — бот подставит их сам только после первого сообщения в чате.</p>
     <div class="tbl" style="margin-bottom:16px"><table>
-      <thead><tr><th>Имя</th><th>Роль</th><th>Грейд</th><th class="num">Оклад</th><th>YouGile ID</th><th>Telegram ID</th><th></th></tr></thead>
+      <thead><tr><th>Имя</th><th>Роль</th><th>Грейд</th><th>Оклад</th><th>YouGile ID</th><th>Telegram ID</th><th>Ник</th><th></th></tr></thead>
       <tbody>${rows}</tbody></table></div>
+    <div id="keyBox" style="margin-bottom:22px"></div>
 
     <div class="card" style="margin-bottom:26px">
       <h3 style="margin-bottom:12px">Добавить человека</h3>
@@ -704,12 +724,67 @@ async function renderAdmin(v){
     } catch (e) { alert(e.message); }
   };
 
-  document.querySelectorAll('[data-rotate]').forEach((b) => {
+  // собирает поля строки в объект
+  const rowData = (id) => {
+    const tr = v.querySelector(`tr[data-id="${CSS.escape(id)}"]`);
+    const b = { id };
+    tr.querySelectorAll('.e').forEach((el) => {
+      b[el.dataset.f] = el.dataset.f === 'salary' ? (+el.value || 0) : el.value.trim();
+    });
+    return b;
+  };
+
+  // ключ показываем в поле, откуда его можно выделить и скопировать
+  const showKey = (name, key) => {
+    $('keyBox').innerHTML = `
+      <div class="card">
+        <div class="ok" style="margin-bottom:8px">Новый ключ для «${esc(name)}». Старый больше не работает.</div>
+        <div class="row" style="gap:8px">
+          <input id="keyVal" readonly value="${esc(key)}" style="flex:1;font-family:ui-monospace,monospace">
+          <button class="btn" id="copyKey">Скопировать</button>
+        </div>
+        <p class="muted" style="margin-top:8px">Ключ хранится только в виде отпечатка — увидеть его ещё раз нельзя.</p>
+      </div>`;
+    const inp = $('keyVal');
+    inp.focus(); inp.select();
+    $('copyKey').onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(key);
+        $('copyKey').textContent = 'Скопировано';
+      } catch {
+        // без разрешения на буфер обмена остаётся выделить руками
+        inp.focus(); inp.select();
+        $('copyKey').textContent = 'Выделено — Ctrl+C';
+      }
+    };
+  };
+
+  v.querySelectorAll('[data-save]').forEach((b) => {
+    b.onclick = async () => {
+      try {
+        await api('/admin/users', { method: 'POST', body: JSON.stringify(rowData(b.dataset.save)) });
+        b.textContent = 'Сохранено';
+        setTimeout(() => { b.textContent = 'Сохранить'; }, 1500);
+      } catch (e) { alert(e.message); }
+    };
+  });
+
+  v.querySelectorAll('[data-rotate]').forEach((b) => {
     b.onclick = async () => {
       if (!confirm(`Выдать новый ключ для «${b.dataset.name}»? Старый перестанет работать.`)) return;
-      const u = users.find((x) => x.id === b.dataset.rotate);
-      const res = await api('/admin/users', {method:'POST', body: JSON.stringify({...u, rotateKey:true})});
-      alert('Новый ключ (сохраните, он больше не покажется):\n\n' + res.key);
+      const res = await api('/admin/users', {
+        method: 'POST',
+        body: JSON.stringify({ ...rowData(b.dataset.rotate), rotateKey: true }),
+      });
+      showKey(b.dataset.name, res.key);
+    };
+  });
+
+  v.querySelectorAll('[data-del]').forEach((b) => {
+    b.onclick = async () => {
+      if (!confirm(`Удалить «${b.dataset.name}»? Задачи и история останутся, но человек исчезнет из отдела.`)) return;
+      await api('/admin/users/' + encodeURIComponent(b.dataset.del), { method: 'DELETE' });
+      renderAdmin(v);
     };
   });
 

@@ -156,8 +156,19 @@ function computeMetrics({ tasks, replies, settings, grade }) {
   const slaRate = withDeadline.length ? inTimeCount / withDeadline.length : 0;
   const slaScore = slaRate * 10;
 
-  // 4 балла из 10 — реакция, 6 — попадание в срок
-  const speed = Math.max(0, Math.min(10, 0.4 * chat.score + 0.6 * slaScore));
+  // Срок учитывается только если его вообще проставляют.
+  //
+  // По умолчанию скорость — это 4 балла за реакцию и 6 за попадание в срок.
+  // Но если сроков нет почти нигде, вторую часть некому набрать, и человек
+  // терял бы больше половины кошелька за то, что задачи ставят без дат.
+  // В таком месяце скорость меряется по одной реакции — по тому, что есть.
+  const coverage = closed.length ? withDeadline.length / closed.length : 0;
+  const minCoverage = num(settings, 'sla_min_coverage', 0.3);
+  const slaCounts = withDeadline.length > 0 && coverage >= minCoverage;
+
+  const speed = slaCounts
+    ? Math.max(0, Math.min(10, 0.4 * chat.score + 0.6 * slaScore))
+    : chat.score;
 
   // Автономность — доля задач без вовлечения руководителя, отнесённая к норме
   const normAut = num(settings, `norm_autonomy_${grade}`, 0.85);
@@ -201,7 +212,11 @@ function computeMetrics({ tasks, replies, settings, grade }) {
         inTime: inTimeCount,
         slaRate: pct(slaRate),
         slaScore: round2(slaScore),
-        formula: `реакция ${chat.score} × 0.4 + срок ${round2(slaScore)} × 0.6`,
+        slaCounts,
+        slaCoverage: pct(coverage),
+        formula: slaCounts
+          ? `реакция ${chat.score} × 0.4 + срок ${round2(slaScore)} × 0.6`
+          : `только реакция ${chat.score}: срок проставлен у ${withDeadline.length} из ${closed.length} задач`,
       },
       autonomy: {
         solo: soloCount,
@@ -812,9 +827,20 @@ async function handleApi(request, env, url) {
 
     if (path === '/admin/users' && request.method === 'GET') {
       const { results } = await db
-        .prepare('SELECT id, name, role, grade, salary, active, yougile_id, tg_user_id FROM users ORDER BY role, name')
+        .prepare(
+          `SELECT id, name, role, grade, salary, active, yougile_id, tg_user_id, tg_username
+           FROM users ORDER BY role, name`
+        )
         .all();
       return json({ users: results });
+    }
+
+    if (path.startsWith('/admin/users/') && request.method === 'DELETE') {
+      const id = decodeURIComponent(path.split('/').pop());
+      // задачи и переписку не трогаем: история должна пережить любую чистку
+      await db.prepare('UPDATE tasks SET assignee_id = NULL WHERE assignee_id = ?').bind(id).run();
+      await db.prepare('DELETE FROM users WHERE id = ?').bind(id).run();
+      return json({ ok: true });
     }
 
     if (path === '/admin/users' && request.method === 'POST') {
@@ -823,15 +849,17 @@ async function handleApi(request, env, url) {
       const key = b.rotateKey || !b.id ? newKey() : null;
       const hash = key ? await sha256(key) : null;
 
+      const nick = (b.tg_username || '').replace('@', '').toLowerCase() || null;
+
       if (b.id) {
         await db
           .prepare(
-            `UPDATE users SET name=?, role=?, grade=?, salary=?, yougile_id=?, tg_user_id=?, active=?
-             ${hash ? ', key_hash=?' : ''} WHERE id=?`
+            `UPDATE users SET name=?, role=?, grade=?, salary=?, yougile_id=?, tg_user_id=?,
+             tg_username=?, active=? ${hash ? ', key_hash=?' : ''} WHERE id=?`
           )
           .bind(...[
             b.name, b.role, b.grade, b.salary | 0, b.yougile_id || null, b.tg_user_id || null,
-            b.active === false ? 0 : 1,
+            nick, b.active === false ? 0 : 1,
             ...(hash ? [hash] : []),
             b.id,
           ])
@@ -839,11 +867,11 @@ async function handleApi(request, env, url) {
       } else {
         await db
           .prepare(
-            `INSERT INTO users (id, name, role, grade, salary, yougile_id, tg_user_id, key_hash)
-             VALUES (?,?,?,?,?,?,?,?)`
+            `INSERT INTO users (id, name, role, grade, salary, yougile_id, tg_user_id, tg_username, key_hash)
+             VALUES (?,?,?,?,?,?,?,?,?)`
           )
           .bind(id, b.name, b.role || 'assistant', b.grade || 'A2', b.salary | 0,
-                b.yougile_id || null, b.tg_user_id || null, hash)
+                b.yougile_id || null, b.tg_user_id || null, nick, hash)
           .run();
       }
       // ключ показывается ровно один раз — в базе только его хэш
@@ -1869,11 +1897,27 @@ async function handleBotCommand(msg, env, settings) {
     if (!nick || !name) return reply(`Формат: ${cmd} @ник Имя Фамилия`);
 
     const role = cmd === '/assist' ? 'assistant' : 'chief';
-    const exists = await db.prepare('SELECT id FROM users WHERE lower(tg_username) = ?').bind(nick).first();
+
+    // Человек может уже быть заведён — из YouGile или руками. Ищем сначала
+    // по нику, потом по имени, и только если совпадений нет, создаём нового.
+    // Иначе одна команда плодит двойников с пустыми id.
+    let exists = await db
+      .prepare('SELECT id, name FROM users WHERE lower(tg_username) = ?')
+      .bind(nick).first();
+    if (!exists) {
+      exists = await db
+        .prepare('SELECT id, name FROM users WHERE lower(name) = lower(?) OR lower(name) LIKE lower(?)')
+        .bind(name, name.split(' ')[0] + '%').first();
+    }
+
     if (exists) {
-      await db.prepare('UPDATE users SET name = ?, role = ?, active = 1 WHERE id = ?')
-        .bind(name, role, exists.id).run();
-      return reply(`Обновил: ${name} — ${role === 'assistant' ? 'ассистент' : 'руководитель'}.`);
+      await db
+        .prepare('UPDATE users SET name = ?, role = ?, tg_username = ?, active = 1 WHERE id = ?')
+        .bind(name, role, nick, exists.id).run();
+      return reply(
+        `Обновил уже заведённого: <b>${name}</b> — ${role === 'assistant' ? 'ассистент' : 'руководитель'}, ник @${nick}.\n\n` +
+        `Новую запись не создавал, чтобы не было двойников.`
+      );
     }
 
     const key = newKey();
