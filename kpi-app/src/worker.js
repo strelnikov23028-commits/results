@@ -714,10 +714,15 @@ async function handleApi(request, env, url) {
 
     // Скорость лида: своя реакция на вопросы руководителя плюс скорость
     // команды. Одной командной мало — молчать самому тоже нельзя, а одной
-    // своей мало тем более: если ассистент systematically просрачивает
+    // своей мало тем более: если ассистент систематически просрачивает
     // ответы, это должно бить и по доходу того, кто им руководит.
-    const meFull = await db.prepare('SELECT * FROM users WHERE id = ?').bind(me.id).first();
-    const leadOwn = me.role === 'lead' ? await buildProfile(db, meFull, period, settings) : null;
+    //
+    // Профиль лида считается всегда, а не только когда он сам смотрит:
+    // владельцу нужно видеть и его цифры тоже.
+    const leadUser = await db
+      .prepare("SELECT * FROM users WHERE role = 'lead' AND active = 1 ORDER BY created_at LIMIT 1")
+      .first();
+    const leadOwn = leadUser ? await buildProfile(db, leadUser, period, settings) : null;
     const teamSpeed = profiles.length
       ? round2(profiles.reduce((a, p) => a + p.metrics.speed, 0) / profiles.length)
       : 0;
@@ -766,11 +771,18 @@ async function handleApi(request, env, url) {
       })),
       lead: {
         avgKef,
+        id: leadUser?.id || null,
+        name: leadUser?.name || null,
+        // Владельцу нужны те же подробности, что и по ассистентам,
+        // поэтому отдаём полный разбор, а не только итоговые цифры.
         own: leadOwn ? {
           quality: leadOwn.metrics.quality,
           autonomy: leadOwn.metrics.autonomy,
           speed: leadOwn.metrics.speed,
           tasks: leadOwn.tasks.length,
+          openTasks: leadOwn.openTasks.length,
+          breakdown: leadOwn.metrics.breakdown,
+          money: leadOwn.money,
         } : null,
         wallets: leadWallets,
         speed: {

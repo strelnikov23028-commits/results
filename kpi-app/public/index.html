@@ -115,8 +115,27 @@ td strong{color:var(--fg)}
 .btn.ghost.danger{background:transparent;color:var(--red);border-color:var(--red)}
 /* отключённый сотрудник виден, но приглушён */
 tr.off{opacity:.45}
-/* поля прямо в таблице: компактнее обычных */
-td .e{padding:6px 8px;font-size:14px;min-height:34px;border-radius:8px}
+/* Поля прямо в таблице. Ширины заданы через колонки, а не через поля,
+   чтобы таблица влезала целиком и её не приходилось прокручивать. */
+td .e{padding:6px 8px;font-size:14px;min-height:34px;border-radius:8px;width:100%;min-width:0}
+#peopleTable{min-width:0;table-layout:fixed;width:100%}
+#peopleTable th,#peopleTable td{padding:10px 8px}
+#peopleTable col.c-name{width:17%}
+#peopleTable col.c-role{width:14%}
+#peopleTable col.c-grade{width:8%}
+#peopleTable col.c-salary{width:9%}
+#peopleTable col.c-yg{width:13%}
+#peopleTable col.c-tg{width:11%}
+#peopleTable col.c-nick{width:12%}
+#peopleTable col.c-acts{width:16%}
+/* технические id читать глазами не нужно — при наведении видно целиком */
+td .e.id{font-size:12.5px;color:var(--fg-3)}
+td.acts{white-space:nowrap;display:flex;gap:4px;justify-content:flex-end;align-items:center}
+td.acts .btn{padding:0 9px;font-size:12.5px}
+@media(max-width:1100px){
+  #peopleTable{min-width:920px;table-layout:auto}
+  td .e{width:auto}
+}
 .btn.sm{min-height:34px;padding:0 12px;font-size:13.5px}
 
 input,select{
@@ -377,7 +396,9 @@ function renderProfile(p, v){
 
   v.innerHTML = `
     <div class="row" style="margin-bottom:16px">
-      <div><h1>${esc(p.user.name)}</h1><p class="muted">Грейд ${esc(p.user.grade)} · ${p.tasks.length} закрытых задач, ${p.openTasks.length} в работе</p></div>
+      <div><h1>${esc(p.user.name)}</h1><p class="muted">${
+        p.user.role === 'assistant' ? `Грейд ${esc(p.user.grade)} · ` : ''
+      }${p.tasks.length} закрытых задач, ${p.openTasks.length} в работе</p></div>
       <div class="spacer"></div>
       <div class="card" style="padding:14px 20px">
         <div class="kef"><span class="big">${p.money.kef.toFixed(2)}</span><span class="muted">кэф месяца</span></div>
@@ -560,45 +581,70 @@ function labelEvent(type){
 }
 
 function renderTeam(d, v){
-  const rows = d.people.map((p) => `
+  const L = d.lead;
+  const iAmLead = ME && ME.role === 'lead';
+
+  const row = (p, extra) => `
     <tr class="clickable" data-person="${esc(p.id)}">
-      <td><strong>${esc(p.name)}</strong> <span class="tag t-grey">${esc(p.grade)}</span></td>
+      <td><strong>${esc(p.name)}</strong> ${extra || ''}</td>
       <td class="num"><strong style="font-size:17px;color:var(--accent)">${p.kef.toFixed(2)}</strong></td>
       <td class="num">${p.metrics.quality.toFixed(1)}</td>
-      <td class="num">${p.metrics.speed.toFixed(1)}</td>
       <td class="num">${p.metrics.autonomy.toFixed(1)}</td>
-      
+      <td class="num">${p.metrics.speed.toFixed(1)}</td>
       <td class="num">${p.tasksClosed} / ${p.tasksOpen}</td>
       <td class="num">${fmtSeconds(p.medianReply)}</td>
       <td class="num"><strong>${money(p.total)}</strong></td>
-    </tr>`).join('');
+    </tr>`;
 
-  const L = d.lead;
+  const rows = d.people.map((p) => row(p, `<span class="tag t-grey">${esc(p.grade)}</span>`)).join('');
+
+  // Строка руководителя отдела в общей таблице: у него другой пул и другие
+  // кошельки, но владельцу нужно видеть всех в одном месте.
+  const leadRow = L.own ? `
+    <tr class="clickable" data-person="${esc(L.id || '')}" style="border-top:2px solid var(--border)">
+      <td><strong>${esc(L.name || 'Руководитель отдела')}</strong>
+        <span class="tag t-blue">рук. отдела</span></td>
+      <td class="num"><strong style="font-size:17px;color:var(--accent)">${(L.bonus / 5000).toFixed(2)}</strong></td>
+      <td class="num">${L.own.quality.toFixed(1)}</td>
+      <td class="num">${L.own.autonomy.toFixed(1)}</td>
+      <td class="num">${L.own.speed.toFixed(1)}</td>
+      <td class="num">${L.own.tasks} / ${L.own.openTasks}</td>
+      <td class="num">${fmtSeconds(L.own.breakdown?.speed?.medianReply)}</td>
+      <td class="num"><strong>${money(L.bonus + L.shareZaeb + L.shareSaving)}</strong></td>
+    </tr>` : '';
+
   v.innerHTML = `
     <div class="row" style="margin-bottom:16px">
-      <div><h1>Отдел</h1><p class="muted">Средний кэф команды за период</p></div>
+      <div><h1>Отдел</h1><p class="muted">Результаты за период</p></div>
       <div class="spacer"></div>
-      <div class="card" style="padding:14px 20px"><div class="kef"><span class="big">${d.avgKef.toFixed(2)}</span><span class="muted">средний кэф</span></div></div>
+      <div class="card" style="padding:14px 20px"><div class="kef"><span class="big">${d.avgKef.toFixed(2)}</span><span class="muted">средний кэф ассистентов</span></div></div>
     </div>
 
     <div class="tbl" style="margin-bottom:26px"><table>
       <thead><tr>
-        <th>Ассистент</th><th class="num">Кэф</th><th class="num">Кач.</th><th class="num">Скор.</th>
-        <th class="num">Авт.</th><th class="num">Проакт.</th><th class="num">Закрыто / в работе</th>
+        <th>Человек</th><th class="num">Кэф</th><th class="num">Кач.</th>
+        <th class="num">Самост.</th><th class="num">Скор.</th><th class="num">Закрыто / в работе</th>
         <th class="num">Медиана ответа</th><th class="num">К выплате</th>
-      </tr></thead><tbody>${rows || '<tr><td colspan="9" class="muted">Ассистентов пока нет</td></tr>'}</tbody>
+      </tr></thead><tbody>${rows || '<tr><td colspan="8" class="muted">Ассистентов пока нет</td></tr>'}${leadRow}</tbody>
     </table></div>
 
-    <h2 style="margin-bottom:12px">Ваш собственный результат как руководителя отдела</h2>
+    <h2 style="margin-bottom:4px">${iAmLead ? 'Ваш результат' : 'Результат руководителя отдела'}</h2>
+    <p class="muted" style="margin-bottom:12px">Премия 50 000 ₽: своя работа плюс результат команды</p>
     <div class="grid g4">
-      <div class="card metric"><div class="lbl">Результат отдела</div><div class="val">${money(L.wallets.team)}</div><div class="sub">средний кэф ${L.avgKef.toFixed(2)}</div></div>
-      <div class="card metric"><div class="lbl">Фильтр</div><div class="val">${money(L.wallets.filter)}</div><div class="sub">принято с первого раза ${esc(L.filterRate)}</div></div>
-      <div class="card metric"><div class="lbl">Разгрузка</div><div class="val">${money(L.wallets.unload)}</div><div class="sub">без руководителя ${esc(L.unloadRate)}</div></div>
-      <div class="card metric"><div class="lbl">Доля с команды</div><div class="val">${money(L.shareZaeb + L.shareSaving)}</div><div class="sub">заёбы ${money(L.shareZaeb)} + экономия ${money(L.shareSaving)}</div></div>
+      <div class="card metric"><div class="lbl">Результат отдела</div><div class="val">${money(L.wallets.team)}</div><div class="sub">средний кэф ассистентов ${L.avgKef.toFixed(2)}</div></div>
+      <div class="card metric"><div class="lbl">Качество</div><div class="val">${money(L.wallets.quality)}</div><div class="sub">свои задачи: ${L.own ? L.own.quality.toFixed(1) : '—'} из 10</div></div>
+      <div class="card metric"><div class="lbl">Самостоятельность</div><div class="val">${money(L.wallets.autonomy)}</div><div class="sub">свои задачи: ${L.own ? L.own.autonomy.toFixed(1) : '—'} из 10</div></div>
+      <div class="card metric"><div class="lbl">Скорость</div><div class="val">${money(L.wallets.speed)}</div><div class="sub">${esc(L.speed.formula)}</div></div>
     </div>
     <div class="card" style="margin-top:14px">
-      <div class="row"><h3>Итого ваш бонус за период</h3><div class="spacer"></div>
-        <div class="money">${money(L.bonus + L.shareZaeb + L.shareSaving)}</div></div>
+      <div class="row">
+        <div>
+          <h3>Итого за период</h3>
+          <p class="muted" style="margin:4px 0 0">включая долю с команды: заёбы ${money(L.shareZaeb)} + экономия ${money(L.shareSaving)}</p>
+        </div>
+        <div class="spacer"></div>
+        <div class="money">${money(L.bonus + L.shareZaeb + L.shareSaving)}</div>
+      </div>
     </div>
   `;
 
@@ -632,20 +678,28 @@ async function renderAdmin(v){
     ['assistant', 'ассистент'], ['lead', 'рук. отдела'], ['chief', 'руководитель'],
   ].map(([v2, t]) => `<option value="${v2}"${v2 === cur ? ' selected' : ''}>${t}</option>`).join('');
 
+  // Ширины подобраны так, чтобы таблица влезала целиком без прокрутки:
+  // роль и грейд читаются полностью, а длинные технические id ужаты —
+  // их всё равно не читают глазами, полное значение видно при наведении.
   const rows = users.map((u) => `
     <tr data-id="${esc(u.id)}"${u.active ? '' : ' class="off"'}>
-      <td><input class="e" data-f="name" value="${esc(u.name)}" style="min-width:150px"></td>
+      <td><input class="e" data-f="name" value="${esc(u.name)}" title="${esc(u.name)}"></td>
       <td><select class="e" data-f="role">${roleOpts(u.role)}</select></td>
-      <td><select class="e" data-f="grade">${['A1','A2','A3'].map((g) =>
-            `<option${g === u.grade ? ' selected' : ''}>${g}</option>`).join('')}</select></td>
-      <td><input class="e" data-f="salary" type="number" value="${u.salary | 0}" style="width:96px"></td>
-      <td><input class="e" data-f="yougile_id" value="${esc(u.yougile_id || '')}" placeholder="не задан" style="min-width:200px"></td>
-      <td><input class="e" data-f="tg_user_id" value="${esc(u.tg_user_id || '')}" placeholder="не задан" style="width:120px"></td>
-      <td><input class="e" data-f="tg_username" value="${esc(u.tg_username || '')}" placeholder="ник" style="width:110px"></td>
-      <td class="num" style="white-space:nowrap">
+      <td>${u.role === 'assistant'
+        ? `<select class="e" data-f="grade">${['A1','A2','A3'].map((g) =>
+            `<option${g === u.grade ? ' selected' : ''}>${g}</option>`).join('')}</select>`
+        : '<span class="muted">—</span>'}</td>
+      <td><input class="e" data-f="salary" type="number" value="${u.salary | 0}"></td>
+      <td><input class="e id" data-f="yougile_id" value="${esc(u.yougile_id || '')}"
+                 placeholder="не задан" title="${esc(u.yougile_id || 'не задан')}"></td>
+      <td><input class="e id" data-f="tg_user_id" value="${esc(u.tg_user_id || '')}"
+                 placeholder="не задан" title="${esc(u.tg_user_id || 'не задан')}"></td>
+      <td><input class="e" data-f="tg_username" value="${esc(u.tg_username || '')}"
+                 placeholder="ник" title="${esc(u.tg_username || '')}"></td>
+      <td class="num acts">
         <button class="btn sm" data-save="${esc(u.id)}">Сохранить</button>
         <button class="btn ghost sm" data-rotate="${esc(u.id)}" data-name="${esc(u.name)}">Ключ</button>
-        <button class="btn ghost sm danger" data-del="${esc(u.id)}" data-name="${esc(u.name)}">Удалить</button>
+        <button class="btn ghost sm danger" data-del="${esc(u.id)}" data-name="${esc(u.name)}">×</button>
       </td>
     </tr>`).join('');
 
@@ -665,7 +719,11 @@ async function renderAdmin(v){
     <h1 style="margin-bottom:6px">Люди</h1>
     <p class="muted" style="margin-bottom:14px">Любое поле правится прямо здесь. Telegram ID и ID в YouGile
       можно вписать вручную — бот подставит их сам только после первого сообщения в чате.</p>
-    <div class="tbl" style="margin-bottom:16px"><table>
+    <div class="tbl" style="margin-bottom:16px"><table id="peopleTable">
+      <colgroup>
+        <col class="c-name"><col class="c-role"><col class="c-grade"><col class="c-salary">
+        <col class="c-yg"><col class="c-tg"><col class="c-nick"><col class="c-acts">
+      </colgroup>
       <thead><tr><th>Имя</th><th>Роль</th><th>Грейд</th><th>Оклад</th><th>YouGile ID</th><th>Telegram ID</th><th>Ник</th><th></th></tr></thead>
       <tbody>${rows}</tbody></table></div>
     <div id="keyBox" style="margin-bottom:22px"></div>
@@ -677,8 +735,9 @@ async function renderAdmin(v){
         <div class="field"><label>Роль</label><select id="n_role">
           <option value="assistant">ассистент</option><option value="lead">руководитель отдела</option>
           <option value="chief">руководитель</option></select></div>
-        <div class="field"><label>Грейд</label><select id="n_grade">
-          <option>A1</option><option selected>A2</option><option>A3</option></select></div>
+        <div class="field" id="gradeField"><label>Грейд</label><select id="n_grade">
+          <option>A1</option><option selected>A2</option><option>A3</option></select>
+          <div class="muted" style="margin-top:5px">Только для ассистентов: задаёт норму самостоятельности</div></div>
         <div class="field"><label>Оклад</label><input id="n_salary" type="number" value="0"></div>
         <div class="field"><label>ID в YouGile</label><input id="n_yg"></div>
         <div class="field"><label>ID в Telegram</label><input id="n_tg"></div>
@@ -696,6 +755,13 @@ async function renderAdmin(v){
         <span id="syncMsg" class="muted"></span>
       </div>
     </div>`;
+
+  // грейд есть только у ассистентов — у руководителей его прячем
+  const syncGradeField = () => {
+    $('gradeField').style.display = $('n_role').value === 'assistant' ? '' : 'none';
+  };
+  $('n_role').onchange = syncGradeField;
+  syncGradeField();
 
   $('addUser').onclick = async () => {
     try {
