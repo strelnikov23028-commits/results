@@ -220,6 +220,15 @@ function computeMetrics({ tasks, replies, settings, grade }) {
     speed: idle ? 0 : round2(speed),
     autonomy: idle ? 0 : round2(autonomy),
     idle,
+
+    // По каким метрикам вообще была база. Метрика без базы не платится
+    // и не наказывает: её кошелёк расходится по остальным.
+    usable: {
+      quality: closed.length > 0,
+      autonomy: closed.length > 0,
+      // скорость меряется по чату: нет вопросов — нечего мерить
+      speed: chat.reference > 0 || chat.off > 0 || withDeadline.length > 0,
+    },
     breakdown: {
       idle: idle ? 'за период нет ни задач, ни ответов в чате — бонус не начисляется' : null,
       quality: {
@@ -390,7 +399,7 @@ function medianSeconds(replies) {
 
 /** Деньги: сколько забрано из каждого кошелька. */
 function computeMoney(metrics, settings, extra = {}) {
-  const purses = {
+  const basePurses = {
     quality: num(settings, 'purse_quality', 17500),
     autonomy: num(settings, 'purse_autonomy', 10000),
     speed: num(settings, 'purse_speed', 2500),
@@ -401,9 +410,30 @@ function computeMoney(metrics, settings, extra = {}) {
     autonomy: metrics.autonomy,
   };
 
+  // Метрика без данных — это не ноль и не десятка, это «нечем мерить».
+  //
+  // Если за месяц не было ни одного вопроса в чате, «скорость 10» ничего
+  // не доказывает: сигнала не было. Платить за это нельзя, но и наказывать
+  // человека за чужое молчание несправедливо. Поэтому такой кошелёк
+  // не выплачивается и не сгорает — он расходится по остальным метрикам,
+  // и человек зарабатывает те же деньги, но только за измеренное.
+  const usable = metrics.usable || {};
+  const skipped = Object.keys(basePurses).filter((k) => usable[k] === false);
+  const live = Object.keys(basePurses).filter((k) => !skipped.includes(k));
+
+  const purses = { ...basePurses };
+  if (skipped.length && live.length) {
+    const freed = skipped.reduce((a, k) => a + basePurses[k], 0);
+    const liveSum = live.reduce((a, k) => a + basePurses[k], 0) || 1;
+    for (const k of skipped) purses[k] = 0;
+    for (const k of live) {
+      purses[k] = Math.round(basePurses[k] + freed * (basePurses[k] / liveSum));
+    }
+  }
+
   const threshold = num(settings, 'cut_threshold', 5);
   const cutFactor = num(settings, 'cut_factor', 0.85);
-  const low = Object.values(values).some((v) => v < threshold);
+  const low = live.some((k) => values[k] < threshold);
   const cut = low ? cutFactor : 1;
   const mult = extra.chiefMultiplier ?? 1;
 
@@ -411,7 +441,8 @@ function computeMoney(metrics, settings, extra = {}) {
   // Без этого пояснения оценка «10 из 10» рядом с неполной суммой
   // выглядит ошибкой расчёта, хотя это сработавшая отсечка.
   const NAMES = { quality: 'качество', speed: 'скорость', autonomy: 'самостоятельность' };
-  const lowNames = Object.keys(values)
+  // отсечка смотрит только на метрики, у которых была база
+  const lowNames = live
     .filter((k) => values[k] < threshold)
     .map((k) => `${NAMES[k]} ${round2(values[k])}`);
 
@@ -696,16 +727,21 @@ async function handleApi(request, env, url) {
       ? round2(wPersonal * leadOwn.metrics.speed + wTeam * teamSpeed)
       : teamSpeed;
 
+    // Кошельки лида. «Фильтр» и «Разгрузка» убраны: они мерили возвраты
+    // от владельца и его вовлечение в карточки, а владелец в трекер
+    // не заходит вовсе. Обе всегда показывали 100 % и просто дарили деньги.
+    // Вместо них — собственные задачи лида, по тем же правилам,
+    // что у ассистентов, плюс результат команды.
     const leadPools = {
       team: num(settings, 'lead_purse_team', 20000),
-      filter: num(settings, 'lead_purse_filter', 15000),
-      unload: num(settings, 'lead_purse_unload', 10000),
-      speed: num(settings, 'lead_purse_speed', 5000),
+      quality: num(settings, 'lead_purse_quality', 15000),
+      autonomy: num(settings, 'lead_purse_autonomy', 8000),
+      speed: num(settings, 'lead_purse_speed', 7000),
     };
     const leadWallets = {
       team: Math.round(leadPools.team * (avgKef / 10)),
-      filter: Math.round(leadPools.filter * Math.min(1, filterRate / 0.95)),
-      unload: Math.round(leadPools.unload * unloadRate),
+      quality: Math.round(leadPools.quality * ((leadOwn?.metrics.quality || 0) / 10)),
+      autonomy: Math.round(leadPools.autonomy * ((leadOwn?.metrics.autonomy || 0) / 10)),
       speed: Math.round(leadPools.speed * (leadSpeed / 10)),
     };
 
@@ -730,8 +766,12 @@ async function handleApi(request, env, url) {
       })),
       lead: {
         avgKef,
-        filterRate: pct(filterRate),
-        unloadRate: pct(unloadRate),
+        own: leadOwn ? {
+          quality: leadOwn.metrics.quality,
+          autonomy: leadOwn.metrics.autonomy,
+          speed: leadOwn.metrics.speed,
+          tasks: leadOwn.tasks.length,
+        } : null,
         wallets: leadWallets,
         speed: {
           total: leadSpeed,
@@ -744,7 +784,7 @@ async function handleApi(request, env, url) {
         shareZaeb: Math.round(teamZaeb * leadShareZaeb),
         shareSaving: Math.round(teamSaving * leadShareSaving),
         bonus:
-          leadWallets.team + leadWallets.filter + leadWallets.unload + leadWallets.speed,
+          leadWallets.team + leadWallets.quality + leadWallets.autonomy + leadWallets.speed,
       },
     });
   }
