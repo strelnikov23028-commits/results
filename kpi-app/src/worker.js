@@ -450,15 +450,20 @@ function computeMoney(metrics, settings, extra = {}) {
   let bonus = 0;
   for (const k of Object.keys(purses)) {
     const earned = purses[k] * (values[k] / 10); // до поправок
-    const got = earned * mult * cut;
+    // Безупречная метрика отсечкой не режется: если человек всегда на связи
+    // и отвечает вовремя, он забирает эту часть целиком, чем бы ни закончились
+    // остальные направления. Наказывать за чужую метрику здесь не за что.
+    const perfect = values[k] >= 10;
+    const got = earned * mult * (perfect ? 1 : cut);
     wallets[k] = {
       pool: purses[k],
       score: values[k],
       earned: Math.round(earned),
       got: Math.round(got),
+      perfect,
       // почему из кошелька пришло меньше, чем набрано по оценке
       reductions: [
-        cut !== 1 && {
+        cut !== 1 && !perfect && {
           kind: 'отсечка',
           factor: cut,
           amount: Math.round(earned * mult * (1 - cut)),
@@ -544,8 +549,20 @@ async function buildProfile(db, user, period, settings) {
   const { tasks, replies, awards } = await fetchUserData(
     db, user.id, period, user.role, settings.start_from || null
   );
+
+  // Отметки владельца «в этот раз реально помогли». Копятся весь месяц
+  // и поднимают премию: каждая на help_step, но не выше help_max.
+  const helpRow = await db
+    .prepare('SELECT count(*) AS n FROM help_marks WHERE user_id = ? AND period = ?')
+    .bind(user.id, period)
+    .first();
+  const helpCount = helpRow?.n || 0;
+  const helpMult = Math.min(
+    num(settings, 'help_max', 1.2),
+    1 + helpCount * num(settings, 'help_step', 0.02)
+  );
   const metrics = computeMetrics({ tasks, replies, settings, grade: user.grade });
-  const money = computeMoney(metrics, settings);
+  const money = computeMoney(metrics, settings, { chiefMultiplier: helpMult });
 
   const zaebSum = awards
     .filter((a) => a.kind === 'zaeb' && a.status !== 'rejected')
@@ -566,6 +583,12 @@ async function buildProfile(db, user, period, settings) {
       savingPay,
       salary: user.salary || 0,
       total: money.bonus + zaebSum + savingPay,
+    },
+    help: {
+      count: helpCount,
+      multiplier: round2(helpMult),
+      step: num(settings, 'help_step', 0.02),
+      max: num(settings, 'help_max', 1.2),
     },
     awards,
     tasks: metrics.scored.map(decorateTask),
@@ -766,6 +789,7 @@ async function handleApi(request, env, url) {
         tasksClosed: p.tasks.length,
         tasksOpen: p.openTasks.length,
         medianReply: p.metrics.breakdown.speed.medianReply,
+        help: p.help,
         bonus: p.money.bonus,
         total: p.money.total,
       })),
@@ -783,6 +807,7 @@ async function handleApi(request, env, url) {
           openTasks: leadOwn.openTasks.length,
           breakdown: leadOwn.metrics.breakdown,
           money: leadOwn.money,
+          help: leadOwn.help,
         } : null,
         wallets: leadWallets,
         speed: {
@@ -808,6 +833,119 @@ async function handleApi(request, env, url) {
     const user = await db.prepare('SELECT * FROM users WHERE id = ?').bind(id).first();
     if (!user) return bad('не найден', 404);
     return json(withChatLinks(await buildProfile(db, user, period, settings), settings));
+  }
+
+  // Отметка «в этот раз реально помогли». Ставит владелец, по факту,
+  // а не одной оценкой в конце месяца — так видно, за что именно надбавка.
+  if (path.startsWith('/help/')) {
+    if (me.role !== 'chief') return bad('только руководитель', 403);
+    const [, , userId, action] = path.split('/');
+    const target = await db.prepare('SELECT id, name FROM users WHERE id = ?').bind(userId).first();
+    if (!target) return bad('не найден', 404);
+
+    if (action === 'add') {
+      const body = await request.json().catch(() => ({}));
+      await db
+        .prepare('INSERT INTO help_marks (user_id, actor, note, at, period) VALUES (?,?,?,?,?)')
+        .bind(userId, me.name, body.note || null, nowIso(), period)
+        .run();
+      await logEvent(db, {
+        userId, type: 'manual', actor: me.name, source: 'manual',
+        note: `отмечена помощь${body.note ? `: ${body.note}` : ''}`,
+      });
+    }
+
+    if (action === 'undo') {
+      const last = await db
+        .prepare('SELECT id FROM help_marks WHERE user_id = ? AND period = ? ORDER BY id DESC LIMIT 1')
+        .bind(userId, period)
+        .first();
+      if (last) await db.prepare('DELETE FROM help_marks WHERE id = ?').bind(last.id).run();
+    }
+
+    const row = await db
+      .prepare('SELECT count(*) AS n FROM help_marks WHERE user_id = ? AND period = ?')
+      .bind(userId, period)
+      .first();
+    const count = row?.n || 0;
+    return json({
+      ok: true,
+      count,
+      multiplier: round2(Math.min(
+        num(settings, 'help_max', 1.2),
+        1 + count * num(settings, 'help_step', 0.02)
+      )),
+    });
+  }
+
+  // Раздражители: список закрытых с подтверждением выплаты.
+  // Владельцу и руководителю отдела — полный список, ассистенту — свои.
+  if (path === '/zaeby') {
+    const mine = !['lead', 'chief'].includes(me.role);
+    const { results } = await db
+      .prepare(
+        `SELECT a.*, u.name AS user_name FROM awards a
+         LEFT JOIN users u ON u.id = a.user_id
+         WHERE a.kind = 'zaeb' ${mine ? 'AND a.user_id = ?' : ''}
+         ORDER BY CASE a.status WHEN 'pending' THEN 0 WHEN 'half_paid' THEN 1 ELSE 2 END,
+                  a.created_at DESC`
+      )
+      .bind(...(mine ? [me.id] : []))
+      .all();
+
+    const paid = results.reduce((sum, a) => {
+      if (a.status === 'confirmed') return sum + a.amount;
+      if (a.status === 'half_paid') return sum + Math.round(a.amount / 2);
+      return sum;
+    }, 0);
+
+    return json({
+      paid,
+      items: results.map((a) => ({
+        id: a.id,
+        title: a.title,
+        tier: a.tier,
+        amount: a.amount,
+        leadAmount: a.lead_amount,
+        status: a.status,
+        userName: a.user_name,
+        confirmDue: a.confirm_due,
+        createdAt: a.created_at,
+      })),
+    });
+  }
+
+  // подтверждение и отклонение приза за раздражитель
+  if (path.startsWith('/zaeb/')) {
+    if (!['lead', 'chief'].includes(me.role)) return bad('нет доступа', 403);
+    const [, , id, action] = path.split('/');
+    const award = await db.prepare('SELECT * FROM awards WHERE id = ?').bind(id).first();
+    if (!award) return bad('не найден', 404);
+
+    if (action === 'confirm') {
+      // первое подтверждение — половина, второе через 30 дней — остаток
+      const next = award.status === 'pending' ? 'half_paid' : 'confirmed';
+      await db
+        .prepare('UPDATE awards SET status = ?, confirmed_at = ? WHERE id = ?')
+        .bind(next, next === 'confirmed' ? nowIso() : null, id)
+        .run();
+      await logEvent(db, {
+        userId: award.user_id, type: 'manual', actor: me.name, source: 'manual',
+        note: next === 'half_paid'
+          ? `подтверждено закрытие: ${award.title}`
+          : `через 30 дней не всплывало, доплата: ${award.title}`,
+      });
+      return json({ ok: true, status: next });
+    }
+
+    if (action === 'reject') {
+      await db.prepare("UPDATE awards SET status = 'rejected' WHERE id = ?").bind(id).run();
+      await logEvent(db, {
+        userId: award.user_id, type: 'manual', actor: me.name, source: 'manual',
+        note: `проблема вернулась, приз не доплачен: ${award.title}`,
+      });
+      return json({ ok: true, status: 'rejected' });
+    }
   }
 
   // очередь приёмки для руководителя
@@ -890,9 +1028,9 @@ async function handleApi(request, env, url) {
     return json({ task: decorateTask(task), events: results, score: scoreTask(task) });
   }
 
-  // ── админка лида ───────────────────────────────────────────────────────────
+  // ── настройки: доступны руководителю отдела и владельцу ────────────────────
   if (path.startsWith('/admin/')) {
-    if (me.role !== 'lead') return bad('только руководитель отдела', 403);
+    if (!['lead', 'chief'].includes(me.role)) return bad('нет доступа', 403);
 
     if (path === '/admin/users' && request.method === 'GET') {
       const { results } = await db

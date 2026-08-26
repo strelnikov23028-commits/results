@@ -149,6 +149,19 @@ CREATE TABLE awards (
 );
 CREATE INDEX idx_awards_user ON awards(user_id, period);
 
+-- ── Отметки владельца: «в этот раз реально помогли» ─────────────────────────
+-- Копятся в течение месяца, а не выставляются одной цифрой в конце. Каждая
+-- поднимает множитель премии, потолок задаётся настройкой help_max.
+CREATE TABLE help_marks (
+  id      INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id TEXT REFERENCES users(id),
+  actor   TEXT,
+  note    TEXT,
+  at      TEXT NOT NULL DEFAULT (datetime('now')),
+  period  TEXT NOT NULL
+);
+CREATE INDEX idx_help_user ON help_marks(user_id, period);
+
 -- ── Настройки: всё, что можно подкрутить без правки кода ────────────────────
 CREATE TABLE settings (
   key   TEXT PRIMARY KEY,
@@ -225,6 +238,11 @@ INSERT INTO settings (key, value) VALUES
   ('norm_proactivity',  '4'),
   ('cut_threshold',     '5'),
   ('cut_factor',        '0.85'),
+  -- Отметки помощи от владельца. Каждая поднимает премию на help_step,
+  -- но не выше help_max. Ставятся в течение месяца, а не одной оценкой
+  -- в конце: так видно, за что именно человек получил надбавку.
+  ('help_step',         '0.02'),
+  ('help_max',          '1.20'),
   ('yougile_key',       ''),     -- задаётся секретом, в базу не пишется
   ('yougile_base',      'https://yougile.com/api-v2'),
   -- Колонки обеих рабочих досок: «Задачи ассистентов» и «Задачи Дмитрия».

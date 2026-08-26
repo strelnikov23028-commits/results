@@ -321,12 +321,16 @@ function start(){
   PERIOD = sel.value;
   sel.onchange = () => { PERIOD = sel.value; render(); };
 
-  const tabs = [{id:'me', name:'Мои результаты'}];
-  if (ME.role === 'lead' || ME.role === 'chief'){
-    tabs.unshift({id:'team', name:'Отдел'});
-    tabs.push({id:'inbox', name:'Приёмка'});
+  // У владельца нет своих задач, поэтому нет и вкладки с личным результатом:
+  // он смотрит отдел, принимает работу и подтверждает закрытые раздражители.
+  const tabs = [];
+  if (ME.role === 'lead' || ME.role === 'chief') tabs.push({ id: 'team', name: 'Отдел' });
+  if (ME.role === 'assistant' || ME.role === 'lead') tabs.push({ id: 'me', name: 'Мои результаты' });
+  if (ME.role === 'lead' || ME.role === 'chief') {
+    tabs.push({ id: 'inbox', name: 'Приёмка' });
+    tabs.push({ id: 'zaeby', name: 'Раздражители' });
+    tabs.push({ id: 'admin', name: 'Люди и настройки' });
   }
-  if (ME.role === 'lead') tabs.push({id:'admin', name:'Люди и настройки'});
   TAB = tabs[0].id;
 
   $('tabs').innerHTML = '';
@@ -353,6 +357,7 @@ async function render(){
     if (TAB === 'me')    return renderProfile(await api(`/me?period=${PERIOD}`), v);
     if (TAB === 'team')  return renderTeam(await api(`/team?period=${PERIOD}`), v);
     if (TAB === 'inbox') return renderInbox(await api('/inbox'), v);
+    if (TAB === 'zaeby') return renderZaeby(await api(`/zaeby?period=${PERIOD}`), v);
     if (TAB === 'admin') return renderAdmin(v);
   } catch (e) {
     v.innerHTML = `<div class="card"><p class="err">${esc(e.message)}</p></div>`;
@@ -580,19 +585,123 @@ function labelEvent(type){
   })[type] || type;
 }
 
+/**
+ * Раздражители: то, что регулярно мешает работать. Задача из колонки «Заёб»
+ * приносит приз тому, кто её закрыл, и не входит в KPI вообще.
+ *
+ * Приз платится пополам: половина сразу, вторая — через тридцать дней,
+ * если проблема не всплыла снова. Обе половины подтверждаются здесь.
+ */
+function renderZaeby(d, v){
+  const TIER = { S: '3 000', M: '5 000', L: '10 000', XL: '15 000' };
+  const STATUS = {
+    pending:   ['<span class="tag t-amber">ждёт подтверждения</span>', 'Подтвердить закрытие'],
+    half_paid: ['<span class="tag t-blue">выплачена половина</span>', 'Не всплывало — доплатить'],
+    confirmed: ['<span class="tag t-green">закрыт полностью</span>', null],
+    rejected:  ['<span class="tag t-red">отклонён</span>', null],
+  };
+
+  const card = (z) => {
+    const [badge, action] = STATUS[z.status] || ['', null];
+    const due = z.confirmDue ? new Date(z.confirmDue) : null;
+    const ready = !due || due <= new Date();
+    return `
+      <div class="card" style="margin-bottom:12px">
+        <div class="row">
+          <div style="flex:1;min-width:220px">
+            <h3 style="margin-bottom:4px">${esc(z.title)}</h3>
+            <p class="muted" style="margin:0">
+              Закрыл: <b>${esc(z.userName || '—')}</b> ·
+              тариф ${esc(z.tier || '—')} — ${TIER[z.tier] || '?'} ₽ ·
+              ${badge}
+            </p>
+            ${z.status === 'half_paid' && due ? `<p class="muted" style="margin:6px 0 0">
+              Вторая половина ${ready ? 'уже можно подтвердить' : 'откроется ' + due.toLocaleDateString('ru-RU')}</p>` : ''}
+          </div>
+          <div class="spacer"></div>
+          <div class="row" style="gap:8px">
+            ${action && ready ? `<button class="btn sm" data-zconfirm="${z.id}">${action}</button>` : ''}
+            ${z.status !== 'confirmed' && z.status !== 'rejected'
+              ? `<button class="btn ghost sm danger" data-zreject="${z.id}">Проблема вернулась</button>` : ''}
+          </div>
+        </div>
+      </div>`;
+  };
+
+  const waiting = d.items.filter((z) => z.status === 'pending' || z.status === 'half_paid');
+  const done = d.items.filter((z) => z.status === 'confirmed' || z.status === 'rejected');
+
+  v.innerHTML = `
+    <div class="row" style="margin-bottom:16px">
+      <div>
+        <h1>Раздражители</h1>
+        <p class="muted">Бытовые вопросы, которые регулярно мешают. В KPI не входят — только приз тому, кто закрыл</p>
+      </div>
+      <div class="spacer"></div>
+      <div class="card" style="padding:14px 20px">
+        <div class="kef"><span class="big">${money(d.paid)}</span><span class="muted">выплачено за период</span></div>
+      </div>
+    </div>
+
+    <h2 style="margin-bottom:10px">Ждут вашего решения ${waiting.length ? `<span class="tag t-amber">${waiting.length}</span>` : ''}</h2>
+    ${waiting.map(card).join('') || '<div class="card"><p class="muted" style="margin:0">Пока ничего не ждёт — закрытые раздражители появятся здесь сами</p></div>'}
+
+    ${done.length ? `<h2 style="margin:26px 0 10px">История</h2>${done.map(card).join('')}` : ''}
+
+    <div class="card" style="margin-top:20px">
+      <h3 style="margin-bottom:8px">Как это работает</h3>
+      <p class="muted" style="margin:0">Задача из колонки «Заёб» в YouGile висит сразу на всех. Когда её переводят
+      в «Завершена», система смотрит в журнал карточки, кто её передвинул, и предлагает выбрать размер.
+      Половина приза платится сразу, вторая — через тридцать дней, если проблема не вернулась.
+      Руководителю отдела идёт 10 % сверху, и только если закрыл не он сам.</p>
+    </div>`;
+
+  v.querySelectorAll('[data-zconfirm]').forEach((b) => {
+    b.onclick = async () => {
+      try { await api(`/zaeb/${b.dataset.zconfirm}/confirm`, { method: 'POST', body: '{}' }); render(); }
+      catch (e) { alert(e.message); }
+    };
+  });
+  v.querySelectorAll('[data-zreject]').forEach((b) => {
+    b.onclick = async () => {
+      if (!confirm('Проблема вернулась? Приз не будет доплачен.')) return;
+      try { await api(`/zaeb/${b.dataset.zreject}/reject`, { method: 'POST', body: '{}' }); render(); }
+      catch (e) { alert(e.message); }
+    };
+  });
+}
+
 function renderTeam(d, v){
   const L = d.lead;
   const iAmLead = ME && ME.role === 'lead';
 
+  const iAmChief = ME && ME.role === 'chief';
+
+  // Кнопка владельца: отмечает помощь по факту, а не одной оценкой в конце
+  // месяца. Каждая отметка поднимает премию на шаг, до заданного потолка.
+  const helpCell = (p) => {
+    if (!p.help) return '<td class="num">—</td>';
+    const at = p.help.multiplier >= p.help.max;
+    return `<td class="num" style="white-space:nowrap">
+      <b style="color:${p.help.count ? 'var(--green)' : 'var(--fg-3)'}">×${p.help.multiplier.toFixed(2)}</b>
+      <span class="muted"> ${p.help.count}</span>
+      ${iAmChief ? `
+        <button class="btn sm" data-help="${esc(p.id)}" ${at ? 'disabled title="достигнут потолок"' : ''}
+                style="margin-left:6px;padding:0 9px">+</button>
+        ${p.help.count ? `<button class="btn ghost sm" data-unhelp="${esc(p.id)}" style="padding:0 8px">−</button>` : ''}
+      ` : ''}
+    </td>`;
+  };
+
   const row = (p, extra) => `
-    <tr class="clickable" data-person="${esc(p.id)}">
-      <td><strong>${esc(p.name)}</strong> ${extra || ''}</td>
+    <tr data-person="${esc(p.id)}">
+      <td class="clickable"><strong>${esc(p.name)}</strong> ${extra || ''}</td>
       <td class="num"><strong style="font-size:17px;color:var(--accent)">${p.kef.toFixed(2)}</strong></td>
       <td class="num">${p.metrics.quality.toFixed(1)}</td>
       <td class="num">${p.metrics.autonomy.toFixed(1)}</td>
       <td class="num">${p.metrics.speed.toFixed(1)}</td>
       <td class="num">${p.tasksClosed} / ${p.tasksOpen}</td>
-      <td class="num">${fmtSeconds(p.medianReply)}</td>
+      ${helpCell(p)}
       <td class="num"><strong>${money(p.total)}</strong></td>
     </tr>`;
 
@@ -609,7 +718,7 @@ function renderTeam(d, v){
       <td class="num">${L.own.autonomy.toFixed(1)}</td>
       <td class="num">${L.own.speed.toFixed(1)}</td>
       <td class="num">${L.own.tasks} / ${L.own.openTasks}</td>
-      <td class="num">${fmtSeconds(L.own.breakdown?.speed?.medianReply)}</td>
+      ${helpCell({ id: L.id, help: L.own.help })}
       <td class="num"><strong>${money(L.bonus + L.shareZaeb + L.shareSaving)}</strong></td>
     </tr>` : '';
 
@@ -624,7 +733,7 @@ function renderTeam(d, v){
       <thead><tr>
         <th>Человек</th><th class="num">Кэф</th><th class="num">Кач.</th>
         <th class="num">Самост.</th><th class="num">Скор.</th><th class="num">Закрыто / в работе</th>
-        <th class="num">Медиана ответа</th><th class="num">К выплате</th>
+        <th class="num">Помощь</th><th class="num">К выплате</th>
       </tr></thead><tbody>${rows || '<tr><td colspan="8" class="muted">Ассистентов пока нет</td></tr>'}${leadRow}</tbody>
     </table></div>
 
@@ -648,8 +757,31 @@ function renderTeam(d, v){
     </div>
   `;
 
-  document.querySelectorAll('tr[data-person]').forEach((tr) => {
-    tr.onclick = async () => {
+  // отметки помощи: жмутся часто, поэтому перерисовываем только таблицу
+  v.querySelectorAll('[data-help]').forEach((b) => {
+    b.onclick = async (e) => {
+      e.stopPropagation();
+      const note = prompt('Чем именно помогли? Можно оставить пустым') ?? null;
+      try {
+        await api(`/help/${b.dataset.help}/add?period=${PERIOD}`,
+                  { method: 'POST', body: JSON.stringify({ note }) });
+        render();
+      } catch (err) { alert(err.message); }
+    };
+  });
+  v.querySelectorAll('[data-unhelp]').forEach((b) => {
+    b.onclick = async (e) => {
+      e.stopPropagation();
+      try {
+        await api(`/help/${b.dataset.unhelp}/undo?period=${PERIOD}`, { method: 'POST', body: '{}' });
+        render();
+      } catch (err) { alert(err.message); }
+    };
+  });
+
+  v.querySelectorAll('tr[data-person] td.clickable').forEach((td) => {
+    const tr = td.closest('tr');
+    td.onclick = async () => {
       try {
         const p = await api(`/person/${tr.dataset.person}?period=${PERIOD}`);
         renderProfile(p, $('view'));
