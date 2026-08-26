@@ -353,33 +353,63 @@ footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center
     <div class="sec-head reveal">
       <div class="kicker">Структура премии</div>
       <h2>Из чего складывается сумма</h2>
-      <p>Премия в 50 000 ₽ заранее разложена на три части. По каждой ассистент получает оценку от нуля до десяти и забирает такую же долю: оценка 10 — всю часть, оценка 5 — половину.</p>
+      <p>Схемы две: у ассистента премия <strong>30 000 ₽</strong>, у руководителя отдела — <strong>50 000 ₽</strong>. По каждой части человек получает оценку от нуля до десяти и забирает такую же долю: оценка 10 — всю часть, оценка 5 — половину.</p>
     </div>
 
-    <div class="grid g3">
+    <h3 class="reveal" style="margin-bottom:14px">Ассистент — 30 000 ₽</h3>
+    <div class="grid g3" style="margin-bottom:26px">
       <div class="card hoverable reveal wallet">
         <h4>Качество</h4>
-        <div class="sum">22 500 ₽</div>
-        <div class="bar"><i style="width:45%"></i></div>
-        <p class="muted" style="margin-top:12px">Средняя оценка задач с учётом их размера. Самая большая часть: если результат приходится переделывать, остальное не имеет значения.</p>
-      </div>
-      <div class="card hoverable reveal wallet">
-        <h4>Скорость</h4>
-        <div class="sum">15 000 ₽</div>
-        <div class="bar"><i style="width:30%"></i></div>
-        <p class="muted" style="margin-top:12px">Как быстро отвечают в чате и попадают ли в отведённый приоритетом срок. От этого зависит, можно ли на человека положиться.</p>
+        <div class="sum">17 500 ₽</div>
+        <div class="bar"><i style="width:58%"></i></div>
+        <p class="muted" style="margin-top:12px">Средняя оценка задач с учётом размера. Самая большая часть: если результат приходится переделывать, остальное не имеет значения.</p>
       </div>
       <div class="card hoverable reveal wallet">
         <h4>Самостоятельность</h4>
-        <div class="sum">12 500 ₽</div>
-        <div class="bar"><i style="width:25%"></i></div>
+        <div class="sum">10 000 ₽</div>
+        <div class="bar"><i style="width:33%"></i></div>
         <p class="muted" style="margin-top:12px">Доля задач, закрытых без вопросов к вам. Это и есть разница между помощником и ещё одной заботой.</p>
       </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Скорость</h4>
+        <div class="sum">2 500 ₽</div>
+        <div class="bar"><i style="width:9%"></i></div>
+        <p class="muted" style="margin-top:12px">Отзывчивость в чате и попадание в срок. Намеренно самая маленькая часть: быстро ответить — не то же самое, что хорошо сделать.</p>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin-bottom:14px">Руководитель отдела — 50 000 ₽</h3>
+    <div class="grid g4" style="margin-bottom:20px">
+      <div class="card hoverable reveal wallet">
+        <h4>Результат отдела</h4>
+        <div class="sum">20 000 ₽</div>
+        <p class="muted" style="margin-top:10px">Средний результат ассистентов. Чужая просрочка бьёт и по его доходу.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Фильтр</h4>
+        <div class="sum">15 000 ₽</div>
+        <p class="muted" style="margin-top:10px">Доля задач, принятых вами с первого раза после его проверки.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Разгрузка</h4>
+        <div class="sum">10 000 ₽</div>
+        <p class="muted" style="margin-top:10px">Доля задач, закрытых вообще без вашего участия.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Скорость</h4>
+        <div class="sum">5 000 ₽</div>
+        <p class="muted" style="margin-top:10px">Своя отзывчивость на 40 % и командная на 60 %.</p>
+      </div>
+    </div>
+
+    <div class="note green reveal">
+      <div class="title">Почему результат команды влияет на доход руководителя отдела</div>
+      <p class="fg2" style="margin:0">Две из четырёх его частей — результат отдела и командная скорость — считаются по ассистентам. Если он отвечает мгновенно, а кто-то в команде систематически просрачивает, падает не только премия этого человека, но и его собственная. Это сделано намеренно: иначе руководить отделом выгоднее, чем добиваться, чтобы отдел работал.</p>
     </div>
 
     <div class="note amber reveal">
       <div class="title">Провал по одному направлению режет всю премию</div>
-      <p class="fg2" style="margin:0">Если хотя бы одна из четырёх оценок опускается ниже пяти, итоговая сумма умножается на <strong>0.85</strong> целиком. Вытянуть слабое направление сильными можно, но не бесплатно — иначе качество приносили бы в жертву скорости. В приложении при этом прямо написано, какая метрика вызвала вычет и на сколько рублей.</p>
+      <p class="fg2" style="margin:0">Если хотя бы одна из оценок опускается ниже пяти, итоговая сумма умножается на <strong>0.85</strong> целиком. Вытянуть слабое направление сильными можно, но не бесплатно — иначе качество приносили бы в жертву скорости. В приложении при этом прямо написано, какая метрика вызвала вычет и на сколько рублей.</p>
     </div>
   </div>
 </section>
@@ -409,13 +439,14 @@ footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center
         <h3>Скорость</h3>
         <p class="muted" style="margin-bottom:6px">Каждый ответ в чате приносит или отнимает баллы:</p>
         <div class="pts">
-          <div class="pt plus"><b>+1</b> ответ быстрее 15 минут</div>
-          <div class="pt zero"><b>0</b> ответ позже нормы</div>
-          <div class="pt plus"><b>+2</b> ответ в нерабочее время</div>
-          <div class="pt minus"><b>−3</b> вопрос остался без ответа</div>
+          <div class="pt plus"><b>+0.5</b> ответил в срок, быстрее 15 минут</div>
+          <div class="pt minus"><b>−2</b> ответил, но позже нормы</div>
+          <div class="pt minus"><b>−4</b> не ответил вовсе</div>
+          <div class="pt plus"><b>+1</b> ответил в выходной или после работы</div>
         </div>
-        <p class="muted" style="margin-top:14px">Баллы делятся на число вопросов и переводятся в оценку до десяти. Один пропуск стоит ровно трёх быстрых ответов, поэтому плохое начало месяца можно отыграть, но выше десяти подняться нельзя.</p>
-        <p class="muted" style="margin-top:10px">Ответ в нерабочее время ценится вдвое: отвечать вечером или в выходной никто не обязан.</p>
+        <p class="muted" style="margin-top:14px">Оценка — это доля от максимума: ответили в срок на все вопросы, значит ровно десятка. Своевременный ответ даёт немного, потому что это ожидаемое поведение, а не заслуга.</p>
+        <p class="muted" style="margin-top:10px"><strong style="color:var(--fg-2)">Молчание стоит восьми своевременных ответов</strong>, а опоздание — четырёх. Проигнорировать неудобный вопрос заметно дороже, чем ответить поздно.</p>
+        <p class="muted" style="margin-top:10px">Ответ в выходной или вечером ценится вдвое против обычного и идёт сверх максимума: им можно вытянуть провал, но выше десяти подняться нельзя.</p>
       </div>
 
       <div class="card reveal">

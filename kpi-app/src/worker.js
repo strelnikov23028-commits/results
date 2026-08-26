@@ -265,10 +265,10 @@ const pct = (n) => `${Math.round(n * 1000) / 10} %`;
 function scoreChat(replies, settings) {
   const target = num(settings, 'reply_target_min', 15);
   const urgentTarget = num(settings, 'urgent_target_min', 5);
-  const ptFast = num(settings, 'pt_fast', 1);
-  const ptSlow = num(settings, 'pt_slow', 0);
-  const ptOff = num(settings, 'pt_offhours', 2);
-  const ptMiss = num(settings, 'pt_miss', -3);
+  const ptFast = num(settings, 'pt_fast', 0.5);
+  const ptSlow = num(settings, 'pt_slow', -2);
+  const ptOff = num(settings, 'pt_offhours', 1);
+  const ptMiss = num(settings, 'pt_miss', -4);
 
   // вопросы, помеченные как «отвечать было не нужно», из расчёта выпадают
   const counted = replies.filter((r) => !r.no_reply_needed);
@@ -300,23 +300,30 @@ function scoreChat(replies, settings) {
     }
   }
 
-  // Вопросов не было — отвечать было не на что, метрику не занижаем.
-  // Но и не считаем это заслугой: если человек вообще ничего не делал,
-  // это отсекается уровнем выше, в computeMetrics.
-  const reference = counted.filter((r) => r.in_hours === 1).length;
-  const score = reference === 0 ? 10 : Math.max(0, Math.min(10, (10 * points) / reference));
+  // Оценка — доля от максимума: если на все рабочие вопросы ответили
+  // вовремя, это ровно десятка. Ответы в нерабочее время идут сверх
+  // максимума и могут вытянуть провал, но выше десяти не поднимают.
+  //
+  // Вопросов не было — отвечать было не на что, метрику не занижаем:
+  // случай «человек вообще ничего не делал» отсекается уровнем выше.
+  const requests = counted.filter((r) => r.in_hours === 1).length;
+  const best = requests * ptFast;
+  const score = requests === 0 || best <= 0
+    ? (requests === 0 ? 10 : 0)
+    : Math.max(0, Math.min(10, (10 * points) / best));
 
   return {
     score: round2(score),
     points: round2(points),
-    reference,
+    reference: requests,
+    best: round2(best),
     fast, slow, off, miss,
     median: medianSeconds(counted.filter((r) => r.seconds !== null && r.in_hours === 1)),
     unanswered: counted.filter((r) => r.seconds === null && !isMiss(r, settings)).length,
     detail,
-    formula: reference === 0
+    formula: requests === 0
       ? 'вопросов не было — метрика не снижается'
-      : `${round2(points)} балла ÷ ${reference} вопросов × 10`,
+      : `${round2(points)} из ${round2(best)} возможных баллов`,
   };
 }
 
@@ -372,9 +379,9 @@ function medianSeconds(replies) {
 /** Деньги: сколько забрано из каждого кошелька. */
 function computeMoney(metrics, settings, extra = {}) {
   const purses = {
-    quality: num(settings, 'purse_quality', 22500),
-    speed: num(settings, 'purse_speed', 15000),
-    autonomy: num(settings, 'purse_autonomy', 12500),
+    quality: num(settings, 'purse_quality', 17500),
+    autonomy: num(settings, 'purse_autonomy', 10000),
+    speed: num(settings, 'purse_speed', 2500),
   };
   const values = {
     quality: metrics.quality,
@@ -425,7 +432,7 @@ function computeMoney(metrics, settings, extra = {}) {
     bonus += got;
   }
 
-  const pool = num(settings, 'bonus_pool', 50000);
+  const pool = num(settings, 'bonus_pool', 30000);
   return {
     wallets,
     bonus: Math.round(bonus),
@@ -662,21 +669,10 @@ async function handleApi(request, env, url) {
     const teamZaeb = profiles.reduce((a, p) => a + p.money.zaeb, 0);
     const teamSaving = profiles.reduce((a, p) => a + p.money.savingSum, 0);
 
-    const leadPools = {
-      team: num(settings, 'lead_purse_team', 20000),
-      filter: num(settings, 'lead_purse_filter', 15000),
-      unload: num(settings, 'lead_purse_unload', 10000),
-      growth: num(settings, 'lead_purse_growth', 5000),
-    };
-    const leadWallets = {
-      team: Math.round(leadPools.team * (avgKef / 10)),
-      filter: Math.round(leadPools.filter * Math.min(1, filterRate / 0.95)),
-      unload: Math.round(leadPools.unload * unloadRate),
-      growth: 0, // проставляется руководителем вручную
-    };
-
-    // Скорость лида: своя реакция на вопросы руководителя плюс скорость команды.
-    // Одной командной метрики мало — молчать самому тоже нельзя.
+    // Скорость лида: своя реакция на вопросы руководителя плюс скорость
+    // команды. Одной командной мало — молчать самому тоже нельзя, а одной
+    // своей мало тем более: если ассистент systematically просрачивает
+    // ответы, это должно бить и по доходу того, кто им руководит.
     const meFull = await db.prepare('SELECT * FROM users WHERE id = ?').bind(me.id).first();
     const leadOwn = me.role === 'lead' ? await buildProfile(db, meFull, period, settings) : null;
     const teamSpeed = profiles.length
@@ -687,6 +683,19 @@ async function handleApi(request, env, url) {
     const leadSpeed = leadOwn
       ? round2(wPersonal * leadOwn.metrics.speed + wTeam * teamSpeed)
       : teamSpeed;
+
+    const leadPools = {
+      team: num(settings, 'lead_purse_team', 20000),
+      filter: num(settings, 'lead_purse_filter', 15000),
+      unload: num(settings, 'lead_purse_unload', 10000),
+      speed: num(settings, 'lead_purse_speed', 5000),
+    };
+    const leadWallets = {
+      team: Math.round(leadPools.team * (avgKef / 10)),
+      filter: Math.round(leadPools.filter * Math.min(1, filterRate / 0.95)),
+      unload: Math.round(leadPools.unload * unloadRate),
+      speed: Math.round(leadPools.speed * (leadSpeed / 10)),
+    };
 
     return json({
       period,
@@ -723,7 +732,7 @@ async function handleApi(request, env, url) {
         shareZaeb: Math.round(teamZaeb * leadShareZaeb),
         shareSaving: Math.round(teamSaving * leadShareSaving),
         bonus:
-          leadWallets.team + leadWallets.filter + leadWallets.unload + leadWallets.growth,
+          leadWallets.team + leadWallets.filter + leadWallets.unload + leadWallets.speed,
       },
     });
   }
