@@ -1,0 +1,610 @@
+<title>Как считается KPI ассистентов</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --surface-2:#FAFAFC;
+  --fg:#1D1D1F; --fg-2:#4B4B50; --fg-3:#86868B;
+  --accent:#0071E3; --accent-soft:#E8F1FD;
+  --green:#0B8A4B; --green-soft:#E6F5ED;
+  --amber:#B26A00; --amber-soft:#FFF3E0;
+  --red:#C4302B; --red-soft:#FDECEA;
+  --violet:#6B4EE6; --violet-soft:#EFEBFD;
+  --border:#E3E3E7; --border-2:#EDEDF0;
+  --radius:20px; --radius-sm:12px;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.05),0 16px 40px rgba(0,0,0,.08);
+  --maxw:1080px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --surface:#1C1C1E; --surface-2:#161618;
+    --fg:#F5F5F7; --fg-2:#C7C7CC; --fg-3:#8E8E93;
+    --accent:#2E9BFF; --accent-soft:#122437;
+    --green:#4ADE80; --green-soft:#10241A;
+    --amber:#FBBF24; --amber-soft:#2A2010;
+    --red:#FF6B63; --red-soft:#2E1614;
+    --violet:#A594F9; --violet-soft:#1C1730;
+    --border:#2C2C2E; --border-2:#242426;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.5),0 16px 40px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --surface:#1C1C1E; --surface-2:#161618;
+  --fg:#F5F5F7; --fg-2:#C7C7CC; --fg-3:#8E8E93;
+  --accent:#2E9BFF; --accent-soft:#122437;
+  --green:#4ADE80; --green-soft:#10241A;
+  --amber:#FBBF24; --amber-soft:#2A2010;
+  --red:#FF6B63; --red-soft:#2E1614;
+  --violet:#A594F9; --violet-soft:#1C1730;
+  --border:#2C2C2E; --border-2:#242426;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.5),0 16px 40px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+h1,h2,h3,h4{letter-spacing:-.022em; line-height:1.15; margin:0}
+h1{font-size:clamp(32px,5.5vw,52px); font-weight:800}
+h2{font-size:clamp(25px,3.6vw,34px); font-weight:700; margin-bottom:10px}
+h3{font-size:20px; font-weight:650; margin-bottom:8px}
+h4{font-size:16.5px; font-weight:650; margin-bottom:6px}
+p{margin:0 0 14px}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--accent); outline-offset:3px; border-radius:6px}
+
+.nav{
+  position:sticky; top:0; z-index:100;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--border-2);
+}
+.nav-in{max-width:var(--maxw); margin:0 auto; padding:11px 24px; display:flex; gap:6px; align-items:center; overflow-x:auto; scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{font-size:13.5px; font-weight:550; color:var(--fg-2); padding:7px 12px; border-radius:100px; white-space:nowrap; transition:background .2s ease,color .2s ease; cursor:pointer}
+.nav a:hover{background:var(--surface); color:var(--fg); text-decoration:none}
+.nav .brand{font-weight:700; color:var(--fg); padding-left:0; padding-right:14px; font-size:14px}
+.nav .brand:hover{background:transparent}
+
+.hero{padding:70px 0 40px; text-align:center}
+.hero .eyebrow{display:inline-block; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent); background:var(--accent-soft); padding:6px 14px; border-radius:100px; margin-bottom:20px}
+.hero p.lead{font-size:19px; color:var(--fg-2); max-width:700px; margin:20px auto 0}
+
+section{padding:48px 0; scroll-margin-top:64px}
+.sec-head{margin-bottom:26px; max-width:780px}
+.sec-head p{color:var(--fg-2); font-size:17.5px; margin:0}
+.kicker{font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--fg-3); margin-bottom:8px}
+
+.card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease}
+.card.hoverable:hover{transform:translateY(-2px); box-shadow:var(--shadow-lg)}
+.grid{display:grid; gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+.big{font-size:29px; font-weight:750; letter-spacing:-.03em; line-height:1.1}
+.muted{color:var(--fg-3); font-size:14.5px; line-height:1.55}
+.fg2{color:var(--fg-2)}
+
+.tag{display:inline-block; font-size:12.5px; font-weight:600; padding:3px 10px; border-radius:100px}
+.t-blue{background:var(--accent-soft);color:var(--accent)}
+.t-green{background:var(--green-soft);color:var(--green)}
+.t-amber{background:var(--amber-soft);color:var(--amber)}
+.t-red{background:var(--red-soft);color:var(--red)}
+.t-violet{background:var(--violet-soft);color:var(--violet)}
+
+.tbl-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius); border:1px solid var(--border); background:var(--surface); box-shadow:var(--shadow)}
+@media(max-width:820px){.tbl-scroll{box-shadow:var(--shadow), inset -16px 0 14px -14px rgba(0,0,0,.28)}.tbl-hint{display:block}}
+.tbl-hint{display:none; font-size:13px; color:var(--fg-3); margin:8px 0 0; text-align:right}
+table{width:100%; border-collapse:collapse; font-size:15px; min-width:560px}
+th{text-align:left; font-weight:600; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--fg-3); padding:13px 15px; border-bottom:1px solid var(--border); background:var(--surface-2)}
+td{padding:13px 15px; border-bottom:1px solid var(--border-2); vertical-align:top; color:var(--fg-2)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .15s ease}
+tbody tr:hover{background:var(--surface-2)}
+td strong{color:var(--fg); font-weight:600}
+.num{text-align:right; white-space:nowrap}
+
+/* поток данных */
+.flow{display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:center}
+@media(max-width:760px){.flow{grid-template-columns:1fr; }.flow .arrow{transform:rotate(90deg); justify-self:center}}
+.src{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+.src h4{display:flex; align-items:center; gap:9px; margin-bottom:12px}
+.dot{width:9px;height:9px;border-radius:50%;flex:0 0 9px}
+.arrow{color:var(--fg-3); font-size:26px; text-align:center; line-height:1}
+
+.steps{display:grid; gap:12px}
+.step{display:flex; gap:15px; align-items:flex-start}
+.step .n{flex:0 0 28px; width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13.5px; margin-top:2px}
+.step .txt{flex:1}
+.step .txt b{color:var(--fg)}
+
+.wallet .sum{font-size:26px; font-weight:800; letter-spacing:-.03em; line-height:1.1; margin-top:4px}
+.wallet .bar{height:6px; border-radius:100px; background:var(--border); margin-top:12px; overflow:hidden}
+.wallet .bar i{display:block; height:100%; border-radius:100px; background:var(--accent)}
+
+.note{border-left:3px solid var(--accent); background:var(--surface); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:16px 20px; margin:18px 0; box-shadow:var(--shadow)}
+.note.amber{border-left-color:var(--amber)}
+.note.red{border-left-color:var(--red)}
+.note.green{border-left-color:var(--green)}
+.note .title{font-weight:650; color:var(--fg); margin-bottom:5px; font-size:15.5px}
+.note p:last-child{margin-bottom:0}
+
+ul.clean{list-style:none; padding:0; margin:0}
+ul.clean li{padding-left:25px; position:relative; margin-bottom:10px; color:var(--fg-2); font-size:15.5px; line-height:1.55}
+ul.clean li:last-child{margin-bottom:0}
+ul.clean li::before{content:''; position:absolute; left:6px; top:10px; width:6px; height:6px; border-radius:50%; background:var(--accent)}
+ul.clean.check li::before{content:''; left:2px; top:5px; width:16px; height:16px; border-radius:0; background:var(--green);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z' clip-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z' clip-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat}
+ul.clean.cross li::before{background:var(--red)}
+
+.pts{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+.pt{
+  display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px;
+  background:var(--surface-2); border:1px solid var(--border); font-size:14.5px; color:var(--fg-2);
+}
+.pt b{font-size:17px; font-weight:750; min-width:28px; text-align:center}
+.pt.plus b{color:var(--green)} .pt.zero b{color:var(--fg-3)} .pt.minus b{color:var(--red)}
+
+.divider{height:1px; background:var(--border-2)}
+footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center}
+
+.reveal{opacity:1; transform:none; transition:opacity .55s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1)}
+.reveal.pre{opacity:0; transform:translateY(18px)}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.reveal.pre{opacity:1 !important; transform:none !important; transition:none !important}
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">KPI ассистентов</a>
+    <a href="#istochniki">Откуда данные</a>
+    <a href="#avtomat">Что считается само</a>
+    <a href="#ot-vas">Что нужно от вас</a>
+    <a href="#koshelki">Из чего сумма</a>
+    <a href="#metriki">Четыре метрики</a>
+    <a href="#ne-schitaetsya">Что не считается</a>
+    <a href="#prozrachnost">Проверяемость</a>
+    <a href="#granicy">Ограничения</a>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Отдел ассистентов</span>
+    <h1>Как считается KPI</h1>
+    <p class="lead">Оценки никто не выставляет вручную. Всё считается из двух систем, которыми команда пользуется каждый день: задачи берутся из YouGile, скорость ответа — из рабочего чата в Telegram. Любую цифру можно развернуть до конкретных задач и сообщений.</p>
+  </div>
+</header>
+
+<section id="istochniki">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Источники</div>
+      <h2>Откуда берутся данные</h2>
+      <p>Отдельных отчётов и таблиц никто не заполняет. Система читает то, что и так происходит в работе.</p>
+    </div>
+
+    <div class="flow reveal">
+      <div class="src">
+        <h4><span class="dot" style="background:var(--accent)"></span>YouGile</h4>
+        <ul class="clean">
+          <li>Кто исполнитель задачи и кто её завёл</li>
+          <li>Когда взята в работу, отправлена на проверку, завершена</li>
+          <li>Срок, если он проставлен</li>
+          <li>Сколько раз задача возвращалась с проверки</li>
+          <li>Кто передвинул карточку — из журнала событий задачи</li>
+        </ul>
+      </div>
+      <div class="arrow">→</div>
+      <div class="src">
+        <h4><span class="dot" style="background:var(--violet)"></span>Telegram, рабочий чат</h4>
+        <ul class="clean">
+          <li>Когда задан вопрос и когда на него ответили</li>
+          <li>Кто ответил первым</li>
+          <li>Реакция под сообщением — тоже ответ</li>
+          <li>Вопросы самих ассистентов: сколько раз пришлось вас отвлечь</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <div class="title">Текст переписки нигде не хранится</div>
+      <p class="fg2" style="margin:0">В базе остаются только отметки времени, автор ответа и номер сообщения — чтобы можно было открыть нужное место в чате. Содержание сообщений не сохраняется и никуда не передаётся.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="avtomat">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Без ручной работы</div>
+      <h2>Что система определяет сама</h2>
+      <p>Оценка задачи не ставится человеком. Она складывается из фактов, у каждого из которых есть время и след в системе.</p>
+    </div>
+
+    <div class="tbl-scroll reveal">
+      <table style="min-width:700px">
+        <thead><tr><th style="width:24%">Признак</th><th style="width:38%">Как определяется</th><th style="width:38%">Что означает</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Успел в срок</strong></td>
+            <td>Время завершения сравнивается со сроком в карточке</td>
+            <td>Это «быстро». Если срок не проставлен, задача в этот расчёт не попадает</td>
+          </tr>
+          <tr>
+            <td><strong>Без правок</strong></td>
+            <td>Задача ни разу не вернулась с проверки обратно в работу</td>
+            <td>Это «качественно»: сделано с первого раза</td>
+          </tr>
+          <tr>
+            <td><strong>Без вопросов</strong></td>
+            <td>По задаче не было вопросов ассистента в рабочем чате</td>
+            <td>Это «самостоятельно»: вас не пришлось отвлекать</td>
+          </tr>
+          <tr>
+            <td><strong>Инициатива</strong></td>
+            <td>Задачу завёл сам ассистент, а не вы</td>
+            <td>Единственный признак, который подтверждаете вы — одним нажатием</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-hint">Таблица прокручивается вбок →</p>
+
+    <div class="grid g2" style="margin-top:22px">
+      <div class="card reveal">
+        <h3>Что получается за задачу</h3>
+        <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td>Все три признака и инициатива пригодилась</td><td class="num"><span class="tag t-green">10</span></td></tr>
+              <tr><td>Все три признака</td><td class="num"><span class="tag t-green">8</span></td></tr>
+              <tr><td>Два из трёх</td><td class="num"><span class="tag t-blue">6</span></td></tr>
+              <tr><td>Один из трёх</td><td class="num"><span class="tag t-amber">4</span></td></tr>
+              <tr><td>Ни одного</td><td class="num"><span class="tag t-red">2</span></td></tr>
+              <tr><td>Задача сорвана</td><td class="num"><span class="tag t-red">0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:12px"><strong style="color:var(--fg-2)">Восемь — это норма.</strong> Сделал то, о чём договорились, вовремя и никого не отвлекая. Десятка — только за то, чего не просили.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>Размер задачи</h3>
+        <p class="muted" style="margin-bottom:14px">Оценки складываются с учётом размера: иначе десять мелких поручений перевесили бы один переезд.</p>
+        <ul class="clean">
+          <li><strong>1</strong> — мелочь до пятнадцати минут</li>
+          <li><strong>2</strong> — обычная задача до двух часов</li>
+          <li><strong>3</strong> — проект на день и больше</li>
+        </ul>
+        <p class="muted" style="margin-top:14px">Размер ставит руководитель отдела при постановке задачи. Спорить о нём после закрытия поздно — и это правильно.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="ot-vas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Ваше участие</div>
+      <h2>Что требуется лично от вас</h2>
+      <p>Ничего не заполнять и никуда не заходить. Всё сводится к нажатиям в Telegram.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:22px">
+      <div class="card hoverable reveal" style="text-align:center">
+        <div class="big" style="color:var(--accent)">1 нажатие</div>
+        <p class="muted" style="margin-top:8px">на инициативу ассистента — «пригодилось» или «нет». Пять-шесть раз в месяц</p>
+      </div>
+      <div class="card hoverable reveal" style="text-align:center">
+        <div class="big" style="color:var(--accent)">1 нажатие</div>
+        <p class="muted" style="margin-top:8px">когда закрыт пункт из списка бытовых раздражителей — подтвердить, что вопрос действительно снят</p>
+      </div>
+      <div class="card hoverable reveal" style="text-align:center">
+        <div class="big" style="color:var(--accent)">1 цифра</div>
+        <p class="muted" style="margin-top:8px">в конце месяца — насколько стало легче работать, от нуля до десяти</p>
+      </div>
+    </div>
+
+    <div class="note green reveal">
+      <div class="title">Ваша цифра за месяц влияет на всю сумму</div>
+      <p class="fg2" style="margin:0">Она умножает итог целиком: <strong>9–10 → ×1.1</strong>, 7–8 → ×1.0, 5–6 → ×0.9, ниже пяти → ×0.75. Это единственная субъективная величина во всей системе, и она намеренно оставлена за вами — метрики не покрывают всего, что вы чувствуете по работе отдела.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="koshelki">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Структура премии</div>
+      <h2>Из чего складывается сумма</h2>
+      <p>Премия в 50 000 ₽ заранее разложена на четыре части. По каждой ассистент получает оценку от нуля до десяти и забирает такую же долю: оценка 10 — всю часть, оценка 5 — половину.</p>
+    </div>
+
+    <div class="grid g4">
+      <div class="card hoverable reveal wallet">
+        <h4>Качество</h4>
+        <div class="sum">17 500 ₽</div>
+        <div class="bar"><i style="width:35%"></i></div>
+        <p class="muted" style="margin-top:12px">Средняя оценка задач с учётом их размера. Самая большая часть: если результат приходится переделывать, остальное не имеет значения.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Скорость</h4>
+        <div class="sum">12 500 ₽</div>
+        <div class="bar"><i style="width:25%"></i></div>
+        <p class="muted" style="margin-top:12px">Как быстро отвечают в чате и попадают ли в срок. От этого зависит, можно ли на человека положиться.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Самостоятельность</h4>
+        <div class="sum">10 000 ₽</div>
+        <div class="bar"><i style="width:20%"></i></div>
+        <p class="muted" style="margin-top:12px">Доля задач, закрытых без вопросов к вам. Это и есть разница между помощником и ещё одной заботой.</p>
+      </div>
+      <div class="card hoverable reveal wallet">
+        <h4>Инициатива</h4>
+        <div class="sum">10 000 ₽</div>
+        <div class="bar"><i style="width:20%"></i></div>
+        <p class="muted" style="margin-top:12px">Что ассистент придумал и сделал сам, пока его не попросили.</p>
+      </div>
+    </div>
+
+    <div class="note amber reveal">
+      <div class="title">Провал по одному направлению режет всю премию</div>
+      <p class="fg2" style="margin:0">Если хотя бы одна из четырёх оценок опускается ниже пяти, итоговая сумма умножается на <strong>0.85</strong> целиком. Вытянуть слабое направление сильными можно, но не бесплатно — иначе качество приносили бы в жертву скорости. В приложении при этом прямо написано, какая метрика вызвала вычет и на сколько рублей.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="metriki">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Подробности</div>
+      <h2>Как считается каждая из четырёх</h2>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:16px">
+      <div class="card reveal">
+        <h3>Качество</h3>
+        <div class="steps" style="margin-top:14px">
+          <div class="step"><div class="n">1</div><div class="txt">Оценку каждой задачи умножаем на её размер — получаем баллы</div></div>
+          <div class="step"><div class="n">2</div><div class="txt">Складываем баллы всех задач за месяц</div></div>
+          <div class="step"><div class="n">3</div><div class="txt">Складываем размеры этих задач</div></div>
+          <div class="step"><div class="n">4</div><div class="txt">Делим одно на другое — это <b>оценка качества</b></div></div>
+        </div>
+        <p class="muted" style="margin-top:14px">Пример: пять задач дали 70 баллов при сумме размеров 10 → оценка 7.0.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>Скорость</h3>
+        <p class="muted" style="margin-bottom:6px">Каждый ответ в чате приносит или отнимает баллы:</p>
+        <div class="pts">
+          <div class="pt plus"><b>+1</b> ответ быстрее 15 минут</div>
+          <div class="pt zero"><b>0</b> ответ позже нормы</div>
+          <div class="pt plus"><b>+2</b> ответ в нерабочее время</div>
+          <div class="pt minus"><b>−3</b> вопрос остался без ответа</div>
+        </div>
+        <p class="muted" style="margin-top:14px">Баллы делятся на число вопросов и переводятся в оценку до десяти. Один пропуск стоит ровно трёх быстрых ответов, поэтому плохое начало месяца можно отыграть, но выше десяти подняться нельзя.</p>
+        <p class="muted" style="margin-top:10px">Ответ в нерабочее время ценится вдвое: отвечать вечером или в выходной никто не обязан.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>Самостоятельность</h3>
+        <p class="muted">Считается доля задач, закрытых без единого вопроса ассистента в чат. Норма зависит от опыта: у новичка 60 %, у опытного 85 %, у старшего 95 %. Закрыл без вопросов 76 % при норме 85 % — оценка 8.9.</p>
+        <p class="muted" style="margin-top:12px">Уточняющий вопрос по существу задачи — это нормально. Метрику снижает вопрос, ответ на который уже был в переписке или в регламенте.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>Инициатива</h3>
+        <p class="muted">Норма — четыре полезных инициативы в месяц. Сделал две — оценка 5. Сделал пять при норме четыре — всё равно 10, выше потолка не уходит.</p>
+        <p class="muted" style="margin-top:12px">Засчитываются только те, что вы подтвердили как полезные. Придумать активность ради галочки не получится.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <div class="title">Если сроки в задачах не проставляют</div>
+      <p class="fg2" style="margin:0">Оценка скорости обычно складывается из двух частей: реакция в чате и попадание в срок. Но если сроки проставлены меньше чем у трети задач, вторая часть не учитывается вовсе, и скорость меряется по одной реакции. Иначе человек терял бы половину этой части премии за то, как оформлены чужие задачи. Как только сроки начнут ставить регулярно, они включатся в расчёт автоматически.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="ne-schitaetsya">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Границы расчёта</div>
+      <h2>Что в KPI не входит</h2>
+      <p>Часть задач намеренно исключена — по ним оценка была бы недостоверной или несправедливой.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3 style="color:var(--red)">Не участвует в расчёте</h3>
+        <ul class="clean cross">
+          <li><strong>Задачи в «Блокере» и «В ожидании»</strong> — работа стоит не по вине исполнителя. Время простоя потом сдвигает срок в его пользу</li>
+          <li><strong>«На контроле» и «На потом»</strong> — задача отложена, а не решена. В зачёт пойдёт, только когда будет действительно закрыта</li>
+          <li><strong>«Отменена»</strong> — задачу сняли, её не делали</li>
+          <li><strong>Закрытые до запуска системы</strong> — по ним нет ни признаков приёмки, ни переписки. Отсчёт начат с чистого листа</li>
+        </ul>
+      </div>
+
+      <div class="card reveal">
+        <h3 style="color:var(--violet)">Считается отдельно от KPI</h3>
+        <p class="fg2" style="margin-bottom:12px">Задачи из колонки бытовых раздражителей — то, что регулярно мешает работать. Они висят сразу на всех и в метрики не входят: ни время, ни качество, ни самостоятельность.</p>
+        <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
+          <table style="min-width:0">
+            <thead><tr><th>Размер</th><th class="num">Закрывшему</th><th class="num">Лиду</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag t-blue">S</span> редко</td><td class="num"><strong>3 000 ₽</strong></td><td class="num">300 ₽</td></tr>
+              <tr><td><span class="tag t-blue">M</span> еженедельно</td><td class="num"><strong>5 000 ₽</strong></td><td class="num">500 ₽</td></tr>
+              <tr><td><span class="tag t-amber">L</span> ежедневно</td><td class="num"><strong>10 000 ₽</strong></td><td class="num">1 000 ₽</td></tr>
+              <tr><td><span class="tag t-red">XL</span> бьёт по здоровью</td><td class="num"><strong>15 000 ₽</strong></td><td class="num">1 500 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:12px">Кто закрыл — определяется из журнала событий задачи. Руководителю отдела идёт 10 % сверху, и только если закрыл не он сам: его работа — добиться, чтобы это сделала команда.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <div class="title">Половина суммы — через тридцать дней</div>
+      <p class="fg2" style="margin:0">Приз выплачивается пополам: половина сразу, вторая — через месяц, если проблема не всплыла снова. Ровно через тридцать дней система сама спросит вас об этом одним сообщением. Это отделяет решённую проблему от закрытой на бумаге.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="prozrachnost">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Проверяемость</div>
+      <h2>Любую цифру можно развернуть</h2>
+      <p>В базе не хранится ни одной готовой оценки — только события с отметками времени. Все цифры выводятся из них заново при каждом открытии, поэтому подогнать их нельзя.</p>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:20px">
+      <div class="card hoverable reveal">
+        <h4>Оценка раскрывается до задач</h4>
+        <p class="muted">«Самостоятельность 8.9» разворачивается в «33 задачи из 44 закрыты без вопросов, это 75 % при норме 85 %» и дальше в список этих задач.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h4>У задачи есть лента</h4>
+        <p class="muted">Поставлена, взята, отправлена на проверку, возвращена, закрыта — каждое событие со временем. Спор о том, была ли правка, закрывается открытием карточки.</p>
+      </div>
+      <div class="card hoverable reveal">
+        <h4>Ссылки на сообщения</h4>
+        <p class="muted">Каждый снятый или добавленный балл за скорость сопровождается ссылкой на конкретное сообщение в чате.</p>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3>Правила, которые делают систему честной</h3>
+      <div class="steps" style="margin-top:16px">
+        <div class="step"><div class="n">1</div><div class="txt"><b>Цифры видны каждый день, а не первого числа.</b> Ассистент открывает приложение и видит текущий результат. Узнать о провале в день выплаты — худшее, что может случиться с такой системой</div></div>
+        <div class="step"><div class="n">2</div><div class="txt"><b>Правила не меняются задним числом.</b> Нормы и ставки правятся только с начала следующего месяца</div></div>
+        <div class="step"><div class="n">3</div><div class="txt"><b>Живой диалог не накручивает баллы.</b> Пока переписка идёт, новый отсчёт не начинается — только после двадцати минут тишины. Иначе одна беседа давала бы десяток «быстрых ответов»</div></div>
+        <div class="step"><div class="n">4</div><div class="txt"><b>Молчание дороже медленного ответа.</b> Доля быстрых ответов считается от всех вопросов, а не только от тех, на которые ответили. Проигнорировать неудобный вопрос невыгоднее, чем ответить поздно</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="granicy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Честно о слабых местах</div>
+      <h2>Чего система не умеет</h2>
+      <p>Чтобы к цифрам было доверие, важно понимать и границы их применимости.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <h4>Личная переписка не видна</h4>
+        <p class="muted">Если вопрос задан в личных сообщениях, а не в рабочем чате, система о нём не знает: ни время ответа, ни сам факт вопроса не попадут в расчёт. Всё, что должно учитываться, живёт в общем чате.</p>
+      </div>
+      <div class="card reveal">
+        <h4>История до запуска недоступна</h4>
+        <p class="muted">Бот получает сообщения только с момента подключения, а признаки приёмки появляются только у новых задач. Первый месяц — это ещё и калибровка норм.</p>
+      </div>
+      <div class="card reveal">
+        <h4>Связь вопроса с задачей не всегда точна</h4>
+        <p class="muted">Когда вопрос задан без указания человека, система сама ищет подходящую задачу по смыслу. В большинстве случаев она попадает верно, но ошибку можно поправить вручную — и это видно в истории.</p>
+      </div>
+      <div class="card reveal">
+        <h4>Метрика не заменяет разговор</h4>
+        <p class="muted">Цифры показывают, где проседает работа, но не объясняют почему. Поэтому за вами остаётся оценка месяца, а за руководителем отдела — разбор спорных случаев до расчёта, а не после.</p>
+      </div>
+    </div>
+
+    <div class="note green reveal">
+      <div class="title">Что это даёт по итогу</div>
+      <p class="fg2" style="margin:0">Премия перестаёт быть предметом переговоров. Ассистент в любой день видит свой результат и знает, какая задача его просадила. Руководитель отдела разбирает спорное до того, как посчитаны деньги. От вас требуется около двадцати нажатий в месяц и одна цифра — а расчёт по каждому человеку выгружается со всеми задачами и таймингами, и его не нужно защищать словами, достаточно показать.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Все суммы и нормы — настраиваемые параметры, а не константы. Правятся с начала следующего месяца.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('.nav a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var t = document.querySelector(a.getAttribute('href'));
+      if (t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+
+  // Появление секций. Контент виден по умолчанию: класс .pre вешается
+  // только здесь и снимается либо наблюдателем, либо страховочным таймером.
+  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  function showAll(){ els.forEach(function(el){ el.classList.remove('pre'); }); }
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced && 'IntersectionObserver' in window) {
+    els.forEach(function(el){ el.classList.add('pre'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -60px 0px', threshold:0.01});
+    els.forEach(function(el){ io.observe(el); });
+
+    setTimeout(showAll, 2500);
+    window.addEventListener('load', function(){ setTimeout(showAll, 800); });
+    window.addEventListener('error', showAll, true);
+  }
+})();
+</script>
+
+<script type="module">
+  // Motion только для микроанимаций: видимость текста от него не зависит.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    try {
+      const { animate } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      document.querySelectorAll('.tag, .pt').forEach((t) => {
+        t.addEventListener('pointerenter', () => animate(t, { scale: 1.05 }, { duration: 0.18 }));
+        t.addEventListener('pointerleave', () => animate(t, { scale: 1 }, { duration: 0.18 }));
+      });
+      document.querySelectorAll('.wallet .bar i').forEach((bar, i) => {
+        const w = bar.style.width;
+        animate(bar, { width: ['0%', w] }, { duration: 0.7, delay: 0.1 * i });
+      });
+    } catch (e) {
+      /* CDN недоступен — страница остаётся полностью рабочей */
+    }
+  }
+</script>
