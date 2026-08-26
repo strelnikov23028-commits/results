@@ -248,8 +248,8 @@ footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center
         <tbody>
           <tr>
             <td><strong>Успел в срок</strong></td>
-            <td>Время завершения сравнивается со сроком в карточке</td>
-            <td>Это «быстро». Если срок не проставлен, задача в этот расчёт не попадает</td>
+            <td>Срок вычисляется из приоритета задачи в рабочих днях от постановки</td>
+            <td>Это «быстро»: работа сделана в отведённое время</td>
           </tr>
           <tr>
             <td><strong>Без правок</strong></td>
@@ -260,11 +260,6 @@ footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center
             <td><strong>Без вопросов</strong></td>
             <td>По задаче не было вопросов ассистента в рабочем чате</td>
             <td>Это «самостоятельно»: вас не пришлось отвлекать</td>
-          </tr>
-          <tr>
-            <td><strong>Инициатива</strong></td>
-            <td>Задачу завёл сам ассистент, а не вы</td>
-            <td>Единственный признак, который подтверждаете вы — одним нажатием</td>
           </tr>
         </tbody>
       </table>
@@ -277,27 +272,42 @@ footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center
         <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
           <table style="min-width:0">
             <tbody>
-              <tr><td>Все три признака и инициатива пригодилась</td><td class="num"><span class="tag t-green">10</span></td></tr>
-              <tr><td>Все три признака</td><td class="num"><span class="tag t-green">8</span></td></tr>
-              <tr><td>Два из трёх</td><td class="num"><span class="tag t-blue">6</span></td></tr>
+              <tr><td>Все три признака</td><td class="num"><span class="tag t-green">10</span></td></tr>
+              <tr><td>Два из трёх</td><td class="num"><span class="tag t-blue">7</span></td></tr>
               <tr><td>Один из трёх</td><td class="num"><span class="tag t-amber">4</span></td></tr>
               <tr><td>Ни одного</td><td class="num"><span class="tag t-red">2</span></td></tr>
               <tr><td>Задача сорвана</td><td class="num"><span class="tag t-red">0</span></td></tr>
             </tbody>
           </table>
         </div>
-        <p class="muted" style="margin-top:12px"><strong style="color:var(--fg-2)">Восемь — это норма.</strong> Сделал то, о чём договорились, вовремя и никого не отвлекая. Десятка — только за то, чего не просили.</p>
+        <p class="muted" style="margin-top:12px">Десятка означает: сделал то, о чём договорились, в срок и никого не отвлекая. Это и есть максимум — работа, к которой нет вопросов.</p>
       </div>
 
       <div class="card reveal">
-        <h3>Размер задачи</h3>
-        <p class="muted" style="margin-bottom:14px">Оценки складываются с учётом размера: иначе десять мелких поручений перевесили бы один переезд.</p>
-        <ul class="clean">
-          <li><strong>1</strong> — мелочь до пятнадцати минут</li>
-          <li><strong>2</strong> — обычная задача до двух часов</li>
-          <li><strong>3</strong> — проект на день и больше</li>
-        </ul>
-        <p class="muted" style="margin-top:14px">Размер ставит руководитель отдела при постановке задачи. Спорить о нём после закрытия поздно — и это правильно.</p>
+        <h3>Срок задаётся приоритетом</h3>
+        <p class="muted" style="margin-bottom:14px">Отдельную дату никто не проставляет. У задачи стоит приоритет — это и есть срок в <strong style="color:var(--fg-2)">рабочих днях</strong> от момента постановки.</p>
+        <div class="tbl-scroll" style="box-shadow:none;border:1px solid var(--border)">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td class="num" style="width:52px"><span class="tag t-red">1</span></td><td>в течение дня или в первый рабочий день после выходных</td></tr>
+              <tr><td class="num"><span class="tag t-amber">3</span></td><td>в течение двух-трёх рабочих дней</td></tr>
+              <tr><td class="num"><span class="tag t-blue">7</span></td><td>в течение недели</td></tr>
+              <tr><td class="num"><span class="tag t-violet">30</span></td><td>в течение месяца</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:12px">Выходные не считаются: задача, поставленная в пятницу вечером с приоритетом 1, ждёт понедельника, а не оказывается просроченной за субботу.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:16px">
+      <h3>Размер задачи</h3>
+      <p class="muted" style="margin-bottom:14px">Оценки складываются с учётом размера — он тоже стоит на карточке отдельным полем. Иначе десять мелких поручений перевесили бы один переезд.</p>
+      <div class="grid g4">
+        <div><span class="tag t-blue">S</span><p class="muted" style="margin-top:8px">вес 1 — мелочь на пятнадцать минут</p></div>
+        <div><span class="tag t-blue">M</span><p class="muted" style="margin-top:8px">вес 2 — обычная задача до двух часов</p></div>
+        <div><span class="tag t-amber">L</span><p class="muted" style="margin-top:8px">вес 3 — работа на день</p></div>
+        <div><span class="tag t-red">XL</span><p class="muted" style="margin-top:8px">вес 5 — проект на несколько дней</p></div>
       </div>
     </div>
   </div>
@@ -313,19 +323,20 @@ footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center
       <p>Ничего не заполнять и никуда не заходить. Всё сводится к нажатиям в Telegram.</p>
     </div>
 
-    <div class="grid g3" style="margin-bottom:22px">
+    <div class="grid g2" style="margin-bottom:22px">
       <div class="card hoverable reveal" style="text-align:center">
         <div class="big" style="color:var(--accent)">1 нажатие</div>
-        <p class="muted" style="margin-top:8px">на инициативу ассистента — «пригодилось» или «нет». Пять-шесть раз в месяц</p>
-      </div>
-      <div class="card hoverable reveal" style="text-align:center">
-        <div class="big" style="color:var(--accent)">1 нажатие</div>
-        <p class="muted" style="margin-top:8px">когда закрыт пункт из списка бытовых раздражителей — подтвердить, что вопрос действительно снят</p>
+        <p class="muted" style="margin-top:8px">когда закрыт пункт из списка бытовых раздражителей — подтвердить, что вопрос действительно снят. Один-два раза в месяц</p>
       </div>
       <div class="card hoverable reveal" style="text-align:center">
         <div class="big" style="color:var(--accent)">1 цифра</div>
         <p class="muted" style="margin-top:8px">в конце месяца — насколько стало легче работать, от нуля до десяти</p>
       </div>
+    </div>
+
+    <div class="note reveal">
+      <div class="title">Это весь список</div>
+      <p class="fg2" style="margin:0">Оценивать задачи, подтверждать инициативы, заходить в трекер или заполнять что-либо не нужно. Раньше в системе была метрика проактивности, требовавшая от вас подтверждений, — она убрана: все задачи ставит руководитель отдела, поэтому измерять там было нечего.</p>
     </div>
 
     <div class="note green reveal">
@@ -342,33 +353,27 @@ footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center
     <div class="sec-head reveal">
       <div class="kicker">Структура премии</div>
       <h2>Из чего складывается сумма</h2>
-      <p>Премия в 50 000 ₽ заранее разложена на четыре части. По каждой ассистент получает оценку от нуля до десяти и забирает такую же долю: оценка 10 — всю часть, оценка 5 — половину.</p>
+      <p>Премия в 50 000 ₽ заранее разложена на три части. По каждой ассистент получает оценку от нуля до десяти и забирает такую же долю: оценка 10 — всю часть, оценка 5 — половину.</p>
     </div>
 
-    <div class="grid g4">
+    <div class="grid g3">
       <div class="card hoverable reveal wallet">
         <h4>Качество</h4>
-        <div class="sum">17 500 ₽</div>
-        <div class="bar"><i style="width:35%"></i></div>
+        <div class="sum">22 500 ₽</div>
+        <div class="bar"><i style="width:45%"></i></div>
         <p class="muted" style="margin-top:12px">Средняя оценка задач с учётом их размера. Самая большая часть: если результат приходится переделывать, остальное не имеет значения.</p>
       </div>
       <div class="card hoverable reveal wallet">
         <h4>Скорость</h4>
-        <div class="sum">12 500 ₽</div>
-        <div class="bar"><i style="width:25%"></i></div>
-        <p class="muted" style="margin-top:12px">Как быстро отвечают в чате и попадают ли в срок. От этого зависит, можно ли на человека положиться.</p>
+        <div class="sum">15 000 ₽</div>
+        <div class="bar"><i style="width:30%"></i></div>
+        <p class="muted" style="margin-top:12px">Как быстро отвечают в чате и попадают ли в отведённый приоритетом срок. От этого зависит, можно ли на человека положиться.</p>
       </div>
       <div class="card hoverable reveal wallet">
         <h4>Самостоятельность</h4>
-        <div class="sum">10 000 ₽</div>
-        <div class="bar"><i style="width:20%"></i></div>
+        <div class="sum">12 500 ₽</div>
+        <div class="bar"><i style="width:25%"></i></div>
         <p class="muted" style="margin-top:12px">Доля задач, закрытых без вопросов к вам. Это и есть разница между помощником и ещё одной заботой.</p>
-      </div>
-      <div class="card hoverable reveal wallet">
-        <h4>Инициатива</h4>
-        <div class="sum">10 000 ₽</div>
-        <div class="bar"><i style="width:20%"></i></div>
-        <p class="muted" style="margin-top:12px">Что ассистент придумал и сделал сам, пока его не попросили.</p>
       </div>
     </div>
 
@@ -419,16 +424,11 @@ footer{padding:44px 0 60px; color:var(--fg-3); font-size:14px; text-align:center
         <p class="muted" style="margin-top:12px">Уточняющий вопрос по существу задачи — это нормально. Метрику снижает вопрос, ответ на который уже был в переписке или в регламенте.</p>
       </div>
 
-      <div class="card reveal">
-        <h3>Инициатива</h3>
-        <p class="muted">Норма — четыре полезных инициативы в месяц. Сделал две — оценка 5. Сделал пять при норме четыре — всё равно 10, выше потолка не уходит.</p>
-        <p class="muted" style="margin-top:12px">Засчитываются только те, что вы подтвердили как полезные. Придумать активность ради галочки не получится.</p>
-      </div>
     </div>
 
     <div class="note reveal">
-      <div class="title">Если сроки в задачах не проставляют</div>
-      <p class="fg2" style="margin:0">Оценка скорости обычно складывается из двух частей: реакция в чате и попадание в срок. Но если сроки проставлены меньше чем у трети задач, вторая часть не учитывается вовсе, и скорость меряется по одной реакции. Иначе человек терял бы половину этой части премии за то, как оформлены чужие задачи. Как только сроки начнут ставить регулярно, они включатся в расчёт автоматически.</p>
+      <div class="title">Если приоритет у задачи не проставлен</div>
+      <p class="fg2" style="margin:0">Оценка скорости складывается из двух частей: реакция в чате и попадание в срок. Срок берётся из приоритета; если приоритет не стоит, по умолчанию считается неделя. А если приоритеты не проставлены меньше чем у трети задач за месяц, вторая часть не учитывается вовсе, и скорость меряется по одной реакции — человек не должен терять треть премии за то, как оформлены чужие задачи.</p>
     </div>
   </div>
 </section>

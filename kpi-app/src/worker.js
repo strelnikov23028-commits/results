@@ -90,6 +90,13 @@ async function authenticate(request, db) {
  * три признака снимаются с событий, четвёртый — ответ руководителя
  * по инициативе (и только по ней).
  */
+/**
+ * Оценка одной задачи по трём признакам, которые система снимает сама.
+ *
+ * Признака «инициатива» больше нет: все задачи заводит руководитель отдела,
+ * измерять там нечего. Поэтому три признака и есть максимум — десятка
+ * означает «сделал то, о чём договорились, вовремя и никого не отвлекая».
+ */
 function scoreTask(task) {
   if (task.status === 'failed') {
     return { score: 0, flags: { inTime: false, noReturns: false, noChief: false }, reason: 'сорвана' };
@@ -108,8 +115,8 @@ function scoreTask(task) {
   const noChief = !task.chief_touched || task.disputed === 1;
 
   const hits = [inTime, noReturns, noChief].filter(Boolean).length;
-  let score = [2, 4, 6, 8][hits];
-  if (hits === 3 && task.is_initiative && task.initiative_useful === 1) score = 10;
+  // 0 → 2, 1 → 4, 2 → 7, 3 → 10
+  const score = [2, 4, 7, 10][hits];
 
   return { score, flags: { inTime, noReturns, noChief }, reason: null };
 }
@@ -176,18 +183,12 @@ function computeMetrics({ tasks, replies, settings, grade }) {
   const soloRate = closed.length ? soloCount / closed.length : 0;
   const autonomy = Math.min(10, normAut > 0 ? (soloRate / normAut) * 10 : 0);
 
-  // Проактивность — инициативы, которые пригодились
-  const normPro = num(settings, 'norm_proactivity', 4);
-  const initiatives = closed.filter((t) => t.is_initiative && t.initiative_useful === 1).length;
-  const proactivity = Math.min(10, normPro > 0 ? (initiatives / normPro) * 10 : 0);
-
   return {
     // Пустой месяц не приносит денег: без задач и без ответов метрика
     // не «нет данных», а ноль. Иначе тишина оплачивалась бы наравне с работой.
     quality: idle ? 0 : round2(quality),
     speed: idle ? 0 : round2(speed),
     autonomy: idle ? 0 : round2(autonomy),
-    proactivity: idle ? 0 : round2(proactivity),
     idle,
     breakdown: {
       idle: idle ? 'за период нет ни задач, ни ответов в чате — бонус не начисляется' : null,
@@ -224,12 +225,6 @@ function computeMetrics({ tasks, replies, settings, grade }) {
         rate: pct(soloRate),
         norm: pct(normAut),
         formula: `${pct(soloRate)} ÷ ${pct(normAut)} × 10`,
-      },
-      proactivity: {
-        useful: initiatives,
-        norm: normPro,
-        proposed: closed.filter((t) => t.is_initiative).length,
-        formula: `${initiatives} из нормы ${normPro}`,
       },
     },
     scored,
@@ -359,16 +354,14 @@ function medianSeconds(replies) {
 /** Деньги: сколько забрано из каждого кошелька. */
 function computeMoney(metrics, settings, extra = {}) {
   const purses = {
-    quality: num(settings, 'purse_quality', 17500),
-    speed: num(settings, 'purse_speed', 12500),
-    autonomy: num(settings, 'purse_autonomy', 10000),
-    proactivity: num(settings, 'purse_proactivity', 10000),
+    quality: num(settings, 'purse_quality', 22500),
+    speed: num(settings, 'purse_speed', 15000),
+    autonomy: num(settings, 'purse_autonomy', 12500),
   };
   const values = {
     quality: metrics.quality,
     speed: metrics.speed,
     autonomy: metrics.autonomy,
-    proactivity: metrics.proactivity,
   };
 
   const threshold = num(settings, 'cut_threshold', 5);
@@ -380,10 +373,7 @@ function computeMoney(metrics, settings, extra = {}) {
   // Какие метрики просели ниже порога — из-за них режется весь итог.
   // Без этого пояснения оценка «10 из 10» рядом с неполной суммой
   // выглядит ошибкой расчёта, хотя это сработавшая отсечка.
-  const NAMES = {
-    quality: 'качество', speed: 'скорость',
-    autonomy: 'автономность', proactivity: 'проактивность',
-  };
+  const NAMES = { quality: 'качество', speed: 'скорость', autonomy: 'самостоятельность' };
   const lowNames = Object.keys(values)
     .filter((k) => values[k] < threshold)
     .map((k) => `${NAMES[k]} ${round2(values[k])}`);
@@ -692,7 +682,6 @@ async function handleApi(request, env, url) {
           quality: p.metrics.quality,
           speed: p.metrics.speed,
           autonomy: p.metrics.autonomy,
-          proactivity: p.metrics.proactivity,
         },
         tasksClosed: p.tasks.length,
         tasksOpen: p.openTasks.length,
@@ -770,17 +759,6 @@ async function handleApi(request, env, url) {
         .run();
       await logEvent(db, {
         taskId: id, type: 'returned', actor: me.name, note: body.note || null, source: 'manual',
-      });
-      return json({ ok: true });
-    }
-    if (action === 'initiative') {
-      await db
-        .prepare('UPDATE tasks SET initiative_useful = ?, updated_at = ? WHERE id = ?')
-        .bind(body.useful ? 1 : 0, nowIso(), id)
-        .run();
-      await logEvent(db, {
-        taskId: id, type: 'initiative_answer', actor: me.name,
-        note: body.useful ? 'пригодилось' : 'не пригодилось', source: 'manual',
       });
       return json({ ok: true });
     }
@@ -1185,6 +1163,48 @@ async function detectTask(db, text, settings) {
     : { task: candidates[0], how: 'по словам, модель не ответила', candidates };
 }
 
+/**
+ * Разбор настройки вида «id1=значение1,id2=значение2» в таблицу соответствий.
+ * Так хранятся состояния стикеров YouGile: у каждого состояния свой id.
+ */
+function stateMap(settings, key) {
+  const map = new Map();
+  for (const pair of String(settings[key] || '').split(',')) {
+    const [id, val] = pair.split('=').map((s) => s.trim());
+    if (id && val) map.set(id, val);
+  }
+  return map;
+}
+
+/** Значение стикера на задаче: из объекта stickers достаём id состояния. */
+function stickerValue(task, stickerId, map, fallback) {
+  const stateId = task?.stickers?.[stickerId];
+  if (!stateId) return fallback;
+  const v = map.get(stateId);
+  return v === undefined ? fallback : v;
+}
+
+/**
+ * Прибавляет рабочие дни к дате, пропуская субботы и воскресенья.
+ *
+ * Приоритет «1» означает «сегодня или в первый рабочий день после выходных»,
+ * поэтому задача, поставленная в пятницу вечером, ждёт понедельника,
+ * а не оказывается просроченной за выходные.
+ */
+function addWorkdays(from, days) {
+  const d = new Date(from);
+  // задача, поставленная в выходной, считается поставленной в понедельник
+  while (d.getUTCDay() === 0 || d.getUTCDay() === 6) d.setUTCDate(d.getUTCDate() + 1);
+  let left = Math.max(0, Math.round(days));
+  while (left > 0) {
+    d.setUTCDate(d.getUTCDate() + 1);
+    if (d.getUTCDay() !== 0 && d.getUTCDay() !== 6) left -= 1;
+  }
+  // конец рабочего дня, а не полночь: срок «1 день» истекает вечером
+  d.setUTCHours(21, 0, 0, 0);
+  return d.toISOString();
+}
+
 /** Настройка со списком id колонок: «a,b,c» → Set. */
 const colSet = (settings, key) =>
   new Set((settings[key] || '').split(',').map((s) => s.trim()).filter(Boolean));
@@ -1217,9 +1237,22 @@ async function upsertTaskFromYougile(env, t, settings) {
   const title = t.title || existing?.title || 'Без названия';
   const createdAt = existing?.created_at
     || (t.timestamp ? new Date(t.timestamp).toISOString() : now);
+
+  // Размер задачи берём со стикера, а не выдумываем
+  const size = Number(
+    stickerValue(t, settings.sticker_size, stateMap(settings, 'size_states'),
+                 settings.size_default || '1')
+  ) || 1;
+
+  // Срок вычисляется из стикера «Приоритет»: это рабочие дни от постановки.
+  // Явная дата в карточке, если она есть, важнее — её ставили руками.
+  const priorityDays = Number(
+    stickerValue(t, settings.sticker_priority, stateMap(settings, 'priority_states'),
+                 settings.priority_default || '7')
+  );
   const deadline = t.deadline?.deadline
     ? new Date(t.deadline.deadline).toISOString()
-    : existing?.deadline || null;
+    : (priorityDays ? addWorkdays(createdAt, priorityDays) : existing?.deadline || null);
 
   let status = existing?.status || 'open';
   let taken = existing?.taken_at || null;
@@ -1285,12 +1318,12 @@ async function upsertTaskFromYougile(env, t, settings) {
     await db
       .prepare(
         `UPDATE tasks SET title=?, number=?, board_id=?, column_id=?, keywords=?, assignee_id=?,
-         deadline=?, status=?, taken_at=?, submitted_at=?, done_at=?, returns=?, paused_min=?,
-         paused_since=?, period=?, updated_at=? WHERE id=?`
+         size=?, deadline=?, status=?, taken_at=?, submitted_at=?, done_at=?, returns=?,
+         paused_min=?, paused_since=?, period=?, updated_at=? WHERE id=?`
       )
       .bind(title, t.idTaskCommon || existing.number, t.boardId || existing.board_id,
             t.columnId || existing.column_id, keywords,
-            user?.id || existing.assignee_id, deadline, status, taken, submitted, done,
+            user?.id || existing.assignee_id, size, deadline, status, taken, submitted, done,
             returns, pausedMin, pausedSince, period, now, t.id)
       .run();
   } else {
@@ -1307,14 +1340,14 @@ async function upsertTaskFromYougile(env, t, settings) {
     await db
       .prepare(
         `INSERT INTO tasks (id, title, number, board_id, column_id, keywords, assignee_id,
-         author_id, created_at, deadline, status, taken_at, submitted_at, done_at, returns,
+         author_id, size, created_at, deadline, status, taken_at, submitted_at, done_at, returns,
          paused_min, paused_since, is_initiative, is_zaeb, period)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
       )
       .bind(t.id, title, t.idTaskCommon || null, t.boardId || null, t.columnId || null,
             taskKeywords({ ...t, title }),
-            user?.id || null, t.createdBy || null, createdAt, deadline, status, taken, submitted,
-            done, returns, pausedMin, pausedSince, isInitiative,
+            user?.id || null, t.createdBy || null, size, createdAt, deadline, status, taken,
+            submitted, done, returns, pausedMin, pausedSince, isInitiative,
             colSet(settings, 'column_zaeb').has(t.columnId || '') ? 1 : 0, period)
       .run();
     await logEvent(db, { taskId: t.id, type: 'created', at: createdAt });
@@ -1978,7 +2011,7 @@ async function handleBotCommand(msg, env, settings) {
       `<b>${p.user.name}</b>, ${period}\n\n` +
       `Кэф: <b>${p.money.kef}</b>\n` +
       `Качество ${p.metrics.quality} · Скорость ${p.metrics.speed}\n` +
-      `Автономность ${p.metrics.autonomy} · Проактивность ${p.metrics.proactivity}\n\n` +
+      `Самостоятельность ${p.metrics.autonomy}\n\n` +
       `К выплате сверх оклада: <b>${p.money.total.toLocaleString('ru-RU')} ₽</b>`
     );
   }

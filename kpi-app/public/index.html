@@ -344,7 +344,6 @@ const METRIC_META = {
   quality:     { name:'Качество',      purse:'quality' },
   speed:       { name:'Скорость',      purse:'speed' },
   autonomy:    { name:'Автономность',  purse:'autonomy' },
-  proactivity: { name:'Проактивность', purse:'proactivity' },
 };
 
 function renderProfile(p, v){
@@ -358,7 +357,6 @@ function renderProfile(p, v){
     if (k === 'quality') why = `<b>${b.quality.points}</b> баллов ÷ <b>${b.quality.weight}</b> размеров по <b>${b.quality.tasks}</b> задачам`;
     if (k === 'speed')   why = `реакция <b>${b.speed.chatScore}</b>: быстро ${b.speed.repliesFast}, медленно ${b.speed.repliesSlow}, вне часов ${b.speed.offHoursAnswered}, пропусков <b>${b.speed.misses}</b><br>медиана <b>${fmtSeconds(b.speed.medianReply)}</b><br>срок: <b>${b.speed.inTime}</b> из <b>${b.speed.withDeadline}</b> (${b.speed.slaRate})`;
     if (k === 'autonomy') why = `<b>${b.autonomy.solo}</b> из <b>${b.autonomy.of}</b> задач закрыто без вопросов в чат (${b.autonomy.rate}) при норме ${b.autonomy.norm}`;
-    if (k === 'proactivity') why = `<b>${b.proactivity.useful}</b> инициатив пригодилось из <b>${b.proactivity.proposed}</b> предложенных, норма ${b.proactivity.norm}`;
 
     // Оценка 10 при неполном кошельке — это не ошибка, а сработавшая
     // поправка. Показываем её прямо в карточке, а не прячем в отчёт.
@@ -458,7 +456,6 @@ function taskTable(tasks){
       t.flags.inTime ? '' : '<span class="tag t-red">не в срок</span>',
       t.flags.noReturns ? '' : `<span class="tag t-amber">возвратов: ${t.returns}</span>`,
       t.flags.noChief ? '' : '<span class="tag t-amber">дёргал руководителя</span>',
-      t.isInitiative ? '<span class="tag t-blue">инициатива</span>' : '',
     ].filter(Boolean).join(' ') : '';
 
     return `<tr class="clickable" data-task="${esc(t.id)}">
@@ -501,13 +498,6 @@ async function openTask(id){
          <button class="btn danger" data-act="return">Вернуть</button>
        </div>`
     : '';
-  const initiativeBtn = canAccept && t.isInitiative && t.initiativeUseful === null
-    ? `<div class="row" style="margin-top:12px">
-         <span class="muted">Инициатива пригодилась?</span>
-         <button class="btn sm" data-act="init-yes">Да</button>
-         <button class="btn ghost sm" data-act="init-no">Нет</button>
-       </div>`
-    : '';
   const disputeBtn = ME.role === 'lead' && t.chiefTouched && !t.disputed
     ? `<button class="btn ghost sm" data-act="dispute" style="margin-top:12px">Списать вовлечение: вопрос был по делу</button>`
     : '';
@@ -533,11 +523,10 @@ async function openTask(id){
         В срок: <b>${sc.flags.inTime ? 'да' : 'нет'}</b><br>
         Без правок: <b>${sc.flags.noReturns ? 'да' : 'нет'}</b> ${t.returns ? `(возвратов: ${t.returns})` : ''}<br>
         Без вовлечения руководителя: <b>${sc.flags.noChief ? 'да' : 'нет'}</b> ${t.disputed ? '<span class="tag t-blue">списано лидом</span>' : ''}<br>
-        ${t.isInitiative ? `Инициатива: <b>${t.initiativeUseful === 1 ? 'пригодилась' : t.initiativeUseful === 0 ? 'не пригодилась' : 'ждёт ответа'}</b>` : ''}
       </div>
     </div>
 
-    ${actions}${initiativeBtn}${disputeBtn}
+    ${actions}${disputeBtn}
 
     <h3 style="margin-top:20px">Что происходило</h3>
     <ul class="timeline">
@@ -554,8 +543,6 @@ async function openTask(id){
     try {
       if (act === 'accept')   await api(`/task/${id}/accept`, {method:'POST', body:'{}'});
       if (act === 'return')   await api(`/task/${id}/return`, {method:'POST', body: JSON.stringify({note: prompt('Что не так?') || ''})});
-      if (act === 'init-yes') await api(`/task/${id}/initiative`, {method:'POST', body: JSON.stringify({useful:true})});
-      if (act === 'init-no')  await api(`/task/${id}/initiative`, {method:'POST', body: JSON.stringify({useful:false})});
       if (act === 'dispute')  await api(`/task/${id}/dispute`, {method:'POST', body: JSON.stringify({note: prompt('Почему вопрос был по делу?') || ''})});
       bg.remove(); render();
     } catch (err) { alert(err.message); }
@@ -580,7 +567,7 @@ function renderTeam(d, v){
       <td class="num">${p.metrics.quality.toFixed(1)}</td>
       <td class="num">${p.metrics.speed.toFixed(1)}</td>
       <td class="num">${p.metrics.autonomy.toFixed(1)}</td>
-      <td class="num">${p.metrics.proactivity.toFixed(1)}</td>
+      
       <td class="num">${p.tasksClosed} / ${p.tasksOpen}</td>
       <td class="num">${fmtSeconds(p.medianReply)}</td>
       <td class="num"><strong>${money(p.total)}</strong></td>
@@ -671,7 +658,6 @@ async function renderAdmin(v){
     ['reply_target_min', 'Норма ответа, минут'],
     ['work_start', 'Начало рабочего окна'],
     ['work_end', 'Конец рабочего окна'],
-    ['norm_proactivity', 'Норма инициатив в месяц'],
   ].map(([k, label]) => `<div class="field"><label for="s_${k}">${label}</label>
       <input id="s_${k}" value="${esc(settings[k] || '')}"></div>`).join('');
 
