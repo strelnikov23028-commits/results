@@ -130,6 +130,11 @@ td .e{padding:6px 8px;font-size:14px;min-height:34px;border-radius:8px;width:100
 #peopleTable col.c-acts{width:16%}
 /* технические id читать глазами не нужно — при наведении видно целиком */
 td .e.id{font-size:12.5px;color:var(--fg-3)}
+/* коэффициент помощи: минус, значение, плюс в одну строку */
+td.help-cell{white-space:nowrap;display:flex;gap:5px;align-items:center;justify-content:flex-end}
+td.help-cell .hb{min-height:28px;padding:0 9px;font-size:15px;line-height:1}
+.help-val{font-size:15px;min-width:52px;text-align:center;cursor:pointer;border-radius:6px;padding:2px 4px}
+.help-val[data-help-set]:hover{background:var(--surface-2);outline:1px solid var(--border)}
 td.acts{white-space:nowrap;display:flex;gap:4px;justify-content:flex-end;align-items:center}
 td.acts .btn{padding:0 9px;font-size:12.5px}
 @media(max-width:1100px){
@@ -423,6 +428,24 @@ function renderProfile(p, v){
       <div class="card"><div class="lbl muted">Оклад</div><div class="money">${money(p.money.salary)}</div></div>
     </div>
 
+    ${p.help && p.help.multiplier !== 1 ? `
+      <div class="card" style="margin-bottom:22px;border-color:${p.help.multiplier > 1 ? 'var(--green)' : 'var(--amber)'}">
+        <div class="row">
+          <div>
+            <h3>${p.help.multiplier > 1 ? 'Надбавка от руководителя' : 'Понижающий коэффициент'}</h3>
+            <p class="muted" style="margin:4px 0 0">
+              Премия умножена на <b>×${p.help.multiplier.toFixed(2)}</b>${
+                p.help.note ? ` — ${esc(p.help.note)}` : ''
+              }
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="money" style="color:${p.help.multiplier > 1 ? 'var(--green)' : 'var(--amber)'}">
+            ${p.help.delta > 0 ? '+' : ''}${money(p.help.delta)}
+          </div>
+        </div>
+      </div>` : ''}
+
     ${chatReport(p)}
 
     <h2 style="margin-bottom:12px">Задачи за период</h2>
@@ -677,19 +700,21 @@ function renderTeam(d, v){
 
   const iAmChief = ME && ME.role === 'chief';
 
-  // Кнопка владельца: отмечает помощь по факту, а не одной оценкой в конце
-  // месяца. Каждая отметка поднимает премию на шаг, до заданного потолка.
+  // Коэффициент помощи. Кнопки двигают на шаг, по самому числу можно
+  // кликнуть и вписать своё — в том числе меньше единицы.
+  const canSetHelp = iAmChief || iAmLead;
   const helpCell = (p) => {
     if (!p.help) return '<td class="num">—</td>';
-    const at = p.help.multiplier >= p.help.max;
-    return `<td class="num" style="white-space:nowrap">
-      <b style="color:${p.help.count ? 'var(--green)' : 'var(--fg-3)'}">×${p.help.multiplier.toFixed(2)}</b>
-      <span class="muted"> ${p.help.count}</span>
-      ${iAmChief ? `
-        <button class="btn sm" data-help="${esc(p.id)}" ${at ? 'disabled title="достигнут потолок"' : ''}
-                style="margin-left:6px;padding:0 9px">+</button>
-        ${p.help.count ? `<button class="btn ghost sm" data-unhelp="${esc(p.id)}" style="padding:0 8px">−</button>` : ''}
-      ` : ''}
+    const m = p.help.multiplier;
+    const color = m > 1 ? 'var(--green)' : m < 1 ? 'var(--red)' : 'var(--fg-3)';
+    return `<td class="num help-cell">
+      ${canSetHelp ? `<button class="btn ghost sm hb" data-help-sub="${esc(p.id)}"
+              ${m <= p.help.min ? 'disabled' : ''} title="минус ${p.help.step}">−</button>` : ''}
+      <b class="help-val" style="color:${color}"
+         ${canSetHelp ? `data-help-set="${esc(p.id)}" title="нажмите, чтобы вписать своё значение"` : ''}
+      >×${m.toFixed(2)}</b>
+      ${canSetHelp ? `<button class="btn sm hb" data-help-add="${esc(p.id)}"
+              ${m >= p.help.max ? 'disabled' : ''} title="плюс ${p.help.step}">+</button>` : ''}
     </td>`;
   };
 
@@ -757,25 +782,35 @@ function renderTeam(d, v){
     </div>
   `;
 
-  // отметки помощи: жмутся часто, поэтому перерисовываем только таблицу
-  v.querySelectorAll('[data-help]').forEach((b) => {
-    b.onclick = async (e) => {
-      e.stopPropagation();
-      const note = prompt('Чем именно помогли? Можно оставить пустым') ?? null;
-      try {
-        await api(`/help/${b.dataset.help}/add?period=${PERIOD}`,
-                  { method: 'POST', body: JSON.stringify({ note }) });
-        render();
-      } catch (err) { alert(err.message); }
-    };
+  // Коэффициент помощи: кнопки на шаг, клик по числу — ручной ввод.
+  const setHelp = async (id, action, body = {}) => {
+    try {
+      await api(`/help/${id}/${action}?period=${PERIOD}`,
+                { method: 'POST', body: JSON.stringify(body) });
+      render();
+    } catch (err) { alert(err.message); }
+  };
+
+  v.querySelectorAll('[data-help-add]').forEach((b) => {
+    b.onclick = (e) => { e.stopPropagation(); setHelp(b.dataset.helpAdd, 'add'); };
   });
-  v.querySelectorAll('[data-unhelp]').forEach((b) => {
-    b.onclick = async (e) => {
+  v.querySelectorAll('[data-help-sub]').forEach((b) => {
+    b.onclick = (e) => { e.stopPropagation(); setHelp(b.dataset.helpSub, 'sub'); };
+  });
+  v.querySelectorAll('[data-help-set]').forEach((el) => {
+    el.onclick = (e) => {
       e.stopPropagation();
-      try {
-        await api(`/help/${b.dataset.unhelp}/undo?period=${PERIOD}`, { method: 'POST', body: '{}' });
-        render();
-      } catch (err) { alert(err.message); }
+      const cur = el.textContent.replace('×', '').trim();
+      const raw = prompt(
+        'Коэффициент премии. Больше 1 — надбавка, меньше 1 — снижение.\n' +
+        'Например: 1.3 или 0.8',
+        cur
+      );
+      if (raw === null) return;
+      const value = Number(String(raw).replace(',', '.'));
+      if (!Number.isFinite(value) || value <= 0) return alert('Нужно положительное число');
+      const note = prompt('За что? Можно оставить пустым') ?? null;
+      setHelp(el.dataset.helpSet, 'set', { value, note });
     };
   });
 

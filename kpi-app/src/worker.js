@@ -532,7 +532,8 @@ async function fetchUserData(db, userId, period, role = 'assistant', startFrom =
        WHERE period = ? AND (
          user_id = ?
          OR (mention_id = ? AND replied_at IS NULL)
-         OR (? = 'lead' AND mention_id IS NULL AND replied_at IS NULL AND asked_role = 'chief')
+         OR (? = 'lead' AND mention_id IS NULL AND mention_raw IS NULL
+             AND replied_at IS NULL AND asked_role = 'chief')
        )`
     )
     .bind(period, userId, userId, role)
@@ -544,23 +545,29 @@ async function fetchUserData(db, userId, period, role = 'assistant', startFrom =
   return { tasks: tasks.results, replies: replies.results, awards: awards.results };
 }
 
+/** Коэффициент помощи держим в разумных пределах и с шагом настройки. */
+function clampHelp(value, settings) {
+  const v = Number(value);
+  if (!Number.isFinite(v) || v <= 0) return 1;
+  const min = num(settings, 'help_min', 0.5);
+  const max = num(settings, 'help_max', 2);
+  return Math.min(max, Math.max(min, Math.round(v * 100) / 100));
+}
+
 /** Полная карточка человека: метрики, деньги, задачи с таймингами. */
 async function buildProfile(db, user, period, settings) {
   const { tasks, replies, awards } = await fetchUserData(
     db, user.id, period, user.role, settings.start_from || null
   );
 
-  // Отметки владельца «в этот раз реально помогли». Копятся весь месяц
-  // и поднимают премию: каждая на help_step, но не выше help_max.
+  // Коэффициент за помощь. Владелец ставит его вручную: плюс и минус
+  // двигают на шаг, число можно вписать напрямую. Значение меньше единицы
+  // тоже допустимо — коэффициент работает в обе стороны.
   const helpRow = await db
-    .prepare('SELECT count(*) AS n FROM help_marks WHERE user_id = ? AND period = ?')
+    .prepare('SELECT value, note FROM help_marks WHERE user_id = ? AND period = ?')
     .bind(user.id, period)
     .first();
-  const helpCount = helpRow?.n || 0;
-  const helpMult = Math.min(
-    num(settings, 'help_max', 1.2),
-    1 + helpCount * num(settings, 'help_step', 0.02)
-  );
+  const helpMult = clampHelp(helpRow ? helpRow.value : 1, settings);
   const metrics = computeMetrics({ tasks, replies, settings, grade: user.grade });
   const money = computeMoney(metrics, settings, { chiefMultiplier: helpMult });
 
@@ -585,10 +592,13 @@ async function buildProfile(db, user, period, settings) {
       total: money.bonus + zaebSum + savingPay,
     },
     help: {
-      count: helpCount,
       multiplier: round2(helpMult),
-      step: num(settings, 'help_step', 0.02),
-      max: num(settings, 'help_max', 1.2),
+      note: helpRow?.note || null,
+      step: num(settings, 'help_step', 0.1),
+      min: num(settings, 'help_min', 0.5),
+      max: num(settings, 'help_max', 2),
+      // сколько рублей добавил или отнял коэффициент
+      delta: Math.round(money.bonus - money.bonus / helpMult),
     },
     awards,
     tasks: metrics.scored.map(decorateTask),
@@ -835,47 +845,49 @@ async function handleApi(request, env, url) {
     return json(withChatLinks(await buildProfile(db, user, period, settings), settings));
   }
 
-  // Отметка «в этот раз реально помогли». Ставит владелец, по факту,
-  // а не одной оценкой в конце месяца — так видно, за что именно надбавка.
+  // Коэффициент за помощь. Ставит владелец: кнопками по шагу или вписав
+  // число напрямую. Меньше единицы тоже можно — коэффициент работает
+  // в обе стороны и умножает всю премию человека.
   if (path.startsWith('/help/')) {
-    if (me.role !== 'chief') return bad('только руководитель', 403);
+    if (!['chief', 'lead'].includes(me.role)) return bad('только руководитель', 403);
     const [, , userId, action] = path.split('/');
     const target = await db.prepare('SELECT id, name FROM users WHERE id = ?').bind(userId).first();
     if (!target) return bad('не найден', 404);
 
-    if (action === 'add') {
-      const body = await request.json().catch(() => ({}));
-      await db
-        .prepare('INSERT INTO help_marks (user_id, actor, note, at, period) VALUES (?,?,?,?,?)')
-        .bind(userId, me.name, body.note || null, nowIso(), period)
-        .run();
+    const body = await request.json().catch(() => ({}));
+    const cur = await db
+      .prepare('SELECT value FROM help_marks WHERE user_id = ? AND period = ?')
+      .bind(userId, period)
+      .first();
+    const step = num(settings, 'help_step', 0.1);
+    const was = cur ? Number(cur.value) : 1;
+
+    let next = was;
+    if (action === 'add') next = was + step;
+    else if (action === 'sub') next = was - step;
+    else if (action === 'set') next = Number(body.value);
+    else if (action === 'reset') next = 1;
+    next = clampHelp(next, settings);
+
+    await db
+      .prepare(
+        `INSERT INTO help_marks (user_id, period, value, note, actor, at)
+         VALUES (?,?,?,?,?,?)
+         ON CONFLICT(user_id, period) DO UPDATE SET
+           value = excluded.value, note = excluded.note,
+           actor = excluded.actor, at = excluded.at`
+      )
+      .bind(userId, period, next, body.note || null, me.name, nowIso())
+      .run();
+
+    if (round2(next) !== round2(was)) {
       await logEvent(db, {
         userId, type: 'manual', actor: me.name, source: 'manual',
-        note: `отмечена помощь${body.note ? `: ${body.note}` : ''}`,
+        note: `коэффициент помощи ${round2(was)} → ${round2(next)}${body.note ? `: ${body.note}` : ''}`,
       });
     }
 
-    if (action === 'undo') {
-      const last = await db
-        .prepare('SELECT id FROM help_marks WHERE user_id = ? AND period = ? ORDER BY id DESC LIMIT 1')
-        .bind(userId, period)
-        .first();
-      if (last) await db.prepare('DELETE FROM help_marks WHERE id = ?').bind(last.id).run();
-    }
-
-    const row = await db
-      .prepare('SELECT count(*) AS n FROM help_marks WHERE user_id = ? AND period = ?')
-      .bind(userId, period)
-      .first();
-    const count = row?.n || 0;
-    return json({
-      ok: true,
-      count,
-      multiplier: round2(Math.min(
-        num(settings, 'help_max', 1.2),
-        1 + count * num(settings, 'help_step', 0.02)
-      )),
-    });
+    return json({ ok: true, multiplier: round2(next), step });
   }
 
   // Раздражители: список закрытых с подтверждением выплаты.
@@ -992,8 +1004,8 @@ async function handleApi(request, env, url) {
       return json({ ok: true });
     }
     if (action === 'dispute') {
-      // лид списывает вовлечение руководителя как «вопрос был по делу»
-      if (me.role !== 'lead') return bad('только руководитель отдела', 403);
+      // списание вовлечения: «вопрос был по делу, а не от беспомощности»
+      if (!['lead', 'chief'].includes(me.role)) return bad('только руководитель', 403);
       await db
         .prepare('UPDATE tasks SET disputed = 1, dispute_note = ?, updated_at = ? WHERE id = ?')
         .bind(body.note || null, nowIso(), id)
@@ -1854,22 +1866,29 @@ async function handleTelegramUpdate(request, env, settings) {
     // Кому адресовано. Явный тег — самый надёжный сигнал. Если тега нет,
     // ищем задачу по смыслу сообщения и спрашиваем с её исполнителя:
     // руководитель в YouGile не пишет и адресата не указывает.
-    let mentionId = await resolveMention(db, msg);
+    const mention = await resolveMention(db, msg);
+    let mentionId = mention.id;
     let matchedTask = null;
     let matchHow = null;
 
-    if (!mentionId) {
+    // Задачу по смыслу ищем, только если адресата не назвали. Если человека
+    // тегнули явно — вопрос его, и никого другого он не касается,
+    // даже когда текст похож на чужую задачу.
+    if (!mention.raw) {
       const found = await detectTask(db, msg.text || msg.caption || '', settings);
       matchHow = found.how;
       if (found.task?.assignee_id) {
         mentionId = found.task.assignee_id;
         matchedTask = found.task;
       }
+    } else if (!mentionId) {
+      // тег есть, но человека нет в системе — вопрос не штрафует никого
+      matchHow = `тегнут ${mention.raw}, но такого человека нет в системе`;
     }
 
     // Лид всегда тегает, когда ставит задачу. Значит сообщение лида без тега,
     // когда висит вопрос руководителя, — это его собственный ответ, а не запрос.
-    if (user.role === 'lead' && !mentionId) {
+    if (user.role === 'lead' && !mention.raw && !mentionId) {
       const openForLead = await db
         .prepare(
           `SELECT * FROM chat_replies WHERE chat_id = ? AND replied_at IS NULL
@@ -1891,10 +1910,12 @@ async function handleTelegramUpdate(request, env, settings) {
 
     await db
       .prepare(
-        `INSERT INTO chat_replies (user_id, chat_id, request_msg, asked_by, asked_role, asked_at, in_hours, urgent, mention_id, period)
-         VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        `INSERT INTO chat_replies (user_id, chat_id, request_msg, asked_by, asked_role, asked_at,
+         in_hours, urgent, mention_id, mention_raw, period)
+         VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       )
-      .bind(String(msg.chat.id), String(msg.message_id), user.id, user.role, at, inHours, urgent, mentionId, period)
+      .bind(String(msg.chat.id), String(msg.message_id), user.id, user.role, at, inHours, urgent,
+            mentionId, mention.raw, period)
       .run();
 
     // Бот подсказывает в чат, кого ждут: сообщение руководителя без адресата
@@ -2373,20 +2394,26 @@ async function resolveMention(db, msg) {
   const entities = msg.entities || msg.caption_entities || [];
   const text = msg.text || msg.caption || '';
 
+  let raw = null; // кого тегнули, даже если в базе такого нет
   for (const e of entities) {
     if (e.type === 'text_mention' && e.user?.id) {
+      raw = raw || String(e.user.id);
       const u = await db.prepare('SELECT id FROM users WHERE tg_user_id = ?')
         .bind(String(e.user.id)).first();
-      if (u) return u.id;
+      if (u) return { id: u.id, raw };
     }
     if (e.type === 'mention') {
       const nick = text.substr(e.offset + 1, e.length - 1).toLowerCase();
+      raw = raw || `@${nick}`;
       const u = await db.prepare('SELECT id FROM users WHERE lower(tg_username) = ?')
         .bind(nick).first();
-      if (u) return u.id;
+      if (u) return { id: u.id, raw };
     }
   }
-  return null;
+  // raw заполнен, а id нет — тег был, но человека нет в системе.
+  // Такой вопрос не должен штрафовать никого: адресат назван,
+  // просто он неизвестен боту.
+  return { id: null, raw };
 }
 
 /** Отправка сообщения в Telegram. Токен лежит в секретах, не в коде. */

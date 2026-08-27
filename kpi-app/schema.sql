@@ -115,6 +115,8 @@ CREATE TABLE chat_replies (
   urgent       INTEGER NOT NULL DEFAULT 0, -- помечено как срочное
   escalated    INTEGER NOT NULL DEFAULT 0, -- бот уже напоминал
   mention_id   TEXT,     -- если обращались к конкретному человеку
+  mention_raw  TEXT,     -- кого тегнули в тексте, даже если его нет в системе:
+                         -- такой вопрос не должен штрафовать посторонних
   no_reply_needed INTEGER NOT NULL DEFAULT 0, -- «понял, спасибо» — таймер не в счёт
   period       TEXT NOT NULL
 );
@@ -149,18 +151,19 @@ CREATE TABLE awards (
 );
 CREATE INDEX idx_awards_user ON awards(user_id, period);
 
--- ── Отметки владельца: «в этот раз реально помогли» ─────────────────────────
--- Копятся в течение месяца, а не выставляются одной цифрой в конце. Каждая
--- поднимает множитель премии, потолок задаётся настройкой help_max.
+-- ── Коэффициент за помощь ───────────────────────────────────────────────────
+-- Ставится вручную владельцем: кнопками по шагу или прямым вводом.
+-- Умножает всю премию человека и работает в обе стороны — меньше единицы
+-- тоже допустимо. Одна запись на человека за период.
 CREATE TABLE help_marks (
-  id      INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id TEXT REFERENCES users(id),
-  actor   TEXT,
+  user_id TEXT NOT NULL REFERENCES users(id),
+  period  TEXT NOT NULL,
+  value   REAL NOT NULL DEFAULT 1,
   note    TEXT,
+  actor   TEXT,
   at      TEXT NOT NULL DEFAULT (datetime('now')),
-  period  TEXT NOT NULL
+  PRIMARY KEY (user_id, period)
 );
-CREATE INDEX idx_help_user ON help_marks(user_id, period);
 
 -- ── Настройки: всё, что можно подкрутить без правки кода ────────────────────
 CREATE TABLE settings (
@@ -241,8 +244,10 @@ INSERT INTO settings (key, value) VALUES
   -- Отметки помощи от владельца. Каждая поднимает премию на help_step,
   -- но не выше help_max. Ставятся в течение месяца, а не одной оценкой
   -- в конце: так видно, за что именно человек получил надбавку.
-  ('help_step',         '0.02'),
-  ('help_max',          '1.20'),
+  -- Коэффициент помощи: шаг кнопок и границы ручного ввода
+  ('help_step',         '0.1'),
+  ('help_min',          '0.5'),
+  ('help_max',          '2'),
   ('yougile_key',       ''),     -- задаётся секретом, в базу не пишется
   ('yougile_base',      'https://yougile.com/api-v2'),
   -- Колонки обеих рабочих досок: «Задачи ассистентов» и «Задачи Дмитрия».
