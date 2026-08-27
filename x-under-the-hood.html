@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X «Under the Hood» — как посмотреть скрытые метки аккаунта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --surface-2:#FAFAFC;
+  --text:#1D1D1F; --text-2:#515154; --text-3:#86868B;
+  --line:#E3E3E6; --line-strong:#D2D2D7;
+  --accent:#0071E3; --accent-soft:#E8F1FE;
+  --warn:#B25000; --warn-soft:#FFF3E6;
+  --danger:#C0271A; --danger-soft:#FDECEA;
+  --ok:#0F7B4F; --ok-soft:#E6F5EE;
+  --code-bg:#1D1D1F; --code-text:#F2F2F4;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --surface:#151517; --surface-2:#1C1C1F;
+    --text:#F5F5F7; --text-2:#C7C7CC; --text-3:#8E8E93;
+    --line:#2C2C2E; --line-strong:#3A3A3C;
+    --accent:#0A84FF; --accent-soft:#14283F;
+    --warn:#FFB86B; --warn-soft:#33240F;
+    --danger:#FF7B6E; --danger-soft:#3A1714;
+    --ok:#5FD9A0; --ok-soft:#123227;
+    --code-bg:#0B0B0C; --code-text:#EDEDF0;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.4);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:17px; line-height:1.6; letter-spacing:-.01em;
+  font-feature-settings:"tnum" 0;
+}
+.wrap{max-width:1000px; margin:0 auto; padding:0 24px}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px}
+
+/* ── Hero ── */
+header.hero{padding:88px 0 56px}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:13px; font-weight:600; letter-spacing:.02em; text-transform:uppercase;
+  color:var(--warn); background:var(--warn-soft);
+  padding:7px 14px; border-radius:999px; margin-bottom:22px;
+}
+.eyebrow svg{width:14px;height:14px;flex:none}
+h1{
+  font-size:clamp(34px,5.2vw,56px); line-height:1.08; letter-spacing:-.03em;
+  font-weight:700; margin:0 0 20px;
+}
+.lede{font-size:clamp(18px,2.2vw,21px); color:var(--text-2); max-width:64ch; margin:0}
+
+/* ── Sections ── */
+section{padding:20px 0 44px}
+h2{
+  font-size:clamp(24px,3vw,32px); letter-spacing:-.025em; font-weight:700;
+  margin:44px 0 10px; scroll-margin-top:24px;
+}
+h2 .num{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; margin-right:12px; vertical-align:2px;
+  border-radius:10px; background:var(--accent); color:#fff;
+  font-size:15px; font-weight:600; letter-spacing:0;
+}
+h3{font-size:19px; font-weight:600; letter-spacing:-.015em; margin:28px 0 8px}
+p{margin:0 0 14px; color:var(--text-2)}
+p strong,li strong{color:var(--text); font-weight:600}
+.sub{color:var(--text-3); font-size:15px}
+
+/* ── Cards ── */
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:18px;
+  padding:26px 28px; box-shadow:var(--shadow); margin:18px 0;
+}
+.grid{display:grid; gap:16px; margin:18px 0}
+@media(min-width:760px){ .grid.two{grid-template-columns:1fr 1fr} }
+.mini{
+  background:var(--surface); border:1px solid var(--line); border-radius:16px;
+  padding:20px 22px; box-shadow:var(--shadow);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.mini:hover{transform:translateY(-2px); box-shadow:0 4px 8px rgba(0,0,0,.06),0 14px 34px rgba(0,0,0,.08)}
+.mini h4{margin:0 0 6px; font-size:16px; font-weight:600; letter-spacing:-.01em; display:flex; align-items:center; gap:9px}
+.mini h4 svg{width:18px;height:18px;color:var(--accent);flex:none}
+.mini p{margin:0; font-size:15px}
+
+/* ── Steps ── */
+ol.steps{counter-reset:s; list-style:none; padding:0; margin:18px 0}
+ol.steps>li{
+  counter-increment:s; position:relative; padding:0 0 0 46px; margin:0 0 18px;
+  color:var(--text-2);
+}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:0;
+  width:30px; height:30px; border-radius:50%;
+  background:var(--accent-soft); color:var(--accent);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:600; letter-spacing:0;
+}
+ol.steps>li b{color:var(--text)}
+
+/* ── Path chips ── */
+.path{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:6px 0 4px}
+.path span{
+  background:var(--surface-2); border:1px solid var(--line-strong); border-radius:9px;
+  padding:6px 12px; font-size:14px; font-weight:500; color:var(--text);
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+}
+.path .arr{border:0; background:none; color:var(--text-3); padding:0 2px; font-family:inherit}
+
+/* ── Callout ── */
+.note{
+  border-left:3px solid var(--accent); background:var(--accent-soft);
+  padding:16px 20px; border-radius:0 12px 12px 0; margin:18px 0;
+}
+.note.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+.note p{margin:0; color:var(--text)}
+.note p+p{margin-top:10px}
+
+/* ── Code ── */
+.codewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:14px; margin:16px 0}
+pre{
+  margin:0; background:var(--code-bg); color:var(--code-text);
+  padding:20px 22px; border-radius:14px;
+  font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:13.5px; line-height:1.65; letter-spacing:0; min-width:max-content;
+}
+pre .c{color:#7D8590}
+pre .k{color:#79C0FF}
+pre .s{color:#A5D6A5}
+pre .n{color:#FFB86B}
+code.inl{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-size:.88em;
+  background:var(--surface-2); border:1px solid var(--line);
+  padding:2px 7px; border-radius:6px; color:var(--text); letter-spacing:0;
+}
+
+/* ── Tables ── */
+.tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:16px; background:var(--surface); box-shadow:var(--shadow); margin:18px 0}
+table{border-collapse:collapse; width:100%; min-width:720px; font-size:15px}
+th,td{text-align:left; padding:14px 18px; border-bottom:1px solid var(--line); vertical-align:top}
+thead th{
+  background:var(--surface-2); font-size:13px; font-weight:600;
+  text-transform:uppercase; letter-spacing:.04em; color:var(--text-3);
+  position:sticky; top:0; z-index:1;
+}
+tbody tr:last-child td{border-bottom:0}
+td.lbl{white-space:nowrap}
+td.lbl code{
+  font-family:'JetBrains Mono',ui-monospace,monospace; font-size:13px; letter-spacing:0;
+  background:var(--surface-2); border:1px solid var(--line-strong);
+  padding:4px 9px; border-radius:7px; display:inline-block; color:var(--text);
+}
+td.eff{color:var(--text-2)}
+.sev{
+  display:inline-block; font-size:11.5px; font-weight:600; letter-spacing:.02em;
+  padding:3px 9px; border-radius:999px; white-space:nowrap; margin-top:8px;
+}
+.sev.hard{background:var(--danger-soft); color:var(--danger)}
+.sev.mid{background:var(--warn-soft); color:var(--warn)}
+.sev.soft{background:var(--ok-soft); color:var(--ok)}
+
+/* ── Lists ── */
+ul.plain{list-style:none; padding:0; margin:14px 0}
+ul.plain li{position:relative; padding-left:28px; margin-bottom:11px; color:var(--text-2)}
+ul.plain li svg{position:absolute; left:0; top:4px; width:17px; height:17px}
+ul.plain li.yes svg{color:var(--ok)}
+ul.plain li.no svg{color:var(--danger)}
+
+/* ── Sources ── */
+.sources{font-size:15px}
+.sources li{margin-bottom:9px; color:var(--text-2)}
+footer{
+  border-top:1px solid var(--line); margin-top:48px; padding:28px 0 60px;
+  color:var(--text-3); font-size:14px;
+}
+
+/* ── Motion ── */
+.reveal{opacity:1}
+html.js-motion .reveal{opacity:0; transform:translateY(20px)}
+@media (prefers-reduced-motion: reduce){
+  html.js-motion .reveal{opacity:1 !important; transform:none !important}
+  .mini{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+      Пилот · с 13 августа 2026
+    </div>
+    <h1 class="reveal">Under the Hood: как запросить у X скрытые метки аккаунта</h1>
+    <p class="lede reveal">X открыл исходники ранжирования «For You» и одновременно запустил отчёт, в котором видно, какие <i>visibility-метки</i> система навесила на ваш аккаунт и посты за прошлый календарный месяц. Ниже — путь в интерфейсе, точные условия допуска, структура JSON и полный список из 30 меток, вычитанный прямо из опубликованного кода.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- 1 -->
+<section>
+  <h2 class="reveal"><span class="num">1</span>Что это вообще такое</h2>
+  <p class="reveal">Under the Hood — страница в настройках X, где аккаунт может скачать <b>агрегированную месячную статистику</b> по меткам ограничения видимости. Это не «детектор теневого бана»: отчёт показывает только <b>формальные метки модерации</b>, которые X реально записал за вами. Слабый охват из-за плохого вовлечения, ранжирующих моделей или скоринга сюда не попадает.</p>
+
+  <div class="grid two">
+    <div class="mini reveal">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Формат</h4>
+      <p>JSON-файл. Агрегат за месяц, <b>не</b> детализация по каждому посту.</p>
+    </div>
+    <div class="mini reveal">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Период</h4>
+      <p>Прошлый календарный месяц по UTC — и только через 10+ дней после его окончания.</p>
+    </div>
+    <div class="mini reveal">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Две группы меток</h4>
+      <p><b>18</b> меток на посты (<code class="inl">TweetSafetyLabels</code>) и <b>12</b> на аккаунт (<code class="inl">UserSafetyLabels</code>).</p>
+    </div>
+    <div class="mini reveal">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg>Открытый код</h4>
+      <p>Генератор отчёта опубликован: <a href="https://github.com/xai-org/x-algorithm/tree/main/under-the-hood" target="_blank" rel="noopener">xai-org/x-algorithm → under-the-hood</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section>
+  <h2 class="reveal"><span class="num">2</span>Путь в интерфейсе</h2>
+  <p class="reveal">Штатный способ — через настройки веб-версии или приложения:</p>
+  <div class="card reveal">
+    <div class="path">
+      <span>Settings and privacy</span><span class="arr">→</span>
+      <span>Privacy and safety</span><span class="arr">→</span>
+      <span>Under the Hood</span><span class="arr">→</span>
+      <span>Download</span>
+    </div>
+    <p class="sub" style="margin:12px 0 0">Если пункта «Under the Hood» в меню нет — ваш аккаунт не в пилотной группе. Это не ошибка и не признак санкций: страница целиком спрятана за фиче-флагом (см. блок 3).</p>
+  </div>
+  <div class="note reveal">
+    <p><b>Про чтение JSON.</b> X прямо предлагает нетехническим пользователям закинуть файл в любого AI-ассистента вместе со ссылкой на GitHub-репозиторий и попросить объяснить. Расшифровка меток лежит рядом с отчётом — таблицы ниже это она и есть.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section>
+  <h2 class="reveal"><span class="num">3</span>Условия допуска — дословно из кода</h2>
+  <p class="reveal">Проверки жёстко зашиты в <a href="https://github.com/xai-org/x-algorithm/blob/main/under-the-hood/strato/columns/underTheHoodReport.User.strato" target="_blank" rel="noopener">underTheHoodReport.User.strato</a>. Все четыре должны выполниться одновременно:</p>
+  <ol class="steps reveal">
+    <li><b>Фиче-флаг включён.</b> <code class="inl">under_the_hood_report_enabled</code>, значение по умолчанию — <code class="inl">false</code>. Раздаётся выборочной группе; в конфиге также прописана роль <code class="inl">birdwatch_team</code>. Именно поэтому у большинства пункта в настройках пока нет.</li>
+    <li><b>Аккаунт старше года.</b> <code class="inl">minimumAccountAge = 365.days</code>, метка проверки — «Account at least 1 year old».</li>
+    <li><b>10+ постов за отчётный месяц.</b> <code class="inl">minimumEligiblePosts = 10</code>, метка — «10 or more posts in the prior month».</li>
+    <li><b>Аккаунт не заблокирован.</b> При <code class="inl">suspended = true</code> колонка отдаёт <code class="inl">Ok.missing</code> — отчёта не будет вообще.</li>
+  </ol>
+
+  <h3 class="reveal">Какой месяц попадёт в отчёт</h3>
+  <p class="reveal">Берётся предыдущий календарный месяц UTC, но только если с его последнего дня прошло <b>минимум 10 суток</b> (<code class="inl">minDaysAfterMonthEnd = 10</code>). Если данные по нему ещё не досчитаны до конца (<code class="inl">finalThroughDay</code> не покрывает последний день месяца) — система откатывается ещё на месяц назад. То есть в начале сентября вы, скорее всего, увидите июль, а не август.</p>
+
+  <div class="note warn reveal">
+    <p><b>Важный нюанс.</b> Если возраст или число постов не дотягивают, X всё равно вернёт объект — но с пустым <code class="inl">reportJson</code> и заполненным <code class="inl">reportInfo.eligibilityChecks</code>, где по каждой проверке стоит <code class="inl">true</code>/<code class="inl">false</code>. Так что интерфейс сможет показать вам, чего именно не хватило.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <h2 class="reveal"><span class="num">4</span>Как это устроено на уровне запроса</h2>
+  <p class="reveal">Отчёт отдаётся через GraphQL. В опубликованном коде видна вся цепочка:</p>
+  <ul class="plain reveal">
+    <li class="yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Публичный алиас</b> — <code class="inl">userUnderTheHoodReport</code> типа <code class="inl">GraphQlQuery</code>, <code class="inl">views = Set(ExternalGraphQl)</code>. Ведёт на колонку <code class="inl">visibility/under-the-hood/underTheHoodReport</code>.</li>
+    <li class="yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Ключ запроса — пустой</b> (<code class="inl">type Key = Unit</code>). Пользователь берётся из сессии: <code class="inl">CallContext.authenticatedTwitterUserId()</code>. Чужой аккаунт запросить нельзя — политика доступа <code class="inl">AllowTwitterUserId</code>.</li>
+    <li class="yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Форма ответа</b> описана в <code class="inl">under_the_hood.thrift</code>.</li>
+  </ul>
+
+  <div class="codewrap reveal">
+<pre><span class="c">// under-the-hood/strato/graphql/under_the_hood.thrift</span>
+<span class="k">struct</span> UnderTheHoodReportInfo {
+  <span class="n">1</span>: optional string reportPeriod              <span class="c">// "July 2026"</span>
+  <span class="n">2</span>: optional map&lt;string, bool&gt; eligibilityChecks
+}
+
+<span class="k">struct</span> UnderTheHoodReport {
+  <span class="n">1</span>: optional i64    generatedAt   (GraphQlEncoding = <span class="s">"Int53"</span>)
+  <span class="n">2</span>: optional string reportJson    <span class="c">// сам отчёт строкой JSON</span>
+  <span class="n">3</span>: optional UnderTheHoodReportInfo reportInfo
+}</pre>
+  </div>
+
+  <div class="note warn reveal">
+    <p><b>Честно о пределах.</b> Конкретный <code class="inl">queryId</code> персистентного GraphQL-запроса x.com в открытый репозиторий не выкладывали, и публично он не документирован. Найти его можно только у себя: открыть настройки Under the Hood → DevTools → вкладка Network → фильтр <code class="inl">graphql</code> → искать запрос со словом <code class="inl">UnderTheHood</code> в имени операции. Дальше его можно повторить с вашими же куками. Никакого способа посмотреть метки <i>чужого</i> аккаунта в этом API нет — ключ запроса берётся из сессии, а не из параметра.</p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section>
+  <h2 class="reveal"><span class="num">5</span>Что внутри <code class="inl" style="font-size:.7em">reportJson</code></h2>
+  <p class="reveal">Структура собирается функцией <code class="inl">buildReportJson</code>. Пример полного ответа (значения условные, поля и формат — реальные):</p>
+  <div class="codewrap reveal">
+<pre>{
+  <span class="k">"notes"</span>: <span class="s">"You can learn more about instances when a post's reach may be limited…"</span>,
+  <span class="k">"period"</span>: { <span class="k">"startDate"</span>: <span class="s">"2026-07-01"</span>, <span class="k">"endDate"</span>: <span class="s">"2026-07-31"</span>, <span class="k">"timezone"</span>: <span class="s">"UTC"</span> },
+  <span class="k">"generatedAt"</span>: <span class="s">"2026-08-11T06:14:03Z"</span>,
+  <span class="k">"postCount"</span>: <span class="n">128</span>,
+  <span class="k">"postLabels"</span>: [
+    {
+      <span class="k">"label"</span>: <span class="s">"NSFW_HIGH_RECALL"</span>,
+      <span class="k">"about"</span>: <span class="s">"Post detected by automated systems as one that may contain…"</span>,
+      <span class="k">"effect"</span>: <span class="s">"Post hidden from recommendations to non-followers…"</span>,
+      <span class="k">"posts"</span>: <span class="n">3</span>,
+      <span class="k">"totalPostsInMonth"</span>: <span class="n">128</span>,
+      <span class="k">"percentageOfPosts"</span>: <span class="s">"2.34%"</span>
+    }
+  ],
+  <span class="k">"accountLabels"</span>: [
+    {
+      <span class="k">"label"</span>: <span class="s">"SpamHighRecall"</span>,
+      <span class="k">"about"</span>: <span class="s">"Account detected by automated systems as likely to post spam."</span>,
+      <span class="k">"effect"</span>: <span class="s">"The account's posts are hidden from recommendations to non-followers."</span>,
+      <span class="k">"days"</span>: <span class="n">4</span>,          <span class="c">// сколько дней месяца метка была активна</span>
+      <span class="k">"daysInPeriod"</span>: <span class="n">31</span>,
+      <span class="k">"percentageOfDays"</span>: <span class="s">"12.90%"</span>
+    }
+  ]
+}</pre>
+  </div>
+  <p class="reveal"><b>Чистый отчёт выглядит иначе:</b> если меток нет, массивы пустые, а рядом добавляются поля <code class="inl">"totalPostLabels": 0</code> и/или <code class="inl">"totalAccountLabels": 0</code>. Это и есть сигнал «ничего не навешано».</p>
+  <p class="reveal sub">Разница в единицах измерения: посты считаются <b>в штуках</b> (<code class="inl">posts</code> — сколько постов месяца несут метку), аккаунт — <b>в днях</b> (<code class="inl">days</code> — сколько суток метка на вас висела).</p>
+</section>
+
+<!-- 6 -->
+<section>
+  <h2 class="reveal"><span class="num">6</span>Метки аккаунта — все 12</h2>
+  <p class="reveal">Это то, что вы искали под словами «скрытые метки аккаунта». Список — из <a href="https://github.com/xai-org/x-algorithm/blob/main/under-the-hood/strato/lib/underTheHoodLabels.strato" target="_blank" rel="noopener">underTheHoodLabels.strato</a>, формулировки эффекта переведены с оригинала.</p>
+  <div class="tablewrap reveal">
+    <table>
+      <thead><tr><th style="width:230px">Метка</th><th style="width:35%">За что ставится</th><th>Что делает</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl"><code>ReadOnly</code><br><span class="sev hard">жёстко</span></td><td>Аккаунт переведён в режим «только чтение» за нарушение правил, требующее удаления поста.</td><td class="eff">Постить нельзя до удаления нарушающего поста. Посты скрыты из рекомендаций для неподписчиков.</td></tr>
+        <tr><td class="lbl"><code>Compromised</code><br><span class="sev hard">жёстко</span></td><td>Автоматика или жалоба определили аккаунт как взломанный.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам. Требуется смена пароля.</td></tr>
+        <tr><td class="lbl"><code>SpamHighRecall</code><br><span class="sev mid">охват</span></td><td>Автоматика считает, что аккаунт вероятно постит спам.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>NsfwHighRecall</code><br><span class="sev mid">охват</span></td><td>Автоматика: аккаунт <i>может</i> публиковать контент 18+.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>NsfwHighPrecision</code><br><span class="sev mid">охват</span></td><td>Автоматика: аккаунт <i>вероятно</i> публикует контент 18+.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>NsfwAvatarImage</code><br><span class="sev mid">охват</span></td><td>Сработка по аватарке — возможен контент 18+.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>NsfwBannerImage</code><br><span class="sev mid">охват</span></td><td>Сработка по шапке профиля — возможен контент 18+.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>NsfwNearPerfect</code><br><span class="sev mid">охват</span></td><td>Ещё одна модель детекции контента 18+.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>NsfwAdmin</code><br><span class="sev hard">жёстко</span></td><td>По жалобе признано, что аккаунт публикует <b>преимущественно</b> контент 18+ или сцены насилия.</td><td class="eff">Посты показываются за предупреждением, скрыты из рекомендаций неподписчикам, а также от несовершеннолетних, пользователей без указанного возраста и незалогиненных.</td></tr>
+        <tr><td class="lbl"><code>ImpersonationHighPrecision</code><br><span class="sev mid">охват</span></td><td>Автоматика: вероятное нарушение политики подлинности (выдача себя за другого).</td><td class="eff">Посты скрыты из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>AbusiveHighRecall</code><br><span class="sev mid">охват</span></td><td>Автоматика: возможное нарушение политики подлинности.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам + требуется прохождение security challenge (защита от ботов).</td></tr>
+        <tr><td class="lbl"><code>DoNotAmplify</code><br><span class="sev mid">охват</span></td><td>Автоматика: вероятное нарушение пользовательского соглашения.</td><td class="eff">Посты скрыты из рекомендаций неподписчикам до дальнейшей проверки.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 7 -->
+<section>
+  <h2 class="reveal"><span class="num">7</span>Метки постов — все 18</h2>
+  <div class="tablewrap reveal">
+    <table>
+      <thead><tr><th style="width:255px">Метка</th><th style="width:35%">За что ставится</th><th>Что делает</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl"><code>SPAM</code><br><span class="sev hard">пост скрыт</span></td><td>Автоматика или жалоба: нарушение политики подлинности.</td><td class="eff"><b>Пост не показывается в X вообще.</b></td></tr>
+        <tr><td class="lbl"><code>PDNA</code><br><span class="sev hard">пост скрыт</span></td><td>Автоматика: вероятное нарушение пользовательского соглашения.</td><td class="eff">Пост не показывается, пока идёт дополнительная проверка.</td></tr>
+        <tr><td class="lbl"><code>BOUNCE</code><br><span class="sev hard">пост скрыт</span></td><td>Автоматика или жалоба: нарушение пользовательского соглашения.</td><td class="eff">Пост не показывается, пока автор его не удалит.</td></tr>
+        <tr><td class="lbl"><code>NSFW_HIGH_PRECISION</code><br><span class="sev mid">ширма + охват</span></td><td>Автоматика или жалоба: вероятный контент 18+.</td><td class="eff">Пост за предупреждением, скрыт из рекомендаций неподписчикам и от несовершеннолетних / без возраста / незалогиненных.</td></tr>
+        <tr><td class="lbl"><code>NSFW_HIGH_RECALL</code><br><span class="sev mid">охват</span></td><td>Автоматика: пост <i>может</i> содержать контент 18+.</td><td class="eff">Скрыт из рекомендаций неподписчикам и от несовершеннолетних / без возраста / незалогиненных.</td></tr>
+        <tr><td class="lbl"><code>NSFW_TEXT</code><br><span class="sev mid">охват</span></td><td>Автоматика: откровенно сексуальная лексика в тексте.</td><td class="eff">Скрыт из рекомендаций неподписчикам и от несовершеннолетних / без возраста / незалогиненных.</td></tr>
+        <tr><td class="lbl"><code>NSFW_CARD_IMAGE</code><br><span class="sev mid">ширма + охват</span></td><td>Сработка по превью карточки ссылки.</td><td class="eff">Пост за предупреждением + скрыт из рекомендаций неподписчикам и от несовершеннолетних / без возраста / незалогиненных.</td></tr>
+        <tr><td class="lbl"><code>NSFW_ADMIN</code><br><span class="sev mid">ширма + охват</span></td><td>Пост написан аккаунтом, у которого стоит метка <code>NsfwAdmin</code>.</td><td class="eff">Пост за предупреждением + скрыт из рекомендаций неподписчикам и от несовершеннолетних / без возраста / незалогиненных.</td></tr>
+        <tr><td class="lbl"><code>GORE_AND_VIOLENCE_HIGH_PRECISION</code><br><span class="sev mid">ширма + охват</span></td><td>Автоматика или жалоба: вероятное нарушение политики о жестоком контенте.</td><td class="eff">Пост за предупреждением + скрыт из рекомендаций неподписчикам и от несовершеннолетних / без возраста / незалогиненных.</td></tr>
+        <tr><td class="lbl"><code>SPAM_HIGH_RECALL</code><br><span class="sev mid">охват</span></td><td>Автоматика: пост <i>может</i> содержать спам.</td><td class="eff">Скрыт из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>MALICIOUS_URL</code><br><span class="sev mid">охват</span></td><td>Автоматика: вероятная ссылка на вредоносный сайт.</td><td class="eff">Скрыт из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>DO_NOT_AMPLIFY</code><br><span class="sev soft">легаси</span></td><td>Исторический аналог <code>MALICIOUS_URL</code>. Заменяется на него и будет удалён.</td><td class="eff">Включён в отчёт, потому что такие посты всё ещё скрыты из рекомендаций неподписчикам.</td></tr>
+        <tr><td class="lbl"><code>FOSNR_HATEFUL_CONDUCT</code><br><span class="sev hard">только профиль</span></td><td>Автоматика или жалоба: нарушение политики о разжигании ненависти.</td><td class="eff">Пост находится <b>только через профиль автора</b>. Всем видна плашка об ограниченной видимости.</td></tr>
+        <tr><td class="lbl"><code>FOSNR_ABUSE</code><br><span class="sev hard">только профиль</span></td><td>По жалобе: травля и оскорбления.</td><td class="eff">Пост находится только через профиль автора + видимая плашка об ограничении.</td></tr>
+        <tr><td class="lbl"><code>FOSNR_VIOLENT_SPEECH</code><br><span class="sev hard">только профиль</span></td><td>По жалобе: призывы к насилию.</td><td class="eff">Пост находится только через профиль автора + видимая плашка об ограничении.</td></tr>
+        <tr><td class="lbl"><code>FOSNR_CIVIC_INTEGRITY</code><br><span class="sev hard">только профиль</span></td><td>По жалобе: нарушение политики о честности гражданских процессов (выборы и т. п.).</td><td class="eff">Пост находится только через профиль автора + видимая плашка об ограничении.</td></tr>
+        <tr><td class="lbl"><code>FOSNR_ABUSE_INSULTS</code><br><span class="sev mid">охват</span></td><td>Автоматика или жалоба: оскорбления.</td><td class="eff">Скрыт из рекомендаций неподписчикам + видимая плашка об ограничении.</td></tr>
+        <tr><td class="lbl"><code>FOR_EMERGENCY_USE_ONLY</code><br><span class="sev mid">ширма</span></td><td>Аварийная метка для реагирования на инциденты, с произвольным текстом уведомления.</td><td class="eff">Пост за уведомлением и не показывается в домашней ленте.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="reveal sub">В коде есть также алиас <code class="inl">NSFW_ADMIN_STAMPED</code> → <code class="inl">NSFW_ADMIN</code>: при сравнении имён подчёркивания убираются и регистр игнорируется, поэтому варианты написания схлопываются в одну каноническую метку.</p>
+</section>
+
+<!-- 8 -->
+<section>
+  <h2 class="reveal"><span class="num">8</span>Чего отчёт не покажет</h2>
+  <ul class="plain reveal">
+    <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg><b>Предсказания на базе Grok.</b> Системы, где Grok прогнозирует нарушение правил, в выгрузку не включены — вице-президент по продукту Кит Коулман объяснил это защитой от обхода правил спамерами.</li>
+    <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg><b>Часть правил botmaker.</b> В репозитории прямо написано, что некоторые правила не опубликованы «чтобы снизить риск обхода систем».</li>
+    <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg><b>Разбивку по конкретным постам.</b> Только агрегат: сколько постов за месяц несут метку и какой это процент.</li>
+    <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg><b>Скоринг ранжирования.</b> Насколько модель понизила ваш пост в ленте — не метка, и в отчёт не попадает.</li>
+    <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg><b>Экспериментальный brand safety.</b> Структуры <code class="inl">UthBrandSafetyAggregate</code> в схеме есть, но в коде помечены как «experimental / not used, всегда пустые, не отдаются в reportJson».</li>
+  </ul>
+  <div class="note reveal">
+    <p><b>Итог по вашему вопросу.</b> Отдельного «запроса к x.com» изобретать не нужно: единственная точка входа — страница <b>Settings → Privacy and safety → Under the Hood</b> у залогиненного аккаунта, и она же под капотом дёргает GraphQL-колонку, где идентификатор берётся из сессии. Если пункта нет — не хватает либо фиче-флага пилота, либо года возраста, либо десяти постов за отчётный месяц.</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="reveal">Источники</h2>
+  <ul class="sources reveal">
+    <li><a href="https://github.com/xai-org/x-algorithm/tree/main/under-the-hood" target="_blank" rel="noopener">xai-org/x-algorithm — папка <code class="inl">under-the-hood</code></a> — первоисточник: пороги, список меток, сборка JSON, схема GraphQL</li>
+    <li><a href="https://techcrunch.com/2026/08/13/x-open-sources-its-ranking-algorithm-letting-users-see-if-theyve-been-shadowbanned/" target="_blank" rel="noopener">TechCrunch, 13.08.2026 — X open sources its ranking algorithm</a> — условия пилота, комментарий Кита Коулмана</li>
+    <li><a href="https://www.engadget.com/2236672/x-is-testing-a-tool-that-will-let-users-see-if-their-posts-have-been-shadowbanned/" target="_blank" rel="noopener">Engadget — X is testing a tool… 'shadowbanned'</a> — агрегированный характер данных, ограничения</li>
+    <li><a href="https://circleboom.com/blog/twitter-x-under-the-hood-checker" target="_blank" rel="noopener">Circleboom — X Under the Hood Checker</a> — путь в меню настроек</li>
+    <li><a href="https://help.x.com/rules-and-policies/x-reach-limited" target="_blank" rel="noopener">help.x.com — When your reach is limited</a> и <a href="https://help.x.com/rules-and-policies/enforcement-options" target="_blank" rel="noopener">enforcement options</a> — ссылки, которые X сам кладёт в поле <code class="inl">notes</code> отчёта</li>
+  </ul>
+</section>
+
+<footer>
+  <div>Собрано 27 августа 2026. Пороги, названия меток и структура JSON вычитаны напрямую из опубликованного кода X, а не пересказаны по новостям — соответственно, они точны на момент коммита в <code class="inl">xai-org/x-algorithm</code>. Пилот продолжается, набор меток может измениться.</div>
+</footer>
+
+</div>
+
+<script type="module">
+  document.documentElement.classList.add('js-motion');
+  const fallback = setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+  }, 2500);
+  try {
+    const { animate, inView, stagger, spring } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+    } else {
+      inView(".reveal", (el) => {
+        animate(el, { opacity: [0, 1], transform: ["translateY(20px)", "translateY(0px)"] },
+                { duration: 0.55, easing: spring({ stiffness: 120, damping: 18 }) });
+      }, { margin: "0px 0px -8% 0px" });
+      animate(".mini", { opacity: [0, 1] }, { delay: stagger(0.04), duration: 0.4 });
+    }
+    clearTimeout(fallback);
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (getComputedStyle(el).opacity === '0') { el.style.opacity = '1'; el.style.transform = 'none'; }
+      });
+    }, 1800);
+  } catch (e) {
+    document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+    clearTimeout(fallback);
+  }
+</script>
+</body>
+</html>
