@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Reverse email lookup — проверка двух адресов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7;
+    --surface:#FFFFFF;
+    --surface-2:#FAFAFC;
+    --text:#1D1D1F;
+    --text-2:#515154;
+    --text-3:#86868B;
+    --border:#E3E3E6;
+    --blue:#0071E3;
+    --green:#248A3D;
+    --green-bg:#E9F6EC;
+    --amber:#9A6700;
+    --amber-bg:#FDF6E3;
+    --slate:#5A6270;
+    --slate-bg:#EEF0F3;
+    --radius:18px;
+    --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#000000;
+      --surface:#1C1C1E;
+      --surface-2:#161618;
+      --text:#F5F5F7;
+      --text-2:#B9B9BE;
+      --text-3:#8A8A8F;
+      --border:#2E2E32;
+      --blue:#2997FF;
+      --green:#41C463;
+      --green-bg:#16281B;
+      --amber:#E0B341;
+      --amber-bg:#2A2213;
+      --slate:#A0A7B4;
+      --slate-bg:#212228;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.4);
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+  code,.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+
+  /* ---------- Hero ---------- */
+  header.hero{padding:88px 0 56px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:500;letter-spacing:.02em;
+    color:var(--text-2);background:var(--surface);
+    border:1px solid var(--border);border-radius:999px;
+    padding:7px 14px;margin-bottom:28px;
+  }
+  .eyebrow svg{width:15px;height:15px;flex:none;color:var(--blue)}
+  h1{
+    font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-.03em;
+    font-weight:700;margin:0 0 22px;
+  }
+  .lead{font-size:clamp(18px,2.4vw,21px);color:var(--text-2);margin:0 0 34px;max-width:46ch}
+  .mails{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+  .mail{
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:14px;
+    background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:11px 15px;color:var(--text);word-break:break-all;
+  }
+  .verdict{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:26px 28px;display:flex;gap:18px;align-items:flex-start;
+  }
+  .verdict .ico{
+    width:42px;height:42px;flex:none;border-radius:12px;
+    background:var(--slate-bg);color:var(--slate);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .verdict .ico svg{width:22px;height:22px}
+  .verdict h2{margin:0 0 6px;font-size:19px;letter-spacing:-.01em}
+  .verdict p{margin:0;color:var(--text-2);font-size:16px}
+
+  /* ---------- Sections ---------- */
+  section{padding:52px 0}
+  h2.sec{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;margin:0 0 10px;font-weight:600}
+  .sec-sub{color:var(--text-3);font-size:15px;margin:0 0 26px}
+  p{margin:0 0 16px;color:var(--text-2)}
+  p strong{color:var(--text);font-weight:600}
+
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:26px 28px;transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card + .card{margin-top:14px}
+  .card h3{margin:0 0 10px;font-size:17px;letter-spacing:-.01em}
+  .card p:last-child{margin-bottom:0}
+
+  .grid{display:grid;gap:14px}
+  @media(min-width:720px){.grid.cols-3{grid-template-columns:repeat(3,1fr)}.grid.cols-2{grid-template-columns:repeat(2,1fr)}}
+
+  /* ---------- Metrics ---------- */
+  .metric{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:24px;
+  }
+  .metric .num{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+  .metric .lab{margin-top:9px;font-size:14px;color:var(--text-3);line-height:1.45}
+
+  /* ---------- Table ---------- */
+  .tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
+  th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);vertical-align:top}
+  thead th{font-size:13px;font-weight:600;color:var(--text-3);letter-spacing:.02em;background:var(--surface-2);position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:none}
+  td.method{color:var(--text);font-weight:500}
+  td.method small{display:block;font-weight:400;color:var(--text-3);font-size:13px;margin-top:3px}
+  .tag{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:500;border-radius:999px;padding:4px 10px;white-space:nowrap;
+  }
+  .tag svg{width:13px;height:13px;flex:none}
+  .tag.clean{background:var(--slate-bg);color:var(--slate)}
+  .tag.ok{background:var(--green-bg);color:var(--green)}
+  .tag.blind{background:var(--amber-bg);color:var(--amber)}
+
+  /* ---------- Lists ---------- */
+  ul.plain{list-style:none;padding:0;margin:0}
+  ul.plain li{
+    padding-left:30px;position:relative;margin-bottom:13px;color:var(--text-2);
+  }
+  ul.plain li:last-child{margin-bottom:0}
+  ul.plain li::before{
+    content:"";position:absolute;left:8px;top:11px;width:6px;height:6px;border-radius:50%;
+    background:var(--blue);
+  }
+  ul.plain li strong{color:var(--text);font-weight:600}
+
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  ol.steps li{
+    counter-increment:s;position:relative;padding-left:44px;margin-bottom:20px;color:var(--text-2);
+  }
+  ol.steps li:last-child{margin-bottom:0}
+  ol.steps li::before{
+    content:counter(s);position:absolute;left:0;top:1px;
+    width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;
+  }
+  ol.steps b{color:var(--text);display:block;margin-bottom:2px;font-weight:600}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .chip{
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12.5px;
+    background:var(--surface-2);border:1px solid var(--border);border-radius:8px;
+    padding:5px 9px;color:var(--text-2);
+  }
+
+  .note{
+    border-left:3px solid var(--amber);background:var(--amber-bg);
+    border-radius:0 12px 12px 0;padding:18px 22px;
+  }
+  .note p{color:var(--text-2);margin-bottom:10px}
+  .note p:last-child{margin-bottom:0}
+  .note b{color:var(--text)}
+
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible,.card:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+
+  footer{padding:48px 0 72px;color:var(--text-3);font-size:14px;border-top:1px solid var(--border);margin-top:40px}
+  footer p{color:var(--text-3);font-size:14px}
+  footer .srcs{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
+
+  /* reveal: видим по умолчанию, прячется только когда JS реально готов анимировать */
+  html.motion-ready .reveal{opacity:0;transform:translateY(22px)}
+  @media (prefers-reduced-motion: reduce){
+    html.motion-ready .reveal{opacity:1;transform:none}
+    *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      OSINT-проверка · 27 августа 2026
+    </span>
+    <h1 class="reveal">Reverse email lookup: что показали две почты</h1>
+    <p class="lead reveal">Метод простой: берём адрес и смотрим, где он засветился в открытых источниках — в поиске, в базах утечек, в регистрациях на сервисах, в привязанных профилях. Чем длиннее хвост следов, тем реальнее человек за адресом.</p>
+
+    <div class="mails reveal">
+      <span class="mail">hotroundstar</span>
+      <span class="mail">hotroundrock</span>
+    </div>
+
+    <div class="verdict reveal">
+      <span class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/></svg>
+      </span>
+      <div>
+        <h2>Цифровой след не обнаружен — ни у одного адреса</h2>
+        <p>Восемь независимых проверок, 121 сайт, три базы утечек. Ноль попаданий. Это не «плохо» и не «хорошо» — это значит, что почта не подтверждает о человеке ровным счётом ничего.</p>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="sec reveal">Что вообще ищут при такой проверке</h2>
+    <p class="sec-sub reveal">Четыре независимых канала, каждый ловит свой тип следа</p>
+    <div class="grid cols-2">
+      <div class="card reveal">
+        <h3>Индексация в поиске</h3>
+        <p>Адрес мог попасть в объявление, резюме, коммит на GitHub, состав форума, контакты компании. Всё это индексируется и находится по точной фразе.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Базы утечек</h3>
+        <p>Самый показательный канал. За десять лет утекли данные сотен сервисов. Почта с реальной историей почти всегда всплывает хотя бы в одной базе.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Регистрации на сервисах</h3>
+        <p>Многие сайты по-разному отвечают на «этот email уже занят» и «свободен». По этой разнице видно, где у адреса есть аккаунт — не заходя в него.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Привязанные профили</h3>
+        <p>Gravatar подтягивает аватар по хешу почты, ник из адреса часто повторяется в соцсетях. Отсюда обычно и тянется ниточка к настоящему имени.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec reveal">Цифры проверки</h2>
+    <p class="sec-sub reveal">Суммарно по обоим адресам</p>
+    <div class="grid cols-3">
+      <div class="metric reveal"><div class="num">8</div><div class="lab">независимых методов проверки</div></div>
+      <div class="metric reveal"><div class="num">121</div><div class="lab">сайт проверен на регистрацию адреса</div></div>
+      <div class="metric reveal"><div class="num">0</div><div class="lab">подтверждённых следов у обеих почт</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec reveal">Результаты по каждому методу</h2>
+    <p class="sec-sub reveal">Прокрутите таблицу вбок на узком экране</p>
+    <div class="tablewrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Метод</th>
+            <th scope="col">hotroundstar</th>
+            <th scope="col">hotroundrock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="method">Поисковая индексация<small>Google и Bing, точная фраза + ник отдельно</small></td>
+            <td><span class="tag clean">0 упоминаний</span></td>
+            <td><span class="tag clean">0 упоминаний</span></td>
+          </tr>
+          <tr>
+            <td class="method">Gravatar<small>по хешам MD5 и SHA-256</small></td>
+            <td><span class="tag clean">профиля нет</span></td>
+            <td><span class="tag clean">профиля нет</span></td>
+          </tr>
+          <tr>
+            <td class="method">LeakCheck<small>публичная база утечек</small></td>
+            <td><span class="tag clean">не найдено</span></td>
+            <td><span class="tag clean">не найдено</span></td>
+          </tr>
+          <tr>
+            <td class="method">XposedOrNot<small>агрегатор сотен утечек</small></td>
+            <td><span class="tag clean">не найдено</span></td>
+            <td><span class="tag clean">не найдено</span></td>
+          </tr>
+          <tr>
+            <td class="method">ProxyNova COMB<small>3+ млрд пар логин-пароль</small></td>
+            <td><span class="tag clean">0 записей</span></td>
+            <td><span class="tag clean">0 записей</span></td>
+          </tr>
+          <tr>
+            <td class="method">holehe, 121 сайт<small>четыре прогона подряд</small></td>
+            <td><span class="tag clean">0 регистраций</span></td>
+            <td><span class="tag clean">0 регистраций</span></td>
+          </tr>
+          <tr>
+            <td class="method">Spotify API<small>занят ли адрес</small></td>
+            <td><span class="tag ok">свободен</span></td>
+            <td><span class="tag ok">свободен</span></td>
+          </tr>
+          <tr>
+            <td class="method">Firefox Accounts API<small>прямой ответ сервиса</small></td>
+            <td><span class="tag ok">exists: false</span></td>
+            <td><span class="tag ok">exists: false</span></td>
+          </tr>
+          <tr>
+            <td class="method">Ники на площадках<small>GitHub, VK, Telegram, Steam, TikTok, Habr, SoundCloud</small></td>
+            <td><span class="tag clean">нигде не заняты</span></td>
+            <td><span class="tag clean">нигде не заняты</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec reveal">Где проверка не сработала</h2>
+    <p class="sec-sub reveal">Честные границы: чего этот отчёт НЕ доказывает</p>
+
+    <div class="note reveal">
+      <p><b>Три четверти сайтов ответили отказом, а не результатом.</b> Из 121 сайта в holehe достоверный ответ пришёл по 46 адресам для первой почты и по 39 — для второй. Остальные 75 и 82 упёрлись в rate limit во всех четырёх прогонах. По ним нельзя сказать ни «есть аккаунт», ни «нет».</p>
+      <p><b>В слепую зону попали самые массовые сервисы:</b></p>
+      <div class="chips">
+        <span class="chip">google.com</span><span class="chip">instagram.com</span><span class="chip">github.com</span>
+        <span class="chip">discord.com</span><span class="chip">snapchat.com</span><span class="chip">pinterest.com</span>
+        <span class="chip">ebay.com</span><span class="chip">quora.com</span><span class="chip">imgur.com</span><span class="chip">ok.ru</span>
+      </div>
+      <p style="margin-top:14px"><b>Have I Been Pwned остался непроверенным</b> — его API отдаёт 401 без платного ключа. То же с EmailRep. Это ещё один пласт утечек, который в отчёт не вошёл.</p>
+    </div>
+
+    <div class="card reveal" style="margin-top:18px">
+      <h3>Зато вот здесь ответ достоверный</h3>
+      <p>Эти сервисы прямо подтвердили, что аккаунта с такой почтой у них нет — 46 сайтов для первого адреса, 39 для второго. Выборочно:</p>
+      <div class="chips">
+        <span class="chip">twitter.com</span><span class="chip">amazon.com</span><span class="chip">adobe.com</span>
+        <span class="chip">wordpress.com</span><span class="chip">spotify.com</span><span class="chip">docker.com</span>
+        <span class="chip">freelancer.com</span><span class="chip">last.fm</span><span class="chip">zoho.com</span>
+        <span class="chip">lastpass.com</span><span class="chip">envato.com</span><span class="chip">mail.ru</span>
+        <span class="chip">rambler.ru</span><span class="chip">protonmail.ch</span><span class="chip">hubspot.com</span>
+        <span class="chip">archive.org</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec reveal">Как это читать</h2>
+    <p class="sec-sub reveal">Интерпретация — не факт, а наиболее правдоподобное объяснение</p>
+
+    <div class="card reveal">
+      <h3>Пустота — это тоже сигнал</h3>
+      <p>У почты, которой человек реально пользуется несколько лет, почти всегда есть запись хотя бы в одной базе утечек: COMB и XposedOrNot агрегируют сливы за десятилетие. Здесь пусто в трёх базах сразу — плюс ноль регистраций там, где проверка прошла, плюс ноль индексации в поиске.</p>
+    </div>
+
+    <div class="card reveal">
+      <h3>Оба адреса собраны по одному шаблону</h3>
+      <p><code>hotround</code> + <code>star</code> и <code>hotround</code> + <code>rock</code>. Общий корень, разный «хвост». Почти наверняка созданы одним человеком за один заход.</p>
+    </div>
+
+    <div class="card reveal">
+      <h3>Вывод</h3>
+      <p><strong>Скорее всего это свежие ящики, заведённые под конкретную задачу</strong>, а не личные почты с историей. Само по себе это не улика: так делают и по гигиене, отделяя рабочую переписку от личной. Но принимать такую почту как подтверждение личности нельзя — за ней не стоит ничего проверяемого.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec reveal">Что даст больше, чем почта</h2>
+    <p class="sec-sub reveal">Четыре шага, каждый информативнее исходной проверки</p>
+    <div class="card reveal">
+      <ol class="steps">
+        <li><b>Заголовки писем</b>В Gmail открой письмо → «Показать оригинал». Поля <code>Received</code>, <code>X-Originating-IP</code> и <code>Message-ID</code> покажут, откуда реально ушло письмо и через какой клиент. Пришли дамп — разберу.</li>
+        <li><b>Другие идентификаторы</b>Телефон, ник в Telegram, профиль на hh.ru, LinkedIn или GitHub. По ним reverse lookup работает несопоставимо результативнее, чем по чистому gmail.</li>
+        <li><b>Видеозвонок до выдачи доступов</b>Самая дешёвая и надёжная проверка из всех.</li>
+        <li><b>Минимальные права и ротация</b>Пока личность не подтверждена вторым каналом — доступы по минимуму, с возможностью быстро отозвать.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec reveal">Технические примечания</h2>
+    <p class="sec-sub reveal">Чтобы результат можно было воспроизвести</p>
+    <div class="card reveal">
+      <ul class="plain">
+        <li><strong>Хеши для Gravatar.</strong> <code>hotroundstar</code> → MD5 <code>4c9d57f6…28109</code>, SHA-256 <code>cf322c23…baab8</code>. <code>hotroundrock</code> → MD5 <code>7a617773…2caaa</code>, SHA-256 <code>698d2483…d0747</code>. Все четыре запроса вернули 404.</li>
+        <li><strong>Инструмент.</strong> holehe 1.61 — открытый OSINT-сканер, проверяет 121 сайт на существование аккаунта. Прогонов было четыре, результаты объединены: сайт считался проверенным, если хоть раз ответил по существу.</li>
+        <li><strong>Оговорка о письмах.</strong> holehe обращается к сайтам с запросами вида «есть ли такой аккаунт». Отдельные модули теоретически способны инициировать служебное письмо на проверяемый адрес. Массовой рассылки не было, но полностью исключить одно-два таких письма нельзя.</li>
+        <li><strong>Почему страница не опубликована.</strong> Отчёт касается конкретных частных лиц, поэтому в публичный репозиторий он не выкладывается — файл лежит только локально и закрыт от индексации.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Проверка выполнена 27 августа 2026. Все выводы основаны на ответах перечисленных сервисов на указанную дату — состояние может измениться.</p>
+    <div class="srcs">
+      <a href="https://www.gravatar.com/" target="_blank" rel="noopener">Gravatar</a>
+      <a href="https://leakcheck.io/" target="_blank" rel="noopener">LeakCheck</a>
+      <a href="https://xposedornot.com/" target="_blank" rel="noopener">XposedOrNot</a>
+      <a href="https://www.proxynova.com/tools/comb" target="_blank" rel="noopener">ProxyNova COMB</a>
+      <a href="https://github.com/megadose/holehe" target="_blank" rel="noopener">holehe</a>
+      <a href="https://haveibeenpwned.com/" target="_blank" rel="noopener">Have I Been Pwned</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Класс ставим синхронно, но со страховкой: если motion не загрузился за 1.5 с — контент показываем как есть.
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    var root = document.documentElement;
+    root.classList.add('motion-ready');
+    window.__revealFallback = setTimeout(function () {
+      root.classList.remove('motion-ready');
+    }, 1500);
+  })();
+</script>
+
+<script type="module">
+  const root = document.documentElement;
+  const clearFallback = () => { if (window.__revealFallback) clearTimeout(window.__revealFallback); };
+
+  if (!root.classList.contains('motion-ready')) {
+    // reduced-motion: анимации не нужны
+  } else {
+    try {
+      const { animate, inView, stagger, spring } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      clearFallback();
+
+      // hero — сразу, без ожидания скролла
+      animate(
+        document.querySelectorAll('.hero .reveal'),
+        { opacity: [0, 1], y: [22, 0] },
+        { duration: .55, delay: stagger(.06), easing: spring({ stiffness: 120, damping: 18 }) }
+      );
+
+      inView('section', (section) => {
+        const items = section.querySelectorAll('.reveal');
+        if (!items.length) return;
+        animate(
+          items,
+          { opacity: [0, 1], y: [22, 0] },
+          { duration: .5, delay: stagger(.05), easing: spring({ stiffness: 120, damping: 18 }) }
+        );
+      }, { margin: '-10% 0px -10% 0px' });
+
+      // микро-взаимодействие: карточки чуть приподнимаются
+      document.querySelectorAll('.card, .metric').forEach((el) => {
+        el.addEventListener('pointerenter', () => animate(el, { y: -2 }, { duration: .18 }));
+        el.addEventListener('pointerleave', () => animate(el, { y: 0 }, { duration: .18 }));
+      });
+
+      // страховка: если что-то осталось скрытым (не попало в inView) — показать через 3 с
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach((el) => {
+          if (getComputedStyle(el).opacity === '0') {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          }
+        });
+      }, 3000);
+    } catch (e) {
+      clearFallback();
+      root.classList.remove('motion-ready');
+    }
+  }
+</script>
+
+</body>
+</html>
