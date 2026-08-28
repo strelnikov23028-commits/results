@@ -30,12 +30,24 @@ def main():
     cards = json.load(open(D("data", "words.json"), encoding="utf-8"))
     by_pt = {c["pt"]: c for c in cards}
 
-    if "--fix" in sys.argv:
+    # слова с диакритикой ломаются при передаче через аргументы PowerShell,
+    # поэтому пачку можно задать файлом: --from data/extra_words4.json
+    src = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--from=")), None)
+    if src:
+        data = json.load(open(D(*src.split("/")), encoding="utf-8"))
+        words = [w["pt"] for w in data] if isinstance(data, list) else list(data)
+    elif "--fix" in sys.argv:
         fixes = json.load(open(D("data", "scenes_fix.json"), encoding="utf-8"))
         fixes.pop("_comment", None)
         words = list(fixes)
     else:
         words = [a for a in sys.argv[1:] if not a.startswith("--")]
+
+    # можно ограничить диапазоном: --slice=0:15
+    rng = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--slice=")), None)
+    if rng:
+        a, b = (int(x) if x else None for x in rng.split(":"))
+        words = words[a:b]
 
     items = []
     for w in words:

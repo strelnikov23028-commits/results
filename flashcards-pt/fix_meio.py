@@ -4,21 +4,24 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 D = lambda *p: os.path.join(ROOT, *p)
 IMG_OUT = os.path.abspath(os.path.join(ROOT, "..", "cartoes-img"))
 
-# cada — «каждый»: почтовые ящики повторяли a cada (бутылки на полке).
-#   Показываем не просто одинаковый ряд, а «в каждой ячейке по одному».
-# possível — «возможный»: зелёный светофор читался как «можно идти»
-#   и тянул к verde. Ключ, входящий в замок, — это именно «получается».
-# já — «уже»: пустая тарелка сливалась с nada и vazio. Задутая свеча
-#   ещё и рифмуется по контрасту с ainda, где свеча пока горит.
+# Разводим пары, которые после добавления новых слов стали бы похожи:
+#   dia и sol — оба были «солнце в небе»;
+#   espere и mão — оба ладонь крупным планом;
+#   senha, contato, ligo — три экрана телефона подряд;
+#   finalmente, sentar-se, levantar — три сцены со стулом.
 EDITS = {
-    "scenes_v2_rest.json": {
-        "cada": ("a baking tray of identical muffin cups with exactly one muffin "
-                 "sitting in every single cup"),
-        "já": ("a just blown out candle with a thin curl of smoke rising from the "
-               "extinguished wick"),
+    "scenes_v2_nouns.json": {
+        "dia": ("a sunlit city street at midday with short sharp shadows, "
+                "clearly the middle of the day"),
+        "senha": ("a mechanical combination padlock with its number dials set, close-up"),
     },
-    "scenes_v2_adj.json": {
-        "possível": ("a key inserted into a lock and turning, the mechanism giving way"),
+    "scenes_v2_verbs.json": {
+        "espere": ("a pedestrian traffic light glowing red with the standing figure, "
+                   "telling people to wait"),
+    },
+    "scenes_v2_rest.json": {
+        "finalmente": ("a person finally reaching the service window at the end of "
+                       "a long queue, the wait over"),
     },
 }
 

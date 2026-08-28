@@ -1,0 +1,225 @@
+[
+ {"pt":"conheça","ru":"познакомься, узнай","en":"meet, get to know","pos":"verbs",
+  "imgQuery":"two strangers greeting each other for the first time at a party, warm introduction",
+  "note":"повелительная форма от conhecer"},
+
+ {"pt":"espere","ru":"подожди","en":"wait","pos":"verbs",
+  "imgQuery":"an open palm held up firmly in a stop-and-wait gesture"},
+
+ {"pt":"alguém","ru":"кто-то","en":"someone","pos":"function words",
+  "imgQuery":"a human silhouette showing through frosted glass, identity unclear",
+  "fix":"нужен акут: alguém"},
+
+ {"pt":"resultado","ru":"результат","en":"result","pos":"nouns",
+  "imgQuery":"a rising bar chart displayed on a screen, results clearly improving"},
+
+ {"pt":"mais uma vez","ru":"ещё раз","en":"one more time","pos":"phrases",
+  "imgQuery":"a weightlifter setting up for another repetition at the barbell",
+  "fix":"в списке было «Mas uma vez» — правильно mais uma vez: mais значит «ещё», mas значит «но»"},
+
+ {"pt":"preocupação","ru":"беспокойство, тревога","en":"worry","pos":"nouns",
+  "imgQuery":"a worried person frowning deeply and rubbing their forehead",
+  "fix":"нужна седиль и тильда: preocupação"},
+
+ {"pt":"curto","ru":"короткий","en":"short","pos":"adjectives",
+  "imgQuery":"a pencil worn down to a tiny stub, sharpened almost to nothing"},
+
+ {"pt":"mosca","ru":"муха","en":"fly (insect)","pos":"nouns",
+  "imgQuery":"a housefly resting on a white surface, macro shot of its wings and eyes",
+  "fix":"в списке «Voar - муха», но voar значит «летать» и уже есть в колоде; муха — mosca"},
+
+ {"pt":"lixo","ru":"мусор","en":"rubbish, trash","pos":"nouns",
+  "imgQuery":"an overflowing rubbish bin with tied bin bags beside it"},
+
+ {"pt":"pintar","ru":"рисовать красками, красить","en":"to paint","pos":"verbs",
+  "imgQuery":"an artist at an easel applying paint to a canvas with a brush"},
+
+ {"pt":"irmão","ru":"брат","en":"brother","pos":"nouns",
+  "imgQuery":"an older and a younger brother standing together with arms round shoulders"},
+
+ {"pt":"irmã","ru":"сестра","en":"sister","pos":"nouns",
+  "imgQuery":"two sisters of different ages sitting together and laughing",
+  "fix":"нужна тильда: irmã"},
+
+ {"pt":"saque","ru":"подача (в теннисе); снятие денег","en":"serve; withdrawal","pos":"nouns",
+  "imgQuery":"a tennis player at full stretch striking the ball overhead on serve"},
+
+ {"pt":"saúde","ru":"здоровье","en":"health","pos":"nouns",
+  "imgQuery":"a stethoscope lying beside fresh vegetables and fruit on a light surface"},
+
+ {"pt":"preciso","ru":"мне нужно","en":"I need","pos":"verbs",
+  "imgQuery":"a parched person in a desert reaching desperately for a water bottle",
+  "note":"форма от precisar: «preciso de ajuda» — мне нужна помощь"},
+
+ {"pt":"arroz","ru":"рис","en":"rice","pos":"nouns",
+  "imgQuery":"a bowl heaped with cooked white rice, steam rising, close-up"},
+
+ {"pt":"sopa","ru":"суп","en":"soup","pos":"nouns",
+  "imgQuery":"a bowl of thick soup seen from above, no cutlery, no people"},
+
+ {"pt":"outono","ru":"осень","en":"autumn","pos":"nouns",
+  "imgQuery":"a park path covered in fallen golden and red autumn leaves"},
+
+ {"pt":"tubos","ru":"трубы","en":"tubes, pipes","pos":"nouns",
+  "imgQuery":"a stack of metal pipes lying in a yard, ends facing the camera"},
+
+ {"pt":"segunda-feira","ru":"понедельник","en":"Monday","pos":"nouns",
+  "imgQuery":"a desk calendar page for Monday with the weekday name SEGUNDA clearly printed"},
+
+ {"pt":"terça-feira","ru":"вторник","en":"Tuesday","pos":"nouns",
+  "imgQuery":"a desk calendar page for Tuesday with the weekday name TERÇA clearly printed"},
+
+ {"pt":"quinta-feira","ru":"четверг","en":"Thursday","pos":"nouns",
+  "imgQuery":"a desk calendar page for Thursday with the weekday name QUINTA clearly printed"},
+
+ {"pt":"explosão","ru":"взрыв","en":"explosion","pos":"nouns",
+  "imgQuery":"a controlled pyrotechnic fireball erupting outdoors at a safe distance"},
+
+ {"pt":"será que","ru":"интересно, ли…; неужели","en":"I wonder if…","pos":"phrases",
+  "imgQuery":"a person gazing upward with a doubtful wondering expression, chin lifted",
+  "note":"вводит сомнение: «será que ele vem?» — интересно, придёт ли он"},
+
+ {"pt":"cobrir","ru":"покрывать, накрывать","en":"to cover","pos":"verbs",
+  "imgQuery":"a dust sheet being pulled over furniture, covering it completely",
+  "fix":"в списке была форма «cobriria» (покрыл бы) — карточка на инфинитив cobrir"},
+
+ {"pt":"cabeça","ru":"голова","en":"head","pos":"nouns",
+  "imgQuery":"a clean profile portrait of a human head against a plain studio background"},
+
+ {"pt":"barriga","ru":"живот","en":"belly, stomach","pos":"nouns",
+  "imgQuery":"a close-up of a bare human midriff with both hands resting on the belly"},
+
+ {"pt":"dor","ru":"боль","en":"pain","pos":"nouns",
+  "imgQuery":"a person wincing and gripping their shoulder in evident pain"},
+
+ {"pt":"frase","ru":"фраза, предложение","en":"phrase, sentence","pos":"nouns",
+  "imgQuery":"one line of printed text in a book highlighted with a marker pen"},
+
+ {"pt":"terra","ru":"земля, почва","en":"earth, ground","pos":"nouns",
+  "imgQuery":"a handful of dark crumbly soil held in cupped hands, close-up"},
+
+ {"pt":"escada","ru":"лестница","en":"stairs, ladder","pos":"nouns",
+  "imgQuery":"an elegant spiral staircase photographed looking down the centre"},
+
+ {"pt":"finalmente","ru":"наконец","en":"finally","pos":"adverbs",
+  "imgQuery":"a person leaning back in a chair with a long relieved sigh, work behind them"},
+
+ {"pt":"praia","ru":"пляж","en":"beach","pos":"nouns",
+  "imgQuery":"an empty sandy beach with waves rolling in, no people and no furniture"},
+
+ {"pt":"visto","ru":"виза","en":"visa","pos":"nouns",
+  "imgQuery":"a passport page with a colourful visa sticker and entry stamp, close-up"},
+
+ {"pt":"passaporte","ru":"паспорт","en":"passport","pos":"nouns",
+  "imgQuery":"a closed burgundy passport booklet lying alone on a plain surface"},
+
+ {"pt":"tirar","ru":"доставать, вынимать; получать","en":"to take out, to get","pos":"verbs",
+  "imgQuery":"a hand pulling a printed ticket out of a machine slot",
+  "note":"tirar o visto — получить визу, tirar foto — сделать фото"},
+
+ {"pt":"julho","ru":"июль","en":"July","pos":"nouns",
+  "imgQuery":"a field of tall sunflowers in full bloom under a blazing midsummer sun"},
+
+ {"pt":"cor","ru":"цвет","en":"colour","pos":"nouns",
+  "imgQuery":"an artist's palette loaded with many different bright paint colours"},
+
+ {"pt":"cinza","ru":"серый","en":"grey","pos":"adjectives",
+  "imgQuery":"a completely flat solid grey surface filling the entire frame, uniform neutral grey, nothing else in the picture"},
+
+ {"pt":"qual é, parceiro?","ru":"как дела, братан?","en":"what's up, mate?","pos":"phrases",
+  "imgQuery":"two friends greeting with a handshake pulling into a shoulder hug",
+  "note":"разговорное приветствие между приятелями"},
+
+ {"pt":"que tá pegando?","ru":"что происходит?","en":"what's going on?","pos":"phrases",
+  "imgQuery":"a man spreading his arms in bewilderment at a chaotic mess in front of him",
+  "note":"разговорное, стяжение от «que está pegando?»"},
+
+ {"pt":"cabelos","ru":"волосы (на голове)","en":"hair","pos":"nouns",
+  "imgQuery":"long wavy hair on a head seen from behind, strands in soft light",
+  "note":"pelo — волосок на теле, cabelo — волосы на голове"},
+
+ {"pt":"desde","ru":"с (какого-то времени)","en":"since, from","pos":"function words",
+  "imgQuery":"a milestone marker post standing at the very start of a long trail"},
+
+ {"pt":"relógio","ru":"часы (предмет)","en":"clock, watch","pos":"nouns",
+  "imgQuery":"an old pendulum wall clock hanging on a wall, pendulum visible below"},
+
+ {"pt":"pra quê","ru":"зачем","en":"what for","pos":"phrases",
+  "imgQuery":"a person staring at a strange unfamiliar gadget with a baffled look, unsure of its purpose"},
+
+ {"pt":"suporte","ru":"поддержка, опора","en":"support","pos":"nouns",
+  "imgQuery":"a wooden prop holding up a heavy laden tree branch",
+  "fix":"в списке было «supporte» — по-португальски одна p: suporte"},
+
+ {"pt":"notebook","ru":"ноутбук","en":"laptop","pos":"nouns",
+  "imgQuery":"a slim closed laptop held in one hand, side view showing its thin profile",
+  "note":"в бразильском португальском ноутбук называют именно notebook"},
+
+ {"pt":"cabo","ru":"кабель, провод","en":"cable","pos":"nouns",
+  "imgQuery":"a neatly coiled black cable with a connector, lying on a plain surface"},
+
+ {"pt":"conectar","ru":"подключать, соединять","en":"to connect","pos":"verbs",
+  "imgQuery":"a plug being pushed into a socket, contacts about to meet"},
+
+ {"pt":"cartão","ru":"карта (банковская)","en":"card","pos":"nouns",
+  "imgQuery":"a bank card lying alone on a plain surface, chip and embossing visible"},
+
+ {"pt":"vagabundo","ru":"никчёмный, дрянной; бездельник","en":"lousy, bum","pos":"adjectives",
+  "imgQuery":"a cheap broken chair collapsed on the floor, shoddy and falling apart"},
+
+ {"pt":"vagabunda","ru":"грубое оскорбление женщины","en":"bitch (vulgar)","pos":"adjectives",
+  "imgQuery":"a person turning away with a scornful dismissive expression",
+  "note":"обсценное и оскорбительное — понимать на слух, но не употреблять"},
+
+ {"pt":"microfone","ru":"микрофон","en":"microphone","pos":"nouns",
+  "imgQuery":"a studio condenser microphone on a stand against a dark background"},
+
+ {"pt":"escolher","ru":"выбирать","en":"to choose","pos":"verbs",
+  "imgQuery":"fingers picking one chocolate out of a full box of assorted chocolates"},
+
+ {"pt":"tradução","ru":"перевод (текста)","en":"translation","pos":"nouns",
+  "imgQuery":"two open pages side by side showing the same text in two different languages"},
+
+ {"pt":"pensar","ru":"думать, размышлять","en":"to think","pos":"verbs",
+  "imgQuery":"a person tapping a pen against their temple while staring up in thought",
+  "fix":"в списке было «penser» — это французский; по-португальски pensar"},
+
+ {"pt":"fosse","ru":"был бы; если бы был","en":"were, would be","pos":"verbs",
+  "imgQuery":"a person daydreaming in front of a luxury car in a showroom window",
+  "note":"сослагательное от ser и ir: «se eu fosse rico» — если бы я был богат"},
+
+ {"pt":"remoto","ru":"удалённый, дальний","en":"remote","pos":"adjectives",
+  "imgQuery":"a lone cabin standing far away high in empty mountains, no roads around"},
+
+ {"pt":"manhã","ru":"утро","en":"morning","pos":"nouns",
+  "imgQuery":"low morning mist lying over a quiet green field just after dawn"},
+
+ {"pt":"chuvosa","ru":"дождливая","en":"rainy","pos":"adjectives",
+  "imgQuery":"heavy dark rain clouds pouring over a city skyline, sheets of rain falling"},
+
+ {"pt":"sol","ru":"солнце","en":"sun","pos":"nouns",
+  "imgQuery":"the blazing sun high in a clear sky, rays flaring around the disc"},
+
+ {"pt":"fui","ru":"я был; я пошёл","en":"I was; I went","pos":"verbs",
+  "imgQuery":"a single set of shoe prints leading up to the camera in fresh snow",
+  "note":"форма первого лица: fui ao mercado — я пошёл на рынок; foi — он пошёл"},
+
+ {"pt":"aeromoça","ru":"бортпроводница","en":"flight attendant","pos":"nouns",
+  "imgQuery":"a flight attendant in uniform standing in an aircraft cabin aisle"},
+
+ {"pt":"empresário","ru":"предприниматель","en":"entrepreneur","pos":"nouns",
+  "imgQuery":"a confident businessman in a suit standing with arms crossed in an office lobby"},
+
+ {"pt":"faxineiro","ru":"уборщик","en":"cleaner, janitor","pos":"nouns",
+  "imgQuery":"a cleaner mopping the floor of a corridor with a bucket beside him"},
+
+ {"pt":"funcionar","ru":"работать, функционировать","en":"to work, to function","pos":"verbs",
+  "imgQuery":"a desk fan running at full speed, blades blurred with motion",
+  "note":"инфинитив; funciona — «работает» в третьем лице"},
+
+ {"pt":"quarto","ru":"спальня, комната","en":"bedroom","pos":"nouns",
+  "imgQuery":"a tidy bedroom with a neatly made bed and bedside lamp"},
+
+ {"pt":"sala","ru":"гостиная, зал","en":"living room, hall","pos":"nouns",
+  "imgQuery":"a living room with a sofa and coffee table seen from the doorway"}
+]
