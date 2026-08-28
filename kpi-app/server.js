@@ -162,9 +162,11 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(response.status, Object.fromEntries(response.headers));
     res.end(Buffer.from(await response.arrayBuffer()));
   } catch (err) {
-    console.error('Сбой запроса:', err);
+    // Причину показываем в ответе, а не прячем за «сбой на сервере»:
+    // приложение внутреннее, и без текста ошибку не найти.
+    console.error(`Сбой запроса ${req.method} ${req.url}:`, err);
     res.writeHead(500, { 'content-type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ error: 'сбой на сервере' }));
+    res.end(JSON.stringify({ error: String(err && err.message || err).slice(0, 300) }));
   }
 });
 

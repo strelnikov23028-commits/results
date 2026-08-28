@@ -1071,13 +1071,18 @@ async function handleApi(request, env, url) {
       const nick = (b.tg_username || '').replace('@', '').toLowerCase() || null;
 
       if (b.id) {
+        // Грейд приходит не всегда: у руководителей поле скрыто, и форма
+        // его не присылает. Пустое значение не должно затирать сохранённое —
+        // иначе любое переименование падало бы на ограничении NOT NULL.
         await db
           .prepare(
-            `UPDATE users SET name=?, role=?, grade=?, salary=?, yougile_id=?, tg_user_id=?,
-             tg_username=?, active=? ${hash ? ', key_hash=?' : ''} WHERE id=?`
+            `UPDATE users SET name=?, role=?, grade=COALESCE(?, grade), salary=?,
+             yougile_id=?, tg_user_id=?, tg_username=?, active=?
+             ${hash ? ', key_hash=?' : ''} WHERE id=?`
           )
           .bind(...[
-            b.name, b.role, b.grade, b.salary | 0, b.yougile_id || null, b.tg_user_id || null,
+            b.name, b.role, b.grade || null, b.salary | 0,
+            b.yougile_id || null, b.tg_user_id || null,
             nick, b.active === false ? 0 : 1,
             ...(hash ? [hash] : []),
             b.id,
@@ -1089,8 +1094,10 @@ async function handleApi(request, env, url) {
             `INSERT INTO users (id, name, role, grade, salary, yougile_id, tg_user_id, tg_username, key_hash)
              VALUES (?,?,?,?,?,?,?,?,?)`
           )
-          .bind(id, b.name, b.role || 'assistant', b.grade || 'A2', b.salary | 0,
-                b.yougile_id || null, b.tg_user_id || null, nick, hash)
+          .bind(id, b.name, b.role || 'assistant',
+                // у руководителей грейд не спрашивают: ставим строгую норму
+                b.grade || (b.role === 'assistant' ? 'A2' : 'A3'),
+                b.salary | 0, b.yougile_id || null, b.tg_user_id || null, nick, hash)
           .run();
       }
       // ключ показывается ровно один раз — в базе только его хэш
