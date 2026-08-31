@@ -1,0 +1,86 @@
+[
+ {"pt":"conseguir","ru":"суметь, добиться, раздобыть","en":"to manage, to get","pos":"verbs",
+  "imgQuery":"a climber standing triumphantly on a summit with both arms raised, having made it",
+  "fix":"в списке было «Conzeguir» — правильно conseguir, через s"},
+
+ {"pt":"parecido","ru":"похожий","en":"similar, alike","pos":"adjectives",
+  "imgQuery":"two dogs of similar but clearly different breeds sitting side by side",
+  "fix":"в списке было «Paresido» — правильно parecido, через c",
+  "note":"рядом semelhante — то же значение, parecido разговорнее"},
+
+ {"pt":"demais","ru":"слишком; чересчур","en":"too much","pos":"adverbs",
+  "imgQuery":"an overstuffed suitcase that will not close, clothes bulging out of the sides"},
+
+ {"pt":"cartório","ru":"нотариальная контора","en":"notary office","pos":"nouns",
+  "imgQuery":"a notary pressing an official seal onto a document at a counter",
+  "fix":"нужен акут: cartório"},
+
+ {"pt":"entregar","ru":"вручать, доставлять","en":"to deliver, to hand over","pos":"verbs",
+  "imgQuery":"a courier handing a parcel to someone at their front door"},
+
+ {"pt":"notícias","ru":"новости","en":"news","pos":"nouns",
+  "imgQuery":"a folded newspaper front page lying on a table, headlines visible"},
+
+ {"pt":"gerada","ru":"сгенерированная, выработанная","en":"generated","pos":"adjectives",
+  "imgQuery":"a wind turbine spinning against the sky, producing power",
+  "note":"форма женского рода от gerar — порождать, вырабатывать"},
+
+ {"pt":"barato","ru":"дешёвый","en":"cheap","pos":"adjectives",
+  "imgQuery":"a market stall with big red discount signs and bargain goods piled up"},
+
+ {"pt":"caro","ru":"дорогой (по цене)","en":"expensive","pos":"adjectives",
+  "imgQuery":"a diamond ring displayed alone under a spotlight in a jeweller's glass case"},
+
+ {"pt":"ontem","ru":"вчера","en":"yesterday","pos":"adverbs",
+  "imgQuery":"a torn-off calendar page for the previous day lying beside the calendar"},
+
+ {"pt":"apresentar","ru":"представлять, знакомить","en":"to introduce, to present","pos":"verbs",
+  "imgQuery":"a person gesturing to introduce one friend to another, all three standing together"},
+
+ {"pt":"juntar","ru":"соединять, собирать вместе","en":"to join, to gather","pos":"verbs",
+  "imgQuery":"hands sweeping scattered coins together into one pile on a table"},
+
+ {"pt":"comum","ru":"обычный, распространённый","en":"common, ordinary","pos":"adjectives",
+  "imgQuery":"a row of identical ordinary terraced houses, nothing remarkable about any of them"},
+
+ {"pt":"afinidade","ru":"близость по духу, взаимопонимание","en":"affinity","pos":"nouns",
+  "imgQuery":"two friends laughing at the same joke at the same moment, completely in tune"},
+
+ {"pt":"calor","ru":"жара, тепло","en":"heat, warmth","pos":"nouns",
+  "imgQuery":"heat haze shimmering above scorching asphalt on a summer road"},
+
+ {"pt":"coloque","ru":"положи, помести","en":"put, place","pos":"verbs",
+  "imgQuery":"a hand placing a book neatly into its slot on a shelf",
+  "note":"повелительная форма от colocar"},
+
+ {"pt":"infelizmente","ru":"к сожалению","en":"unfortunately","pos":"adverbs",
+  "imgQuery":"a person looking down at a cancelled sign on a locked shop door, disappointed",
+  "fix":"в списке было «Enfelizmente» — правильно infelizmente, от infeliz"},
+
+ {"pt":"consigo","ru":"я могу, у меня получается","en":"I can, I manage","pos":"verbs",
+  "imgQuery":"a person lifting a heavy crate onto a shelf without help, managing it",
+  "note":"форма от conseguir; отдельно consigo значит ещё «с собой»"},
+
+ {"pt":"mano / mana","ru":"братан / сестрёнка (разг.)","en":"bro / sis","pos":"phrases",
+  "imgQuery":"two young men greeting each other with a fist bump, friendly street style"},
+
+ {"pt":"durante","ru":"во время, в течение","en":"during","pos":"function words",
+  "imgQuery":"a runner on the track with a stadium timer counting in the background"},
+
+ {"pt":"enviar","ru":"отправлять, посылать","en":"to send","pos":"verbs",
+  "imgQuery":"a paper plane just released from a hand, flying away",
+  "fix":"в списке было «Envier» — это французская форма; по-португальски enviar",
+  "note":"рядом mandar — то же значение, enviar чуть официальнее"},
+
+ {"pt":"assim que der","ru":"как только получится","en":"as soon as I can","pos":"phrases",
+  "imgQuery":"a hand resting on a door handle ready to open it the moment it is possible"},
+
+ {"pt":"tratar","ru":"заниматься чем-то; обращаться с кем-то","en":"to deal with, to treat","pos":"verbs",
+  "imgQuery":"a mechanic bent over an open car engine, dealing with the problem"},
+
+ {"pt":"preço","ru":"цена","en":"price","pos":"nouns",
+  "imgQuery":"a petrol station price board showing fuel prices in large digits"},
+
+ {"pt":"preparar","ru":"готовить, подготавливать","en":"to prepare","pos":"verbs",
+  "imgQuery":"chopped ingredients laid out in separate bowls ready before cooking starts"}
+]

@@ -614,7 +614,16 @@ const isNew  = c => st(c.id).seen === 0;
 const isDue  = c => { const x = st(c.id); return x.seen > 0 && x.due <= todayKey(); };
 const learned = c => { const x = st(c.id); return x.rep >= 3 && x.iv >= 21; };
 const inProgress = c => { const x = st(c.id); return x.seen > 0 && !learned(c); };
-const hardCards = () => CARDS.filter(c => { const x = st(c.id); return x.miss >= 2 && x.miss >= x.ok; });
+/* «Трудные» — слова, с которыми сложно СЕЙЧАС, а не те, где ошибки были когда-то.
+   Прежний отбор смотрел на всю историю, и слово, заваленное в первые дни,
+   оставалось трудным даже после того, как выучено. Теперь выученные и те,
+   что идут уверенной серией верных ответов, сюда не попадают. */
+const hardCards = () => CARDS.filter(c => {
+  const x = st(c.id);
+  if(!x.seen || learned(c)) return false;        // выученное трудным не считаем
+  if(x.rep >= 3) return false;                   // три верных подряд — уже не трудное
+  return x.miss >= 2 && x.miss / x.seen >= 0.34; // ошибался хотя бы в трети попыток
+});
 
 const POS_RU = { 'nouns':'существительные','adjectives':'прилагательные','verbs':'глаголы',
                  'adverbs':'наречия','function words':'служебные','phrases':'выражения' };

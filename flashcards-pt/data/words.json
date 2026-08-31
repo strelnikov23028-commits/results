@@ -4247,25 +4247,6 @@
   ]
  },
  {
-  "id": 175,
-  "pt": "isso acontece",
-  "en": "it happens",
-  "ru": "это случается",
-  "pos": "phrases",
-  "examples": [],
-  "imgQuery": null,
-  "image": "cartoes-img/это случается — isso acontece.webp",
-  "credit": {
-   "author": "",
-   "url": "",
-   "source": "Grok Build",
-   "license": "сгенерировано ИИ"
-  },
-  "sources": [
-   "personal"
-  ]
- },
- {
   "id": 176,
   "pt": "aberta",
   "en": "open, outdoor",
@@ -7034,25 +7015,6 @@
   ]
  },
  {
-  "id": 320,
-  "pt": "cada",
-  "en": "each, every",
-  "ru": "каждый",
-  "pos": "function words",
-  "examples": [],
-  "imgQuery": "a baking tray of identical muffin cups with exactly one muffin sitting in every single cup",
-  "image": "cartoes-img/каждый — cada.webp",
-  "credit": {
-   "author": "",
-   "url": "",
-   "source": "Grok Build",
-   "license": "сгенерировано ИИ"
-  },
-  "sources": [
-   "extra2"
-  ]
- },
- {
   "id": 321,
   "pt": "pelo",
   "en": "body hair, fur",
@@ -9195,6 +9157,491 @@
   },
   "sources": [
    "extra4"
+  ]
+ },
+ {
+  "id": 432,
+  "pt": "conseguir",
+  "en": "to manage, to get",
+  "ru": "суметь, добиться, раздобыть",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a climber standing triumphantly on a summit with both arms raised, having made it",
+  "image": "cartoes-img/суметь, добиться, раздобыть — conseguir.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ],
+  "fix": "в списке было «Conzeguir» — правильно conseguir, через s"
+ },
+ {
+  "id": 433,
+  "pt": "parecido",
+  "en": "similar, alike",
+  "ru": "похожий",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "two dogs of similar but clearly different breeds sitting side by side",
+  "image": "cartoes-img/похожий — parecido.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ],
+  "note": "рядом semelhante — то же значение, parecido разговорнее",
+  "fix": "в списке было «Paresido» — правильно parecido, через c"
+ },
+ {
+  "id": 434,
+  "pt": "demais",
+  "en": "too much",
+  "ru": "слишком; чересчур",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "an overstuffed suitcase that will not close, clothes bulging out of the sides",
+  "image": "cartoes-img/слишком, чересчур — demais.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 435,
+  "pt": "cartório",
+  "en": "notary office",
+  "ru": "нотариальная контора",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a notary pressing an official seal onto a document at a counter",
+  "image": "cartoes-img/нотариальная контора — cartório.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ],
+  "fix": "нужен акут: cartório"
+ },
+ {
+  "id": 436,
+  "pt": "entregar",
+  "en": "to deliver, to hand over",
+  "ru": "вручать, доставлять",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a parcel passing from the courier's hands into the recipient's hands, close-up on the handover",
+  "image": "cartoes-img/вручать, доставлять — entregar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 437,
+  "pt": "notícias",
+  "en": "news",
+  "ru": "новости",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a folded newspaper front page lying on a table, headlines visible",
+  "image": "cartoes-img/новости — notícias.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 438,
+  "pt": "gerada",
+  "en": "generated",
+  "ru": "сгенерированная, выработанная",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a wind turbine spinning against the sky, producing power",
+  "image": "cartoes-img/сгенерированная, выработанная — gerada.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ],
+  "note": "форма женского рода от gerar — порождать, вырабатывать"
+ },
+ {
+  "id": 439,
+  "pt": "barato",
+  "en": "cheap",
+  "ru": "дешёвый",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a market stall with big red discount signs and bargain goods piled up",
+  "image": "cartoes-img/дешёвый — barato.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 440,
+  "pt": "caro",
+  "en": "expensive",
+  "ru": "дорогой (по цене)",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a diamond ring displayed alone under a spotlight in a jeweller's glass case",
+  "image": "cartoes-img/дорогой — caro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 441,
+  "pt": "ontem",
+  "en": "yesterday",
+  "ru": "вчера",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "a torn-off calendar page for the previous day lying beside the calendar",
+  "image": "cartoes-img/вчера — ontem.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 442,
+  "pt": "apresentar",
+  "en": "to introduce, to present",
+  "ru": "представлять, знакомить",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person gesturing to introduce one friend to another, all three standing together",
+  "image": "cartoes-img/представлять, знакомить — apresentar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 443,
+  "pt": "juntar",
+  "en": "to join, to gather",
+  "ru": "соединять, собирать вместе",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "two small streams merging together into a single river",
+  "image": "cartoes-img/соединять, собирать вместе — juntar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 444,
+  "pt": "comum",
+  "en": "common, ordinary",
+  "ru": "обычный, распространённый",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a row of identical ordinary terraced houses, nothing remarkable about any of them",
+  "image": "cartoes-img/обычный, распространённый — comum.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 445,
+  "pt": "afinidade",
+  "en": "affinity",
+  "ru": "близость по духу, взаимопонимание",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "two friends laughing at the same joke at the same moment, completely in tune",
+  "image": "cartoes-img/близость по духу, взаимопонимание — afinidade.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 446,
+  "pt": "calor",
+  "en": "heat, warmth",
+  "ru": "жара, тепло",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "heat haze shimmering above scorching asphalt on a summer road",
+  "image": "cartoes-img/жара, тепло — calor.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 447,
+  "pt": "coloque",
+  "en": "put, place",
+  "ru": "положи, помести",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hand placing a cut flower into a vase of water",
+  "image": "cartoes-img/положи, помести — coloque.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ],
+  "note": "повелительная форма от colocar"
+ },
+ {
+  "id": 448,
+  "pt": "infelizmente",
+  "en": "unfortunately",
+  "ru": "к сожалению",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "a defeated footballer sitting on the pitch holding his head after losing the match",
+  "image": "cartoes-img/к сожалению — infelizmente.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ],
+  "fix": "в списке было «Enfelizmente» — правильно infelizmente, от infeliz"
+ },
+ {
+  "id": 449,
+  "pt": "consigo",
+  "en": "I can, I manage",
+  "ru": "я могу, у меня получается",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hiker carrying a heavy backpack up a steep slope, managing it under their own strength",
+  "image": "cartoes-img/я могу, у меня получается — consigo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ],
+  "note": "форма от conseguir; отдельно consigo значит ещё «с собой»"
+ },
+ {
+  "id": 450,
+  "pt": "mano / mana",
+  "en": "bro / sis",
+  "ru": "братан / сестрёнка (разг.)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "two young men greeting each other with a fist bump, friendly street style",
+  "image": "cartoes-img/братан - сестрёнка — mano - mana.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 451,
+  "pt": "durante",
+  "en": "during",
+  "ru": "во время, в течение",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a runner on the track with a stadium timer counting in the background",
+  "image": "cartoes-img/во время, в течение — durante.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 452,
+  "pt": "enviar",
+  "en": "to send",
+  "ru": "отправлять, посылать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a paper plane just released from a hand, flying away",
+  "image": "cartoes-img/отправлять, посылать — enviar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ],
+  "note": "рядом mandar — то же значение, enviar чуть официальнее",
+  "fix": "в списке было «Envier» — это французская форма; по-португальски enviar"
+ },
+ {
+  "id": 453,
+  "pt": "assim que der",
+  "en": "as soon as I can",
+  "ru": "как только получится",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a finger poised right above a button, ready to press it the moment it becomes possible",
+  "image": "cartoes-img/как только получится — assim que der.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 454,
+  "pt": "tratar",
+  "en": "to deal with, to treat",
+  "ru": "заниматься чем-то; обращаться с кем-то",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a mechanic bent over an open car engine, dealing with the problem",
+  "image": "cartoes-img/заниматься чем-то, обращаться с кем-то — tratar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 455,
+  "pt": "preço",
+  "en": "price",
+  "ru": "цена",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a petrol station price board showing fuel prices in large digits",
+  "image": "cartoes-img/цена — preço.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
+  ]
+ },
+ {
+  "id": 456,
+  "pt": "preparar",
+  "en": "to prepare",
+  "ru": "готовить, подготавливать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "chopped ingredients laid out in separate bowls ready before cooking starts",
+  "image": "cartoes-img/готовить, подготавливать — preparar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra5"
   ]
  }
 ]
