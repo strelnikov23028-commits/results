@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Предложение по KPI ассистента</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F7; --surface:#FFFFFF; --ink:#1D1D1F; --ink-2:#4B4B51; --ink-3:#86868B;
+    --line:#E3E3E6; --blue:#0071E3; --blue-soft:#EAF3FE;
+    --green:#1D8F4E; --green-soft:#E7F5EC;
+    --radius:20px; --radius-sm:12px;
+    --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding:0 24px}
+  header.hero{padding:80px 0 40px}
+  .eyebrow{
+    display:inline-flex; font-size:13px; font-weight:600; letter-spacing:.02em;
+    text-transform:uppercase; color:var(--blue); background:var(--blue-soft);
+    padding:7px 14px; border-radius:999px;
+  }
+  h1{font-size:clamp(30px,4.6vw,46px); line-height:1.12; letter-spacing:-.02em; margin:22px 0 18px; font-weight:700}
+  .lead{font-size:19px; color:var(--ink-2); margin:0; max-width:62ch}
+  .total{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
+  .chip{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:14px 18px; box-shadow:var(--shadow)}
+  .chip b{display:block; font-size:21px; font-variant-numeric:tabular-nums; letter-spacing:-.01em}
+  .chip span{font-size:13px; color:var(--ink-3)}
+  section{padding:32px 0}
+  h2{font-size:clamp(23px,3.2vw,31px); letter-spacing:-.02em; margin:0 0 8px; font-weight:700}
+  .sub{color:var(--ink-3); margin:0 0 24px; font-size:16px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow)}
+  .tbl-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse; width:100%; min-width:560px; font-size:15px}
+  th,td{text-align:left; padding:13px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-3); font-weight:600}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:600}
+  td.dim{color:var(--ink-3)}
+  tbody tr:last-child td{border-bottom:none}
+  tfoot td{border-top:2px solid var(--ink); border-bottom:none; font-weight:700; padding-top:14px}
+  ol,ul{margin:0; padding-left:22px; color:var(--ink-2)}
+  li{margin-bottom:11px}
+  li:last-child{margin-bottom:0}
+  li b{color:var(--ink)}
+  .calc{margin-top:24px; padding-top:22px; border-top:1px solid var(--line)}
+  .calc h3{font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-3); margin:0 0 14px; font-weight:600}
+  .calc-row{display:flex; justify-content:space-between; gap:16px; padding:9px 0; border-bottom:1px solid var(--line); font-size:15px; color:var(--ink-2)}
+  .calc-row span:last-child{font-variant-numeric:tabular-nums; font-weight:600; color:var(--ink); white-space:nowrap}
+  .calc-row.sum{border-bottom:none; border-top:2px solid var(--ink); margin-top:6px; padding-top:14px; font-size:17px; font-weight:700; color:var(--ink)}
+  .note{background:var(--blue-soft); border-radius:var(--radius-sm); padding:20px 24px; margin-top:24px; font-size:15px; color:var(--ink-2)}
+  .note b{color:var(--ink)}
+  .ask{background:var(--green-soft); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow)}
+  .ask h2{margin-bottom:14px}
+  .ask p{color:var(--ink-2); margin:0 0 14px; max-width:66ch}
+  .ask p:last-child{margin-bottom:0}
+  footer{padding:44px 0 72px; color:var(--ink-3); font-size:14px; border-top:1px solid var(--line); margin-top:36px; max-width:70ch}
+  @media (max-width:640px){
+    header.hero{padding:52px 0 28px}
+    .card,.ask{padding:22px 18px}
+    .wrap{padding:0 18px}
+    .calc-row{flex-direction:column; gap:2px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="hero wrap reveal">
+  <span class="eyebrow">Предложение</span>
+  <h1>Система KPI для ассистента</h1>
+  <p class="lead">Предлагаю привязать переменную часть зарплаты к четырём показателям, которые считаются по выгрузке из задачника. Общий фонд не меняется: оклад 30 000 ₽ и премия 30 000 ₽. Меняется только то, что премия становится измеримой — понятно заранее, за что она платится, и видно в любой день месяца.</p>
+  <div class="total">
+    <div class="chip"><b>30 000 ₽</b><span>оклад, без изменений</span></div>
+    <div class="chip"><b>30 000 ₽</b><span>премия, распределена по KPI</span></div>
+    <div class="chip"><b>10 минут</b><span>расчёт раз в месяц</span></div>
+  </div>
+</header>
+
+<section class="wrap reveal">
+  <h2>Зачем это нужно</h2>
+  <div class="card">
+    <ol>
+      <li><b>Приоритеты видны заранее.</b> Половина премии закреплена за сроками — значит, при выборе, что делать первым, приоритет очевиден без дополнительных уточнений.</li>
+      <li><b>Премия перестаёт быть предметом обсуждения.</b> Все четыре показателя берутся из задачника, результат считается одинаково обеими сторонами.</li>
+      <li><b>Проблемы видно в течение месяца, а не по факту.</b> Показатели можно посмотреть в любой день и успеть исправить ситуацию до конца периода.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <h2>Из чего складывается премия</h2>
+  <p class="sub">Четыре показателя, вместе — 30 000 ₽.</p>
+  <div class="card">
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Показатель</th><th>Как считается</th><th>Вес</th><th>Сумма</th></tr></thead>
+        <tbody>
+          <tr><td><b>Задачи закрыты в срок</b></td><td>Доля задач, закрытых до дедлайна, от всех задач месяца</td><td class="num">50%</td><td class="num">15 000 ₽</td></tr>
+          <tr><td><b>Задачи без возвратов</b></td><td>Сколько раз задача возвращалась на доработку</td><td class="num">25%</td><td class="num">7 500 ₽</td></tr>
+          <tr><td><b>Ежедневный отчёт</b></td><td>Доля отправленных отчётов от числа рабочих дней</td><td class="num">15%</td><td class="num">4 500 ₽</td></tr>
+          <tr><td><b>Отсутствие критических сбоев</b></td><td>Просроченный документ, сорванная бронь, потерянный платёж</td><td class="num">10%</td><td class="num">3 000 ₽</td></tr>
+        </tbody>
+        <tfoot><tr><td>Итого</td><td></td><td class="num">100%</td><td class="num">30 000 ₽</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <h2>Шкала начисления</h2>
+  <p class="sub">Каждый показатель начисляется ступенями, промежуточных значений нет.</p>
+  <div class="card">
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Показатель</th><th>Максимум</th><th>Условие максимума</th><th>Остальные ступени</th></tr></thead>
+        <tbody>
+          <tr><td>Сроки</td><td class="num">15 000 ₽</td><td>95% задач и выше закрыты в срок</td><td class="dim">90–94% → 10 000 ₽ · 85–89% → 5 000 ₽ · ниже 85% → 0</td></tr>
+          <tr><td>Возвраты</td><td class="num">7 500 ₽</td><td>не больше одного возврата за месяц</td><td class="dim">2–3 → 5 000 ₽ · 4–5 → 2 500 ₽ · 6 и больше → 0</td></tr>
+          <tr><td>Отчёты</td><td class="num">4 500 ₽</td><td>отправлено 90% отчётов и больше</td><td class="dim">80–89% → 2 500 ₽ · ниже 80% → 0</td></tr>
+          <tr><td>Сбои</td><td class="num">3 000 ₽</td><td>ни одного критического сбоя</td><td class="dim">1 сбой → 1 500 ₽ · 2 и больше → 0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="calc">
+      <h3>Пример расчёта за месяц</h3>
+      <div class="calc-row"><span>Закрыто в срок 96% задач</span><span>15 000 ₽</span></div>
+      <div class="calc-row"><span>Два возврата на доработку</span><span>5 000 ₽</span></div>
+      <div class="calc-row"><span>Отправлен 21 отчёт из 22 рабочих дней — 95%</span><span>4 500 ₽</span></div>
+      <div class="calc-row"><span>Критических сбоев нет</span><span>3 000 ₽</span></div>
+      <div class="calc-row sum"><span>Премия за месяц</span><span>27 500 ₽</span></div>
+    </div>
+    <div class="note">
+      <b>Про порог 90% по отчётам.</b> Отчёт — одно сообщение в конце рабочего дня: что сделано, что в работе, что застряло. В месяце с 22 рабочими днями 90% — это 20 отчётов, то есть допускаются два пропуска на случай командировки или форс-мажора. Выходные, отпуск и больничный в расчёт не входят.
+    </div>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <h2>Что для этого нужно с вашей стороны</h2>
+  <p class="sub">Три действия, все — часть обычной постановки задач.</p>
+  <div class="card">
+    <ol>
+      <li><b>Ставить срок при постановке задачи.</b> Задача без срока в расчёт не входит — ни в плюс, ни в минус. Срок определяет постановщик, не исполнитель.</li>
+      <li><b>Возвращать задачу на доработку в задачнике, а не в переписке.</b> Тогда качество считается автоматически и не требует отдельного учёта.</li>
+      <li><b>Раз в месяц сверить выгрузку.</b> До 5 числа, по четырём цифрам — примерно десять минут.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <h2>Правила расчёта</h2>
+  <p class="sub">Предлагаю зафиксировать письменно — это защищает обе стороны от разночтений.</p>
+  <div class="card">
+    <ol>
+      <li><b>Период.</b> Календарный месяц, расчёт до 5 числа следующего, выплата вместе с зарплатой.</li>
+      <li><b>Источник данных.</b> Выгрузка из задачника, доступная обеим сторонам. Что не заведено в задачник, в расчёт не входит.</li>
+      <li><b>Что не считается просрочкой.</b> Задача заблокирована третьей стороной, изменились вводные, срок перенёс постановщик — при условии, что я письменно сообщил о блокере до наступления дедлайна.</li>
+      <li><b>Поздние задачи.</b> Задача со сроком «сегодня», поставленная после 17:00, переносится на следующий рабочий день.</li>
+      <li><b>Отчёт.</b> Одно сообщение вечером в согласованный канал. Отправленный на следующий день задним числом не засчитывается.</li>
+      <li><b>Пересмотр.</b> Веса и пороги пересматриваются раз в квартал и действуют со следующего месяца. Задним числом правила не меняются.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <h2>Как предлагаю запустить</h2>
+  <div class="card">
+    <ol>
+      <li><b>Первый месяц — вхолостую.</b> Считаем показатели, но премия выплачивается полностью независимо от результата. Это нужно, чтобы увидеть реальные цифры и при необходимости сдвинуть пороги: возможно, 95% по срокам окажется слишком мягким требованием или наоборот.</li>
+      <li><b>Со второго месяца схема действует.</b> Пороги к этому моменту уже подтверждены фактическими данными.</li>
+      <li><b>Через квартал — сверка.</b> Смотрим, что показатели действительно отражают работу, и корректируем при необходимости.</li>
+    </ol>
+    <div class="note">
+      <b>Чего схема сознательно не делает.</b> Она не различает сложные и мелкие задачи — час переписки и трёхдневное оформление документов считаются одинаково. И не оплачивает улучшения процессов: регламенты, шаблоны, базы подрядчиков, автоматизацию рутины. Это можно добавить отдельным блоком позже, когда базовая схема отработает пару месяцев и станет видно, что именно стоит поощрять.
+    </div>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <div class="ask">
+    <h2>Что предлагаю обсудить</h2>
+    <p>Веса и пороги в этом документе — предложение, а не окончательный вариант. Если приоритеты расставлены иначе, готов пересобрать: например, увеличить вес качества за счёт сроков или добавить показатель, которого здесь нет.</p>
+    <p>Если четыре показателя кажутся избыточными, есть упрощённая версия из трёх пунктов по 10 000 ₽ — сроки, возвраты, отчёты. Считается за пять минут, но приоритеты в ней выражены слабее.</p>
+    <p>Готов обсудить в удобное время и запустить с ближайшего месяца.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  Документ описывает предлагаемый порядок расчёта переменной части. Общий фонд оплаты не изменяется: оклад 30 000 ₽ плюс премия до 30 000 ₽.
+</footer>
+
+<script type="module">
+  const items = document.querySelectorAll('.reveal');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    try {
+      const { animate, inView, stagger } = await import('https://cdn.jsdelivr.net/npm/motion@11/+esm');
+      items.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(18px)'; });
+      setTimeout(() => {
+        items.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+      }, 2000);
+      inView(items, (el) => {
+        animate(el, { opacity: [0, 1], transform: ['translateY(18px)', 'translateY(0px)'] },
+                { duration: .5, easing: [.16, 1, .3, 1] });
+      }, { margin: '0px 0px -10% 0px' });
+      animate(document.querySelectorAll('.chip'),
+              { opacity: [0, 1], transform: ['translateY(12px)', 'translateY(0px)'] },
+              { delay: stagger(.06), duration: .45, easing: [.16, 1, .3, 1] });
+    } catch (e) {
+      items.forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+    }
+  }
+</script>
+</body>
+</html>
