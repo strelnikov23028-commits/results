@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Где открывать мокрую лабораторию — юрисдикции вне США и Европы + кейс Элизабет Пэриш</title>
+<meta name="description" content="Сравнение юрисдикций вне США и Европы для частной wet-lab под ключ: Панама, ОАЭ, Колумбия, Próspera, Бразилия. Разбор кейса BioViva и Элизабет Пэриш.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --ink:#1D1D1F; --ink-2:#424245; --ink-3:#6E6E73;
+  --line:#E3E3E6; --blue:#0071E3; --blue-ink:#0058B0;
+  --green:#1E8E3E; --amber:#B26A00; --red:#C4291E;
+  --r-lg:22px; --r-md:16px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --shadow-h:0 2px 6px rgba(0,0,0,.06), 0 16px 40px rgba(0,0,0,.10);
+  --maxw:1120px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+a{color:var(--blue-ink); text-decoration:none; border-bottom:1px solid rgba(0,113,227,.28)}
+a:hover{border-bottom-color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue); outline-offset:3px; border-radius:6px}
+h1,h2,h3,h4{letter-spacing:-.022em; line-height:1.16; margin:0}
+h1{font-size:clamp(34px,5.4vw,58px); font-weight:700}
+h2{font-size:clamp(26px,3.4vw,38px); font-weight:700}
+h3{font-size:clamp(19px,2.1vw,23px); font-weight:600; margin-bottom:10px}
+h4{font-size:17px; font-weight:600; margin-bottom:8px}
+p{margin:0 0 16px}
+small{font-size:13.5px; color:var(--ink-3)}
+.mono{font-variant-numeric:tabular-nums}
+
+.topbar{position:sticky; top:0; z-index:100; background:rgba(245,245,247,.82); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:20px; height:52px; justify-content:space-between}
+.brand{font-weight:600; font-size:15px; letter-spacing:-.01em; white-space:nowrap}
+.topnav{display:flex; gap:20px; overflow-x:auto; scrollbar-width:none}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{font-size:14px; color:var(--ink-2); border:0; white-space:nowrap; padding:6px 0}
+.topnav a:hover{color:var(--blue-ink)}
+
+.hero{padding:72px 0 24px}
+.eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--blue-ink); background:rgba(0,113,227,.09); padding:7px 13px; border-radius:100px; margin-bottom:22px}
+.lede{font-size:clamp(18px,2.2vw,21px); color:var(--ink-2); max-width:780px; margin-top:22px}
+
+.bento{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin:32px 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:26px; box-shadow:var(--shadow); transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s}
+.card.hoverable:hover{transform:translateY(-2px); box-shadow:var(--shadow-h)}
+.c12{grid-column:span 12} .c8{grid-column:span 8} .c6{grid-column:span 6} .c4{grid-column:span 4}
+@media(max-width:900px){.c8,.c6,.c4{grid-column:span 12}}
+.kicker{font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px}
+.big{font-size:clamp(28px,4vw,42px); font-weight:700; letter-spacing:-.03em; line-height:1.05}
+
+section{padding:44px 0; scroll-margin-top:68px}
+.section-head{max-width:800px; margin-bottom:26px}
+.section-head p{color:var(--ink-2); margin-top:14px}
+
+.badge{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:100px; border:1px solid transparent; white-space:nowrap}
+.b-green{background:rgba(30,142,62,.10); color:var(--green); border-color:rgba(30,142,62,.2)}
+.b-amber{background:rgba(178,106,0,.10); color:var(--amber); border-color:rgba(178,106,0,.2)}
+.b-red{background:rgba(196,41,30,.09); color:var(--red); border-color:rgba(196,41,30,.2)}
+.b-blue{background:rgba(0,113,227,.09); color:var(--blue-ink); border-color:rgba(0,113,227,.2)}
+.b-gray{background:#F0F0F2; color:var(--ink-3); border-color:var(--line)}
+
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow); -webkit-overflow-scrolling:touch}
+table{border-collapse:collapse; width:100%; min-width:900px; font-size:15px}
+th,td{padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+th{font-size:12.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); background:#FAFAFB}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#FBFBFD}
+td strong{font-weight:600}
+
+ol.steps{counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:14px}
+ol.steps li{counter-increment:s; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:20px 22px 20px 62px; position:relative; box-shadow:var(--shadow)}
+ol.steps li::before{content:counter(s); position:absolute; left:20px; top:19px; width:28px; height:28px; border-radius:9px; background:var(--blue); color:#fff; font-size:14px; font-weight:600; display:flex; align-items:center; justify-content:center}
+ul.tick{list-style:none; padding:0; margin:0 0 8px; display:grid; gap:10px}
+ul.tick li{position:relative; padding-left:26px; color:var(--ink-2)}
+ul.tick li::before{content:""; position:absolute; left:2px; top:9px; width:8px; height:8px; border-radius:50%; background:var(--blue)}
+ul.tick.warn li::before{background:var(--amber)}
+ul.tick.bad li::before{background:var(--red)}
+ul.tick.good li::before{background:var(--green)}
+
+.quote{border-left:3px solid var(--blue); padding:2px 0 2px 20px; color:var(--ink-2); font-size:16.5px; margin:0 0 18px}
+.note{background:#FFF9EC; border:1px solid #F2E2BC; border-radius:var(--r-md); padding:18px 20px; font-size:15.5px; color:#5A4300}
+.note.blue{background:#EFF6FF; border-color:#CFE3FB; color:#0B3E75}
+.note.red{background:#FDF1F0; border-color:#F5D2CF; color:#7A1C15}
+.note p:last-child{margin-bottom:0}
+
+.srcgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px}
+.src{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; font-size:14.5px}
+.src a{border:0; font-weight:500}
+.src small{display:block; margin-top:4px; line-height:1.45}
+
+footer{padding:44px 0 64px; border-top:1px solid var(--line); margin-top:40px; color:var(--ink-3); font-size:14px}
+.reveal{opacity:1}
+.js .reveal{opacity:0; transform:translateY(18px)}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1 !important; transform:none !important}}
+</style>
+</head>
+<body>
+<script>
+document.documentElement.classList.add('js');
+setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(e){e.style.opacity=1;e.style.transform='none';});},2200);
+</script>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brand">Wet-lab · выбор юрисдикции</span>
+    <nav class="topnav" aria-label="Разделы страницы">
+      <a href="#verdict">Вердикт</a>
+      <a href="#parrish">Кейс Пэриш</a>
+      <a href="#precedents">Прецеденты</a>
+      <a href="#turnkey">Turnkey</a>
+      <a href="#table">Сравнение</a>
+      <a href="#secrecy">Приватность</a>
+      <a href="#plan">План 90 дней</a>
+      <a href="#sources">Источники</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Аналитика · 2 сентября 2026</span>
+    <h1 class="reveal">Где открывать мокрую лабораторию,<br>если это не США и не Европа</h1>
+    <p class="lede reveal">Пять юрисдикций по семи осям: закон, импорт клеток и реагентов, холодовая цепь, доступность перелёта из Рио, приватность, деньги, риск. Плюс разбор того, что <strong>на самом деле</strong> сделала Элизабет Пэриш — и почему в её схеме собственная лаборатория вообще не понадобилась.</p>
+  </div>
+</header>
+
+<section id="verdict">
+  <div class="wrap">
+    <div class="bento">
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Первый выбор</div>
+        <div class="big">Панама</div>
+        <p style="margin-top:12px; color:var(--ink-2)">17 прямых рейсов в неделю из Рио, безвиз 90 дней, доллар как валюта, разрешение на импорт исследовательских реагентов по регламенту — <strong>10 рабочих дней и B/. 25</strong>, живой прецедент лицензированной клеточной лаборатории.</p>
+        <span class="badge b-green">Лучший баланс</span>
+      </div>
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Если нужен буквально «под ключ»</div>
+        <div class="big">Дубай</div>
+        <p style="margin-top:12px; color:var(--ink-2)">Единственная известная площадка вне США и Европы, где лабораторный модуль сдают <strong>уже оснащённым</strong>: вытяжной шкаф, мокрый и сухой стол, офисная зона. Взамен — закон о геноме 49/2023 и высокая аренда.</p>
+        <span class="badge b-blue">Готовая инфраструктура</span>
+      </div>
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Соблазн, от которого лучше отойти</div>
+        <div class="big">Próspera</div>
+        <p style="margin-top:12px; color:var(--ink-2)">Регуляторная свобода настоящая и работает до сих пор, но правовую рамку зоны Верховный суд Гондураса в 2024 году признал неконституционной <em>ex tunc</em>. Фундамент оспорен.</p>
+        <span class="badge b-red">Юридический риск</span>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="kicker">Вывод, который экономит месяцы</div>
+        <p style="font-size:19px; margin-bottom:14px"><strong>Юрисдикцию выбирает не закон о лабораториях, а таможня.</strong> Ни в одной из рассмотренных стран частная исследовательская лаборатория <em>in vitro</em> не запрещена и не требует отдельной лицензии на сам факт существования. Страны различаются другим: доедут ли клетки живыми и за сколько недель.</p>
+        <p style="margin-bottom:14px; color:var(--ink-2)">В Бразилии более 90% исследователей ждут импорт минимум три месяца, крайние случаи доходят до двух лет. В Панаме регламент обещает 10 рабочих дней, а региональная диагностика Senacyt и Межамериканского банка развития фиксирует реальные 30–45 дней и до 8 месяцев в тяжёлых случаях. Разброс между «регламент» и «реальность» — главная переменная всего проекта.</p>
+        <p style="margin:0; color:var(--ink-2)">Отсюда первый практический шаг: не аренда помещения, а <strong>тестовый импорт одной ампулы</strong> в выбранную страну. Он стоит несколько сотен долларов и отвечает на главный вопрос честнее любой консультации.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="parrish">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Кейс Элизабет Пэриш: что они сделали конкретно</h2>
+      <p>Короткий ответ: они не строили лабораторию. Совсем. Схема состояла из четырёх независимых кусков, каждый из которых был вынесен наружу — и именно поэтому её удалось собрать за месяцы, а не за годы.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c8 reveal">
+        <h3>Хронология</h3>
+        <ul class="tick">
+          <li><strong>Сентябрь 2015, Колумбия.</strong> Пэриш, основатель и CEO <a href="https://bioviva-science.com/" target="_blank" rel="noopener">BioViva</a>, прилетела и получила две экспериментальные генные терапии: AAV с фоллистатином внутримышечно (блокирует миостатин, в опытах на животных увеличивает мышечную массу) и внутривенную дозу вирусных частиц с геном теломеразы.</li>
+          <li><strong>Обстановка процедуры.</strong> По репортажу <a href="https://www.technologyreview.com/2015/10/14/165802/a-tale-of-do-it-yourself-gene-therapy/" target="_blank" rel="noopener">MIT Technology Review</a>, это был «скромно оборудованный кабинет врача». Присутствовали один врач и одна медсестра. Имя врача не раскрывалось, сама Пэриш тогда отказалась подтверждать даже страну.</li>
+          <li><strong>Векторы.</strong> Обе терапии были произведены по контракту коммерческой лабораторией <em>за пределами США</em>. Компанию-производителя не назвали ни тогда, ни позже.</li>
+          <li><strong>Юрисдикция выбрана по принципу исключения.</strong> В США процедура была бы незаконна без разрешения FDA — на неё разрешения не было.</li>
+          <li><strong>Заявленный результат.</strong> Теломеры лейкоцитов 6,71 kb → 7,33 kb и рост мышечной массы бёдер. Критика по существу: <a href="https://en.wikipedia.org/wiki/BioViva" target="_blank" rel="noopener">колебания измерения теломер около 10%</a> перекрывают заявленный эффект (Bradley Johnson), риски для механизмов подавления опухолей (Duncan Baird), а George M. Martin вышел из совета советников, узнав о самоэксперименте.</li>
+        </ul>
+      </div>
+
+      <div class="card c4 reveal">
+        <h3>Роли</h3>
+        <p style="color:var(--ink-2); margin-bottom:14px"><strong>Jason Williams</strong> — соучредитель BioViva, передал компании права по патенту. Позже открыл клинику в Боготе, но процедура Пэриш прошла <em>не</em> в ней. В 2013 году он прекратил неодобренные стволовые терапии после требования FDA — то есть контакт с регулятором у команды был ещё до 2015 года.</p>
+        <p style="color:var(--ink-2); margin-bottom:0"><strong>Сегодня.</strong> BioViva зарегистрирована в штате Вашингтон. Терапии до пациентов доводит эксклюзивный партнёр <a href="https://www.integrated-health-systems.com/" target="_blank" rel="noopener">Integrated Health Systems</a> — «медицинский консьерж-клуб» с сетью клиник в Южной Америке и врачами в США, Великобритании и Индии.</p>
+      </div>
+
+      <div class="card c6 reveal">
+        <h3>Попытка построить своё — и провал</h3>
+        <p>В 2016 году Пэриш вместе с Bill Andrews анонсировала <strong>BioViva Fiji</strong>: рендер современной клиники, заявление о «крупномасштабном производстве и клинике». Когда фиджийская пресса дошла до властей, те ответили журналистам, что такой компании не существует даже на бумаге. К RAADfest 2017 тему перестали обсуждать.</p>
+        <p style="margin-bottom:0"><span class="badge b-amber">Урок</span> Анонс офшорной площадки — это не площадка. Единственная часть схемы, требовавшая капитала и разрешений, оказалась единственной, которая не состоялась.</p>
+      </div>
+
+      <div class="card c6 reveal">
+        <h3>Что из этого следует лично для вас</h3>
+        <ul class="tick good">
+          <li><strong>Разделение функций работает.</strong> IP и юрлицо — в одной стране, производство вектора — у контрактной лаборатории в другой, введение — в третьей, аналитика — в четвёртой.</li>
+          <li><strong>Клиническая часть не требует собственной wet-lab.</strong> Требует её только исследовательская часть — если вы действительно хотите ставить эксперименты, а не покупать чужой продукт.</li>
+          <li><strong>Их слабое место — данные.</strong> Один пациент, без контроля, измерение на грани шума. Собственная лаборатория нужна ровно для того, чтобы этой ошибки не повторить.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="precedents">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Соседние прецеденты: кто и где повторял</h2>
+      <p>Три группы прошли той же дорогой после 2015 года. Их география — фактический ответ рынка на вопрос «куда идти».</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Колумбия, Картахена · 2019</div>
+        <h3>Libella Gene Therapeutics</h3>
+        <p style="color:var(--ink-2)">Фаза I терапии AAV-hTERT (<a href="https://clinicaltrials.gov/study/NCT04133649" target="_blank" rel="noopener">NCT04133649</a>) на базе MediHelp Services Clinic. Модель pay-to-play: 1 млн долларов за участие, оплата в стране проживания, приезд в Колумбию для подписания согласия и введения. Одобрение получено от <strong>IRB, а не от INVIMA</strong>.</p>
+        <p style="margin-bottom:0"><span class="badge b-red">Итог</span> <a href="https://www.technologyreview.com/2019/12/06/131657/buyer-beware-of-this-1-million-gene-therapy-for-aging/" target="_blank" rel="noopener">Резкая критика MIT Tech Review</a>, противоречивые сведения о наборе пациентов (менеджер говорил о троих в ожидании, CRO bioaccess — что не включён никто), публикованных результатов нет.</p>
+      </div>
+
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Гондурас, Роатан · с 2021</div>
+        <h3>Minicircle в Próspera</h3>
+        <p style="color:var(--ink-2)">Плазмидная фоллистатиновая терапия (<a href="https://clinicaltrials.gov/study/NCT06411366" target="_blank" rel="noopener">NCT06411366</a>) в частной зоне ZEDE с собственной регуляторной рамкой. Клинический партнёр — GARM Clinic на Роатане. К апрелю 2025 около <strong>500 участников</strong> получили FST-терапию. Среди спонсоров называют Питера Тиля и Сэма Альтмана.</p>
+        <p style="margin-bottom:0"><span class="badge b-amber">Нюанс</span> Работает до сих пор — но открытый вопрос, примет ли FDA данные, полученные в Próspera.</p>
+      </div>
+
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Фиджи · 2016</div>
+        <h3>BioViva Fiji</h3>
+        <p style="color:var(--ink-2)">Анонс производства и клиники «полного цикла». Власти Фиджи сообщили прессе, что компании не существует. Проект не реализован.</p>
+        <p style="margin-bottom:0"><span class="badge b-gray">Вывод</span> Экзотическая юрисдикция без местного партнёра и без денег на стройку — это пресс-релиз, а не актив.</p>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="note red">
+          <p><strong>Про Próspera подробнее, потому что это важно.</strong> В 2024 году Верховный суд Гондураса признал весь правовой каркас ZEDE неконституционным с обратной силой (<em>ex tunc</em>) — то есть так, будто он никогда не действовал, вместе с контрактами, разрешениями и гарантиями. Próspera подала иск в ICSID на 10,7 млрд долларов; Гондурас заявил о выходе из ICSID 24 февраля 2024 года (вступил в силу 25 августа), но обязан защищаться по уже поданным искам. В феврале 2025 трибунал отклонил предварительное возражение Гондураса, дело идёт по существу.</p>
+          <p>Практический смысл: сегодня там можно работать, и люди работают. Но вы строите на активе, чей правовой титул оспорен государством и защищается международным арбитражем. Для лаборатории с оборудованием и морозильниками это плохая ставка — вывозить сложнее, чем регистрировать.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="turnkey">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Turnkey lab: три реальных способа получить готовую лабораторию</h2>
+      <p>Вы правы, что голое помещение — это девять отдельных проектов. Но рынка «арендуй готовую wet-lab» вне США и Европы почти нет: там, где он есть, это как раз биопарки и кампусы, которые вы исключили. Остаётся три пути.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Путь A · быстрее всего</div>
+        <h3>Оснащённый модуль в аренду</h3>
+        <p style="color:var(--ink-2)"><a href="https://dsp.ae/offerings/laboratories" target="_blank" rel="noopener">Dubai Science Park</a> сдаёт лабораторные модули двух типов: shell (вытяжка и вентиляция, кислотостойкая канализация, система нейтрализации pH) и <strong>fitted</strong> — уже с вытяжным шкафом, мокрым и сухим столом и офисной зоной. Это отдельное запираемое помещение, а не общий bench: соседи по зданию есть, соседей по лаборатории — нет.</p>
+        <ul class="tick">
+          <li>Лицензия от AED 15 000, регистрация 2–4 недели (данные консультанта <a href="https://jre.ae/advisory/free-zones/dubai-science-park" target="_blank" rel="noopener">JRE</a>)</li>
+          <li>Ставок именно на лаборатории DSP публично не даёт; для ориентира — индустриальный юнит в DSP выставлялся по AED 145/фут² плюс сервисный сбор AED 8–15/фут²</li>
+        </ul>
+        <p style="margin-bottom:0"><span class="badge b-blue">Срок до первого эксперимента</span> реалистично 2–4 месяца</p>
+      </div>
+
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Путь B · максимум приватности</div>
+        <h3>Модульная лаборатория в контейнере</h3>
+        <p style="color:var(--ink-2)">Готовый BSL-2 внутри ISO-контейнера: HVAC, фильтрация, мебель, электрика, сантехника собраны на заводе, на месте — подключение. Ставится на арендованном складе или участке в свободной зоне. Производители: <a href="https://www.germfree.com/facilities-equipment/facilities/modular-laboratories/" target="_blank" rel="noopener">Germfree</a> (США, отгрузка в любой порт), <a href="https://biosafelab.in/microbial-containment-facilities-2/pre-fabricated-modular-bio-safety-laboratory/" target="_blank" rel="noopener">Biosafe Lab</a> (Индия), <a href="https://www.maxlabfurniture.com/product/20gp-container-laboratory-one-stop-lab-solution/" target="_blank" rel="noopener">Maxlab</a> (Китай).</p>
+        <p style="color:var(--ink-2)">Цены на новые единицы публично не публикуются. Ориентир порядка величины: мобильная BSL-2 лаборатория Germfree Trailer 37 выставлялась на вторичном рынке за 200 тыс. долларов при исходной стоимости около 1,2 млн.</p>
+        <p style="margin-bottom:0"><span class="badge b-amber">Минус</span> нужны земля, коммуникации и местные разрешения на подключение — часть работы из вашего списка возвращается</p>
+      </div>
+
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Путь C · дешевле и рискованнее</div>
+        <h3>Войти в действующую лицензированную лабораторию</h3>
+        <p style="color:var(--ink-2)">Арендовать выделенную комнату и часть мощностей у частной лаборатории, у которой уже есть лицензия Минздрава, автоклав, утилизация отходов и валидированные шкафы. В Панаме такие есть по факту: <a href="https://www.medistempanama.com/about-us/" target="_blank" rel="noopener">Medistem Panama</a> — лаборатория с ISO 9001 и лицензией MINSA на производство, наращивание и хранение клеточных продуктов.</p>
+        <p style="margin-bottom:0"><span class="badge b-red">Цена вопроса</span> ваш проект видят чужие сотрудники. Ровно тот риск утечки, из-за которого вы отказались от кампусов — только концентрированный</p>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="note blue">
+          <p style="margin-bottom:0"><strong>Что в списке из девяти пунктов не снимается ни одним путём:</strong> утилизация биоотходов (везде это отдельный договор с лицензированным оператором — в Колумбии, например, по <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=56755" target="_blank" rel="noopener">Decreto 351 de 2014</a>, который прямо распространяется на лаборатории биотехнологии и исследовательские центры с живыми организмами) и валидация — сертификация шкафов биобезопасности, калибровки, SOP. Это 3–6 недель и подрядчик на месте в любой стране.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="table">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Сравнение по семи осям</h2>
+      <p>Все пункты со ссылками проверены по первоисточникам, перечисленным внизу. Там, где данных нет, так и написано — не заполнял догадками.</p>
+    </div>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Юрисдикция</th>
+            <th>Виза для РФ · перелёт из Рио</th>
+            <th>Импорт клеток и реагентов</th>
+            <th>Правовая рамка</th>
+            <th>Готовая лаборатория</th>
+            <th>Итог</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Панама</strong><br><small>Панама-Сити</small></td>
+            <td>Безвиз <span class="mono">90</span> дней.<br>Copa, <span class="mono">17</span> нонстопов в неделю GIG–PTY, ~<span class="mono">6</span> ч</td>
+            <td>Спецразрешение на реагенты и расходники для исследований болезней человека выдаёт <a href="https://www.panamadigital.gob.pa/InformacionTramite/permisos-especiales-de-importacion-para-reactivos-equipos-e-insumos-cuyo-uso-previsto-es-para-investigacion-de-enfermedades-en-seres-humanos" target="_blank" rel="noopener">Instituto Gorgas</a>: <strong>10 рабочих дней, B/. 25</strong>.<br><small>Реальность по Senacyt/МБР: 30–45 дней, крайние случаи до 8 месяцев; переплата 20–30% к ценам США</small></td>
+            <td>Исследования с участием людей — <a href="https://cnbi.senacyt.gob.pa/" target="_blank" rel="noopener">Ley 84 de 2019</a>, комитеты биоэтики аккредитует CNBI при MINSA, регистрация в RESEGIS. Клеточные исследования оценивает CNBI отдельно</td>
+            <td>Готовых к аренде лабораторий на открытом рынке не нашёл. Путь B или C</td>
+            <td><span class="badge b-green">1 место</span></td>
+          </tr>
+          <tr>
+            <td><strong>ОАЭ</strong><br><small>Дубай</small></td>
+            <td>Безвиз <span class="mono">90</span> дней в течение 180; с 2026 обязательна страховка на весь срок.<br>Emirates, нонстоп GIG–DXB, ~<span class="mono">14</span> ч</td>
+            <td>Импорт медпродуктов с 2025 ведёт <a href="https://mohap.gov.ae/en/mte" target="_blank" rel="noopener">Emirates Drug Establishment</a>, есть режим временного ввоза для исследований. DXB — крупнейший карго-хаб региона</td>
+            <td><a href="https://mohap.gov.ae/en/w/federal-decree-law-no.-49-of-the-year-2023-regarding-the-regulation-of-the-use-of-the-human-genome" target="_blank" rel="noopener">Federal Decree-Law 49/2023</a> о геноме человека: информированное согласие обязательно, <strong>нетерапевтические генетические изменения запрещены</strong>, генная терапия и исследования разрешены под строгими правилами, штрафы за несанкционированное раскрытие данных</td>
+            <td><strong>Да</strong> — fitted-модули DSP. Единственный такой рынок вне США и Европы</td>
+            <td><span class="badge b-blue">2 место</span></td>
+          </tr>
+          <tr>
+            <td><strong>Колумбия</strong><br><small>Богота / Медельин</small></td>
+            <td>Безвиз <span class="mono">90</span> дней.<br>Avianca, круглогодичный нонстоп Богота–Рио</td>
+            <td>INVIMA (здоровье) и ICA (агро) — разрешения до отгрузки из страны происхождения; диагностические реагенты входят в отдельную категорию авторизации</td>
+            <td>Отходы — Decreto 351 de 2014. Прецеденты есть (Пэриш 2015, Libella 2019), дешёвые локальные CRO. Обратная сторона — репутационный шлейф «страны, куда едут в обход FDA»</td>
+            <td>Не нашёл коммерческого предложения готовых лабораторий</td>
+            <td><span class="badge b-amber">3 место</span></td>
+          </tr>
+          <tr>
+            <td><strong>Гондурас</strong><br><small>Próspera, Роатан</small></td>
+            <td>Визовый режим для РФ не проверял.<br>Прямых рейсов из Рио нет</td>
+            <td>Данных о процедуре импорта в ZEDE не нашёл</td>
+            <td>Собственная рамка зоны — самая свободная из всех. <strong>Но:</strong> Верховный суд Гондураса в 2024 признал каркас ZEDE неконституционным ex tunc; арбитраж ICSID на 10,7 млрд идёт</td>
+            <td>Инфраструктура под клиники есть (GARM), под R&amp;D — вопрос</td>
+            <td><span class="badge b-red">Не рекомендую</span></td>
+          </tr>
+          <tr>
+            <td><strong>Бразилия</strong><br><small>Рио — «домашний» вариант</small></td>
+            <td>Вы уже там. Ноль перелётов, ноль виз</td>
+            <td><strong>Главный стоп-фактор.</strong> Более 90% исследователей ждут импорт минимум 3 месяца, крайние случаи до 2 лет; таможня отправляет запросы по реагентам в Минздрав; локальные цены примерно вдвое выше американских. Льгота по Lei 8.010/90 — для физлиц и НКО, аккредитованных <a href="https://www.gov.br/cnpq/pt-br" target="_blank" rel="noopener">CNPq</a>; частная компания под неё не подпадает</td>
+            <td>Работа с ГМО требует <a href="https://ctnbio.mcti.gov.br/cqb" target="_blank" rel="noopener">CQB от CTNBio</a> — для организаций любой формы собственности, плюс обязательная внутренняя комиссия CIBio и поэтажные планы в досье</td>
+            <td>Есть биопарки, но это кампусы</td>
+            <td><span class="badge b-gray">Только для несрочной рутины</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Где брать клетки</h3>
+        <p style="color:var(--ink-2)"><a href="https://www.atcc.org/support/order-support/permits-and-restrictions" target="_blank" rel="noopener">ATCC</a> отправляет напрямую во все страны, кроме тех, где есть авторизованный дистрибьютор. Импортные разрешения получает <strong>заказчик</strong> и передаёт их до отгрузки; сам ATCC предупреждает, что процедура в госорганах занимает несколько недель и более. Ни в Панаме, ни в Колумбии, ни в ОАЭ эксклюзивного дистрибьютора я не подтвердил — значит, вероятна прямая отправка из Вирджинии.</p>
+        <p style="margin-bottom:0; color:var(--ink-2)">Альтернативы для не-американских линий: <a href="https://www.culturecollections.org.uk/" target="_blank" rel="noopener">ECACC</a>, <a href="https://www.dsmz.de/" target="_blank" rel="noopener">DSMZ</a>, <a href="https://cellbank.nibiohn.go.jp/english/" target="_blank" rel="noopener">JCRB</a>. Для рутинных линий (HEK293, HeLa, фибробласты) вопрос закрывается заказом, для первичных человеческих клеток добавляется этика и согласия доноров.</p>
+      </div>
+      <div class="card c6 reveal">
+        <h3>Как их довезти</h3>
+        <p style="color:var(--ink-2)">Два режима: сухой лёд (−78 °C, 3–5 суток автономии) и сухой криошиппер на жидком азоте (−150 °C и ниже, до двух недель). Второе — для дорогих или незаменимых образцов.</p>
+        <ul class="tick">
+          <li><a href="https://www.worldcourier.com/solutions/cryogenic-transportation" target="_blank" rel="noopener">World Courier</a> — более 140 собственных офисов в 50 странах, свыше 12 000 криоотправлений в год</li>
+          <li><a href="https://www.cryoport.com/solutions/shipping-systems/cryogenic/" target="_blank" rel="noopener">Cryoport</a> — шипперы Cryoport Express, партнёрство с World Courier</li>
+          <li><a href="https://www.marken.com/" target="_blank" rel="noopener">Marken</a> — флот LN2, обслуживание в 14 точках</li>
+        </ul>
+        <p style="margin-bottom:0"><small>Наличие офисов именно в Панаме, Колумбии и ОАЭ я не проверял — это первый вопрос на созвоне с их sales.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="secrecy">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Приватность: почему отказ от кампуса — правильно, и что ещё нужно</h2>
+      <p>Отдельное помещение закрывает бытовой канал утечки — разговоры в общей комнате отдыха и соседей у того же ламинара. Остаются три канала посерьёзнее.</p>
+    </div>
+    <div class="bento">
+      <div class="card c4 reveal">
+        <h4>Реестры</h4>
+        <p style="color:var(--ink-2); margin-bottom:0">В Панаме состав директоров публикуется через Registro Público и виден любому. Реестр бенефициарных владельцев (Ley 129 de 2020) — закрытый, доступ только у компетентных органов. То есть анонимность конечного владельца обеспечена законом, а вот фамилии директоров — нет. Для свободных зон ОАЭ аналогичной проверки я не делал; это вопрос к местному юристу.</p>
+      </div>
+      <div class="card c4 reveal">
+        <h4>Подрядчики</h4>
+        <p style="color:var(--ink-2); margin-bottom:0">Самый недооценённый канал. Заказы на синтез, секвенирование и производство векторов раскрывают предмет работы точнее, чем любой сотрудник. Разносите заказы между поставщиками так, чтобы ни у одного не складывалась полная картина, и не отдавайте одному подрядчику и конструкт, и аналитику по нему.</p>
+      </div>
+      <div class="card c4 reveal">
+        <h4>Публичные регистрации</h4>
+        <p style="color:var(--ink-2); margin-bottom:0">Регистрация исследования в национальном реестре (RESEGIS в Панаме, ClinicalTrials.gov) делает протокол публичным. Для <em>in vitro</em> этого не требуется вовсе — требование возникает только при переходе к людям. Это ещё одна причина держать две фазы в разных контурах.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>План на 90 дней</h2>
+      <p>Порядок важен: первые три шага стоят меньше пяти тысяч долларов и отсеивают юрисдикцию до того, как вы потратитесь на помещение.</p>
+    </div>
+    <ol class="steps reveal">
+      <li><strong>Составить список материалов.</strong> Клеточные линии, среды, векторы. Ключевая развилка — есть ли в работе ГМО и вирусные векторы: от неё зависит, попадаете ли вы под режим биобезопасности (в Бразилии это CQB, в других странах — свои аналоги) или обходитесь общим режимом импорта.</li>
+      <li><strong>Тестовый импорт.</strong> Заказать одну ампулу рутинной линии из ATCC на адрес местного партнёра в Панаме и параллельно в Дубае. Замерить фактический срок от заказа до получения. Это единственный честный тест юрисдикции.</li>
+      <li><strong>Юридическое заключение в двух странах.</strong> Один вопрос: требуется ли лицензия для частной исследовательской лаборатории, не оказывающей услуг населению и не работающей с людьми. Ответ определяет всё остальное.</li>
+      <li><strong>Помещение и путь.</strong> Дубай — fitted-модуль DSP. Панама — склад в свободной зоне плюс модульная лаборатория или договор с действующей лабораторией. Ориентир площади для клеточной культуры: 80–150 м².</li>
+      <li><strong>Оборудование.</strong> Шкаф биобезопасности II класса, CO₂-инкубатор, морозильники −20 и −80, дьюар с жидким азотом, автоклав, центрифуга, инвертированный микроскоп, система очистки воды. Проверить электросеть: в Рио 127 В, в Панаме 110 В, в ОАЭ 220 В — от этого зависит комплектация заказа.</li>
+      <li><strong>Отходы и валидация.</strong> Договор с лицензированным оператором биоотходов, сертификация шкафов, калибровки, написание SOP. Закладывать 3–6 недель.</li>
+      <li><strong>Персонал.</strong> Один опытный местный лаборант решает больше, чем любое оборудование: он знает таможенного брокера, оператора отходов и инспектора лично.</li>
+    </ol>
+
+    <div class="bento">
+      <div class="card c12 reveal">
+        <div class="note">
+          <p style="margin-bottom:0"><strong>Развилка, которую стоит проговорить.</strong> Всё выше написано для лаборатории <em>in vitro</em> — культуры клеток, анализы, никакого введения людям. Если конечная цель включает введение препаратов человеку, картина меняется: тогда решающими становятся Ley 84 de 2019 и CNBI в Панаме либо особая рамка Próspera, а лаборатория превращается во второстепенный вопрос — как и показал кейс Пэриш, где её просто не было. Эти две задачи лучше решать в разных юрисдикциях и разными юрлицами.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Источники</h2>
+      <p>Всё фактическое в этом документе опирается на список ниже. Утверждения, которых я не проверил, помечены в тексте отдельно.</p>
+    </div>
+    <div class="srcgrid reveal">
+      <div class="src"><a href="https://www.technologyreview.com/2015/10/14/165802/a-tale-of-do-it-yourself-gene-therapy/" target="_blank" rel="noopener">MIT Technology Review — A Tale of Do-It-Yourself Gene Therapy</a><small>Antonio Regalado, 14.10.2015. Обстановка процедуры, контрактное производство вектора вне США, роль Jason Williams</small></div>
+      <div class="src"><a href="https://en.wikipedia.org/wiki/BioViva" target="_blank" rel="noopener">Wikipedia — BioViva</a><small>Терапия, поездка в Колумбию, критика Johnson, Baird, Martin</small></div>
+      <div class="src"><a href="https://www.inverse.com/article/15895-bioviva-plans-an-age-reversal-clinic-in-fiji-as-medical-tourism-gets-weird" target="_blank" rel="noopener">Inverse — BioViva Plans an Age Reversal Clinic in Fiji</a><small>Анонс BioViva Fiji; реакция властей Фиджи</small></div>
+      <div class="src"><a href="https://www.technologyreview.com/2019/12/06/131657/buyer-beware-of-this-1-million-gene-therapy-for-aging/" target="_blank" rel="noopener">MIT Technology Review — Buyer beware of this $1 million gene therapy</a><small>Libella, Картахена, модель pay-to-play, противоречия по набору пациентов</small></div>
+      <div class="src"><a href="https://clinicaltrials.gov/study/NCT04133649" target="_blank" rel="noopener">ClinicalTrials.gov NCT04133649</a><small>Libella AAV-hTERT, Колумбия</small></div>
+      <div class="src"><a href="https://www.technologyreview.com/2023/02/13/1068330/minicircle-prospera-honduras-biohacking-follistatin-gene-therapy/" target="_blank" rel="noopener">MIT Technology Review — Minicircle в Próspera</a><small>Схема работы в ZEDE, инвесторы</small></div>
+      <div class="src"><a href="https://www.pharmaceutical-technology.com/features/in-a-honduran-city-biotechs-create-gene-therapy-cocktails-to-fight-ageing/" target="_blank" rel="noopener">Pharmaceutical Technology — In a Honduran city</a><small>~500 участников к апрелю 2025, GARM Clinic, вопрос признания данных FDA</small></div>
+      <div class="src"><a href="https://legalblogs.wolterskluwer.com/arbitration-blog/a-local-remedies-pitfall-avoided-for-now-key-takeaways-from-honduras-prospera-inc-v-honduras/" target="_blank" rel="noopener">Kluwer Arbitration Blog — Próspera v. Honduras</a><small>Решение Верховного суда 2024 ex tunc, отклонение возражения ICSID в феврале 2025</small></div>
+      <div class="src"><a href="https://www.panamadigital.gob.pa/InformacionTramite/permisos-especiales-de-importacion-para-reactivos-equipos-e-insumos-cuyo-uso-previsto-es-para-investigacion-de-enfermedades-en-seres-humanos" target="_blank" rel="noopener">Panamá Digital — спецразрешения на импорт реагентов</a><small>Instituto Gorgas, 10 рабочих дней, B/. 25, перечень документов</small></div>
+      <div class="src"><a href="https://www.senacyt.gob.pa/la-senacyt-y-el-bid-presentan-diagnostico-regional-sobre-los-desafios-en-el-proceso-de-importacion-de-material-biologico-y-reactivos-empleados-en-id/" target="_blank" rel="noopener">Senacyt + МБР — диагностика импорта биоматериалов</a><small>30–45 дней и до 8 месяцев, переплата 20–30%, отсутствие единой платформы</small></div>
+      <div class="src"><a href="https://cnbi.senacyt.gob.pa/" target="_blank" rel="noopener">CNBI Panamá</a><small>Ley 84 de 2019, аккредитация комитетов биоэтики, оценка исследований со стволовыми клетками</small></div>
+      <div class="src"><a href="https://www.medistempanama.com/about-us/" target="_blank" rel="noopener">Medistem Panama</a><small>Лаборатория с ISO 9001 и лицензией MINSA на производство и хранение клеточных продуктов</small></div>
+      <div class="src"><a href="https://dsp.ae/offerings/laboratories" target="_blank" rel="noopener">Dubai Science Park — Laboratories</a><small>Shell и fitted лабораторные модули, инженерные системы</small></div>
+      <div class="src"><a href="https://mohap.gov.ae/en/w/federal-decree-law-no.-49-of-the-year-2023-regarding-the-regulation-of-the-use-of-the-human-genome" target="_blank" rel="noopener">MOHAP — Federal Decree-Law 49/2023</a><small>Закон ОАЭ о геноме человека</small></div>
+      <div class="src"><a href="https://www.nature.com/articles/18763" target="_blank" rel="noopener">Nature — Customs delays drive researchers to smuggling</a><small>Сроки растаможки научных грузов в Бразилии</small></div>
+      <div class="src"><a href="https://theplosblog.plos.org/2008/02/guest-blog-kafkaesque-bureaucracies-impede-import-of-scientific-goods-in-brazil/" target="_blank" rel="noopener">PLOS Blog — Kafkaesque bureaucracies in Brazil</a><small>Более 90% ждут 3+ месяца, доля грантов на растаможку, двойные цены</small></div>
+      <div class="src"><a href="https://ctnbio.mcti.gov.br/cqb" target="_blank" rel="noopener">CTNBio — CQB</a><small>Обязательность сертификата биобезопасности для работы с ГМО, требования к досье</small></div>
+      <div class="src"><a href="https://www.gov.br/pt-br/servicos/habilitar-projetos-de-pesquisa-para-instituicao-sem-finalidades-lucrativas-junto-ao-cnpq-para-importacao-de-bens-lei-8-010-1990" target="_blank" rel="noopener">Gov.br — Lei 8.010/1990 через CNPq</a><small>Круг получателей льготы на импорт для науки</small></div>
+      <div class="src"><a href="https://www.atcc.org/support/order-support/permits-and-restrictions" target="_blank" rel="noopener">ATCC — Permits and Restrictions</a><small>Прямая отправка, разрешения на стороне заказчика, сроки в госорганах</small></div>
+      <div class="src"><a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=56755" target="_blank" rel="noopener">Decreto 351 de 2014 (Колумбия)</a><small>Обращение с биологическими отходами, охват исследовательских лабораторий</small></div>
+      <div class="src"><a href="https://www.germfree.com/facilities-equipment/facilities/modular-laboratories/" target="_blank" rel="noopener">Germfree — Modular Laboratories</a><small>Контейнерные BSL-2 лаборатории, мобильные платформы</small></div>
+      <div class="src"><a href="https://www.flightconnections.com/flights-from-gig-to-pty" target="_blank" rel="noopener">FlightConnections — GIG→PTY</a><small>Copa, 17 нонстопов в неделю</small></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-bottom:8px">Подготовлено 2 сентября 2026 года. Документ носит информационный характер и не заменяет юридическую консультацию в конкретной юрисдикции.</p>
+    <p style="margin:0"><small>Позиции, отмеченные как непроверенные — визовый режим Гондураса, порядок импорта в ZEDE, публичность реестров свободных зон ОАЭ, присутствие криокурьеров в конкретных странах — требуют отдельной проверки перед решением.</small></p>
+  </div>
+</footer>
+
+<script type="module">
+  try {
+    const { animate, inView, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const els = document.querySelectorAll(".reveal");
+    if (reduced) {
+      els.forEach(e => { e.style.opacity = 1; e.style.transform = "none"; });
+    } else {
+      els.forEach(el => {
+        inView(el, () => {
+          animate(el, { opacity: [0, 1], transform: ["translateY(18px)", "translateY(0px)"] },
+                  { duration: 0.5, easing: [0.2, 0.7, 0.3, 1] });
+        }, { margin: "-8% 0px -8% 0px" });
+      });
+      const cards = document.querySelectorAll(".bento .card");
+      if (cards.length) {
+        inView(".bento", () => {
+          animate(cards, { opacity: [null, 1] }, { delay: stagger(0.04), duration: 0.35 });
+        }, { margin: "-10% 0px" });
+      }
+    }
+  } catch (e) {
+    document.querySelectorAll(".reveal").forEach(el => { el.style.opacity = 1; el.style.transform = "none"; });
+  }
+</script>
+</body>
+</html>
