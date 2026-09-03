@@ -4,28 +4,32 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 D = lambda *p: os.path.join(ROOT, *p)
 IMG_OUT = os.path.abspath(os.path.join(ROOT, "..", "cartoes-img"))
 
-# Новые слова попали в уже перегруженные образы: двери (11 сцен), монеты (5),
-# полки (5). Разводим до генерации, чтобы карточки не сливались.
 EDITS = {
     "scenes_v2_verbs.json": {
-        # дверь занята десятком слов — оставляем только передачу из рук в руки
-        "entregar": ("a parcel passing from the courier's hands into the recipient's "
-                     "hands, close-up on the handover"),
-        # полка занята; «положи» показываем через цветок в вазе
-        "coloque": "a hand placing a cut flower into a vase of water",
-        # монеты уже у пяти слов — берём слияние двух потоков в один
-        "juntar": "two small streams merging together into a single river",
-        # ящик на полку повторял poder; несём тяжесть в гору
-        "consigo": ("a hiker carrying a heavy backpack up a steep slope, managing it "
-                    "under their own strength"),
+        # человек в пустой комнате не читался как «забыл» — берём стёртую доску
+        "esquecer": ("a school blackboard wiped clean with chalk smears left behind, "
+                     "whatever was written on it now gone"),
+        # смотреть на фото уже занято у me lembro и fosse — желание у фонтана
+        "gostaria": ("a person tossing a coin into a wishing fountain, making a wish"),
+        # по подсказке: проигрыш в казино
+        "perder": ("a gambler at a casino table watching the croupier rake away his "
+                   "last chips, hands empty"),
+        # механик у капота читался как «чинить машину» — берём заботу и уход
+        "tratar": ("a gardener carefully tending a plant, handling it gently"),
+        # по подсказке: отправка посылки на почте; entregar остаётся про вручение
+        "enviar": ("a customer handing a parcel across the counter at a post office, "
+                   "the package being weighed for sending"),
     },
-    "scenes_v2_rest.json": {
-        # закрытая дверь магазина сливалась с loja, fica и nunca
-        "infelizmente": ("a defeated footballer sitting on the pitch holding his head "
-                         "after losing the match"),
-        # ещё одна дверная ручка была бы двенадцатой дверью в колоде
-        "assim que der": ("a finger poised right above a button, ready to press it the "
-                          "moment it becomes possible"),
+    "scenes_v2_nouns.json": {
+        # верстак с замками читался как «замки» — показываем работу с ключом
+        "serralheiro": ("a locksmith cutting a new key on a key-cutting machine, "
+                        "sparks flying from the blade"),
+        # показывать новое уже занято словом mostrar — берём ажиотаж вокруг новинки
+        "novidade": ("a crowd pressing against a shop window to see a newly released "
+                     "product on display"),
+        # по подсказке: зашкаливающий градусник
+        "calor": ("an outdoor thermometer with the red column shot right up past forty "
+                  "degrees under a blazing sun"),
     },
 }
 
@@ -36,7 +40,7 @@ for fname, changes in EDITS.items():
     p = D("data", fname)
     d = json.load(open(p, encoding="utf-8"))
     for word, scene in changes.items():
-        print(f"{word:<14} → {scene[:66]}")
+        print(f"{word:<14} → {scene[:64]}")
         d[word] = scene
         c = by_pt.get(word)
         if not c:
