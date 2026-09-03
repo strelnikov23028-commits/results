@@ -1,0 +1,844 @@
+<title>Почта neoved.io</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Внутренний документ: ссылка рабочая, но в поиск страница не попадает. -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-2: #FAFAFC;
+  --text: #1D1D1F;
+  --text-2: #515154;
+  --text-3: #86868B;
+  --border: #E3E3E8;
+  --blue: #0071E3;
+  --blue-soft: #EAF3FE;
+  --red: #C7362B;
+  --red-soft: #FDEEEC;
+  --amber: #9A6400;
+  --amber-soft: #FDF3E2;
+  --green: #1B7F4C;
+  --green-soft: #E9F7EF;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --radius: 18px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0B0D;
+    --surface: #161618;
+    --surface-2: #1E1E21;
+    --text: #F5F5F7;
+    --text-2: #C4C4C9;
+    --text-3: #8A8A91;
+    --border: #2B2B30;
+    --blue: #3B9BFF;
+    --blue-soft: #12243A;
+    --red: #FF6B5E;
+    --red-soft: #331816;
+    --amber: #E0A33A;
+    --amber-soft: #2E2416;
+    --green: #4ED08A;
+    --green-soft: #122A1D;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 28px rgba(0,0,0,.45);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0B0B0D;
+  --surface: #161618;
+  --surface-2: #1E1E21;
+  --text: #F5F5F7;
+  --text-2: #C4C4C9;
+  --text-3: #8A8A91;
+  --border: #2B2B30;
+  --blue: #3B9BFF;
+  --blue-soft: #12243A;
+  --red: #FF6B5E;
+  --red-soft: #331816;
+  --amber: #E0A33A;
+  --amber-soft: #2E2416;
+  --green: #4ED08A;
+  --green-soft: #122A1D;
+  --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 28px rgba(0,0,0,.45);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 120px; }
+
+header { padding: 88px 0 56px; }
+.eyebrow {
+  font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--blue); margin: 0 0 18px;
+}
+h1 {
+  font-size: clamp(34px, 5.5vw, 54px); line-height: 1.08; letter-spacing: -.025em;
+  font-weight: 700; margin: 0 0 22px; max-width: 20ch; text-wrap: balance;
+}
+.lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--text-2); margin: 0; max-width: 62ch; }
+.meta {
+  margin-top: 28px; font-size: 14px; color: var(--text-3);
+  display: flex; flex-wrap: wrap; gap: 8px 20px;
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px;
+}
+
+section { margin-top: 72px; }
+h2 {
+  font-size: clamp(24px, 3.2vw, 32px); letter-spacing: -.02em; font-weight: 700;
+  margin: 0 0 10px; text-wrap: balance;
+}
+.sub { color: var(--text-2); margin: 0 0 28px; max-width: 68ch; }
+h3 { font-size: 19px; font-weight: 600; margin: 32px 0 10px; letter-spacing: -.01em; }
+
+p { margin: 0 0 16px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 600; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow);
+}
+.bento { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+.verdict { border-left: 4px solid var(--red); }
+.verdict.ok { border-left-color: var(--green); }
+.verdict.warn { border-left-color: var(--amber); }
+.verdict h3 { margin-top: 0; }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; letter-spacing: .02em;
+  padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+}
+.tag.crit { background: var(--red-soft); color: var(--red); }
+.tag.warn { background: var(--amber-soft); color: var(--amber); }
+.tag.ok   { background: var(--green-soft); color: var(--green); }
+.tag.info { background: var(--blue-soft); color: var(--blue); }
+
+.dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
+
+.scroller { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); }
+table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 15px; background: var(--surface); }
+th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th {
+  font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--text-3); background: var(--surface-2);
+}
+tbody tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+code, pre, .mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+code {
+  font-size: .88em; background: var(--surface-2); border: 1px solid var(--border);
+  padding: 1px 6px; border-radius: 6px; word-break: break-word;
+}
+pre {
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 18px; overflow-x: auto; font-size: 13.5px; line-height: 1.65; margin: 0 0 16px;
+}
+pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+.label {
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-3); margin: 0 0 8px;
+}
+
+.steps { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+.steps > li {
+  counter-increment: step; position: relative; padding: 0 0 0 52px; margin: 0 0 32px;
+}
+.steps > li::before {
+  content: counter(step); position: absolute; left: 0; top: 0;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--blue); color: #fff; font-size: 15px; font-weight: 600;
+  display: grid; place-items: center;
+}
+.steps h3 { margin: 4px 0 8px; }
+
+ul.plain { padding-left: 22px; margin: 0 0 16px; }
+ul.plain li { margin-bottom: 10px; }
+
+.note {
+  background: var(--amber-soft); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 22px; margin: 0 0 20px;
+}
+.note p:last-child { margin-bottom: 0; }
+
+.foot {
+  margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--border);
+  font-size: 14px; color: var(--text-3);
+}
+
+.reveal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Аудит доставляемости · neoved.io</p>
+  <h1>Почему письма доходят не всем</h1>
+  <p class="lede">
+    Проверка почтовой конфигурации домена: DNS, подписи, репутация отправляющих адресов
+    и содержимое ящика. Каждый вывод подтверждён конкретным запросом — чем именно,
+    указано в таблицах. Спорное помечено как требующее проверки, а не выдано за факт.
+  </p>
+  <div class="meta">
+    <span>2–3 сентября 2026</span>
+    <span>DNS через 8.8.8.8, 1.1.1.1, 9.9.9.9, 77.88.8.8</span>
+    <span>Чёрные списки — ручная проверка</span>
+    <span>Zoho Mail API — живой доступ</span>
+  </div>
+</header>
+
+<!-- ── ГЛАВНОЕ ────────────────────────────────────────── -->
+<section class="reveal">
+  <h2>Главное за минуту</h2>
+  <p class="sub">
+    Вопреки ожиданию, техническая база домена в порядке. Главная проблема
+    не в настройках, а в том, что происходящее не видно.
+  </p>
+
+  <div class="bento">
+    <div class="card verdict">
+      <span class="tag crit"><span class="dot"></span>Корень проблемы</span>
+      <h3>Вы не видите ни одного факта недоставки</h3>
+      <p style="margin:0;color:var(--text-2)">
+        Отчёты и сообщения о недоставке уходят на <code>admin@neoved.io</code> —
+        ящик, к которому нет доступа. В доступном <code>director@</code> за всё время
+        ни одного такого письма. Причина жалобы до сих пор не локализована:
+        неизвестно, из какого ящика и кому именно письмо не дошло.
+      </p>
+    </div>
+
+    <div class="card verdict warn">
+      <span class="tag warn"><span class="dot"></span>Вероятная причина</span>
+      <h3>Домен почти не имеет истории отправки</h3>
+      <p style="margin:0;color:var(--text-2)">
+        Ящик создан 13 мая 2026 года, папка «Отправленные» пуста, в единственном
+        полученном отчёте Google — одно письмо за сутки. Домен без наработанной
+        репутации разные почтовые службы фильтруют по-разному даже при исправных подписях.
+        Это ровно та картина, что описана в жалобе.
+      </p>
+    </div>
+
+    <div class="card verdict warn">
+      <span class="tag warn"><span class="dot"></span>Механизм найден</span>
+      <h3>Один сервер amoCRM в чёрном списке</h3>
+      <p style="margin:0;color:var(--text-2)">
+        <code>95.143.181.58</code>
+        <a href="https://check.spamhaus.org/results/?query=95.143.181.58">числится в Spamhaus CSS</a>
+        — проверено вручную 3 сентября. Через него amoCRM шлёт письма
+        российским получателям. Письма из Zoho этим не затронуты — отсюда и разная
+        судьба у разных отправлений.
+      </p>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:24px">
+    <p>
+      <strong>Первое действие — не правка DNS.</strong> Откройте <code>admin@neoved.io</code>
+      и выясните, из какого ящика и какому получателю письмо не дошло. Один экземпляр
+      непришедшего письма с заголовками даёт больше, чем весь остальной аудит.
+      Всё прочее имеет смысл только после этого.
+    </p>
+  </div>
+</section>
+
+<!-- ── ЧТО ИСПРАВНО ───────────────────────────────────── -->
+<section class="reveal">
+  <h2>Что проверено и работает</h2>
+  <p class="sub">
+    Это не «в целом нормально», а перечень проверок с результатом. Переделывать здесь нечего.
+  </p>
+
+  <div class="scroller">
+    <table>
+      <thead>
+        <tr><th style="width:24%">Что проверялось</th><th style="width:20%">Результат</th><th>Чем подтверждено</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Запись отправителей SPF</strong></td>
+          <td><span class="tag ok"><span class="dot"></span>Исправна</span></td>
+          <td>Развёртка всей цепочки: 4 DNS-запроса из 10 допустимых по RFC 7208.
+              Оба канала отправки — Zoho и amoCRM — авторизованы, синтаксических ошибок нет</td>
+        </tr>
+        <tr>
+          <td><strong>Подпись писем из Zoho</strong></td>
+          <td><span class="tag ok"><span class="dot"></span>Проходит</span></td>
+          <td>Подтверждено получателем, а не расчётом: в отчёте Google
+              <code>dkim=pass</code>, <code>spf=pass</code>, селектор <code>dkim1</code>,
+              отправитель <code>103.117.158.11</code></td>
+        </tr>
+        <tr>
+          <td><strong>Приём почты</strong></td>
+          <td><span class="tag ok"><span class="dot"></span>Работает</span></td>
+          <td>Три записи MX с приоритетами 10/20/50. В ящике живая деловая переписка
+              с ответами контрагентов</td>
+        </tr>
+        <tr>
+          <td><strong>Репутация домена</strong></td>
+          <td><span class="tag ok"><span class="dot"></span>Чист</span></td>
+          <td>Проверено вручную на <a href="https://check.spamhaus.org/results/?query=neoved.io">check.spamhaus.org</a>
+              3 сентября: «neoved.io has no issues»</td>
+        </tr>
+        <tr>
+          <td><strong>Серверы отправки Zoho</strong></td>
+          <td><span class="tag ok"><span class="dot"></span>Чисты</span></td>
+          <td>Узел <code>103.117.158.11</code>, с которого реально уходят ваши письма, —
+              <a href="https://check.spamhaus.org/results/?query=103.117.158.11">«has no issues»</a>.
+              Обратная запись корректна: <code>sender-op-o11.zoho.in</code></td>
+        </tr>
+        <tr>
+          <td><strong>Длина ключей подписи</strong></td>
+          <td><span class="tag ok"><span class="dot"></span>Соответствует</span></td>
+          <td>1024 бита. Google требует «1024 бита и длиннее», Yahoo — «1024 и более».
+              Outlook, Mail.ru и Яндекс требований к длине не публикуют.
+              Ни один провайдер не отвергает такие ключи</td>
+        </tr>
+        <tr>
+          <td><strong>Состояние ящика в Zoho</strong></td>
+          <td><span class="tag ok"><span class="dot"></span>Не заблокирован</span></td>
+          <td>Ответ API: <code>mailboxStatus: enabled</code>, <code>smtpStatus: true</code>,
+              <code>outgoingBlocked: false</code></td>
+        </tr>
+        <tr>
+          <td><strong>Подписи DNSSEC</strong></td>
+          <td><span class="tag ok"><span class="dot"></span>Включены</span></td>
+          <td>Запись DS у делегирования присутствует</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── ПРОБЛЕМЫ ───────────────────────────────────────── -->
+<section class="reveal">
+  <h2>Найденные проблемы</h2>
+  <p class="sub">
+    Порядок — по влиянию на доставляемость. То, что не подтвердилось при перепроверке,
+    в таблицу не попало и вынесено в раздел «чего делать не нужно».
+  </p>
+
+  <div class="scroller">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:24%">Проблема</th>
+          <th style="width:30%">Чем подтверждена</th>
+          <th style="width:28%">На что влияет</th>
+          <th style="width:9%">Срочность</th>
+          <th style="width:9%">Время</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Телеметрия домена уходит в недоступный ящик</strong></td>
+          <td>В записи <code>_dmarc</code> указан <code>admin@neoved.io</code>.
+              Скан всех одиннадцати папок <code>director@</code>: отчётов ноль,
+              сообщений о недоставке ноль</td>
+          <td>Ни одного факта недоставки и ни одной цифры по аутентификации
+              с мая. Без этого любой вывод о причине — догадка</td>
+          <td><span class="tag crit">Критично</span></td>
+          <td class="num">15 мин</td>
+        </tr>
+        <tr>
+          <td><strong>Жалоба не локализована</strong></td>
+          <td>Папка «Отправленные» у <code>director@</code> была пуста. Значит жалоба —
+              про другие ящики: <code>assistant@</code>, <code>buh@</code>, <code>hr@</code>,
+              <code>lawyer@</code>, <code>operations@</code>, <code>hello@</code></td>
+          <td>Невозможно отличить «лежит в спаме» от «отклонено сервером»
+              и от «получатель не там посмотрел»</td>
+          <td><span class="tag crit">Критично</span></td>
+          <td class="num">1 день</td>
+        </tr>
+        <tr>
+          <td><strong>Домен «холодный»</strong></td>
+          <td>Ящик создан 13 мая 2026. «Отправленные» пусты при пустой корзине —
+              историю не удаляли, её просто нет. В отчёте Google за сутки
+              <code>count = 1</code></td>
+          <td>Отсутствие репутации. Приёмники фильтруют такой домен по-разному
+              при одинаково исправных подписях. Ни DNS, ни настройками не лечится</td>
+          <td><span class="tag warn">Важно</span></td>
+          <td class="num">недели</td>
+        </tr>
+        <tr>
+          <td><strong>Сервер amoCRM в Spamhaus CSS</strong><br>
+              <span class="mono" style="font-size:13px;color:var(--text-3)">95.143.181.58</span></td>
+          <td>Подтверждено вручную 3 сентября на
+              <a href="https://check.spamhaus.org/results/?query=95.143.181.58">check.spamhaus.org</a>:
+              «95.143.181.58 has 1 listing — CSS Blocklist».
+              Формулировка Spamhaus: адрес «ведёт себя подозрительно, неверно настроен
+              либо имеет плохую репутацию отправителя».
+              Остальные пять узлов amoCRM и узел Zoho проверены там же — все чисты</td>
+          <td>Письма, уходящие из amoCRM через этот узел. Письма из Zoho не затронуты —
+              это и есть механизм «доходит не на все»</td>
+          <td><span class="tag warn">Важно</span></td>
+          <td class="num">не на вашей стороне</td>
+        </tr>
+        <tr>
+          <td><strong>Ключей amoCRM нет на основном домене</strong></td>
+          <td><code>us._domainkey.neoved.io</code> и <code>mail._domainkey.neoved.io</code> —
+              записи отсутствуют. Ключи существуют только под
+              <code>…_domainkey.mail.neoved.io</code></td>
+          <td>Если amoCRM подписывает письма от имени основного домена,
+              проверка подписи разваливается сразу у всех получателей.
+              Если от имени поддомена — всё в порядке. Что именно в подписи —
+              покажет живое письмо</td>
+          <td><span class="tag warn">Проверить</span></td>
+          <td class="num">10 мин</td>
+        </tr>
+        <tr>
+          <td><strong>Самоподписанный сертификат на www</strong></td>
+          <td><code>www.neoved.io</code> отдаёт сертификат <code>CN=root</code>
+              издателя ACME, выпущенный 1 апреля 2022. Основной домен —
+              с действующим Let's Encrypt</td>
+          <td>Ссылки с www ведут на предупреждение браузера.
+              Содержимое писем фильтры проверяют вместе со ссылками</td>
+          <td><span class="tag warn">Важно</span></td>
+          <td class="num">30 мин</td>
+        </tr>
+        <tr>
+          <td><strong>Второй сервер amoCRM без обратной записи</strong><br>
+              <span class="mono" style="font-size:13px;color:var(--text-3)">88.212.249.38</span></td>
+          <td>Обратный запрос не вернул имени. У остальных пяти адресов amoCRM имена есть</td>
+          <td>Google требует обратную запись у адреса, устанавливающего соединение.
+              Влияет, только если отправка идёт именно с него</td>
+          <td><span class="tag info">Проверить</span></td>
+          <td class="num">10 мин</td>
+        </tr>
+        <tr>
+          <td><strong>Интеграция с CRM не разбирает почту</strong></td>
+          <td>В настройках воркера <code>amo-mail</code> рабочим адресом указан
+              <code>hello@neoved.io</code>. Среди получателей входящих этого ящика
+              такого адреса нет вовсе — значит ни одно письмо под условие не подходит</td>
+          <td>Письма клиентов не попадают в CRM. К доставляемости отношения не имеет,
+              но обнаружено попутно и стоит починки</td>
+          <td><span class="tag warn">Важно</span></td>
+          <td class="num">20 мин</td>
+        </tr>
+        <tr>
+          <td><strong>Криминалистические отчёты включены</strong></td>
+          <td><code>ruf=mailto:admin@neoved.io</code> в записи <code>_dmarc</code></td>
+          <td>Это копии писем, не прошедших проверку: лишний шум
+              и содержимое переписки, уходящее наружу</td>
+          <td><span class="tag info">Желательно</span></td>
+          <td class="num">5 мин</td>
+        </tr>
+        <tr>
+          <td><strong>В SPF авторизован чужой сервис рассылок</strong></td>
+          <td><code>include:zohomail.in</code> подтягивает
+              <code>zeptomail.net.in</code> — транзакционный сервис Zoho,
+              которым вы не пользуетесь</td>
+          <td>Домен разрешает отправку с адресов, которые вам не принадлежат.
+              Сужать стоит только после того, как отчёты покажут все ваши источники</td>
+          <td><span class="tag info">Желательно</span></td>
+          <td class="num">потом</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── ЧТО ДЕЛАТЬ ─────────────────────────────────────── -->
+<section class="reveal">
+  <h2>Что делать</h2>
+  <p class="sub">По срокам. Каждый шаг — с готовым значением, которое можно вставить.</p>
+
+  <h3 style="margin-top:36px">Сегодня</h3>
+  <ol class="steps">
+    <li>
+      <h3>Открыть ящик admin@neoved.io</h3>
+      <p>
+        Панель управления Zoho (<span class="mono">mailadmin.zoho.in</span>) → Пользователи →
+        найти <code>admin@neoved.io</code>. Возможны три исхода: ящик есть и пароль известен —
+        зайти и найти письма с темами <span class="mono">Report Domain: neoved.io</span>
+        и все <span class="mono">Undelivered Mail Returned to Sender</span>; ящик есть,
+        но доступа нет — сбросить пароль через администратора организации; ящика нет вовсе —
+        значит отчёты улетают в пустоту с момента публикации записи, и нужно сразу к шагу&nbsp;3.
+      </p>
+    </li>
+
+    <li>
+      <h3>Выяснить, кто именно жалуется</h3>
+      <p>
+        Спросить прямо: из какого ящика отправляли, какому получателю, какого числа,
+        и осталось ли письмо в «Отправленных». Реальные рабочие адреса домена, видные
+        по входящим: <code>assistant@</code> (35 писем), <code>director@</code> (28),
+        <code>buh@</code> (17), <code>hr@</code> (17), <code>lawyer@</code> (6),
+        <code>operations@</code> (2).
+      </p>
+      <p>
+        Один экземпляр непришедшего письма с заголовками стоит больше всего остального аудита.
+      </p>
+    </li>
+
+    <li>
+      <h3>Перенаправить отчёты на живой ящик</h3>
+      <p>
+        В панели NameSilo → Manage DNS для <code>neoved.io</code> → запись <code>_dmarc</code>:
+      </p>
+      <p class="label">Было</p>
+      <pre><code>v=DMARC1; p=none; rua=mailto:admin@neoved.io; ruf=mailto:admin@neoved.io; adkim=r; aspf=r; pct=100</code></pre>
+      <p class="label">Стало</p>
+      <pre><code>v=DMARC1; p=none; rua=mailto:director@neoved.io; adkim=r; aspf=r</code></pre>
+      <p>
+        Адрес заменён на тот, доступ к которому есть. Убран <code>ruf</code>.
+        Убран <code>pct=100</code> — при режиме наблюдения он ничего не значит.
+        <strong>Параметры <code>adkim=r</code> и <code>aspf=r</code> трогать нельзя:</strong>
+        именно они позволяют подписи amoCRM с поддомена считаться своей.
+      </p>
+    </li>
+
+    <li>
+      <h3>Поставить страховку от провала подписи amoCRM</h3>
+      <p>Сначала забрать точные значения существующих ключей:</p>
+      <pre><code>Resolve-DnsName us._domainkey.mail.neoved.io   -Type TXT -Server 8.8.8.8 |
+  Select-Object -ExpandProperty Strings
+
+Resolve-DnsName mail._domainkey.mail.neoved.io -Type TXT -Server 8.8.8.8 |
+  Select-Object -ExpandProperty Strings</code></pre>
+      <p>
+        Затем создать <strong>две новые</strong> TXT-записи с именами
+        <code>us._domainkey</code> и <code>mail._domainkey</code> — значения скопировать
+        дословно, склеив части в одну строку без пробелов внутри <code>p=</code>.
+      </p>
+      <p>
+        Это безопасно при любом раскладе. Если amoCRM подписывает от имени поддомена,
+        новые записи просто не используются. Если от имени основного домена —
+        вы чините поломку, которая сейчас может ронять подпись у всех получателей сразу.
+        <strong>Старые записи не удалять.</strong>
+      </p>
+    </li>
+
+    <li>
+      <h3>Починить сертификат на www</h3>
+      <p>
+        В панели Tilda подключить <code>www.neoved.io</code> как алиас основного домена,
+        чтобы на него выпустили сертификат, либо настроить переадресацию на основной адрес.
+        Проверить результат:
+      </p>
+      <pre><code>curl -sI https://www.neoved.io | head -1</code></pre>
+    </li>
+  </ol>
+
+  <h3 style="margin-top:44px">На этой неделе</h3>
+  <ol class="steps" start="6">
+    <li>
+      <h3>Матрица тестов: четыре источника на четыре приёмника</h3>
+      <p>
+        Двадцать минут работы, которые дают ответ. Приёмники — Gmail, Outlook.com,
+        Яндекс, Mail.ru. Источники: вручную из Zoho от <code>director@</code>;
+        вручную от <code>hello@</code>; из amoCRM через сделку;
+        форма на Tilda, если она шлёт от вашего домена.
+      </p>
+      <p>
+        Шестнадцать писем, для каждого зафиксировать: входящие, спам или не пришло.
+        В заголовках смотреть <code>Authentication-Results</code>
+        (значения <code>spf=</code>, <code>dkim=</code>, <code>dmarc=</code>)
+        и <code>DKIM-Signature</code> — поле <code>d=</code> покажет, от чьего имени
+        подписано письмо из CRM.
+      </p>
+      <p>
+        Разрез, ради которого всё делается: если у всех четырёх приёмников проверки проходят,
+        а результат разный — причина в репутации и содержании, и DNS тут не поможет.
+        Если у писем из CRM подпись не проходит — сработал шаг 4, и он это уже закрыл.
+      </p>
+    </li>
+
+    <li>
+      <h3>Обратиться в поддержку amoCRM</h3>
+      <p>
+        Сначала перепроверить, держится ли листинг — он динамический и снимается сам.
+        Проверять <strong>только браузером</strong>, открыв
+        <a href="https://check.spamhaus.org/results/?query=95.143.181.58">страницу адреса</a>:
+        «has 1 listing» — держится, «has no issues» — сняли.
+      </p>
+      <div class="note">
+        <p><strong>Проверять Spamhaus командой из консоли бесполезно.</strong>
+        Списки Spamhaus не отвечают на запросы через публичные DNS-серверы
+        (8.8.8.8, 1.1.1.1, 9.9.9.9, 77.88.8.8) — проверено 3 сентября: даже контрольный
+        адрес <code>2.0.0.127</code>, который обязан числиться в списке всегда,
+        отвечает «нет записи». Любой скрипт в такой ситуации показывает «чисто»
+        для чего угодно. Именно так выглядит ложное спокойствие.</p>
+      </div>
+      <p>
+        При подтверждённом листинге — заявка в поддержку amoCRM со ссылкой на
+        <a href="https://check.spamhaus.org/results/?query=95.143.181.58">проверку адреса</a>.
+        Снять листинг с чужого адреса может только его владелец. Пока держится —
+        важные письма отправляйте из Zoho напрямую, а не через CRM.
+      </p>
+    </li>
+
+    <li>
+      <h3>Завести постмастер Mail.ru</h3>
+      <p>
+        <a href="https://postmaster.mail.ru/">postmaster.mail.ru</a> → добавить домен →
+        подтвердить TXT-записью. Это единственный источник правды о вашей репутации
+        у Mail.ru: доля жалоб, ошибки доставки, объём.
+      </p>
+      <p style="color:var(--text-2)">
+        <a href="https://postmaster.google.com/">Google Postmaster Tools</a> тоже стоит завести,
+        но честно: Google сам предупреждает, что при малом объёме данных не будет.
+        При вашем объёме дашборд, скорее всего, окажется пустым.
+        Инструмент Яндекса на 2 сентября 2026 недоступен — справка озаглавлена
+        «Почтовый офис закрыт», проверка дала противоречивый результат.
+      </p>
+    </li>
+
+    <li>
+      <h3>Починить интеграцию с CRM</h3>
+      <p>
+        В настройках воркера <code>amo-mail</code> заменить рабочий адрес на существующие:
+      </p>
+      <pre><code>MAIL_FROM=director@neoved.io
+ACCEPT_TO=director@neoved.io,assistant@neoved.io,buh@neoved.io,hr@neoved.io,lawyer@neoved.io,operations@neoved.io</code></pre>
+      <p>
+        После правки сбросить сохранённые данные об аккаунте — они кэшируются на сутки,
+        иначе изменение подействует только завтра. Возвращать <code>hello@</code>
+        можно будет после того, как этот адрес добавят в список адресов отправки
+        ящика в Zoho и подтвердят кодом.
+      </p>
+    </li>
+  </ol>
+
+  <h3 style="margin-top:44px">В течение месяца</h3>
+  <ol class="steps" start="10">
+    <li>
+      <h3>Постепенно ужесточить политику DMARC</h3>
+      <p>
+        Сразу оговорка: <strong>ни один провайдер сегодня не требует режима жёстче наблюдения</strong> —
+        <code>p=none</code> формально удовлетворяет всех. Лестница нужна ради защиты
+        от подделки вашего домена, а не ради того, чтобы письма стали доходить.
+        Ускорять её ради текущей жалобы бессмысленно.
+      </p>
+      <p>
+        Правило движения одно: следующий шаг делается, только когда в отчётах
+        все ваши источники опознаны и проходят проверку. Во всех записях сохраняется
+        <code>adkim=r; aspf=r</code> — строгий режим сломает подпись amoCRM с поддомена.
+      </p>
+      <p class="label">Этап 0 — наблюдение, минимум 3–4 недели</p>
+      <pre><code>v=DMARC1; p=none; rua=mailto:director@neoved.io; adkim=r; aspf=r</code></pre>
+      <p class="label">Этап 1 — карантин для десятой части, 7–10 дней</p>
+      <pre><code>v=DMARC1; p=quarantine; pct=10; rua=mailto:director@neoved.io; adkim=r; aspf=r</code></pre>
+      <p class="label">Этап 2 — половина, 10–14 дней</p>
+      <pre><code>v=DMARC1; p=quarantine; pct=50; rua=mailto:director@neoved.io; adkim=r; aspf=r</code></pre>
+      <p class="label">Этап 3 — полный карантин, 2–4 недели</p>
+      <pre><code>v=DMARC1; p=quarantine; rua=mailto:director@neoved.io; adkim=r; aspf=r</code></pre>
+      <p class="label">Этап 4 — отказ</p>
+      <pre><code>v=DMARC1; p=reject; rua=mailto:director@neoved.io; adkim=r; aspf=r</code></pre>
+      <p>
+        Отдельно про пересылку: при автоматической пересылке письма проверка отправителя
+        ломается всегда, а подпись выживает. Поэтому до последнего этапа обязательна
+        рабочая подпись у каждого источника, а не только запись SPF.
+      </p>
+      <p>
+        <strong>Отступить назад — нормально.</strong> Если после любого этапа контрагент
+        сообщил о пропаже письма, верните предыдущую строку немедленно: правка DNS
+        действует за минуты.
+      </p>
+    </li>
+
+    <li>
+      <h3>Наработать историю отправки</h3>
+      <p>
+        Единственное лекарство от «холодного» домена — регулярная человеческая переписка
+        с рабочих адресов, без всплесков. Массовые рассылки — только после того,
+        как отчёты покажут стабильно проходящие проверки, и с плавным ростом объёма.
+      </p>
+    </li>
+  </ol>
+</section>
+
+<!-- ── АРХИВЫ ─────────────────────────────────────────── -->
+<section class="reveal">
+  <h2>Как избавиться от архивов</h2>
+  <p class="sub">
+    Отдельный вопрос, с которого всё начиналось: zip-файлы на ящике администратора.
+  </p>
+
+  <div class="card">
+    <p>
+      Эти архивы — не сообщения о недоставке, а суточная статистика аутентификации.
+      В ней нет и не может быть адреса получателя. Чтобы вместо них приходили
+      понятные письма, зарегистрируйтесь на
+      <a href="https://dmarc.postmarkapp.com/">dmarc.postmarkapp.com</a> — бесплатно,
+      выдают адрес вида <code>re+ХЕШ@dmarc.postmarkapp.com</code>.
+    </p>
+    <p class="label">Готовая запись, с копией себе</p>
+    <pre><code>v=DMARC1; p=none; rua=mailto:re+ХЕШ@dmarc.postmarkapp.com,mailto:director@neoved.io; adkim=r; aspf=r</code></pre>
+    <p>
+      Два адреса через запятую — намеренно: сервис присылает читаемую сводку,
+      а копия исходных отчётов остаётся у вас и не зависит от стороннего сервиса.
+      Отдельную запись-разрешение добавлять не нужно: у Postmark опубликована
+      групповая запись <code>*._report._dmarc.inbound.postmarkapp.com</code>, я это проверил.
+    </p>
+    <p style="margin-bottom:0;color:var(--text-2)">
+      Минусы бесплатного тарифа честно: сводка раз в неделю, а не ежедневно;
+      десять источников; история за семь дней. На этапах ужесточения политики
+      недельная задержка означает, что каждый шаг придётся выдерживать дольше.
+    </p>
+  </div>
+</section>
+
+<!-- ── ЧЕГО НЕ НАДО ───────────────────────────────────── -->
+<section class="reveal">
+  <h2>Чего делать не нужно</h2>
+  <p class="sub">
+    Это выглядит как проблемы, но проверка показала обратное. Здесь же — то,
+    что я сам поначалу счёл проблемой и что не подтвердилось.
+  </p>
+
+  <div class="scroller">
+    <table>
+      <thead><tr><th style="width:32%">Кажется проблемой</th><th>Почему это не так</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Перевыпустить ключи в 2048 бит</strong></td>
+          <td>Google требует «1024 бита и длиннее», Yahoo — «1024 и более»,
+              остальные требований не публикуют. Рекомендация RFC 8301 остаётся
+              рекомендацией: ни один провайдер такие ключи не отвергает
+              и даты отказа не объявлял. Делать можно, срочности нет</td>
+        </tr>
+        <tr>
+          <td><strong>Запись mail как псевдоним домена</strong></td>
+          <td>Выглядит аномалией, но нарушения нет: стандарт запрещает соседство
+              такой записи с другими <em>на одном имени</em>, а ключи лежат на именах-потомках.
+              Проверено эмпирически — записи отдают все резолверы,
+              а несуществующее имя под ними даёт корректный отказ.
+              Поддерево не перенаправляется</td>
+        </tr>
+        <tr>
+          <td><strong>Переехать из индийского центра Zoho</strong></td>
+          <td>Отправляющие адреса Zoho чисты во всех списках, обратные записи корректны,
+              специфичных проблем с доставкой в Россию не найдено. Переезд —
+              это простой в работе почты ради недоказанной выгоды</td>
+        </tr>
+        <tr>
+          <td><strong>Ужесточить SPF до жёсткого отказа</strong></td>
+          <td>При действующем DMARC разница минимальна. Ужесточать стоит
+              только после того, как политика доведена до последнего этапа</td>
+        </tr>
+        <tr>
+          <td><strong>Нет обратной записи у адреса сайта</strong></td>
+          <td>Это адрес Tilda, где стоит сайт. Почта с него не отправляется,
+              в записи SPF он не значится</td>
+          </tr>
+        <tr>
+          <td><strong>Сервер вебхуков в списке Barracuda</strong></td>
+          <td>Он не отправляет почту и в SPF не указан. На письма не влияет</td>
+        </tr>
+        <tr>
+          <td><strong>Настроить BIMI ради логотипа</strong></td>
+          <td>Требует политики не ниже карантина и платного сертификата.
+              К доставляемости отношения не имеет</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── ОТКРЫТЫЕ ВОПРОСЫ ───────────────────────────────── -->
+<section class="reveal">
+  <h2>Что осталось невыясненным</h2>
+
+  <div class="card">
+    <ul class="plain" style="margin-bottom:0">
+      <li>
+        <strong>Из какого ящика шлют письма, которые не доходят.</strong> Главный вопрос:
+        от ответа зависит, чинить репутацию amoCRM, подпись или искать причину в содержании.
+      </li>
+      <li>
+        <strong>Что лежит в <code>admin@neoved.io</code>.</strong> Доступа нет,
+        а именно туда идут все отчёты и все сообщения о недоставке.
+      </li>
+      <li>
+        <strong>От чьего имени amoCRM подписывает письма.</strong> Установить можно
+        только по заголовкам живого письма из CRM. От этого зависит,
+        была ли страховка из шага 4 необходимостью или перестраховкой.
+      </li>
+      <li>
+        <strong>Реальный объём отправки.</strong> Пороги, с которых начинают действовать
+        требования к массовым отправителям, — пять тысяч писем в сутки.
+        По косвенным признакам вы далеко ниже, но точных цифр нет.
+      </li>
+      <li style="margin-bottom:0">
+        <strong>Как письма выглядят для фильтра.</strong> Тематика сайта — международные
+        расчёты и криптовалюта для юрлиц — та область, которую почтовые службы проверяют
+        строже обычного. Это не приговор, но означает, что содержание письма
+        и репутация домена весят больше, чем у нейтральных отправителей.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="foot">
+  <p>
+    Проверки выполнены 2 и 3 сентября 2026 года. DNS опрашивался через 8.8.8.8, 1.1.1.1,
+    9.9.9.9 и 77.88.8.8. Доступ к почте — через интерфейс Zoho Mail существующим ключом.
+  </p>
+  <p>
+    Чёрные списки перепроверены 3 сентября вручную, через сайт Spamhaus. Это важная поправка
+    к первой версии отчёта: запросы к спискам Spamhaus из консоли в вашей сети не работают
+    вообще — контрольный адрес <code>2.0.0.127</code>, который обязан числиться в списке
+    всегда, отвечает «нет записи» со всех четырёх публичных DNS-серверов. Поэтому любые
+    результаты «чисто», полученные скриптом, здесь недостоверны, и все выводы по спискам
+    в этом отчёте опираются на ручную проверку: <code>95.143.181.58</code> — один листинг
+    в CSS, остальные пять узлов amoCRM, узел Zoho <code>103.117.158.11</code>
+    и сам домен <code>neoved.io</code> — «no issues».
+  </p>
+  <p>
+    В ходе аудита с ящика <code>director@neoved.io</code> были отправлены два служебных письма
+    с темой <span class="mono">diag amo-mail from-address test</span> — на внутренние адреса,
+    для проверки поведения отправки. Наружу ничего не уходило.
+  </p>
+  <p style="margin-bottom:0">
+    Состояние чёрных списков меняется само — листинг стоит перепроверить перед тем,
+    как действовать на его основании.
+  </p>
+</div>
+
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+(function () {
+  var items = document.querySelectorAll('.reveal');
+  var showAll = function () {
+    for (var i = 0; i < items.length; i++) items[i].classList.add('in');
+  };
+  if (!('IntersectionObserver' in window)) { showAll(); return; }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+  items.forEach(function (el) { io.observe(el); });
+  setTimeout(showAll, 2500);
+})();
+</script>
