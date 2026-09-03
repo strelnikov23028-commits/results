@@ -1,0 +1,156 @@
+[
+ {"pt":"mensagem","ru":"сообщение","en":"message","pos":"nouns",
+  "imgQuery":"a phone screen showing a single incoming chat bubble notification",
+  "fix":"в списке перевод «sent» — но mensagem это «сообщение»; «отправленный» будет enviado"},
+
+ {"pt":"avião","ru":"самолёт","en":"plane","pos":"nouns",
+  "imgQuery":"a passenger aeroplane parked at an airport stand, full side view",
+  "fix":"нужна тильда: avião"},
+
+ {"pt":"defeito","ru":"дефект, брак","en":"defect, fault","pos":"nouns",
+  "imgQuery":"a crack running across the surface of an otherwise new product, close-up"},
+
+ {"pt":"exato","ru":"точный","en":"exact","pos":"adjectives",
+  "imgQuery":"a dart landing dead centre in the bullseye of a dartboard"},
+
+ {"pt":"janela","ru":"окно","en":"window","pos":"nouns",
+  "imgQuery":"a single old wooden window frame in a plain wall, seen straight on from outside"},
+
+ {"pt":"porta","ru":"дверь","en":"door","pos":"nouns",
+  "imgQuery":"a solid closed wooden door with a brass handle, photographed straight on"},
+
+ {"pt":"cadeira","ru":"стул","en":"chair","pos":"nouns",
+  "imgQuery":"a single wooden chair standing alone against a plain background"},
+
+ {"pt":"teto","ru":"потолок","en":"ceiling","pos":"nouns",
+  "imgQuery":"looking straight up at a ceiling with a hanging light fixture"},
+
+ {"pt":"esqueci","ru":"я забыл","en":"I forgot","pos":"verbs",
+  "imgQuery":"a person slapping their forehead in realisation that they forgot something",
+  "note":"форма от esquecer: «esqueci a chave» — я забыл ключ"},
+
+ {"pt":"principal","ru":"главный, основной","en":"main","pos":"adjectives",
+  "imgQuery":"the grand main entrance of a building with columns, clearly the principal way in"},
+
+ {"pt":"assustador","ru":"страшный, пугающий","en":"scary","pos":"adjectives",
+  "imgQuery":"a dark eerie corridor dimly lit at the far end, unsettling atmosphere"},
+
+ {"pt":"estranho","ru":"странный","en":"strange, odd","pos":"adjectives",
+  "imgQuery":"a person wearing two completely different shoes, one on each foot"},
+
+ {"pt":"em algum lugar","ru":"где-то","en":"somewhere","pos":"phrases",
+  "imgQuery":"a lone blank signpost standing in an empty desert with no writing on it"},
+
+ {"pt":"aguarde","ru":"подождите","en":"please hold","pos":"verbs",
+  "imgQuery":"a receptionist holding up one finger to signal a moment while on the phone",
+  "note":"вежливее, чем espere; часто в объявлениях и по телефону"},
+
+ {"pt":"imediatamente","ru":"немедленно","en":"immediately","pos":"adverbs",
+  "imgQuery":"firefighters rushing out of the station the instant the alarm sounds"},
+
+ {"pt":"mesa","ru":"стол","en":"table","pos":"nouns",
+  "imgQuery":"a single empty wooden table standing alone in a bare room"},
+
+ {"pt":"chuva","ru":"дождь","en":"rain","pos":"nouns",
+  "imgQuery":"a wall of falling rain streaks against a dark background, water pouring down"},
+
+ {"pt":"nuvens","ru":"облака","en":"clouds","pos":"nouns",
+  "imgQuery":"a field of white clouds seen from above from an aeroplane window height"},
+
+ {"pt":"nublado","ru":"пасмурный, облачный","en":"cloudy","pos":"adjectives",
+  "imgQuery":"a dull overcast grey sky over a city, flat light and no shadows"},
+
+ {"pt":"gentileza","ru":"любезность","en":"kindness","pos":"nouns",
+  "imgQuery":"a young man giving up his seat to an elderly woman on a bus",
+  "fix":"в списке было «Gentiliza» — правильно gentileza",
+  "note":"«por gentileza» — вежливое «будьте добры»"},
+
+ {"pt":"ideia","ru":"идея","en":"idea","pos":"nouns",
+  "imgQuery":"a light bulb switching on and glowing brightly against a dark background"},
+
+ {"pt":"beleza","ru":"красота; отлично! (разг.)","en":"beauty; cool!","pos":"phrases",
+  "imgQuery":"a person grinning broadly and giving an enthusiastic approving nod",
+  "fix":"в списке было «Belesa» — правильно beleza, через z"},
+
+ {"pt":"joia","ru":"драгоценность; отлично! (разг.)","en":"jewel; great!","pos":"phrases",
+  "imgQuery":"a brilliant cut diamond sparkling under a spotlight, close-up",
+  "note":"буквально «драгоценность», в разговоре — «супер, отлично»"},
+
+ {"pt":"tá top","ru":"топово, отлично (разг.)","en":"it's great","pos":"phrases",
+  "imgQuery":"a chef kissing his fingertips in the classic perfect gesture"},
+
+ {"pt":"bacana","ru":"классный, здорово (разг.)","en":"cool, nice","pos":"phrases",
+  "imgQuery":"a group of friends raising their glasses together in a cheerful toast"},
+
+ {"pt":"de boa","ru":"всё нормально, спокойно (разг.)","en":"all good, chill","pos":"phrases",
+  "imgQuery":"a person sprawled comfortably on a sofa, completely relaxed"},
+
+ {"pt":"tô","ru":"я (нахожусь, являюсь)","en":"I am","pos":"verbs",
+  "imgQuery":"a person pointing down at the ground where they stand, indicating being right here",
+  "fix":"в списке было «To - у меня», но tô это сокращение от estou — «я нахожусь / мне»",
+  "note":"«tô bem» — я в порядке; «tô indo» — я иду"},
+
+ {"pt":"suave","ru":"мягкий; спокойно (разг.)","en":"smooth, chill","pos":"adjectives",
+  "imgQuery":"a person making a slow calming downward gesture with an open palm",
+  "fix":"в списке было «Suaf» — правильно suave"},
+
+ {"pt":"firmeza","ru":"твёрдость; всё чётко (разг.)","en":"firmness; all good","pos":"phrases",
+  "imgQuery":"a tight secure knot pulled firm in a thick rope, close-up",
+  "fix":"в списке было «Filmesa» — похоже на firmeza: буквально «твёрдость», в разговоре «всё чётко»"},
+
+ {"pt":"na paz","ru":"спокойно, с миром (разг.)","en":"peace, all calm","pos":"phrases",
+  "imgQuery":"a hand raised making the two-finger peace sign against a clear sky"},
+
+ {"pt":"tirei","ru":"я убрал, я достал","en":"I took out, I removed","pos":"verbs",
+  "imgQuery":"a person lifting a baking tray out of the oven with mitts"},
+
+ {"pt":"cheio","ru":"полный","en":"full","pos":"adjectives",
+  "imgQuery":"a glass filled with water right to the very brim, meniscus bulging"},
+
+ {"pt":"invasão","ru":"вторжение, нашествие","en":"invasion","pos":"nouns",
+  "imgQuery":"a swarming column of ants overrunning a piece of food on a kitchen surface"},
+
+ {"pt":"prática","ru":"практика","en":"practice","pos":"nouns",
+  "imgQuery":"a pianist drilling scales at the keyboard, hands in motion",
+  "fix":"в списке было «Práctica» — это испанское написание; по-португальски prática"},
+
+ {"pt":"verificar","ru":"проверять","en":"to check, to verify","pos":"verbs",
+  "imgQuery":"an inspector with a clipboard ticking off items against a checklist"},
+
+ {"pt":"peça","ru":"деталь, часть","en":"piece, part","pos":"nouns",
+  "imgQuery":"one single machine part lying alone on a workbench, isolated"},
+
+ {"pt":"gordo","ru":"толстый","en":"fat","pos":"adjectives",
+  "imgQuery":"a very plump round cat sitting and filling the frame"},
+
+ {"pt":"atravessa","ru":"переходит (дорогу)","en":"crosses","pos":"verbs",
+  "imgQuery":"a pedestrian walking across a zebra crossing, mid-crossing"},
+
+ {"pt":"estrada","ru":"дорога, шоссе","en":"road, highway","pos":"nouns",
+  "imgQuery":"a winding mountain road seen from above, curving down the slope"},
+
+ {"pt":"percebido","ru":"замеченный, воспринятый","en":"noticed, perceived","pos":"adjectives",
+  "imgQuery":"a person turning their head sharply, having just caught something out of the corner of their eye"},
+
+ {"pt":"em vez disso","ru":"вместо этого","en":"instead","pos":"phrases",
+  "imgQuery":"a hand pushing one mug aside and setting a different mug in its place"},
+
+ {"pt":"pão","ru":"хлеб","en":"bread","pos":"nouns",
+  "imgQuery":"a crusty loaf of bread on a wooden board, close-up"},
+
+ {"pt":"pau","ru":"палка, деревяшка","en":"stick, wood","pos":"nouns",
+  "imgQuery":"a bare wooden stick lying alone on the ground",
+  "fix":"в списке «Pao - tree», но дерево это árvore; pau значит «палка, деревяшка»"},
+
+ {"pt":"queijo","ru":"сыр","en":"cheese","pos":"nouns",
+  "imgQuery":"a wedge of yellow cheese with holes on a board, close-up"},
+
+ {"pt":"tamanho","ru":"размер","en":"size","pos":"nouns",
+  "imgQuery":"three identical t-shirts on hangers in small, medium and large sizes side by side"},
+
+ {"pt":"anotar","ru":"записывать, помечать","en":"to note down","pos":"verbs",
+  "imgQuery":"a journalist scribbling into a small pocket notepad while standing"},
+
+ {"pt":"queda","ru":"падение","en":"fall","pos":"nouns",
+  "imgQuery":"an apple caught in mid-air the instant after it broke off the branch"}
+]

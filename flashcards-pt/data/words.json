@@ -10317,5 +10317,912 @@
   "sources": [
    "extra6"
   ]
+ },
+ {
+  "id": 492,
+  "pt": "mensagem",
+  "en": "message",
+  "ru": "сообщение",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a phone screen showing a single incoming chat bubble notification",
+  "image": "cartoes-img/сообщение — mensagem.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "fix": "в списке перевод «sent» — но mensagem это «сообщение»; «отправленный» будет enviado"
+ },
+ {
+  "id": 493,
+  "pt": "avião",
+  "en": "plane",
+  "ru": "самолёт",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a passenger aeroplane parked at an airport stand, full side view",
+  "image": "cartoes-img/самолёт — avião.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "fix": "нужна тильда: avião"
+ },
+ {
+  "id": 494,
+  "pt": "defeito",
+  "en": "defect, fault",
+  "ru": "дефект, брак",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a crack running across the surface of an otherwise new product, close-up",
+  "image": "cartoes-img/дефект, брак — defeito.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 495,
+  "pt": "exato",
+  "en": "exact",
+  "ru": "точный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a dart landing dead centre in the bullseye of a dartboard",
+  "image": "cartoes-img/точный — exato.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 496,
+  "pt": "janela",
+  "en": "window",
+  "ru": "окно",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a single old wooden window frame in a plain wall, seen straight on from outside",
+  "image": "cartoes-img/окно — janela.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 497,
+  "pt": "porta",
+  "en": "door",
+  "ru": "дверь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a solid closed wooden door with a brass handle, photographed straight on",
+  "image": "cartoes-img/дверь — porta.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 498,
+  "pt": "cadeira",
+  "en": "chair",
+  "ru": "стул",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a single wooden chair standing alone against a plain background",
+  "image": "cartoes-img/стул — cadeira.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 499,
+  "pt": "teto",
+  "en": "ceiling",
+  "ru": "потолок",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "looking straight up at a ceiling with a hanging light fixture",
+  "image": "cartoes-img/потолок — teto.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 500,
+  "pt": "esqueci",
+  "en": "I forgot",
+  "ru": "я забыл",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person slapping their forehead in realisation that they forgot something",
+  "image": "cartoes-img/я забыл — esqueci.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "note": "форма от esquecer: «esqueci a chave» — я забыл ключ"
+ },
+ {
+  "id": 501,
+  "pt": "principal",
+  "en": "main",
+  "ru": "главный, основной",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "the grand main entrance of a building with columns, clearly the principal way in",
+  "image": "cartoes-img/главный, основной — principal.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 502,
+  "pt": "assustador",
+  "en": "scary",
+  "ru": "страшный, пугающий",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a dark eerie corridor dimly lit at the far end, unsettling atmosphere",
+  "image": "cartoes-img/страшный, пугающий — assustador.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 503,
+  "pt": "estranho",
+  "en": "strange, odd",
+  "ru": "странный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a person wearing two completely different shoes, one on each foot",
+  "image": "cartoes-img/странный — estranho.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 504,
+  "pt": "em algum lugar",
+  "en": "somewhere",
+  "ru": "где-то",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a lone blank signpost standing in an empty desert with no writing on it",
+  "image": "cartoes-img/где-то — em algum lugar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 505,
+  "pt": "aguarde",
+  "en": "please hold",
+  "ru": "подождите",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a receptionist holding up one finger to signal a moment while on the phone",
+  "image": "cartoes-img/подождите — aguarde.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "note": "вежливее, чем espere; часто в объявлениях и по телефону"
+ },
+ {
+  "id": 506,
+  "pt": "imediatamente",
+  "en": "immediately",
+  "ru": "немедленно",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "firefighters rushing out of the station the instant the alarm sounds",
+  "image": "cartoes-img/немедленно — imediatamente.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 507,
+  "pt": "mesa",
+  "en": "table",
+  "ru": "стол",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a single empty wooden table standing alone in a bare room",
+  "image": "cartoes-img/стол — mesa.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 508,
+  "pt": "chuva",
+  "en": "rain",
+  "ru": "дождь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall of falling rain streaks against a dark background, water pouring down",
+  "image": "cartoes-img/дождь — chuva.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 509,
+  "pt": "nuvens",
+  "en": "clouds",
+  "ru": "облака",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a field of white clouds seen from above from an aeroplane window height",
+  "image": "cartoes-img/облака — nuvens.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 510,
+  "pt": "nublado",
+  "en": "cloudy",
+  "ru": "пасмурный, облачный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a dull overcast grey sky over a city, flat light and no shadows",
+  "image": "cartoes-img/пасмурный, облачный — nublado.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 511,
+  "pt": "gentileza",
+  "en": "kindness",
+  "ru": "любезность",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a young man giving up his seat to an elderly woman on a bus",
+  "image": "cartoes-img/любезность — gentileza.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "note": "«por gentileza» — вежливое «будьте добры»",
+  "fix": "в списке было «Gentiliza» — правильно gentileza"
+ },
+ {
+  "id": 512,
+  "pt": "ideia",
+  "en": "idea",
+  "ru": "идея",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a light bulb switching on and glowing brightly against a dark background",
+  "image": "cartoes-img/идея — ideia.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 513,
+  "pt": "beleza",
+  "en": "beauty; cool!",
+  "ru": "красота; отлично! (разг.)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a person grinning broadly and giving an enthusiastic approving nod",
+  "image": "cartoes-img/красота, отлично! — beleza.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "fix": "в списке было «Belesa» — правильно beleza, через z"
+ },
+ {
+  "id": 514,
+  "pt": "joia",
+  "en": "jewel; great!",
+  "ru": "драгоценность; отлично! (разг.)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a brilliant cut diamond sparkling under a spotlight, close-up",
+  "image": "cartoes-img/драгоценность, отлично! — joia.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "note": "буквально «драгоценность», в разговоре — «супер, отлично»"
+ },
+ {
+  "id": 515,
+  "pt": "tá top",
+  "en": "it's great",
+  "ru": "топово, отлично (разг.)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a chef kissing his fingertips in the classic perfect gesture",
+  "image": "cartoes-img/топово, отлично — tá top.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 516,
+  "pt": "bacana",
+  "en": "cool, nice",
+  "ru": "классный, здорово (разг.)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a group of friends raising their glasses together in a cheerful toast",
+  "image": "cartoes-img/классный, здорово — bacana.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 517,
+  "pt": "de boa",
+  "en": "all good, chill",
+  "ru": "всё нормально, спокойно (разг.)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a person sprawled comfortably on a sofa, completely relaxed",
+  "image": "cartoes-img/всё нормально, спокойно — de boa.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 518,
+  "pt": "tô",
+  "en": "I am",
+  "ru": "я (нахожусь, являюсь)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person pointing down at the ground where they stand, indicating being right here",
+  "image": "cartoes-img/я — tô.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "note": "«tô bem» — я в порядке; «tô indo» — я иду",
+  "fix": "в списке было «To - у меня», но tô это сокращение от estou — «я нахожусь / мне»"
+ },
+ {
+  "id": 519,
+  "pt": "suave",
+  "en": "smooth, chill",
+  "ru": "мягкий; спокойно (разг.)",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a person making a slow calming downward gesture with an open palm",
+  "image": "cartoes-img/мягкий, спокойно — suave.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "fix": "в списке было «Suaf» — правильно suave"
+ },
+ {
+  "id": 520,
+  "pt": "firmeza",
+  "en": "firmness; all good",
+  "ru": "твёрдость; всё чётко (разг.)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a tight secure knot pulled firm in a thick rope, close-up",
+  "image": "cartoes-img/твёрдость, всё чётко — firmeza.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "fix": "в списке было «Filmesa» — похоже на firmeza: буквально «твёрдость», в разговоре «всё чётко»"
+ },
+ {
+  "id": 521,
+  "pt": "na paz",
+  "en": "peace, all calm",
+  "ru": "спокойно, с миром (разг.)",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a hand raised making the two-finger peace sign against a clear sky",
+  "image": "cartoes-img/спокойно, с миром — na paz.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 522,
+  "pt": "tirei",
+  "en": "I took out, I removed",
+  "ru": "я убрал, я достал",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person lifting a baking tray out of the oven with mitts",
+  "image": "cartoes-img/я убрал, я достал — tirei.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 523,
+  "pt": "cheio",
+  "en": "full",
+  "ru": "полный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a glass filled with water right to the very brim, meniscus bulging",
+  "image": "cartoes-img/полный — cheio.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 524,
+  "pt": "invasão",
+  "en": "invasion",
+  "ru": "вторжение, нашествие",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a swarming column of ants overrunning a piece of food on a kitchen surface",
+  "image": "cartoes-img/вторжение, нашествие — invasão.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 525,
+  "pt": "prática",
+  "en": "practice",
+  "ru": "практика",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a pianist drilling scales at the keyboard, hands in motion",
+  "image": "cartoes-img/практика — prática.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "fix": "в списке было «Práctica» — это испанское написание; по-португальски prática"
+ },
+ {
+  "id": 526,
+  "pt": "verificar",
+  "en": "to check, to verify",
+  "ru": "проверять",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "an inspector with a clipboard ticking off items against a checklist",
+  "image": "cartoes-img/проверять — verificar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 527,
+  "pt": "peça",
+  "en": "piece, part",
+  "ru": "деталь, часть",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "one single machine part lying alone on a workbench, isolated",
+  "image": "cartoes-img/деталь, часть — peça.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 528,
+  "pt": "gordo",
+  "en": "fat",
+  "ru": "толстый",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a very plump round cat sitting and filling the frame",
+  "image": "cartoes-img/толстый — gordo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 529,
+  "pt": "atravessa",
+  "en": "crosses",
+  "ru": "переходит (дорогу)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a pedestrian walking across a zebra crossing, mid-crossing",
+  "image": "cartoes-img/переходит — atravessa.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 530,
+  "pt": "estrada",
+  "en": "road, highway",
+  "ru": "дорога, шоссе",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a winding mountain road seen from above, curving down the slope",
+  "image": "cartoes-img/дорога, шоссе — estrada.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 531,
+  "pt": "percebido",
+  "en": "noticed, perceived",
+  "ru": "замеченный, воспринятый",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a person turning their head sharply, having just caught something out of the corner of their eye",
+  "image": "cartoes-img/замеченный, воспринятый — percebido.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 532,
+  "pt": "em vez disso",
+  "en": "instead",
+  "ru": "вместо этого",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a hand pushing one mug aside and setting a different mug in its place",
+  "image": "cartoes-img/вместо этого — em vez disso.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 533,
+  "pt": "pão",
+  "en": "bread",
+  "ru": "хлеб",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a crusty loaf of bread on a wooden board, close-up",
+  "image": "cartoes-img/хлеб — pão.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 534,
+  "pt": "pau",
+  "en": "stick, wood",
+  "ru": "палка, деревяшка",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a bare wooden stick lying alone on the ground",
+  "image": "cartoes-img/палка, деревяшка — pau.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ],
+  "fix": "в списке «Pao - tree», но дерево это árvore; pau значит «палка, деревяшка»"
+ },
+ {
+  "id": 535,
+  "pt": "queijo",
+  "en": "cheese",
+  "ru": "сыр",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wedge of yellow cheese with holes on a board, close-up",
+  "image": "cartoes-img/сыр — queijo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 536,
+  "pt": "tamanho",
+  "en": "size",
+  "ru": "размер",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "three identical t-shirts on hangers in small, medium and large sizes side by side",
+  "image": "cartoes-img/размер — tamanho.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 537,
+  "pt": "anotar",
+  "en": "to note down",
+  "ru": "записывать, помечать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a journalist scribbling into a small pocket notepad while standing",
+  "image": "cartoes-img/записывать, помечать — anotar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
+ },
+ {
+  "id": 538,
+  "pt": "queda",
+  "en": "fall",
+  "ru": "падение",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an apple caught in mid-air the instant after it broke off the branch",
+  "image": "cartoes-img/падение — queda.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra7"
+  ]
  }
 ]

@@ -17,11 +17,12 @@ for c in cards:
         if p:
             have.setdefault(p, c)
 
-new = ["lento","correr","indo","mãe","alfândega","rastro","chorar","perder","cachorro",
-       "papagaio","inseto","mamíferos","humano","casal de apaixonados","lar","preocupe",
-       "novidade","abrir","passo","gostaria","lançamento","serralheiro","planta",
-       "legível","esquecer","coerência","mostrar","falecido","tão","raro",
-       "menina","menino","compartilhar","pergunte","sobre","atrasar","decolar"]
+new = ["mensagem","avião","defeito","esquerda","exato","janela","porta","cadeira","teto",
+       "esqueci","principal","assustador","estranho","em algum lugar","aguarde","vazio",
+       "imediatamente","mesa","chuva","nuvens","nublado","gentileza","ideia","beleza",
+       "joia","tá top","bacana","de boa","tô","suave","firmeza","na paz","tirei","cheio",
+       "invasão","prática","verificar","peça","gordo","atravessa","estrada","país",
+       "percebido","em vez disso","pão","pau","queijo","tamanho","anotar","queda","conseguir"]
 
 dup = []
 print("уже есть в колоде:")
@@ -29,7 +30,5 @@ for w in new:
     c = have.get(norm(w))
     if c:
         dup.append(w)
-        print(f"  {w:<20} → «{c['pt']}» ({c['ru']})")
-if not dup:
-    print("  нет")
+        print(f"  {w:<18} → «{c['pt']}» ({c['ru']})")
 print(f"\nв списке: {len(new)}, новых: {len(new)-len(dup)}, в колоде: {len(cards)}")
