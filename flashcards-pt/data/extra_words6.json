@@ -1,0 +1,115 @@
+[
+ {"pt":"lento","ru":"медленный","en":"slow","pos":"adjectives",
+  "imgQuery":"a snail crawling slowly across a wet leaf, macro shot"},
+
+ {"pt":"correr","ru":"бежать","en":"to run","pos":"verbs",
+  "imgQuery":"a pack of marathon runners mid-race filling the street"},
+
+ {"pt":"indo","ru":"идущий, направляющийся","en":"going","pos":"verbs",
+  "imgQuery":"a hiker with a backpack walking along a mountain trail, seen from the side",
+  "note":"герундий от ir: «estou indo» — я иду / уже еду"},
+
+ {"pt":"mãe","ru":"мама","en":"mother","pos":"nouns",
+  "imgQuery":"a mother holding her child close, her face full of tenderness"},
+
+ {"pt":"alfândega","ru":"таможня","en":"customs","pos":"nouns",
+  "imgQuery":"a customs control desk at an airport with an officer checking documents",
+  "fix":"нужен циркумфлекс: alfândega"},
+
+ {"pt":"rastro","ru":"след","en":"trail, trace","pos":"nouns",
+  "imgQuery":"a white contrail streaking across a clear blue sky behind a distant plane"},
+
+ {"pt":"chorar","ru":"плакать","en":"to cry","pos":"verbs",
+  "imgQuery":"a small child crying loudly with mouth wide open and tears flowing"},
+
+ {"pt":"perder","ru":"терять; проигрывать","en":"to lose","pos":"verbs",
+  "imgQuery":"a man patting his empty pockets in alarm, searching for something lost"},
+
+ {"pt":"cachorro","ru":"собака","en":"dog","pos":"nouns",
+  "imgQuery":"a friendly dog portrait facing the camera, plain background"},
+
+ {"pt":"papagaio","ru":"попугай","en":"parrot","pos":"nouns",
+  "imgQuery":"a brightly coloured macaw parrot perched on a branch"},
+
+ {"pt":"inseto","ru":"насекомое","en":"insect","pos":"nouns",
+  "imgQuery":"a shiny beetle on a leaf, extreme macro with visible legs and antennae"},
+
+ {"pt":"mamíferos","ru":"млекопитающие","en":"mammals","pos":"nouns",
+  "imgQuery":"a cow nursing her calf in a meadow, feeding it milk"},
+
+ {"pt":"humano","ru":"человеческий; человек","en":"human","pos":"adjectives",
+  "imgQuery":"an anatomical model of a human body standing in a classroom"},
+
+ {"pt":"casal de apaixonados","ru":"пара влюблённых","en":"couple in love","pos":"phrases",
+  "imgQuery":"a couple slow dancing together, looking into each other's eyes"},
+
+ {"pt":"lar","ru":"дом (домашний очаг)","en":"home","pos":"nouns",
+  "imgQuery":"a warm fireplace burning in a cosy living room, homely atmosphere",
+  "note":"casa — здание, lar — дом как домашний уют"},
+
+ {"pt":"preocupe","ru":"беспокойся, тревожься","en":"worry","pos":"verbs",
+  "imgQuery":"a mother anxiously watching her phone late at night, waiting for a call",
+  "note":"повелительная форма: «não se preocupe» — не волнуйся"},
+
+ {"pt":"novidade","ru":"новость, новинка","en":"news, novelty","pos":"nouns",
+  "imgQuery":"a person excitedly showing friends something brand new they have just got"},
+
+ {"pt":"abrir","ru":"открывать","en":"to open","pos":"verbs",
+  "imgQuery":"heavy theatre curtains being drawn open to reveal the stage"},
+
+ {"pt":"passo","ru":"шаг","en":"step","pos":"nouns",
+  "imgQuery":"a toddler taking their very first step toward outstretched arms"},
+
+ {"pt":"gostaria","ru":"хотел бы","en":"I would like","pos":"verbs",
+  "imgQuery":"a person gazing wistfully at a travel photo pinned to the wall"},
+
+ {"pt":"lançamento","ru":"запуск, выпуск","en":"launch, release","pos":"nouns",
+  "imgQuery":"a champagne bottle smashing against a ship's hull at its launching ceremony",
+  "fix":"нужна седиль и n: lançamento"},
+
+ {"pt":"serralheiro","ru":"слесарь","en":"locksmith","pos":"nouns",
+  "imgQuery":"a locksmith at his workbench surrounded by locks and key blanks"},
+
+ {"pt":"planta","ru":"чертёж, план; растение","en":"blueprint; plant","pos":"nouns",
+  "imgQuery":"an architectural floor plan drawing spread out on a desk with a ruler",
+  "note":"planta значит и «чертёж», и «растение» — смысл задаёт контекст"},
+
+ {"pt":"legível","ru":"разборчивый, читаемый","en":"legible","pos":"adjectives",
+  "imgQuery":"a line of beautifully clear handwriting on cream paper, every letter crisp",
+  "fix":"нужен акут: legível"},
+
+ {"pt":"esquecer","ru":"забывать","en":"to forget","pos":"verbs",
+  "imgQuery":"a man standing blankly in the middle of a room, having forgotten why he came in",
+  "fix":"в списке было «Pense - forget», но pense значит «думай» (от pensar); «забудь» — esqueça, инфинитив esquecer"},
+
+ {"pt":"coerência","ru":"связность, последовательность","en":"coherence, consistency","pos":"nouns",
+  "imgQuery":"a perfectly even brick wall with every course aligned, flawless regularity"},
+
+ {"pt":"mostrar","ru":"показывать","en":"to show","pos":"verbs",
+  "imgQuery":"a person turning their phone screen around to show a photo to someone else"},
+
+ {"pt":"falecido","ru":"покойный, умерший","en":"deceased","pos":"adjectives",
+  "imgQuery":"fresh flowers laid on a quiet gravestone in a cemetery"},
+
+ {"pt":"tão","ru":"так, настолько","en":"so, such","pos":"adverbs",
+  "imgQuery":"a fisherman holding his hands far apart to show how big the fish was"},
+
+ {"pt":"raro","ru":"редкий","en":"rare","pos":"adjectives",
+  "imgQuery":"a single rare postage stamp displayed under glass in a collector's case"},
+
+ {"pt":"compartilhar","ru":"делиться","en":"to share","pos":"verbs",
+  "imgQuery":"two friends breaking a chocolate bar in half to share it"},
+
+ {"pt":"pergunte","ru":"спроси","en":"ask","pos":"verbs",
+  "imgQuery":"a tourist stopping a passer-by on the street to ask for directions",
+  "note":"повелительная форма от perguntar"},
+
+ {"pt":"sobre","ru":"о, про; поверх","en":"about; on top of","pos":"function words",
+  "imgQuery":"a presenter pointing at a screen showing a single clear topic image"},
+
+ {"pt":"atrasar","ru":"задерживать, опаздывать","en":"to delay, to be late","pos":"verbs",
+  "imgQuery":"a man running toward train doors that are already closing, too late"},
+
+ {"pt":"decolar","ru":"взлетать","en":"to take off","pos":"verbs",
+  "imgQuery":"an aeroplane lifting its nose off the runway at the moment of take-off"}
+]

@@ -9643,5 +9643,679 @@
   "sources": [
    "extra5"
   ]
+ },
+ {
+  "id": 457,
+  "pt": "lento",
+  "en": "slow",
+  "ru": "медленный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a snail crawling slowly across a wet leaf, macro shot",
+  "image": "cartoes-img/медленный — lento.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 458,
+  "pt": "correr",
+  "en": "to run",
+  "ru": "бежать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a pack of marathon runners mid-race filling the street",
+  "image": "cartoes-img/бежать — correr.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 459,
+  "pt": "indo",
+  "en": "going",
+  "ru": "идущий, направляющийся",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hiker with a backpack walking along a mountain trail, seen from the side",
+  "image": "cartoes-img/идущий, направляющийся — indo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "note": "герундий от ir: «estou indo» — я иду / уже еду"
+ },
+ {
+  "id": 460,
+  "pt": "mãe",
+  "en": "mother",
+  "ru": "мама",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a mother holding her child close, her face full of tenderness",
+  "image": "cartoes-img/мама — mãe.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 461,
+  "pt": "alfândega",
+  "en": "customs",
+  "ru": "таможня",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a customs control desk at an airport with an officer checking documents",
+  "image": "cartoes-img/таможня — alfândega.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "fix": "нужен циркумфлекс: alfândega"
+ },
+ {
+  "id": 462,
+  "pt": "rastro",
+  "en": "trail, trace",
+  "ru": "след",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a white contrail streaking across a clear blue sky behind a distant plane",
+  "image": "cartoes-img/след — rastro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 463,
+  "pt": "chorar",
+  "en": "to cry",
+  "ru": "плакать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a small child crying loudly with mouth wide open and tears flowing",
+  "image": "cartoes-img/плакать — chorar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 464,
+  "pt": "perder",
+  "en": "to lose",
+  "ru": "терять; проигрывать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a man patting his empty pockets in alarm, searching for something lost",
+  "image": "cartoes-img/терять, проигрывать — perder.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 465,
+  "pt": "cachorro",
+  "en": "dog",
+  "ru": "собака",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a friendly dog portrait facing the camera, plain background",
+  "image": "cartoes-img/собака — cachorro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 466,
+  "pt": "papagaio",
+  "en": "parrot",
+  "ru": "попугай",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a brightly coloured macaw parrot perched on a branch",
+  "image": "cartoes-img/попугай — papagaio.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 467,
+  "pt": "inseto",
+  "en": "insect",
+  "ru": "насекомое",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a shiny beetle on a leaf, extreme macro with visible legs and antennae",
+  "image": "cartoes-img/насекомое — inseto.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 468,
+  "pt": "mamíferos",
+  "en": "mammals",
+  "ru": "млекопитающие",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a cow nursing her calf in a meadow, feeding it milk",
+  "image": "cartoes-img/млекопитающие — mamíferos.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 469,
+  "pt": "humano",
+  "en": "human",
+  "ru": "человеческий; человек",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "an anatomical model of a human body standing in a classroom",
+  "image": "cartoes-img/человеческий, человек — humano.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 470,
+  "pt": "casal de apaixonados",
+  "en": "couple in love",
+  "ru": "пара влюблённых",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a couple slow dancing together, looking into each other's eyes",
+  "image": "cartoes-img/пара влюблённых — casal de apaixonados.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 471,
+  "pt": "lar",
+  "en": "home",
+  "ru": "дом (домашний очаг)",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a warm fireplace burning in a cosy living room, homely atmosphere",
+  "image": "cartoes-img/дом — lar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "note": "casa — здание, lar — дом как домашний уют"
+ },
+ {
+  "id": 472,
+  "pt": "preocupe",
+  "en": "worry",
+  "ru": "беспокойся, тревожься",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a mother anxiously watching her phone late at night, waiting for a call",
+  "image": "cartoes-img/беспокойся, тревожься — preocupe.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "note": "повелительная форма: «não se preocupe» — не волнуйся"
+ },
+ {
+  "id": 473,
+  "pt": "novidade",
+  "en": "news, novelty",
+  "ru": "новость, новинка",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a person excitedly showing friends something brand new they have just got",
+  "image": "cartoes-img/новость, новинка — novidade.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 474,
+  "pt": "abrir",
+  "en": "to open",
+  "ru": "открывать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "heavy theatre curtains being drawn open to reveal the stage",
+  "image": "cartoes-img/открывать — abrir.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 475,
+  "pt": "passo",
+  "en": "step",
+  "ru": "шаг",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a toddler taking their very first step toward outstretched arms",
+  "image": "cartoes-img/шаг — passo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 476,
+  "pt": "gostaria",
+  "en": "I would like",
+  "ru": "хотел бы",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person gazing wistfully at a travel photo pinned to the wall",
+  "image": "cartoes-img/хотел бы — gostaria.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 477,
+  "pt": "lançamento",
+  "en": "launch, release",
+  "ru": "запуск, выпуск",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a champagne bottle smashing against a ship's hull at its launching ceremony",
+  "image": "cartoes-img/запуск, выпуск — lançamento.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "fix": "нужна седиль и n: lançamento"
+ },
+ {
+  "id": 478,
+  "pt": "serralheiro",
+  "en": "locksmith",
+  "ru": "слесарь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a locksmith at his workbench surrounded by locks and key blanks",
+  "image": "cartoes-img/слесарь — serralheiro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 479,
+  "pt": "planta",
+  "en": "blueprint; plant",
+  "ru": "чертёж, план; растение",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an architectural floor plan drawing spread out on a desk with a ruler",
+  "image": "cartoes-img/чертёж, план, растение — planta.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "note": "planta значит и «чертёж», и «растение» — смысл задаёт контекст"
+ },
+ {
+  "id": 480,
+  "pt": "legível",
+  "en": "legible",
+  "ru": "разборчивый, читаемый",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a line of beautifully clear handwriting on cream paper, every letter crisp",
+  "image": "cartoes-img/разборчивый, читаемый — legível.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "fix": "нужен акут: legível"
+ },
+ {
+  "id": 481,
+  "pt": "esquecer",
+  "en": "to forget",
+  "ru": "забывать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a man standing blankly in the middle of a room, having forgotten why he came in",
+  "image": "cartoes-img/забывать — esquecer.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "fix": "в списке было «Pense - forget», но pense значит «думай» (от pensar); «забудь» — esqueça, инфинитив esquecer"
+ },
+ {
+  "id": 482,
+  "pt": "coerência",
+  "en": "coherence, consistency",
+  "ru": "связность, последовательность",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a perfectly even brick wall with every course aligned, flawless regularity",
+  "image": "cartoes-img/связность, последовательность — coerência.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 483,
+  "pt": "mostrar",
+  "en": "to show",
+  "ru": "показывать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person turning their phone screen around to show a photo to someone else",
+  "image": "cartoes-img/показывать — mostrar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 484,
+  "pt": "falecido",
+  "en": "deceased",
+  "ru": "покойный, умерший",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "fresh flowers laid on a quiet gravestone in a cemetery",
+  "image": "cartoes-img/покойный, умерший — falecido.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 485,
+  "pt": "tão",
+  "en": "so, such",
+  "ru": "так, настолько",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "a fisherman holding his hands far apart to show how big the fish was",
+  "image": "cartoes-img/так, настолько — tão.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 486,
+  "pt": "raro",
+  "en": "rare",
+  "ru": "редкий",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a single rare postage stamp displayed under glass in a collector's case",
+  "image": "cartoes-img/редкий — raro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 487,
+  "pt": "compartilhar",
+  "en": "to share",
+  "ru": "делиться",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "two friends breaking a chocolate bar in half to share it",
+  "image": "cartoes-img/делиться — compartilhar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 488,
+  "pt": "pergunte",
+  "en": "ask",
+  "ru": "спроси",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a tourist stopping a passer-by on the street to ask for directions",
+  "image": "cartoes-img/спроси — pergunte.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ],
+  "note": "повелительная форма от perguntar"
+ },
+ {
+  "id": 489,
+  "pt": "sobre",
+  "en": "about; on top of",
+  "ru": "о, про; поверх",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a presenter pointing at a screen showing a single clear topic image",
+  "image": "cartoes-img/о, про, поверх — sobre.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 490,
+  "pt": "atrasar",
+  "en": "to delay, to be late",
+  "ru": "задерживать, опаздывать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a man running toward train doors that are already closing, too late",
+  "image": "cartoes-img/задерживать, опаздывать — atrasar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
+ },
+ {
+  "id": 491,
+  "pt": "decolar",
+  "en": "to take off",
+  "ru": "взлетать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "an aeroplane lifting its nose off the runway at the moment of take-off",
+  "image": "cartoes-img/взлетать — decolar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra6"
+  ]
  }
 ]
