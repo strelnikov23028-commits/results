@@ -11224,5 +11224,25 @@
   "sources": [
    "extra7"
   ]
+ },
+ {
+  "id": 539,
+  "pt": "país",
+  "en": "country",
+  "ru": "страна",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a national flag flying on a pole over a border checkpoint building",
+  "image": "cartoes-img/страна — país.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra8"
+  ],
+  "note": "акут меняет смысл: país — страна, pais — родители"
  }
 ]
