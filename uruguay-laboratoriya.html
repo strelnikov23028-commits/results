@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Уругвай: частная клеточная лаборатория — право, инфраструктура, импорт, деньги</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="description" content="Уругвай для частной исследовательской лаборатории: режим ГМО написан про растения, клетки и ткани под Decreto 160/006 с запретом коммерции, бесплатный сертификат MBIO на ввоз биообразцов, научный парк Pando со сдачей лабораторий, резидентство за 90 долларов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --ink:#1D1D1F; --ink-2:#424245; --ink-3:#6E6E73;
+  --line:#E3E3E6; --blue:#0071E3; --blue-ink:#0058B0;
+  --green:#1E8E3E; --amber:#B26A00; --red:#C4291E; --violet:#5E5CE6;
+  --r-lg:22px; --r-md:16px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --shadow-h:0 2px 6px rgba(0,0,0,.06), 0 16px 40px rgba(0,0,0,.10);
+  --maxw:1120px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+a{color:var(--blue-ink); text-decoration:none; border-bottom:1px solid rgba(0,113,227,.28)}
+a:hover{border-bottom-color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue); outline-offset:3px; border-radius:6px}
+h1,h2,h3,h4{letter-spacing:-.022em; line-height:1.16; margin:0}
+h1{font-size:clamp(34px,5.4vw,58px); font-weight:700}
+h2{font-size:clamp(26px,3.4vw,38px); font-weight:700}
+h3{font-size:clamp(19px,2.1vw,23px); font-weight:600; margin-bottom:10px}
+h4{font-size:17px; font-weight:600; margin-bottom:8px}
+p{margin:0 0 16px}
+small{font-size:13.5px; color:var(--ink-3)}
+.mono{font-variant-numeric:tabular-nums}
+
+.topbar{position:sticky; top:0; z-index:100; background:rgba(245,245,247,.82); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:20px; height:52px; justify-content:space-between}
+.brand{font-weight:600; font-size:15px; letter-spacing:-.01em; white-space:nowrap}
+.topnav{display:flex; gap:18px; overflow-x:auto; scrollbar-width:none}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{font-size:14px; color:var(--ink-2); border:0; white-space:nowrap; padding:6px 0}
+.topnav a:hover{color:var(--blue-ink)}
+
+.hero{padding:72px 0 24px}
+.eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--blue-ink); background:rgba(0,113,227,.09); padding:7px 13px; border-radius:100px; margin-bottom:22px}
+.lede{font-size:clamp(18px,2.2vw,21px); color:var(--ink-2); max-width:820px; margin-top:22px}
+
+.bento{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin:32px 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:26px; box-shadow:var(--shadow); transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s}
+.card.hoverable:hover{transform:translateY(-2px); box-shadow:var(--shadow-h)}
+.c12{grid-column:span 12} .c8{grid-column:span 8} .c6{grid-column:span 6} .c4{grid-column:span 4}
+@media(max-width:900px){.c8,.c6,.c4{grid-column:span 12}}
+.kicker{font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px}
+.big{font-size:clamp(28px,4vw,42px); font-weight:700; letter-spacing:-.03em; line-height:1.05}
+
+section{padding:44px 0; scroll-margin-top:68px}
+.section-head{max-width:820px; margin-bottom:26px}
+.section-head p{color:var(--ink-2); margin-top:14px}
+
+.badge{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:100px; border:1px solid transparent; white-space:nowrap}
+.b-green{background:rgba(30,142,62,.10); color:var(--green); border-color:rgba(30,142,62,.2)}
+.b-amber{background:rgba(178,106,0,.10); color:var(--amber); border-color:rgba(178,106,0,.2)}
+.b-red{background:rgba(196,41,30,.09); color:var(--red); border-color:rgba(196,41,30,.2)}
+.b-blue{background:rgba(0,113,227,.09); color:var(--blue-ink); border-color:rgba(0,113,227,.2)}
+.b-violet{background:rgba(94,92,230,.10); color:var(--violet); border-color:rgba(94,92,230,.22)}
+.b-gray{background:#F0F0F2; color:var(--ink-3); border-color:var(--line)}
+
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow); -webkit-overflow-scrolling:touch; margin-bottom:18px}
+table{border-collapse:collapse; width:100%; min-width:820px; font-size:15px}
+th,td{padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+th{font-size:12.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); background:#FAFAFB}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#FBFBFD}
+td strong{font-weight:600}
+
+ol.steps{counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:14px}
+ol.steps li{counter-increment:s; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:20px 22px 20px 62px; position:relative; box-shadow:var(--shadow)}
+ol.steps li::before{content:counter(s); position:absolute; left:20px; top:19px; width:28px; height:28px; border-radius:9px; background:var(--blue); color:#fff; font-size:14px; font-weight:600; display:flex; align-items:center; justify-content:center}
+ul.tick{list-style:none; padding:0; margin:0 0 8px; display:grid; gap:10px}
+ul.tick li{position:relative; padding-left:26px; color:var(--ink-2)}
+ul.tick li::before{content:""; position:absolute; left:2px; top:9px; width:8px; height:8px; border-radius:50%; background:var(--blue)}
+ul.tick.warn li::before{background:var(--amber)}
+ul.tick.bad li::before{background:var(--red)}
+ul.tick.good li::before{background:var(--green)}
+
+.note{background:#FFF9EC; border:1px solid #F2E2BC; border-radius:var(--r-md); padding:18px 20px; font-size:15.5px; color:#5A4300}
+.note.blue{background:#EFF6FF; border-color:#CFE3FB; color:#0B3E75}
+.note.red{background:#FDF1F0; border-color:#F5D2CF; color:#7A1C15}
+.note.green{background:#F0F8F2; border-color:#CDE7D5; color:#14532B}
+.note p:last-child{margin-bottom:0}
+
+.srcgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px}
+.src{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; font-size:14.5px}
+.src a{border:0; font-weight:500}
+.src small{display:block; margin-top:4px; line-height:1.45}
+
+.dl{display:grid; gap:0; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; background:var(--surface)}
+.dl .row{display:grid; grid-template-columns:minmax(150px,240px) 1fr; gap:0; border-bottom:1px solid var(--line)}
+.dl .row:last-child{border-bottom:0}
+.dl .row > div{padding:12px 16px}
+.dl .row .t{font-weight:600; background:#FAFAFB; font-size:14.5px}
+.dl .row .d{font-size:14.5px; color:var(--ink-2)}
+@media(max-width:700px){.dl .row{grid-template-columns:1fr} .dl .row .t{border-bottom:1px solid var(--line)}}
+
+.term{border:0; background:none; padding:0; margin:0; font:inherit; color:inherit; cursor:help;
+  border-bottom:1px dashed rgba(94,92,230,.55); transition:background .15s, border-color .15s}
+.term:hover{background:rgba(94,92,230,.08); border-bottom-color:var(--violet)}
+.term[aria-expanded="true"]{background:rgba(94,92,230,.12); border-bottom-color:var(--violet)}
+#pop{position:fixed; z-index:900; max-width:340px; background:var(--surface); border:1px solid var(--line);
+  border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,.08), 0 20px 50px rgba(0,0,0,.16); padding:16px 18px 14px;
+  opacity:0; transform:translateY(6px) scale(.98); pointer-events:none; transition:opacity .16s ease, transform .16s cubic-bezier(.2,.7,.3,1)}
+#pop.on{opacity:1; transform:none; pointer-events:auto}
+#pop .h{font-size:15px; font-weight:600; margin:0 26px 6px 0; letter-spacing:-.01em}
+#pop .b{font-size:14.5px; line-height:1.5; color:var(--ink-2); margin:0}
+#pop .x{position:absolute; top:10px; right:10px; width:26px; height:26px; border:0; border-radius:8px; background:#F0F0F2;
+  color:var(--ink-3); font-size:15px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center}
+#pop .x:hover{background:#E6E6EA; color:var(--ink)}
+#pop .arw{position:absolute; width:12px; height:12px; background:var(--surface); border:1px solid var(--line);
+  border-top:0; border-left:0; transform:rotate(45deg); left:calc(50% - 6px); bottom:-7px}
+#pop.up .arw{top:-7px; bottom:auto; transform:rotate(225deg)}
+@media (prefers-reduced-motion:reduce){#pop{transition:none}}
+
+footer{padding:44px 0 64px; border-top:1px solid var(--line); margin-top:40px; color:var(--ink-3); font-size:14px}
+.reveal{opacity:1}
+.js .reveal{opacity:0; transform:translateY(18px)}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1 !important; transform:none !important}}
+</style>
+</head>
+<body>
+<script>
+document.documentElement.classList.add('js');
+setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(e){e.style.opacity=1;e.style.transform='none';});},2200);
+</script>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brand">Уругвай</span>
+    <nav class="topnav" aria-label="Разделы страницы">
+      <a href="#verdict">Вердикт</a>
+      <a href="#law">Право</a>
+      <a href="#infra">Инфраструктура</a>
+      <a href="#import">Импорт</a>
+      <a href="#space">Помещение</a>
+      <a href="#money">Компания и налоги</a>
+      <a href="#visa">Виза и ВНЖ</a>
+      <a href="#glossary">Словарь</a>
+      <a href="wet-lab-obshee.html">Общая часть</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Страновой разбор · 4 сентября 2026</span>
+    <h1 class="reveal">Уругвай</h1>
+    <p class="lede reveal">Страна, которая по сумме практических параметров обошла всех: сюда пускают без визы, вид на жительство стоит около девяноста долларов и не требует ни инвестиции, ни порога дохода, прямых рейсов из Рио около четырнадцати в неделю, а ввоз биообразцов оформляется бесплатным сертификатом. Взамен придётся иметь дело с двумя вещами: режимом ГМО, написанным про растения, и прямым законодательным запретом коммерции человеческими клетками.</p>
+    <p class="lede reveal" style="font-size:16px; margin-top:14px"><a href="wet-lab-obshee.html">Общая часть — биобезопасность, оборудование, клетки, черви, российская сторона →</a></p>
+  </div>
+</header>
+
+<section id="verdict">
+  <div class="wrap">
+    <div class="bento">
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Вид на жительство</div>
+        <div class="big">$90</div>
+        <p style="margin-top:12px; color:var(--ink-2)">Пошлина 557,30 UI за <a href="https://www.gub.uy/tramites/residencia-legal-permanente" target="_blank" rel="noopener">постоянную резиденцию</a>. Ни минимальной инвестиции, ни фиксированного порога дохода: требование сформулировано как «ежемесячный доход, достаточный для содержания». Промежуточная временная стадия не нужна.</p>
+        <span class="badge b-green">Сильная сторона</span>
+      </div>
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Ввоз биообразцов</div>
+        <div class="big">Бесплатно</div>
+        <p style="margin-top:12px; color:var(--ink-2)">Сертификат MBIO от министерства здравоохранения. Действует 30 дней, пошлины нет. В форме обязательны декларация об инфекционности и данные об этическом одобрении; режим помечен как «только для исследований».</p>
+        <span class="badge b-green">Сильная сторона</span>
+      </div>
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Главное ограничение</div>
+        <div class="big">Запрет</div>
+        <p style="margin-top:12px; color:var(--ink-2)">Decreto 160/006 прямо запрещает <em>коммерцию человеческими клетками и тканями</em>: донорство должно быть альтруистическим и безвозмездным. Это перекрывает целые бизнес-модели, которые в Панаме работают легально.</p>
+        <span class="badge b-red">Слабая сторона</span>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="kicker">Вывод в одном абзаце</div>
+        <p style="font-size:19px; margin-bottom:14px"><strong>Уругвай — лучший выбор, если вы делаете исследования и не собираетесь продавать клеточный продукт.</strong> Здесь дешёвый и быстрый вход в страну, работающая процедура ввоза, настоящая научная инфраструктура европейского типа и научный парк, который сдаёт помещения именно под лаборатории.</p>
+        <p style="margin-bottom:0; color:var(--ink-2)">И здесь же самая жёсткая из трёх стран рамка вокруг человеческого материала: запрет коммерции, обязательная авторизация центров и государственный институт, который регистрирует все процедуры с биологическим материалом и контролирует его ввоз и вывоз. Для in vitro работы с покупными линиями это не помеха. Для любых планов с донорским материалом — определяющее обстоятельство.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="law">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Право: три декрета, которые вас касаются</h2>
+      <p>Уругвайское регулирование устроено проще панамского: вместо десятка пересекающихся актов — три декрета с ясными границами. Проблема не в их сложности, а в том, что один из них вашей ситуации не замечает.</p>
+    </div>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead><tr><th style="width:24%">Акт</th><th>О чём</th><th style="width:32%">Что это значит для вас</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><a href="https://www.impo.com.uy/bases/decretos/353-2008" target="_blank" rel="noopener"><strong>Decreto 353/008</strong></a><br><small>от 21 июля 2008</small></td>
+            <td>Биобезопасность генетически модифицированных организмов. Статья 1 задаёт предмет: «введение, использование и обращение с <strong>генетически модифицированными растениями и их частями</strong>». Статья 3 перечисляет виды разрешений, включая <em>uso contenido</em> — работу в лабораторном масштабе</td>
+            <td><strong>Правовой вакуум.</strong> Животные клетки и вирусные векторы в предмет декрета не попадают вообще. Разрешение вам не нужно — но и документа, которым можно закрыться при вопросе регулятора, у вас не будет. Это не то же самое, что разрешение</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.impo.com.uy/bases/decretos-reglamento/129-2005" target="_blank" rel="noopener"><strong>Decreto 129/005</strong></a></td>
+            <td>Регламент работы <strong>лабораторий клинического анализа</strong> — тех, что исследуют человеческие образцы для диагностики и наблюдения за патологиями. Статья 2 требует прямой habilitación от министерства здравоохранения. Статьи 7–8 задают требования к помещению: отдельный вход для публики, зал ожидания, рабочий зал, помещение для забора проб, санузлы, зона отдыха персонала, доступность для людей с ограниченными возможностями. Статьи 14–15 требуют технического директора — клинического биохимика либо врача-специалиста по лабораторной диагностике</td>
+            <td><strong>К исследовательской лаборатории не применяется</strong> — по предмету регулирования. Требования к отдельному входу и залу ожидания сами по себе показывают, что норма написана про приём пациентов. Но это вывод по тексту, а не официальное разъяснение</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.impo.com.uy/bases/decretos/160-2006/1" target="_blank" rel="noopener"><strong>Decreto 160/006</strong></a><br><small>от 2 июня 2006</small></td>
+            <td>Ключевой акт по клеткам и тканям. Охватывает донорство и получение, оценку, обработку, консервацию и хранение, распределение, клиническое применение и утилизацию. Прямо включает стволовые клетки, гемопоэтические клетки-предшественники периферической крови, клетки пуповинной крови, костный мозг, взрослые и эмбриональные стволовые клетки. Исключает препараты крови и органы — у них свои законы</td>
+            <td><strong>Здесь всё серьёзно.</strong> Центры обязаны получить habilitación министерства и проходят инспекции. Надзор — у <a href="https://www.indt.gub.uy/" target="_blank" rel="noopener">INDT</a>, национального института донорства и трансплантации при медицинском факультете государственного университета; он же регистрирует процедуры с биоматериалом и контролирует его импорт и экспорт. И главное — <strong>прямой запрет коммерции человеческими клетками и тканями</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Что отсюда следует практически</h3>
+        <ul class="tick good">
+          <li><strong>Работа с покупными линиями</strong> — самый чистый сценарий. Клеточные линии из ATCC не подпадают ни под запрет коммерции (вы ничего не продаёте), ни под режим донорства (донора нет), ни под декрет о клинических лабораториях.</li>
+          <li><strong>Лентивекторы</strong> формально вне режима ГМО, потому что тот про растения. Работать можно, но помните: вакуум — не разрешение.</li>
+          <li><strong>Черви</strong> не регулируются вовсе, как и везде.</li>
+        </ul>
+      </div>
+      <div class="card c6 reveal">
+        <h3>Где начинаются проблемы</h3>
+        <ul class="tick bad">
+          <li><strong>Первичные клетки от доноров</strong> — прямо в поле Decreto 160/006: нужна habilitación центра, регистрация в INDT, альтруистическое донорство.</li>
+          <li><strong>Любая продажа клеточного продукта</strong> упирается в запрет коммерции. Это не про лицензию, которую можно получить, а про запрет как таковой.</li>
+          <li><strong>Частные банки стволовых клеток</strong> — по сообщениям профильной прессы, министерство до сих пор не определилось, разрешать ли их существование. Регуляторная неопределённость в этой нише сохраняется.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="infra">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Инфраструктура: чего нет в Панаме и Парагвае</h2>
+      <p>Это главный неочевидный аргумент за Уругвай. Здесь есть научная среда европейского типа, и часть её работает с внешними компаниями.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 hoverable reveal">
+        <div class="kicker">Монтевидео</div>
+        <h3>Institut Pasteur de Montevideo</h3>
+        <p style="color:var(--ink-2)">Один из институтов международной сети Пастера, объединяющей 33 независимых центра на пяти континентах. Устроен вокруг <strong>научных платформ высокого уровня</strong>: геномика, протеомика, биоинформатика, молекулярная и клеточная биология — с лабораториями, открытыми для проектов внешних исследователей.</p>
+        <p style="color:var(--ink-2)">С 2023 года у института есть <a href="https://labplus.uy/ourinstitute/" target="_blank" rel="noopener">company builder LAB+</a> совместно с фондом Ficus Advisory: заявленная программа — <strong>25 миллионов долларов в 16 стартапов за четыре года</strong> в медицине, биологии и технологиях.</p>
+        <p style="margin-bottom:0"><span class="badge b-blue">Зачем вам</span> доступ к платформам снимает половину закупочного бюджета: секвенирование, масс-спектрометрию и цитометрию не обязательно ставить у себя. И это же готовый канал научной аффилиации — той самой, что открывает депозитарии вроде Addgene.</p>
+      </div>
+
+      <div class="card c6 hoverable reveal">
+        <div class="kicker">Пандо, Канелонес · с 2010</div>
+        <h3>Parque Científico Tecnológico de Pando</h3>
+        <p style="color:var(--ink-2)">Единственная из найденных площадок в трёх странах, которая <strong>прямо предлагает аренду помещений под лаборатории и пилотные установки</strong>. Специализация — химия, биотехнология, нанотехнологии. Парк входит в международную ассоциацию научных парков IASP и имеет опыт работы с иностранными инвесторами.</p>
+        <div class="dl" style="margin-top:14px">
+          <div class="row"><div class="t">Что предлагают</div><div class="d">Аренда современных помещений под лаборатории и пилотные производства, проектирование и управление R&amp;D-проектами, консультации по финансированию</div></div>
+          <div class="row"><div class="t">Адрес</div><div class="d">Camino Saravia S/N, Пандо, департамент Канелонес</div></div>
+          <div class="row"><div class="t">Контакт</div><div class="d">Laura Vera, секретарь правления — lvera@pctp.org.uy, (+598) 2292 0984 и (+598) 99978428. Сайт <a href="https://pctp.org.uy/" target="_blank" rel="noopener">pctp.org.uy</a>, работают на испанском и английском</div></div>
+        </div>
+        <p style="margin:14px 0 0"><small>Ставок аренды парк публично не публикует — это вопрос прямого запроса. Но сам факт наличия готовых лабораторных площадей под сдачу в стране принципиально меняет расчёт: не нужно строить инженерию с нуля.</small></p>
+      </div>
+
+      <div class="card c6 hoverable reveal">
+        <div class="kicker">Свободная зона</div>
+        <h3>Zonamerica</h3>
+        <p style="color:var(--ink-2)">Бизнес-парк под режимом свободной зоны с 1990 года: около 350 компаний, 30 зданий, более 90 тысяч м² застройки. Профильное направление — <a href="https://web.zonamerica.com/en/industries/pharma-life-sciences/" target="_blank" rel="noopener">фарма и науки о жизни</a>; через парк проходит более <strong>62% фармацевтического экспорта Уругвая</strong>. Резиденты: Abbott, Sanofi, Merck, Fresenius, Eurofarma.</p>
+        <p style="color:var(--ink-2)">Три режима работы: свободная зона с полным налоговым освобождением, индустриальный парк по закону об инвестициях и общий режим. Есть отдельные здания под требования арендатора и участки земли.</p>
+        <p style="margin-bottom:0"><span class="badge b-amber">Оговорка</span> цены не публикуются, а профиль парка — логистика и дистрибуция фармы, а не исследовательские лаборатории. Уточнять, есть ли мокрые площади, надо адресно: +598 2518 2000.</p>
+      </div>
+
+      <div class="card c6 hoverable reveal">
+        <div class="kicker">Кто уже работает</div>
+        <h3>Частный клеточный сегмент</h3>
+        <ul class="tick">
+          <li><a href="https://biotec.com.uy/medicina-regenerativa/" target="_blank" rel="noopener">BIOTEC</a> — предлагает терапии аутологичными стволовыми клетками и тромбоцитарными факторами роста при артритах и артрозах</li>
+          <li><a href="https://cordonbank.adnuruguay.com.uy/" target="_blank" rel="noopener">CordónBank (CBR)</a> — банк пуповинных клеток с собственной лабораторной инфраструктурой</li>
+          <li><a href="https://www.livceller.com/" target="_blank" rel="noopener">Livceller</a> — лаборатория, выделяющая стволовые клетки из плаценты и вартонова студня, обучает специалистов методикам клеточной терапии</li>
+          <li><a href="https://celulasdecordon.com/" target="_blank" rel="noopener">Células de Cordón</a> — агент американского New England Cord Blood Bank; образцы хранятся <strong>в Бостоне</strong>, а не в Уругвае</li>
+          <li>Государственный полюс — <a href="https://www.areatcmr.hc.edu.uy/" target="_blank" rel="noopener">Área de Terapia Celular y Medicina Regenerativa</a> при Hospital de Clínicas</li>
+        </ul>
+        <p style="margin-bottom:0"><small>Последний пример показателен: вынести хранение за границу — рабочая схема обхода локальной неопределённости.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="import">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Импорт: самая простая процедура из трёх стран</h2>
+    </div>
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Клетки и биообразцы</h3>
+        <div class="dl">
+          <div class="row"><div class="t">Документ</div><div class="d">Сертификат <strong>MBIO</strong> от министерства здравоохранения — единственное профильное разрешение на ввоз биологических образцов</div></div>
+          <div class="row"><div class="t">Стоимость</div><div class="d"><strong>Бесплатно</strong></div></div>
+          <div class="row"><div class="t">Срок действия</div><div class="d">30 дней</div></div>
+          <div class="row"><div class="t">Что в форме</div><div class="d">Обязательны декларация об инфекционности материала и данные об этическом одобрении. В системе единого окна режим помечен как «только для исследований»</div></div>
+          <div class="row"><div class="t">Дистрибьютор ATCC</div><div class="d">Авторизованного дистрибьютора в Уругвае нет, и страна не входит в перечень с особыми документальными требованиями — <strong>вероятна прямая отправка</strong> из Вирджинии</div></div>
+        </div>
+      </div>
+      <div class="card c6 reveal">
+        <h3>Сыворотка и холодовая цепь</h3>
+        <p style="color:var(--ink-2)">FBS и прочие материалы животного происхождения идут <strong>не через минздрав</strong>, а через министерство сельского хозяйства и его службу здоровья животных — процедуры CAEP и CAPI. Это отдельный трек, который планируется параллельно с MBIO, а не после него.</p>
+        <p style="color:var(--ink-2)">Из криокурьеров в стране работает <strong>World Courier</strong>. У Marken депо в Уругвае нет, у Cryoport нет центров во всей Латинской Америке — выбор фактически один.</p>
+        <p style="margin-bottom:0"><span class="badge b-blue">Совет</span> заложите тестовый ввоз одной ампулы до аренды помещения. Бесплатный сертификат делает такой тест почти бесплатным — это редкая возможность проверить юрисдикцию за стоимость доставки.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="space">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Помещение и режимы</h2>
+      <p>В отличие от Панамы, где выбор сводится к «стройте сами», здесь есть готовый лабораторный вариант.</p>
+    </div>
+    <div class="tablewrap reveal">
+      <table>
+        <thead><tr><th style="width:22%">Вариант</th><th>Что это</th><th style="width:30%">Оценка</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Научный парк Пандо</strong></td>
+            <td>Аренда готовых помещений под лаборатории и пилотные установки, профиль — химия и биотехнология. Управляется профессиональной командой, входит в IASP</td>
+            <td><span class="badge b-green">Первый выбор</span> единственная площадка, спроектированная под мокрую лабораторию. Ставки не публикуются — запрашивать напрямую</td>
+          </tr>
+          <tr>
+            <td><strong>Zonamerica</strong></td>
+            <td>Свободная зона: полное освобождение от налога на прибыль, НДС и прочих национальных налогов на доходы от деятельности внутри зоны по <a href="https://www.impo.com.uy/bases/leyes/15921-1987" target="_blank" rel="noopener">Ley 15.921</a>. Отдельные здания под требования арендатора</td>
+            <td><span class="badge b-blue">Для масштаба</span> максимальные льготы, но профиль логистический. Мокрые площади уточнять адресно</td>
+          </tr>
+          <tr>
+            <td><strong>Обычная аренда</strong></td>
+            <td>Коммерческие и промышленные помещения в Монтевидео и пригородах на общих основаниях</td>
+            <td><span class="badge b-gray">Дешевле</span> но вся инженерия — вытяжки, стоки, резервное питание — за свой счёт</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bento">
+      <div class="card c12 reveal">
+        <div class="note">
+          <p style="margin-bottom:0"><strong>Чего я не нашёл и что нужно спрашивать.</strong> Ни парк Пандо, ни Zonamerica не публикуют ставок за квадратный метр — в отличие от Панамы и Парагвая, где рынок прозрачен и цены видны в объявлениях. Поэтому бюджет по Уругваю пока не считается: это первый запрос, который стоит отправить, и ответ на него определит, действительно ли Уругвай дешевле в эксплуатации, а не только на входе.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="money">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Компания и налоги</h2>
+    </div>
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Форма и регистрация</h3>
+        <ul class="tick">
+          <li><strong>Иностранец может учредить компанию без резидентства</strong> — государственное агентство Uruguay XXI формулирует прямо: партнёрам не требуется ни уругвайское гражданство, ни вид на жительство. Нужны налоговый адрес в стране и представитель.</li>
+          <li><strong>SAS</strong> — упрощённое акционерное общество по <a href="https://www.impo.com.uy/bases/leyes/19820-2019" target="_blank" rel="noopener">Ley 19.820</a>, создано под быструю цифровую регистрацию.</li>
+          <li><strong>SA и SRL</strong> — классические формы; акционерные общества администрирует государственный аудит, регулирование по Ley 16.060.</li>
+          <li>Есть режим <strong>«Empresa en el Día»</strong> — регистрация за один день без доплат.</li>
+        </ul>
+      </div>
+      <div class="card c6 reveal">
+        <h3>Налоги</h3>
+        <div class="dl">
+          <div class="row"><div class="t">Налог на прибыль</div><div class="d">IRAE — <strong>25%</strong>. Выше парагвайских 10%, но ниже аргентинских 35%, бразильских 34% и чилийских 27%</div></div>
+          <div class="row"><div class="t">Территориальность</div><div class="d">Доход из зарубежных источников в базу IRAE, как правило, не входит — это автоматически выводит из-под налога услуги, оказанные за пределами страны, и зарубежные инвестиции</div></div>
+          <div class="row"><div class="t">Свободная зона</div><div class="d">Полное освобождение от IRAE, НДС, налога на доход нерезидентов и прочих национальных налогов на деятельность внутри зоны</div></div>
+          <div class="row"><div class="t">Эффективная ставка</div><div class="d">При использовании режимов — свободная зона, закон об инвестициях, режим ПО, территориальность — фактическая нагрузка заметно ниже номинальных 25%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visa">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Виза, вид на жительство и налоговое резидентство</h2>
+      <p>Три разные вещи, которые здесь особенно важно не путать: миграционный статус получить легко и дёшево, а вот налоговое резидентство — отдельная категория с высокими порогами.</p>
+    </div>
+    <div class="bento">
+      <div class="card c4 reveal">
+        <h3>Въезд</h3>
+        <p style="color:var(--ink-2)">Гражданам России <strong>виза не нужна</strong>: в официальном <a href="https://www.gub.uy/ministerio-interior/comunicacion/publicaciones/regimen-visas-admision" target="_blank" rel="noopener">перечне режима виз</a> напротив России стоит «No Necesita Visa». Безвиз действует для туризма и до 90 дней; для трудовой цели или более долгого пребывания нужно предварительное согласование.</p>
+        <p style="margin-bottom:0; color:var(--ink-2)">Срок продлевается через миграционную службу: подавать минимум за 15 дней, стоимость 225,60 UI, а при просроченном сроке — 345,00 UI.</p>
+      </div>
+      <div class="card c4 reveal">
+        <h3>Вид на жительство</h3>
+        <p style="color:var(--ink-2)"><strong>Постоянная резиденция доступна сразу</strong>, без промежуточной временной стадии, и открыта «любому иностранцу, намеренному постоянно проживать в стране».</p>
+        <p style="color:var(--ink-2)">Документы: действующее удостоверение личности, справка о несудимости за все страны проживания последних пяти лет, медицинская карта, сертификат прививок. Иностранные документы — с апостилем и переводом присяжным переводчиком Уругвая.</p>
+        <p style="margin-bottom:0"><span class="badge b-amber">Что неизвестно</span> официальный срок рассмотрения миграционная служба не публикует. Оценки в 12–24 месяца встречаются только у частных юрфирм и первоисточником не подтверждены.</p>
+      </div>
+      <div class="card c4 reveal">
+        <h3>Налоговое резидентство</h3>
+        <p style="color:var(--ink-2)">Отдельная категория со <a href="https://www.gub.uy/direccion-general-impositiva/comunicacion/publicaciones/causales-residencia-fiscal" target="_blank" rel="noopener">своими основаниями</a>: свыше 183 дней в календарном году, либо центр жизненных интересов, либо ядро деятельности, либо инвестиции — недвижимость свыше 15 млн UI, предприятие свыше 45 млн UI, недвижимость свыше 3,5 млн UI плюс 60 дней присутствия, предприятие свыше 15 млн UI плюс 15 рабочих мест.</p>
+        <p style="margin-bottom:0"><span class="badge b-red">Проверять</span> сообщается, что с 1 января 2026 пороги подняты бюджетным законом, но на официальной странице налоговой по-прежнему стоят прежние суммы. До сверки считать неподтверждённым.</p>
+      </div>
+      <div class="card c12 reveal">
+        <div class="note green">
+          <p style="margin-bottom:0"><strong>Перелёт.</strong> Рио — Монтевидео обслуживают <a href="https://aeropuertodecarrasco.com.uy/en/non-stop-destinations/" target="_blank" rel="noopener">три перевозчика прямыми рейсами</a>: GOL, JetSMART и SKY, суммарно около четырнадцати рейсов в неделю, время в пути примерно 2 часа 40 минут. Это ближе, чем Панама, и несопоставимо удобнее Мексики, куда прямых рейсов из Рио нет вовсе.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="glossary">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Уругвайский словарь</h2>
+      <p>Термины подсвечены по всему тексту пунктиром — нажмите на любой, чтобы увидеть значение. Общие термины — <a href="wet-lab-obshee.html#glossary">в общей части</a>.</p>
+    </div>
+    <div class="tablewrap reveal">
+      <table>
+        <thead><tr><th style="width:26%">Термин</th><th>Значение</th></tr></thead>
+        <tbody>
+          <tr><td><strong>MSP</strong></td><td>Ministerio de Salud Pública — министерство здравоохранения, главный регулятор: выдаёт habilitación лабораториям и сертификаты MBIO</td></tr>
+          <tr><td><strong>MBIO</strong></td><td>Сертификат на ввоз биологических образцов. Бесплатный, действует 30 дней, требует декларации об инфекционности и данных об этическом одобрении</td></tr>
+          <tr><td><strong>INDT</strong></td><td>Instituto Nacional de Donación y Trasplante — институт при медицинском факультете государственного университета. Регистрирует все процедуры с биологическим материалом, контролирует его ввоз и вывоз</td></tr>
+          <tr><td><strong>habilitación</strong></td><td>Разрешение на работу учреждения, выдаваемое министерством. Для клинических лабораторий обязательно, для исследовательских — по предмету декрета не требуется</td></tr>
+          <tr><td><strong>uso contenido</strong></td><td>Работа с ГМО в замкнутых условиях лабораторного масштаба. В уругвайском декрете этот режим существует, но только для растений</td></tr>
+          <tr><td><strong>MGAP / DGSG</strong></td><td>Министерство сельского хозяйства и его генеральная дирекция здоровья животных. Через них идут материалы животного происхождения, включая сыворотку</td></tr>
+          <tr><td><strong>UI</strong></td><td>Unidad Indexada — расчётная единица, привязанная к индексу потребительских цен. В ней выражены пошлины: 557,30 UI это около $90</td></tr>
+          <tr><td><strong>IRAE</strong></td><td>Impuesto a las Rentas de las Actividades Económicas — налог на прибыль предприятий, ставка 25%</td></tr>
+          <tr><td><strong>SAS</strong></td><td>Sociedad por Acciones Simplificada — упрощённое акционерное общество, создано законом 19.820 под быструю цифровую регистрацию</td></tr>
+          <tr><td><strong>DNM</strong></td><td>Dirección Nacional de Migración — миграционная служба</td></tr>
+          <tr><td><strong>PCTP</strong></td><td>Parque Científico Tecnológico de Pando — научный парк, сдающий помещения под лаборатории и пилотные установки</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Источники</h2>
+    </div>
+    <div class="srcgrid reveal">
+      <div class="src"><a href="https://www.impo.com.uy/bases/decretos/353-2008" target="_blank" rel="noopener">Decreto 353/008 — биобезопасность ГМО</a><small>Статья 1: предмет — генетически модифицированные растения и их части; статья 3 — виды разрешений, включая uso contenido</small></div>
+      <div class="src"><a href="https://www.impo.com.uy/bases/decretos-reglamento/129-2005" target="_blank" rel="noopener">Decreto 129/005 — лаборатории клинического анализа</a><small>Статья 2 — habilitación MSP; статьи 7–8 — требования к помещению; статьи 14–15 и 19 — технический директор и его ответственность; статья 27 — срок приведения в соответствие 180 дней</small></div>
+      <div class="src"><a href="https://www.impo.com.uy/bases/decretos/160-2006/1" target="_blank" rel="noopener">Decreto 160/006 — клетки и ткани человека</a><small>Охват: донорство, обработка, хранение, распределение, клиническое применение; включает стволовые клетки всех типов; роль INDT; запрет коммерции человеческими клетками и тканями</small></div>
+      <div class="src"><a href="https://www.gub.uy/ministerio-interior/comunicacion/publicaciones/regimen-visas-admision" target="_blank" rel="noopener">Régimen de visas de admisión</a><small>Официальный перечень: Россия — «No Necesita Visa», примечание про 90 дней и туристическую цель</small></div>
+      <div class="src"><a href="https://www.gub.uy/tramites/residencia-legal-permanente" target="_blank" rel="noopener">Residencia legal permanente</a><small>Открыта любому иностранцу, пошлина 557,30 UI, требование «ежемесячного дохода, достаточного для содержания» без фиксированной суммы</small></div>
+      <div class="src"><a href="https://www.gub.uy/direccion-general-impositiva/comunicacion/publicaciones/causales-residencia-fiscal" target="_blank" rel="noopener">DGI — основания налогового резидентства</a><small>183 дня, центр интересов, ядро деятельности либо инвестиционные пороги в UI</small></div>
+      <div class="src"><a href="https://pasteur.uy/en/who-we-are/" target="_blank" rel="noopener">Institut Pasteur de Montevideo</a><small>Научные платформы: геномика, протеомика, биоинформатика, молекулярная и клеточная биология; членство в сети из 33 институтов</small></div>
+      <div class="src"><a href="https://www.uruguayxxi.gub.uy/es/directorio-servicio/parque-cientifico-tecnologico-de-pando/" target="_blank" rel="noopener">Parque Científico Tecnológico de Pando</a><small>Аренда помещений под лаборатории и пилотные установки, контакты, членство в IASP, основан в 2010</small></div>
+      <div class="src"><a href="https://web.zonamerica.com/en/industries/pharma-life-sciences/" target="_blank" rel="noopener">Zonamerica — Pharma &amp; Life Sciences</a><small>Более 62% фармэкспорта Уругвая, резиденты Abbott, Sanofi, Merck, Fresenius; три режима деятельности</small></div>
+      <div class="src"><a href="https://www.uruguayxxi.gub.uy/es/quiero-invertir/faq/" target="_blank" rel="noopener">Uruguay XXI — вопросы инвестора</a><small>Партнёрам компании не требуются уругвайское гражданство и резидентство; нужен налоговый адрес и представитель</small></div>
+      <div class="src"><a href="https://aeropuertodecarrasco.com.uy/en/non-stop-destinations/" target="_blank" rel="noopener">Аэропорт Карраско — прямые направления</a><small>Рио-де-Жанейро: JetSMART, SKY, GOL</small></div>
+      <div class="src"><a href="https://www.impo.com.uy/bases/leyes/15921-1987" target="_blank" rel="noopener">Ley 15.921 — свободные зоны</a><small>Освобождение от IRAE, НДС и прочих национальных налогов на деятельность внутри зоны</small></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-bottom:8px">Страновой разбор, 4 сентября 2026 года. Общая часть — <a href="wet-lab-obshee.html">здесь</a>. Другие страны: <a href="panama-laboratoriya-praktika.html">Панама</a>, <a href="paraguay-laboratoriya.html">Парагвай</a>.</p>
+    <p style="margin:0"><small>Суммы в долларах США; уругвайские пошлины исчисляются в Unidad Indexada и пересчитаны по курсу около 6,64 песо за UI. Документ носит информационный характер и не заменяет юридическую консультацию.</small></p>
+  </div>
+</footer>
+
+<div id="pop" role="dialog" aria-live="polite" aria-hidden="true">
+  <button class="x" type="button" aria-label="Закрыть подсказку">✕</button>
+  <p class="h"></p>
+  <p class="b"></p>
+  <span class="arw"></span>
+</div>
+
+<script>
+(function () {
+  var TERMS = {
+    "MSP":"Ministerio de Salud Pública — министерство здравоохранения Уругвая. Выдаёт habilitación лабораториям и сертификаты MBIO на ввоз биообразцов.",
+    "MBIO":"Уругвайский сертификат на ввоз биологических образцов. Бесплатный, действует 30 дней; в форме обязательны декларация об инфекционности и данные об этическом одобрении.",
+    "INDT":"Instituto Nacional de Donación y Trasplante — институт при медицинском факультете государственного университета. Регистрирует процедуры с биоматериалом и контролирует его ввоз и вывоз.",
+    "habilitación":"Разрешение на работу учреждения от министерства здравоохранения. Для клинических лабораторий обязательно; исследовательская лаборатория под этот режим по предмету декрета не подпадает.",
+    "uso contenido":"Работа с ГМО в замкнутых условиях лабораторного масштаба. В уругвайском декрете такой режим есть, но только для растений.",
+    "MGAP":"Ministerio de Ganadería, Agricultura y Pesca — министерство сельского хозяйства. Через него ввозятся материалы животного происхождения, включая сыворотку.",
+    "DGSG":"Dirección General de Servicios Ganaderos — служба здоровья животных при минсельхозе, оформляет ввоз сыворотки и прочих животных материалов.",
+    "UI":"Unidad Indexada — расчётная единица, привязанная к индексу потребительских цен. Пошлина 557,30 UI составляет около 90 долларов.",
+    "IRAE":"Impuesto a las Rentas de las Actividades Económicas — уругвайский налог на прибыль предприятий, ставка 25%.",
+    "SAS":"Sociedad por Acciones Simplificada — упрощённое акционерное общество по закону 19.820, рассчитанное на быструю цифровую регистрацию.",
+    "SRL":"Sociedad de Responsabilidad Limitada — общество с ограниченной ответственностью.",
+    "DNM":"Dirección Nacional de Migración — миграционная служба Уругвая.",
+    "PCTP":"Parque Científico Tecnológico de Pando — научно-технологический парк в департаменте Канелонес, сдаёт помещения под лаборатории и пилотные установки.",
+    "IASP":"International Association of Science Parks — международная ассоциация научных парков и зон инноваций.",
+    "ATCC":"American Type Culture Collection — крупнейший поставщик клеточных линий. В Уругвае авторизованного дистрибьютора нет, вероятна прямая отправка.",
+    "FBS":"Fetal bovine serum — эмбриональная телячья сыворотка. Как продукт животного происхождения идёт через минсельхоз, а не через минздрав.",
+    "CAEP":"Уругвайская процедура ввоза продуктов животного происхождения через службу здоровья животных.",
+    "CAPI":"Смежная процедура минсельхоза для ввоза животных материалов.",
+    "IRNR":"Impuesto a las Rentas de los No Residentes — уругвайский налог на доходы нерезидентов; в свободной зоне не взимается."
+  };
+
+  var pop = document.getElementById('pop');
+  if (!pop) return;
+  var hEl = pop.querySelector('.h'), bEl = pop.querySelector('.b'), xEl = pop.querySelector('.x');
+  var open = null;
+
+  var keys = Object.keys(TERMS).sort(function (a, b) { return b.length - a.length; });
+  function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  var rx = new RegExp('(?:' + keys.map(esc).join('|') + ')', 'g');
+
+  var SKIP = { A: 1, BUTTON: 1, CODE: 1, SCRIPT: 1, STYLE: 1, TEXTAREA: 1, TH: 1 };
+  function skip(node) {
+    for (var p = node.parentNode; p && p !== document.body; p = p.parentNode) {
+      if (SKIP[p.nodeName]) return true;
+      if (p.id === 'pop' || (p.classList && p.classList.contains('topnav'))) return true;
+      if (p.nodeName === 'TD' && p.parentNode && p.parentNode.parentNode &&
+          p.parentNode.parentNode.nodeName === 'TBODY' && p.cellIndex === 0) return true;
+    }
+    return false;
+  }
+
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  var nodes = [], n;
+  while ((n = walker.nextNode())) { if (n.nodeValue.length > 2 && !skip(n)) nodes.push(n); }
+
+  nodes.forEach(function (node) {
+    var text = node.nodeValue;
+    rx.lastIndex = 0;
+    if (!rx.test(text)) return;
+    rx.lastIndex = 0;
+    var frag = document.createDocumentFragment(), last = 0, m;
+    while ((m = rx.exec(text))) {
+      if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'term';
+      b.setAttribute('aria-expanded', 'false');
+      b.dataset.k = m[0];
+      b.textContent = m[0];
+      frag.appendChild(b);
+      last = m.index + m[0].length;
+    }
+    if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+
+  function hide() {
+    pop.classList.remove('on');
+    pop.setAttribute('aria-hidden', 'true');
+    if (open) { open.setAttribute('aria-expanded', 'false'); open = null; }
+  }
+
+  function show(btn) {
+    var k = btn.dataset.k;
+    hEl.textContent = k;
+    bEl.textContent = TERMS[k] || '';
+    pop.classList.add('on');
+    pop.setAttribute('aria-hidden', 'false');
+    if (open) open.setAttribute('aria-expanded', 'false');
+    open = btn;
+    btn.setAttribute('aria-expanded', 'true');
+
+    var r = btn.getBoundingClientRect();
+    var pw = pop.offsetWidth, ph = pop.offsetHeight;
+    var left = r.left + r.width / 2 - pw / 2;
+    left = Math.max(12, Math.min(left, window.innerWidth - pw - 12));
+    var top = r.top - ph - 12, upward = false;
+    if (top < 12) { top = r.bottom + 12; upward = true; }
+    pop.classList.toggle('up', upward);
+    pop.style.left = left + 'px';
+    pop.style.top = top + 'px';
+    var arrow = pop.querySelector('.arw');
+    var ax = r.left + r.width / 2 - left - 6;
+    arrow.style.left = Math.max(14, Math.min(ax, pw - 26)) + 'px';
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('.term') : null;
+    if (t) { e.preventDefault(); (t === open) ? hide() : show(t); return; }
+    if (!e.target.closest || !e.target.closest('#pop')) hide();
+  });
+  xEl.addEventListener('click', hide);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+  window.addEventListener('resize', hide);
+  window.addEventListener('scroll', function () { if (open) show(open); }, { passive: true });
+})();
+</script>
+
+<script type="module">
+  try {
+    const { animate, inView, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const els = document.querySelectorAll(".reveal");
+    if (reduced) {
+      els.forEach(e => { e.style.opacity = 1; e.style.transform = "none"; });
+    } else {
+      els.forEach(el => {
+        inView(el, () => {
+          animate(el, { opacity: [0, 1], transform: ["translateY(18px)", "translateY(0px)"] },
+                  { duration: 0.5, easing: [0.2, 0.7, 0.3, 1] });
+        }, { margin: "-8% 0px -8% 0px" });
+      });
+      const cards = document.querySelectorAll(".bento .card");
+      if (cards.length) {
+        inView(".bento", () => {
+          animate(cards, { opacity: [null, 1] }, { delay: stagger(0.04), duration: 0.35 });
+        }, { margin: "-10% 0px" });
+      }
+    }
+  } catch (e) {
+    document.querySelectorAll(".reveal").forEach(el => { el.style.opacity = 1; el.style.transform = "none"; });
+  }
+</script>
+</body>
+</html>

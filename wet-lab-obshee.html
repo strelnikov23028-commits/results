@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Частная клеточная лаборатория: общая часть — схема, биобезопасность, оборудование, деньги</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="description" content="Общая часть для любой юрисдикции: разбор схемы Элизабет Пэриш по звеньям, биобезопасность лентивекторов, оборудование и бюджет, где брать клетки и как везти, черви без разрешений, российское гражданство против налогового резидентства, чек-лист выбора страны.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --ink:#1D1D1F; --ink-2:#424245; --ink-3:#6E6E73;
+  --line:#E3E3E6; --blue:#0071E3; --blue-ink:#0058B0;
+  --green:#1E8E3E; --amber:#B26A00; --red:#C4291E; --violet:#5E5CE6;
+  --r-lg:22px; --r-md:16px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --shadow-h:0 2px 6px rgba(0,0,0,.06), 0 16px 40px rgba(0,0,0,.10);
+  --maxw:1120px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+a{color:var(--blue-ink); text-decoration:none; border-bottom:1px solid rgba(0,113,227,.28)}
+a:hover{border-bottom-color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue); outline-offset:3px; border-radius:6px}
+h1,h2,h3,h4{letter-spacing:-.022em; line-height:1.16; margin:0}
+h1{font-size:clamp(34px,5.4vw,58px); font-weight:700}
+h2{font-size:clamp(26px,3.4vw,38px); font-weight:700}
+h3{font-size:clamp(19px,2.1vw,23px); font-weight:600; margin-bottom:10px}
+h4{font-size:17px; font-weight:600; margin-bottom:8px}
+p{margin:0 0 16px}
+small{font-size:13.5px; color:var(--ink-3)}
+.mono{font-variant-numeric:tabular-nums}
+
+.topbar{position:sticky; top:0; z-index:100; background:rgba(245,245,247,.82); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:20px; height:52px; justify-content:space-between}
+.brand{font-weight:600; font-size:15px; letter-spacing:-.01em; white-space:nowrap}
+.topnav{display:flex; gap:18px; overflow-x:auto; scrollbar-width:none}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{font-size:14px; color:var(--ink-2); border:0; white-space:nowrap; padding:6px 0}
+.topnav a:hover{color:var(--blue-ink)}
+
+.hero{padding:72px 0 24px}
+.eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--blue-ink); background:rgba(0,113,227,.09); padding:7px 13px; border-radius:100px; margin-bottom:22px}
+.lede{font-size:clamp(18px,2.2vw,21px); color:var(--ink-2); max-width:820px; margin-top:22px}
+
+.bento{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin:32px 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:26px; box-shadow:var(--shadow); transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s}
+.card.hoverable:hover{transform:translateY(-2px); box-shadow:var(--shadow-h)}
+.c12{grid-column:span 12} .c8{grid-column:span 8} .c6{grid-column:span 6} .c4{grid-column:span 4}
+@media(max-width:900px){.c8,.c6,.c4{grid-column:span 12}}
+.kicker{font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px}
+.big{font-size:clamp(28px,4vw,42px); font-weight:700; letter-spacing:-.03em; line-height:1.05}
+
+section{padding:44px 0; scroll-margin-top:68px}
+.section-head{max-width:820px; margin-bottom:26px}
+.section-head p{color:var(--ink-2); margin-top:14px}
+
+.badge{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:100px; border:1px solid transparent; white-space:nowrap}
+.b-green{background:rgba(30,142,62,.10); color:var(--green); border-color:rgba(30,142,62,.2)}
+.b-amber{background:rgba(178,106,0,.10); color:var(--amber); border-color:rgba(178,106,0,.2)}
+.b-red{background:rgba(196,41,30,.09); color:var(--red); border-color:rgba(196,41,30,.2)}
+.b-blue{background:rgba(0,113,227,.09); color:var(--blue-ink); border-color:rgba(0,113,227,.2)}
+.b-violet{background:rgba(94,92,230,.10); color:var(--violet); border-color:rgba(94,92,230,.22)}
+.b-gray{background:#F0F0F2; color:var(--ink-3); border-color:var(--line)}
+
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow); -webkit-overflow-scrolling:touch; margin-bottom:18px}
+table{border-collapse:collapse; width:100%; min-width:820px; font-size:15px}
+th,td{padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+th{font-size:12.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); background:#FAFAFB}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#FBFBFD}
+td strong{font-weight:600}
+
+ol.steps{counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:14px}
+ol.steps li{counter-increment:s; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:20px 22px 20px 62px; position:relative; box-shadow:var(--shadow)}
+ol.steps li::before{content:counter(s); position:absolute; left:20px; top:19px; width:28px; height:28px; border-radius:9px; background:var(--blue); color:#fff; font-size:14px; font-weight:600; display:flex; align-items:center; justify-content:center}
+ul.tick{list-style:none; padding:0; margin:0 0 8px; display:grid; gap:10px}
+ul.tick li{position:relative; padding-left:26px; color:var(--ink-2)}
+ul.tick li::before{content:""; position:absolute; left:2px; top:9px; width:8px; height:8px; border-radius:50%; background:var(--blue)}
+ul.tick.warn li::before{background:var(--amber)}
+ul.tick.bad li::before{background:var(--red)}
+ul.tick.good li::before{background:var(--green)}
+
+.quote{border-left:3px solid var(--blue); padding:2px 0 2px 20px; color:var(--ink-2); font-size:16.5px; margin:0 0 18px}
+.note{background:#FFF9EC; border:1px solid #F2E2BC; border-radius:var(--r-md); padding:18px 20px; font-size:15.5px; color:#5A4300}
+.note.blue{background:#EFF6FF; border-color:#CFE3FB; color:#0B3E75}
+.note.red{background:#FDF1F0; border-color:#F5D2CF; color:#7A1C15}
+.note.green{background:#F0F8F2; border-color:#CDE7D5; color:#14532B}
+.note p:last-child{margin-bottom:0}
+
+.chain{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:6px 0 18px}
+@media(max-width:900px){.chain{grid-template-columns:1fr}}
+.chain .node{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 20px; box-shadow:var(--shadow)}
+.chain .node .flag{font-size:12.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--violet); margin-bottom:8px}
+.chain .node h4{margin-bottom:6px}
+.chain .node p{margin:0; font-size:14.5px; color:var(--ink-2)}
+
+.countries{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:8px 0 0}
+@media(max-width:900px){.countries{grid-template-columns:1fr}}
+.country{display:block; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px; box-shadow:var(--shadow); border-bottom:1px solid var(--line); transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s}
+.country:hover{transform:translateY(-2px); box-shadow:var(--shadow-h); border-bottom-color:var(--line)}
+.country .n{font-size:22px; font-weight:700; letter-spacing:-.02em; color:var(--ink); margin-bottom:6px}
+.country .d{font-size:14.5px; color:var(--ink-2)}
+
+.srcgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px}
+.src{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; font-size:14.5px}
+.src a{border:0; font-weight:500}
+.src small{display:block; margin-top:4px; line-height:1.45}
+
+.dl{display:grid; gap:0; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; background:var(--surface)}
+.dl .row{display:grid; grid-template-columns:minmax(150px,240px) 1fr; gap:0; border-bottom:1px solid var(--line)}
+.dl .row:last-child{border-bottom:0}
+.dl .row > div{padding:12px 16px}
+.dl .row .t{font-weight:600; background:#FAFAFB; font-size:14.5px}
+.dl .row .d{font-size:14.5px; color:var(--ink-2)}
+@media(max-width:700px){.dl .row{grid-template-columns:1fr} .dl .row .t{border-bottom:1px solid var(--line)}}
+
+.term{border:0; background:none; padding:0; margin:0; font:inherit; color:inherit; cursor:help;
+  border-bottom:1px dashed rgba(94,92,230,.55); transition:background .15s, border-color .15s}
+.term:hover{background:rgba(94,92,230,.08); border-bottom-color:var(--violet)}
+.term[aria-expanded="true"]{background:rgba(94,92,230,.12); border-bottom-color:var(--violet)}
+#pop{position:fixed; z-index:900; max-width:340px; background:var(--surface); border:1px solid var(--line);
+  border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,.08), 0 20px 50px rgba(0,0,0,.16); padding:16px 18px 14px;
+  opacity:0; transform:translateY(6px) scale(.98); pointer-events:none; transition:opacity .16s ease, transform .16s cubic-bezier(.2,.7,.3,1)}
+#pop.on{opacity:1; transform:none; pointer-events:auto}
+#pop .h{font-size:15px; font-weight:600; margin:0 26px 6px 0; letter-spacing:-.01em}
+#pop .b{font-size:14.5px; line-height:1.5; color:var(--ink-2); margin:0}
+#pop .x{position:absolute; top:10px; right:10px; width:26px; height:26px; border:0; border-radius:8px; background:#F0F0F2;
+  color:var(--ink-3); font-size:15px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center}
+#pop .x:hover{background:#E6E6EA; color:var(--ink)}
+#pop .arw{position:absolute; width:12px; height:12px; background:var(--surface); border:1px solid var(--line);
+  border-top:0; border-left:0; transform:rotate(45deg); left:calc(50% - 6px); bottom:-7px}
+#pop.up .arw{top:-7px; bottom:auto; transform:rotate(225deg)}
+@media (prefers-reduced-motion:reduce){#pop{transition:none}}
+
+footer{padding:44px 0 64px; border-top:1px solid var(--line); margin-top:40px; color:var(--ink-3); font-size:14px}
+.reveal{opacity:1}
+.js .reveal{opacity:0; transform:translateY(18px)}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1 !important; transform:none !important}}
+</style>
+</head>
+<body>
+<script>
+document.documentElement.classList.add('js');
+setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(e){e.style.opacity=1;e.style.transform='none';});},2200);
+</script>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brand">Общая часть</span>
+    <nav class="topnav" aria-label="Разделы страницы">
+      <a href="#chain">Принцип звеньев</a>
+      <a href="#parrish">Кейс Пэриш</a>
+      <a href="#bio">Биобезопасность</a>
+      <a href="#kit">Оборудование</a>
+      <a href="#cells">Клетки и доставка</a>
+      <a href="#worms">Черви</a>
+      <a href="#russia">Российская сторона</a>
+      <a href="#choose">Выбор страны</a>
+      <a href="#glossary">Словарь</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Общая часть · 4 сентября 2026</span>
+    <h1 class="reveal">Что не зависит<br>от выбранной страны</h1>
+    <p class="lede reveal">Здесь собрано всё, что одинаково работает в Панаме, Уругвае и Парагвае: как устроена схема, в которой ни одно звено не видит картины целиком, какой уровень биобезопасности требуют лентивекторы, сколько стоит железо, где заказывают клетки и чем их везут, почему черви не требуют вообще никаких разрешений, и что означает российский паспорт отдельно от налогового резидентства.</p>
+    <p class="lede reveal" style="font-size:16px; margin-top:14px">Страновая специфика — право, лицензии, аренда, импорт, визы — вынесена на отдельные страницы, чтобы не смешивать.</p>
+    <div class="countries reveal" style="margin-top:26px">
+      <a class="country" href="panama-laboratoriya-praktika.html">
+        <div class="n">Панама</div>
+        <div class="d">Лучшая логистика из Рио и живой прецедент лицензированной клеточной лаборатории. Резидентство от $200 000 и регуляторная серая зона, ставшая с 2026 года зоной высокого риска</div>
+      </a>
+      <a class="country" href="uruguay-laboratoriya.html">
+        <div class="n">Уругвай</div>
+        <div class="d">Резидентство почти даром, прямые рейсы и бесплатный сертификат на ввоз биообразцов. Взамен — запрет коммерции человеческими клетками и режим ГМО, написанный про растения</div>
+      </a>
+      <a class="country" href="paraguay-laboratoriya.html">
+        <div class="n">Парагвай</div>
+        <div class="d">Самая дешёвая аренда и налог на прибыль 10%, компания за 72 часа. Взамен — самая слабая научная инфраструктура и регулирование, которое сами парагвайские авторы называют незавершённым</div>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section id="chain">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Принцип звеньев: почему это вообще работает</h2>
+      <p>Главный вывод из всех разобранных кейсов не про юрисдикции, а про конструкцию. Работающие схемы устроены так, что каждое звено находится в своей стране, действует по её правилам и не нарушает их — а картина целиком не собирается ни у кого, кроме владельца.</p>
+    </div>
+
+    <div class="chain reveal">
+      <div class="node">
+        <div class="flag">Звено 1</div>
+        <h4>Юрлицо и IP</h4>
+        <p>Компания, патенты, договоры. Может стоять в стране, где сама процедура была бы незаконна — владение интеллектуальной собственностью ничего не нарушает</p>
+      </div>
+      <div class="node">
+        <div class="flag">Звено 2</div>
+        <h4>Производство</h4>
+        <p>Контрактная лаборатория делает вектор или конструкт. Она не знает, что вы с ним будете делать, и по своим правилам чиста</p>
+      </div>
+      <div class="node">
+        <div class="flag">Звено 3</div>
+        <h4>Работа с материалом</h4>
+        <p>Ваша лаборатория. Именно здесь возникают все вопросы биобезопасности, импорта и лицензий — и именно это звено выбирает страну</p>
+      </div>
+      <div class="node">
+        <div class="flag">Звено 4</div>
+        <h4>Аналитика</h4>
+        <p>Измерения отдаются наружу, часто в третью страну. Побочный эффект: независимость данных — но и утечка предмета работы</p>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Что этот принцип даёт</h3>
+        <ul class="tick good">
+          <li><strong>Ни одно звено не нарушает закон своей страны.</strong> Контрактная лаборатория производит вектор легально; клиника вводит препарат по своим правилам; аналитическая лаборатория просто меряет образец.</li>
+          <li><strong>Скорость.</strong> Схему собирают за месяцы, а не за годы, потому что ничего не надо строить — только законтрактовать.</li>
+          <li><strong>Сменяемость.</strong> Отвалилось звено — заменяется подрядчик, а не проект.</li>
+        </ul>
+      </div>
+      <div class="card c6 reveal">
+        <h3>Чего он не даёт</h3>
+        <ul class="tick bad">
+          <li><strong>Данных.</strong> Если вы отдаёте наружу и производство, и аналитику, у вас нет ни контроля методики, ни возможности повторить измерение. Именно на этом разваливаются все громкие кейсы.</li>
+          <li><strong>Приватности.</strong> Подрядчик по синтезу и секвенированию узнаёт предмет работы точнее, чем любой сотрудник. Разносите заказы так, чтобы ни у одного не складывалась полная картина.</li>
+          <li><strong>Независимости от одного звена.</strong> Ровно то звено, которое требует капитала и разрешений — собственная лаборатория, — и есть то, которое обычно не состаивается.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="parrish">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Кейс Элизабет Пэриш, разложенный по звеньям</h2>
+      <p>Самый известный пример этой конструкции. Ниже — что установлено по источникам, а что не раскрыто до сих пор.</p>
+    </div>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead><tr><th style="width:16%">Звено</th><th style="width:18%">Где</th><th>Что известно</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Юрлицо и IP</strong></td>
+            <td>США, штат Вашингтон</td>
+            <td><a href="https://bioviva-science.com/" target="_blank" rel="noopener">BioViva USA Inc.</a>, Bainbridge Island, основана в 2015 году. Патент <a href="https://en.wikipedia.org/wiki/BioViva" target="_blank" rel="noopener">US-11266721-B1</a> «Methods of treating or preventing age related disorders». Соучредитель Jason Williams передал компании права по патенту — тот самый, кто в 2013 году прекратил неодобренные стволовые терапии после требования FDA. То есть опыт общения с американским регулятором у команды был <em>до</em> всей истории</td>
+          </tr>
+          <tr>
+            <td><strong>Производство вектора</strong></td>
+            <td>Не раскрыто</td>
+            <td>Обе конструкции — AAV с фоллистатином и AAV с теломеразой — произведены по контракту коммерческой лабораторией <strong>за пределами США</strong>. Название компании не публиковалось ни в 2015 году, ни позже; проверка по нескольким независимым заходам его не даёт. Это самая аккуратная часть конструкции: производителя нельзя ни проверить, ни привлечь</td>
+          </tr>
+          <tr>
+            <td><strong>Введение</strong></td>
+            <td>Колумбия</td>
+            <td>15 сентября 2015 года. По <a href="https://www.technologyreview.com/2015/10/14/165802/a-tale-of-do-it-yourself-gene-therapy/" target="_blank" rel="noopener">репортажу MIT Technology Review</a> — «скромно оборудованный кабинет врача», присутствовали врач и медсестра, имя врача не раскрывалось, сама Пэриш сначала отказывалась подтверждать даже страну. Пол Кнопфлер <a href="https://ipscell.com/2015/10/diy-gene-therapy/" target="_blank" rel="noopener">тогда же связал процедуру</a> с нелицензированной клиникой стволовых клеток. Клиника Jason Williams в Боготе существовала, но процедура прошла <strong>не</strong> в ней</td>
+          </tr>
+          <tr>
+            <td><strong>Аналитика</strong></td>
+            <td>США, верификация — Европа</td>
+            <td>Длину теломер лейкоцитов мерила <a href="https://www.the-scientist.com/first-data-from-anti-aging-gene-therapy-33661" target="_blank" rel="noopener">SpectraCell Laboratories</a> в Хьюстоне: забор в сентябре 2015 (до) и в марте 2016 (после), результат 6,71 kb → 7,33 kb. «Независимо верифицировали» брюссельская НКО HEALES и британский Biogerontology Research Foundation. Критика по существу: погрешность измерения теломер около 10% перекрывает заявленный эффект</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Что было дальше</h3>
+        <ul class="tick">
+          <li><strong>2016, BioViva Fiji.</strong> Анонс клиники и производства полного цикла с рендерами. Власти Фиджи сообщили прессе, что такой компании не существует даже на бумаге. Единственное звено, требовавшее капитала и разрешений, оказалось единственным несостоявшимся.</li>
+          <li><strong>Клиентов ведёт партнёр.</strong> <a href="https://www.integrated-health-systems.com/" target="_blank" rel="noopener">Integrated Health Systems</a> — сеть клиник в Южной Америке плюс врачи в США, Великобритании и Индии. Цены — сотни тысяч долларов.</li>
+          <li><strong>2021, Мехико.</strong> <a href="https://www.biospace.com/six-patients-with-dementia-received-controversial-gene-therapy-injection-in-mexico-according-to-biovia" target="_blank" rel="noopener">Шесть пациентов с деменцией</a> получили генную терапию. Ни одно издание не смогло подтвердить ни личности пациентов, ни результаты — источник только сама компания.</li>
+          <li><strong>Сейчас.</strong> Платформа на CMV-векторе вместо AAV совместно с Rutgers (<a href="https://www.nature.com/articles/d43747-023-00117-w" target="_blank" rel="noopener">публикация в Nature Biopharma Dealmakers</a>), Series A с 2023 года, <a href="https://longevity.technology/news/bioviva-to-spin-out-its-rd-and-bioinformatics/" target="_blank" rel="noopener">планы выделить R&amp;D в дочерние структуры</a>. Заявляют более 300 пациентов по миру — независимого подтверждения нет.</li>
+        </ul>
+      </div>
+      <div class="card c6 reveal">
+        <h3>Вывод, который меняет постановку задачи</h3>
+        <p style="color:var(--ink-2)">В этой схеме собственная лаборатория <strong>не понадобилась вообще</strong> — потому что там ничего не исследовали. Там покупали производство и продавали введение.</p>
+        <p style="color:var(--ink-2)">Лаборатория нужна ровно в противоположном сценарии: когда вы хотите ставить эксперименты и получать данные, которые не разваливаются от десятипроцентной погрешности измерения. И тогда все вопросы этого документа — биобезопасность, импорт, лицензии — становятся вашими.</p>
+        <p style="margin-bottom:0"><span class="badge b-violet">Практическое следствие</span> клиническую часть и исследовательскую стоит держать в разных юрисдикциях и разных юрлицах. У них противоположные требования: исследованию нужна инфраструктура, клинике — правовая рамка для процедуры.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Биобезопасность: что требуют лентивекторы</h2>
+      <p>Это одинаково везде, потому что стандарты международные. Национальное регулирование может добавлять требования, но не отменяет физику работы.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Уровень защиты определяется не «лентивирусом», а деталями</h3>
+        <p style="color:var(--ink-2)">Сами лентивирусы отнесены к третьей группе риска, но векторы на их основе — нет. <a href="https://ibc.utah.edu/library/recombinant-lentiviral-vectors.php" target="_blank" rel="noopener">Комитет по биобезопасности Университета Юты</a> формулирует границу так:</p>
+        <ul class="tick good">
+          <li><strong>BSL-2 достаточно</strong> для систем третьего и четвёртого поколения с самоинактивирующимися LTR, без онкогенного трансгена, при объёме производства до 100 мл.</li>
+        </ul>
+        <ul class="tick bad">
+          <li><strong>BSL-2 enhanced обязателен</strong>, если есть онкогенный трансген, объём свыше 100 мл, конструкция CRISPR с Cas9 и направляющей РНК в одном векторе, либо система первого-второго поколения или любая трёхплазмидная.</li>
+        </ul>
+        <p style="margin-bottom:0"><small>Отдельно отмечу: NIH не задают лентивекторам фиксированный уровень напрямую — у них есть <a href="https://osp.od.nih.gov/policies/biosafety-and-biosecurity-policy/" target="_blank" rel="noopener">отдельное руководство по оценке риска</a>, где уровень выводится из природы трансгена, поколения системы и вероятности образования репликационно-компетентного вируса.</small></p>
+      </div>
+
+      <div class="card c6 reveal">
+        <h3>Чем вектор третьего поколения отличается от вируса</h3>
+        <p style="color:var(--ink-2)">Четыре плазмиды вместо одного генома: две упаковочные, оболочечная и трансферная. Акцессорные гены удалены. Оболочка заменена на белок VSV-G. LTR самоинактивирующиеся. Собрать из этого реплицирующийся вирус практически невозможно — но «практически» проверяется экспериментом, а не верой.</p>
+        <div class="dl">
+          <div class="row"><div class="t">Проверка на RCL</div><div class="d">Три пассажа супернатанта на клетках 293T с тестированием каждого пассажа на антиген p24 методом ELISA; чувствительность анализа должна быть ниже 12,5 пг/мл</div></div>
+          <div class="row"><div class="t">Дезинфекция</div><div class="d">0,5% гипохлорит натрия, 5% фенол или 70% спирт при контакте <strong>не менее 20 минут</strong>. При разливе — накрыть, обработать от периферии к центру, выдержать 30 минут. Тепловая инактивация — 56 °C не менее 30 минут</div></div>
+          <div class="row"><div class="t">СИЗ</div><div class="d">Две пары перчаток (внешняя снимается в боксе), халат с манжетами или одноразовый со сплошным передом, защита глаз. <strong>Все манипуляции — в шкафу биобезопасности II класса</strong></div></div>
+          <div class="row"><div class="t">Отходы</div><div class="d">Классифицируются как регулируемые медицинские отходы — то есть договор с лицензированным оператором нужен в любой стране</div></div>
+        </div>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="note blue">
+          <p style="margin-bottom:0"><strong>Практический вывод для закупки.</strong> Собирайте комплект вокруг шкафа биобезопасности <strong>II класса</strong>. Он не входит в американский экспортный контрольный перечень ECCN 2B352 и вывозится без лицензии BIS, тогда как шкаф III класса и ферментёры от 20 литров в этот перечень входят прямо. Для работы с клеточными культурами и лентивекторами третьего поколения второго класса достаточно — а вопрос экспортной лицензии снимается сам.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kit">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Оборудование и векторы: что покупать и почём</h2>
+      <p>Цены ниже — те, что производители публикуют открыто. Там, где прайс закрыт и работает только запрос котировки, это сказано прямо, а не заменено выдуманной цифрой.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Минимальный комплект под фибробласты и лентивекторы</h3>
+        <ul class="tick">
+          <li>Шкаф биобезопасности II класса, тип A2 — <strong>$6 500–8 000</strong> по открытым прайсам (USA Lab, Across International)</li>
+          <li>CO₂-инкубатор, лучше два — резервирование важнее объёма</li>
+          <li>Центрифуга с охлаждением, ротор под 15 и 50 мл</li>
+          <li>Морозильники −20 и −80, дьюар с жидким азотом</li>
+          <li>Инвертированный микроскоп, обязательно с флуоресценцией, если работаете с репортёрами</li>
+          <li>Автоклав, система очистки воды типа I, аспиратор</li>
+        </ul>
+        <p style="margin-bottom:0"><small>Общую смету лаборатории на 80–150 м² я сознательно не привожу: проверяемого источника с такой цифрой нет, а придуманный бюджет хуже отсутствующего. Считать нужно по своему списку и котировкам поставщиков.</small></p>
+      </div>
+
+      <div class="card c6 reveal">
+        <h3>Векторы: заказать дешевле, чем паковать самому</h3>
+        <div class="dl">
+          <div class="row"><div class="t"><a href="https://en.vectorbuilder.com/" target="_blank" rel="noopener">VectorBuilder</a></div><div class="d">Упаковка лентивируса <strong>$269–1 699</strong>, срок 6–12 дней. Единственный из крупных, кто публикует прайс открыто</div></div>
+          <div class="row"><div class="t"><a href="https://www.addgene.org/" target="_blank" rel="noopener">Addgene</a></div><div class="d">Плазмида <strong>$34</strong>, готовый лентипреп <strong>$170</strong> за мл, срок 6–8 недель. <strong>Только для академических организаций</strong> — частной компании этот путь закрыт</div></div>
+          <div class="row"><div class="t">Cellecta, GeneCopoeia, SignaGen, Charles River</div><div class="d">Работают по запросу котировки, публичных прайсов нет</div></div>
+        </div>
+        <p style="margin:14px 0 0"><span class="badge b-amber">Ловушка</span> ограничение Addgene по академическому статусу — причина, по которой имеет смысл заранее продумать научную аффилиацию: партнёрство с университетом открывает доступ к депозитариям, закрытым для коммерческой структуры.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cells">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Где брать клетки и чем их везти</h2>
+      <p>Это то самое место, где юрисдикция перестаёт быть теорией: доедут ли клетки живыми и за сколько недель.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Источники линий</h3>
+        <p style="color:var(--ink-2)"><a href="https://www.atcc.org/support/order-support/permits-and-restrictions" target="_blank" rel="noopener">ATCC</a> отправляет напрямую во все страны, где нет авторизованного дистрибьютора. Импортные разрешения получает <strong>заказчик</strong> и передаёт их до отгрузки; сам ATCC предупреждает, что процедура в госорганах занимает несколько недель и более.</p>
+        <p style="color:var(--ink-2)">Альтернативы для не-американских линий: <a href="https://www.culturecollections.org.uk/" target="_blank" rel="noopener">ECACC</a> (Великобритания), <a href="https://www.dsmz.de/" target="_blank" rel="noopener">DSMZ</a> (Германия), <a href="https://cellbank.nibiohn.go.jp/english/" target="_blank" rel="noopener">JCRB</a> (Япония).</p>
+        <p style="margin-bottom:0"><span class="badge b-blue">Разница, которую стоит знать</span> для рутинных линий вопрос закрывается заказом. Для первичных человеческих клеток добавляются этика, согласия доноров и — в большинстве стран — совсем другой правовой режим.</p>
+      </div>
+
+      <div class="card c6 reveal">
+        <h3>Холодовая цепь</h3>
+        <p style="color:var(--ink-2)">Два режима: сухой лёд (−78 °C, автономия 3–5 суток) и сухой криошиппер на жидком азоте (−150 °C и ниже, до двух недель). Второе — для дорогих или незаменимых образцов.</p>
+        <ul class="tick">
+          <li><a href="https://www.worldcourier.com/solutions/cryogenic-transportation" target="_blank" rel="noopener">World Courier</a> — более 140 собственных офисов в 50 странах, свыше 12 000 криоотправлений в год. <strong>Работает во всех трёх рассматриваемых странах</strong></li>
+          <li><a href="https://www.marken.com/" target="_blank" rel="noopener">Marken</a> — есть депо в Мехико, но нет в Уругвае</li>
+          <li><a href="https://www.cryoport.com/solutions/shipping-systems/cryogenic/" target="_blank" rel="noopener">Cryoport</a> — собственных центров в Латинской Америке нет вовсе</li>
+        </ul>
+        <p style="margin-bottom:0"><small>Наличие офиса курьера в стране — не формальность: именно он дозаправляет шиппер при задержке на таможне, и без него срок автономии превращается в дедлайн.</small></p>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="note green">
+          <p style="margin-bottom:0"><strong>Первый практический шаг в любой стране — тестовый импорт одной ампулы.</strong> Он стоит несколько сотен долларов и отвечает на главный вопрос честнее любой консультации: сколько на самом деле идёт растаможка научного груза и жив ли образец на выходе. Делать это нужно <em>до</em> аренды помещения, а не после — потому что помещение поменять дорого, а страну на этом этапе ещё дёшево.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="worms">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Черви: почему с них имеет смысл начинать</h2>
+      <p>Короткий ответ на вопрос «что нужно, чтобы работать с <em>C. elegans</em>»: ничего. Ни разрешения, ни комитета, ни вивария — и это не лазейка, а прямое следствие того, как написаны законы о защите животных во всём мире.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c8 reveal">
+        <h3>Беспозвоночные выведены из-под регулирования везде</h3>
+        <div class="dl">
+          <div class="row"><div class="t">США</div><div class="d">Политика Службы общественного здравоохранения и надзор OLAW распространяются только на <strong>позвоночных</strong>. Закон о защите животных (Animal Welfare Act) беспозвоночных прямо исключает</div></div>
+          <div class="row"><div class="t">Евросоюз</div><div class="d">Директива 2010/63/EU охватывает позвоночных и <strong>головоногих моллюсков</strong> — нематоды в неё не попадают</div></div>
+          <div class="row"><div class="t">Латинская Америка</div><div class="d">Отдельных законов о лабораторных животных, как правило, нет; требования приходят из общих норм об исследованиях и касаются проектов с животными в смысле позвоночных</div></div>
+        </div>
+        <p style="margin:16px 0 0; color:var(--ink-2)">Практический смысл: <strong>с червями вы можете начать работу в тот день, когда собрали лабораторию</strong>, не дожидаясь ни одного разрешения. Комитет по этике и благополучию животных становится обязательным ровно в тот момент, когда в проекте появляются мыши — и вот его придётся искать заранее, потому что в частной лаборатории такой инфраструктуры по умолчанию нет.</p>
+      </div>
+
+      <div class="card c4 reveal">
+        <h3>Что нужно физически</h3>
+        <ul class="tick good">
+          <li>Штаммы из <a href="https://cgc.umn.edu/" target="_blank" rel="noopener">Caenorhabditis Genetics Center</a> при Университете Миннесоты — основной мировой депозитарий. Аккаунт $30 в год, штамм $10 для академической организации и <strong>$150 для коммерческой</strong>, плюс $1 международного сбора за штамм с 1 марта 2026. Требуется lab code, перераспределять штаммы за пределы своей организации запрещено, выживаемость при международной отправке не гарантируется</li>
+          <li><strong>Осторожно с трансгенными линиями:</strong> большинство рабочих штаммов несут репортёры GFP или mCherry — а это уже генетически модифицированные организмы со своим режимом в каждой стране. Дикий тип N2 такой проблемы не создаёт</li>
+          <li>Чашки с агаром NGM и газон кормовой <em>E. coli</em> OP50</li>
+          <li>Инкубатор на 20 °C</li>
+          <li>Стереомикроскоп с подсветкой</li>
+          <li>Платиновая петля для переноса</li>
+        </ul>
+        <p style="margin-bottom:0"><small>Таможенный вопрос всё же есть: нематоды — живой биологический материал, и ввоз может потребовать разрешения санитарной или фитосанитарной службы. Это уточняется на страновых страницах.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="russia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Российская сторона: паспорт и резидентство — разные вещи</h2>
+      <p>Это ошибка, которую совершают почти все, включая консультантов. Гражданство определяет, как вас видит банк. Налоговое резидентство определяет, кому вы платите. Они могут лежать в разных странах, и у вас именно так.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Из паспорта следует комплаенс</h3>
+        <ul class="tick warn">
+          <li><strong>Усиленная проверка.</strong> Россия внесена в список высокорисковых третьих стран ЕС с 29 января 2026 года — это включает углублённую проверку в любом банке, ориентирующемся на европейские стандарты.</li>
+          <li><strong>Потолок депозита.</strong> Статья 5b Regulation (EU) 833/2014 запрещает принимать депозиты свыше 100 000 евро от граждан России, а также от компаний вне ЕС, более чем наполовину принадлежащих россиянам.</li>
+          <li><strong>ВНЖ третьей страны не спасает.</strong> Изъятие из этого запрета написано только под виды на жительство ЕС, ЕЭЗ и Швейцарии. Бразильский, панамский или уругвайский ВНЖ его не снимает.</li>
+          <li><strong>Документы о происхождении средств</strong> требуют присяжного перевода и апостиля, а российские банковские выписки проверяются глубже обычного.</li>
+        </ul>
+      </div>
+
+      <div class="card c6 reveal">
+        <h3>Из резидентства следуют налоги</h3>
+        <p style="color:var(--ink-2)">Налоговое резидентство России определяется <strong>единственным критерием</strong> — не менее 183 календарных дней в стране в течение 12 следующих подряд месяцев (пункт 2 статьи 207 НК РФ). Гражданство, паспорт и прописка статус не создают; период не прерывается краткосрочным выездом на лечение или обучение.</p>
+        <p style="color:var(--ink-2)">Обратное тоже верно: статус <strong>возвращается автоматически</strong>, стоит набрать 183 дня, — никакой процедуры постановки или снятия не существует.</p>
+        <p style="margin-bottom:0"><span class="badge b-green">Ключевое следствие</span> иностранная компания вообще не признаётся контролируемой, если её контролирующее лицо не является налоговым резидентом РФ. Это прямо записано в подпункте 2 пункта 1 статьи 25.13 НК РФ.</p>
+      </div>
+
+      <div class="card c12 reveal">
+        <h3>Что было бы, будь вы налоговым резидентом России</h3>
+        <p style="color:var(--ink-2)">Привожу для контраста — чтобы было видно, что именно снимает нерезидентство, и чтобы вы понимали цену случайного пересечения порога в 183 дня.</p>
+        <div class="tablewrap" style="box-shadow:none; margin-bottom:0">
+          <table>
+            <thead><tr><th>Обязанность</th><th>Условие</th><th>Санкция за нарушение</th></tr></thead>
+            <tbody>
+              <tr><td>Уведомление об участии в иностранной организации</td><td>Доля свыше 10%, срок — 3 месяца с даты возникновения или изменения доли</td><td><strong>50 000 ₽</strong> за каждую организацию (пункт 2 статьи 129.6 НК РФ)</td></tr>
+              <tr><td>Ежегодное уведомление о КИК</td><td>Для физлиц — не позднее 30 апреля следующего года, независимо от размера прибыли</td><td><strong>500 000 ₽</strong> за каждую компанию (пункт 1 статьи 129.6 НК РФ)</td></tr>
+              <tr><td>Налог с прибыли КИК</td><td>Признание контролирующим лицом: доля свыше 25%, либо свыше 10% при совокупной доле резидентов РФ более 50%. Прибыль не учитывается, если не превысила <strong>10 млн ₽</strong></td><td>НДФЛ по прогрессивной шкале от 13% до 22%, действующей с 2025 года</td></tr>
+              <tr><td>Альтернатива — режим фиксированной прибыли</td><td>С 2025 года сумма зависит от числа компаний: <strong>27 990 000 ₽</strong> базы за одну КИК, до 120 899 900 ₽ за пять и более</td><td>Налог ровно <strong>5 млн ₽</strong> в год за одну компанию, минимальный срок применения — пять налоговых периодов</td></tr>
+              <tr><td>Валютные обязанности</td><td>Уведомление ФНС о зарубежных счетах и отчёт о движении средств</td><td><strong>Не применяются</strong> при пребывании за пределами РФ более 183 дней в календарном году — часть 8 статьи 12 ФЗ-173</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin:16px 0 0"><small>Дополнительно: Банк России <a href="https://cbr.ru/press/event/?id=28158" target="_blank" rel="noopener">с 8 декабря 2025 года</a> снял лимиты на переводы валюты за рубеж для граждан РФ. А нерезидент по статье 209 НК РФ облагается только доходами от источников в России — прибыли иностранной компании там нет.</small></p>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="note">
+          <p><strong>Если вы налоговый резидент Бразилии.</strong> С видом на жительство резидентство наступает <strong>с даты въезда</strong>, а не после 183 дней — правило 184 дней действует только для временных виз без трудового договора. Дальше включается обложение по мировому доходу: ежемесячный carnê-leão и годовая декларация DIRPF, обязательная при активах дороже 800 тысяч реалов на 31 декабря.</p>
+          <p>Главное: по <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14754.htm" target="_blank" rel="noopener">Lei 14.754/2023</a> прибыль контролируемой зарубежной компании облагается по ставке <strong>15% ежегодно на 31 декабря независимо от распределения</strong>, если компания зарегистрирована в юрисдикции из списка льготного налогообложения. Панама в этом списке есть. Альтернатива — режим налоговой прозрачности по статье 8, выбор безотзывный на весь срок владения. Плюс декларация CBE в Банк Бразилии при зарубежных активах от $1 млн и удержание 10% у источника с дивидендов, уходящих за рубеж, с 1 января 2026 года.</p>
+          <p style="margin-bottom:0">Двойного налогообложения при этом не возникает: конвенция между Россией и Бразилией от 22 ноября 2004 года действует, применяется с 1 января 2018 года и в число приостановленных соглашений не входит; спор о резидентстве решается по статье 4 — постоянное жилище, центр жизненных интересов, обычное проживание и только в последнюю очередь гражданство. Но рассчитывать на невидимость не стоит: и Бразилия, и Панама входят в действующий перечень ФНС по автоматическому обмену финансовой информацией.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="choose">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Как выбирать страну: семь вопросов вместо интуиции</h2>
+      <p>Порядок важен. Первые три вопроса стоят меньше пяти тысяч долларов и отсеивают юрисдикцию до того, как вы потратитесь на помещение.</p>
+    </div>
+    <ol class="steps reveal">
+      <li><strong>Попадает ли ваша работа под режим ГМО?</strong> Лентивектор и трансдуцированные клетки формально — генетические конструкты. В одних странах для лабораторной работы с ними есть процедура, в других закон написан про сельское хозяйство и вашей ситуации не замечает. Отсутствие процедуры — не разрешение, а неопределённость, и она бывает дороже запрета.</li>
+      <li><strong>Нужна ли лицензия исследовательской лаборатории?</strong> Ключевое различие везде одно: работаете ли вы с образцами людей и выдаёте ли результаты. Лаборатория, которая не принимает пациентов, обычно выпадает из режима клинических лабораторий — но проверять это надо по тексту нормы, а не по логике.</li>
+      <li><strong>Как ввозятся клетки и реагенты?</strong> Есть ли отдельная процедура для живого биоматериала, сколько она стоит и сколько идёт по факту, а не по регламенту. Здесь и делается тестовый импорт одной ампулы.</li>
+      <li><strong>Пустит ли вас страна и на какой срок?</strong> Виза, резидентство, его цена и сроки рассмотрения. Двенадцать месяцев ожидания вида на жительство — это год, в течение которого вы не можете нормально работать.</li>
+      <li><strong>Откроют ли счёт компании с российским бенефициаром?</strong> Вопрос не юридический, а практический: банки не публикуют страновые ограничения, и ответ узнаётся только на подаче.</li>
+      <li><strong>Сколько лететь и сколько это стоит?</strong> Прямой рейс — это не комфорт, а частота присутствия. Лаборатория, до которой добираться с двумя пересадками, посещается вчетверо реже.</li>
+      <li><strong>Есть ли там люди?</strong> Один местный лаборант, умеющий культуру клеток, решает больше, чем любое оборудование: он знает таможенного брокера, оператора отходов и инспектора лично.</li>
+    </ol>
+
+    <h3 class="reveal" style="margin:36px 0 16px">Восемь юрисдикций по решающему критерию</h3>
+    <div class="tablewrap reveal">
+      <table>
+        <thead><tr><th style="width:16%">Страна</th><th>Режим ГМО в закрытых условиях</th><th style="width:26%">Вход и перелёт из Рио</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Уругвай</strong><br><span class="badge b-green">1 место</span></td>
+            <td><strong>Вакуум.</strong> Decreto 353/008 покрывает только генетически модифицированные растения; животные клетки и вирусные векторы в предмет не входят вообще. Удобно, но юридически непрозрачно</td>
+            <td>Виза не нужна, 90 дней. Постоянное резидентство сразу, без инвестиции, пошлина около <strong>$90</strong>. Прямые рейсы — около 14 в неделю, 2 ч 40 мин</td>
+          </tr>
+          <tr>
+            <td><strong>Мексика</strong><br><span class="badge b-blue">2 место</span></td>
+            <td><strong>Уведомительный режим и прямое исключение.</strong> Закон о биобезопасности выводит геном человека и культуру человеческих стволовых клеток из-под своего действия — они регулируются общим законом о здравоохранении. Самая прочная юридическая позиция из восьми</td>
+            <td>Виза не нужна — электронное разрешение SAE, до 180 дней. <strong>Прямых рейсов из Рио нет.</strong> Ввоз клеток — разрешение COFEPRIS, 60 рабочих дней</td>
+          </tr>
+          <tr>
+            <td><strong>Панама</strong><br><span class="badge b-blue">3 место</span></td>
+            <td><strong>Закон есть, регламента нет.</strong> Ley 48 de 2002 определяет <em>uso confinado</em> и создаёт отраслевой комитет по здравоохранению, но подзаконной процедуры под лабораторию не издано. С апреля 2026 пробел сам по себе означает высокий риск</td>
+            <td>Безвиз 90 дней, но резидентство для российского паспорта — от <strong>$200 000</strong>. Лучшая логистика: до 24 рейсов в неделю к январю 2027</td>
+          </tr>
+          <tr>
+            <td><strong>Парагвай</strong></td>
+            <td><strong>Вакуум аграрного типа.</strong> Национальная комиссия по биобезопасности создана как сельскохозяйственная и лесная</td>
+            <td>Для туризма визы нет, для доходной деятельности — нужна. ПМЖ по инвестиции от $150 000, пошлина $350–400. Прямые рейсы с января 2026</td>
+          </tr>
+          <tr>
+            <td><strong>Коста-Рика</strong></td>
+            <td><strong>Вакуум.</strong> Ley 7664 регулирует ГМО «для сельскохозяйственного использования»</td>
+            <td>Виза не нужна, 90 дней, но резидентство рассматривают <strong>12–24 месяца</strong> при очереди в 38 тысяч дел. Прямых рейсов нет. При въезде из Бразилии нужна прививка от жёлтой лихорадки</td>
+          </tr>
+          <tr>
+            <td><strong>Грузия</strong></td>
+            <td><strong>Процедура есть.</strong> Закон о живых ГМО требует лицензии на использование в закрытой системе, министерство выдаёт её в течение 30 дней. Ввоз ГМО по умолчанию запрещён, исключение — закрытая система по лицензии</td>
+            <td>Безвиз для граждан РФ — <strong>целый год подряд</strong>, самый мягкий режим из восьми. Прямых рейсов из Рио нет</td>
+          </tr>
+          <tr>
+            <td><strong>Сербия</strong></td>
+            <td><strong>Процедура есть.</strong> Разрешение министерства на использование ГМО в закрытых системах, лаборатория вносится в публичный реестр держателей разрешений</td>
+            <td>Единое разрешение на пребывание и работу до 3 лет, срок рассмотрения 15 дней, подача только электронно. Прямых рейсов из Рио нет</td>
+          </tr>
+          <tr>
+            <td><strong>ОАЭ</strong></td>
+            <td><strong>Самый жёсткий режим.</strong> Федеральный закон 9/2020 запрещает импорт ГМО без разрешения; санкции — лишение свободы от двух лет и штрафы до 4 млн дирхамов</td>
+            <td>Безвиз 90 дней в течение 180. Единственный нон-стоп в регион Залива — Emirates, около 14 часов 25 минут</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bento">
+      <div class="card c12 reveal">
+        <div class="note blue">
+          <p style="margin-bottom:0"><strong>Что одинаково во всех трёх странах и не снимается ничем:</strong> договор с лицензированным оператором на вывоз биологических отходов, ежегодная сертификация шкафов биобезопасности, калибровки, написание внутренних процедур. Это три-шесть недель и подрядчик на месте — независимо от того, где вы находитесь.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="glossary">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Общий словарь</h2>
+      <p>Термины, которые звучат в любой стране. Страновые аббревиатуры — на соответствующих страницах. Все они подсвечены по тексту пунктиром: нажмите, чтобы увидеть значение.</p>
+    </div>
+    <div class="tablewrap reveal">
+      <table>
+        <thead><tr><th style="width:26%">Термин</th><th>Значение</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BSL-2 / BSL-2 enhanced</strong></td><td>Уровни биологической защиты. Второй — стандарт для клеточных культур и лентивекторов третьего поколения; «enhanced» добавляет требования при онкогенных трансгенах, больших объёмах и системах старых поколений</td></tr>
+          <tr><td><strong>RCL</strong></td><td>Replication-competent lentivirus — репликационно-компетентный лентивирус. То, чего не должно образоваться в вашем препарате; проверяется пассажами и p24-ELISA</td></tr>
+          <tr><td><strong>p24</strong></td><td>Капсидный антиген ВИЧ. По нему методом ELISA ловят присутствие репликационно-компетентного вируса</td></tr>
+          <tr><td><strong>SIN-LTR</strong></td><td>Self-inactivating long terminal repeat — самоинактивирующиеся концевые повторы. Ключевой элемент безопасности вектора третьего поколения</td></tr>
+          <tr><td><strong>VSV-G</strong></td><td>Белок оболочки вируса везикулярного стоматита, которым псевдотипируют лентивектор, чтобы расширить круг заражаемых клеток</td></tr>
+          <tr><td><strong>ECCN 2B352</strong></td><td>Позиция американского экспортного контрольного перечня: шкафы биобезопасности III класса и ферментёры от 20 литров. Требуют лицензии BIS; шкаф II класса в перечень не входит</td></tr>
+          <tr><td><strong>GCP / GLP</strong></td><td>Надлежащая клиническая и надлежащая лабораторная практика. Международные стандарты, на которые ссылаются национальные нормы, даже если страна не входит в ICH</td></tr>
+          <tr><td><strong>ICH</strong></td><td>Международный совет по гармонизации требований к лекарствам. Ни одна из трёх рассматриваемых стран в него не входит, но все инкорпорируют его стандарты ссылкой</td></tr>
+          <tr><td><strong>ISSCR</strong></td><td>International Society for Stem Cell Research — организация, чьи руководства де-факто определяют, какие категории работ требуют специального надзора</td></tr>
+          <tr><td><strong>ATCC</strong></td><td>American Type Culture Collection — основной мировой поставщик клеточных линий. Импортные разрешения получает заказчик, а не поставщик</td></tr>
+          <tr><td><strong>CGC</strong></td><td>Caenorhabditis Genetics Center при Университете Миннесоты — депозитарий штаммов <em>C. elegans</em></td></tr>
+          <tr><td><strong>NGM / OP50</strong></td><td>Nematode Growth Medium — агар для червей; OP50 — штамм <em>E. coli</em>, служащий им кормом</td></tr>
+          <tr><td><strong>FBS</strong></td><td>Fetal bovine serum, эмбриональная телячья сыворотка. Продукт животного происхождения — почти везде проходит по ветеринарной линии, а не по санитарной</td></tr>
+          <tr><td><strong>КИК</strong></td><td>Контролируемая иностранная компания в смысле НК РФ. Существует только тогда, когда контролирующее лицо является налоговым резидентом России</td></tr>
+          <tr><td><strong>CRS</strong></td><td>Common Reporting Standard — международный автоматический обмен финансовой информацией между налоговыми органами</td></tr>
+          <tr><td><strong>Source of funds / source of wealth</strong></td><td>Происхождение средств конкретного платежа и происхождение состояния в целом. Банки спрашивают второе, а получают ответ на первое — отсюда большинство отказов</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-bottom:8px">Общая часть, 4 сентября 2026 года. Страновые разделы: <a href="panama-laboratoriya-praktika.html">Панама</a>, <a href="uruguay-laboratoriya.html">Уругвай</a>, <a href="paraguay-laboratoriya.html">Парагвай</a>. Сравнение юрисдикций и действующие лаборатории Панамы — <a href="wet-lab-yurisdikciya.html">в первой части</a>.</p>
+    <p style="margin:0"><small>Документ носит информационный характер и не заменяет юридическую консультацию. Утверждения, которые не удалось подтвердить первоисточником, помечены в тексте отдельно.</small></p>
+  </div>
+</footer>
+
+<div id="pop" role="dialog" aria-live="polite" aria-hidden="true">
+  <button class="x" type="button" aria-label="Закрыть подсказку">✕</button>
+  <p class="h"></p>
+  <p class="b"></p>
+  <span class="arw"></span>
+</div>
+
+<script>
+(function () {
+  var TERMS = {
+    "BSL-2":"Второй уровень биологической защиты — стандарт для работы с клеточными культурами и лентивекторами третьего поколения.",
+    "BSL-2 enhanced":"Усиленный второй уровень: требуется при онкогенных трансгенах, объёмах свыше 100 мл, системах первого-второго поколения и конструкциях CRISPR с Cas9 и гидовой РНК в одном векторе.",
+    "RCL":"Replication-competent lentivirus — репликационно-компетентный лентивирус. То, чего не должно быть в вашем препарате.",
+    "p24":"Капсидный антиген ВИЧ. По нему методом ELISA проверяют, не образовался ли реплицирующийся вирус; чувствительность анализа должна быть ниже 12,5 пг/мл.",
+    "SIN":"Self-inactivating — самоинактивирующиеся концевые повторы вектора, ключевой элемент его безопасности.",
+    "VSV-G":"Белок оболочки вируса везикулярного стоматита. Им псевдотипируют лентивектор, чтобы он мог заражать широкий круг клеток.",
+    "ECCN 2B352":"Позиция экспортного контрольного перечня США: шкафы биобезопасности III класса и ферментёры от 20 литров. Требуют лицензии BIS. Шкаф II класса туда не входит.",
+    "BIS":"Bureau of Industry and Security — бюро министерства торговли США, выдающее экспортные лицензии на товары двойного назначения.",
+    "AAV":"Адено-ассоциированный вирус — вирусный вектор для доставки генов, использованный в кейсе Пэриш.",
+    "GCP":"Good Clinical Practice — надлежащая клиническая практика, международный стандарт проведения исследований с участием людей.",
+    "GLP":"Good Laboratory Practice — надлежащая лабораторная практика, стандарт для доклинических исследований.",
+    "ICH":"International Council for Harmonisation — совет по гармонизации требований к лекарственным средствам.",
+    "ISSCR":"International Society for Stem Cell Research — общество, чьи руководства определяют, какие работы со стволовыми клетками требуют особого надзора.",
+    "ATCC":"American Type Culture Collection — крупнейший поставщик клеточных линий. Разрешения на ввоз получает заказчик и передаёт их до отгрузки.",
+    "ECACC":"European Collection of Authenticated Cell Cultures — британская коллекция клеточных культур.",
+    "DSMZ":"Немецкая коллекция микроорганизмов и клеточных культур.",
+    "JCRB":"Японский банк исследовательских биоресурсов — коллекция клеточных линий.",
+    "CGC":"Caenorhabditis Genetics Center при Университете Миннесоты — основной мировой депозитарий штаммов C. elegans.",
+    "C. elegans":"Caenorhabditis elegans — почвенная нематода длиной около миллиметра, классический модельный организм. Как беспозвоночное выведена из-под законов о защите лабораторных животных.",
+    "NGM":"Nematode Growth Medium — питательная среда в виде агара, на которой выращивают нематод.",
+    "OP50":"Штамм кишечной палочки, служащий кормовым газоном для C. elegans.",
+    "FBS":"Fetal bovine serum — эмбриональная телячья сыворотка, обязательный компонент большинства культуральных сред. Как продукт животного происхождения проходит ветеринарный контроль.",
+    "iPSC":"Индуцированные плюрипотентные стволовые клетки — получаются перепрограммированием обычных клеток, например фибробластов.",
+    "hTERT":"Ген каталитической субъединицы теломеразы. Его введение — способ иммортализации клеток и предмет теломеразной генной терапии.",
+    "OSKM":"Четыре фактора Яманаки (Oct4, Sox2, Klf4, c-Myc), которыми перепрограммируют клетки в плюрипотентное состояние.",
+    "КИК":"Контролируемая иностранная компания в смысле Налогового кодекса РФ. Существует только если контролирующее лицо — налоговый резидент России.",
+    "CRS":"Common Reporting Standard — международный автоматический обмен финансовой информацией между налоговыми органами.",
+    "DIRPF":"Годовая налоговая декларация физического лица в Бразилии.",
+    "carnê-leão":"Бразильский механизм ежемесячной уплаты подоходного налога с доходов от физлиц и из-за рубежа.",
+    "CBE":"Declaração de Capitais Brasileiros no Exterior — декларация в Банк Бразилии о зарубежных активах, обязательна от 1 млн долларов.",
+    "source of wealth":"Происхождение состояния в целом — то, что банк на самом деле проверяет, в отличие от происхождения средств конкретного платежа.",
+    "source of funds":"Происхождение средств конкретного платежа. Не то же самое, что происхождение состояния."
+  };
+
+  var pop = document.getElementById('pop');
+  if (!pop) return;
+  var hEl = pop.querySelector('.h'), bEl = pop.querySelector('.b'), xEl = pop.querySelector('.x');
+  var open = null;
+
+  var keys = Object.keys(TERMS).sort(function (a, b) { return b.length - a.length; });
+  function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  var rx = new RegExp('(?:' + keys.map(esc).join('|') + ')', 'g');
+
+  var SKIP = { A: 1, BUTTON: 1, CODE: 1, SCRIPT: 1, STYLE: 1, TEXTAREA: 1, TH: 1 };
+  function skip(node) {
+    for (var p = node.parentNode; p && p !== document.body; p = p.parentNode) {
+      if (SKIP[p.nodeName]) return true;
+      if (p.id === 'pop' || p.classList && p.classList.contains('topnav')) return true;
+      if (p.nodeName === 'TD' && p.parentNode && p.parentNode.parentNode &&
+          p.parentNode.parentNode.nodeName === 'TBODY' && p.cellIndex === 0) return true;
+    }
+    return false;
+  }
+
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  var nodes = [], n;
+  while ((n = walker.nextNode())) { if (n.nodeValue.length > 2 && !skip(n)) nodes.push(n); }
+
+  nodes.forEach(function (node) {
+    var text = node.nodeValue;
+    rx.lastIndex = 0;
+    if (!rx.test(text)) return;
+    rx.lastIndex = 0;
+    var frag = document.createDocumentFragment(), last = 0, m;
+    while ((m = rx.exec(text))) {
+      if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'term';
+      b.setAttribute('aria-expanded', 'false');
+      b.dataset.k = m[0];
+      b.textContent = m[0];
+      frag.appendChild(b);
+      last = m.index + m[0].length;
+    }
+    if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+
+  function hide() {
+    pop.classList.remove('on');
+    pop.setAttribute('aria-hidden', 'true');
+    if (open) { open.setAttribute('aria-expanded', 'false'); open = null; }
+  }
+
+  function show(btn) {
+    var k = btn.dataset.k;
+    hEl.textContent = k;
+    bEl.textContent = TERMS[k] || '';
+    pop.classList.add('on');
+    pop.setAttribute('aria-hidden', 'false');
+    if (open) open.setAttribute('aria-expanded', 'false');
+    open = btn;
+    btn.setAttribute('aria-expanded', 'true');
+
+    var r = btn.getBoundingClientRect();
+    var pw = pop.offsetWidth, ph = pop.offsetHeight;
+    var left = r.left + r.width / 2 - pw / 2;
+    left = Math.max(12, Math.min(left, window.innerWidth - pw - 12));
+    var top = r.top - ph - 12, upward = false;
+    if (top < 12) { top = r.bottom + 12; upward = true; }
+    pop.classList.toggle('up', upward);
+    pop.style.left = left + 'px';
+    pop.style.top = top + 'px';
+    var arrow = pop.querySelector('.arw');
+    var ax = r.left + r.width / 2 - left - 6;
+    arrow.style.left = Math.max(14, Math.min(ax, pw - 26)) + 'px';
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('.term') : null;
+    if (t) { e.preventDefault(); (t === open) ? hide() : show(t); return; }
+    if (!e.target.closest || !e.target.closest('#pop')) hide();
+  });
+  xEl.addEventListener('click', hide);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+  window.addEventListener('resize', hide);
+  window.addEventListener('scroll', function () { if (open) show(open); }, { passive: true });
+})();
+</script>
+
+<script type="module">
+  try {
+    const { animate, inView, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const els = document.querySelectorAll(".reveal");
+    if (reduced) {
+      els.forEach(e => { e.style.opacity = 1; e.style.transform = "none"; });
+    } else {
+      els.forEach(el => {
+        inView(el, () => {
+          animate(el, { opacity: [0, 1], transform: ["translateY(18px)", "translateY(0px)"] },
+                  { duration: 0.5, easing: [0.2, 0.7, 0.3, 1] });
+        }, { margin: "-8% 0px -8% 0px" });
+      });
+      const cards = document.querySelectorAll(".bento .card");
+      if (cards.length) {
+        inView(".bento", () => {
+          animate(cards, { opacity: [null, 1] }, { delay: stagger(0.04), duration: 0.35 });
+        }, { margin: "-10% 0px" });
+      }
+    }
+  } catch (e) {
+    document.querySelectorAll(".reveal").forEach(el => { el.style.opacity = 1; el.style.transform = "none"; });
+  }
+</script>
+</body>
+</html>
