@@ -1,0 +1,244 @@
+[
+ {"pt":"ler","ru":"читать","en":"to read","pos":"verbs",
+  "imgQuery":"a person absorbed in reading a book in an armchair"},
+
+ {"pt":"escrever","ru":"писать","en":"to write","pos":"verbs",
+  "imgQuery":"a hand writing a letter with a fountain pen on paper"},
+
+ {"pt":"demora","ru":"задержка; занимает время","en":"delay, takes time","pos":"nouns",
+  "imgQuery":"thick honey dripping very slowly off a spoon in a long thread"},
+
+ {"pt":"tanto","ru":"столько, так много","en":"so much","pos":"adverbs",
+  "imgQuery":"an enormous stack of books piled up almost to the ceiling"},
+
+ {"pt":"deve","ru":"должен","en":"must, owes","pos":"verbs",
+  "imgQuery":"a mandatory safety sign showing a hard hat must be worn, blue circular pictogram"},
+
+ {"pt":"lavar","ru":"мыть, стирать","en":"to wash","pos":"verbs",
+  "imgQuery":"hands washing a plate under running water at the sink",
+  "fix":"в списке «Lava - dish» и «Louça - washing» разошлись: lava значит «моет» (от lavar), а louça — «посуда»; вместе lavar louça — мыть посуду"},
+
+ {"pt":"louça","ru":"посуда","en":"dishes, crockery","pos":"nouns",
+  "imgQuery":"a neat stack of clean white plates and bowls on a shelf"},
+
+ {"pt":"consertar","ru":"чинить, ремонтировать","en":"to repair","pos":"verbs",
+  "imgQuery":"a repairman fixing an appliance with a screwdriver, panel open",
+  "fix":"в списке было «Concertar» — чинить это consertar через s; concertar значит «согласовывать» и встречается редко"},
+
+ {"pt":"atendimento","ru":"обслуживание, приём","en":"service","pos":"nouns",
+  "imgQuery":"a staff member at an information desk helping a visitor"},
+
+ {"pt":"vovó","ru":"бабушка","en":"grandma","pos":"nouns",
+  "imgQuery":"a grandmother hugging her grandchild warmly",
+  "fix":"нужен акут: vovó (бабушка); vovô с циркумфлексом — дедушка"},
+
+ {"pt":"legumes","ru":"овощи","en":"vegetables","pos":"nouns",
+  "imgQuery":"a wooden crate filled with assorted fresh vegetables"},
+
+ {"pt":"tipo","ru":"тип, вид; типа (разг.)","en":"type, kind","pos":"nouns",
+  "imgQuery":"a fan of fabric swatches showing different material types"},
+
+ {"pt":"disso","ru":"этого, об этом","en":"of that","pos":"function words",
+  "imgQuery":"a hand pushing a plate of food away with a refusing gesture"},
+
+ {"pt":"casca","ru":"кожура, корка","en":"peel, rind","pos":"nouns",
+  "imgQuery":"an orange peel curling off in one long spiral, close-up"},
+
+ {"pt":"jardim","ru":"сад","en":"garden","pos":"nouns",
+  "imgQuery":"a well-kept flower garden with paths and blooming beds"},
+
+ {"pt":"são","ru":"они есть, являются","en":"they are","pos":"verbs",
+  "imgQuery":"a hand gesturing toward three identical objects lined up on a table",
+  "note":"форма ser для «они»: «eles são amigos» — они друзья"},
+
+ {"pt":"plano","ru":"план","en":"plan","pos":"nouns",
+  "imgQuery":"a project planning board covered with sticky notes and arrows"},
+
+ {"pt":"acordo","ru":"соглашение, договор","en":"agreement","pos":"nouns",
+  "imgQuery":"a signed contract on a desk with two signatures at the bottom"},
+
+ {"pt":"época","ru":"эпоха, время","en":"era, period","pos":"nouns",
+  "imgQuery":"a museum display case of artefacts from one historical period"},
+
+ {"pt":"escravidão","ru":"рабство","en":"slavery","pos":"nouns",
+  "imgQuery":"old rusted iron shackles and chains lying on dark wood"},
+
+ {"pt":"ganhar","ru":"зарабатывать; выигрывать","en":"to earn, to win","pos":"verbs",
+  "imgQuery":"a hand receiving a pay envelope full of banknotes"},
+
+ {"pt":"quintal","ru":"задний двор","en":"back yard","pos":"nouns",
+  "imgQuery":"a small grassy back yard behind a house with a wooden fence"},
+
+ {"pt":"trancista","ru":"мастер по косичкам","en":"braider","pos":"nouns",
+  "imgQuery":"a hairdresser braiding intricate cornrows into a client's hair"},
+
+ {"pt":"penteados","ru":"причёски","en":"hairstyles","pos":"nouns",
+  "imgQuery":"a salon poster row of mannequin heads with different hairstyles"},
+
+ {"pt":"manutenção","ru":"обслуживание, поддержание","en":"maintenance","pos":"nouns",
+  "imgQuery":"a technician servicing machinery with tools laid out beside him"},
+
+ {"pt":"mestre","ru":"мастер","en":"master","pos":"nouns",
+  "imgQuery":"an old grey-haired craftsman working with confident practised hands"},
+
+ {"pt":"avenida","ru":"проспект","en":"avenue","pos":"nouns",
+  "imgQuery":"a wide city avenue lined with tall trees on both sides"},
+
+ {"pt":"adicionar","ru":"добавлять","en":"to add","pos":"verbs",
+  "imgQuery":"a hand tipping an ingredient into a cooking pot"},
+
+ {"pt":"principalmente","ru":"главным образом","en":"mainly, mostly","pos":"adverbs",
+  "imgQuery":"a pie chart where one large slice dominates all the others"},
+
+ {"pt":"lugar","ru":"место","en":"place, spot","pos":"nouns",
+  "imgQuery":"a large X marked on the ground showing one exact spot"},
+
+ {"pt":"sentido","ru":"смысл; направление","en":"sense; direction","pos":"nouns",
+  "imgQuery":"a one-way street sign with a single arrow, showing the direction of travel"},
+
+ {"pt":"série","ru":"сериал; серия","en":"series","pos":"nouns",
+  "imgQuery":"a streaming interface showing a grid of episode thumbnails"},
+
+ {"pt":"hotel","ru":"отель","en":"hotel","pos":"nouns",
+  "imgQuery":"a hotel lobby with a reception desk and luggage trolley"},
+
+ {"pt":"sugerir","ru":"предлагать, советовать","en":"to suggest","pos":"verbs",
+  "imgQuery":"a waiter leaning in to recommend a dish, pointing at the menu"},
+
+ {"pt":"aeroporto","ru":"аэропорт","en":"airport","pos":"nouns",
+  "imgQuery":"an airport terminal interior with departure boards and travellers",
+  "fix":"в списке было записано на слух «Eiroporto» — по-португальски aeroporto"},
+
+ {"pt":"somos","ru":"мы есть, мы являемся","en":"we are","pos":"verbs",
+  "imgQuery":"a sports team in matching kit standing together facing the camera"},
+
+ {"pt":"sonho","ru":"мечта; сон","en":"dream","pos":"nouns",
+  "imgQuery":"a person sleeping peacefully with a serene expression, soft moonlight"},
+
+ {"pt":"chamar","ru":"звать; называть","en":"to call","pos":"verbs",
+  "imgQuery":"a person cupping both hands around their mouth and shouting to someone far away"},
+
+ {"pt":"primeiro","ru":"первый","en":"first","pos":"adjectives",
+  "imgQuery":"the top step of a winners' podium standing empty and highest"},
+
+ {"pt":"janeiro","ru":"январь","en":"January","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with JANEIRO printed at the top"},
+
+ {"pt":"fevereiro","ru":"февраль","en":"February","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with FEVEREIRO printed at the top"},
+
+ {"pt":"março","ru":"март","en":"March","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with MARÇO printed at the top"},
+
+ {"pt":"abril","ru":"апрель","en":"April","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with ABRIL printed at the top"},
+
+ {"pt":"maio","ru":"май","en":"May","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with MAIO printed at the top"},
+
+ {"pt":"junho","ru":"июнь","en":"June","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with JUNHO printed at the top"},
+
+ {"pt":"agosto","ru":"август","en":"August","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with AGOSTO printed at the top"},
+
+ {"pt":"setembro","ru":"сентябрь","en":"September","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with SETEMBRO printed at the top"},
+
+ {"pt":"outubro","ru":"октябрь","en":"October","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with OUTUBRO printed at the top"},
+
+ {"pt":"novembro","ru":"ноябрь","en":"November","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with NOVEMBRO printed at the top"},
+
+ {"pt":"dezembro","ru":"декабрь","en":"December","pos":"nouns",
+  "imgQuery":"a wall calendar page for the month with DEZEMBRO printed at the top"},
+
+ {"pt":"data","ru":"дата","en":"date","pos":"nouns",
+  "imgQuery":"a rubber date stamp pressed onto a document, ink impression visible"},
+
+ {"pt":"toma","ru":"на, держи","en":"here, take it","pos":"verbs",
+  "imgQuery":"a hand thrusting an object forward toward the viewer, offering it",
+  "fix":"в списке было «Tomo» — это «я беру»; «на, держи» — toma"},
+
+ {"pt":"seguir","ru":"следовать, идти за","en":"to follow","pos":"verbs",
+  "imgQuery":"a line of ducklings walking in single file behind their mother",
+  "fix":"в списке было «Sega» — такого слова нет: следовать это seguir, «следует» — segue"},
+
+ {"pt":"conselho","ru":"совет","en":"advice","pos":"nouns",
+  "imgQuery":"an older man giving advice to a younger one, hand on his shoulder"},
+
+ {"pt":"desenho animado","ru":"мультфильм","en":"cartoon","pos":"nouns",
+  "imgQuery":"children sitting close to a television watching a colourful cartoon"},
+
+ {"pt":"desenho","ru":"рисунок","en":"drawing","pos":"nouns",
+  "imgQuery":"a detailed pencil sketch on white paper with the pencil beside it"},
+
+ {"pt":"maravilhosa","ru":"чудесная, восхитительная","en":"wonderful","pos":"adjectives",
+  "imgQuery":"a magnificent waterfall thundering into a pool surrounded by green cliffs",
+  "fix":"в списке было «Maraviosa» — правильно maravilhosa"},
+
+ {"pt":"legal","ru":"классный, клёвый (разг.)","en":"cool, nice","pos":"adjectives",
+  "imgQuery":"a skateboarder landing a trick while onlookers cheer",
+  "fix":"в списке было «Chido» — это мексиканский сленг; в Бразилии говорят legal"},
+
+ {"pt":"fila","ru":"очередь","en":"queue, line","pos":"nouns",
+  "imgQuery":"a long queue of people standing one behind another, seen from the side"},
+
+ {"pt":"volumosos","ru":"пышные, объёмные","en":"voluminous","pos":"adjectives",
+  "imgQuery":"a head of very full thick curly hair, voluminous and bouncy",
+  "fix":"в списке было «Volumos» — правильно volumosos"},
+
+ {"pt":"qualquer","ru":"любой","en":"any","pos":"function words",
+  "imgQuery":"a hand reaching into a bowl of identical sweets without looking, taking any one"},
+
+ {"pt":"aleatório","ru":"случайный","en":"random","pos":"adjectives",
+  "imgQuery":"dice tumbling in mid-air above a table, outcome not yet decided",
+  "fix":"в списке было «Paralho» — судя по переводу «random», имеется в виду aleatório"},
+
+ {"pt":"tem novidade?","ru":"ну как там? есть новости?","en":"any news?","pos":"phrases",
+  "imgQuery":"two friends chatting, one leaning in with a curious questioning look"},
+
+ {"pt":"como está indo o processo?","ru":"как продвигается процесс?","en":"how is the process going?","pos":"phrases",
+  "imgQuery":"two colleagues reviewing a progress chart together at a desk",
+  "fix":"в списке было «Como este indo» — правильно como está indo"},
+
+ {"pt":"seleto","ru":"отборный, избранный","en":"select","pos":"adjectives",
+  "imgQuery":"a red carpet with velvet rope barriers, reserved for a select few"},
+
+ {"pt":"mar","ru":"море","en":"sea","pos":"nouns",
+  "imgQuery":"the open sea stretching to the horizon with rolling waves, no shore in sight"},
+
+ {"pt":"caneta","ru":"ручка (пишущая)","en":"pen","pos":"nouns",
+  "imgQuery":"a single ballpoint pen lying alone on a white surface"},
+
+ {"pt":"fome","ru":"голод","en":"hunger","pos":"nouns",
+  "imgQuery":"a person staring longingly at food with an obviously empty hungry look"},
+
+ {"pt":"antigo","ru":"старинный, древний","en":"ancient, old","pos":"adjectives",
+  "imgQuery":"an ancient stone ruin with weathered carved columns"},
+
+ {"pt":"roupas","ru":"одежда","en":"clothes","pos":"nouns",
+  "imgQuery":"a wardrobe rail hung with a row of clothes on hangers"},
+
+ {"pt":"endereço","ru":"адрес","en":"address","pos":"nouns",
+  "imgQuery":"an envelope with a handwritten postal address on the front"},
+
+ {"pt":"pular","ru":"прыгать; пропускать","en":"to jump, to skip","pos":"verbs",
+  "imgQuery":"a person leaping over a large puddle in mid-air"},
+
+ {"pt":"caixa","ru":"касса; коробка","en":"checkout; box","pos":"nouns",
+  "imgQuery":"a cash register on a shop counter, drawer open with money"},
+
+ {"pt":"noivo(a)","ru":"жених, невеста; помолвлен(а)","en":"fiancé(e), engaged","pos":"nouns",
+  "imgQuery":"an engagement ring being slipped onto a finger during a proposal"},
+
+ {"pt":"casado(a)","ru":"женат, замужем","en":"married","pos":"adjectives",
+  "imgQuery":"two hands side by side both wearing matching wedding bands"},
+
+ {"pt":"solteiro(a)","ru":"холост, не замужем","en":"single","pos":"adjectives",
+  "imgQuery":"a single toothbrush standing alone in a bathroom glass"},
+
+ {"pt":"sorriso","ru":"улыбка","en":"smile","pos":"nouns",
+  "imgQuery":"an extreme close-up of a wide genuine smile showing teeth"}
+]

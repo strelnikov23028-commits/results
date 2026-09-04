@@ -1,34 +1,20 @@
-import json, os, re, unicodedata
+import json, os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 cards = json.load(open(os.path.join(ROOT, "data", "words.json"), encoding="utf-8"))
+have = {c["pt"]: c for c in cards}
 
-def norm(s):
-    s = s.lower().strip()
-    s = "".join(c for c in unicodedata.normalize("NFD", s)
-                if unicodedata.category(c) != "Mn")
-    return re.sub(r"[^a-z ]", "", s).strip()
+new = ["criança","imprensa","escuro","claro","transparente","limpar","chance",
+       "imediatamente","perder","morder","ontem","aluguel diário","ótimo","enquanto",
+       "traga","decisão","boneca","andar","andar de bicicleta","entrevista","matéria",
+       "jornalista","posso...?","saber","conhecer","revista","arquitetura","lado","comum",
+       "segundo","colaboração","um segundo","som","igual","inserir","elevado","criado",
+       "prédio","significativo","sinceramente","honestamente","importante","essencial",
+       "verbo","irregular","misturando","lado de fora","lado de dentro","lado de cima",
+       "lado de baixo","acima de","abaixo de","vendido","promoção"]
 
-have = {}
-for c in cards:
-    have[norm(c["pt"])] = c
-    for part in re.split(r"[/,]", c["pt"]):
-        p = norm(part.replace("(a)", ""))
-        if p:
-            have.setdefault(p, c)
-
-new = ["mensagem","avião","defeito","esquerda","exato","janela","porta","cadeira","teto",
-       "esqueci","principal","assustador","estranho","em algum lugar","aguarde","vazio",
-       "imediatamente","mesa","chuva","nuvens","nublado","gentileza","ideia","beleza",
-       "joia","tá top","bacana","de boa","tô","suave","firmeza","na paz","tirei","cheio",
-       "invasão","prática","verificar","peça","gordo","atravessa","estrada","país",
-       "percebido","em vez disso","pão","pau","queijo","tamanho","anotar","queda","conseguir"]
-
-dup = []
+dup = [w for w in new if w in have]
 print("уже есть в колоде:")
-for w in new:
-    c = have.get(norm(w))
-    if c:
-        dup.append(w)
-        print(f"  {w:<18} → «{c['pt']}» ({c['ru']})")
+for w in dup:
+    print(f"  {w:<20} → {have[w]['ru']}")
 print(f"\nв списке: {len(new)}, новых: {len(new)-len(dup)}, в колоде: {len(cards)}")

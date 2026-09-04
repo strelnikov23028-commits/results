@@ -3504,11 +3504,11 @@
   "id": 136,
   "pt": "claro",
   "en": "of course; clear",
-  "ru": "конечно; ясный",
+  "ru": "конечно; ясный, светлый",
   "pos": "adverbs",
   "examples": [],
   "imgQuery": null,
-  "image": "cartoes-img/конечно, ясный — claro.webp",
+  "image": "cartoes-img/конечно, ясный, светлый — claro.webp",
   "credit": {
    "author": "",
    "url": "",
@@ -8548,7 +8548,7 @@
   "ru": "июль",
   "pos": "nouns",
   "examples": [],
-  "imgQuery": "a field of tall sunflowers in full bloom under a blazing midsummer sun",
+  "imgQuery": "a wall calendar page for the month with JULHO printed at the top",
   "image": "cartoes-img/июль — julho.webp",
   "credit": {
    "author": "",
@@ -11244,5 +11244,2380 @@
    "extra8"
   ],
   "note": "акут меняет смысл: país — страна, pais — родители"
+ },
+ {
+  "id": 540,
+  "pt": "ler",
+  "en": "to read",
+  "ru": "читать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person absorbed in reading a book in an armchair",
+  "image": "cartoes-img/читать — ler.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 541,
+  "pt": "escrever",
+  "en": "to write",
+  "ru": "писать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hand writing a letter with a fountain pen on paper",
+  "image": "cartoes-img/писать — escrever.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 542,
+  "pt": "demora",
+  "en": "delay, takes time",
+  "ru": "задержка; занимает время",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "thick honey dripping very slowly off a spoon in a long thread",
+  "image": "cartoes-img/задержка, занимает время — demora.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 543,
+  "pt": "tanto",
+  "en": "so much",
+  "ru": "столько, так много",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "an enormous stack of books piled up almost to the ceiling",
+  "image": "cartoes-img/столько, так много — tanto.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 544,
+  "pt": "deve",
+  "en": "must, owes",
+  "ru": "должен",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a mandatory safety sign showing a hard hat must be worn, blue circular pictogram",
+  "image": "cartoes-img/должен — deve.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 545,
+  "pt": "lavar",
+  "en": "to wash",
+  "ru": "мыть, стирать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "hands washing a plate under running water at the sink",
+  "image": "cartoes-img/мыть, стирать — lavar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке «Lava - dish» и «Louça - washing» разошлись: lava значит «моет» (от lavar), а louça — «посуда»; вместе lavar louça — мыть посуду"
+ },
+ {
+  "id": 546,
+  "pt": "louça",
+  "en": "dishes, crockery",
+  "ru": "посуда",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a neat stack of clean white plates and bowls on a shelf",
+  "image": "cartoes-img/посуда — louça.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 547,
+  "pt": "consertar",
+  "en": "to repair",
+  "ru": "чинить, ремонтировать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a repairman fixing an appliance with a screwdriver, panel open",
+  "image": "cartoes-img/чинить, ремонтировать — consertar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было «Concertar» — чинить это consertar через s; concertar значит «согласовывать» и встречается редко"
+ },
+ {
+  "id": 548,
+  "pt": "atendimento",
+  "en": "service",
+  "ru": "обслуживание, приём",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a staff member at an information desk helping a visitor",
+  "image": "cartoes-img/обслуживание, приём — atendimento.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 549,
+  "pt": "vovó",
+  "en": "grandma",
+  "ru": "бабушка",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a grandmother hugging her grandchild warmly",
+  "image": "cartoes-img/бабушка — vovó.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "нужен акут: vovó (бабушка); vovô с циркумфлексом — дедушка"
+ },
+ {
+  "id": 550,
+  "pt": "legumes",
+  "en": "vegetables",
+  "ru": "овощи",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wooden crate filled with assorted fresh vegetables",
+  "image": "cartoes-img/овощи — legumes.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 551,
+  "pt": "tipo",
+  "en": "type, kind",
+  "ru": "тип, вид; типа (разг.)",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a fan of fabric swatches showing different material types",
+  "image": "cartoes-img/тип, вид, типа — tipo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 552,
+  "pt": "disso",
+  "en": "of that",
+  "ru": "этого, об этом",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a hand pushing a plate of food away with a refusing gesture",
+  "image": "cartoes-img/этого, об этом — disso.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 553,
+  "pt": "casca",
+  "en": "peel, rind",
+  "ru": "кожура, корка",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an orange peel curling off in one long spiral, close-up",
+  "image": "cartoes-img/кожура, корка — casca.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 554,
+  "pt": "jardim",
+  "en": "garden",
+  "ru": "сад",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a well-kept flower garden with paths and blooming beds",
+  "image": "cartoes-img/сад — jardim.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 555,
+  "pt": "são",
+  "en": "they are",
+  "ru": "они есть, являются",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hand gesturing toward three identical objects lined up on a table",
+  "image": "cartoes-img/они есть, являются — são.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "note": "форма ser для «они»: «eles são amigos» — они друзья"
+ },
+ {
+  "id": 556,
+  "pt": "plano",
+  "en": "plan",
+  "ru": "план",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a project planning board covered with sticky notes and arrows",
+  "image": "cartoes-img/план — plano.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 557,
+  "pt": "acordo",
+  "en": "agreement",
+  "ru": "соглашение, договор",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a signed contract on a desk with two signatures at the bottom",
+  "image": "cartoes-img/соглашение, договор — acordo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 558,
+  "pt": "época",
+  "en": "era, period",
+  "ru": "эпоха, время",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a museum display case of artefacts from one historical period",
+  "image": "cartoes-img/эпоха, время — época.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 559,
+  "pt": "escravidão",
+  "en": "slavery",
+  "ru": "рабство",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "old rusted iron shackles and chains lying on dark wood",
+  "image": "cartoes-img/рабство — escravidão.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 560,
+  "pt": "ganhar",
+  "en": "to earn, to win",
+  "ru": "зарабатывать; выигрывать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hand receiving a pay envelope full of banknotes",
+  "image": "cartoes-img/зарабатывать, выигрывать — ganhar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 561,
+  "pt": "quintal",
+  "en": "back yard",
+  "ru": "задний двор",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a small grassy back yard behind a house with a wooden fence",
+  "image": "cartoes-img/задний двор — quintal.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 562,
+  "pt": "trancista",
+  "en": "braider",
+  "ru": "мастер по косичкам",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a hairdresser braiding intricate cornrows into a client's hair",
+  "image": "cartoes-img/мастер по косичкам — trancista.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 563,
+  "pt": "penteados",
+  "en": "hairstyles",
+  "ru": "причёски",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a salon poster row of mannequin heads with different hairstyles",
+  "image": "cartoes-img/причёски — penteados.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 564,
+  "pt": "manutenção",
+  "en": "maintenance",
+  "ru": "обслуживание, поддержание",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a technician servicing machinery with tools laid out beside him",
+  "image": "cartoes-img/обслуживание, поддержание — manutenção.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 565,
+  "pt": "mestre",
+  "en": "master",
+  "ru": "мастер",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an old grey-haired craftsman working with confident practised hands",
+  "image": "cartoes-img/мастер — mestre.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 566,
+  "pt": "avenida",
+  "en": "avenue",
+  "ru": "проспект",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wide city avenue lined with tall trees on both sides",
+  "image": "cartoes-img/проспект — avenida.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 567,
+  "pt": "adicionar",
+  "en": "to add",
+  "ru": "добавлять",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hand tipping an ingredient into a cooking pot",
+  "image": "cartoes-img/добавлять — adicionar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 568,
+  "pt": "principalmente",
+  "en": "mainly, mostly",
+  "ru": "главным образом",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "a pie chart where one large slice dominates all the others",
+  "image": "cartoes-img/главным образом — principalmente.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 569,
+  "pt": "lugar",
+  "en": "place, spot",
+  "ru": "место",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a large X marked on the ground showing one exact spot",
+  "image": "cartoes-img/место — lugar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 570,
+  "pt": "sentido",
+  "en": "sense; direction",
+  "ru": "смысл; направление",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a one-way street sign with a single arrow, showing the direction of travel",
+  "image": "cartoes-img/смысл, направление — sentido.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 571,
+  "pt": "série",
+  "en": "series",
+  "ru": "сериал; серия",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a streaming interface showing a grid of episode thumbnails",
+  "image": "cartoes-img/сериал, серия — série.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 572,
+  "pt": "hotel",
+  "en": "hotel",
+  "ru": "отель",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a hotel lobby with a reception desk and luggage trolley",
+  "image": "cartoes-img/отель — hotel.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 573,
+  "pt": "sugerir",
+  "en": "to suggest",
+  "ru": "предлагать, советовать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a waiter leaning in to recommend a dish, pointing at the menu",
+  "image": "cartoes-img/предлагать, советовать — sugerir.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 574,
+  "pt": "aeroporto",
+  "en": "airport",
+  "ru": "аэропорт",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an airport terminal interior with departure boards and travellers",
+  "image": "cartoes-img/аэропорт — aeroporto.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было записано на слух «Eiroporto» — по-португальски aeroporto"
+ },
+ {
+  "id": 575,
+  "pt": "somos",
+  "en": "we are",
+  "ru": "мы есть, мы являемся",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a sports team in matching kit standing together facing the camera",
+  "image": "cartoes-img/мы есть, мы являемся — somos.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 576,
+  "pt": "sonho",
+  "en": "dream",
+  "ru": "мечта; сон",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a person sleeping peacefully with a serene expression, soft moonlight",
+  "image": "cartoes-img/мечта, сон — sonho.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 577,
+  "pt": "chamar",
+  "en": "to call",
+  "ru": "звать; называть",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person cupping both hands around their mouth and shouting to someone far away",
+  "image": "cartoes-img/звать, называть — chamar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 578,
+  "pt": "primeiro",
+  "en": "first",
+  "ru": "первый",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "the top step of a winners' podium standing empty and highest",
+  "image": "cartoes-img/первый — primeiro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 579,
+  "pt": "janeiro",
+  "en": "January",
+  "ru": "январь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with JANEIRO printed at the top",
+  "image": "cartoes-img/январь — janeiro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 580,
+  "pt": "fevereiro",
+  "en": "February",
+  "ru": "февраль",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with FEVEREIRO printed at the top",
+  "image": "cartoes-img/февраль — fevereiro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 581,
+  "pt": "março",
+  "en": "March",
+  "ru": "март",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with MARÇO printed at the top",
+  "image": "cartoes-img/март — março.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 582,
+  "pt": "abril",
+  "en": "April",
+  "ru": "апрель",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with ABRIL printed at the top",
+  "image": "cartoes-img/апрель — abril.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 583,
+  "pt": "maio",
+  "en": "May",
+  "ru": "май",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with MAIO printed at the top",
+  "image": "cartoes-img/май — maio.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 584,
+  "pt": "junho",
+  "en": "June",
+  "ru": "июнь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with JUNHO printed at the top",
+  "image": "cartoes-img/июнь — junho.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 585,
+  "pt": "agosto",
+  "en": "August",
+  "ru": "август",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with AGOSTO printed at the top",
+  "image": "cartoes-img/август — agosto.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 586,
+  "pt": "setembro",
+  "en": "September",
+  "ru": "сентябрь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with SETEMBRO printed at the top",
+  "image": "cartoes-img/сентябрь — setembro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 587,
+  "pt": "outubro",
+  "en": "October",
+  "ru": "октябрь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with OUTUBRO printed at the top",
+  "image": "cartoes-img/октябрь — outubro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 588,
+  "pt": "novembro",
+  "en": "November",
+  "ru": "ноябрь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with NOVEMBRO printed at the top",
+  "image": "cartoes-img/ноябрь — novembro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 589,
+  "pt": "dezembro",
+  "en": "December",
+  "ru": "декабрь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wall calendar page for the month with DEZEMBRO printed at the top",
+  "image": "cartoes-img/декабрь — dezembro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 590,
+  "pt": "data",
+  "en": "date",
+  "ru": "дата",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a rubber date stamp pressed onto a document, ink impression visible",
+  "image": "cartoes-img/дата — data.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 591,
+  "pt": "toma",
+  "en": "here, take it",
+  "ru": "на, держи",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a hand thrusting an object forward toward the viewer, offering it",
+  "image": "cartoes-img/на, держи — toma.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было «Tomo» — это «я беру»; «на, держи» — toma"
+ },
+ {
+  "id": 592,
+  "pt": "seguir",
+  "en": "to follow",
+  "ru": "следовать, идти за",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a line of ducklings walking in single file behind their mother",
+  "image": "cartoes-img/следовать, идти за — seguir.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было «Sega» — такого слова нет: следовать это seguir, «следует» — segue"
+ },
+ {
+  "id": 593,
+  "pt": "conselho",
+  "en": "advice",
+  "ru": "совет",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an older man giving advice to a younger one, hand on his shoulder",
+  "image": "cartoes-img/совет — conselho.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 594,
+  "pt": "desenho animado",
+  "en": "cartoon",
+  "ru": "мультфильм",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "children sitting close to a television watching a colourful cartoon",
+  "image": "cartoes-img/мультфильм — desenho animado.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 595,
+  "pt": "desenho",
+  "en": "drawing",
+  "ru": "рисунок",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a detailed pencil sketch on white paper with the pencil beside it",
+  "image": "cartoes-img/рисунок — desenho.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 596,
+  "pt": "maravilhosa",
+  "en": "wonderful",
+  "ru": "чудесная, восхитительная",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a magnificent waterfall thundering into a pool surrounded by green cliffs",
+  "image": "cartoes-img/чудесная, восхитительная — maravilhosa.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было «Maraviosa» — правильно maravilhosa"
+ },
+ {
+  "id": 597,
+  "pt": "legal",
+  "en": "cool, nice",
+  "ru": "классный, клёвый (разг.)",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a skateboarder landing a trick while onlookers cheer",
+  "image": "cartoes-img/классный, клёвый — legal.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было «Chido» — это мексиканский сленг; в Бразилии говорят legal"
+ },
+ {
+  "id": 598,
+  "pt": "fila",
+  "en": "queue, line",
+  "ru": "очередь",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a long queue of people standing one behind another, seen from the side",
+  "image": "cartoes-img/очередь — fila.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 599,
+  "pt": "volumosos",
+  "en": "voluminous",
+  "ru": "пышные, объёмные",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a head of very full thick curly hair, voluminous and bouncy",
+  "image": "cartoes-img/пышные, объёмные — volumosos.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было «Volumos» — правильно volumosos"
+ },
+ {
+  "id": 600,
+  "pt": "qualquer",
+  "en": "any",
+  "ru": "любой",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a hand reaching into a bowl of identical sweets without looking, taking any one",
+  "image": "cartoes-img/любой — qualquer.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 601,
+  "pt": "aleatório",
+  "en": "random",
+  "ru": "случайный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "dice tumbling in mid-air above a table, outcome not yet decided",
+  "image": "cartoes-img/случайный — aleatório.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было «Paralho» — судя по переводу «random», имеется в виду aleatório"
+ },
+ {
+  "id": 602,
+  "pt": "tem novidade?",
+  "en": "any news?",
+  "ru": "ну как там? есть новости?",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "two friends chatting, one leaning in with a curious questioning look",
+  "image": "cartoes-img/ну как там есть новости — tem novidade.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 603,
+  "pt": "como está indo o processo?",
+  "en": "how is the process going?",
+  "ru": "как продвигается процесс?",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "two colleagues reviewing a progress chart together at a desk",
+  "image": "cartoes-img/как продвигается процесс — como está indo o processo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ],
+  "fix": "в списке было «Como este indo» — правильно como está indo"
+ },
+ {
+  "id": 604,
+  "pt": "seleto",
+  "en": "select",
+  "ru": "отборный, избранный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a red carpet with velvet rope barriers, reserved for a select few",
+  "image": "cartoes-img/отборный, избранный — seleto.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 605,
+  "pt": "mar",
+  "en": "sea",
+  "ru": "море",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "the open sea stretching to the horizon with rolling waves, no shore in sight",
+  "image": "cartoes-img/море — mar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 606,
+  "pt": "caneta",
+  "en": "pen",
+  "ru": "ручка (пишущая)",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a single ballpoint pen lying alone on a white surface",
+  "image": "cartoes-img/ручка — caneta.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 607,
+  "pt": "fome",
+  "en": "hunger",
+  "ru": "голод",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a person staring longingly at food with an obviously empty hungry look",
+  "image": "cartoes-img/голод — fome.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 608,
+  "pt": "antigo",
+  "en": "ancient, old",
+  "ru": "старинный, древний",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "an ancient stone ruin with weathered carved columns",
+  "image": "cartoes-img/старинный, древний — antigo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 609,
+  "pt": "roupas",
+  "en": "clothes",
+  "ru": "одежда",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wardrobe rail hung with a row of clothes on hangers",
+  "image": "cartoes-img/одежда — roupas.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 610,
+  "pt": "endereço",
+  "en": "address",
+  "ru": "адрес",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an envelope with a handwritten postal address on the front",
+  "image": "cartoes-img/адрес — endereço.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 611,
+  "pt": "pular",
+  "en": "to jump, to skip",
+  "ru": "прыгать; пропускать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person leaping over a large puddle in mid-air",
+  "image": "cartoes-img/прыгать, пропускать — pular.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 612,
+  "pt": "caixa",
+  "en": "checkout; box",
+  "ru": "касса; коробка",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a cash register on a shop counter, drawer open with money",
+  "image": "cartoes-img/касса, коробка — caixa.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 613,
+  "pt": "noivo(a)",
+  "en": "fiancé(e), engaged",
+  "ru": "жених, невеста; помолвлен(а)",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an engagement ring being slipped onto a finger during a proposal",
+  "image": "cartoes-img/жених, невеста, помолвлен — noivo(a).webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 614,
+  "pt": "casado(a)",
+  "en": "married",
+  "ru": "женат, замужем",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "two hands side by side both wearing matching wedding bands",
+  "image": "cartoes-img/женат, замужем — casado(a).webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 615,
+  "pt": "solteiro(a)",
+  "en": "single",
+  "ru": "холост, не замужем",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a single toothbrush standing alone in a bathroom glass",
+  "image": "cartoes-img/холост, не замужем — solteiro(a).webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 616,
+  "pt": "sorriso",
+  "en": "smile",
+  "ru": "улыбка",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "an extreme close-up of a wide genuine smile showing teeth",
+  "image": "cartoes-img/улыбка — sorriso.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra9"
+  ]
+ },
+ {
+  "id": 617,
+  "pt": "criança",
+  "en": "child",
+  "ru": "ребёнок",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a small child standing alone and looking at the camera, plain background",
+  "image": "cartoes-img/ребёнок — criança.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 618,
+  "pt": "imprensa",
+  "en": "the press",
+  "ru": "пресса, СМИ",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a cluster of microphones and recorders thrust forward at a press conference",
+  "image": "cartoes-img/пресса, СМИ — imprensa.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 619,
+  "pt": "escuro",
+  "en": "dark",
+  "ru": "тёмный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "an almost completely dark room with only a faint trace of light at the edge",
+  "image": "cartoes-img/тёмный — escuro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 620,
+  "pt": "transparente",
+  "en": "transparent",
+  "ru": "прозрачный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a clear sheet of glass held up, everything behind it perfectly visible",
+  "image": "cartoes-img/прозрачный — transparente.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 621,
+  "pt": "limpar",
+  "en": "to clean",
+  "ru": "чистить, убирать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a cloth wiping a dusty surface, a clean streak appearing behind it",
+  "image": "cartoes-img/чистить, убирать — limpar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 622,
+  "pt": "chance",
+  "en": "chance",
+  "ru": "шанс, возможность",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a single lottery ticket held between two fingers",
+  "image": "cartoes-img/шанс, возможность — chance.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 623,
+  "pt": "morder",
+  "en": "to bite",
+  "ru": "кусать",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person biting into a crisp apple, teeth breaking the skin",
+  "image": "cartoes-img/кусать — morder.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ],
+  "fix": "в списке стояло английское «Bite» — по-португальски кусать это morder"
+ },
+ {
+  "id": 624,
+  "pt": "aluguel diário",
+  "en": "daily rental",
+  "ru": "посуточная аренда",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a holiday apartment key with a tag being handed over at a short-stay let",
+  "image": "cartoes-img/посуточная аренда — aluguel diário.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 625,
+  "pt": "ótimo",
+  "en": "great, excellent",
+  "ru": "отличный, превосходный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a report card with the top grade circled in red",
+  "image": "cartoes-img/отличный, превосходный — ótimo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 626,
+  "pt": "enquanto",
+  "en": "while",
+  "ru": "пока, в то время как",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a person reading a book while the kettle boils with steam behind them",
+  "image": "cartoes-img/пока, в то время как — enquanto.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ],
+  "fix": "в списке было «Enquando» — правильно enquanto"
+ },
+ {
+  "id": 627,
+  "pt": "traga",
+  "en": "bring",
+  "ru": "принеси",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a dog trotting back with a stick in its mouth, bringing it to its owner",
+  "image": "cartoes-img/принеси — traga.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 628,
+  "pt": "decisão",
+  "en": "decision",
+  "ru": "решение",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a judge's gavel striking the block, the decision made",
+  "image": "cartoes-img/решение — decisão.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 629,
+  "pt": "boneca",
+  "en": "doll",
+  "ru": "кукла",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a porcelain doll sitting upright on a shelf, facing forward",
+  "image": "cartoes-img/кукла — boneca.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 630,
+  "pt": "andar",
+  "en": "to walk; floor",
+  "ru": "ходить; этаж",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a person strolling calmly along a park path, unhurried pace",
+  "image": "cartoes-img/ходить, этаж — andar.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ],
+  "note": "andar значит и «ходить», и «этаж»: «terceiro andar» — третий этаж"
+ },
+ {
+  "id": 631,
+  "pt": "andar de bicicleta",
+  "en": "to ride a bike",
+  "ru": "ездить на велосипеде",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a cyclist riding along a path, pedalling steadily",
+  "image": "cartoes-img/ездить на велосипеде — andar de bicicleta.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 632,
+  "pt": "entrevista",
+  "en": "interview",
+  "ru": "интервью, собеседование",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "two people facing each other across a table, one holding a recorder and asking questions",
+  "image": "cartoes-img/интервью, собеседование — entrevista.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ],
+  "fix": "в списке перевод «interviewer» — но entrevista это само интервью; интервьюер будет entrevistador"
+ },
+ {
+  "id": 633,
+  "pt": "matéria",
+  "en": "subject, material",
+  "ru": "предмет (учебный); материал",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a stack of school textbooks for different subjects on a desk",
+  "image": "cartoes-img/предмет — matéria.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ],
+  "fix": "нужен акут: matéria"
+ },
+ {
+  "id": 634,
+  "pt": "jornalista",
+  "en": "journalist",
+  "ru": "журналист",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a reporter with a press badge holding out a microphone on the street",
+  "image": "cartoes-img/журналист — jornalista.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 635,
+  "pt": "posso...?",
+  "en": "may I…?",
+  "ru": "можно мне…?",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a person raising a hand slightly with a polite questioning expression, asking permission",
+  "image": "cartoes-img/можно мне… — posso.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 636,
+  "pt": "saber",
+  "en": "to know (a fact)",
+  "ru": "знать (факт, информацию)",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "an open encyclopedia showing a detailed entry, knowledge on the page",
+  "image": "cartoes-img/знать — saber.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ],
+  "note": "saber — знать факт; conhecer — быть знакомым с человеком или местом"
+ },
+ {
+  "id": 637,
+  "pt": "revista",
+  "en": "magazine",
+  "ru": "журнал",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a glossy magazine lying on a table with a colourful cover",
+  "image": "cartoes-img/журнал — revista.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ],
+  "fix": "в списке перевод «newspaper» — но revista это журнал; газета будет jornal"
+ },
+ {
+  "id": 638,
+  "pt": "arquitetura",
+  "en": "architecture",
+  "ru": "архитектура",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "the ornate facade of a historic building with columns and detailed stonework",
+  "image": "cartoes-img/архитектура — arquitetura.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 639,
+  "pt": "lado",
+  "en": "side",
+  "ru": "сторона",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a wooden cube photographed at an angle so one single face is clearly toward the viewer",
+  "image": "cartoes-img/сторона — lado.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 640,
+  "pt": "segundo",
+  "en": "second",
+  "ru": "секунда; второй",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a stopwatch face with the hand frozen just past the start",
+  "image": "cartoes-img/секунда, второй — segundo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 641,
+  "pt": "um segundo",
+  "en": "just a second",
+  "ru": "одну секунду, минутку",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a person holding up one finger asking someone to wait a brief moment",
+  "image": "cartoes-img/одну секунду, минутку — um segundo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 642,
+  "pt": "colaboração",
+  "en": "collaboration",
+  "ru": "сотрудничество",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "several pairs of hands building something together on one table",
+  "image": "cartoes-img/сотрудничество — colaboração.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 643,
+  "pt": "som",
+  "en": "sound",
+  "ru": "звук",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "visible sound waves rippling out from a loudspeaker cone, close-up",
+  "image": "cartoes-img/звук — som.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 644,
+  "pt": "igual",
+  "en": "equal, same",
+  "ru": "одинаковый, равный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a balance scale perfectly level with identical weights on both pans",
+  "image": "cartoes-img/одинаковый, равный — igual.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 645,
+  "pt": "inserir",
+  "en": "to insert",
+  "ru": "вставлять, вводить",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "a bank card being slid into a card reader slot",
+  "image": "cartoes-img/вставлять, вводить — inserir.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 646,
+  "pt": "elevado",
+  "en": "elevated, high",
+  "ru": "высокий, приподнятый",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "an elevated walkway raised high on columns above the ground",
+  "image": "cartoes-img/высокий, приподнятый — elevado.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 647,
+  "pt": "criado",
+  "en": "raised, brought up",
+  "ru": "выращенный, воспитанный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a seedling grown in a nursery pot with a supporting stake, carefully raised",
+  "image": "cartoes-img/выращенный, воспитанный — criado.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 648,
+  "pt": "prédio",
+  "en": "building",
+  "ru": "здание",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a tall residential apartment block seen from the street, full height",
+  "image": "cartoes-img/здание — prédio.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 649,
+  "pt": "significativo",
+  "en": "significant",
+  "ru": "значимый, существенный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "one line on a chart shooting far above all the others, a standout result",
+  "image": "cartoes-img/значимый, существенный — significativo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 650,
+  "pt": "sinceramente",
+  "en": "sincerely",
+  "ru": "искренне",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "a person with a hand on their heart speaking earnestly, open sincere face",
+  "image": "cartoes-img/искренне — sinceramente.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 651,
+  "pt": "honestamente",
+  "en": "honestly",
+  "ru": "честно",
+  "pos": "adverbs",
+  "examples": [],
+  "imgQuery": "a found wallet being handed in at a lost property counter",
+  "image": "cartoes-img/честно — honestamente.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 652,
+  "pt": "essencial",
+  "en": "essential",
+  "ru": "необходимый, ключевой",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a single keystone at the top of a stone arch holding the whole structure",
+  "image": "cartoes-img/необходимый, ключевой — essencial.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 653,
+  "pt": "verbo",
+  "en": "verb",
+  "ru": "глагол",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a grammar textbook page open at a verb conjugation table",
+  "image": "cartoes-img/глагол — verbo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 654,
+  "pt": "irregular",
+  "en": "irregular",
+  "ru": "неправильный (о глаголе); неровный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "a row of neat identical tiles with one tile visibly crooked and out of line",
+  "image": "cartoes-img/неправильный — irregular.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 655,
+  "pt": "misturando",
+  "en": "mixing",
+  "ru": "смешивая",
+  "pos": "verbs",
+  "examples": [],
+  "imgQuery": "two colours of paint swirling into each other as they are stirred together",
+  "image": "cartoes-img/смешивая — misturando.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 656,
+  "pt": "lado de fora",
+  "en": "outside",
+  "ru": "снаружи",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a cat sitting outside on the doorstep looking in through the glass",
+  "image": "cartoes-img/снаружи — lado de fora.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 657,
+  "pt": "lado de dentro",
+  "en": "inside",
+  "ru": "внутри",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "the inner cavity of an open walnut shell, kernel visible inside",
+  "image": "cartoes-img/внутри — lado de dentro.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 658,
+  "pt": "lado de cima",
+  "en": "top side",
+  "ru": "верхняя сторона",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a closed cardboard box photographed straight down onto its top face",
+  "image": "cartoes-img/верхняя сторона — lado de cima.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 659,
+  "pt": "lado de baixo",
+  "en": "underside",
+  "ru": "нижняя сторона",
+  "pos": "phrases",
+  "examples": [],
+  "imgQuery": "a skateboard flipped over showing its underside with the wheels up",
+  "image": "cartoes-img/нижняя сторона — lado de baixo.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 660,
+  "pt": "acima de",
+  "en": "above",
+  "ru": "над, выше",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a hot air balloon floating high above a village below it",
+  "image": "cartoes-img/над, выше — acima de.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 661,
+  "pt": "abaixo de",
+  "en": "below, under",
+  "ru": "под, ниже",
+  "pos": "function words",
+  "examples": [],
+  "imgQuery": "a diver swimming below the surface with the waterline visible above",
+  "image": "cartoes-img/под, ниже — abaixo de.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 662,
+  "pt": "vendido",
+  "en": "sold",
+  "ru": "проданный",
+  "pos": "adjectives",
+  "examples": [],
+  "imgQuery": "an auction lot with a SOLD sticker slapped across its label",
+  "image": "cartoes-img/проданный — vendido.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
+ },
+ {
+  "id": 663,
+  "pt": "promoção",
+  "en": "sale, promotion",
+  "ru": "акция, распродажа",
+  "pos": "nouns",
+  "examples": [],
+  "imgQuery": "a supermarket shelf tag showing a slashed old price next to a new lower one",
+  "image": "cartoes-img/акция, распродажа — promoção.webp",
+  "credit": {
+   "author": "",
+   "url": "",
+   "source": "Grok Build",
+   "license": "сгенерировано ИИ"
+  },
+  "sources": [
+   "extra10"
+  ]
  }
 ]
