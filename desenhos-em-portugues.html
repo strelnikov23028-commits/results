@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мультфильмы на португальском — до 30 минут</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="description" content="Бразильские и португальские мультфильмы длительностью до 30 минут: культовая классика, фольклор, сериалы. Все ссылки проверены.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7;
+  --surface:#FFFFFF;
+  --surface-2:#FAFAFC;
+  --text:#1D1D1F;
+  --muted:#6E6E73;
+  --accent:#0071E3;
+  --accent-soft:rgba(0,113,227,.10);
+  --border:rgba(0,0,0,.09);
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --shadow-hover:0 2px 6px rgba(0,0,0,.06), 0 16px 40px rgba(0,0,0,.10);
+  --green:#1D7C4D;
+  --amber:#9A6200;
+  --violet:#6A3AB2;
+  --radius:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#000000;
+    --surface:#1C1C1E;
+    --surface-2:#161618;
+    --text:#F5F5F7;
+    --muted:#9A9AA0;
+    --accent:#0A84FF;
+    --accent-soft:rgba(10,132,255,.16);
+    --border:rgba(255,255,255,.12);
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.4);
+    --shadow-hover:0 2px 6px rgba(0,0,0,.6), 0 16px 40px rgba(0,0,0,.55);
+    --green:#5CD199;
+    --amber:#F5BE5A;
+    --violet:#BFA0F5;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ---------- hero ---------- */
+header.hero{padding:88px 0 48px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-soft);
+  padding:7px 14px;border-radius:999px;margin-bottom:20px;
+}
+h1{
+  font-size:clamp(34px,6vw,60px);line-height:1.06;letter-spacing:-.028em;
+  font-weight:700;margin:0 0 20px;max-width:16ch;
+}
+.lead{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:62ch;margin:0 0 32px}
+.stats{display:flex;flex-wrap:wrap;gap:12px}
+.stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:14px 18px;box-shadow:var(--shadow);min-width:132px;
+}
+.stat b{display:block;font-size:26px;letter-spacing:-.02em;line-height:1.2}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* ---------- filters ---------- */
+.filters{
+  position:sticky;top:0;z-index:40;
+  background:var(--bg);
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:14px 0;margin-bottom:48px;
+}
+.filter-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.filter-label{font-size:13px;color:var(--muted);font-weight:500;margin-right:4px}
+.chip{
+  font:inherit;font-size:14px;font-weight:500;
+  padding:8px 15px;min-height:38px;border-radius:999px;cursor:pointer;
+  background:var(--surface);color:var(--text);border:1px solid var(--border);
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.count{font-size:13px;color:var(--muted);margin-left:auto}
+
+/* ---------- sections ---------- */
+section{margin-bottom:72px}
+.sec-head{margin-bottom:28px;max-width:70ch}
+h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.022em;font-weight:700;margin:0 0 10px}
+.sec-head p{color:var(--muted);margin:0;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+
+/* ---------- card ---------- */
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+.thumb{position:relative;display:block;aspect-ratio:16/9;background:var(--surface-2);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(to top,rgba(0,0,0,.45),rgba(0,0,0,0) 55%);
+}
+.play svg{width:54px;height:54px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.45))}
+.dur{
+  position:absolute;right:10px;top:10px;
+  background:rgba(0,0,0,.72);color:#fff;font-size:12px;font-weight:600;
+  padding:4px 9px;border-radius:7px;letter-spacing:.01em;
+}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.title{font-size:19px;font-weight:600;letter-spacing:-.012em;line-height:1.3;margin:0}
+.title .yr{color:var(--muted);font-weight:500}
+.meta{font-size:13px;color:var(--muted);margin:0}
+.desc{font-size:15px;margin:0;color:var(--text);opacity:.9}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tag{
+  font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;
+  border:1px solid var(--border);color:var(--muted);background:var(--surface-2);
+  display:inline-flex;align-items:center;gap:5px;
+}
+.tag.lvl-easy{color:var(--green);border-color:color-mix(in srgb, var(--green) 32%, transparent)}
+.tag.lvl-mid{color:var(--amber);border-color:color-mix(in srgb, var(--amber) 32%, transparent)}
+.tag.lvl-hard{color:var(--violet);border-color:color-mix(in srgb, var(--violet) 34%, transparent)}
+.tag svg{width:13px;height:13px;flex:none}
+.links{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;font-weight:500;padding-top:4px}
+.links a{display:inline-flex;align-items:center;gap:5px}
+.links svg{width:14px;height:14px}
+
+/* ---------- folklore strip ---------- */
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:16px}
+.mini{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  box-shadow:var(--shadow);transition:transform .22s ease,box-shadow .22s ease;display:block;color:inherit;
+}
+.mini:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);text-decoration:none}
+.mini img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.mini .mb{padding:12px 14px 14px}
+.mini b{display:block;font-size:15px;font-weight:600}
+.mini span{font-size:13px;color:var(--muted)}
+
+/* ---------- route table ---------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;background:var(--surface-2)}
+tr:last-child td{border-bottom:none}
+td b{font-weight:600}
+
+/* ---------- notes ---------- */
+.note{
+  background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:14px;padding:18px 22px;font-size:15px;color:var(--muted);box-shadow:var(--shadow);
+}
+.note strong{color:var(--text)}
+.srclist{columns:2;column-gap:32px;font-size:14px;color:var(--muted);padding-left:18px;margin:0}
+.srclist li{margin-bottom:7px;break-inside:avoid}
+@media (max-width:640px){.srclist{columns:1}}
+footer{padding:56px 0 72px;border-top:1px solid var(--border);color:var(--muted);font-size:14px}
+.hidden{display:none !important}
+
+/* ---------- motion (progressive) ---------- */
+.js-anim .reveal:not(.seen){opacity:0;transform:translateY(22px)}
+@media (prefers-reduced-motion: reduce){
+  .js-anim .reveal{opacity:1 !important;transform:none !important}
+  .card,.mini{transition:none}
+}
+@media print{
+  .reveal{opacity:1 !important;transform:none !important}
+  .filters{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Подборка · сентябрь 2026</span>
+    <h1>Мультфильмы на португальском до 30 минут</h1>
+    <p class="lead">Бразильская и португальская анимация: культовые сериалы с сериями по 11 минут, фольклорные короткометражки и классика, которая брала Канны и «Оскар». Каждая ссылка открыта и проверена — длительность взята из самого видео, а не из описания.</p>
+    <div class="stats">
+      <div class="stat"><b>21</b><span>фильм и сериал</span></div>
+      <div class="stat"><b>0:37–24:49</b><span>реальный хронометраж</span></div>
+      <div class="stat"><b>5</b><span>легенд фольклора</span></div>
+      <div class="stat"><b>18</b><span>смотреть бесплатно</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="filters">
+  <div class="wrap">
+    <div class="filter-row" role="group" aria-label="Фильтр по длительности и стране">
+      <span class="filter-label">Длительность</span>
+      <button class="chip" data-f="dur" data-v="all" aria-pressed="true">Любая</button>
+      <button class="chip" data-f="dur" data-v="s" aria-pressed="false">до 5 мин</button>
+      <button class="chip" data-f="dur" data-v="m" aria-pressed="false">5–15 мин</button>
+      <button class="chip" data-f="dur" data-v="l" aria-pressed="false">15–30 мин</button>
+      <span class="filter-label" style="margin-left:16px">Страна</span>
+      <button class="chip" data-f="geo" data-v="all" aria-pressed="true">Все</button>
+      <button class="chip" data-f="geo" data-v="br" aria-pressed="false">Бразилия</button>
+      <button class="chip" data-f="geo" data-v="pt" aria-pressed="false">Португалия</button>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- ============ СЕРИАЛЫ ============ -->
+<section id="series">
+  <div class="sec-head reveal">
+    <h2>Культовые сериалы — серия ровно на один вечер</h2>
+    <p>Формат 11 минут: можно смотреть по одной серии в день и не выпадать из привычек. Три из четырёх сделаны на <a href="https://www.copastudio.com/" target="_blank" rel="noopener">Copa Studio</a> в Рио-де-Жанейро — эта студия, по сути, и создала современную бразильскую анимацию.</p>
+  </div>
+  <div class="grid">
+
+    <article class="card reveal" data-dur="m" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=BhF6mkQtObw" target="_blank" rel="noopener" aria-label="Смотреть серию «Vovó Me Leva pra Aula» на YouTube">
+        <img src="https://i.ytimg.com/vi/BhF6mkQtObw/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/BhF6mkQtObw/hqdefault.jpg'" alt="Кадр из мультсериала Irmão do Jorel" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">11:14</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Irmão do Jorel <span class="yr">· 2014–2025</span></h3>
+        <p class="meta">Juliano Enrico · Copa Studio · 5 сезонов, 127 серий по 11 минут</p>
+        <p class="desc">Главная бразильская анимация современности: первый оригинальный сериал Cartoon Network, сделанный в Бразилии и во всей Латинской Америке. Мальчик, которого все зовут просто «брат Жорела», живёт в семье, срисованной с домашних видео 80-х и 90-х. Номинация Emmy Kids (2019), премия Quirino за лучший сериал (2025).</p>
+        <div class="tags">
+          <span class="tag lvl-hard">Язык: сложный</span>
+          <span class="tag">Ностальгия по 80–90-м</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=BhF6mkQtObw" target="_blank" rel="noopener">Серия целиком (Copa Studio)</a>
+          <a href="https://www.cartoonnetwork.com.br/show/irmao-do-jorel" target="_blank" rel="noopener">Cartoon Network</a>
+          <a href="https://irmaodojorel.com.br/" target="_blank" rel="noopener">Сайт сериала</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="l" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=Cct4ahJVr_4" target="_blank" rel="noopener" aria-label="Смотреть оригинальную короткометражку Historietas Assombradas на YouTube">
+        <img src="https://i.ytimg.com/vi/Cct4ahJVr_4/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Cct4ahJVr_4/hqdefault.jpg'" alt="Кадр из Historietas Assombradas para Crianças Malcriadas" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">16:05</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Historietas Assombradas <span class="yr">· 2005 / 2013–2016</span></h3>
+        <p class="meta">Victor-Hugo Borges · Glaz Entretenimento и Copa Studio · 2 сезона, 40 серий по 11 минут</p>
+        <p class="desc">«Страшилки для невоспитанных детей». Ленивый одиннадцатилетний Пепе развозит зелья своей бабки-ведьмы и по дороге натыкается на всю бразильскую нечисть — от Белокурой из школьного туалета до Куки. Мрачный юмор, который дети и взрослые понимают по-разному. Начать стоит с короткометражки 2005 года, из которой вырос весь сериал.</p>
+        <div class="tags">
+          <span class="tag lvl-hard">Язык: сложный</span>
+          <span class="tag">Городские легенды</span>
+          <span class="tag">Чёрный юмор</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=Cct4ahJVr_4" target="_blank" rel="noopener">Короткометражка 2005</a>
+          <a href="https://www.youtube.com/watch?v=9XYk01N8Xbk" target="_blank" rel="noopener">Серия 1×01 (11:55)</a>
+          <a href="https://www.youtube.com/playlist?list=PL47y4FT147ATspojl389mYFjJLL-1GL-N" target="_blank" rel="noopener">Весь 1-й сезон</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="m" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=c8J1UKHWCjU" target="_blank" rel="noopener" aria-label="Смотреть серию Tromba Trem на YouTube">
+        <img src="https://i.ytimg.com/vi/c8J1UKHWCjU/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/c8J1UKHWCjU/hqdefault.jpg'" alt="Кадр из мультсериала Tromba Trem" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">11:27</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Tromba Trem <span class="yr">· 2011–2016</span></h3>
+        <p class="meta">Zé Brandão · Copa Studio · 3 сезона, 52 серии</p>
+        <p class="desc">Слон Гажа, потерявший память, муравьедиха-вегетарианка Дуда и колония термитов едут на паровозе через серрадо за таинственным дирижаблем. Победитель государственного конкурса Anima TV (2010) — то есть сериал буквально выбрали как образец национальной анимации. Речь и юмор — из глубинки, не из Сан-Паулу.</p>
+        <div class="tags">
+          <span class="tag lvl-mid">Язык: средний</span>
+          <span class="tag">Серрадо</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=c8J1UKHWCjU" target="_blank" rel="noopener">Серия целиком (Copa Studio)</a>
+          <a href="https://tvbrasil.ebc.com.br/trombatrem" target="_blank" rel="noopener">TV Brasil</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="m" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=vnDwdf8-Dxk" target="_blank" rel="noopener" aria-label="Смотреть серию Sítio do Picapau Amarelo на YouTube">
+        <img src="https://i.ytimg.com/vi/vnDwdf8-Dxk/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/vnDwdf8-Dxk/hqdefault.jpg'" alt="Кадр из мультсериала Sítio do Picapau Amarelo" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">10:00</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Sítio do Picapau Amarelo <span class="yr">· 2012–2016</span></h3>
+        <p class="meta">Rede Globo и продюсерская компания Mixer · 3 сезона, 78 серий</p>
+        <p class="desc">Анимационная версия книг <a href="https://pt.wikipedia.org/wiki/Monteiro_Lobato" target="_blank" rel="noopener">Монтейру Лобату</a> — фундамента бразильского детства. Тряпичная кукла Эмилия, Висконде де Сабугоза, Саси и Кука: если вы хотите понимать, откуда бразильцы берут половину своих шуток и отсылок, начинать надо отсюда.</p>
+        <div class="tags">
+          <span class="tag lvl-mid">Язык: средний</span>
+          <span class="tag">Классика литературы</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=vnDwdf8-Dxk" target="_blank" rel="noopener">Серия на YouTube</a>
+          <a href="https://pt.wikipedia.org/wiki/S%C3%ADtio_do_Picapau_Amarelo_(s%C3%A9rie_animada)" target="_blank" rel="noopener">О сериале</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="m" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=0nMmWgETnMY" target="_blank" rel="noopener" aria-label="Смотреть серию O Show da Luna на YouTube">
+        <img src="https://i.ytimg.com/vi/0nMmWgETnMY/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/0nMmWgETnMY/hqdefault.jpg'" alt="Кадр из мультсериала O Show da Luna" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">12:03</span>
+      </a>
+      <div class="body">
+        <h3 class="title">O Show da Luna! <span class="yr">· с 2014</span></h3>
+        <p class="meta">Студия <a href="https://www.tvpinguim.com/" target="_blank" rel="noopener">TV PinGuim</a> · серии по 11–12 минут</p>
+        <p class="desc">Шестилетняя Луна ставит опыты и объясняет, как устроен мир. Не культ, а инструмент: дикция дикторская, лексика простая, фразы короткие — это лучший вход в бразильский португальский на слух, если сериалы для взрослых пока рассыпаются в кашу.</p>
+        <div class="tags">
+          <span class="tag lvl-easy">Язык: лёгкий</span>
+          <span class="tag">Для старта</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=0nMmWgETnMY" target="_blank" rel="noopener">Серия на официальном канале</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="s" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=lCEwXdXEDVw" target="_blank" rel="noopener" aria-label="Смотреть эпизод Mônica Toy на YouTube">
+        <img src="https://i.ytimg.com/vi/lCEwXdXEDVw/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/lCEwXdXEDVw/hqdefault.jpg'" alt="Кадр из Mônica Toy" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">0:37</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Mônica Toy <span class="yr">· с 2013</span></h3>
+        <p class="meta"><a href="https://turmadamonica.uol.com.br/" target="_blank" rel="noopener">Mauricio de Sousa Produções</a> · 11 сезонов, серии по 30–40 секунд</p>
+        <p class="desc">Сделано к 50-летию Мôники — главной героини бразильских комиксов, которую тут знает вообще каждый. Гэги без слов по полминуты: языковой пользы почти нет, зато за неделю вы начнёте узнавать персонажей на упаковках, вывесках и в чужих шутках.</p>
+        <div class="tags">
+          <span class="tag">Почти без слов</span>
+          <span class="tag">Национальный канон</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=lCEwXdXEDVw" target="_blank" rel="noopener">Эпизод</a>
+          <a href="https://www.youtube.com/playlist?list=PLWduEF1R_tVYCikTS9pSWwd3UtfmotVvr" target="_blank" rel="noopener">Все эпизоды</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ ФОЛЬКЛОР ============ -->
+<section id="folclore">
+  <div class="sec-head reveal">
+    <h2>«Juro que Vi» — бразильский фольклор в пяти сериях</h2>
+    <p>Самое «национальное», что вообще есть в этой подборке: пять короткометражек про Саси, Иару, Розового дельфина, Матинта Перейру и Курупиру. Режиссёры Умберту Авелар и Сержиу Гленес, продюсер — <a href="https://multi.rio/index.php/serie/2536-juro-que-vi" target="_blank" rel="noopener">MultiRio</a>, муниципальная медиакомпания Рио-де-Жанейро; в работе участвовали школьники городских школ. Легенды пересказаны на современный лад — через темы экологии, прав животных и предрассудков.</p>
+  </div>
+  <div class="strip">
+    <a class="mini reveal" href="https://www.youtube.com/watch?v=X5X7OWhqNRQ" target="_blank" rel="noopener" data-dur="m" data-geo="br">
+      <img src="https://i.ytimg.com/vi/X5X7OWhqNRQ/hqdefault.jpg" alt="Кадр из короткометражки O Saci" loading="lazy" width="480" height="360">
+      <span class="mb"><b>O Saci</b><span>13:13 · одноногий проказник в красном колпаке</span></span>
+    </a>
+    <a class="mini reveal" href="https://www.youtube.com/watch?v=Z3H09Jt10R4" target="_blank" rel="noopener" data-dur="m" data-geo="br">
+      <img src="https://i.ytimg.com/vi/Z3H09Jt10R4/hqdefault.jpg" alt="Кадр из короткометражки A Iara" loading="lazy" width="480" height="360">
+      <span class="mb"><b>A Iara</b><span>10:28 · речная дева, заманивающая рыбаков</span></span>
+    </a>
+    <a class="mini reveal" href="https://www.youtube.com/watch?v=5U1gwqkiK0M" target="_blank" rel="noopener" data-dur="m" data-geo="br">
+      <img src="https://i.ytimg.com/vi/5U1gwqkiK0M/hqdefault.jpg" alt="Кадр из короткометражки O Boto" loading="lazy" width="480" height="360">
+      <span class="mb"><b>O Boto</b><span>11:26 · амазонский дельфин, превращающийся в парня</span></span>
+    </a>
+    <a class="mini reveal" href="https://www.youtube.com/watch?v=uMUqDgwsSI4" target="_blank" rel="noopener" data-dur="m" data-geo="br">
+      <img src="https://i.ytimg.com/vi/uMUqDgwsSI4/hqdefault.jpg" alt="Кадр из короткометражки Matinta Perera" loading="lazy" width="480" height="360">
+      <span class="mb"><b>Matinta Perera</b><span>13:17 · ведьма-птица с севера страны</span></span>
+    </a>
+    <a class="mini reveal" href="https://www.youtube.com/watch?v=KaBZZWAkLZw" target="_blank" rel="noopener" data-dur="m" data-geo="br">
+      <img src="https://i.ytimg.com/vi/KaBZZWAkLZw/hqdefault.jpg" alt="Кадр из короткометражки O Curupira" loading="lazy" width="480" height="360">
+      <span class="mb"><b>O Curupira</b><span>11:24 · хранитель леса с вывернутыми ступнями</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ КЛАССИКА ============ -->
+<section id="curtas">
+  <div class="sec-head reveal">
+    <h2>Классика короткого метра — то, чем Бразилия гордится</h2>
+    <p>Четыре фильма, которые входят во все национальные списки лучшего. Один взял Канны за десять лет до того, как о бразильской анимации вообще заговорили.</p>
+  </div>
+  <div class="grid">
+
+    <article class="card reveal" data-dur="m" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=bDyNXArnsvc" target="_blank" rel="noopener" aria-label="Смотреть короткометражку Meow! на YouTube">
+        <img src="https://i.ytimg.com/vi/bDyNXArnsvc/hqdefault.jpg" alt="Кадр из короткометражки Meow! Маркоса Магальяйнса" loading="lazy" width="480" height="360">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">8:11</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Meow! <span class="yr">· 1981</span></h3>
+        <p class="meta">Marcos Magalhães · Специальный приз жюри Каннского фестиваля, 1982</p>
+        <p class="desc">Первая бразильская анимационная короткометражка, взявшая приз жюри в Каннах. Кот как метафора потребления: снят ещё в 1976-м на Super-8 и переснят на 35 мм в 1981-м. Ассоциация бразильских кинокритиков поставила его на третье место в списке лучших анимаций страны.</p>
+        <div class="tags">
+          <span class="tag">Канны 1982</span>
+          <span class="tag">Абсолютная классика</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=bDyNXArnsvc" target="_blank" rel="noopener">Смотреть целиком</a>
+          <a href="https://www.itaucultural.org.br/meow" target="_blank" rel="noopener">Itaú Cultural</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="m" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=45IC916K2xg" target="_blank" rel="noopener" aria-label="Смотреть короткометражку Vida Maria на YouTube">
+        <img src="https://i.ytimg.com/vi/45IC916K2xg/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/45IC916K2xg/hqdefault.jpg'" alt="Кадр из короткометражки Vida Maria" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">8:35</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Vida Maria <span class="yr">· 2006</span></h3>
+        <p class="meta">Márcio Ramos · 3D · более 40 наград фестивалей</p>
+        <p class="desc">Пятилетняя Мария Жозе учится писать своё имя, но мать отправляет её работать в поле. Дальше — то же самое с её дочерью, и с дочерью её дочери. Восемь минут, после которых становится понятно, почему в Бразилии этот фильм показывают в школах. Фактуры и цвета сняты в сертане штата Сеара.</p>
+        <div class="tags">
+          <span class="tag lvl-hard">Сильный северо-восточный акцент</span>
+          <span class="tag">Школьная программа</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=45IC916K2xg" target="_blank" rel="noopener">Смотреть целиком</a>
+          <a href="https://www.culturagenial.com/filme-vida-maria/" target="_blank" rel="noopener">Разбор фильма</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="s" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=6TPWNlhbu5c" target="_blank" rel="noopener" aria-label="Смотреть короткометражку Tyger на YouTube">
+        <img src="https://i.ytimg.com/vi/6TPWNlhbu5c/hqdefault.jpg" alt="Кадр из короткометражки Tyger" loading="lazy" width="480" height="360">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">4:31</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Tyger <span class="yr">· 2006</span></h3>
+        <p class="meta">Guilherme Marcondes · более 30 наград по всему миру</p>
+        <p class="desc">По стихотворению Уильяма Блейка: гигантский тигр появляется ночью посреди Сан-Паулу. Живые кукловоды из <span style="white-space:nowrap">Cia. Stromboli</span> смешаны с рисованной графикой прямо поверх городских съёмок. Второе место в категории лучшей бразильской анимации на Anima Mundi 2006.</p>
+        <div class="tags">
+          <span class="tag">Визуальная вещь</span>
+          <span class="tag">Сан-Паулу</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=6TPWNlhbu5c" target="_blank" rel="noopener">Смотреть целиком</a>
+          <a href="http://www.guilherme.tv/tyger" target="_blank" rel="noopener">Сайт режиссёра</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="m" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=mQ3nkVy-C2o" target="_blank" rel="noopener" aria-label="Смотреть короткометражку Guaxuma на YouTube">
+        <img src="https://i.ytimg.com/vi/mQ3nkVy-C2o/hqdefault.jpg" alt="Кадр из короткометражки Guaxuma" loading="lazy" width="480" height="360">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">14:11</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Guaxuma <span class="yr">· 2018</span></h3>
+        <p class="meta">Nara Normande · песочная анимация и stop-motion</p>
+        <p class="desc">Режиссёр своим голосом рассказывает о детстве и лучшей подруге Тайре на пляже Гуашума в Алагоасе — рисунком по песку, песочными скульптурами и куклами. Фильм прошёл Бразилиа, Грамаду и Anima Mundi и получил квалификацию на «Оскар» 2020 года. Закадровый текст спокойный и разборчивый — редкая короткометражка, по которой реально учить язык.</p>
+        <div class="tags">
+          <span class="tag lvl-mid">Язык: средний, чёткий закадр</span>
+          <span class="tag">Оскаровская квалификация</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=mQ3nkVy-C2o" target="_blank" rel="noopener">Смотреть целиком</a>
+          <a href="https://www.papodecinema.com.br/especiais/top-2018-os-melhores-curtas-brasileiros-do-ano/guaxuma-de-nara-normande/" target="_blank" rel="noopener">Рецензия</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ ВЗРОСЛОЕ ============ -->
+<section id="adulto">
+  <div class="sec-head reveal">
+    <h2>Взрослая анимация — 16+ и 18+</h2>
+    <p>Два культовых проекта, которые в детской подборке смотрелись бы странно. Оба доступны хуже остальных — честно указано, где именно.</p>
+  </div>
+  <div class="grid">
+
+    <article class="card reveal" data-dur="l" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=kChPtNfGQGI" target="_blank" rel="noopener" aria-label="Смотреть трейлер Dossiê Rê Bordosa на YouTube">
+        <img src="https://i.ytimg.com/vi/kChPtNfGQGI/hqdefault.jpg" alt="Кадр из короткометражки Dossiê Rê Bordosa" loading="lazy" width="480" height="360">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">16:00</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Dossiê Rê Bordosa <span class="yr">· 2008</span></h3>
+        <p class="meta">Cesar Cabral · stop-motion · 16+</p>
+        <p class="desc">Псевдодокументальное расследование в кукольной анимации: почему карикатурист <a href="https://pt.wikipedia.org/wiki/Angeli" target="_blank" rel="noopener">Анжели</a> убил Ре Бордозу — свою самую известную героиню. Один из самых известных бразильских короткометражных мультфильмов для взрослых.</p>
+        <div class="tags">
+          <span class="tag lvl-hard">Язык: сложный, сленг 80-х</span>
+          <span class="tag">Целиком — по подписке</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=kChPtNfGQGI" target="_blank" rel="noopener">Официальный трейлер</a>
+          <a href="https://portacurtas.org.br/filme/?name=dossie_re_bordosa46095" target="_blank" rel="noopener">Целиком на Porta Curtas (подписка или аренда)</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="l" data-geo="br">
+      <a class="thumb" href="https://www.youtube.com/watch?v=_h0mrndA2fU" target="_blank" rel="noopener" aria-label="Смотреть трейлер Super Drags на YouTube">
+        <img src="https://i.ytimg.com/vi/_h0mrndA2fU/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/_h0mrndA2fU/hqdefault.jpg'" alt="Кадр из сериала Super Drags" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">23–25 мин</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Super Drags <span class="yr">· 2018</span></h3>
+        <p class="meta">Combo Estúdio · Netflix · 5 серий по 23–25 минут · 18+</p>
+        <p class="desc">Трое продавцов универмага по ночам превращаются в драг-квин-супергероинь. Сериал вызвал скандал ещё до выхода — Бразильское общество педиатров требовало его снять, Netflix отвечал, что рейтинг TV-MA и аудитория взрослая. Закрыт через месяц после премьеры, чем и стал культовым. Живой уличный португальский с максимальной концентрацией сленга.</p>
+        <div class="tags">
+          <span class="tag lvl-hard">Язык: очень сложный</span>
+          <span class="tag">Только по подписке</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=_h0mrndA2fU" target="_blank" rel="noopener">Трейлер Netflix</a>
+          <a href="https://www.netflix.com/pt/title/80218634" target="_blank" rel="noopener">Netflix</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ ПОРТУГАЛИЯ ============ -->
+<section id="portugal">
+  <div class="sec-head reveal">
+    <h2>Португалия — своя школа анимации</h2>
+    <p>Португальская анимация — это почти исключительно авторский короткий метр, и он сильный: за последние тридцать лет страна взяла главную европейскую награду в анимации и первую в своей истории номинацию на «Оскар». Учтите: два фильма из трёх — без реплик, для языка они бесполезны, но пропускать их жалко.</p>
+  </div>
+  <div class="grid">
+
+    <article class="card reveal" data-dur="l" data-geo="pt">
+      <a class="thumb" href="https://www.youtube.com/watch?v=m4Fciq8LPz0" target="_blank" rel="noopener" aria-label="Смотреть короткометражку A Suspeita на YouTube">
+        <img src="https://i.ytimg.com/vi/m4Fciq8LPz0/hqdefault.jpg" alt="Кадр из короткометражки A Suspeita" loading="lazy" width="480" height="360">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">24:49</span>
+      </a>
+      <div class="body">
+        <h3 class="title">A Suspeita <span class="yr">· 1999</span></h3>
+        <p class="meta">José Miguel Ribeiro · stop-motion · Cartoon d'Or 2000</p>
+        <p class="desc">Четверо в купе поезда, среди них возможный убийца, складной нож из Барселуша и контролёр. Куклы из латекса и смолы. Главная европейская награда для анимационной короткометражки и 26 международных призов — при этом на родине фильм вышел в прокат только в 2001 году и широкой публике до сих пор почти неизвестен.</p>
+        <div class="tags">
+          <span class="tag lvl-mid">Европейский португальский</span>
+          <span class="tag">Cartoon d'Or</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=m4Fciq8LPz0" target="_blank" rel="noopener">Смотреть целиком</a>
+          <a href="https://pt.wikipedia.org/wiki/A_Suspeita_(cartoon)" target="_blank" rel="noopener">О фильме</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="m" data-geo="pt">
+      <a class="thumb" href="https://www.youtube.com/watch?v=KT5O4tSuTro" target="_blank" rel="noopener" aria-label="Смотреть трейлер Ice Merchants на YouTube">
+        <img src="https://i.ytimg.com/vi/KT5O4tSuTro/hqdefault.jpg" alt="Кадр из короткометражки Ice Merchants" loading="lazy" width="480" height="360">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">14:00</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Ice Merchants <span class="yr">· 2022</span></h3>
+        <p class="meta">João Gonzalez · Канны, Annie Award, номинация на «Оскар» 2023</p>
+        <p class="desc">Отец и сын каждый день прыгают с парашютом с дома на отвесной скале, чтобы продавать лёд в деревне внизу. Первая португальская анимация, награждённая в Каннах, и первая португальская картина, номинированная на «Оскар». Реплик в фильме нет. Целиком в свободном доступе не выложен — только трейлеры и фестивальные показы.</p>
+        <div class="tags">
+          <span class="tag">Без слов</span>
+          <span class="tag">Оскар 2023, номинация</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=KT5O4tSuTro" target="_blank" rel="noopener">Трейлер</a>
+          <a href="https://en.wikipedia.org/wiki/Ice_Merchants" target="_blank" rel="noopener">О фильме</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="s" data-geo="pt">
+      <a class="thumb" href="https://www.youtube.com/watch?v=0mgeOzd58bw" target="_blank" rel="noopener" aria-label="Смотреть короткометражку Estória do Gato e da Lua на YouTube">
+        <img src="https://i.ytimg.com/vi/0mgeOzd58bw/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/0mgeOzd58bw/hqdefault.jpg'" alt="Кадр из короткометражки Estória do Gato e da Lua" loading="lazy" width="480" height="270">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">5:30</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Estória do Gato e da Lua <span class="yr">· 1995</span></h3>
+        <p class="meta">Pedro Serrazina · выложено самим режиссёром</p>
+        <p class="desc">Кот влюбляется в луну. Пять с половиной минут чёрно-белой графики, света и теней — сказка, построенная на молчании. Входит в кураторские подборки ста лет португальской анимации.</p>
+        <div class="tags">
+          <span class="tag">Без слов</span>
+          <span class="tag">Оригинальная версия от автора</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=0mgeOzd58bw" target="_blank" rel="noopener">Смотреть целиком</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-dur="s" data-geo="pt">
+      <a class="thumb" href="https://www.youtube.com/watch?v=tFl_CJLFWCU" target="_blank" rel="noopener" aria-label="Смотреть эпизод Bruno Aleixo на YouTube">
+        <img src="https://i.ytimg.com/vi/tFl_CJLFWCU/hqdefault.jpg" alt="Кадр из серии про Бруну Алейшу" loading="lazy" width="480" height="360">
+        <span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.5 6.2 5.2 3.3a.6.6 0 010 1l-5.2 3.3a.6.6 0 01-.9-.5V8.7a.6.6 0 01.9-.5z"/></svg></span>
+        <span class="dur">3:33</span>
+      </a>
+      <div class="body">
+        <h3 class="title">Bruno Aleixo <span class="yr">· с 2000-х</span></h3>
+        <p class="meta">Интернет-персонаж из Авейру · короткие эпизоды, потом сериалы на RTP1 и полный метр</p>
+        <p class="desc">Медведь с говором северной провинции, который рассуждает обо всём подряд с абсолютной серьёзностью. В Португалии его цитируют как мем-фольклор целого поколения. Предупреждение: акцент и разговорные обороты тут такие, что даже португальцы иногда включают субтитры — это самый трудный пункт списка.</p>
+        <div class="tags">
+          <span class="tag lvl-hard">Язык: очень сложный</span>
+          <span class="tag">Интернет-культ</span>
+        </div>
+        <div class="links">
+          <a href="https://www.youtube.com/watch?v=tFl_CJLFWCU" target="_blank" rel="noopener">Эпизод</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ МАРШРУТ ============ -->
+<section id="route">
+  <div class="sec-head reveal">
+    <h2>С чего начать</h2>
+    <p>Отметки сложности языка ниже — моя оценка по манере речи в этих проектах, а не измеренный показатель. Исключение — пункты «без слов»: это указано в описаниях самих фильмов.</p>
+  </div>
+  <div class="tablewrap reveal">
+    <table>
+      <thead>
+        <tr><th>Задача</th><th>Что смотреть</th><th>Почему</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Разогнать слух с нуля</b></td>
+          <td><a href="https://www.youtube.com/watch?v=0nMmWgETnMY" target="_blank" rel="noopener">O Show da Luna!</a></td>
+          <td>Дикторская дикция, простые конструкции, повторяющаяся лексика. 12 минут за подход.</td>
+        </tr>
+        <tr>
+          <td><b>Понять культурный код</b></td>
+          <td><a href="#folclore">Juro que Vi</a> и <a href="https://www.youtube.com/watch?v=vnDwdf8-Dxk" target="_blank" rel="noopener">Sítio do Picapau Amarelo</a></td>
+          <td>Саси, Иара, Курупира, Кука, Эмилия — имена, которые всплывают в разговорах, рекламе и названиях баров.</td>
+        </tr>
+        <tr>
+          <td><b>Один сильный фильм на вечер</b></td>
+          <td><a href="https://www.youtube.com/watch?v=45IC916K2xg" target="_blank" rel="noopener">Vida Maria</a> или <a href="https://www.youtube.com/watch?v=mQ3nkVy-C2o" target="_blank" rel="noopener">Guaxuma</a></td>
+          <td>8 и 14 минут. После них понятно, о чём вообще бразильская анимация помимо детских каналов.</td>
+        </tr>
+        <tr>
+          <td><b>Втянуться в сериал надолго</b></td>
+          <td><a href="https://www.youtube.com/watch?v=BhF6mkQtObw" target="_blank" rel="noopener">Irmão do Jorel</a></td>
+          <td>127 серий по 11 минут. Быстрая разговорная речь и плотный слой отсылок — тяжело, но именно так тут и говорят.</td>
+        </tr>
+        <tr>
+          <td><b>Посмотреть с бразильцами</b></td>
+          <td><a href="https://www.youtube.com/watch?v=Cct4ahJVr_4" target="_blank" rel="noopener">Historietas Assombradas</a></td>
+          <td>Их детство. Реакция собеседника на первые кадры сама по себе стоит просмотра.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ ПРИМЕЧАНИЯ ============ -->
+<section id="notes">
+  <div class="sec-head reveal"><h2>Что важно знать</h2></div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+    <div class="note reveal">
+      <strong>Субтитры.</strong> У большинства роликов на YouTube нет авторских субтитров, но автоматические на португальском включаются в настройках проигрывателя. Для тренировки слуха это рабочий костыль: первый проход без них, второй — с ними.
+    </div>
+    <div class="note reveal">
+      <strong>Как проверялась подборка.</strong> Длительность каждого ролика взята из данных самого видео, а не из описаний на сайтах. Ссылки открывались на момент 7 сентября 2026 года. Загрузки на YouTube не всегда официальные — там, где канал принадлежит студии или режиссёру (Copa Studio, MultiRio, Pedro Serrazina, Netflix), это указано в карточке.
+    </div>
+    <div class="note reveal">
+      <strong>Не влезло в тридцать минут.</strong> У «Historietas Assombradas» есть <a href="https://www.youtube.com/watch?v=sunTC0B5cps" target="_blank" rel="noopener">полнометражная версия</a> на полтора часа — если сериал зайдёт, это следующий шаг. Полный метр вроде «O Menino e o Mundo» и «Nayola» в подборку не попал по условию длительности.
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="sec-head reveal"><h2>Источники</h2></div>
+  <ol class="srclist reveal">
+    <li><a href="https://pt.wikipedia.org/wiki/Irm%C3%A3o_do_Jorel" target="_blank" rel="noopener">Wikipédia — Irmão do Jorel</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Historietas_Assombradas_(para_Crian%C3%A7as_Malcriadas)" target="_blank" rel="noopener">Wikipédia — Historietas Assombradas</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Tromba_Trem" target="_blank" rel="noopener">Wikipédia — Tromba Trem</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/S%C3%ADtio_do_Picapau_Amarelo_(s%C3%A9rie_animada)" target="_blank" rel="noopener">Wikipédia — Sítio do Picapau Amarelo</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/M%C3%B4nica_Toy" target="_blank" rel="noopener">Wikipédia — Mônica Toy</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Juro_que_vi" target="_blank" rel="noopener">Wikipédia — Juro que Vi</a></li>
+    <li><a href="https://multi.rio/index.php/serie/2536-juro-que-vi" target="_blank" rel="noopener">MultiRio — серия «Juro Que Vi»</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Meow!" target="_blank" rel="noopener">Wikipédia — Meow!</a></li>
+    <li><a href="https://www.itaucultural.org.br/meow" target="_blank" rel="noopener">Itaú Cultural — Meow!</a></li>
+    <li><a href="https://www.culturagenial.com/filme-vida-maria/" target="_blank" rel="noopener">Cultura Genial — разбор «Vida Maria»</a></li>
+    <li><a href="https://www.clubedecriacao.com.br/ultimas/anima-mundi-2006/" target="_blank" rel="noopener">Clube de Criação — итоги Anima Mundi 2006 (Tyger)</a></li>
+    <li><a href="https://www.papodecinema.com.br/especiais/top-2018-os-melhores-curtas-brasileiros-do-ano/guaxuma-de-nara-normande/" target="_blank" rel="noopener">Papo de Cinema — Guaxuma</a></li>
+    <li><a href="https://portacurtas.org.br/filme/?name=dossie_re_bordosa46095" target="_blank" rel="noopener">Porta Curtas — Dossiê Rê Bordosa</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Super_Drags" target="_blank" rel="noopener">Wikipedia — Super Drags</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/A_Suspeita_(cartoon)" target="_blank" rel="noopener">Wikipédia — A Suspeita</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Ice_Merchants" target="_blank" rel="noopener">Wikipedia — Ice Merchants</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Portuguese_animation" target="_blank" rel="noopener">Wikipedia — Portuguese animation</a></li>
+    <li><a href="https://revistadecinema.com.br/2024/10/5a-temporada-de-irmao-do-jorel-estreia-na-max-e-no-cartoon-network/" target="_blank" rel="noopener">Revista de Cinema — 5-й сезон «Irmão do Jorel»</a></li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Подборка собрана 7 сентября 2026 года. Хронометраж и доступность ссылок проверены вручную на эту дату; у роликов на YouTube и то и другое может измениться.
+  </div>
+</footer>
+
+<script>
+/* ---------- фильтры ---------- */
+(function(){
+  var state = { dur:'all', geo:'all' };
+  var items = Array.prototype.slice.call(document.querySelectorAll('[data-dur]'));
+  var counter = document.getElementById('count');
+
+  function apply(){
+    var shown = 0;
+    items.forEach(function(el){
+      var ok = (state.dur === 'all' || el.dataset.dur === state.dur) &&
+               (state.geo === 'all' || el.dataset.geo === state.geo);
+      el.classList.toggle('hidden', !ok);
+      if (ok) shown++;
+    });
+    document.querySelectorAll('section').forEach(function(sec){
+      var inSec = sec.querySelectorAll('[data-dur]');
+      if (!inSec.length) return;
+      var vis = sec.querySelectorAll('[data-dur]:not(.hidden)').length;
+      sec.classList.toggle('hidden', vis === 0);
+    });
+    counter.textContent = (state.dur === 'all' && state.geo === 'all')
+      ? '' : 'Показано: ' + shown;
+  }
+
+  document.querySelectorAll('.chip').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var f = btn.dataset.f;
+      state[f] = btn.dataset.v;
+      document.querySelectorAll('.chip[data-f="'+f+'"]').forEach(function(b){
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      // после фильтрации ничего не должно оставаться прозрачным
+      document.querySelectorAll('.reveal').forEach(function(el){
+        el.classList.add('seen');
+        el.style.opacity = '';
+        el.style.transform = '';
+      });
+      apply();
+    });
+  });
+})();
+
+/* ---------- анимации: Framer Motion, с безопасным fallback ---------- */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  var root = document.documentElement;
+  root.classList.add('js-anim');
+  // если модуль не загрузится — вернуть контент через 1,5 с
+  var bail = setTimeout(function(){ root.classList.remove('js-anim'); }, 1500);
+
+  import('https://cdn.jsdelivr.net/npm/motion@11/+esm').then(function(m){
+    clearTimeout(bail);
+    var animate = m.animate, inView = m.inView;
+
+    inView('.reveal', function(entry){
+      // motion 11 отдаёт IntersectionObserverEntry, более ранние версии — сам элемент
+      var el = (entry && entry.target) ? entry.target : entry;
+      if (!el || !el.classList) return;
+      // лёгкий каскад: соседи в одной сетке появляются друг за другом
+      var sibs = el.parentElement ? el.parentElement.querySelectorAll(':scope > .reveal') : [];
+      var idx = Array.prototype.indexOf.call(sibs, el);
+      var delay = idx > 0 ? Math.min(idx, 6) * 0.045 : 0;
+      el.classList.add('seen');
+      animate(el, { opacity:[0,1], transform:['translateY(22px)','translateY(0px)'] },
+                  { duration:0.5, delay:delay, easing:[0.16,1,0.3,1] });
+      return function(){};
+    }, { margin:'240px 0px 240px 0px' });
+
+    // страховка: контент не должен остаться невидимым ни при каких условиях
+    setTimeout(function(){ root.classList.remove('js-anim'); }, 8000);
+    window.addEventListener('beforeprint', function(){ root.classList.remove('js-anim'); });
+  }).catch(function(){
+    clearTimeout(bail);
+    root.classList.remove('js-anim');
+  });
+})();
+</script>
+</body>
+</html>
