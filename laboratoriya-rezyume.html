@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Клеточная лаборатория: резюме — кейс Пэриш и три юрисдикции</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="description" content="Краткое резюме: как была устроена схема Элизабет Пэриш по звеньям и где, вероятно, произвели вектор. Сравнение Уругвая, Панамы и Парагвая для открытия лаборатории гражданином РФ с ВНЖ Бразилии.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --surface:#FFFFFF; --ink:#1D1D1F; --ink-2:#424245; --ink-3:#6E6E73;
+  --line:#E3E3E6; --blue:#0071E3; --blue-ink:#0058B0;
+  --green:#1E8E3E; --amber:#B26A00; --red:#C4291E; --violet:#5E5CE6;
+  --r-lg:22px; --r-md:16px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --shadow-h:0 2px 6px rgba(0,0,0,.06), 0 16px 40px rgba(0,0,0,.10);
+  --maxw:1080px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+a{color:var(--blue-ink); text-decoration:none; border-bottom:1px solid rgba(0,113,227,.28)}
+a:hover{border-bottom-color:var(--blue)}
+a:focus-visible{outline:3px solid var(--blue); outline-offset:3px; border-radius:6px}
+h1,h2,h3,h4{letter-spacing:-.022em; line-height:1.16; margin:0}
+h1{font-size:clamp(34px,5.4vw,56px); font-weight:700}
+h2{font-size:clamp(25px,3.2vw,36px); font-weight:700}
+h3{font-size:clamp(18px,2vw,22px); font-weight:600; margin-bottom:10px}
+h4{font-size:16.5px; font-weight:600; margin-bottom:8px}
+p{margin:0 0 16px}
+small{font-size:13.5px; color:var(--ink-3)}
+
+.topbar{position:sticky; top:0; z-index:100; background:rgba(245,245,247,.82); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex; align-items:center; gap:20px; height:52px; justify-content:space-between}
+.brand{font-weight:600; font-size:15px; white-space:nowrap}
+.topnav{display:flex; gap:20px; overflow-x:auto; scrollbar-width:none}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{font-size:14px; color:var(--ink-2); border:0; white-space:nowrap; padding:6px 0}
+.topnav a:hover{color:var(--blue-ink)}
+
+.hero{padding:76px 0 20px}
+.eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--blue-ink); background:rgba(0,113,227,.09); padding:7px 13px; border-radius:100px; margin-bottom:22px}
+.lede{font-size:clamp(18px,2.1vw,21px); color:var(--ink-2); max-width:760px; margin-top:22px}
+
+.bento{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin:30px 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:26px; box-shadow:var(--shadow); transition:transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s}
+.card.hoverable:hover{transform:translateY(-2px); box-shadow:var(--shadow-h)}
+.c12{grid-column:span 12} .c8{grid-column:span 8} .c6{grid-column:span 6} .c4{grid-column:span 4}
+@media(max-width:900px){.c8,.c6,.c4{grid-column:span 12}}
+.kicker{font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px}
+.big{font-size:clamp(26px,3.6vw,38px); font-weight:700; letter-spacing:-.03em; line-height:1.05}
+
+section{padding:42px 0; scroll-margin-top:68px}
+.section-head{max-width:780px; margin-bottom:24px}
+.section-head p{color:var(--ink-2); margin-top:14px}
+.num{display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:10px; background:var(--ink); color:#fff; font-size:15px; font-weight:600; margin-right:12px; vertical-align:2px}
+
+.badge{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:100px; border:1px solid transparent; white-space:nowrap}
+.b-green{background:rgba(30,142,62,.10); color:var(--green); border-color:rgba(30,142,62,.2)}
+.b-amber{background:rgba(178,106,0,.10); color:var(--amber); border-color:rgba(178,106,0,.2)}
+.b-red{background:rgba(196,41,30,.09); color:var(--red); border-color:rgba(196,41,30,.2)}
+.b-blue{background:rgba(0,113,227,.09); color:var(--blue-ink); border-color:rgba(0,113,227,.2)}
+.b-violet{background:rgba(94,92,230,.10); color:var(--violet); border-color:rgba(94,92,230,.22)}
+.b-gray{background:#F0F0F2; color:var(--ink-3); border-color:var(--line)}
+
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow); -webkit-overflow-scrolling:touch; margin-bottom:18px}
+table{border-collapse:collapse; width:100%; min-width:760px; font-size:15px}
+th,td{padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line)}
+th{font-size:12.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); background:#FAFAFB}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#FBFBFD}
+
+ul.tick{list-style:none; padding:0; margin:0 0 8px; display:grid; gap:10px}
+ul.tick li{position:relative; padding-left:26px; color:var(--ink-2)}
+ul.tick li::before{content:""; position:absolute; left:2px; top:9px; width:8px; height:8px; border-radius:50%; background:var(--blue)}
+ul.tick.warn li::before{background:var(--amber)}
+ul.tick.bad li::before{background:var(--red)}
+ul.tick.good li::before{background:var(--green)}
+
+.note{background:#FFF9EC; border:1px solid #F2E2BC; border-radius:var(--r-md); padding:18px 20px; font-size:15.5px; color:#5A4300}
+.note.blue{background:#EFF6FF; border-color:#CFE3FB; color:#0B3E75}
+.note.red{background:#FDF1F0; border-color:#F5D2CF; color:#7A1C15}
+.note.green{background:#F0F8F2; border-color:#CDE7D5; color:#14532B}
+.note.violet{background:#F4F4FE; border-color:#DAD9FA; color:#2E2C8A}
+.note p:last-child{margin-bottom:0}
+
+.chain{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:6px 0 18px}
+@media(max-width:900px){.chain{grid-template-columns:1fr}}
+.chain .node{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 20px; box-shadow:var(--shadow)}
+.chain .node .flag{font-size:12px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--violet); margin-bottom:8px}
+.chain .node h4{margin-bottom:6px}
+.chain .node p{margin:0; font-size:14.5px; color:var(--ink-2)}
+
+.dl{display:grid; gap:0; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; background:var(--surface)}
+.dl .row{display:grid; grid-template-columns:minmax(140px,210px) 1fr; border-bottom:1px solid var(--line)}
+.dl .row:last-child{border-bottom:0}
+.dl .row > div{padding:12px 16px}
+.dl .row .t{font-weight:600; background:#FAFAFB; font-size:14.5px}
+.dl .row .d{font-size:14.5px; color:var(--ink-2)}
+@media(max-width:700px){.dl .row{grid-template-columns:1fr} .dl .row .t{border-bottom:1px solid var(--line)}}
+
+footer{padding:40px 0 60px; border-top:1px solid var(--line); margin-top:36px; color:var(--ink-3); font-size:14px}
+.reveal{opacity:1}
+.js .reveal{opacity:0; transform:translateY(18px)}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1 !important; transform:none !important}}
+</style>
+</head>
+<body>
+<script>
+document.documentElement.classList.add('js');
+setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(e){e.style.opacity=1;e.style.transform='none';});},2200);
+</script>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brand">Резюме</span>
+    <nav class="topnav" aria-label="Разделы">
+      <a href="#parrish">Кейс Пэриш</a>
+      <a href="#where">Где сделали вектор</a>
+      <a href="#countries">Три страны</a>
+      <a href="#status">Наш статус</a>
+      <a href="#rec">Рекомендация</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Резюме · 4 сентября 2026</span>
+    <h1 class="reveal">Клеточная лаборатория:<br>кейс и три юрисдикции</h1>
+    <p class="lede reveal">Первая часть — как была устроена самая известная схема в этой области и что из неё следует практически. Вторая — сравнение Уругвая, Панамы и Парагвая применительно к нашей ситуации: гражданство России, вид на жительство Бразилии.</p>
+    <p class="lede reveal" style="font-size:16px; margin-top:14px">Развёрнутые материалы: <a href="wet-lab-obshee.html">общая часть</a> · <a href="uruguay-laboratoriya.html">Уругвай</a> · <a href="panama-laboratoriya-praktika.html">Панама</a> · <a href="paraguay-laboratoriya.html">Парагвай</a></p>
+  </div>
+</header>
+
+<section id="parrish">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2><span class="num">1</span>Элизабет Пэриш: что она сделала на самом деле</h2>
+      <p>В сентябре 2015 года основатель и глава американской компании BioViva стала первым человеком, применившим на себе генную терапию против старения. Главное в этой истории — не результат, а конструкция: <strong>своей лаборатории у них не было вообще</strong>.</p>
+    </div>
+
+    <div class="chain reveal">
+      <div class="node">
+        <div class="flag">Звено 1 · США</div>
+        <h4>Компания и патенты</h4>
+        <p>BioViva USA Inc., штат Вашингтон. Владеть интеллектуальной собственностью в США законно — сама процедура там была бы незаконна</p>
+      </div>
+      <div class="node">
+        <div class="flag">Звено 2 · не раскрыто</div>
+        <h4>Производство вектора</h4>
+        <p>Контрактная лаборатория за пределами США. Название не называлось ни тогда, ни за прошедшие одиннадцать лет</p>
+      </div>
+      <div class="node">
+        <div class="flag">Звено 3 · Колумбия</div>
+        <h4>Введение</h4>
+        <p>15 сентября 2015 года, «скромно оборудованный кабинет врача»: один врач и одна медсестра</p>
+      </div>
+      <div class="node">
+        <div class="flag">Звено 4 · США</div>
+        <h4>Аналитика</h4>
+        <p>Лаборатория SpectraCell в Хьюстоне мерила длину теломер. «Верификация» — НКО в Бельгии и фонд в Великобритании</p>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Что именно вводили</h3>
+        <p style="color:var(--ink-2)">Две экспериментальные генные терапии на аденоассоциированном вирусе как носителе:</p>
+        <ul class="tick">
+          <li><strong>Фоллистатин</strong> внутримышечно — блокирует миостатин, в опытах на животных увеличивает мышечную массу</li>
+          <li><strong>Теломераза</strong> внутривенно — фермент, достраивающий концы хромосом</li>
+        </ul>
+        <p style="margin-bottom:0; color:var(--ink-2)">Заявленный результат: длина теломер лейкоцитов выросла с 6,71 до 7,33 килобаз за полгода. <strong>Критика по существу:</strong> погрешность этого метода измерения около 10%, то есть она перекрывает весь заявленный эффект. Один пациент, без контрольной группы, измерение на грани шума.</p>
+      </div>
+
+      <div class="card c6 reveal">
+        <h3>Почему именно Колумбия</h3>
+        <p style="color:var(--ink-2)">Выбор сделан методом исключения: в США процедура требовала разрешения регулятора, которого не было. Соучредитель компании — американский радиолог, который двумя годами ранее уже прекращал неодобренные клеточные терапии по требованию FDA, то есть команда знала, чем рискует дома.</p>
+        <p style="margin-bottom:0; color:var(--ink-2)">Имя врача не раскрывалось, сама Пэриш поначалу отказывалась подтверждать даже страну. Клиника соучредителя в Боготе существовала, но процедура прошла <strong>не</strong> в ней.</p>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="note">
+          <p><strong>Чем закончились попытки построить своё.</strong> В 2016 году компания анонсировала клинику и производство полного цикла на Фиджи — с рендерами и пресс-релизами. Когда фиджийская пресса дошла до властей, те ответили, что такой компании не существует даже на бумаге. Проект не состоялся.</p>
+          <p style="margin-bottom:0"><strong>Вывод, который стоит запомнить:</strong> единственное звено, требовавшее капитала и разрешений — собственная лаборатория, — оказалось единственным, которое не получилось. Всё остальное собрали за месяцы, потому что покупали услуги, а не строили мощности.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="where">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2><span class="num">2</span>Где произвели вектор: что известно и что можно предположить</h2>
+      <p>Это единственное звено цепочки, которое так и не раскрыто. Ниже сначала факты, затем — обоснованная гипотеза, прямо помеченная как гипотеза.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <div class="kicker">Установленные факты</div>
+        <h3>Что известно точно</h3>
+        <ul class="tick good">
+          <li>Обе конструкции произведены <strong>по контракту коммерческой лабораторией за пределами США</strong> — это единственная формулировка, которую компания дала прессе.</li>
+          <li>Название производителя <strong>не публиковалось ни разу</strong> — ни в 2015 году, ни за одиннадцать лет после.</li>
+          <li>Продукт не был фармацевтического качества: ни компания, ни журналисты никогда не упоминали производство по стандарту GMP. При наличии такого статуса о нём бы заявили — это главный аргумент в подобных спорах.</li>
+        </ul>
+      </div>
+
+      <div class="card c6 reveal">
+        <div class="kicker">Гипотеза · не подтверждено</div>
+        <h3>Где это было вероятнее всего</h3>
+        <p style="color:var(--ink-2)"><strong>Наиболее вероятно — азиатский контрактный производитель исследовательского уровня, скорее всего в Китае.</strong> Рассуждение:</p>
+        <ul class="tick warn">
+          <li><strong>Исключены США</strong> — сказано прямо. Это убирает всех крупных американских производителей вирусных векторов.</li>
+          <li><strong>Исключена, скорее всего, и Европа:</strong> европейские площадки дороги и требовательны к документации о назначении продукта, а конечное применение здесь было заведомо непроходным.</li>
+          <li><strong>Латинская Америка отпадает по мощностям:</strong> в 2015 году производства аденоассоциированных векторов там практически не существовало — именно поэтому вектор везли в Колумбию, а не делали на месте.</li>
+          <li><strong>Остаётся Азия.</strong> К 2015 году Китай уже был основным поставщиком дешёвых векторов исследовательского уровня: цена в десятки раз ниже фармацевтической, сроки в недели, документы о конечном применении обычно не запрашиваются.</li>
+        </ul>
+        <p style="margin-bottom:0"><span class="badge b-amber">Оговорка</span> это вывод по косвенным признакам, а не установленный факт. Прямых подтверждений в открытых источниках нет.</p>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="note violet">
+          <p style="margin-bottom:0"><strong>Почему производитель молчит одиннадцать лет — и почему это логично.</strong> Поставщик исследовательского материала продаёт продукт с маркировкой «только для лабораторных исследований, не для применения на человеке». Если такой продукт ввели человеку, ответственность формально лежит на покупателе, но репутационно история бьёт по обеим сторонам. Молчание здесь — не сокрытие преступления, а обычная коммерческая осторожность. И именно поэтому у схемы нет слабого звена: <strong>производителя нельзя ни проверить, ни привлечь, потому что он никому не известен</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="countries">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2><span class="num">3</span>Три страны: главное в одной таблице</h2>
+      <p>Все три рассматривались под конкретную задачу — частная исследовательская лаборатория, работа с клеточными культурами <em>in vitro</em>, без пациентов и без продажи препаратов.</p>
+    </div>
+
+    <div class="tablewrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:15%">Критерий</th>
+            <th style="width:29%">Уругвай</th>
+            <th style="width:28%">Панама</th>
+            <th style="width:28%">Парагвай</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Въезд и ВНЖ</strong></td>
+            <td>Виза не нужна, 90 дней. Вид на жительство <strong>около $90</strong>, без инвестиции и без порога дохода</td>
+            <td>Виза не нужна, 90 дней. Но вид на жительство для российского паспорта — <strong>от $200 000</strong></td>
+            <td>Для туризма визы нет, для работы нужна. ВНЖ: пошлина $350–400, инвесторский путь от $150 000</td>
+          </tr>
+          <tr>
+            <td><strong>Перелёт из Рио</strong></td>
+            <td><strong>Прямые, около 14 в неделю</strong>, 2 часа 40 минут</td>
+            <td><strong>Лучшая связность:</strong> до 24 рейсов в неделю к январю 2027, около 6 часов</td>
+            <td>Прямые появились в январе 2026</td>
+          </tr>
+          <tr>
+            <td><strong>Ввоз клеток</strong></td>
+            <td><strong>Бесплатный сертификат</strong> минздрава, действует 30 дней. Самая простая процедура</td>
+            <td>Разрешение института Горгаса: $25 и 10 рабочих дней по регламенту, <strong>но фактически 30–45 дней</strong></td>
+            <td>Отдельной процедуры для живых клеток нет — срок непредсказуем</td>
+          </tr>
+          <tr>
+            <td><strong>Аренда</strong></td>
+            <td>Есть <strong>научный парк, сдающий готовые лаборатории</strong> — единственный из трёх. Ставки не публикуются</td>
+            <td>Склад от $7/м², научный кампус около $17/м². Готовых лабораторий нет</td>
+            <td><strong>$3.80/м²</strong> — вчетверо дешевле панамского кампуса. Но склад придётся переделывать с нуля</td>
+          </tr>
+          <tr>
+            <td><strong>Налог на прибыль</strong></td>
+            <td>25%, в свободной зоне — освобождение</td>
+            <td>Территориальный принцип: зарубежный доход не облагается</td>
+            <td><strong>10%</strong> — самая низкая ставка</td>
+          </tr>
+          <tr>
+            <td><strong>Научная среда</strong></td>
+            <td><strong>Институт Пастера</strong> с открытыми платформами, государственные институты, частный клеточный сектор</td>
+            <td>Государственные институты и новый центр вакцин; есть <strong>работающий прецедент</strong> лицензированной клеточной лаборатории</td>
+            <td><strong>Практически отсутствует.</strong> Ни института, ни подрядчиков, ни кадров</td>
+          </tr>
+          <tr>
+            <td><strong>Главный риск</strong></td>
+            <td>Прямой <strong>запрет коммерции</strong> человеческими клетками. Режим ГМО написан про растения — работать можно, но опереться не на что</td>
+            <td>С апреля 2026 <strong>отсутствие процедуры само по себе означает высокий риск</strong> по новому регламенту</td>
+            <td>Незавершённое регулирование исследований: данные отсюда сложнее признать за рубежом</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bento">
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Первое место</div>
+        <div class="big">Уругвай</div>
+        <p style="margin-top:12px; color:var(--ink-2)">Дешёвый и быстрый вход, работающая процедура ввоза, готовые лабораторные площади и настоящая научная среда. Не подходит, только если в планах продажа клеточного продукта — это там запрещено прямо.</p>
+        <span class="badge b-green">Рекомендуется</span>
+      </div>
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Второе место</div>
+        <div class="big">Панама</div>
+        <p style="margin-top:12px; color:var(--ink-2)">Лучшая логистика, доллар как валюта, американский электрический стандарт и живой прецедент лицензированной клеточной лаборатории. Останавливают два фактора: цена резидентства и захлопнувшееся в 2026 году регуляторное окно.</p>
+        <span class="badge b-blue">Запасной вариант</span>
+      </div>
+      <div class="card c4 hoverable reveal">
+        <div class="kicker">Третье место</div>
+        <div class="big">Парагвай</div>
+        <p style="margin-top:12px; color:var(--ink-2)">Побеждает только деньгами: аренда, налог и скорость регистрации компании. Всё остальное — включая людей, подрядчиков и предсказуемость импорта — придётся завозить или создавать самим.</p>
+        <span class="badge b-gray">Если приоритет — экономия</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2><span class="num">4</span>Наш статус: гражданство России, ВНЖ Бразилии</h2>
+      <p>Это два разных статуса с разными последствиями, и путать их дорого. Гражданство определяет отношение банков. Вид на жительство определяет налоги.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card c6 reveal">
+        <h3>Что следует из российского паспорта</h3>
+        <ul class="tick warn">
+          <li><strong>Углублённая проверка в банках.</strong> Россия внесена в список высокорисковых стран Евросоюза с 29 января 2026 года — это автоматически усложняет открытие счетов везде, где банк ориентируется на европейские стандарты.</li>
+          <li><strong>Потолок по депозитам.</strong> Европейский запрет принимать от граждан России суммы свыше 100 000 евро. <strong>Бразильский вид на жительство от этого запрета не освобождает</strong> — исключение написано только под ВНЖ Евросоюза, Норвегии, Исландии, Лихтенштейна и Швейцарии.</li>
+          <li><strong>Российских налоговых обязанностей паспорт не создаёт:</strong> налоговое резидентство определяется исключительно количеством дней в стране, а не гражданством.</li>
+        </ul>
+      </div>
+
+      <div class="card c6 reveal">
+        <h3>Что следует из бразильского ВНЖ</h3>
+        <ul class="tick">
+          <li><strong>Налоговое резидентство Бразилии — с даты въезда</strong> по виду на жительство, а не после 183 дней. Правило полугода действует только для временных виз.</li>
+          <li><strong>Обложение по мировому доходу</strong> и годовая декларация.</li>
+          <li><strong>Ключевая цифра: 15% с прибыли зарубежной компании ежегодно</strong>, независимо от того, выводились деньги или нет — если компания зарегистрирована в юрисдикции из бразильского списка льготного налогообложения. <strong>Панама в этом списке есть.</strong> Это прямой аргумент в пользу Уругвая при прочих равных.</li>
+          <li>Российские правила контролируемых иностранных компаний при этом не применяются — они действуют только для налоговых резидентов России.</li>
+        </ul>
+      </div>
+
+      <div class="card c12 reveal">
+        <div class="note green">
+          <p style="margin-bottom:0"><strong>Практический вывод.</strong> Наша конфигурация — российский паспорт плюс бразильское резидентство — делает решающим не размер местного налога, а <em>попадание юрисдикции в бразильский список</em>. Парагвайские 10% и панамская территориальность частично обесцениваются бразильскими 15% сверху. Считать выгоду нужно вместе с бухгалтером в Рио, а не по ставке в стране лаборатории.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rec">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2><span class="num">5</span>Что предлагаю сделать</h2>
+      <p>Первые три шага стоят меньше пяти тысяч долларов и отсеивают страну до того, как мы потратимся на помещение.</p>
+    </div>
+    <div class="bento">
+      <div class="card c12 reveal">
+        <div class="dl">
+          <div class="row"><div class="t">Шаг 1 · неделя</div><div class="d"><strong>Тестовый ввоз одной ампулы</strong> клеточной линии в Уругвай на адрес местного партнёра. Сертификат там бесплатный, поэтому проверка юрисдикции обойдётся в стоимость доставки. Замеряем фактический срок от заказа до получения — это единственный честный тест</div></div>
+          <div class="row"><div class="t">Шаг 2 · неделя</div><div class="d"><strong>Запрос в научный парк Пандо</strong> о наличии свободных лабораторных площадей и ставке за квадратный метр. Это единственная площадка в трёх странах, спроектированная под мокрую лабораторию; от её ответа зависит смета</div></div>
+          <div class="row"><div class="t">Шаг 3 · две недели</div><div class="d"><strong>Юридическое заключение в Уругвае</strong> по одному вопросу: требуется ли разрешение частной исследовательской лаборатории, которая не работает с пациентами и не продаёт клеточный продукт. Ответ определяет всё остальное</div></div>
+          <div class="row"><div class="t">Шаг 4 · параллельно</div><div class="d"><strong>Консультация бухгалтера в Рио</strong> о налоговых последствиях владения уругвайской компанией: входит ли Уругвай в бразильский список льготных юрисдикций и какая ставка применяется</div></div>
+          <div class="row"><div class="t">Шаг 5 · после ответов</div><div class="d">Решение по стране, регистрация компании, аренда. К этому моменту у нас будут проверенные сроки импорта, реальная ставка аренды и письменная позиция юриста</div></div>
+        </div>
+        <p style="margin:18px 0 0"><span class="badge b-violet">Логика порядка</span> сначала проверяем то, что нельзя изменить деньгами — таможню и право. Помещение и оборудование выбираются последними, потому что их всегда можно поменять.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-bottom:8px">Резюме подготовлено 4 сентября 2026 года. Подробные материалы с ссылками на тексты законов: <a href="wet-lab-obshee.html">общая часть</a>, <a href="uruguay-laboratoriya.html">Уругвай</a>, <a href="panama-laboratoriya-praktika.html">Панама</a>, <a href="paraguay-laboratoriya.html">Парагвай</a>, <a href="wet-lab-yurisdikciya.html">сравнение юрисдикций</a>.</p>
+    <p style="margin:0"><small>Все суммы в долларах США. Гипотеза о происхождении вектора в кейсе Пэриш помечена в тексте как предположение и не является установленным фактом. Документ носит информационный характер и не заменяет юридическую консультацию.</small></p>
+  </div>
+</footer>
+
+<script type="module">
+  try {
+    const { animate, inView, stagger } = await import("https://cdn.jsdelivr.net/npm/motion@11/+esm");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const els = document.querySelectorAll(".reveal");
+    if (reduced) {
+      els.forEach(e => { e.style.opacity = 1; e.style.transform = "none"; });
+    } else {
+      els.forEach(el => {
+        inView(el, () => {
+          animate(el, { opacity: [0, 1], transform: ["translateY(18px)", "translateY(0px)"] },
+                  { duration: 0.5, easing: [0.2, 0.7, 0.3, 1] });
+        }, { margin: "-8% 0px -8% 0px" });
+      });
+      const cards = document.querySelectorAll(".bento .card, .chain .node");
+      if (cards.length) {
+        inView(".bento", () => {
+          animate(cards, { opacity: [null, 1] }, { delay: stagger(0.04), duration: 0.35 });
+        }, { margin: "-10% 0px" });
+      }
+    }
+  } catch (e) {
+    document.querySelectorAll(".reveal").forEach(el => { el.style.opacity = 1; el.style.transform = "none"; });
+  }
+</script>
+</body>
+</html>
